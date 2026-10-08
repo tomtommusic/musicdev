@@ -19,6 +19,15 @@ jobs:
           echo "RESULTAT: OK" >> ci.log
           ls -R build/Debug-iphonesimulator/MusicDEV.app | head -40 >> ci.log
           plutil -p build/Debug-iphonesimulator/MusicDEV.app/Info.plist >> ci.log
+      - name: Lancer dans le simulateur et prendre une capture
+        run: |
+          UDID=$(xcrun simctl list devices available -j | python3 -c "import json,sys;d=json.load(sys.stdin)['devices'];print([x['udid'] for k,v in d.items() if 'iOS' in k for x in v if 'iPhone' in x['name']][-1])")
+          xcrun simctl boot "$UDID"; xcrun simctl bootstatus "$UDID" -b
+          xcrun simctl install "$UDID" build/Debug-iphonesimulator/MusicDEV.app
+          xcrun simctl privacy "$UDID" grant microphone ca.tomtommusic.musicdev || true
+          xcrun simctl launch "$UDID" ca.tomtommusic.musicdev
+          sleep 12
+          xcrun simctl io "$UDID" screenshot shot.png
       - name: Publier le journal
         if: always()
         run: |
@@ -26,4 +35,4 @@ jobs:
           grep -q "RESULTAT: OK" ci.log || { echo "RESULTAT: ECHEC" >> ci.log; grep -E "error:|warning:" ci.log | head -60 >> ci.log || true; }
           git config user.name ci && git config user.email ci@users.noreply.github.com
           git checkout --orphan ci-ios && git rm -rfq . && cp ci.log ci-ios.log 2>/dev/null || true
-          git add ci-ios.log && git commit -qm "journal ${GITHUB_SHA}" && git push -f origin ci-ios
+          git add ci-ios.log; [ -f shot.png ] && git add -f shot.png && git commit -qm "journal ${GITHUB_SHA}" && git push -f origin ci-ios
