@@ -2998,57 +2998,37 @@ $('#helpexit').addEventListener('click',()=>helpSet(false));
 
 /* ---------- méthode de travail : affichée au bas de chaque module ---------- */
 const METHOD={
- tq:`<ol><li><b>Avant de commencer</b> : choisis dans les réglages les sujets vus en classe et le niveau. Commence par peu de questions (5 ou 10).</li>
-<li><b>Lis toute la question</b> : clé, armure, « au-dessus » ou « au-dessous »… Un détail change souvent la réponse.</li>
-<li><b>Utilise les flèches</b> pour sauter une question difficile et y revenir à la fin. Les pastilles du haut montrent les questions déjà répondues.</li>
-<li><b>Après le résultat</b>, touche chaque question ratée : la bonne réponse s'affiche, avec un lien vers la notion dans la bibliothèque.</li>
-<li><b>Pour l'enseignant</b> : le bouton PDF crée un questionnaire à photocopier (sans questions d'écoute) et son corrigé, avec de nouvelles questions à chaque fois.</li></ol>`,
- dm:`<ol><li><b>Première écoute sans écrire</b> : repère le caractère, la pulsation (en 2, 3 ou 4 ?) et si c'est majeur ou mineur.</li>
-<li><b>Écris le cadre</b> : clé, armure, chiffre de mesure, barres de mesure.</li>
-<li><b>Le rythme d'abord</b> : chante intérieurement et note les durées (de petits traits suffisent).</li>
-<li><b>Les hauteurs</b> : pars de la première note, situe-toi par rapport à la tonique et cherche les notes de l'accord de tonique (do–mi–sol en do majeur). Les grands sauts tombent souvent sur ces notes ; le reste avance surtout par degrés conjoints.</li>
-<li><b>La fin</b> : la plupart des mélodies finissent sur la tonique, précédée de la sensible ou de la sus-tonique.</li>
-<li><b>Vérifie</b> en chantant ce que tu as écrit pendant la dernière écoute.</li></ol>
-<p>Utilise <b>Gamme et arpège</b> pour te mettre la tonalité dans l'oreille, et <b>Mesure</b> pour travailler un passage difficile. Aux examens, on entend souvent l'extrait trois fois au maximum : vise une information précise à chaque écoute.</p>`,
- dr:`<ol><li><b>Bats la pulsation</b> (pied ou main) dès la première écoute et compte les temps à voix basse.</li>
-<li><b>Repère d'abord les notes longues et les silences</b> : ce sont les points d'appui de chaque mesure.</li>
-<li><b>Reconstruis temps par temps</b> : pour chaque temps, demande-toi s'il y a 1, 2, 3 ou 4 sons (noire, 2 croches, triolet ou noire pointée en composé, 4 doubles…).</li>
-<li><b>Vérifie le total</b> : chaque mesure doit contenir exactement le nombre de temps du chiffre de mesure.</li></ol>
-<p>Le bouton <b>Mesure</b> rejoue une seule mesure : très utile pour les rythmes serrés.</p>`,
- iv:`<ol><li><b>Chante l'intervalle intérieurement</b> juste après l'avoir entendu, avant de répondre.</li>
-<li><b>Associe chaque intervalle à un début d'air connu</b> (voir « Repères pour reconnaître à l'oreille » dans la bibliothèque) : choisis des chansons que tu peux chanter sans hésiter.</li>
-<li><b>Situe les notes dans une gamme</b> : do–sol, c'est « 1 à 5 » ; si la 2<sup>e</sup> note sonne comme une tonique, pense aux intervalles qui y mènent.</li>
-<li><b>Écoute la couleur</b> : les secondes « frottent », les tierces sont douces, les quartes et quintes sonnent « vides », le triton est instable, la septième majeure veut monter.</li></ol>
-<p>Après chaque réponse, clique sur les autres intervalles pour les entendre à partir de la même note : comparer est la meilleure façon d'apprendre.</p>`,
- pc:`<ol><li><b>Situe-toi dans la tonalité</b> : écoute <b>▶ Tonalité</b> pour bien entendre l'accord de tonique.</li>
-<li><b>Écoute la basse</b> : c'est elle qui révèle le degré. Fa à la basse en do majeur suggère IV ; sol suggère V ; la suggère vi.</li>
-<li><b>Écoute la couleur</b> de chaque accord : majeur (lumineux) ou mineur (plus sombre). Ça permet de distinguer IV de ii, ou I de vi.</li>
-<li><b>Pense aux enchaînements fréquents</b> : I–IV–V–I, I–vi–IV–V, ii–V–I. Le V7 et le vii° vont presque toujours vers I. V suivi de vi : cadence rompue.</li>
-<li><b>Élimine</b> les propositions qui ne collent pas à ce que tu as entendu, une position à la fois.</li></ol>
-<p>Après la réponse, réécoute chaque accord seul pour bien mémoriser sa sonorité.</p>`,
- ln:`<ul><li><b>Apprends des notes repères</b> : en clé de sol, sol (2<sup>e</sup> ligne), do central et le do du 3<sup>e</sup> interligne ; en clé de fa, fa (4<sup>e</sup> ligne), le do central et le do du 2<sup>e</sup> interligne. Les autres notes se trouvent à partir d'elles.</li>
-<li><b>Retiens les lignes et les interlignes</b> : clé de sol, lignes mi–sol–si–ré–fa et interlignes fa–la–do–mi ; clé de fa, lignes sol–si–ré–fa–la et interlignes la–do–mi–sol.</li>
-<li><b>Vise la vitesse, pas seulement la justesse</b> : reconnaître une note en moins d'une seconde, c'est ce qui rend la lecture à vue possible.</li>
-<li>Ajoute les lignes supplémentaires et les altérations quand la portée est solide.</li></ul>`,
- lm:`<ol><li><b>Avant de jouer</b>, regarde 20 secondes : tonalité, mesure, rythme le plus difficile, grands sauts.</li>
-<li><b>Écoute Gamme et arpège</b> pour te placer dans la tonalité.</li>
-<li><b>Pendant le décompte</b>, installe la pulsation dans ton corps.</li>
-<li><b>Ne t'arrête jamais</b> : une note manquée se corrige à la prochaine lecture. Garder le tempo est plus important que chaque note.</li>
-<li><b>Lis une ou deux notes d'avance</b> : tes yeux doivent être un peu devant tes doigts (ou ta voix).</li></ol>`,
- lr:`<ol><li><b>Garde la pulsation dans ton corps</b> (pied ou tête) pendant que tes mains frappent le rythme.</li>
-<li><b>Compte à voix basse</b> : « 1 et 2 et » pour les croches, « 1 i et a » pour les doubles-croches.</li>
-<li><b>Tiens les notes longues</b> en comptant leurs temps, et respecte les silences autant que les notes.</li>
-<li><b>Écoute le modèle</b> si un passage te bloque, puis recommence sans lui.</li></ol>
-<p>Le résultat te dit si tu es en avance ou en retard en moyenne : c'est un bon indice pour ajuster.</p>`,
- so:`<p>Le <b>solfège</b> consiste à chanter une mélodie en nommant ses notes. Deux traditions existent : le <b>do fixe</b> (France, Québec, Italie : do est toujours la note do, et les altérations ne changent pas le nom chanté) et le <b>do mobile</b> (pays anglo-saxons, méthode Kodály : do est toujours la tonique, ce qui aide à sentir les degrés).</p>
-<ol><li><b>Donne-toi la tonalité</b> avec <b>Gamme et arpège</b>, et la première note avec <b>1re note</b>.</li>
-<li><b>Repère les notes de l'accord de tonique</b> dans la mélodie : ce sont tes points d'appui.</li>
-<li><b>Garde la pulsation</b> avec le métronome et lis une ou deux notes d'avance.</li>
-<li><b>Ne t'arrête pas</b> sur une erreur ; écoute ensuite la solution pour te corriger.</li></ol>`,
- la:`<ol><li><b>Repère la tonalité et la position de la main</b> avant de commencer : sur quelle touche commence la mélodie ?</li>
-<li><b>Pense en intervalles</b> : « je monte d'une tierce », « je descends d'une seconde », plutôt que de chercher chaque note isolément.</li>
-<li><b>Lis une note d'avance</b> pour préparer ton doigt.</li>
-<li>Utilise le clavier d'ordinateur (A W S E D F…) pour aller plus vite.</li></ol>`,
+ tq:`<ol><li><b>Lis toute la question</b> : clé, armure, « au-dessus » ou « au-dessous »… un détail change souvent la réponse.</li>
+<li><b>Saute une question difficile</b> avec les flèches et reviens-y à la fin.</li>
+<li><b>Après le résultat</b>, ouvre chaque question ratée : la bonne réponse s'affiche, avec un lien vers la notion.</li></ol>`,
+ dm:`<ol><li><b>Première écoute sans écrire</b> : trouve la pulsation et si c'est majeur ou mineur.</li>
+<li><b>Le rythme d'abord</b>, puis les hauteurs.</li>
+<li><b>Situe-toi par rapport à la tonique</b> : les sauts tombent souvent sur les notes de l'accord de tonique ; le reste avance surtout par degrés conjoints.</li></ol>
+<p><b>▶ Gamme et arpège</b> met la tonalité dans l'oreille ; <b>Mesure</b> rejoue un passage difficile.</p>`,
+ dr:`<ol><li><b>Bats la pulsation</b> dès la première écoute.</li>
+<li><b>Écris temps par temps</b> : combien de sons dans ce temps ? Un (noire), deux (croches), quatre (doubles)…</li>
+<li><b>Vérifie le total</b> de chaque mesure.</li></ol>
+<p><b>Mesure</b> rejoue une seule mesure : utile pour les rythmes serrés.</p>`,
+ iv:`<ol><li><b>Chante l'intervalle intérieurement</b> avant de répondre.</li>
+<li><b>Associe chaque intervalle à un début de chanson</b> que tu connais bien (voir « Repères pour reconnaître à l'oreille » dans la bibliothèque).</li>
+<li><b>Après la réponse</b>, écoute les autres intervalles à partir de la même note pour comparer.</li></ol>`,
+ pc:`<ol><li><b>Écoute ▶ Tonalité</b> pour bien entendre l'accord de tonique.</li>
+<li><b>Suis la basse</b> : c'est elle qui révèle le degré (en do majeur : fa → IV, sol → V, la → vi).</li>
+<li><b>Écoute si l'accord est majeur ou mineur</b> : ça distingue IV de ii, ou I de vi.</li></ol>
+<p>Après la réponse, réécoute chaque accord seul.</p>`,
+ ln:`<ul><li><b>Pars de notes repères</b> : en clé de sol, le sol de la 2<sup>e</sup> ligne ; en clé de fa, le fa de la 4<sup>e</sup> ligne. Les autres notes se trouvent à partir d'elles.</li>
+<li><b>Vise la vitesse</b> : nommer une note en moins d'une seconde, c'est ce qui rend la lecture à vue possible.</li></ul>`,
+ lm:`<ol><li><b>Avant de commencer</b>, repère la tonalité, la mesure et le passage le plus difficile.</li>
+<li><b>Garde le tempo</b> : ne t'arrête pas sur une erreur.</li>
+<li><b>Lis une note d'avance.</b></li></ol>`,
+ lr:`<ol><li><b>Garde la pulsation dans ton corps</b> (pied ou tête) pendant que tu frappes.</li>
+<li><b>Compte à voix basse</b> et tiens les notes longues toute leur valeur ; les silences comptent autant que les notes.</li>
+<li>Si un passage bloque, <b>écoute le modèle</b>, puis recommence sans lui.</li></ol>`,
+ so:`<ol><li><b>Donne-toi la tonalité</b> avec <b>▶ Gamme et arpège</b>, puis la première note avec <b>▶ 1re note</b>.</li>
+<li><b>Garde la pulsation</b> et ne t'arrête pas sur une erreur.</li>
+<li><b>Écoute la solution</b> pour te corriger, puis rechante.</li></ol>`,
+ la:`<ol><li><b>Trouve la première note</b> sur le clavier avant de commencer.</li>
+<li><b>Pense en intervalles</b> (« je monte d'une tierce ») plutôt que note par note.</li></ol>`,
 };
 function showMethod(id){const box=$('#method'),h=METHOD[id];box.hidden=!h;if(!h)return;box.querySelector('.methbody').innerHTML=h;}
 /* ========== MODULE : Tester mes connaissances — banque de questions ========== */
