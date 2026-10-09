@@ -1086,7 +1086,7 @@ const REV={'0':0,'1':.1,'2':.2};
 const A={ctx:null,out:null,
   init(){
     if(!this.ctx){const C=window.AudioContext||window.webkitAudioContext;this.setup(new C());}
-    if(this.ctx.state==='suspended')this.ctx.resume();return this.ctx;},
+    qzUnmute();if(this.ctx.state==='suspended')this.ctx.resume();return this.ctx;},
   setup(c){
     /* chaîne : notes -> out -> (sec + réverbération de salle) -> compresseur -> sortie */
     this.ctx=c;const comp=c.createDynamicsCompressor();comp.threshold.value=-3;comp.knee.value=0;comp.ratio.value=8;comp.attack.value=.002;comp.release.value=.12; // simple garde-fou contre la saturation : n'agit que sur les crêtes extrêmes (avant : agissait en continu et « pompait » sur les attaques fortes)
@@ -1302,6 +1302,17 @@ const A={ctx:null,out:null,
   }
 };
 const P={sess:null};
+/* iPhone/iPad : jouer le son même quand l'appareil est en mode silencieux ou vibration.
+   Safari récent : navigator.audioSession ; plus ancien : un petit son muet en boucle fait passer la page en « lecture média ». */
+const SILENT_WAV='data:audio/wav;base64,UklGRvQHAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YdAHAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgA==';
+let UNMUTE=null;
+function qzUnmute(){
+  try{if(navigator.audioSession){if(!MIC.on&&!(typeof TS!=='undefined'&&TS.on)&&navigator.audioSession.type!=='playback')navigator.audioSession.type='playback';return;}}catch(e){}
+  if(UNMUTE||!/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)||!('ontouchend' in document))return;
+  try{UNMUTE=new Audio();UNMUTE.src=SILENT_WAV;UNMUTE.loop=true;UNMUTE.setAttribute('playsinline','');UNMUTE.setAttribute('x-webkit-airplay','deny');UNMUTE.preload='auto';
+    const p=UNMUTE.play();if(p&&p.catch)p.catch(()=>{UNMUTE=null;});}catch(e){UNMUTE=null;}
+}
+function qzSessionForMic(on){try{if(navigator.audioSession)navigator.audioSession.type=on?'play-and-record':'playback';}catch(e){}}
 function setPlaying(on){document.querySelectorAll('[data-stop]').forEach(b=>b.disabled=!on);}
 const CI={
   show(meter){const b=$('#countin');b.hidden=false;b.replaceChildren(el('span',{class:'cl'},'Décompte'),...Array.from({length:meter.beats},(_,k)=>el('i',{},String(k+1))),el('span',{class:'go'},''));},
@@ -1685,7 +1696,7 @@ async function micStart(mode,onEvent,onLive){
   try{
     if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error('no');
     const c=A.init();
-    const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:mode==='onset',noiseSuppression:false,autoGainControl:false}});
+    qzSessionForMic(true);const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:mode==='onset',noiseSuppression:false,autoGainControl:false}});
     Object.assign(MIC,{on:true,stream,mode,onEvent,onLive,cand:null,stableN:0,emitted:null,peak:0,armed:true,floor:.003,lastOn:0,prevRms:0});
     MIC.src=c.createMediaStreamSource(stream);MIC.an=c.createAnalyser();MIC.an.fftSize=2048;MIC.buf=new Float32Array(2048);MIC.src.connect(MIC.an);
     MIC.timer=setInterval(micTick,mode==='onset'?12:33);
@@ -1699,7 +1710,7 @@ async function micStart(mode,onEvent,onLive){
     return false;
   }
 }
-function micStop(){clearInterval(MIC.timer);MIC.timer=0;if(MIC.stream)MIC.stream.getTracks().forEach(t=>t.stop());try{MIC.src&&MIC.src.disconnect();}catch(e){}Object.assign(MIC,{on:false,stream:null,src:null,an:null});const cb=MIC.onStopped;MIC.onStopped=null;if(cb)cb();}
+function micStop(){if(MIC.on)qzSessionForMic(false);clearInterval(MIC.timer);MIC.timer=0;if(MIC.stream)MIC.stream.getTracks().forEach(t=>t.stop());try{MIC.src&&MIC.src.disconnect();}catch(e){}Object.assign(MIC,{on:false,stream:null,src:null,an:null});const cb=MIC.onStopped;MIC.onStopped=null;if(cb)cb();}
 function micTick(){
   if(!MIC.on||!MIC.an)return;const x=MIC.buf,c=A.ctx;MIC.an.getFloatTimeDomainData(x);
   let ss=0;for(let i=0;i<x.length;i++)ss+=x[i]*x[i];const rms=Math.sqrt(ss/x.length);
@@ -4472,7 +4483,7 @@ async function tunerStart(){
   try{
     if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error('no');
     const c=A.init();
-    const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});
+    qzSessionForMic(true);const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});
     TS.stream=stream;TS.src=c.createMediaStreamSource(stream);TS.an=c.createAnalyser();TS.an.fftSize=4096;TS.buf=new Float32Array(TS.an.fftSize);TS.src.connect(TS.an);
     TS.on=true;TS.hist=[];TS.timer=setInterval(tunerTick,60);tnUi();feedback('');return true;
   }catch(e){
@@ -4480,7 +4491,7 @@ async function tunerStart(){
     feedback(n==='NotAllowedError'||n==='SecurityError'?'Le micro a été refusé. Autorise-le dans les réglages de l\'appareil ou du navigateur, puis réessaie.':n==='NotFoundError'?'Aucun micro détecté.':'Le micro n\'est pas disponible ici.','bad');return false;
   }
 }
-function tunerStop(){clearInterval(TS.timer);TS.timer=0;if(TS.stream)TS.stream.getTracks().forEach(t=>t.stop());try{TS.src&&TS.src.disconnect();}catch(e){}Object.assign(TS,{on:false,stream:null,src:null,an:null,hist:[]});tnRefStop();tnUi();}
+function tunerStop(){if(TS.on)qzSessionForMic(false);clearInterval(TS.timer);TS.timer=0;if(TS.stream)TS.stream.getTracks().forEach(t=>t.stop());try{TS.src&&TS.src.disconnect();}catch(e){}Object.assign(TS,{on:false,stream:null,src:null,an:null,hist:[]});tnRefStop();tnUi();}
 function tnRange(){const s=tnStrings();if(!s)return[27,2100];const lo=Math.min(...s.notes),hi=Math.max(...s.notes);return[midiHz(lo)*.7,midiHz(hi)*1.45];}
 function tunerTick(){
   if(!TS.on||!TS.an)return;TS.an.getFloatTimeDomainData(TS.buf);
