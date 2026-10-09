@@ -846,6 +846,9 @@ main[data-kind="tools"] > .stand,main[data-kind="tools"] > #toolbar,main[data-ki
 }
 .tnmic:not(.primary){background:#2E3331;color:#E8EFEA;border-color:#3A403D;box-shadow:none}
 @media (max-width:600px){.mtadj{flex-wrap:wrap}.mtadj .mtslider{order:-1;flex-basis:100%;height:34px}.mtadj .mtstep{flex:1}}
+.tnarrowtrack{position:relative;height:9px;margin-top:-2px}
+.tnarrow{position:absolute;top:0;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:8px solid #FF5A4A;transform:translateX(-50%);transition:left .07s linear}
+.tnarrow.off{opacity:0}
 </style>
 
 <div class="app">
@@ -4510,7 +4513,7 @@ function tnShow(f,rms){
   const u=TS.ui;if(!u)return;
   u.level.style.width=Math.min(100,Math.round((rms||0)*900))+'%';
   const ledsOff=()=>u.leds.querySelectorAll('i').forEach(x=>x.className='');
-  if(!f){u.box.classList.add('idle');u.box.classList.remove('ok','low','high');u.note.textContent='–';u.oct.textContent='';u.cents.textContent=TS.on?'Joue une note':'';u.hz.textContent='';TS.okSince=0;ledsOff();tnStringsMark(-1,false);return;}
+  if(!f){u.box.classList.add('idle');u.box.classList.remove('ok','low','high');u.note.textContent='–';u.oct.textContent='';u.cents.textContent=TS.on?'Joue une note':'';u.hz.textContent='';TS.okSince=0;ledsOff();u.arrow.classList.add('off');tnStringsMark(-1,false);return;}
   const tg=tnTarget(f),s=tnStrings(),c=tg.cents;
   u.box.classList.remove('idle');
   u.note.textContent=tnName(tg.midi,s&&s.flat);u.oct.textContent=String(Math.floor(tg.midi/12)-1);
@@ -4521,6 +4524,10 @@ function tnShow(f,rms){
   const cr=Math.round(c);
   u.cents.textContent=Math.abs(c)>=100?(c<0?`Beaucoup trop bas (${cr} ¢)`:`Beaucoup trop haut (+${cr} ¢)`):stable?'Juste':`${cr>0?'+':''}${cr} ¢ · ${c<0?'trop bas':'trop haut'}`;
   u.hz.textContent=`${f.toFixed(2).replace('.',',')} Hz · cible ${midiHz(tg.midi).toFixed(2).replace('.',',')} Hz`;
+  /* petite flèche continue sous les voyants (même échelle qu'eux) */
+  const cc=Math.max(-50,Math.min(50,c));let j=0;while(j<TN_LEDS.length-2&&TN_LEDS[j+1]<cc)j++;
+  const idx=j+(cc-TN_LEDS[j])/(TN_LEDS[j+1]-TN_LEDS[j]);TS.needle=u.arrow.classList.contains('off')?idx:TS.needle+(idx-TS.needle)*.5;
+  u.arrow.classList.remove('off');u.arrow.style.left=`${(TS.needle+.5)/TN_LEDS.length*100}%`;
   /* rangée de voyants : plus serrés près du centre ; le voyant central s'allume en vert seulement si c'est juste */
   ledsOff();const L=u.leds.querySelectorAll('i');
   if(Math.abs(c)<=TN.tol)L[TN_LEDS.indexOf(0)].className=stable?'ok':'near';
@@ -4547,7 +4554,8 @@ function tunerView(){
   u.note=el('b',{class:'tnnote'},'–');u.oct=el('sub',{class:'tnoct'});u.cents=el('p',{class:'tncents'});u.hz=el('p',{class:'tnhz'});
   u.level=el('i');
   u.leds=el('div',{class:'tnleds','aria-hidden':'true'},TN_LEDS.map(v=>el('i',{'data-v':v})));
-  const scale=el('div',{class:'tnledwrap'},u.leds,el('div',{class:'tnledlab'},el('span',{},'−50'),el('span',{},'0'),el('span',{},'+50')));
+  u.arrow=el('i',{class:'tnarrow off'});
+  const scale=el('div',{class:'tnledwrap'},u.leds,el('div',{class:'tnarrowtrack'},u.arrow),el('div',{class:'tnledlab'},el('span',{},'−50'),el('span',{},'0'),el('span',{},'+50')));
   u.box=el('div',{class:'tnbox idle'},el('div',{class:'tnflat'},'♭'),el('div',{class:'tnmid'},el('div',{class:'tnname'},u.note,u.oct),u.cents),el('div',{class:'tnsharp'},'♯'));
   u.strings=el('div',{class:'tnstrings'});
   function refresh(){
