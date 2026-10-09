@@ -1423,7 +1423,7 @@ function preset(id,lv){
   if(id==='ln')return{clef:'treble',ext:0,acc:false,count:20,sound:true};
   if(id==='iv')return{ivs:['3m','3M','4J','5J','8J'],dirs:['up'],acc:false,auto:false};
   if(id==='pc')return{keys:['C','G','F'],chords:['I','IV','V'],n:4,startI:true,inv:false,dur:1.6,choices:4};
-  if(id==='bt'||id==='ou')return{};
+  if(id==='bt'||id==='mt'||id==='ac')return{};
   if(id==='tq')return{n:10,level:1,formats:['mc','short','staff'],topics:['l_sol','l_fa','r_fig','r_sil','g_arm','g_maj','i_nom','a_qua','t_nua','t_tem']};
   if(id==='lm')return{keys:['C'],clef:'treble',meters:['4/4'],measures:4,tempo:60,lo:0,hi:7,leap:2,figs:['noire','croches','blanche']};
   const p=structuredClone(MEL_P[i]);
@@ -1444,7 +1444,8 @@ const MODS=[
   {id:'la',kind:'mel',t:'Lecture appliquée',s:'Voir → jouer',d:'Joue la mélodie note par note sur le clavier à l\'écran ou avec ton clavier d\'ordinateur.'},
   {id:'bt',g:'Théorie',kind:'lib',t:'Bibliothèque théorique',s:'Comprendre',d:'Toutes les notions utiles pour lire, écouter et analyser la musique : de la portée aux cadences. Cherche une notion ou parcours les onglets.'},
   {id:'tq',kind:'quiz',t:'Tester mes connaissances',s:'Évaluer',d:'Un questionnaire tiré au hasard selon les sujets et le niveau choisis dans les réglages : une question par page, ton résultat à la fin, et des PDF à partager ou à imprimer.'},
-  {id:'ou',g:'Outils',kind:'tools',t:'Métronome et accordeur',s:'Outils de travail',d:'Un métronome avec subdivisions et un accordeur chromatique précis, avec les accords courants et alternatifs de la guitare, de la basse, du ukulélé, du banjo et des cordes frottées.'},
+  {id:'mt',g:'Outils',kind:'tools',t:'Métronome',s:'Garder le tempo',d:'Un métronome avec subdivisions à mélanger, accélération progressive et mesures muettes.'},
+  {id:'ac',kind:'tools',t:'Accordeur',s:'Accorder son instrument',d:'Un accordeur chromatique précis, avec les accords courants et alternatifs de la guitare, de la basse, du ukulélé, du banjo et des cordes frottées.'},
 ];
 const MOD=Object.fromEntries(MODS.map(m=>[m.id,m]));
 const S={mic:(()=>{try{return !!localStorage.getItem('atelier-mic')}catch(e){return false}})(),transp:(()=>{try{return localStorage.getItem('atelier-transp')||'ut'}catch(e){return 'ut'}})(),perc:(()=>{try{return localStorage.getItem('atelier-perc')||'wood'}catch(e){return 'wood'}})(),slot:{},rev:(()=>{try{return localStorage.getItem('atelier-rev')||'1'}catch(e){return '1'}})(),inst:(()=>{try{const v=localStorage.getItem('atelier-inst')||'piano';return v==='glock'?'flute':v==='choeur'||v==='pianosynth'?(v==='choeur'?'voix':'piano'):v}catch(e){return 'piano'}})(),auto:{},lastEx:{},mod:'dm',cfg:{},level:{},stats:{},ex:null,st:{},keyHandler:null,midiHandler:null};
@@ -4261,23 +4262,14 @@ async function qzPdfResult(t){
 }
 
 /* ========== MODULE : Outils (métronome et accordeur) ========== */
-const TL={tab:(()=>{try{return localStorage.getItem('atelier-tool')||'metro'}catch(e){return 'metro'}})()};
 const tlLoad=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k)||'null');return v&&typeof v==='object'?Object.assign({},d,v):d;}catch(e){return d;}};
 const tlSave=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}};
 function toolsStop(){metroStop();tunerStop();}
 
-MOD.ou.mount=function(){
-  $('#toolbar').replaceChildren();
-  const tabs=el('div',{class:'tltabs',role:'tablist'});
-  const body=el('div',{class:'tlbody'});
-  const show=t=>{TL.tab=t;try{localStorage.setItem('atelier-tool',t);}catch(e){}
-    tabs.querySelectorAll('button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.t===t)));
-    if(t!=='tuner')tunerStop();body.replaceChildren(t==='tuner'?tunerView():metroView());};
-  [['metro','Métronome'],['tuner','Accordeur']].forEach(([t,l])=>tabs.append(el('button',{type:'button',role:'tab','data-t':t,onclick:()=>show(t)},l)));
-  $('#answer').replaceChildren(el('div',{class:'tl'},tabs,body));
-  this.show=show;
-};
-MOD.ou.fresh=function(){this.show(TL.tab);};
+MOD.mt.mount=function(){$('#toolbar').replaceChildren();this.root=el('div',{class:'tl'});$('#answer').replaceChildren(this.root);};
+MOD.mt.fresh=function(){this.root.replaceChildren(metroView());};
+MOD.ac.mount=function(){$('#toolbar').replaceChildren();this.root=el('div',{class:'tl'});$('#answer').replaceChildren(this.root);};
+MOD.ac.fresh=function(){this.root.replaceChildren(tunerView());};
 
 /* ---------------- MÉTRONOME ---------------- */
 const MT_DEF={bpm:96,beats:4,vol:{acc:.9,beat:.7,e8:0,e3:0,e16:0},shuffle:false,sound:'bip',master:.9,
@@ -4594,8 +4586,9 @@ $('#setbtn').addEventListener('click',()=>{const p=$('#settings'),open=p.hidden,
 let rz;window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{const M=MOD[S.mod];if(S.ex&&M.redraw)M.redraw();},200);});
 (function boot(){
   const lb=(location.hash||'').match(/^#?bt(?:-([a-z0-9-]+))?$/);if(lb){if(lb[1]&&LIB_TOPICS[lb[1]])S.lib.topic=lb[1];openModule('bt');return;}
-  const m=(location.hash||'').match(/^#?(dm|dr|iv|pc|ln|lm|lr|so|la|tq|ou)(?:-([A-Za-z0-9_-]+))?$/);let shared=null;
+  const m=(location.hash||'').match(/^#?(dm|dr|iv|pc|ln|lm|lr|so|la|tq|mt|ac)(?:-([A-Za-z0-9_-]+))?$/);let shared=null;
   if(m&&m[2]){try{shared=dec(m[2]);}catch(e){shared=null;}}
+  if(/^#?ou\b/.test(location.hash||'')){openModule('mt');return;}
   openModule(m?m[1]:'dm',shared);
 })();
 </script>
