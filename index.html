@@ -20,8 +20,8 @@
 .langsw button+button{border-left:1px solid var(--line)}
 .langsw button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
 .langsw button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
-.headtools{display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;justify-content:flex-end;align-self:flex-start}
-@media (max-width:600px){.headtools{gap:6px}.langsw button{padding:7px 9px;min-height:34px;font-size:.72rem}}
+.rail .langsw{align-self:flex-start}
+@media (max-width:600px){.rail .langsw{order:1}.rail .railnote{order:2}.langsw button{padding:8px 12px;min-height:38px}}
 </style>
 <title>MusicDEV</title>
 <link rel="stylesheet" href="fonts/fonts.css">
@@ -1029,7 +1029,7 @@ function T(s){
   if(!m[2]||!/[A-Za-zÀ-ÿ]/.test(m[2]))return str;const r=tCore(m[2],I18N.lang);return r==null?str:m[1]+r+m[3];
 }
 /* traduction de la page : textes, attributs utiles ; la partition (abcjs) n'est jamais touchée */
-const TR_SEEN=new WeakMap(),TR_ATTR=['placeholder','title','aria-label'];
+const TR_SEEN=new WeakMap(),TR_ATTR=['placeholder','title','aria-label','label'];
 const trSkip=n=>{const e=n.nodeType===1?n:n.parentElement;return !e||!!e.closest('script,style,.abcjs-container,[data-notr],textarea');};
 function trText(n){const v=n.nodeValue;if(!v||!/[A-Za-zÀ-ÿ]/.test(v))return;const st=TR_SEEN.get(n);const fr=st&&v===st.out?st.fr:v;const out=T(fr);TR_SEEN.set(n,{fr,out});if(out!==v)n.nodeValue=out;}
 function trAttrs(e){for(const a of TR_ATTR){if(!e.hasAttribute||!e.hasAttribute(a))continue;const v=e.getAttribute(a);const key='__tr_'+a;const st=e[key];const fr=st&&v===st.out?st.fr:v;const out=T(fr);e[key]={fr,out};if(out!==v)e.setAttribute(a,out);}}
@@ -4949,7 +4949,7 @@ new MutationObserver(sync).observe(sb,{attributes:true,attributeFilter:['aria-ex
 </script>
 <script>
 /* langue : sélecteur dans l'en-tête, puis traduction de la page */
-(()=>{const hw=document.querySelector('.helpwrap');if(hw){const box=document.createElement('div');box.className='headtools';hw.parentNode.insertBefore(box,hw);box.append(langSwitch(),hw);}
+(()=>{const br=document.querySelector('.rail .brand');if(br)br.after(langSwitch());
   document.documentElement.lang=I18N.lang==='fr'?'fr-CA':I18N.lang;trStart();if(I18N.lang!=='fr')trTree(document.body);})();
 </script>
 </body>
