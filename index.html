@@ -735,6 +735,9 @@ main[data-kind="quiz"] .stand{padding-bottom:0}
   .qzscore b{font-size:2.4rem}
 }
 .qzpadbox .edwrap{max-width:560px}
+.qzpad{touch-action:none;-webkit-user-select:none;user-select:none}
+.qzpadbox .edtag{font-size:1.05rem;padding:4px 10px;pointer-events:none}
+@media (pointer:coarse){.qzpadbox .edwrap{max-width:none}}
 
 /* ===== Outils : métronome et accordeur ===== */
 main[data-kind="tools"] > .stand,main[data-kind="tools"] > #toolbar,main[data-kind="tools"] > .method{display:none}
@@ -4070,29 +4073,40 @@ function makeQzPad(q,resp,onChange){
   const info=el('p',{class:'edinfo'});
   const paint=()=>{accBtns.forEach(b=>b.setAttribute('aria-pressed',String(acc===+b.dataset.a)));
     info.textContent=P.mode==='chord'?`Touche la portée pour ajouter une note (toutes empilées). Touche une note posée pour l'enlever.${notes.length?' Notes : '+notes.slice().sort((a,b)=>dia(a)-dia(b)).map(nn).join(' – '):''}`
-      :P.mode==='seq'?`Touche la portée pour ajouter les notes de gauche à droite (${notes.length}/${P.max||8}).`:'Touche la portée à la hauteur voulue. Choisis d\'abord ♯ ou ♭ si la note est altérée.';};
-  let svg=null;const render=()=>{draw(staff,P.build(notes).replace('X:1\n','X:1\n%%stretchlast 1\n'),{paddingtop:20,paddingbottom:20});svg=staff.querySelector('svg');};
+      :P.mode==='seq'?`Touche la portée pour ajouter les notes de gauche à droite (${notes.length}/${P.max||8}).`:'Pose le doigt sur la portée et glisse jusqu\'à la bonne note (son nom s\'affiche), puis lève le doigt. ▲ ▼ ajustent ensuite la note. Choisis d\'abord ♯ ou ♭ si elle est altérée.';};
+  /* portée agrandie : une portée courte qu'on étire sur toute la largeur (2× plus haute sur téléphone) */
+  const touch=matchMedia('(pointer:coarse)').matches;
+  let svg=null;const render=()=>{const w=staff.clientWidth||600;draw(staff,P.build(notes).replace('X:1\n','X:1\n%%stretchlast 1\n'),{paddingtop:16,paddingbottom:16,staffwidth:Math.max(120,Math.min(420,w/(touch?(P.mode==='seq'?1.6:2.8):1.5)))});svg=staff.querySelector('svg');};
   const commit=()=>{render();paint();onChange(notes.map(n=>({L:n.L,oct:n.oct,alt:n.alt})));};
   function hit(e){
     if(!svg)return null;const st=svg.querySelector('.abcjs-staff');if(!st)return null;const r=st.getBoundingClientRect(),step=r.height/8;
     const k=Math.round((e.clientY-r.top)/step);if(k<-6||k>14)return null;const d=STAFF_TOP[P.clef]-k;return{d,y:r.top+k*step,step};
   }
-  staff.addEventListener('pointermove',e=>{const h=hit(e);let g=svg&&svg.querySelector('.edghost');
+  /* aperçu : note fantôme + nom de la note, affiché au-dessus du doigt */
+  function ghost(e,h){let g=svg&&svg.querySelector('.edghost');
     if(!h){tag.hidden=true;if(g)g.remove();return;}
-    const n=fromDia(h.d,acc==null?0:acc),wr=wrap.getBoundingClientRect();tag.hidden=false;tag.textContent=nn(n);tag.style.left=(e.clientX-wr.left+14)+'px';tag.style.top=(h.y-wr.top-12)+'px';
+    const n=fromDia(h.d,acc==null?0:acc),wr=wrap.getBoundingClientRect();tag.hidden=false;tag.textContent=nn(n);
+    tag.style.left=(e.clientX-wr.left+(e.pointerType==='touch'?-18:14))+'px';tag.style.top=(h.y-wr.top-(e.pointerType==='touch'?58:12))+'px';
     const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=h.y;const ctm=svg.getScreenCTM();if(!ctm)return;const p=pt.matrixTransform(ctm.inverse()),sc=ctm.a||1;
     if(!g){g=document.createElementNS('http://www.w3.org/2000/svg','ellipse');g.setAttribute('class','edghost');svg.append(g);}
-    g.setAttribute('cx',p.x);g.setAttribute('cy',p.y);g.setAttribute('rx',h.step*.62/sc);g.setAttribute('ry',h.step*.45/sc);});
-  staff.addEventListener('pointerleave',()=>{tag.hidden=true;const g=svg&&svg.querySelector('.edghost');if(g)g.remove();});
-  staff.addEventListener('click',e=>{
-    if(typeof HELP!=='undefined'&&HELP.on)return;const h=hit(e);if(!h)return;
+    g.setAttribute('cx',p.x);g.setAttribute('cy',p.y);g.setAttribute('rx',h.step*.62/sc);g.setAttribute('ry',h.step*.45/sc);}
+  function place(h){
     const n=fromDia(h.d,acc==null?0:acc);if(acc===0)n.nat=true;
     if(P.mode==='one'){notes.length=0;notes.push(n);}
     else if(P.mode==='chord'){const k=notes.findIndex(x=>dia(x)===h.d);if(k>=0){if(acc==null)notes.splice(k,1);else notes[k]=n;}else if(notes.length<(P.max||4))notes.push(n);else{feedback(`Au plus ${P.max||4} notes.`,'bad');return;}}
     else{if(notes.length>=(P.max||8)){feedback('La portée est pleine : efface une note avant d\'en ajouter.','bad');return;}notes.push(n);}
     feedback('');acc=null;A.init();A.note(noteMidi(n),A.ctx.currentTime+.01,.5,.4,A.out);commit();
-  });
-  const tools=el('div',{class:'toolbar qzpadtools'},btn('Effacer la dernière',()=>{notes.pop();commit();}),btn('Tout effacer',()=>{notes.length=0;commit();}),
+  }
+  /* au doigt : on pose le doigt, on glisse pour ajuster (le nom de la note s'affiche), on lève pour poser */
+  let drag=null;
+  staff.addEventListener('pointerdown',e=>{if(typeof HELP!=='undefined'&&HELP.on)return;const h=hit(e);if(!h)return;drag={id:e.pointerId,h};try{staff.setPointerCapture(e.pointerId);}catch(x){}ghost(e,h);e.preventDefault();});
+  staff.addEventListener('pointermove',e=>{const h=hit(e);if(drag&&e.pointerId===drag.id){if(h)drag.h=h;ghost(e,drag.h);}else if(e.pointerType==='mouse')ghost(e,h);});
+  staff.addEventListener('pointerup',e=>{if(!drag||e.pointerId!==drag.id)return;const h=drag.h;drag=null;tag.hidden=true;const g=svg&&svg.querySelector('.edghost');if(g)g.remove();place(h);});
+  staff.addEventListener('pointercancel',()=>{drag=null;tag.hidden=true;});
+  staff.addEventListener('pointerleave',e=>{if(drag)return;tag.hidden=true;const g=svg&&svg.querySelector('.edghost');if(g)g.remove();});
+  /* ajustement fin : déplacer la dernière note d'une ligne ou d'un interligne */
+  const nudge=dir=>{if(!notes.length)return;const n=notes[notes.length-1],m=fromDia(dia(n)+dir,n.alt);if(n.nat)m.nat=true;notes[notes.length-1]=m;A.init();A.note(noteMidi(m),A.ctx.currentTime+.01,.4,.4,A.out);commit();};
+  const tools=el('div',{class:'toolbar qzpadtools'},btn('▲ Monter',()=>nudge(1)),btn('▼ Descendre',()=>nudge(-1)),btn('Effacer la dernière',()=>{notes.pop();commit();}),btn('Tout effacer',()=>{notes.length=0;commit();}),
     btn('▶ Écouter',()=>{const g=(P.given||[]).map(noteMidi),s=notes.slice().sort((a,b)=>P.mode==='seq'?0:dia(a)-dia(b)).map(noteMidi);if(P.mode==='chord'){A.init();stop();run({items:[...g.map((m,i)=>({u:i,d:1,midi:m})),...(s.length?[{u:g.length,d:2,chord:s}]:[])],us:.7,endU:g.length+2});}else{const all=[...g,...s];if(all.length){A.init();stop();run({items:all.map((m,i)=>({u:i,d:1,midi:m})),us:.55,endU:all.length});}}}));
   const elx=el('div',{class:'qzpadbox'},el('div',{class:'edpal'},el('div',{class:'edgrp'},...accBtns)),wrap,info,tools);
   requestAnimationFrame(()=>{render();paint();});
