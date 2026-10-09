@@ -3053,7 +3053,7 @@ const QZ_LEVELS=[[1,'Débutant'],[2,'Intermédiaire'],[3,'Avancé']];
 const QZ_FORMATS=[['mc','Choix de réponses'],['short','Réponse courte'],['staff','Sur la portée']];
 const QZ_SUBJ=[
  {id:'lec',t:'Lecture',subs:[['l_sol','Notes en clé de sol'],['l_fa','Notes en clé de fa'],['l_ut','Notes en clé d\'ut (alto)'],['l_lig','Lignes supplémentaires'],['l_alt','Altérations'],['l_enh','Notes enharmoniques']]},
- {id:'rhy',t:'Rythme',subs:[['r_fig','Figures de notes'],['r_sil','Figures de silence'],['r_pts','Points et liaisons'],['r_mes','Chiffres indicateurs'],['r_cmp','Compléter une mesure']]},
+ {id:'rhy',t:'Rythme',subs:[['r_fig','Figures de notes'],['r_sil','Figures de silence'],['r_pts','Notes pointées'],['r_lia','Liaisons'],['r_mes','Chiffres indicateurs'],['r_cmp','Compléter une mesure']]},
  {id:'gam',t:'Gammes et tonalités',subs:[['g_arm','Armures'],['g_ord','Ordre des dièses et des bémols'],['g_maj','Gamme majeure'],['g_min','Gammes mineures'],['g_rel','Tonalités relatives'],['g_deg','Noms des degrés'],['g_cyc','Cycle des quintes']]},
  {id:'int',t:'Intervalles',subs:[['i_nom','Nommer un intervalle'],['i_ecr','Écrire un intervalle'],['i_dt','Tons et demi-tons'],['i_ren','Renversement des intervalles']]},
  {id:'acc',t:'Accords',subs:[['a_qua','Qualité des triades'],['a_nom','Nommer une triade'],['a_ecr','Écrire une triade'],['a_deg','Accords sur les degrés'],['a_ren','Renversements'],['a_v7','Septième de dominante']]},
@@ -3284,10 +3284,10 @@ QZG.r_sil=(lv,fmts)=>{
   return mcQ(q,fracFr(r),[r*2,r/2,r*4,r+1].filter(x=>x!==r&&x>=.25).map(fracFr));
 };
 QZG.r_pts=(lv,fmts)=>{
-  const v=pick(lv===1?['dotted','count','glyph']:['dotted','count','glyph','tie']);
+  const v=pick(['dotted','count','glyph']);
   const fmt=qzFmt(v==='glyph'?['mc']:['short','mc'],fmts);if(!fmt)return null;
   const q={sub:'r_pts',topic:'points-liaisons'};
-  if(v==='dotted'){const d=pick(lv===1?[12,6]:[24,12,6,3]),r=d/4,nm=d===24?'ronde pointée':d===3?'croche pointée':figName(d).toLowerCase();
+  if(v==='dotted'){const d=pick(lv===1?[12,6]:[12,6,3]),r=d/4,nm=d===24?'ronde pointée':d===3?'croche pointée':figName(d).toLowerCase();
     Object.assign(q,{key:'r_pts:d'+d,prompt:`Dans une mesure à 4/4, combien de temps dure une ${nm} ?`});
     if(fmt==='short')return shortQ(q,fracFr(r),fracAccept(r),{ph:'ex. : 1 ½'});
     return mcQ(q,fracFr(r),[r*2/3,r*4/3,r+1,r-.5,r*2].filter(x=>x!==r&&x>0).map(fracFr));}
@@ -3299,7 +3299,7 @@ QZG.r_pts=(lv,fmts)=>{
     Object.assign(q,{key:`r_pts:t${a}-${b}`,prompt:'Ces deux notes sont reliées par une liaison de prolongation. En 4/4, combien de temps dure le son au total ?',abc:`X:1\nL:1/16\nM:4/4\nK:C\nB${a}-B${b} x${(16-(a+b)%16)%16||''} |]`.replace(' x |]',' |]')});
     if(fmt==='short')return shortQ(q,fracFr(r),fracAccept(r),{ph:'ex. : 3'});
     return mcQ(q,fracFr(r),[a/4,b/4,r+1,r-.5,r*2].filter(x=>x!==r&&x>0).map(fracFr));}
-  const beats=pick([3,1.5,6].slice(0,lv===1?2:3)),u=beats*4;
+  const beats=pick(lv===3?[3,1.5,.75]:[3,1.5]),u=beats*4;
   Object.assign(q,{key:'r_pts:g'+u,prompt:`En 4/4, quelle figure dure ${fracFr(beats)} temps ?`});
   const cand=[24,16,12,8,6,4,3].filter(x=>x!==u&&x!==24);
   return mcQ(q,{t:'',abc:glyphAbc(u),lab:u===24?'Ronde pointée':figName(u)},qzShuffle(cand).slice(0,5).map(x=>({t:'',abc:glyphAbc(x),lab:figName(x)})));
@@ -3312,6 +3312,22 @@ function rhyFill(meter,lv,total,{allowRests=true}={}){
     const g=opts.length?pick(opts):[[16,12,8,6,4,3,2,1].find(x=>x<=total-t&&(x<=bu||t%bu===0))||1];g.forEach(x=>evs.push({dur:Math.abs(x),rest:x<0}));t+=g.reduce((a,x)=>a+Math.abs(x),0);}
   return evs;
 }
+QZG.r_lia=(lv,fmts)=>{
+  const v=pick(lv===1?['tie','kind']:['tie','kind','bar']);const fmt=qzFmt(v==='kind'?['mc']:['short','mc'],fmts);if(!fmt)return null;
+  const q={sub:'r_lia',topic:'points-liaisons'};
+  if(v==='kind'){const same=Math.random()<.5,n=pick(['B','c','A','G']),m={B:'d',c:'e',A:'c',G:'B'}[n];
+    Object.assign(q,{key:'r_lia:k'+same+n,prompt:'Quel type de liaison relie ces deux notes ?',abc:`X:1\nL:1/4\nM:4/4\nK:C\n${same?`${n}2-${n}2`:`(${n}2 ${m}2)`} |]`,small:true});
+    return mcQ(q,same?'Liaison de prolongation (même note : le son est tenu)':'Liaison d\'expression (notes différentes : jouées liées)',[same?'Liaison d\'expression (notes différentes : jouées liées)':'Liaison de prolongation (même note : le son est tenu)'],2);}
+  if(v==='bar'){const me=pick(['3/4','4/4']),M=METERS[me],tot=M.beats*4;const[a,b]=pick([[4,4],[4,8],[8,4],[4,2]]);const pre=tot-a,post=tot-b,r=(a+b)/4;
+    const fill=u=>{const out=[];let x=u;while(x>0){const d=[8,4].find(y=>y<=x)||x;out.push('c'+d);x-=d;}return out.join(' ');};
+    Object.assign(q,{key:`r_lia:b${me}${a}${b}`,prompt:`La liaison relie la dernière note de la mesure 1 à la première note de la mesure 2. En ${me}, combien de temps dure ce son au total ?`,abc:`X:1\nL:1/16\nM:${me}\nK:C\n${fill(pre)} B${a}- | B${b} ${fill(post)} |]`});
+    if(fmt==='short')return shortQ(q,fracFr(r),fracAccept(r),{ph:'ex. : 2'});
+    return mcQ(q,fracFr(r),[a/4,b/4,r+1,r*2].filter(x=>x!==r&&x>0).map(fracFr));}
+  const[a,b]=pick([[8,4],[4,2],[8,8],[4,4],[12,4],[4,8]].slice(0,lv===1?4:6)),r=(a+b)/4;
+  Object.assign(q,{key:`r_lia:t${a}-${b}`,prompt:'Ces deux notes sont reliées par une liaison de prolongation. En 4/4, combien de temps dure le son au total ?',abc:`X:1\nL:1/16\nM:4/4\nK:C\nB${a}-B${b} x${(16-(a+b)%16)%16||''} |]`.replace(' x |]',' |]')});
+  if(fmt==='short')return shortQ(q,fracFr(r),fracAccept(r),{ph:'ex. : 3'});
+  return mcQ(q,fracFr(r),[a/4,b/4,r+1,r-.5,r*2].filter(x=>x!==r&&x>0).map(fracFr));
+};
 QZG.r_mes=(lv,fmts)=>{
   const v=pick(lv===1?['beats','unit','which']:['beats','unit','which','kind']);
   const fmt=qzFmt(v==='which'||v==='kind'?['mc']:['short','mc'],fmts);if(!fmt)return null;
