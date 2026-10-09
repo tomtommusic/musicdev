@@ -810,14 +810,15 @@ main[data-kind="tools"] > .stand,main[data-kind="tools"] > #toolbar,main[data-ki
 .tnbox.ok .tncents{color:#9BE7C9}
 .tnbox.low .tncents,.tnbox.high .tncents{color:#FFB3A6}
 .tnbox.idle .tncents{color:#6FB79C;font-weight:500}
-.tnscale{position:relative;height:56px;margin:0 6px;border-bottom:2px solid #3A403D}
-.tnzone{position:absolute;top:0;bottom:0;background:rgb(155 231 201/.22);border-left:1px solid #9BE7C9;border-right:1px solid #9BE7C9}
-.tntick{position:absolute;bottom:0;width:1px;height:16px;background:#56605B}
-.tntick.zero{height:30px;background:#9BE7C9;width:2px}
-.tntick small{position:absolute;top:18px;left:50%;transform:translateX(-50%);font:500 .65rem/1 var(--f-mono);color:#7C8A84;white-space:nowrap}
-.tntick.zero small{top:32px;color:#9BE7C9}
-.tnneedle{position:absolute;bottom:0;left:calc(50% - 1.5px);width:3px;height:48px;border-radius:2px;background:#FFC46B;box-shadow:0 0 8px #FFC46B;transition:left .06s linear}
-.tnbox.idle~.tnscale .tnneedle{opacity:.25}
+.tnledwrap{display:flex;flex-direction:column;gap:6px;padding:0 4px}
+.tnleds{display:grid;grid-template-columns:repeat(15,1fr);gap:6px;align-items:end;height:44px}
+.tnleds i{display:block;height:60%;border-radius:4px;background:#25302C;box-shadow:inset 0 1px 2px rgb(0 0 0/.5)}
+.tnleds i[data-v="0"]{height:100%;background:#22382F;outline:1.5px solid #3F6B5B;outline-offset:2px}
+.tnleds i.off2{background:#FFC46B;box-shadow:0 0 10px #FFC46B}
+.tnleds i.far{background:#FF8A78;box-shadow:0 0 10px #FF8A78}
+.tnleds i.near{background:#5FA68B}
+.tnleds i.ok{background:#9BE7C9;box-shadow:0 0 16px #9BE7C9}
+.tnledlab{display:flex;justify-content:space-between;font:500 .7rem/1 var(--f-mono);color:#7C8A84}
 .tnhz{margin:6px 0 0;text-align:center;font:500 .8rem/1.3 var(--f-mono);color:#9FB3AA;min-height:1.3em}
 .tnstrings{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
 .tnstrings button{display:flex;flex-direction:column;align-items:center;gap:1px;min-width:56px;padding:8px 10px;border-radius:12px;border:1px solid #3A403D;background:#2E3331;color:#E8EFEA;cursor:pointer;position:relative}
@@ -4441,6 +4442,7 @@ const TUNINGS={
   cello:{t:'Violoncelle',sets:[['std','Standard (do sol ré la)',[36,43,50,57]]]},
 };
 const FR_SH=['do','do♯','ré','ré♯','mi','fa','fa♯','sol','sol♯','la','la♯','si'],FR_FL=['do','ré♭','ré','mi♭','mi','fa','sol♭','sol','la♭','la','si♭','si'];
+const TN_LEDS=[-50,-35,-25,-17,-11,-7,-4,0,4,7,11,17,25,35,50];
 const tnName=(m,fl)=>(fl?FR_FL:FR_SH)[((m%12)+12)%12];
 const TN_DEF={inst:'chroma',set:{},a4:440,tol:2};
 const TN=tlLoad('atelier-tuner',TN_DEF);TN.set=Object.assign({},TN.set);
@@ -4507,7 +4509,8 @@ function tnTarget(f){
 function tnShow(f,rms){
   const u=TS.ui;if(!u)return;
   u.level.style.width=Math.min(100,Math.round((rms||0)*900))+'%';
-  if(!f){u.box.classList.add('idle');u.box.classList.remove('ok','low','high');u.note.textContent='–';u.oct.textContent='';u.cents.textContent=TS.on?'Joue une note':'';u.hz.textContent='';TS.okSince=0;tnStringsMark(-1,false);return;}
+  const ledsOff=()=>u.leds.querySelectorAll('i').forEach(x=>x.className='');
+  if(!f){u.box.classList.add('idle');u.box.classList.remove('ok','low','high');u.note.textContent='–';u.oct.textContent='';u.cents.textContent=TS.on?'Joue une note':'';u.hz.textContent='';TS.okSince=0;ledsOff();tnStringsMark(-1,false);return;}
   const tg=tnTarget(f),s=tnStrings(),c=tg.cents;
   u.box.classList.remove('idle');
   u.note.textContent=tnName(tg.midi,s&&s.flat);u.oct.textContent=String(Math.floor(tg.midi/12)-1);
@@ -4516,9 +4519,12 @@ function tnShow(f,rms){
   const stable=ok&&now-TS.okSince>350;
   u.box.classList.toggle('ok',stable);u.box.classList.toggle('low',!ok&&c<0);u.box.classList.toggle('high',!ok&&c>0);
   const cr=Math.round(c);
-  u.cents.textContent=Math.abs(c)>=100?(c<0?`Beaucoup trop bas (${cr} ¢)`:`Beaucoup trop haut (+${cr} ¢)`):stable?'Juste':`${cr>0?'+':''}${cr} ¢ · ${c<0?'trop bas, monte':'trop haut, descends'}`;
+  u.cents.textContent=Math.abs(c)>=100?(c<0?`Beaucoup trop bas (${cr} ¢)`:`Beaucoup trop haut (+${cr} ¢)`):stable?'Juste':`${cr>0?'+':''}${cr} ¢ · ${c<0?'trop bas':'trop haut'}`;
   u.hz.textContent=`${f.toFixed(2).replace('.',',')} Hz · cible ${midiHz(tg.midi).toFixed(2).replace('.',',')} Hz`;
-  const tgtPos=Math.max(-50,Math.min(50,c));TS.needle+=(tgtPos-TS.needle)*.45;u.needle.style.left=`calc(${50+TS.needle}% - 1.5px)`;
+  /* rangée de voyants : plus serrés près du centre ; le voyant central s'allume en vert seulement si c'est juste */
+  ledsOff();const L=u.leds.querySelectorAll('i');
+  if(Math.abs(c)<=TN.tol)L[TN_LEDS.indexOf(0)].className=stable?'ok':'near';
+  else{let k=0,bd=1e9;TN_LEDS.forEach((v,i)=>{if(v===0)return;if(Math.sign(v)!==Math.sign(c))return;const d=Math.abs(v-Math.max(-50,Math.min(50,c)));if(d<bd){bd=d;k=i;}});L[k].className=Math.abs(c)>25?'far':'off2';}
   tnStringsMark(tg.k,stable);
 }
 function tnStringsMark(k,ok){const u=TS.ui;if(!u||!u.strings)return;u.strings.querySelectorAll('button').forEach((b,i)=>{b.classList.toggle('cur',i===k);if(i===k&&ok)b.classList.add('done');});}
@@ -4539,9 +4545,9 @@ function tunerView(){
   a4.addEventListener('change',()=>{TN.a4=Math.max(415,Math.min(466,Math.round(+a4.value||440)));a4.value=TN.a4;tnSave();refresh();});
   u.mic=el('button',{type:'button',class:'btn primary tnmic',onclick:()=>TS.on?tunerStop():tunerStart()},'🎤 Activer le micro');
   u.note=el('b',{class:'tnnote'},'–');u.oct=el('sub',{class:'tnoct'});u.cents=el('p',{class:'tncents'});u.hz=el('p',{class:'tnhz'});
-  u.needle=el('i',{class:'tnneedle'});u.level=el('i');
-  const scale=el('div',{class:'tnscale'},el('span',{class:'tnzone',style:`width:${2*TN.tol}%;left:${50-TN.tol}%`}),
-    ...[-50,-40,-30,-20,-10,0,10,20,30,40,50].map(v=>el('span',{class:'tntick'+(v===0?' zero':''),style:`left:${50+v}%`},el('small',{},v===0?'0':v>0?'+'+v:String(v)))),u.needle);
+  u.level=el('i');
+  u.leds=el('div',{class:'tnleds','aria-hidden':'true'},TN_LEDS.map(v=>el('i',{'data-v':v})));
+  const scale=el('div',{class:'tnledwrap'},u.leds,el('div',{class:'tnledlab'},el('span',{},'−50'),el('span',{},'0'),el('span',{},'+50')));
   u.box=el('div',{class:'tnbox idle'},el('div',{class:'tnflat'},'♭'),el('div',{class:'tnmid'},el('div',{class:'tnname'},u.note,u.oct),u.cents),el('div',{class:'tnsharp'},'♯'));
   u.strings=el('div',{class:'tnstrings'});
   function refresh(){
@@ -4555,10 +4561,8 @@ function tunerView(){
             el('small',{},String(num)),el('b',{},tnName(m,s.flat)),el('span',{},String(Math.floor(m/12)-1)));}));
       u.strings.hidden=false;u.refs.replaceChildren(el('span',{class:'fl'},'Entendre une corde'),...s.notes.map((m,i)=>el('button',{type:'button',class:'btn quiet sq',onclick:()=>tnRef(m)},tnName(m,s.flat))));
     }else{u.strings.hidden=true;u.strings.replaceChildren();u.refs.replaceChildren(el('span',{class:'fl'},'Note de référence'),btn(`▶ La ${TN.a4} Hz`,()=>tnRef(69),'quiet'));}
-    scale.querySelector('.tnzone').style.cssText=`width:${2*TN.tol}%;left:${50-TN.tol}%`;
   }
   u.refs=el('div',{class:'tnrefs'});
-  tolSel.addEventListener('change',()=>scale.querySelector('.tnzone').style.cssText=`width:${2*TN.tol}%;left:${50-TN.tol}%`);
   const out=el('div',{class:'tnwrap'},
     el('div',{class:'tnpanel'},
       el('div',{class:'tntop'},u.mic,el('span',{class:'tnlevel','aria-hidden':'true'},u.level)),
