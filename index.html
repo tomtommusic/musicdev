@@ -631,6 +631,107 @@ main[data-kind="lib"] > .method{display:none}
   .mi-set button svg{width:21px;height:21px}
   .mi-set button[aria-expanded="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 }
+
+/* ===== Tester mes connaissances ===== */
+main[data-kind="quiz"] #score,main[data-kind="quiz"] .tallyrow,main[data-kind="quiz"] > #toolbar,main[data-kind="quiz"] #countin{display:none}
+main[data-kind="quiz"] .stand{padding-bottom:0}
+.qz{display:flex;flex-direction:column;gap:14px}
+.qzwrap{display:flex;flex-direction:column;gap:14px}
+.qzcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-sm);padding:22px 24px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.qzcard h2{font:700 1.5rem/1.2 var(--f-display);margin:0}
+.qzcard h3{font:700 1.15rem/1.25 var(--f-display);margin:0}
+.qzcard .eyebrow{margin:0}
+.qzsum{margin:0;font-weight:700}
+.qzsubjs{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:4px;line-height:1.45}
+.qzsubjs span{color:var(--muted)}
+.qzwarn{margin:0;color:var(--bad);font-weight:700}
+.qzfield{display:flex;flex-direction:column;gap:4px;max-width:420px}
+.qzfield .fl{font:500 .7rem/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.qzin,.qzsel{border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--paper);font-size:16px;min-width:0;width:100%}
+.qzin:focus,.qzsel:focus{outline:2px solid var(--accent);outline-offset:1px}
+.qzbtns{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.qzbtns a.btn{text-decoration:none;color:inherit}
+.qzbtns a.btn.primary{color:var(--accent-ink)}
+.qzteach{background:var(--sunk)}
+.qzhead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 12px;scroll-margin-top:12px}
+.qznum{font:700 1.25rem/1.2 var(--f-display)}
+.qztag{font:500 .72rem/1.3 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.qzdots{display:flex;flex-wrap:wrap;gap:6px}
+.qzdot{width:34px;height:34px;border-radius:50%;border:1px solid var(--btn-edge);background:var(--btn);color:var(--muted);font:700 .8rem/1 var(--f-body);cursor:pointer;padding:0}
+.qzdot.done{background:var(--accent-soft);color:var(--ink);border-color:var(--accent)}
+.qzdot.ok{background:var(--ok-soft);color:var(--ok);border-color:var(--ok)}
+.qzdot.bad{background:var(--bad-soft);color:var(--bad);border-color:var(--bad)}
+.qzdot.cur{outline:3px solid var(--accent);outline-offset:2px;color:var(--ink)}
+.qzprompt{margin:0;font:700 1.2rem/1.4 var(--f-body)}
+.qzplay{display:flex;gap:8px;align-items:center}
+.qzstaff{margin:0;min-height:0;color:var(--ink)}
+.qzstaff.small{max-width:320px}
+.qzopts{display:flex;flex-direction:column;gap:8px}
+.qzopts.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.qzopt{display:flex;align-items:center;gap:12px;text-align:left;border:1px solid var(--btn-edge);background:var(--btn);border-radius:14px;padding:12px 14px;cursor:pointer;color:var(--ink);box-shadow:var(--shadow-sm);min-height:52px;font-size:1rem}
+.qzopt:hover:not(:disabled){border-color:var(--accent)}
+.qzopt[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)}
+.qzopt .qzl{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--sunk);font:700 .8rem/1 var(--f-mono);flex:0 0 auto;color:var(--muted)}
+.qzopt[aria-pressed="true"] .qzl{background:var(--accent);color:var(--accent-ink)}
+.qzopt .qzoabc{display:block;flex:1;min-width:0;color:var(--ink)}
+.qzopt .qzoabc svg{max-width:100%}
+.qzopt:disabled{cursor:default}
+.qzopt.right{border-color:var(--ok);background:var(--ok-soft)}
+.qzopt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.qzfields{display:flex;flex-wrap:wrap;gap:10px}
+.qzfields .qzfield{flex:1 1 180px}
+.qzshortbox{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.qzshortbox .qzshort{flex:1 1 220px;max-width:360px;font-size:1.1rem}
+.qzsym{display:flex;gap:6px}
+.qzsym .btn{width:44px;height:44px;justify-content:center;font-size:1.2rem;padding:0}
+.qzshortbox .hint{flex-basis:100%;margin:0}
+.qzpadbox,.qzrhy{display:flex;flex-direction:column;gap:8px}
+.qzpad{cursor:crosshair;margin:0;color:var(--ink)}
+.qzpadtools{justify-content:flex-start}
+.qzverdict{border-radius:14px;padding:12px 16px;display:flex;flex-direction:column;gap:6px}
+.qzverdict p{margin:0}
+.qzverdict.ok{background:var(--ok-soft)}
+.qzverdict.bad{background:var(--bad-soft)}
+.qzverdict .qzv{font-weight:700}
+.qzverdict.ok .qzv{color:var(--ok)}
+.qzverdict.bad .qzv{color:var(--bad)}
+.qznav{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.qznav .hide{visibility:hidden}
+.qzfoot{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:0}
+.qzfoot .btn{font-size:.85rem;padding:7px 12px}
+.qzconfirm{border:1px solid var(--warn);background:var(--sunk);border-radius:14px;padding:12px 16px;display:flex;flex-direction:column;gap:8px}
+.qzconfirm p{margin:0}
+.qzscore{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.qzscore b{font:700 3rem/1 var(--f-display);color:var(--accent)}
+.qzscore span{font:700 1.6rem/1 var(--f-body);color:var(--muted)}
+.qzmsg{margin:0;font-weight:700}
+.qztab{display:table;width:100%;max-width:520px}
+.qzbar{display:block;height:8px;border-radius:4px;background:var(--sunk);min-width:80px;overflow:hidden}
+.qzbar i{display:block;height:100%;background:var(--accent)}
+.qzlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.qzrow{width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:12px;padding:10px 12px;cursor:pointer;color:var(--ink)}
+.qzrow:hover{border-color:var(--accent)}
+.qzmark{flex:0 0 26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:700}
+.qzrow.ok .qzmark{background:var(--ok-soft);color:var(--ok)}
+.qzrow.bad .qzmark{background:var(--bad-soft);color:var(--bad)}
+.qzrt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.qzrt small{font:500 .68rem/1.2 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.qzdeliver:empty{display:none}
+.qzpdfready{border:1px solid var(--accent);background:var(--accent-soft);border-radius:14px;padding:12px 16px;display:flex;flex-direction:column;gap:8px}
+.qzpdfready p{margin:0}
+.qzsubj{display:flex;flex-direction:column;gap:6px;padding:8px 0;border-top:1px solid var(--line)}
+.qzsubj .qzall{font-size:1rem}
+@media (max-width:600px){
+  .qzcard{padding:16px 14px;border-radius:16px}
+  .qzprompt{font-size:1.08rem}
+  .qzdot{width:32px;height:32px}
+  .qznav .btn{flex:1 1 auto;justify-content:center;min-height:46px}
+  .qznav .hide{display:none}
+  .qzbtns .btn,.qzbtns a.btn{flex:1 1 100%;justify-content:center;min-height:46px;white-space:normal}
+  .qzopts.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .qzscore b{font-size:2.4rem}
+}
+.qzpadbox .edwrap{max-width:560px}
 </style>
 
 <div class="app">
@@ -1199,6 +1300,7 @@ function preset(id,lv){
   if(id==='iv')return{ivs:['3m','3M','4J','5J','8J'],dirs:['up'],acc:false,auto:false};
   if(id==='pc')return{keys:['C','G','F'],chords:['I','IV','V'],n:4,startI:true,inv:false,dur:1.6,choices:4};
   if(id==='bt')return{};
+  if(id==='tq')return{n:10,level:1,formats:['mc','short','staff'],topics:['l_sol','l_fa','r_fig','r_sil','g_arm','g_maj','i_nom','a_qua','t_nua','t_tem']};
   if(id==='lm')return{keys:['C'],clef:'treble',meters:['4/4'],measures:4,tempo:60,lo:0,hi:7,leap:2,figs:['noire','croches','blanche']};
   const p=structuredClone(MEL_P[i]);
   if(id==='dm')p.first=true;
@@ -1217,6 +1319,7 @@ const MODS=[
   {id:'so',kind:'mel',t:'Solfège',s:'Voir → chanter',d:'Chante la mélodie en nommant les notes, avec le métronome. Écoute ensuite la solution pour te corriger.'},
   {id:'la',kind:'mel',t:'Lecture appliquée',s:'Voir → jouer',d:'Joue la mélodie note par note sur le clavier à l\'écran ou avec ton clavier d\'ordinateur.'},
   {id:'bt',g:'Théorie',kind:'lib',t:'Bibliothèque théorique',s:'Comprendre',d:'Toutes les notions utiles pour lire, écouter et analyser la musique : de la portée aux cadences. Cherche une notion ou parcours les onglets.'},
+  {id:'tq',kind:'quiz',t:'Tester mes connaissances',s:'Évaluer',d:'Un questionnaire tiré au hasard selon les sujets et le niveau choisis dans les réglages : une question par page, ton résultat à la fin, et des PDF à partager ou à imprimer.'},
 ];
 const MOD=Object.fromEntries(MODS.map(m=>[m.id,m]));
 const S={mic:(()=>{try{return !!localStorage.getItem('atelier-mic')}catch(e){return false}})(),transp:(()=>{try{return localStorage.getItem('atelier-transp')||'ut'}catch(e){return 'ut'}})(),perc:(()=>{try{return localStorage.getItem('atelier-perc')||'wood'}catch(e){return 'wood'}})(),slot:{},rev:(()=>{try{return localStorage.getItem('atelier-rev')||'1'}catch(e){return '1'}})(),inst:(()=>{try{const v=localStorage.getItem('atelier-inst')||'piano';return v==='glock'?'flute':v==='choeur'||v==='pianosynth'?(v==='choeur'?'voix':'piano'):v}catch(e){return 'piano'}})(),auto:{},lastEx:{},mod:'dm',cfg:{},level:{},stats:{},ex:null,st:{},keyHandler:null,midiHandler:null};
@@ -1228,6 +1331,7 @@ function btn(label,fn,cls=''){return el('button',{class:'btn '+cls,type:'button'
 function stopBtn(){const b=el('button',{class:'btn quiet',type:'button','data-stop':'',disabled:true,onclick:stop},el('span',{class:'ic'},'■'),'Arrêter');return b;}
 function metaLine(ex){
   const put=bits=>$('#meta').replaceChildren(...bits.map(([k,v])=>el('span',{},k+' ',el('b',{},v))));
+  if(ex.kind==='quiz'){const c=S.cfg.tq;put([['Questions',String(c.n)],['Niveau',QZ_LEVELS[c.level-1][1]],['Sujets',`${c.topics.length} notion${c.topics.length>1?'s':''}`],['Formats',c.formats.length===3?'tous':c.formats.map(f=>QZ_FORMATS.find(x=>x[0]===f)[1]).join(', ')]]);return;}
   if(ex.kind==='iv'){const c=S.cfg.iv;put([['Direction',c.dirs.map(d=>({up:'montant',down:'descendant',harm:'harmonique'})[d]).join(', ')],['Intervalles',`${c.ivs.length} au choix`],['Instrument',instName()]]);return;}
   if(ex.kind==='pc'){const c=S.cfg.pc;put([['Tonalité',ex.key.fr],['Accords',String(ex.n)],['Durée',`${String(ex.dur).replace('.',',')} s par accord`],['Choix',`${c.choices} réponses`]]);return;}
   if(ex.kind==='notes'){const c=S.cfg[S.mod];$('#meta').replaceChildren(...[['Clé',{treble:'sol',bass:'fa',alt:'sol et fa'}[c.clef]],['Étendue',c.ext?`portée + ${c.ext} ligne${c.ext>1?'s':''} supplémentaire${c.ext>1?'s':''}`:'portée seulement'],['Altérations',c.acc?'dièses et bémols':'aucune'],['Série',`${c.count} notes`]].map(([k,v])=>el('span',{},k+' ',el('b',{},v))));return;}
@@ -1247,10 +1351,29 @@ function sel(id,opts,val,on){const s=el('select',{id});opts.forEach(([v,l])=>{co
 function field(label,ctrl,wide){return el('div',{class:'field'+(wide?' wide':'')},el('span',{class:'fl'},label),ctrl);}
 const DEG_LABEL=d=>FRN[mod7(d)]+(d<0?' grave':d>=14?' suraigu':d>=7?' aigu':'')+(d===0?' (tonique)':'');
 function buildSettings(){
+  if(MOD[S.mod].kind==='lib')return;
   const id=S.mod,M=MOD[id],c=S.cfg[id],p=$('#settings'),ch=()=>{cfgChanged(id);newEx();};
   const sec=(t,d)=>el('div',{class:'sech'},el('h3',{},t),d?el('span',{class:'hint'},d):null);
   const fs=[];
   const chk=(idd,label,val,on)=>{const i=el('input',{type:'checkbox',id:idd});i.checked=!!val;i.addEventListener('change',()=>on(i.checked));return el('label',{class:'chk'},i,label);};
+  if(M.kind==='quiz'){
+    const box=subj=>{const all=subj.subs.map(x=>x[0]);const head=el('input',{type:'checkbox',id:'qz_'+subj.id});
+      const items=subj.subs.map(([sid,t])=>{const i=el('input',{type:'checkbox',id:'qz_'+sid});i.checked=c.topics.includes(sid);
+        i.addEventListener('change',()=>{c.topics=i.checked?[...c.topics.filter(x=>x!==sid),sid]:c.topics.filter(x=>x!==sid);sync();ch();});return el('label',{class:'chk'},i,t);});
+      const sync=()=>{const on=all.filter(x=>c.topics.includes(x)).length;head.checked=on===all.length;head.indeterminate=on>0&&on<all.length;};
+      head.addEventListener('change',()=>{c.topics=c.topics.filter(x=>!all.includes(x)).concat(head.checked?all:[]);items.forEach(l=>l.querySelector('input').checked=head.checked);sync();ch();});sync();
+      return el('div',{class:'qzsubj field wide'},el('label',{class:'chk qzall'},head,el('b',{},subj.t)),el('div',{class:'checks'},items));};
+    fs.push(sec('Questionnaire','Les questions sont tirées au hasard à chaque nouveau questionnaire'),
+      field('Nombre de questions',sel('s_qn',[5,10,15,20,25,30,40].map(n=>[n,n]),c.n,v=>{c.n=+v;ch();})),
+      field('Niveau',el('div',{class:'field'},sel('s_qlv',QZ_LEVELS,c.level,v=>{c.level=+v;ch();}),el('span',{class:'hint'},'Le niveau change la difficulté des notes, des tonalités, des intervalles et des accords proposés.'))),
+      field('Formats de questions',el('div',{class:'field'},checks(QZ_FORMATS,c.formats,v=>{c.formats=v;ch();}),el('span',{class:'hint'},'L\'app choisit au hasard un format permis pour chaque question.')),true),
+      sec('Sujets','Coche un sujet en entier, ou seulement certaines notions'),
+      ...QZ_SUBJ.filter(x=>!x.listen).map(box),
+      sec('Écoute (dans l\'app seulement)','Questions où il faut écouter. Elles ne sont jamais incluses dans le PDF à imprimer.'),
+      box(QZ_SUBJ.find(x=>x.listen)),
+      ...soundFields());
+    p.replaceChildren(LEVELS,slotBar(id),...fs);return;
+  }
   if(M.kind==='iv'){
     fs.push(sec('Intervalles','Ce que l\'app peut faire entendre'),
       field('Intervalles',checks(IVS.map(x=>[x.id,`${x.ab} · ${x.fr.toLowerCase()}`]),c.ivs,v=>{c.ivs=v;ch();}),true),
@@ -1353,6 +1476,7 @@ function sanitize(id,c){
   if('first'in b)o.first=!!c.first; if('metro'in b)o.metro=!!c.metro;
   if('ext'in b){num('ext',0,3);num('count',5,100);o.acc=!!c.acc;o.sound=c.sound!==false;}
   if('ivs'in b){const v=arr(c.ivs,IVS.map(x=>x.id));if(v&&v.length)o.ivs=v;const d=arr(c.dirs,IV_DIRS.map(x=>x[0]));if(d&&d.length)o.dirs=d;o.acc=!!c.acc;o.auto=!!c.auto;}
+  if('topics'in b){const v=arr(c.topics,QZ_ALL_SUBS);if(v)o.topics=v;num('n',5,40);num('level',1,3);const f=arr(c.formats,['mc','short','staff']);if(f&&f.length)o.formats=f;return o;}
   if('chords'in b){const v=arr(c.chords,CH_IDS);if(v&&v.length)o.chords=v;num('n',3,8);o.startI=c.startI!==false;o.inv=!!c.inv;num('dur',.6,3);num('choices',2,6);}
   return o;
 }
@@ -1404,6 +1528,7 @@ function openModule(id,shared,opts={}){
 function newEx(){
   stop();feedback('');const M=MOD[S.mod],c=S.cfg[S.mod];
   if(M.kind==='lib'){S.ex=null;M.fresh();return;}
+  if(M.kind==='quiz'){S.ex={kind:'quiz'};S.lastEx[S.mod]=S.ex;S.st={};metaLine(S.ex);if(typeof QZ!=='undefined'&&QZ.view!=='res')QZ.view='start';M.fresh();return;}
   try{S.ex=M.kind==='notes'?genNotes(c):M.kind==='mel'?genMelody(c):M.kind==='iv'?genInterval(c):M.kind==='pc'?genProgression(c):genRhythmEx(c);}
   catch(e){feedback(e.message+(M.kind==='mel'?' Élargis le registre ou le saut maximal.':' Ajoute des choix dans les réglages.'),'bad');return;}
   S.lastEx[S.mod]=S.ex;
@@ -2870,6 +2995,11 @@ $('#helpexit').addEventListener('click',()=>helpSet(false));
 
 /* ---------- méthode de travail : affichée au bas de chaque module ---------- */
 const METHOD={
+ tq:`<ol><li><b>Avant de commencer</b> : choisis dans les réglages les sujets vus en classe et le niveau. Commence par peu de questions (5 ou 10).</li>
+<li><b>Lis toute la question</b> : clé, armure, « au-dessus » ou « au-dessous »… Un détail change souvent la réponse.</li>
+<li><b>Utilise les flèches</b> pour sauter une question difficile et y revenir à la fin. Les pastilles du haut montrent les questions déjà répondues.</li>
+<li><b>Après le résultat</b>, touche chaque question ratée : la bonne réponse s'affiche, avec un lien vers la notion dans la bibliothèque.</li>
+<li><b>Pour l'enseignant</b> : le bouton PDF crée un questionnaire à photocopier (sans questions d'écoute) et son corrigé, avec de nouvelles questions à chaque fois.</li></ol>`,
  dm:`<ol><li><b>Première écoute sans écrire</b> : repère le caractère, la pulsation (en 2, 3 ou 4 ?) et si c'est majeur ou mineur.</li>
 <li><b>Écris le cadre</b> : clé, armure, chiffre de mesure, barres de mesure.</li>
 <li><b>Le rythme d'abord</b> : chante intérieurement et note les durées (de petits traits suffisent).</li>
@@ -2918,6 +3048,1091 @@ const METHOD={
 <li>Utilise le clavier d'ordinateur (A W S E D F…) pour aller plus vite.</li></ol>`,
 };
 function showMethod(id){const box=$('#method'),h=METHOD[id];box.hidden=!h;if(!h)return;box.querySelector('.methbody').innerHTML=h;}
+/* ========== MODULE : Tester mes connaissances — banque de questions ========== */
+const QZ_LEVELS=[[1,'Débutant'],[2,'Intermédiaire'],[3,'Avancé']];
+const QZ_FORMATS=[['mc','Choix de réponses'],['short','Réponse courte'],['staff','Sur la portée']];
+const QZ_SUBJ=[
+ {id:'lec',t:'Lecture',subs:[['l_sol','Notes en clé de sol'],['l_fa','Notes en clé de fa'],['l_ut','Notes en clé d\'ut (alto)'],['l_lig','Lignes supplémentaires'],['l_alt','Altérations'],['l_enh','Notes enharmoniques']]},
+ {id:'rhy',t:'Rythme',subs:[['r_fig','Figures de notes'],['r_sil','Figures de silence'],['r_pts','Points et liaisons'],['r_mes','Chiffres indicateurs'],['r_cmp','Compléter une mesure']]},
+ {id:'gam',t:'Gammes et tonalités',subs:[['g_arm','Armures'],['g_ord','Ordre des dièses et des bémols'],['g_maj','Gamme majeure'],['g_min','Gammes mineures'],['g_rel','Tonalités relatives'],['g_deg','Noms des degrés'],['g_cyc','Cycle des quintes']]},
+ {id:'int',t:'Intervalles',subs:[['i_nom','Nommer un intervalle'],['i_ecr','Écrire un intervalle'],['i_dt','Tons et demi-tons'],['i_ren','Renversement des intervalles']]},
+ {id:'acc',t:'Accords',subs:[['a_qua','Qualité des triades'],['a_nom','Nommer une triade'],['a_ecr','Écrire une triade'],['a_deg','Accords sur les degrés'],['a_ren','Renversements'],['a_v7','Septième de dominante']]},
+ {id:'har',t:'Harmonie',subs:[['h_cad','Cadences'],['h_fon','Fonctions tonales']]},
+ {id:'ter',t:'Termes et signes',subs:[['t_nua','Nuances'],['t_tem','Termes de tempo'],['t_art','Articulations'],['t_rep','Reprises et structure']]},
+ {id:'eco',t:'Écoute',listen:true,subs:[['e_int','Intervalles'],['e_acc','Qualité des accords'],['e_mod','Majeur ou mineur'],['e_cad','Cadences'],['e_rhy','Rythmes']]},
+];
+const QZ_SUB={};QZ_SUBJ.forEach(s=>s.subs.forEach(([id,t])=>QZ_SUB[id]={id,t,subj:s}));
+const QZ_ALL_SUBS=Object.keys(QZ_SUB);
+
+/* ---------- outils ---------- */
+const QA='ABCDEF';
+function qzShuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const qzRand=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const altSym=a=>a===1?'♯':a===-1?'♭':a===2?'𝄪':a===-2?'𝄫':'';
+const nn=n=>FRN[n.L]+altSym(n.alt);                         // nom de note : « fa♯ »
+const NN=n=>{const s=nn(n);return s[0].toUpperCase()+s.slice(1);};
+const dia=n=>n.oct*7+n.L;
+const fromDia=(d,alt=0)=>({L:mod7(d),oct:Math.floor(d/7),alt});
+const pcOf=n=>((PC[n.L]+n.alt)%12+12)%12;
+/* note -> ABC (do central = C) ; accidentel écrit si n.alt≠0, bécarre si n.nat */
+function abcN(n,dur=''){
+  const acc=n.alt===1?'^':n.alt===-1?'_':n.alt===2?'^^':n.alt===-2?'__':n.nat?'=':'';
+  let s=LET[n.L];if(n.oct>=5)s=s.toLowerCase()+"'".repeat(n.oct-5);else s=s+','.repeat(Math.max(0,4-n.oct));
+  return acc+s+dur;
+}
+const CLEF_FR={treble:'clé de sol',bass:'clé de fa',alto:'clé d\'ut 3e ligne'};
+const STAFF_BOT={treble:30,bass:18,alto:24};               // degré (diatonique) de la ligne du bas
+const STAFF_TOP={treble:38,bass:26,alto:32};
+const abcHead=(clef='treble',key='C',extra='')=>`X:1\nL:1/4\n${extra}K:${key} clef=${clef}\n`;
+const noteSlug=n=>`${n.L}.${n.alt}`;
+/* tonalités majeures : armure, tonique */
+const QK=[[0,0,0],[1,4,0],[2,1,0],[3,5,0],[4,2,0],[5,6,0],[6,3,1],[7,0,1],[-1,3,0],[-2,6,-1],[-3,2,-1],[-4,5,-1],[-5,1,-1],[-6,4,-1],[-7,0,-1]]
+  .map(([sig,L,alt])=>({sig,L,alt}));
+const sigMax=lv=>lv===1?2:lv===2?4:7;
+const qkPool=lv=>QK.filter(k=>Math.abs(k.sig)<=sigMax(lv));
+function relMinor(k){const L=mod7(k.L-2);const pc=((PC[k.L]+k.alt-3)%12+12)%12;let alt=pc-PC[L];if(alt>6)alt-=12;if(alt<-6)alt+=12;return{L,alt,sig:k.sig,minor:true};}
+function relMajor(m){return QK.find(k=>k.sig===m.sig);}
+const keyFr=(k,minor)=>NN(k)+(minor||k.minor?' mineur':' majeur');
+const keyAbc=k=>LET[k.L]+(k.alt===1?'#':k.alt===-1?'b':'')+(k.minor?'m':'');
+function scaleOf(k){ /* notes de la gamme majeure (ou mineure naturelle si k.minor), du 1er au 7e degré */
+  const sa=sigAlts(k.sig);return Array.from({length:7},(_,d)=>{const L=mod7(k.L+d);return{L,alt:sa[L]};});
+}
+const SHARP_ORDER=[3,0,4,1,5,2,6],FLAT_ORDER=[6,2,5,1,4,0,3];
+const DEG_NAMES=['Tonique','Sus-tonique','Médiante','Sous-dominante','Dominante','Sus-dominante','Sensible'];
+const ORD=['1er','2e','3e','4e','5e','6e','7e','8e'];
+const ROMANS=['I','II','III','IV','V','VI','VII'];
+/* intervalles : nom à partir de deux notes écrites */
+const IV_NUM=['Unisson','Seconde','Tierce','Quarte','Quinte','Sixte','Septième','Octave'];
+const IV_BASE={1:0,2:2,3:4,4:5,5:7,6:9,7:11,8:12};
+const IV_PERF=new Set([1,4,5,8]);
+const QUAL_P={0:'juste',1:'augmentée','-1':'diminuée'},QUAL_M={0:'majeure','-1':'mineure',1:'augmentée','-2':'diminuée'};
+function ivBetween(a,b){ /* a plus grave que b */
+  const num=dia(b)-dia(a)+1;if(num<1||num>8)return null;
+  const diff=noteMidi(b)-noteMidi(a)-IV_BASE[num];const q=(IV_PERF.has(num)?QUAL_P:QUAL_M)[diff];if(!q)return null;
+  return{num,q,name:IV_NUM[num-1]+' '+q,semis:noteMidi(b)-noteMidi(a)};
+}
+function ivAbove(a,num,q,dir=1){ /* note à « num » (qualité q) au-dessus (dir=1) ou au-dessous de a */
+  const qs=IV_PERF.has(num)?{juste:0,augmentée:1,diminuée:-1}:{majeure:0,mineure:-1,augmentée:1,diminuée:-2};
+  const semis=IV_BASE[num]+qs[q];const d=dia(a)+(num-1)*dir;const b=fromDia(d);
+  const target=noteMidi(a)+semis*dir;b.alt=target-(12*(b.oct+1)+PC[b.L]);return b;
+}
+const QUALS_ALL=['juste','majeure','mineure','augmentée','diminuée'];
+const qzValidIv=name=>{const k=IV_NUM.findIndex(x=>name.startsWith(x+' '));if(k<0)return false;const q=name.slice(IV_NUM[k].length+1);return IV_PERF.has(k+1)?['juste','augmentée','diminuée'].includes(q):['majeure','mineure','augmentée','diminuée'].includes(q);};
+/* triades */
+const TRI={maj:{fr:'majeure',acc:'majeur',s:[4,7]},min:{fr:'mineure',acc:'mineur',s:[3,7]},dim:{fr:'diminuée',acc:'diminué',s:[3,6]},aug:{fr:'augmentée',acc:'augmenté',s:[4,8]}};
+function triad(root,q){
+  const [s3,s5]=TRI[q].s,r=root,t=fromDia(dia(r)+2),f=fromDia(dia(r)+4);
+  t.alt=noteMidi(r)+s3-(12*(t.oct+1)+PC[t.L]);f.alt=noteMidi(r)+s5-(12*(f.oct+1)+PC[f.L]);
+  return[r,t,f];
+}
+const okAlts=ns=>ns.every(n=>Math.abs(n.alt)<=1);
+/* durées (en doubles-croches) */
+const FIGN=[[16,'Ronde','Pause'],[12,'Blanche pointée','Demi-pause pointée'],[8,'Blanche','Demi-pause'],[6,'Noire pointée','Soupir pointé'],[4,'Noire','Soupir'],[3,'Croche pointée','Demi-soupir pointé'],[2,'Croche','Demi-soupir'],[1,'Double-croche','Quart de soupir']];
+const figName=(d,rest)=>{const f=FIGN.find(x=>x[0]===d);return f?f[rest?2:1]:'';};
+const glyphAbc=(d,rest)=>`X:1\nL:1/16\nK:C clef=none stafflines=0\n${rest?'z':'B'}${d}`;
+const fracFr=x=>{const w=Math.floor(x),r=x-w;const f=r===.5?'½':r===.25?'¼':r===.75?'¾':'';return w?(w+(f?' '+f:'')):(f||'0');};
+const fracAccept=x=>{const s=[fracFr(x).replace(' ','')];s.push(String(x).replace('.',','),String(x));const w=Math.floor(x),r=x-w;
+  if(r===.5){s.push(w?`${w}1/2`:'1/2',w?`${w} et demi`:'un demi',w?`${w} 1/2`:'demi');}if(r===.25)s.push(w?`${w}1/4`:'1/4','un quart');if(r===.75)s.push('3/4','trois quarts');return s;};
+/* rythme -> ABC (une seule ligne) */
+function rhyAbc(meter,evs,{spacer=0,mark=null}={}){
+  const m=METERS[meter],bu=m.bu;let t=0,out='';
+  evs.forEach((e,i)=>{const startBeat=Math.floor(t/bu);if(i>0&&(e.rest||e.dur>=bu||Math.floor(t/bu)!==Math.floor((t-1)/bu)||evs[i-1].rest||evs[i-1].dur>=bu))out+=' ';
+    out+=(e.rest?'z':'B')+e.dur;t+=e.dur;void startBeat;});
+  if(spacer)out+=' x'+spacer;
+  return`X:1\nL:1/16\nM:${meter}\nK:C clef=perc stafflines=1\n${out} |]`;
+}
+/* tirage pondéré d'un format parmi ceux permis */
+function qzFmt(sup,fmts){const ok=sup.filter(f=>fmts.includes(f));return ok.length?pick(ok):null;}
+
+/* ---------- fabriques de questions ---------- */
+const optKey=o=>(o.t||'')+'|'+(o.abc||'');
+function mcQ(q,correct,distr,n=4){
+  const N=x=>typeof x==='string'?{t:x}:x,c=N(correct),seen=new Set([optKey(c)]),ds=[];
+  for(const d of qzShuffle(distr.map(N))){if(seen.has(optKey(d)))continue;seen.add(optKey(d));ds.push(d);if(ds.length>=n-1)break;}
+  const opts=qzShuffle([c,...ds]),ans=opts.indexOf(c);
+  return Object.assign(q,{fmt:q.fmt==='listen'?'listen':'mc',opts,ans,answerText:q.answerText||`${QA[ans]}) ${c.lab||c.t}`,
+    check:r=>r===ans,respText:r=>r==null?'':`${QA[r]}) ${opts[r].lab||opts[r].t}`});
+}
+const qnorm=s=>String(s==null?'':s).replace(/½/g,' 1/2').replace(/¼/g,' 1/4').replace(/¾/g,' 3/4').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/♯/g,'#').replace(/♭/g,'b').replace(/𝄪/g,'x')
+  .replace(/\bdiese\b/g,'#').replace(/\bbemol\b/g,'b').replace(/\bbecarre\b/g,'').replace(/\bnaturel(le)?\b/g,'').replace(/\but\b/g,'do').replace(/[^a-z0-9#/,.]+/g,'');
+const NUM_W={zero:0,aucun:0,aucune:0,un:1,une:1,deux:2,trois:3,quatre:4,cinq:5,six:6,sept:7,huit:8,neuf:9,dix:10,onze:11,douze:12,seize:16};
+function shortQ(q,answer,accept,o={}){
+  const acc=new Set(accept.map(qnorm));
+  return Object.assign(q,{fmt:'short',answerText:answer,ph:o.ph||'Ta réponse',num:!!o.num,hint:o.hint||'',
+    check:r=>{const v=qnorm(r);if(!v)return false;if(acc.has(v))return true;if(o.num&&v in NUM_W)return acc.has(String(NUM_W[v]));return false;},
+    respText:r=>r||''});
+}
+const NOTE_OPTS=(()=>{const a=[];for(const alt of[0,1,-1])for(let L=0;L<7;L++)a.push([`${L}.${alt}`,FRN[L]+altSym(alt)]);return a;})();
+function fieldsQ(q,fields,ans,answer){
+  return Object.assign(q,{fmt:'short',fields,fans:ans,answerText:answer,
+    check:r=>Array.isArray(r)&&fields.every((f,i)=>r[i]===ans[i]),
+    respText:r=>Array.isArray(r)?fields.map((f,i)=>{const o=f.options.find(x=>x[0]===r[i]);return o?o[1]:'—';}).join(' '):''});
+}
+const noteAcc=n=>[nn(n),FRN[n.L]+(n.alt===1?' diese':n.alt===-1?' bemol':''),FRN[n.L]+(n.alt===1?'#':n.alt===-1?'b':'')];
+const sameNote=(a,b)=>a.L===b.L&&a.alt===b.alt;
+/* question à écrire sur la portée (pad) */
+function padQ(q,o){
+  /* o : {clef, key?, given:[notes], mode:'one'|'chord'|'seq', max, check(notes), answer:[notes] (pour le corrigé), answerText} */
+  const given=o.given||[];
+  const giv=given.map(n=>abcN(n,'4')).join(' ');
+  const stu=ns=>o.mode==='chord'?(ns.length?'['+ns.slice().sort((a,b)=>dia(a)-dia(b)).map(n=>abcN(n)).join('')+']4':'x4'):o.mode==='seq'?(ns.length?ns.map(n=>abcN(n,'2')).join(' '):'')+' x'+(2*Math.max(0,(o.max||8)-ns.length)):(ns.length?abcN(ns[0],'4'):'x4');
+  const build=ns=>abcHead(o.clef,o.key||'C')+(giv?giv+' ':'')+stu(ns)+' |]';
+  return Object.assign(q,{fmt:'staff',pad:Object.assign({},o,{build}),answerText:o.answerText,answerAbc:build(o.answer),paperAbc:build([]).replace(/x(\d+)/g,(m,d)=>'x'+(+d*(o.mode==='seq'?1:2))),
+    check:r=>Array.isArray(r)&&r.length>0&&o.check(r),respText:r=>Array.isArray(r)&&r.length?r.map(nn).join(' – '):'',respAbc:r=>build(Array.isArray(r)?r:[])});
+}
+
+/* ---------- générateurs ---------- */
+const QZG={};
+/* Lecture : nom des notes dans une clé */
+function genClef(clef,lv,fmts,o={}){
+  const b=STAFF_BOT[clef],sub=o.sub;
+  const ext=o.ledger?null:lv===1?[b-1,b+9]:lv===2?[b-3,b+11]:[b-5,b+13];
+  let d;if(o.ledger){const k=lv===1?2:lv===2?4:6;d=pick([...Array.from({length:k},(_,i)=>b-2-i),...Array.from({length:k},(_,i)=>b+10+i)]);}
+  else d=qzRand(ext[0],ext[1]);
+  const n=fromDia(d,lv===3&&Math.random()<.35?pick([1,-1]):0);
+  const fmt=qzFmt(['short','mc','staff'],fmts);if(!fmt)return null;
+  const q={sub,topic:o.ledger?'lignes-sup':'noms-notes',key:`${sub}:${fmt}:${d}.${n.alt}`};
+  const where=`(${CLEF_FR[clef]})`;
+  if(fmt==='staff'){
+    const lo=b-7,hi=b+15;
+    return padQ(Object.assign(q,{prompt:`Écris la note ${nn(n)} sur la portée ${where}.`+(o.ledger?' Utilise des lignes supplémentaires.':'')}),
+      {clef,mode:'one',answer:[n],answerText:`${nn(n)} (à n'importe quelle octave)`,check:r=>sameNote(r[0],n)&&dia(r[0])>=lo&&dia(r[0])<=hi&&(!o.ledger||dia(r[0])<b-1||dia(r[0])>b+9)});
+  }
+  Object.assign(q,{prompt:`Quel est le nom de cette note ${where} ?`,abc:abcHead(clef)+abcN(n,'4')+' |]'});
+  if(fmt==='short')return shortQ(q,nn(n),noteAcc(n),{ph:'ex. : sol, fa♯'});
+  const ds=[1,-1,2,-2].map(k=>fromDia(d+k,n.alt)).map(nn);
+  return mcQ(q,nn(n),ds);
+}
+QZG.l_sol=(lv,f)=>genClef('treble',lv,f,{sub:'l_sol'});
+QZG.l_fa=(lv,f)=>genClef('bass',lv,f,{sub:'l_fa'});
+QZG.l_ut=(lv,f)=>genClef('alto',lv,f,{sub:'l_ut'});
+QZG.l_lig=(lv,f)=>genClef(pick(['treble','bass']),lv,f,{sub:'l_lig',ledger:true});
+QZG.l_alt=(lv,fmts)=>{
+  const v=pick(lv===1?['sign','carry','write']:lv===2?['sign','carry','nat','write']:['carry','nat','bar','write']);
+  const fmt=v==='write'?qzFmt(['staff'],fmts):v==='sign'?qzFmt(['mc'],fmts):qzFmt(['mc','short'],fmts);
+  if(!fmt)return null;
+  const q={sub:'l_alt',topic:'alterations'};
+  if(v==='sign'){
+    const a=pick(lv===1?[1,-1,0]:[1,-1,0,2]),n=fromDia(qzRand(31,37),a);if(a===0)n.nat=true;
+    const names={1:'Dièse','-1':'Bémol',0:'Bécarre',2:'Double dièse'};
+    return mcQ(Object.assign(q,{key:'l_alt:sign:'+a,prompt:'Comment s\'appelle le signe placé devant cette note ?',abc:abcHead()+abcN(n,'4')+' |]'}),names[a],Object.values(names).filter(x=>x!==names[a]).concat(['Point']));
+  }
+  if(v==='write'){
+    const n=fromDia(qzRand(29,39),pick([1,-1]));
+    return padQ(Object.assign(q,{key:'l_alt:w:'+noteSlug(n),prompt:`Écris la note ${nn(n)} sur la portée (clé de sol). N'oublie pas l'altération.`}),
+      {clef:'treble',mode:'one',answer:[n],answerText:`${nn(n)} : l'altération se place devant la note`,check:r=>sameNote(r[0],n)});
+  }
+  /* une altération vaut pour toute la mesure ; une barre de mesure ou un bécarre l'annule */
+  const x=fromDia(qzRand(30,37),pick([1,-1])),others=[0,1].map(()=>{let d;do{d=qzRand(29,38);}while(mod7(d)===x.L);return fromDia(d);});
+  const plain=Object.assign({},x,{alt:0});let notes,ask,ans;
+  if(v==='carry'){notes=[x,others[0],plain,others[1]];ask=3;ans=x;}
+  else if(v==='nat'){notes=[x,others[0],Object.assign({},plain,{nat:true}),others[1]];ask=3;ans=plain;}
+  else{notes=[x,others[0],others[1],plain];ask=4;ans=plain;}
+  const body=v==='bar'?notes.slice(0,3).map(n=>abcN(n)).join(' ')+' z | '+abcN(plain)+' '+abcN(others[0])+' z2':notes.map(n=>abcN(n)).join(' ');
+  const nums=v==='bar'?'1 2 3 4 5':'1 2 3 4';
+  Object.assign(q,{key:`l_alt:${v}:${noteSlug(x)}`,prompt:`Quel est le nom exact de la note n° ${ask} ? Pense à la règle des altérations dans la mesure.`,abc:`X:1\nL:1/4\nM:4/4\nK:C\n${body} |]\nw: ${nums}`});
+  const nmAns=nn(ans)+(ans.alt===0?' (bécarre)':'');
+  if(fmt==='short')return shortQ(q,nmAns,[...noteAcc(ans),FRN[ans.L]+' becarre',FRN[ans.L]+' naturel'],{ph:'ex. : fa♯, si♭, mi'});
+  return mcQ(q,nmAns,[nn(x),nn(Object.assign({},x,{alt:-x.alt})),nn(fromDia(dia(x)+1))].filter(s=>s!==nn(ans)).map(s=>s===FRN[x.L]?s+' (bécarre)':s).concat(ans.alt===0?[]:[FRN[x.L]+' (bécarre)']));
+};
+QZG.l_enh=(lv,fmts)=>{
+  const P=[[[0,1],[1,-1]],[[1,1],[2,-1]],[[3,1],[4,-1]],[[4,1],[5,-1]],[[5,1],[6,-1]]];
+  if(lv===3)P.push([[2,0],[3,-1]],[[3,0],[2,1]],[[6,0],[0,-1]],[[0,0],[6,1]]);
+  const pr=pick(P),[a,b]=Math.random()<.5?pr:[pr[1],pr[0]];
+  const A={L:a[0],alt:a[1]},B={L:b[0],alt:b[1]};
+  const fmt=qzFmt(['short','mc','staff'],fmts);if(!fmt)return null;
+  const q={sub:'l_enh',topic:'alterations',key:'l_enh:'+fmt+noteSlug(A)};
+  if(fmt==='staff'){
+    const g=Object.assign(fromDia(28+A.L+(A.L<2?7:0)),{alt:A.alt});
+    return padQ(Object.assign(q,{prompt:`Voici la note ${nn(A)}. Écris à droite sa note enharmonique (même son, autre nom).`}),
+      {clef:'treble',mode:'one',given:[g],answer:[Object.assign(fromDia(dia(g)+(B.L-A.L+(B.L-A.L>3?-7:B.L-A.L<-3?7:0))),{alt:B.alt})],answerText:nn(B),
+       check:r=>sameNote(r[0],B)&&((noteMidi(r[0])-noteMidi(g))%12+12)%12===0});
+  }
+  Object.assign(q,{prompt:`Quelle note est l'enharmonique de ${nn(A)} (même son, autre nom) ?`});
+  if(fmt==='short')return shortQ(q,nn(B),noteAcc(B),{ph:'ex. : ré♭'});
+  return mcQ(q,nn(B),[nn({L:B.L,alt:-B.alt||1}),nn({L:mod7(A.L-1),alt:-A.alt||-1}),nn({L:mod7(B.L+1),alt:B.alt}),nn({L:A.L,alt:-A.alt||-1})].filter(s=>s!==nn(A)));
+};
+/* Rythme */
+QZG.r_fig=(lv,fmts)=>{
+  const figs=lv===1?[16,8,4,2]:[16,8,4,2,1];const v=pick(['name','ratio','beats']);
+  const fmt=v==='name'?qzFmt(['mc','short'],fmts):qzFmt(['short','mc'],fmts);if(!fmt)return null;
+  const q={sub:'r_fig',topic:'figures-notes'};
+  if(v==='name'){const d=pick(figs);Object.assign(q,{key:'r_fig:n'+d,prompt:'Comment s\'appelle cette figure de note ?',abc:glyphAbc(d,false),small:true});
+    if(fmt==='short')return shortQ(q,figName(d),[figName(d),figName(d).replace('-',' ')],{ph:'ex. : blanche'});
+    return mcQ(q,figName(d),figs.filter(x=>x!==d).map(x=>figName(x)));}
+  if(v==='ratio'){let a,b;do{a=pick(figs);b=pick(figs);}while(a<=b);const r=a/b;
+    Object.assign(q,{key:`r_fig:r${a}/${b}`,prompt:`Combien de ${figName(b).toLowerCase()}s faut-il pour égaler une ${figName(a).toLowerCase()} ?`});
+    if(fmt==='short')return shortQ(q,String(r),[String(r)],{num:true,ph:'un nombre'});
+    return mcQ(q,String(r),[r*2,r/2,r+1,r-1,r+2].filter(x=>x>=1&&x!==r&&x===Math.floor(x)).map(String));}
+  const d=pick(figs.filter(x=>x>=2||lv>1)),r=d/4;
+  Object.assign(q,{key:'r_fig:b'+d,prompt:`Dans une mesure à 4/4, combien de temps dure une ${figName(d).toLowerCase()} ?`});
+  if(fmt==='short')return shortQ(q,fracFr(r),fracAccept(r),{ph:'ex. : 2 ou ½'});
+  return mcQ(q,fracFr(r),[r*2,r/2,r*4,r/4,r+1].filter(x=>x!==r&&x>=.25&&x<=8).map(fracFr));
+};
+QZG.r_sil=(lv,fmts)=>{
+  const figs=lv===1?[16,8,4,2]:[16,8,4,2,1];const v=pick(['name','same','beats']);
+  const fmt=qzFmt(v==='beats'?['short','mc']:['mc','short'],fmts);if(!fmt)return null;
+  const q={sub:'r_sil',topic:'silences'},d=pick(figs);
+  if(v==='name'){Object.assign(q,{key:'r_sil:n'+d,prompt:'Comment s\'appelle ce silence ?',abc:glyphAbc(d,true),small:true});
+    if(fmt==='short')return shortQ(q,figName(d,true),[figName(d,true)],{ph:'ex. : soupir'});
+    return mcQ(q,figName(d,true),figs.filter(x=>x!==d).map(x=>figName(x,true)));}
+  if(v==='same'){Object.assign(q,{key:'r_sil:s'+d,prompt:`Quel silence a la même durée qu'une ${figName(d).toLowerCase()} ?`});
+    if(fmt==='short')return shortQ(q,figName(d,true),[figName(d,true)],{ph:'ex. : demi-pause'});
+    return mcQ(q,figName(d,true),figs.filter(x=>x!==d).map(x=>figName(x,true)));}
+  const r=d/4;Object.assign(q,{key:'r_sil:b'+d,prompt:`Dans une mesure à 4/4, combien de temps dure un silence appelé « ${figName(d,true).toLowerCase()} » ?`});
+  if(fmt==='short')return shortQ(q,fracFr(r),fracAccept(r),{ph:'ex. : 1'});
+  return mcQ(q,fracFr(r),[r*2,r/2,r*4,r+1].filter(x=>x!==r&&x>=.25).map(fracFr));
+};
+QZG.r_pts=(lv,fmts)=>{
+  const v=pick(lv===1?['dotted','count','glyph']:['dotted','count','glyph','tie']);
+  const fmt=qzFmt(v==='glyph'?['mc']:['short','mc'],fmts);if(!fmt)return null;
+  const q={sub:'r_pts',topic:'points-liaisons'};
+  if(v==='dotted'){const d=pick(lv===1?[12,6]:[24,12,6,3]),r=d/4,nm=d===24?'ronde pointée':d===3?'croche pointée':figName(d).toLowerCase();
+    Object.assign(q,{key:'r_pts:d'+d,prompt:`Dans une mesure à 4/4, combien de temps dure une ${nm} ?`});
+    if(fmt==='short')return shortQ(q,fracFr(r),fracAccept(r),{ph:'ex. : 1 ½'});
+    return mcQ(q,fracFr(r),[r*2/3,r*4/3,r+1,r-.5,r*2].filter(x=>x!==r&&x>0).map(fracFr));}
+  if(v==='count'){const[a,b,nmA,nmB]=pick([[12,4,'blanche pointée','noires'],[6,2,'noire pointée','croches'],[3,1,'croche pointée','doubles-croches']].slice(0,lv===1?2:3));
+    Object.assign(q,{key:'r_pts:c'+a,prompt:`Une ${nmA} vaut combien de ${nmB} ?`});
+    if(fmt==='short')return shortQ(q,String(a/b),[String(a/b)],{num:true,ph:'un nombre'});
+    return mcQ(q,String(a/b),['2','4','6','5'].filter(x=>x!==String(a/b)));}
+  if(v==='tie'){const[a,b]=pick([[8,4],[4,2],[8,8],[4,4],[12,4]]),r=(a+b)/4;
+    Object.assign(q,{key:`r_pts:t${a}-${b}`,prompt:'Ces deux notes sont reliées par une liaison de prolongation. En 4/4, combien de temps dure le son au total ?',abc:`X:1\nL:1/16\nM:4/4\nK:C\nB${a}-B${b} x${(16-(a+b)%16)%16||''} |]`.replace(' x |]',' |]')});
+    if(fmt==='short')return shortQ(q,fracFr(r),fracAccept(r),{ph:'ex. : 3'});
+    return mcQ(q,fracFr(r),[a/4,b/4,r+1,r-.5,r*2].filter(x=>x!==r&&x>0).map(fracFr));}
+  const beats=pick([3,1.5,6].slice(0,lv===1?2:3)),u=beats*4;
+  Object.assign(q,{key:'r_pts:g'+u,prompt:`En 4/4, quelle figure dure ${fracFr(beats)} temps ?`});
+  const cand=[24,16,12,8,6,4,3].filter(x=>x!==u&&x!==24);
+  return mcQ(q,{t:'',abc:glyphAbc(u),lab:u===24?'Ronde pointée':figName(u)},qzShuffle(cand).slice(0,5).map(x=>({t:'',abc:glyphAbc(x),lab:figName(x)})));
+};
+function rhyFill(meter,lv,total,{allowRests=true}={}){
+  const m=METERS[meter],bu=m.bu,evs=[];let t=0;
+  const pool=m.comp?[[6],[6],[4,2],[2,2,2],[12]]:lv===1?[[4],[4],[2,2],[8]]:[[4],[2,2],[8],[6,2],[1,1,2],[2,1,1],[12],[16]];
+  if(allowRests)pool.push(m.comp?[-6]:[-4]);
+  while(t<total){const opts=pool.filter(g=>{const s=g.reduce((a,x)=>a+Math.abs(x),0);if(t+s>total)return false;if(s>bu&&t%bu)return false;if(s===12&&!m.comp&&t%(2*bu))return false;return true;});
+    const g=opts.length?pick(opts):[[16,12,8,6,4,3,2,1].find(x=>x<=total-t&&(x<=bu||t%bu===0))||1];g.forEach(x=>evs.push({dur:Math.abs(x),rest:x<0}));t+=g.reduce((a,x)=>a+Math.abs(x),0);}
+  return evs;
+}
+QZG.r_mes=(lv,fmts)=>{
+  const v=pick(lv===1?['beats','unit','which']:['beats','unit','which','kind']);
+  const fmt=qzFmt(v==='which'||v==='kind'?['mc']:['short','mc'],fmts);if(!fmt)return null;
+  const meters=lv===1?['2/4','3/4','4/4']:['2/4','3/4','4/4','6/8','9/8','12/8'];
+  const me=pick(meters),M=METERS[me];const q={sub:'r_mes',topic:M.comp?'mesures-composees':'mesures-simples'};
+  if(v==='beats'){Object.assign(q,{key:'r_mes:b'+me,prompt:`Combien de temps y a-t-il dans une mesure à ${me} ?`,abc:`X:1\nL:1/4\nM:${me}\nK:C\nx4 |]`.replace('x4','x'),small:true});
+    if(fmt==='short')return shortQ(q,String(M.beats),[String(M.beats)],{num:true,ph:'un nombre'});
+    return mcQ(q,String(M.beats),['2','3','4','6','8','12'].filter(x=>x!==String(M.beats)));}
+  if(v==='unit'){const ans=M.comp?'Noire pointée':'Noire';Object.assign(q,{key:'r_mes:u'+me,prompt:`Dans une mesure à ${me}, quelle figure vaut un temps ?`});
+    if(fmt==='short')return shortQ(q,ans,[ans]);
+    return mcQ(q,ans,['Noire','Noire pointée','Croche','Blanche'].filter(x=>x!==ans));}
+  if(v==='kind'){const ans=M.comp?'Composée':'Simple';Object.assign(q,{key:'r_mes:k'+me,prompt:`La mesure à ${me} est-elle une mesure simple ou composée ?`});return mcQ(q,ans,[M.comp?'Simple':'Composée'],2);}
+  const sm=pick(['2/4','3/4','4/4']),S2=METERS[sm],evs=rhyFill(sm,lv,S2.beats*S2.bu);
+  Object.assign(q,{key:'r_mes:w'+sm+evs.map(e=>e.dur).join(''),topic:'mesures-simples',prompt:'Quel chiffre indicateur convient à cette mesure ?',abc:rhyAbc(sm,evs).replace(`M:${sm}`,'M:none')});
+  return mcQ(q,sm,['2/4','3/4','4/4'].filter(x=>x!==sm).concat(lv>1?['5/4']:[]));
+};
+QZG.r_cmp=(lv,fmts)=>{
+  const fmt=qzFmt(['staff','mc'],fmts);if(!fmt)return null;
+  const me=pick(lv===1?['4/4','3/4','2/4']:lv===2?['4/4','3/4','2/4']:['4/4','3/4','6/8']),M=METERS[me],tot=M.beats*M.bu;
+  for(let att=0;att<60;att++){
+    const miss=fmt==='mc'?pick(M.comp?[6,12]:lv===1?[4,8]:[4,8,6,12,2]):pick(M.comp?[6,12]:lv===1?[4,8]:[4,8,2,6]);
+    if(miss>=tot)continue;const given=rhyFill(me,lv,tot-miss);if(given.reduce((a,e)=>a+e.dur,0)!==tot-miss)continue;
+    const q={sub:'r_cmp',topic:'pulsation',key:`r_cmp:${me}:${given.map(e=>(e.rest?'-':'')+e.dur).join('.')}`};
+    if(fmt==='mc'){if(![16,12,8,6,4,2].includes(miss))continue;
+      Object.assign(q,{prompt:`Quelle figure complète cette mesure à ${me} ?`,abc:rhyAbc(me,given,{spacer:miss})});
+      return mcQ(q,{t:'',abc:glyphAbc(miss),lab:figName(miss)},[16,12,8,6,4,2].filter(x=>x!==miss&&x+tot-miss!==tot).map(x=>({t:'',abc:glyphAbc(x),lab:figName(x)})));}
+    const fill=[];let r=miss,t=tot-miss;while(r>0){const toBeat=(M.bu-t%M.bu)%M.bu,lim=toBeat?Math.min(toBeat,r):r;const d=[16,12,8,6,4,3,2,1].find(x=>x<=lim);fill.push({dur:d,rest:false});r-=d;t+=d;}
+    return Object.assign(q,{fmt:'staff',prompt:`Complète la mesure à ${me} : ajoute des notes ou des silences pour qu'elle contienne exactement ${M.beats} temps.`,
+      rhy:{meter:me,given,miss},answerText:`Toute réponse qui ajoute exactement ${fracFr(miss/M.bu)} temps, par exemple : ${fill.map(e=>figName(e.dur).toLowerCase()).join(' + ')}.`,
+      answerAbc:rhyAbc(me,[...given,...fill]),paperAbc:rhyAbc(me,given,{spacer:miss}),
+      check:r=>Array.isArray(r)&&r.length>0&&r.reduce((a,e)=>a+e.dur,0)===miss,
+      respText:r=>Array.isArray(r)&&r.length?r.map(e=>figName(e.dur,e.rest).toLowerCase()||'?').join(' + '):'',respAbc:r=>rhyAbc(me,[...given,...(Array.isArray(r)?r:[])])});
+  }
+  return null;
+};
+/* Gammes et tonalités */
+const sigText=s=>s===0?'aucune altération':`${Math.abs(s)} ${s>0?'dièse':'bémol'}${Math.abs(s)>1?'s':''}`;
+QZG.g_arm=(lv,fmts)=>{
+  const v=pick(lv===1?['name','count','pick']:['name','count','pick','both']);
+  const fmt=qzFmt(v==='pick'||v==='both'?['mc']:['short','mc'],fmts);if(!fmt)return null;
+  const pool=qkPool(lv),k=pick(v==='count'?pool.filter(x=>x.sig):pool),clef=lv===1?'treble':pick(['treble','bass']);
+  const q={sub:'g_arm',topic:'armures',key:`g_arm:${v}:${k.sig}`};const near=pool.filter(x=>x!==k);
+  const armAbc=(kk,cl=clef)=>`X:1\nL:1/4\nK:${keyAbc(kk)} clef=${cl}\nx |]`;
+  if(v==='name'){Object.assign(q,{prompt:'Quelle tonalité majeure a cette armure ?',abc:armAbc(k),small:true});
+    if(fmt==='short')return shortQ(q,keyFr(k),[...noteAcc(k).map(s=>s+' majeur'),...noteAcc(k),...noteAcc(k).map(s=>s+' maj')],{ph:'ex. : Ré majeur'});
+    return mcQ(q,keyFr(k),qzShuffle(near).sort((a,b)=>Math.abs(a.sig-k.sig)-Math.abs(b.sig-k.sig)).slice(0,5).map(x=>keyFr(x)));}
+  if(v==='count'){const w=k.sig>0?'dièses':'bémols',n=Math.abs(k.sig);Object.assign(q,{prompt:`Combien de ${w} y a-t-il dans l'armure de ${keyFr(k)} ?`});
+    if(fmt==='short')return shortQ(q,String(n),[String(n)],{num:true,ph:'un nombre'});
+    return mcQ(q,String(n),[n-1,n+1,n+2,n-2].filter(x=>x>=0&&x<=7).map(String));}
+  if(v==='both'){const m=relMinor(k);Object.assign(q,{prompt:'Quelles sont les deux tonalités qui ont cette armure ?',abc:armAbc(k),small:true});
+    const lc=x=>x.replace(/^./,ch=>ch.toLowerCase()),lab=kk=>`${keyFr(kk)} et ${lc(keyFr(relMinor(kk),true))}`;
+    const wrong=[`${keyFr(k)} et ${lc(keyFr(fromDia(k.L+2,k.alt),true))}`,...qzShuffle(near).slice(0,3).map(lab)];void m;
+    return mcQ(q,lab(k),qzShuffle(wrong));}
+  Object.assign(q,{prompt:`Laquelle de ces armures est celle de ${keyFr(k)} ?`});
+  return mcQ(q,{t:'',abc:armAbc(k),lab:sigText(k.sig),small:true},qzShuffle(near.filter(x=>Math.abs(x.sig)>0||k.sig!==0)).slice(0,5).map(x=>({t:'',abc:armAbc(x),lab:`${sigText(x.sig)}`,small:true})));
+};
+QZG.g_ord=(lv,fmts)=>{
+  const v=pick(['nth','last','order']);const fmt=qzFmt(v==='order'?['mc']:['short','mc'],fmts);if(!fmt)return null;
+  const q={sub:'g_ord',topic:'armures'};const sharp=Math.random()<.5,ord=sharp?SHARP_ORDER:FLAT_ORDER,a=sharp?1:-1,w=sharp?'dièse':'bémol';
+  if(v==='nth'){const i=qzRand(0,lv===1?3:6),n={L:ord[i],alt:a};Object.assign(q,{key:`g_ord:n${w}${i}`,prompt:`Dans l'ordre des ${w}s, quel est le ${ORD[i]} ${w} ?`});
+    if(fmt==='short')return shortQ(q,nn(n),[...noteAcc(n),FRN[n.L]],{ph:'ex. : '+(sharp?'do♯':'mi♭')});
+    return mcQ(q,nn(n),ord.filter((x,j)=>j!==i).map(L=>nn({L,alt:a})));}
+  if(v==='last'){const k=pick(qkPool(lv).filter(x=>sharp?x.sig>0:x.sig<0)),i=Math.abs(k.sig)-1,n={L:ord[i],alt:a};
+    Object.assign(q,{key:`g_ord:l${k.sig}`,prompt:`Quel est le dernier ${w} de l'armure de ${keyFr(k)} ?`});
+    if(fmt==='short')return shortQ(q,nn(n),[...noteAcc(n),FRN[n.L]],{ph:'ex. : '+(sharp?'sol♯':'la♭')});
+    return mcQ(q,nn(n),ord.filter((x,j)=>j!==i).slice(0,6).map(L=>nn({L,alt:a})));}
+  const seq=o=>o.map(L=>FRN[L]).join(' – ');const sw=(o,i,j)=>{o=o.slice();[o[i],o[j]]=[o[j],o[i]];return o;};
+  Object.assign(q,{key:'g_ord:o'+w,prompt:`Quel est l'ordre des ${w}s dans une armure ?`});
+  return mcQ(q,seq(ord),[seq((sharp?FLAT_ORDER:SHARP_ORDER)),seq(sw(ord,1,2)),seq(sw(ord,3,5)),seq(sw(ord,0,1))]);
+};
+QZG.g_maj=(lv,fmts)=>{
+  const v=pick(lv===1?['nth','alts','write1']:['nth','alts','write1','scale']);
+  const fmt=v==='write1'||v==='scale'?qzFmt(['staff'],fmts):qzFmt(v==='alts'?['mc']:['short','mc'],fmts);if(!fmt)return null;
+  const k=pick(v==='alts'?qkPool(lv).filter(x=>x.sig):qkPool(lv)),sc=scaleOf(k),q={sub:'g_maj',topic:'gamme-majeure'};
+  if(v==='nth'){const i=qzRand(1,6),n=sc[i];Object.assign(q,{key:`g_maj:n${k.sig}.${i}`,prompt:`Quelle est la ${ORD[i].replace('er','re')} note de la gamme de ${keyFr(k)} ?`});
+    if(fmt==='short')return shortQ(q,nn(n),noteAcc(n),{ph:'ex. : fa♯'});
+    return mcQ(q,nn(n),[sc[mod7(i+1)],sc[mod7(i-1)],{L:n.L,alt:n.alt?0:(k.sig<0?-1:1)},sc[mod7(i+2)]].map(nn));}
+  if(v==='alts'){const lst=ks=>{const ns=scaleOf(ks).filter(x=>x.alt);ns.sort((a,b)=>(ks.sig>0?SHARP_ORDER:FLAT_ORDER).indexOf(a.L)-(ks.sig>0?SHARP_ORDER:FLAT_ORDER).indexOf(b.L));return ns.map(nn).join(', ');};
+    Object.assign(q,{key:`g_maj:a${k.sig}`,prompt:`Quelles notes sont altérées dans la gamme de ${keyFr(k)} ?`});
+    return mcQ(q,lst(k),QK.filter(x=>x.sig&&x!==k&&Math.sign(x.sig)===Math.sign(k.sig)&&Math.abs(x.sig-k.sig)<=2).map(lst).concat([lst(QK.find(x=>x.sig===-k.sig))]));}
+  if(v==='write1'){const i=pick([2,3,4,6]),n=sc[i];const nmD=DEG_NAMES[i].toLowerCase();
+    return padQ(Object.assign(q,{key:`g_maj:w${k.sig}.${i}`,prompt:`Écris la ${nmD} (${ORD[i]} degré) de la gamme de ${keyFr(k)} sur la portée (clé de sol).`,topic:'degres'}),
+      {clef:'treble',mode:'one',answer:[Object.assign(fromDia(28+n.L+(n.L<3?7:0)),{alt:n.alt})],answerText:nn(n),check:r=>sameNote(r[0],n)});}
+  const start=fromDia(28+k.L+(k.L>3?-7:0)+(k.L===0?0:0),k.alt);if(dia(start)<26)start.oct++;
+  const ans=Array.from({length:8},(_,i)=>{const d=dia(start)+i,L=mod7(d);return Object.assign(fromDia(d),{alt:scaleOf(k)[mod7(i)].alt});});
+  return padQ(Object.assign(q,{key:`g_maj:s${k.sig}`,prompt:`Écris la gamme de ${keyFr(k)} en montant, de la tonique à la tonique (8 notes). Ajoute les altérations devant les notes (pas d'armure).`}),
+    {clef:'treble',mode:'seq',max:8,answer:ans,answerText:ans.map(nn).join(' – '),check:r=>r.length===8&&sameNote(r[0],k)&&r.every((n,i)=>i===0||dia(n)===dia(r[i-1])+1)&&r.every((n,i)=>n.alt===sc[i%7].alt)});
+};
+function minorScale(m,type){ /* m : tonalité mineure (L, alt, sig) */
+  const sa=sigAlts(m.sig);const s=Array.from({length:7},(_,d)=>{const L=mod7(m.L+d);return{L,alt:sa[L]};});
+  if(type!=='nat')s[6]={L:s[6].L,alt:s[6].alt+1};if(type==='mel')s[5]={L:s[5].L,alt:s[5].alt+1};return s;
+}
+const MIN_T={nat:'naturelle',har:'harmonique',mel:'mélodique'};
+const nnK=(n,sig)=>n.alt===0&&sigAlts(sig)[n.L]!==0?FRN[n.L]+'♮':nn(n);
+QZG.g_min=(lv,fmts)=>{
+  const v=pick(lv===1?['raised','type']:lv===2?['raised','type','mel']:['raised','type','mel','write']);
+  const fmt=v==='write'?qzFmt(['staff'],fmts):qzFmt(v==='type'?['mc']:['short','mc'],fmts);if(!fmt)return null;
+  const m=relMinor(pick(qkPool(lv).filter(k=>k.sig<=4))),q={sub:'g_min',topic:'gammes-mineures'};const mName=keyFr(m,true);
+  if(v==='raised'){const n=minorScale(m,'har')[6],K=x=>nnK(x,m.sig);Object.assign(q,{key:`g_min:r${m.sig}`,prompt:`Dans la gamme de ${mName} harmonique, quelle note est haussée (7e degré, la sensible) ?`});
+    if(fmt==='short')return shortQ(q,K(n),[...noteAcc(n),FRN[n.L]+' becarre',FRN[n.L]+'♮'],{ph:'ex. : sol♯'});
+    return mcQ(q,K(n),[K(minorScale(m,'nat')[6]),K(minorScale(m,'mel')[5]),K(minorScale(m,'nat')[5]),K({L:mod7(n.L-1),alt:n.alt})].filter(s=>s!==K(n)));}
+  if(v==='mel'){const s=minorScale(m,'mel');Object.assign(q,{key:`g_min:m${m.sig}`,prompt:`Dans la gamme de ${mName} mélodique (en montant), quelles notes sont haussées ?`});
+    const lab=a=>a.map(x=>nnK(x,m.sig)).join(' et ');
+    return mcQ(q,lab([s[5],s[6]]),[lab([s[6]]),lab([s[4],s[6]]),lab([minorScale(m,'nat')[5],s[6]]),lab([s[2],s[6]])]);}
+  if(v==='type'){const t=pick(['nat','har','mel']),s=minorScale(m,t);const sa=sigAlts(m.sig);
+    const st=fromDia(28+m.L+(m.L>4?-7:0),0);
+    const notes=Array.from({length:8},(_,i)=>{const d=dia(st)+i,x=s[i%7];const n=fromDia(d,x.alt);if(x.alt!==sa[n.L]){if(x.alt===0)n.nat=true;return n;}return Object.assign(n,{alt:0,sig:true});});
+    const ab=notes.map(n=>n.sig?LET[n.L]+(n.oct>=5?'':''):'').length;void ab;
+    const body=notes.map(n=>{if(n.sig){const c=Object.assign({},n,{alt:0,nat:false});return abcN(c,'');}return abcN(n,'');}).join(' ');
+    Object.assign(q,{key:`g_min:t${m.sig}${t}`,prompt:`Quel type de gamme mineure est écrit ici (${mName.toLowerCase()}, en montant) ?`,abc:`X:1\nL:1/4\nK:${keyAbc(m)} clef=treble\n${body} |]`});
+    return mcQ(q,`Mineure ${MIN_T[t]}`,['nat','har','mel'].filter(x=>x!==t).map(x=>`Mineure ${MIN_T[x]}`),3);}
+  const t=pick(['har','mel']),s=minorScale(m,t),st=fromDia(28+m.L+(m.L>4?-7:0));
+  const ans=Array.from({length:8},(_,i)=>Object.assign(fromDia(dia(st)+i),{alt:s[i%7].alt}));
+  return padQ(Object.assign(q,{key:`g_min:w${m.sig}${t}`,prompt:`Écris la gamme de ${mName} ${MIN_T[t]} en montant, de la tonique à la tonique (8 notes). Ajoute les altérations devant les notes (pas d'armure).`}),
+    {clef:'treble',mode:'seq',max:8,answer:ans,answerText:ans.map(nn).join(' – '),check:r=>r.length===8&&sameNote(r[0],m)&&r.every((n,i)=>i===0||dia(n)===dia(r[i-1])+1)&&r.every((n,i)=>n.alt===s[i%7].alt)});
+};
+QZG.g_rel=(lv,fmts)=>{
+  const fmt=qzFmt(['short','mc'],fmts);if(!fmt)return null;
+  const k=pick(qkPool(lv)),m=relMinor(k),toMin=Math.random()<.5,q={sub:'g_rel',topic:'relatives',key:`g_rel:${toMin?'m':'M'}${k.sig}`};
+  const ans=toMin?m:k,ansT=keyFr(ans,toMin);
+  q.prompt=toMin?`Quelle est la tonalité relative mineure de ${keyFr(k)} ?`:`Quelle est la tonalité relative majeure de ${keyFr(m,true)} ?`;
+  if(fmt==='short'){const w=toMin?['mineur','min','m']:['majeur','maj'];return shortQ(q,ansT,[...noteAcc(ans),...noteAcc(ans).flatMap(s=>w.map(x=>s+' '+x))],{ph:toMin?'ex. : mi mineur':'ex. : Sol majeur'});}
+  const wrong=toMin?[keyFr(fromDia(k.L+2+7,k.alt),true),keyFr({L:k.L,alt:k.alt},true),keyFr(relMinor(QK.find(x=>x.sig===k.sig+1)||QK[1]),true),keyFr(relMinor(QK.find(x=>x.sig===k.sig-1)||QK[8]),true)]
+    :[keyFr({L:m.L,alt:m.alt}),keyFr(QK.find(x=>x.sig===k.sig+1)||QK[1]),keyFr(QK.find(x=>x.sig===k.sig-1)||QK[8]),keyFr(fromDia(m.L+4,m.alt))];
+  return mcQ(q,ansT,wrong.filter(s=>s!==ansT));
+};
+QZG.g_deg=(lv,fmts)=>{
+  const v=pick(['name','note','which','write']);const fmt=v==='write'?qzFmt(['staff'],fmts):qzFmt(v==='which'?['mc']:['short','mc'],fmts);if(!fmt)return null;
+  const q={sub:'g_deg',topic:'degres'};
+  if(v==='name'){const i=qzRand(lv===1?0:1,6);Object.assign(q,{key:'g_deg:n'+i,prompt:`Comment s'appelle le ${ORD[i]} degré (${ROMANS[i]}) d'une gamme majeure ?`});
+    if(fmt==='short')return shortQ(q,DEG_NAMES[i],[DEG_NAMES[i],DEG_NAMES[i].replace('-',' ')],{ph:'ex. : dominante'});
+    return mcQ(q,DEG_NAMES[i],DEG_NAMES.filter((x,j)=>j!==i));}
+  const k=pick(qkPool(lv)),sc=scaleOf(k),i=pick(lv===1?[4,6]:[1,2,3,4,5,6]),n=sc[i];
+  if(v==='note'){Object.assign(q,{key:`g_deg:t${k.sig}.${i}`,prompt:`Quelle est la ${DEG_NAMES[i].toLowerCase()} de ${keyFr(k)} ?`});
+    if(fmt==='short')return shortQ(q,nn(n),noteAcc(n),{ph:'ex. : fa♯'});
+    return mcQ(q,nn(n),[sc[mod7(i+1)],sc[mod7(i-1)],sc[mod7(i+3)]].map(nn).concat([nn({L:n.L,alt:n.alt?0:1})]));}
+  if(v==='which'){Object.assign(q,{key:`g_deg:w${k.sig}.${i}`,prompt:`Dans la gamme de ${keyFr(k)}, la note ${nn(n)} est…`});
+    return mcQ(q,`la ${DEG_NAMES[i].toLowerCase()} (${ROMANS[i]})`,DEG_NAMES.map((x,j)=>`la ${x.toLowerCase()} (${ROMANS[j]})`).filter((x,j)=>j!==i));}
+  return padQ(Object.assign(q,{key:`g_deg:p${k.sig}.${i}`,prompt:`Écris la ${DEG_NAMES[i].toLowerCase()} de ${keyFr(k)} sur la portée (clé de sol).`}),
+    {clef:'treble',mode:'one',answer:[Object.assign(fromDia(28+n.L+(n.L<3?7:0)),{alt:n.alt})],answerText:nn(n),check:r=>sameNote(r[0],n)});
+};
+QZG.g_cyc=(lv,fmts)=>{
+  const fmt=qzFmt(['mc','short'],fmts);if(!fmt)return null;
+  const sharp=Math.random()<.5,pool=qkPool(lv).filter(k=>sharp?k.sig>=0&&k.sig<sigMax(lv):k.sig<=0&&k.sig>-sigMax(lv));
+  const k=pick(pool),nx=QK.find(x=>x.sig===k.sig+(sharp?1:-1));const q={sub:'g_cyc',topic:'quintes',key:`g_cyc:${k.sig}${sharp}`};
+  q.prompt=sharp?`Dans le cycle des quintes, quelle tonalité majeure vient juste après ${keyFr(k)}, dans le sens des dièses (une quinte plus haut) ?`
+    :`Dans le cycle des quintes, quelle tonalité majeure vient juste après ${keyFr(k)}, dans le sens des bémols (une quinte plus bas) ?`;
+  if(fmt==='short')return shortQ(q,keyFr(nx),[...noteAcc(nx),...noteAcc(nx).map(s=>s+' majeur')],{ph:'ex. : Ré majeur'});
+  const prev=QK.find(x=>x.sig===k.sig-(sharp?1:-1));
+  return mcQ(q,keyFr(nx),[prev,QK.find(x=>x.sig===k.sig+(sharp?2:-2)),fromDia(k.L+1,k.alt),fromDia(k.L+2,k.alt)].filter(Boolean).map(x=>keyFr(x)));
+};
+/* Intervalles */
+function pickInterval(lv){
+  for(let a=0;a<300;a++){
+    let root=fromDia(qzRand(28,34));if(lv>1&&Math.random()<.3){const[L,alt]=pick(ROOTS_ACC);root=Object.assign(fromDia(28+L),{alt});}
+    let num,q;
+    if(lv===3&&Math.random()<.35){num=pick([2,3,4,5,6,7]);q=IV_PERF.has(num)?pick(['augmentée','diminuée']):pick(['augmentée','diminuée']);}
+    else{num=qzRand(2,8);q=IV_PERF.has(num)?'juste':pick(['majeure','mineure']);}
+    if(lv===2&&Math.random()<.15){num=pick([4,5]);q=num===4?'augmentée':'diminuée';}
+    const top=ivAbove(root,num,q);
+    if(!okAlts([root,top]))continue;
+    if(lv===1&&(root.alt||top.alt))continue;
+    if(dia(top)>42)continue;
+    return{root,top,iv:ivBetween(root,top)};
+  }
+  const r=fromDia(28),t=fromDia(32);return{root:r,top:t,iv:ivBetween(r,t)};
+}
+const IV_FIELDS=lv=>[{label:'Nombre',options:IV_NUM.map((x,i)=>[String(i+1),x.toLowerCase()])},{label:'Qualité',options:QUALS_ALL.map(x=>[x,x])}];
+QZG.i_nom=(lv,fmts)=>{
+  const fmt=qzFmt(['mc','short'],fmts);if(!fmt)return null;
+  const{root,top,iv}=pickInterval(lv),harm=lv>1&&Math.random()<.4,clef=lv===3&&Math.random()<.3?'bass':'treble';
+  const shift=clef==='bass'?-2:0,R=Object.assign({},root,{oct:root.oct+shift}),T=Object.assign({},top,{oct:top.oct+shift});
+  const q={sub:'i_nom',topic:'intervalles-qualites',key:`i_nom:${noteSlug(root)}${iv.name}`,prompt:'Quel est le nom de cet intervalle (nombre et qualité) ?',
+    abc:abcHead(clef)+(harm?`[${abcN(R)}${abcN(T)}]4`:`${abcN(R,'2')} ${abcN(T,'2')}`)+' |]'};
+  if(fmt==='short')return fieldsQ(q,IV_FIELDS(lv),[String(iv.num),iv.q],iv.name.toLowerCase().replace(/^./,c=>c.toUpperCase()));
+  const alt=[];const qs=IV_PERF.has(iv.num)?['augmentée','diminuée','juste']:['majeure','mineure','augmentée','diminuée'];
+  qs.filter(x=>x!==iv.q).forEach(x=>alt.push(IV_NUM[iv.num-1]+' '+x));
+  [iv.num-1,iv.num+1].filter(x=>x>=2&&x<=8).forEach(x=>alt.push(IV_NUM[x-1]+' '+(IV_PERF.has(x)?'juste':iv.q==='juste'?'majeure':iv.q)));
+  alt.splice(0,alt.length,...alt.filter(qzValidIv));const plain=alt.filter(x=>!/augm|dimin/.test(x));
+  return mcQ(q,iv.name,lv<3&&plain.length>=2?plain.concat(lv===2?alt.filter(x=>/augm|dimin/.test(x)).slice(0,1):[]):alt);
+};
+QZG.i_ecr=(lv,fmts)=>{
+  const fmt=qzFmt(['staff'],fmts);if(!fmt)return null;
+  for(let a=0;a<100;a++){
+    const{root,top,iv}=pickInterval(lv);const down=lv===3&&Math.random()<.4;
+    const given=down?top:root,target=down?root:top;
+    if(!okAlts([given,target]))continue;
+    const q={sub:'i_ecr',topic:'intervalles-qualites',key:`i_ecr:${noteSlug(given)}${iv.name}${down}`};
+    return padQ(Object.assign(q,{prompt:`Écris une ${iv.name.toLowerCase()} ${down?'au-dessous':'au-dessus'} de la note donnée.`}),
+      {clef:'treble',mode:'one',given:[given],answer:[target],answerText:`${nn(given)} → ${nn(target)}`,
+       check:r=>sameNote(r[0],target)&&dia(r[0])===dia(target)});
+  }
+  return null;
+};
+QZG.i_dt=(lv,fmts)=>{
+  const v=pick(lv===1?['pair','semis']:['pair','semis','write']);const fmt=v==='write'?qzFmt(['staff'],fmts):qzFmt(v==='pair'?['mc']:['short','mc'],fmts);if(!fmt)return null;
+  const q={sub:'i_dt',topic:'tons-demitons'};
+  if(v==='pair'){const L=qzRand(0,6),a={L,alt:0},b={L:mod7(L+1),alt:0};let half=(PC[b.L]-PC[a.L]+12)%12===1;
+    if(lv>1&&Math.random()<.4){b.L=a.L;b.alt=1;half=true;}
+    Object.assign(q,{key:`i_dt:p${noteSlug(a)}${noteSlug(b)}`,prompt:`Entre ${nn(a)} et ${nn(b)} (en montant), y a-t-il un ton ou un demi-ton ?`});
+    return mcQ(q,half?'Un demi-ton':'Un ton',[half?'Un ton':'Un demi-ton'],2);}
+  if(v==='semis'){const ivs=[['Seconde mineure',1],['Seconde majeure',2],['Tierce mineure',3],['Tierce majeure',4],['Quarte juste',5],['Quinte juste',7],['Octave juste',12]].concat(lv>1?[['Sixte majeure',9],['Septième mineure',10],['Sixte mineure',8]]:[]);
+    const[nm,s]=pick(ivs);Object.assign(q,{key:'i_dt:s'+s,prompt:`Combien de demi-tons y a-t-il dans une ${nm.toLowerCase()} ?`,topic:'intervalles-qualites'});
+    if(fmt==='short')return shortQ(q,String(s),[String(s)],{num:true,ph:'un nombre'});
+    return mcQ(q,String(s),[s-1,s+1,s+2,s-2].filter(x=>x>0).map(String));}
+  const g=fromDia(qzRand(29,35)),tone=Math.random()<.5,semi=tone?2:1;
+  return padQ(Object.assign(q,{key:`i_dt:w${noteSlug(g)}${tone}`,prompt:`Écris la note située ${tone?'un ton':'un demi-ton'} au-dessus de la note donnée.`}),
+    {clef:'treble',mode:'one',given:[g],answer:[ivAbove(g,2,tone?'majeure':'mineure')],answerText:tone?`${nn(ivAbove(g,2,'majeure'))}`:`${nn(ivAbove(g,2,'mineure'))} (ou ${nn(Object.assign({},g,{alt:g.alt+1}))})`,
+     check:r=>noteMidi(r[0])===noteMidi(g)+semi&&(dia(r[0])===dia(g)+1||(!tone&&dia(r[0])===dia(g)))});
+};
+QZG.i_ren=(lv,fmts)=>{
+  const v=pick(lv===1?['sum','inv']:['inv','inv','sum']);const fmt=qzFmt(v==='sum'?['short','mc']:['mc','short'],fmts);if(!fmt)return null;
+  const q={sub:'i_ren',topic:'renversement-intervalles'};
+  if(v==='sum'){Object.assign(q,{key:'i_ren:sum',prompt:'Un intervalle et son renversement : quand on additionne leurs nombres (ex. : tierce + sixte), quel total obtient-on toujours ?'});
+    if(fmt==='short')return shortQ(q,'9',['9'],{num:true,ph:'un nombre'});return mcQ(q,'9',['8','7','10']);}
+  const num=qzRand(2,7),qs=IV_PERF.has(num)?(lv===3?['juste','augmentée','diminuée']:['juste']):(lv===3?['majeure','mineure','augmentée','diminuée']:['majeure','mineure']);
+  const ql=pick(qs),n2=9-num,inv={juste:'juste',majeure:'mineure',mineure:'majeure',augmentée:'diminuée',diminuée:'augmentée'}[ql];
+  const ans=IV_NUM[n2-1]+' '+inv;Object.assign(q,{key:`i_ren:${num}${ql}`,prompt:`Quel est le renversement d'une ${(IV_NUM[num-1]+' '+ql).toLowerCase()} ?`});
+  if(fmt==='short')return fieldsQ(q,IV_FIELDS(lv),[String(n2),inv],ans);
+  const wrong=[IV_NUM[n2-1]+' '+ql,IV_NUM[num-1]+' '+inv,IV_NUM[(8-num)-1]+' '+inv,...(lv===3?[IV_NUM[n2-1]+' '+(inv==='juste'?'augmentée':inv==='majeure'?'augmentée':'diminuée')]:[])].filter(s=>s!==ans&&qzValidIv(s));
+  return mcQ(q,ans,wrong);
+};
+/* Accords */
+function pickTriad(lv,qs){
+  for(let a=0;a<300;a++){const ql=pick(qs),root=Object.assign(fromDia(qzRand(28,34)),{alt:lv===1?0:Math.random()<.3?pick([1,-1]):0});
+    const t=triad(root,ql);if(okAlts(t))return{root,ql,t};}
+  return{root:fromDia(28),ql:'maj',t:triad(fromDia(28),'maj')};
+}
+const triQs=lv=>lv===1?['maj','min']:lv===2?['maj','min','dim']:['maj','min','dim','aug'];
+const chordName=(r,ql)=>`${NN(r)} ${TRI[ql].acc}`;
+QZG.a_qua=(lv,fmts)=>{
+  const fmt=qzFmt(['mc'],fmts);if(!fmt)return null;
+  const{t,ql}=pickTriad(lv,triQs(lv));const q={sub:'a_qua',topic:'triades',key:`a_qua:${noteSlug(t[0])}${ql}`,prompt:'Quelle est la qualité de cette triade ?',abc:abcHead()+`[${t.map(n=>abcN(n)).join('')}]4 |]`};
+  return mcQ(q,`Majeure|Mineure|Diminuée|Augmentée`.split('|')[['maj','min','dim','aug'].indexOf(ql)],['Majeure','Mineure','Diminuée','Augmentée'].filter((x,i)=>['maj','min','dim','aug'][i]!==ql));
+};
+QZG.a_nom=(lv,fmts)=>{
+  const fmt=qzFmt(['short','mc'],fmts);if(!fmt)return null;
+  const{t,ql,root}=pickTriad(lv,triQs(lv));const q={sub:'a_nom',topic:'triades',key:`a_nom:${noteSlug(root)}${ql}`,prompt:'Nomme cette triade (sa fondamentale et sa qualité).',abc:abcHead()+`[${t.map(n=>abcN(n)).join('')}]4 |]`};
+  if(fmt==='short')return fieldsQ(q,[{label:'Fondamentale',options:NOTE_OPTS},{label:'Qualité',options:Object.entries(TRI).filter(([k])=>triQs(3).includes(k)).map(([k,x])=>[k,x.acc])}],[noteSlug(root),ql],chordName(root,ql));
+  return mcQ(q,chordName(root,ql),[chordName(root,ql==='maj'?'min':'maj'),chordName(t[1],ql),chordName(t[2],ql==='maj'?'maj':'min'),chordName(fromDia(dia(root)-2,root.alt),ql)]);
+};
+QZG.a_ecr=(lv,fmts)=>{
+  const fmt=qzFmt(['staff'],fmts);if(!fmt)return null;
+  const{t,ql,root}=pickTriad(lv,triQs(lv));const set=new Set(t.map(noteSlug));
+  return padQ({sub:'a_ecr',topic:'triades',key:`a_ecr:${noteSlug(root)}${ql}`,prompt:`Écris la triade de ${chordName(root,ql).replace(/^./,c=>c)} à l'état fondamental (clé de sol).`},
+    {clef:'treble',mode:'chord',max:4,answer:t,answerText:t.map(nn).join(' – '),
+     check:r=>{const s=r.slice().sort((a,b)=>dia(a)-dia(b));return s.length===3&&sameNote(s[0],root)&&new Set(s.map(noteSlug)).size===3&&s.every(n=>set.has(noteSlug(n)));}});
+};
+const MAJ_Q=['maj','min','min','maj','maj','min','dim'],MIN_Q=['min','dim','maj','min','maj','maj','dim'];
+const RN_MAJ=['I','ii','iii','IV','V','vi','vii°'],RN_MIN=['i','ii°','III','iv','V','VI','vii°'];
+QZG.a_deg=(lv,fmts)=>{
+  const v=pick(['chord','roman','qual']);const fmt=qzFmt(v==='chord'?['short','mc']:['mc'],fmts);if(!fmt)return null;
+  let k=pick(qkPool(lv===1?1:lv));const minor=lv===3&&Math.random()<.35;if(minor&&k.sig>4)k=QK[4];const key=minor?relMinor(k):k;
+  const sc=minor?minorScale(key,'har'):scaleOf(k),QS=minor?MIN_Q:MAJ_Q,RN=minor?RN_MIN:RN_MAJ,i=qzRand(1,6),r=sc[i];
+  if(minor&&i===2){r.alt=minorScale(key,'nat')[2].alt;}
+  const kName=keyFr(key,minor),q={sub:'a_deg',topic:'accords-degres',key:`a_deg:${v}${key.L}${key.alt}${minor}${i}`};
+  if(v==='chord'){Object.assign(q,{prompt:`En ${kName}, quel accord est construit sur le ${ORD[i]} degré (${RN[i]}) ?`+(minor?' (gamme mineure harmonique)':'')});
+    if(fmt==='short')return fieldsQ(q,[{label:'Fondamentale',options:NOTE_OPTS},{label:'Qualité',options:Object.entries(TRI).map(([kk,x])=>[kk,x.acc])}],[noteSlug(r),QS[i]],chordName(r,QS[i]));
+    return mcQ(q,chordName(r,QS[i]),[chordName(r,QS[i]==='maj'?'min':'maj'),chordName(sc[mod7(i+1)],QS[i]),chordName(sc[mod7(i-1)],QS[mod7(i-1)]==='maj'?'min':'maj')]);}
+  if(v==='roman'){Object.assign(q,{prompt:`En ${kName}, quel chiffre romain correspond à l'accord de ${chordName(r,QS[i]).replace(/^./,c=>c.toLowerCase())} ?`});
+    return mcQ(q,RN[i],RN.filter((x,j)=>j!==i));}
+  Object.assign(q,{prompt:`Dans une tonalité ${minor?'mineure (harmonique)':'majeure'}, quelle est la qualité de l'accord construit sur le ${ORD[i]} degré (${RN[i].replace('°','')}) ?`,key:`a_deg:q${minor}${i}`});
+  const cq=TRI[QS[i]].fr.replace(/^./,c=>c.toUpperCase());return mcQ(q,cq,(lv===3?['Majeure','Mineure','Diminuée','Augmentée']:['Majeure','Mineure','Diminuée']).filter(x=>x!==cq),lv===3?4:3);
+};
+const INV_NAMES=['État fondamental','Premier renversement','Deuxième renversement'];
+QZG.a_ren=(lv,fmts)=>{
+  const v=pick(lv===1?['name','bass']:['name','bass','fig','write']);const fmt=v==='write'?qzFmt(['staff'],fmts):qzFmt(v==='bass'?['short','mc']:['mc'],fmts);if(!fmt)return null;
+  const{t,ql,root}=pickTriad(lv===3?2:1,['maj','min']);const inv=qzRand(0,2);
+  const voiced=inv===0?t:inv===1?[t[1],t[2],Object.assign({},t[0],{oct:t[0].oct+1})]:[t[2],Object.assign({},t[0],{oct:t[0].oct+1}),Object.assign({},t[1],{oct:t[1].oct+1})];
+  const q={sub:'a_ren',topic:'renversements',key:`a_ren:${v}${noteSlug(root)}${ql}${inv}`};const cn=chordName(root,ql);
+  if(v==='name'){Object.assign(q,{prompt:`Cet accord de ${cn.replace(/^./,c=>c.toLowerCase())} est-il à l'état fondamental ou renversé ?`,abc:abcHead()+`[${voiced.map(n=>abcN(n)).join('')}]4 |]`});return mcQ(q,INV_NAMES[inv],INV_NAMES.filter((x,i)=>i!==inv),3);}
+  if(v==='fig'){const F=['⁵₃ (état fondamental, sans chiffre)','⁶ (accord de sixte)','⁶₄ (accord de quarte et sixte)'];Object.assign(q,{prompt:'Quel est le chiffrage de cet accord ?',abc:abcHead()+`[${voiced.map(n=>abcN(n)).join('')}]4 |]`});return mcQ(q,F[inv],F.filter((x,i)=>i!==inv),3);}
+  if(v==='bass'){const i2=qzRand(1,2),b=t[i2];Object.assign(q,{key:`a_ren:b${noteSlug(root)}${ql}${i2}`,prompt:`Quelle note est à la basse dans le ${i2===1?'premier':'deuxième'} renversement de l'accord de ${cn.replace(/^./,c=>c.toLowerCase())} ?`});
+    if(fmt==='short')return shortQ(q,nn(b),noteAcc(b),{ph:'ex. : mi'});return mcQ(q,nn(b),t.filter((x,i)=>i!==i2).map(nn).concat([nn(fromDia(dia(t[0])+1,t[0].alt))]));}
+  const i2=qzRand(1,2),set=new Set(t.map(noteSlug)),bass=t[i2];
+  const ans=i2===1?[t[1],t[2],Object.assign({},t[0],{oct:t[0].oct+1})]:[t[2],Object.assign({},t[0],{oct:t[0].oct+1}),Object.assign({},t[1],{oct:t[1].oct+1})];
+  return padQ(Object.assign(q,{key:`a_ren:w${noteSlug(root)}${ql}${i2}`,prompt:`Écris l'accord de ${cn.replace(/^./,c=>c.toLowerCase())} au ${i2===1?'premier':'deuxième'} renversement (clé de sol).`}),
+    {clef:'treble',mode:'chord',max:4,answer:ans,answerText:`${ans.map(nn).join(' – ')} (${nn(bass)} à la basse)`,
+     check:r=>{const s=r.slice().sort((a,b)=>dia(a)-dia(b));return s.length===3&&sameNote(s[0],bass)&&new Set(s.map(noteSlug)).size===3&&s.every(n=>set.has(noteSlug(n)));}});
+};
+QZG.a_v7=(lv,fmts)=>{
+  const v=pick(lv===1?['notes','root']:['notes','root','write']);const fmt=v==='write'?qzFmt(['staff'],fmts):qzFmt(v==='notes'?['mc']:['short','mc'],fmts);if(!fmt)return null;
+  const k=pick(qkPool(Math.min(lv,2))),sc=scaleOf(k),ch=[4,6,1,3].map(i=>sc[i]);const q={sub:'a_v7',topic:'septiemes',key:`a_v7:${v}${k.sig}`};
+  if(v==='root'){Object.assign(q,{prompt:`Sur quelle note est construit l'accord de septième de dominante (V7) de ${keyFr(k)} ?`});
+    if(fmt==='short')return shortQ(q,nn(ch[0]),noteAcc(ch[0]),{ph:'ex. : sol'});return mcQ(q,nn(ch[0]),[sc[0],sc[3],sc[6]].map(nn));}
+  const lab=a=>a.map(nn).join(' – ');
+  if(v==='notes'){Object.assign(q,{prompt:`Quelles notes forment l'accord de septième de dominante (V7) de ${keyFr(k)} ?`});
+    return mcQ(q,lab(ch),[lab([ch[0],ch[1],ch[2],{L:ch[3].L,alt:ch[3].alt+1}]),lab([0,2,4,6].map(i=>sc[i])),lab([3,5,0,2].map(i=>sc[i])),lab([ch[0],{L:ch[1].L,alt:ch[1].alt-1},ch[2],ch[3]])].filter(s=>!/𝄪|𝄫/.test(s)));}
+  const root=Object.assign(fromDia(28+ch[0].L+(ch[0].L<2?7:0)),{alt:ch[0].alt});const ans=[0,2,4,6].map(s=>Object.assign(fromDia(dia(root)+s),{alt:sc[mod7(4+s)].alt}));const set=new Set(ans.map(noteSlug));
+  return padQ(Object.assign(q,{prompt:`Écris l'accord de septième de dominante (V7) de ${keyFr(k)}, à l'état fondamental (clé de sol).`}),
+    {clef:'treble',mode:'chord',max:5,answer:ans,answerText:ans.map(nn).join(' – '),check:r=>{const s=r.slice().sort((a,b)=>dia(a)-dia(b));return s.length===4&&sameNote(s[0],ch[0])&&new Set(s.map(noteSlug)).size===4&&s.every(n=>set.has(noteSlug(n)));}});
+};
+/* Harmonie */
+const CADS=[['Parfaite','V – I','les deux accords à l\'état fondamental'],['Imparfaite','V⁶ – I','un des accords est renversé'],['Demi-cadence','IV – V','arrêt sur la dominante'],['Plagale','IV – I',''],['Rompue','V – vi','']];
+const CAD_PROG={Parfaite:[['IV',0],['V',0],['I',0]],Imparfaite:[['IV',0],['V',1],['I',0]],'Demi-cadence':[['I',0],['IV',0],['V',0]],Plagale:[['I',0],['IV',0],['I',0]],Rompue:[['IV',0],['V',0],['vi',0]]};
+function cadenceEx(name,key){
+  let prev=null;const chords=CAD_PROG[name].map(([id,inv])=>{const tones=chordTones(key,id),v=voiceChord(tones,inv,prev,id);if(v.upper)prev=v.upper.map(x=>x.m);return{id,tones,inv,bass:v.bass,upper:v.upper};});
+  return chords.some(c=>!c.upper)?null:{kind:'pc',key,chords,n:chords.length,dur:1.4};
+}
+QZG.h_cad=(lv,fmts)=>{
+  const fmt=qzFmt(['mc'],fmts);if(!fmt)return null;
+  const pool=lv===1?CADS.filter(c=>c[0]!=='Imparfaite'):CADS;const c=pick(pool);const q={sub:'h_cad',topic:'cadences'};
+  const opts=pool.map(x=>x[0]==='Demi-cadence'?'Demi-cadence':'Cadence '+x[0].toLowerCase());const ans=c[0]==='Demi-cadence'?'Demi-cadence':'Cadence '+c[0].toLowerCase();
+  if(lv>1&&Math.random()<.5){const key=KEYS[pick(['C','G','F'])];let ex=null;for(let i=0;i<20&&!ex;i++)ex=cadenceEx(c[0],key);
+    if(ex){const abc=abcProgression(ex,true).replace(/\nw: .*\n?$/,'\n');Object.assign(q,{key:'h_cad:s'+c[0],prompt:`Quelle cadence termine cette phrase en ${key.fr.toLowerCase().replace(/^./,x=>x.toUpperCase())} ?`,abc});return mcQ(q,ans,opts.filter(x=>x!==ans));}}
+  Object.assign(q,{key:'h_cad:'+c[0],prompt:`Quelle cadence correspond à l'enchaînement ${c[1]}${c[2]?' ('+c[2]+')':''} à la fin d'une phrase ?`});
+  return mcQ(q,ans,opts.filter(x=>x!==ans));
+};
+QZG.h_fon=(lv,fmts)=>{
+  const fmt=qzFmt(['mc'],fmts);if(!fmt)return null;
+  const F={I:'Tonique',IV:'Prédominante (sous-dominante)',ii:'Prédominante (sous-dominante)',V:'Dominante',V7:'Dominante','vii°':'Dominante'};
+  const v=pick(['func','which']);const q={sub:'h_fon',topic:'fonctions'};
+  if(v==='func'){const c=pick(lv===1?['I','IV','V']:Object.keys(F));Object.assign(q,{key:'h_fon:f'+c,prompt:`Quelle est la fonction tonale de l'accord ${c} ?`});return mcQ(q,F[c],['Tonique','Prédominante (sous-dominante)','Dominante'].filter(x=>x!==F[c]),3);}
+  const fn=pick(['Tonique','Prédominante (sous-dominante)','Dominante']),good=Object.keys(F).filter(k=>F[k]===fn),bad=Object.keys(F).filter(k=>F[k]!==fn);
+  Object.assign(q,{key:'h_fon:w'+fn,prompt:`Lequel de ces accords a une fonction de ${fn.toLowerCase().replace(' (sous-dominante)','')} ?`});
+  return mcQ(q,pick(good),qzShuffle(bad).slice(0,3));
+};
+/* Termes et signes */
+const DYN=[['ppp','pianississimo','extrêmement doux'],['pp','pianissimo','très doux'],['p','piano','doux'],['mp','mezzo piano','moyennement doux'],['mf','mezzo forte','moyennement fort'],['f','forte','fort'],['ff','fortissimo','très fort'],['fff','fortississimo','extrêmement fort']];
+QZG.t_nua=(lv,fmts)=>{
+  const v=pick(lv===1?['mean','abbr']:['mean','abbr','order','cresc']);const fmt=qzFmt(v==='abbr'?['short','mc']:['mc'],fmts);if(!fmt)return null;
+  const pool=lv===1?DYN.slice(1,7):DYN,d=pick(pool),q={sub:'t_nua',topic:'nuances'};
+  if(v==='mean'){Object.assign(q,{key:'t_nua:m'+d[0],prompt:`Que signifie la nuance ${d[0]} (${d[1]}) ?`,abc:`X:1\nL:1/4\nK:C\n!${d[0]}!B4 |]`,small:true});return mcQ(q,d[2].replace(/^./,c=>c.toUpperCase()),pool.filter(x=>x!==d).map(x=>x[2].replace(/^./,c=>c.toUpperCase())));}
+  if(v==='abbr'){Object.assign(q,{key:'t_nua:a'+d[0],prompt:`Quelle nuance (abréviation) signifie « ${d[2]} » ?`});
+    if(fmt==='short')return shortQ(q,`${d[0]} (${d[1]})`,[d[0],d[1]],{ph:'ex. : mp'});return mcQ(q,d[0],pool.filter(x=>x!==d).map(x=>x[0]));}
+  if(v==='cresc'){const c=Math.random()<.5;Object.assign(q,{key:'t_nua:c'+c,prompt:'Que signifie ce signe ?',abc:`X:1\nL:1/4\nK:C\n!${c?'crescendo':'diminuendo'}(!B B B !${c?'crescendo':'diminuendo'})!B |]`});
+    return mcQ(q,c?'Crescendo : en augmentant le volume':'Decrescendo (diminuendo) : en diminuant le volume',[c?'Decrescendo (diminuendo) : en diminuant le volume':'Crescendo : en augmentant le volume','Accelerando : en accélérant','Legato : notes liées']);}
+  const three=qzShuffle(pool).slice(0,3),loud=three.reduce((a,b)=>DYN.indexOf(b)>DYN.indexOf(a)?b:a);const ask=Math.random()<.5;const tgt=ask?loud:three.reduce((a,b)=>DYN.indexOf(b)<DYN.indexOf(a)?b:a);
+  Object.assign(q,{key:'t_nua:o'+three.map(x=>x[0]).join(),prompt:`Parmi ces nuances, laquelle est la plus ${ask?'forte':'douce'} ?`});return mcQ(q,tgt[0],three.filter(x=>x!==tgt).map(x=>x[0]),3);
+};
+const TEMPI=[['Largo','très lent'],['Adagio','lent'],['Andante','allant, au pas'],['Moderato','modéré'],['Allegro','rapide, joyeux'],['Presto','très rapide']];
+const TCHG=[['Accelerando','en accélérant',['accelerando','accel']],['Ritardando','en ralentissant',['ritardando','rit','rallentando','rall']],['A tempo','revenir au tempo',['a tempo']]];
+QZG.t_tem=(lv,fmts)=>{
+  const v=pick(lv===1?['mean','term']:['mean','term','order','change']);const fmt=qzFmt(v==='change'?['short','mc']:['mc'],fmts);if(!fmt)return null;
+  const q={sub:'t_tem',topic:'tempo'};const t=pick(TEMPI);
+  if(v==='mean'){Object.assign(q,{key:'t_tem:m'+t[0],prompt:`Que signifie l'indication de tempo « ${t[0]} » ?`});return mcQ(q,t[1].replace(/^./,c=>c.toUpperCase()),TEMPI.filter(x=>x!==t).map(x=>x[1].replace(/^./,c=>c.toUpperCase())));}
+  if(v==='term'){Object.assign(q,{key:'t_tem:t'+t[0],prompt:`Quel terme italien indique un tempo ${t[1]} ?`});return mcQ(q,t[0],TEMPI.filter(x=>x!==t).map(x=>x[0]));}
+  if(v==='order'){const three=qzShuffle(TEMPI).slice(0,3),slow=Math.random()<.5,tg=three.reduce((a,b)=>(TEMPI.indexOf(b)<TEMPI.indexOf(a))===slow?b:a);
+    Object.assign(q,{key:'t_tem:o'+three.map(x=>x[0]).join(),prompt:`Parmi ces tempos, lequel est le plus ${slow?'lent':'rapide'} ?`});return mcQ(q,tg[0],three.filter(x=>x!==tg).map(x=>x[0]),3);}
+  const c=pick(TCHG);Object.assign(q,{key:'t_tem:c'+c[0],prompt:`Quel terme italien signifie « ${c[1]} » ?`});
+  if(fmt==='short')return shortQ(q,c[0]+(c[0]==='Ritardando'?' (ou rallentando)':''),c[2],{ph:'un terme italien'});
+  return mcQ(q,c[0],TCHG.filter(x=>x!==c).map(x=>x[0]).concat(['Rubato']));
+};
+const ARTS=[['Staccato','.B2 .c2 .d2 .e2','Note détachée, courte'],['Tenuto','!tenuto!B2 !tenuto!c2 !tenuto!d2 !tenuto!e2','Note tenue toute sa valeur, légèrement appuyée'],['Accent','!accent!B2 !accent!c2 !accent!d2 !accent!e2','Attaque plus forte'],['Point d\'orgue','B2 c2 d2 !fermata!e2','Tenir plus longtemps, au choix'],['Legato','(B2 c2 d2 e2)','Notes liées, sans interruption']];
+QZG.t_art=(lv,fmts)=>{
+  const fmt=qzFmt(['mc'],fmts);if(!fmt)return null;
+  const pool=lv===1?ARTS.filter(a=>a[0]!=='Tenuto'):ARTS.concat(lv===3?[['Marcato','!marcato!B2 !marcato!c2 !marcato!d2 !marcato!e2','Accent très marqué']]:[]);const a=pick(pool);const v=pick(['name','effect']);
+  const q={sub:'t_art',topic:'articulations',key:`t_art:${v}${a[0]}`};
+  if(v==='name'){Object.assign(q,{prompt:'Comment s\'appelle le signe d\'articulation écrit sur ces notes ?',abc:`X:1\nL:1/8\nK:C\n${a[1]} |]`});return mcQ(q,a[0],pool.filter(x=>x!==a).map(x=>x[0]));}
+  const near=['Accent','Marcato'];Object.assign(q,{prompt:`Quel est l'effet du signe « ${a[0].toLowerCase()} » ?`,abc:`X:1\nL:1/8\nK:C\n${a[1]} |]`});return mcQ(q,a[2],pool.filter(x=>x!==a&&!(near.includes(a[0])&&near.includes(x[0]))).map(x=>x[2]));
+};
+const REPS=[['D.C. al Fine','Reprendre au début et s\'arrêter au mot Fine'],['D.S.','Retourner au signe 𝄋'],['Barres de reprise (‖: … :‖)','Jouer le passage deux fois'],['Coda','Section de fin du morceau'],['1re et 2e fois','Jouer la case 1, reprendre, puis sauter à la case 2']];
+QZG.t_rep=(lv,fmts)=>{
+  const fmt=qzFmt(['mc'],fmts);if(!fmt)return null;
+  const pool=lv===1?REPS.slice(0,3).concat([REPS[4]]):REPS,r=pick(pool),q={sub:'t_rep',topic:'reprises',key:'t_rep:'+r[0]};
+  if(r[0].startsWith('Barres')){Object.assign(q,{prompt:'Que signifient ces barres de mesure ?',abc:'X:1\nL:1/4\nM:4/4\nK:C\n|: c d e f | g2 g2 :|'});return mcQ(q,r[1],pool.filter(x=>x!==r).map(x=>x[1]));}
+  if(r[0].startsWith('1re')){Object.assign(q,{prompt:'Comment lit-on ce passage ?',abc:'X:1\nL:1/4\nM:4/4\nK:C\n|: c d e f |[1 g a g2 :|[2 e d c2 |]'});return mcQ(q,r[1],pool.filter(x=>x!==r).map(x=>x[1]));}
+  Object.assign(q,{prompt:`Que signifie l'indication « ${r[0]} » ?`});return mcQ(q,r[1],pool.filter(x=>x!==r).map(x=>x[1]));
+};
+/* Écoute (dans l'app seulement) */
+function qzPlayNotes(seq,{gap=.8,dur=.75,chord=false}={}){A.init();stop();const items=chord?[{u:0,d:1,chord:seq}]:seq.map((m,i)=>({u:i,d:1,midi:m}));run({items,us:chord?1.6:gap,endU:chord?1:seq.length});}
+QZG.e_int=(lv)=>{
+  const sets=lv===1?['3m','3M','4J','5J','8J']:lv===2?['2m','2M','3m','3M','4J','5J','6m','6M','8J']:['2m','2M','3m','3M','4J','tr','5J','6m','6M','7m','7M','8J'];
+  const iv=IV_BY[pick(sets)],r=qzRand(55,67),harm=lv===3&&Math.random()<.35,ms=[r,r+iv.s];
+  const q={sub:'e_int',topic:'reperes',fmt:'listen',key:`e_int:${iv.id}${harm}`,prompt:`Écoute l'intervalle ${harm?'harmonique (les deux notes ensemble)':'mélodique (en montant)'} et nomme-le.`,play:()=>qzPlayNotes(ms,{chord:harm})};
+  return mcQ(q,iv.fr,qzShuffle(sets.filter(x=>x!==iv.id)).map(x=>IV_BY[x].fr));
+};
+QZG.e_acc=(lv)=>{
+  const qs=triQs(lv),ql=pick(qs),r=qzRand(53,65),ms=[r,r+TRI[ql].s[0],r+TRI[ql].s[1]];
+  const q={sub:'e_acc',topic:'triades',fmt:'listen',key:'e_acc:'+ql,prompt:'Écoute l\'accord (arpégé puis plaqué). Quelle est sa qualité ?',
+    play:()=>{A.init();stop();run({items:[...ms.map((m,i)=>({u:i,d:1,midi:m})),{u:3.4,d:2,chord:ms}],us:.6,endU:5.4});}};
+  return mcQ(q,`Accord ${TRI[ql].acc}`,['maj','min','dim','aug'].filter(x=>x!==ql&&(lv>1||x!=='aug')).map(x=>`Accord ${TRI[x].acc}`),lv===1?3:4);
+};
+QZG.e_mod=(lv)=>{
+  const minor=Math.random()<.5,t=minor?pick(lv===1?['har']:['nat','har']):'maj',r=qzRand(57,64);
+  const steps=t==='maj'?[0,2,4,5,7,9,11,12]:t==='har'?[0,2,3,5,7,8,11,12]:[0,2,3,5,7,8,10,12];
+  const seq=lv===1?steps.concat(steps.slice(0,-1).reverse()).map(s=>r+s):[0,4,2,7,4,2,0].map(i=>r+steps[i]);
+  const q={sub:'e_mod',topic:'gammes-mineures',fmt:'listen',key:`e_mod:${t}${lv}`,prompt:lv===1?'Écoute cette gamme. Est-elle majeure ou mineure ?':'Écoute ce court motif. Est-il en mode majeur ou mineur ?',play:()=>{A.init();stop();run({items:seq.map((m,i)=>({u:i,d:1,midi:m})),us:lv===1?.32:.45,endU:seq.length});}};
+  const W=lv===1?['Majeure','Mineure']:['Majeur','Mineur'];return mcQ(q,minor?W[1]:W[0],[minor?W[0]:W[1]],2);
+};
+QZG.e_cad=(lv)=>{
+  const names=lv===1?['Parfaite','Demi-cadence']:['Parfaite','Demi-cadence','Plagale','Rompue'];const c=pick(names);
+  let ex=null;for(let i=0;i<20&&!ex;i++)ex=cadenceEx(c,KEYS.C);
+  const lab=x=>x==='Demi-cadence'?'Demi-cadence':'Cadence '+x.toLowerCase();
+  const q={sub:'e_cad',topic:'cadences',fmt:'listen',key:'e_cad:'+c,prompt:'Écoute la fin de la phrase. Quelle cadence entends-tu ?',
+    play:()=>{if(!ex)return;A.init();stop();run({items:ex.chords.map((ch,i)=>({u:i,d:1,chord:[ch.bass.m,...ch.upper.map(x=>x.m)]})),us:1.3,endU:ex.chords.length});}};
+  return mcQ(q,lab(c),names.filter(x=>x!==c).map(lab));
+};
+QZG.e_rhy=(lv)=>{
+  const me=lv===3?pick(['4/4','3/4','6/8']):pick(['4/4','3/4']),M=METERS[me],tot=M.beats*M.bu;const seen=new Set(),opts=[];
+  for(let i=0;i<40&&opts.length<3;i++){const e=rhyFill(me,lv,tot,{allowRests:lv>1});const k=e.map(x=>(x.rest?'-':'')+x.dur).join('.');if(seen.has(k))continue;seen.add(k);opts.push(e);}
+  const good=opts[0];
+  const q={sub:'e_rhy',topic:'figures-notes',fmt:'listen',key:'e_rhy:'+[...seen][0],prompt:'Écoute le rythme (après une mesure de décompte). Lequel as-tu entendu ?',
+    play:()=>{A.init();stop();const items=[];let u=tot;good.forEach(e=>{items.push({u,d:e.dur,rest:e.rest});u+=e.dur;});
+      const clicks=Array.from({length:M.beats},(_,k)=>({u:k*M.bu,strong:k===0,b:k}));run({items,clicks,us:60/(M.comp?56:80)/M.bu,endU:u},{sound:'wood'});}};
+  return mcQ(q,{t:'',abc:rhyAbc(me,good),lab:'le rythme entendu'},opts.slice(1).map(e=>({t:'',abc:rhyAbc(me,e),lab:'autre rythme'})),3);
+};
+
+/* ---------- tirage d'un questionnaire ---------- */
+function qzRng(seed){let a=seed>>>0;return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function qzBuild(cfg,seed,{paper=false}={}){
+  const orig=Math.random;Math.random=qzRng(seed);
+  try{
+    const subs=cfg.topics.filter(s=>QZ_SUB[s]&&QZG[s]&&!(paper&&QZ_SUB[s].subj.listen));
+    if(!subs.length)return[];
+    const qs=[],keys=new Set();let tries=0,order=qzShuffle(subs),k=0;
+    while(qs.length<cfg.n&&tries<cfg.n*40){
+      tries++;const s=order[k%order.length];k++;if(k%order.length===0)order=qzShuffle(subs);
+      let q=null;try{q=QZG[s](cfg.level,cfg.formats);}catch(e){console.warn('quiz',s,e);q=null;}
+      if(!q)continue;if(q.key&&keys.has(q.key))continue;if(q.key)keys.add(q.key);
+      q.subj=QZ_SUB[s].subj.id;qs.push(q);
+    }
+    /* regroupe par sujet, dans l'ordre des onglets */
+    const so=QZ_SUBJ.map(x=>x.id);qs.sort((a,b)=>so.indexOf(a.subj)-so.indexOf(b.subj));
+    return qs;
+  }finally{Math.random=orig;}
+}
+
+/* ========== MODULE : Tester mes connaissances — interface ========== */
+const QZ={test:null,view:'start',i:0,name:'',title:'Évaluation de théorie musicale',confirm:false};
+const QZ_STORE='atelier-quiz';
+const QZ_GLYPH={responsive:undefined,staffwidth:40,scale:1.6,paddingtop:4,paddingbottom:4,paddingleft:4,paddingright:4};
+function qzSave(){try{if(!QZ.test){localStorage.removeItem(QZ_STORE);return;}const t=QZ.test;
+  localStorage.setItem(QZ_STORE,JSON.stringify({seed:t.seed,cfg:t.cfg,resp:t.resp,done:t.done,name:t.name,i:QZ.i,view:QZ.view,date:t.date}));}catch(e){}}
+function qzLoad(){try{const o=JSON.parse(localStorage.getItem(QZ_STORE)||'null');if(!o||!o.cfg)return;
+  const qs=qzBuild(o.cfg,o.seed);if(!qs.length)return;
+  QZ.test={seed:o.seed,cfg:o.cfg,qs,resp:o.resp||[],done:!!o.done,name:o.name||'',date:o.date||Date.now()};QZ.i=Math.min(o.i||0,qs.length-1);QZ.view=o.view==='res'?'res':'q';QZ.name=QZ.test.name;}catch(e){}}
+const qzAnswered=(q,r)=>r!=null&&(Array.isArray(r)?(q.fields?r.every(x=>x):r.length>0):typeof r==='number'||String(r).trim()!=='');
+const qzScore=t=>t.qs.reduce((a,q,i)=>a+(q.check(t.resp[i])?1:0),0);
+const qzDate=d=>new Date(d).toLocaleDateString('fr-CA',{year:'numeric',month:'long',day:'numeric'});
+const qzSubjLabel=q=>`${QZ_SUB[q.sub].subj.t} · ${QZ_SUB[q.sub].t}`;
+function qzNew(){const c=clone(S.cfg.tq),seed=(Math.random()*2**32)>>>0;const qs=qzBuild(c,seed);
+  if(!qs.length){feedback('Aucune question possible avec ces réglages : coche au moins une notion et un format compatible.','bad');return;}
+  QZ.test={seed,cfg:c,qs,resp:new Array(qs.length).fill(null),done:false,name:QZ.name,date:Date.now()};QZ.i=0;QZ.view='q';QZ.confirm=false;qzSave();qzRender();}
+
+MOD.tq.mount=function(){
+  $('#toolbar').replaceChildren();
+  this.root=el('div',{class:'qz'});$('#answer').replaceChildren(this.root);
+  if(!QZ.test)qzLoad();
+};
+MOD.tq.fresh=function(){qzRender();};
+MOD.tq.redraw=function(){qzRender();};
+function qzRender(){
+  const root=MOD.tq.root;if(!root||S.mod!=='tq')return;S.keyHandler=null;feedback('');
+  if(QZ.view==='q'&&QZ.test)root.replaceChildren(qzQuestionView());
+  else if(QZ.view==='res'&&QZ.test&&QZ.test.done)root.replaceChildren(qzResultView());
+  else{QZ.view='start';root.replaceChildren(qzStartView());}
+}
+function qzGo(i){QZ.i=Math.max(0,Math.min(QZ.test.qs.length-1,i));QZ.confirm=false;qzSave();qzRender();
+  const top=$('.qzhead');if(top&&top.getBoundingClientRect().top<0)top.scrollIntoView({block:'start',behavior:'smooth'});}
+
+/* ---------- accueil ---------- */
+function qzStartView(){
+  const c=S.cfg.tq,subs=c.topics.filter(s=>QZ_SUB[s]),lv=QZ_LEVELS[c.level-1][1];
+  const bySubj=QZ_SUBJ.map(s=>({s,on:s.subs.filter(([id])=>subs.includes(id))})).filter(x=>x.on.length);
+  const name=el('input',{type:'text',class:'qzin',id:'qz_name',maxlength:'40',placeholder:'Ton nom (facultatif)',autocomplete:'name'});name.value=QZ.name||'';
+  name.addEventListener('input',()=>{QZ.name=name.value.trim();});
+  const t=QZ.test,inProg=t&&!t.done,answered=t?t.qs.filter((q,i)=>qzAnswered(q,t.resp[i])).length:0;
+  const fm=c.formats.length===3?'tous les formats':c.formats.map(f=>QZ_FORMATS.find(x=>x[0]===f)[1].toLowerCase()).join(', ');
+  const student=el('div',{class:'qzcard qzstart'},
+    el('p',{class:'eyebrow'},'Questionnaire'),
+    el('h2',{},'Prêt à tester tes connaissances ?'),
+    el('p',{class:'qzsum'},`${c.n} questions tirées au hasard · niveau ${lv.toLowerCase()} · ${fm}`),
+    bySubj.length?el('ul',{class:'qzsubjs'},bySubj.map(({s,on})=>el('li',{},el('b',{},s.t+(s.listen?' (écoute)':'')),' ',el('span',{},on.map(x=>x[1]).join(', '))))):
+      el('p',{class:'qzwarn'},'Aucune notion choisie. Ouvre les réglages pour cocher les sujets à évaluer.'),
+    el('p',{class:'hint'},'Une question par page. Tu peux revenir en arrière et changer tes réponses avant de terminer. Ton résultat s\'affiche tout de suite à la fin.'),
+    el('label',{class:'qzfield'},el('span',{class:'fl'},'Nom'),name),
+    el('div',{class:'qzbtns'},
+      btn(inProg?'Nouveau questionnaire':'Commencer le questionnaire',()=>{QZ.name=name.value.trim();qzNew();},'primary'),
+      inProg?btn(`Reprendre le questionnaire en cours (${answered}/${t.qs.length} répondues)`,()=>{QZ.view='q';qzRender();}):null,
+      t&&t.done?btn('Voir mon dernier résultat',()=>{QZ.view='res';qzRender();}):null,
+      btn('Réglages',()=>{const p=$('#settings');if(p.hidden)$('#setbtn').click();p.scrollIntoView({behavior:'smooth',block:'start'});},'quiet')));
+  const title=el('input',{type:'text',class:'qzin',id:'qz_title',maxlength:'70'});title.value=QZ.title;title.addEventListener('input',()=>{QZ.title=title.value;});
+  const out=el('div',{class:'qzdeliver'});
+  const teacher=el('div',{class:'qzcard qzteach'},
+    el('h3',{},'Pour l\'enseignant : un questionnaire à imprimer'),
+    el('p',{class:'hint'},'Crée un PDF avec les mêmes réglages : de nouvelles questions à chaque fois, prêtes à photocopier, et le corrigé sur des pages séparées à la fin. Les questions d\'écoute ne sont pas incluses sur papier.'),
+    el('label',{class:'qzfield'},el('span',{class:'fl'},'Titre'),title),
+    el('div',{class:'qzbtns'},btn('Créer le PDF (questionnaire + corrigé)',async ev=>{
+      const b=ev.currentTarget;const cfg=clone(S.cfg.tq),seed=(Math.random()*2**32)>>>0,qs=qzBuild(cfg,seed,{paper:true});
+      if(!qs.length){out.replaceChildren(el('p',{class:'qzwarn'},'Aucune question imprimable avec ces réglages (les questions d\'écoute ne vont pas sur papier).'));return;}
+      await qzMakePdf(b,out,()=>qzPdfBlank(qs,cfg),`MusicDEV-questionnaire-${new Date().toISOString().slice(0,10)}.pdf`);})),out);
+  return el('div',{class:'qzwrap'},student,teacher);
+}
+
+/* ---------- une question ---------- */
+function qzQuestionView(){
+  const t=QZ.test,N=t.qs.length,i=QZ.i,q=t.qs[i],review=t.done,r=t.resp[i];
+  const set=v=>{t.resp[i]=v;qzSave();dots.replaceWith(dots=qzDots());};
+  let dots=qzDots();
+  const card=el('div',{class:'qzcard qzq'+(review?' review':'')});
+  card.append(el('p',{class:'qzprompt'},q.prompt));
+  if(q.play)card.append(el('div',{class:'qzplay'},btn('▶ Écouter',()=>q.play(),'primary'),btn('■',()=>stop(),'quiet sq')));
+  if(q.abc){const st=el('div',{class:'staff qzstaff'+(q.small?' small':'')});card.append(st);requestAnimationFrame(()=>draw(st,q.abc,/clef=none/.test(q.abc)?Object.assign({},QZ_GLYPH,{scale:2}):{paddingtop:12,paddingbottom:8}));}
+  card.append(qzAnswerUI(q,r,set,review));
+  if(review)card.append(qzVerdict(q,r));
+  const last=i===N-1;
+  const nav=el('div',{class:'qznav'},
+    btn('‹ Précédente',()=>qzGo(i-1),'quiet'+(i===0?' hide':'')),
+    review?btn('Retour au résultat',()=>{QZ.view='res';qzSave();qzRender();}):null,
+    last?(review?null:btn('Terminer et voir mon résultat',()=>qzFinish(),'primary')):btn('Suivante ›',()=>qzGo(i+1),'primary'));
+  const conf=QZ.confirm?qzConfirmBox():null;
+  return el('div',{class:'qzwrap'},
+    el('div',{class:'qzhead'},el('span',{class:'qznum'},`Question ${i+1} sur ${N}`),el('span',{class:'qztag'},qzSubjLabel(q))),
+    dots,card,conf,nav,
+    review?null:el('p',{class:'qzfoot'},btn('Terminer maintenant',()=>qzFinish(),'quiet'),btn('Quitter (le questionnaire est gardé)',()=>{QZ.view='start';qzRender();},'quiet')));
+  function qzDots(){
+    return el('div',{class:'qzdots',role:'navigation','aria-label':'Questions'},t.qs.map((qq,k)=>{
+      const ans=qzAnswered(qq,t.resp[k]),cls=['qzdot',k===i?'cur':'',review?(qq.check(t.resp[k])?'ok':'bad'):ans?'done':''].filter(Boolean).join(' ');
+      return el('button',{class:cls,type:'button','aria-label':`Question ${k+1}`+(ans?' (répondue)':''),'aria-current':k===i?'step':null,onclick:()=>qzGo(k)},String(k+1));}));
+  }
+}
+function qzConfirmBox(){
+  const t=QZ.test,miss=t.qs.map((q,i)=>qzAnswered(q,t.resp[i])?0:i+1).filter(Boolean);
+  return el('div',{class:'qzconfirm'},el('p',{},`Il reste ${miss.length} question${miss.length>1?'s':''} sans réponse (n° ${miss.join(', ')}). Une question sans réponse compte comme une erreur.`),
+    el('div',{class:'qzbtns'},btn('Terminer quand même',()=>qzFinish(true),'primary'),btn('Revenir à la première sans réponse',()=>qzGo(miss[0]-1),'quiet')));
+}
+function qzFinish(force){
+  const t=QZ.test,miss=t.qs.filter((q,i)=>!qzAnswered(q,t.resp[i])).length;
+  if(miss&&!force){QZ.confirm=true;qzRender();const c=$('.qzconfirm');if(c)c.scrollIntoView({block:'center',behavior:'smooth'});return;}
+  stop();t.done=true;t.date=Date.now();QZ.view='res';QZ.confirm=false;qzSave();qzRender();window.scrollTo({top:0,behavior:'smooth'});
+}
+function qzVerdict(q,r){
+  const ok=q.check(r);const box=el('div',{class:'qzverdict '+(ok?'ok':'bad')});
+  box.append(el('p',{class:'qzv'},ok?'✓ Bonne réponse':(qzAnswered(q,r)?'✗ Ce n\'est pas la bonne réponse':'✗ Pas de réponse')));
+  if(!ok){box.append(el('p',{},el('b',{},'Réponse attendue : '),q.answerText));
+    if(q.answerAbc&&(q.pad||q.rhy)){const st=el('div',{class:'staff qzstaff'});box.append(st);requestAnimationFrame(()=>draw(st,q.answerAbc,{paddingtop:10,paddingbottom:6}));}}
+  if(q.topic&&typeof LIB_TOPICS!=='undefined'&&LIB_TOPICS[q.topic])box.append(el('p',{},btn('📖 Revoir cette notion dans la bibliothèque',()=>openLibrary(q.topic),'quiet')));
+  return box;
+}
+
+/* ---------- zones de réponse ---------- */
+function qzAnswerUI(q,r,set,locked){
+  if(q.opts){
+    const box=el('div',{class:'qzopts'+(q.opts.length&&q.opts.every(o=>o.abc&&(o.small||/clef=none/.test(o.abc)))?' grid':'')});
+    q.opts.forEach((o,k)=>{
+      const b=el('button',{type:'button',class:'qzopt'+(locked?(k===q.ans?' right':k===r?' wrong':''):''),'aria-pressed':String(r===k),disabled:locked},
+        el('span',{class:'qzl'},QA[k]),o.abc?el('span',{class:'qzoabc'}):el('span',{class:'qzot'},o.t));
+      if(o.abc)requestAnimationFrame(()=>draw(b.querySelector('.qzoabc'),o.abc,/clef=none/.test(o.abc)?QZ_GLYPH:{paddingtop:6,paddingbottom:4}));
+      b.addEventListener('click',()=>{set(k);box.querySelectorAll('.qzopt').forEach((x,j)=>x.setAttribute('aria-pressed',String(j===k)));});
+      box.append(b);});
+    return box;
+  }
+  if(q.fields){
+    const vals=Array.isArray(r)?r.slice():q.fields.map(()=>'');
+    return el('div',{class:'qzfields'},q.fields.map((f,k)=>{const s=el('select',{class:'qzsel','aria-label':f.label,disabled:locked});
+      s.append(el('option',{value:''},f.label+'…'));f.options.forEach(([v,l])=>{const o=el('option',{value:v},l);if(vals[k]===v)o.selected=true;s.append(o);});
+      s.addEventListener('change',()=>{vals[k]=s.value;set(vals.slice());});return el('label',{class:'qzfield'},el('span',{class:'fl'},f.label),s);}));
+  }
+  if(q.pad){
+    if(locked){const st=el('div',{class:'staff qzstaff'});requestAnimationFrame(()=>draw(st,q.respAbc(r),{paddingtop:14,paddingbottom:10}));return el('div',{},el('p',{class:'hint'},'Ta réponse :'),st);}
+    return makeQzPad(q,r,set).el;
+  }
+  if(q.rhy){
+    if(locked){const st=el('div',{class:'staff qzstaff'});requestAnimationFrame(()=>draw(st,q.respAbc(r),{paddingtop:10,paddingbottom:6}));return el('div',{},el('p',{class:'hint'},'Ta réponse :'),st);}
+    return makeQzRhy(q,r,set);
+  }
+  /* réponse courte */
+  const inp=el('input',{type:'text',class:'qzin qzshort',placeholder:q.ph||'Ta réponse',autocomplete:'off',autocapitalize:'none',spellcheck:'false',disabled:locked,inputmode:q.num?'decimal':'text'});
+  inp.value=r||'';inp.addEventListener('input',()=>set(inp.value));
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();if(QZ.i<QZ.test.qs.length-1)qzGo(QZ.i+1);}});
+  const ins=ch=>{const a=inp.selectionStart??inp.value.length,b=inp.selectionEnd??a;inp.value=inp.value.slice(0,a)+ch+inp.value.slice(b);inp.focus();inp.setSelectionRange(a+1,a+1);set(inp.value);};
+  return el('div',{class:'qzshortbox'},inp,locked||q.num?null:el('div',{class:'qzsym'},el('button',{type:'button',class:'btn quiet sq',title:'Dièse',onclick:()=>ins('♯')},'♯'),el('button',{type:'button',class:'btn quiet sq',title:'Bémol',onclick:()=>ins('♭')},'♭')),
+    locked?null:el('p',{class:'hint'},q.hint||(q.num?'Écris un nombre.':'Les accents et les majuscules ne comptent pas. Tu peux écrire # pour dièse et b pour bémol.')));
+}
+/* portée où l'on pose des notes (rondes) */
+function makeQzPad(q,resp,onChange){
+  const P=q.pad,notes=(Array.isArray(resp)?resp:[]).map(n=>Object.assign({},n));let acc=null;
+  const staff=el('div',{class:'staff qzpad',tabindex:'0','aria-label':'Portée : touche une ligne ou un interligne pour poser une note'});
+  const tag=el('div',{class:'edtag',hidden:true}),wrap=el('div',{class:'edwrap'},staff,tag);
+  const accBtns=[[1,'♯','Dièse'],[-1,'♭','Bémol'],[0,'♮','Bécarre']].map(([a,g,n])=>el('button',{class:'edbtn edtog edacc',type:'button','data-a':a,title:`${n} pour la prochaine note`,onclick:()=>{acc=acc===a?null:a;paint();}},el('b',{},g),el('small',{},n)));
+  const info=el('p',{class:'edinfo'});
+  const paint=()=>{accBtns.forEach(b=>b.setAttribute('aria-pressed',String(acc===+b.dataset.a)));
+    info.textContent=P.mode==='chord'?`Touche la portée pour ajouter une note (toutes empilées). Touche une note posée pour l'enlever.${notes.length?' Notes : '+notes.slice().sort((a,b)=>dia(a)-dia(b)).map(nn).join(' – '):''}`
+      :P.mode==='seq'?`Touche la portée pour ajouter les notes de gauche à droite (${notes.length}/${P.max||8}).`:'Touche la portée à la hauteur voulue. Choisis d\'abord ♯ ou ♭ si la note est altérée.';};
+  let svg=null;const render=()=>{draw(staff,P.build(notes).replace('X:1\n','X:1\n%%stretchlast 1\n'),{paddingtop:20,paddingbottom:20});svg=staff.querySelector('svg');};
+  const commit=()=>{render();paint();onChange(notes.map(n=>({L:n.L,oct:n.oct,alt:n.alt})));};
+  function hit(e){
+    if(!svg)return null;const st=svg.querySelector('.abcjs-staff');if(!st)return null;const r=st.getBoundingClientRect(),step=r.height/8;
+    const k=Math.round((e.clientY-r.top)/step);if(k<-6||k>14)return null;const d=STAFF_TOP[P.clef]-k;return{d,y:r.top+k*step,step};
+  }
+  staff.addEventListener('pointermove',e=>{const h=hit(e);let g=svg&&svg.querySelector('.edghost');
+    if(!h){tag.hidden=true;if(g)g.remove();return;}
+    const n=fromDia(h.d,acc==null?0:acc),wr=wrap.getBoundingClientRect();tag.hidden=false;tag.textContent=nn(n);tag.style.left=(e.clientX-wr.left+14)+'px';tag.style.top=(h.y-wr.top-12)+'px';
+    const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=h.y;const ctm=svg.getScreenCTM();if(!ctm)return;const p=pt.matrixTransform(ctm.inverse()),sc=ctm.a||1;
+    if(!g){g=document.createElementNS('http://www.w3.org/2000/svg','ellipse');g.setAttribute('class','edghost');svg.append(g);}
+    g.setAttribute('cx',p.x);g.setAttribute('cy',p.y);g.setAttribute('rx',h.step*.62/sc);g.setAttribute('ry',h.step*.45/sc);});
+  staff.addEventListener('pointerleave',()=>{tag.hidden=true;const g=svg&&svg.querySelector('.edghost');if(g)g.remove();});
+  staff.addEventListener('click',e=>{
+    if(typeof HELP!=='undefined'&&HELP.on)return;const h=hit(e);if(!h)return;
+    const n=fromDia(h.d,acc==null?0:acc);if(acc===0)n.nat=true;
+    if(P.mode==='one'){notes.length=0;notes.push(n);}
+    else if(P.mode==='chord'){const k=notes.findIndex(x=>dia(x)===h.d);if(k>=0){if(acc==null)notes.splice(k,1);else notes[k]=n;}else if(notes.length<(P.max||4))notes.push(n);else{feedback(`Au plus ${P.max||4} notes.`,'bad');return;}}
+    else{if(notes.length>=(P.max||8)){feedback('La portée est pleine : efface une note avant d\'en ajouter.','bad');return;}notes.push(n);}
+    feedback('');acc=null;A.init();A.note(noteMidi(n),A.ctx.currentTime+.01,.5,.4,A.out);commit();
+  });
+  const tools=el('div',{class:'toolbar qzpadtools'},btn('Effacer la dernière',()=>{notes.pop();commit();}),btn('Tout effacer',()=>{notes.length=0;commit();}),
+    btn('▶ Écouter',()=>{const g=(P.given||[]).map(noteMidi),s=notes.slice().sort((a,b)=>P.mode==='seq'?0:dia(a)-dia(b)).map(noteMidi);if(P.mode==='chord'){A.init();stop();run({items:[...g.map((m,i)=>({u:i,d:1,midi:m})),...(s.length?[{u:g.length,d:2,chord:s}]:[])],us:.7,endU:g.length+2});}else{const all=[...g,...s];if(all.length){A.init();stop();run({items:all.map((m,i)=>({u:i,d:1,midi:m})),us:.55,endU:all.length});}}}));
+  const elx=el('div',{class:'qzpadbox'},el('div',{class:'edpal'},el('div',{class:'edgrp'},...accBtns)),wrap,info,tools);
+  requestAnimationFrame(()=>{render();paint();});
+  return{el:elx};
+}
+/* compléter une mesure : éditeur de rythme, figures données verrouillées */
+function makeQzRhy(q,resp,onChange){
+  const R=q.rhy,me=METERS[R.meter];
+  const ex={kind:'rhy',meter:me,measures:1,tempo:72,key:KEYS.C,clef:'treble',events:[]};
+  const E=makeNoteEditor({mode:'rhy',ex,onChange:()=>onChange(E.evs.slice(G).map(e=>({dur:e.dur,rest:!!e.rest})))});
+  const G=R.given.length;E.evs.push(...R.given.map(g=>({dur:g.dur,rest:!!g.rest})));
+  if(Array.isArray(resp))E.evs.push(...resp.map(e=>({dur:e.dur,rest:!!e.rest})));
+  const u=E.undo;E.undo=()=>{if(E.evs.length>G)u();};E.clear=()=>{E.evs.length=G;E.render();onChange([]);};
+  requestAnimationFrame(()=>E.render());
+  S.keyHandler=e=>E.handleKey(e);
+  return el('div',{class:'qzrhy edbox'},E.palette,E.wrap,el('p',{class:'hint'},`Choisis une figure (ou active « Silence »), puis touche la portée pour l'ajouter après les figures déjà écrites.`),
+    el('div',{class:'toolbar qzpadtools'},btn('Effacer la dernière',()=>E.undo()),btn('Tout effacer',()=>E.clear()),btn('▶ Écouter',()=>E.play())));
+}
+
+/* ---------- résultat ---------- */
+function qzResultView(){
+  const t=QZ.test,N=t.qs.length,sc=qzScore(t),pc=Math.round(100*sc/N);
+  const msg=pc>=90?'Excellent travail !':pc>=75?'Très bien !':pc>=60?'C\'est un bon début. Revois les notions manquées.':'Continue de pratiquer : revois les notions ci-dessous dans la bibliothèque.';
+  const rows=QZ_SUBJ.map(s=>{const qs=t.qs.map((q,i)=>[q,i]).filter(([q])=>q.subj===s.id);if(!qs.length)return null;const ok=qs.filter(([q,i])=>q.check(t.resp[i])).length;
+    return el('tr',{},el('td',{},s.t),el('td',{},`${ok} / ${qs.length}`),el('td',{},el('span',{class:'qzbar'},el('i',{style:`width:${Math.round(100*ok/qs.length)}%`}))));}).filter(Boolean);
+  const out=el('div',{class:'qzdeliver'});
+  const list=el('ol',{class:'qzlist'},t.qs.map((q,i)=>{const ok=q.check(t.resp[i]);return el('li',{},el('button',{type:'button',class:'qzrow '+(ok?'ok':'bad'),onclick:()=>{QZ.view='q';qzGo(i);}},
+    el('span',{class:'qzmark'},ok?'✓':'✗'),el('span',{class:'qzrt'},el('small',{},`Question ${i+1} · ${qzSubjLabel(q)}`),q.prompt)));}));
+  return el('div',{class:'qzwrap'},
+    el('div',{class:'qzcard qzres'},
+      el('p',{class:'eyebrow'},(t.name?t.name+' · ':'')+qzDate(t.date)),
+      el('div',{class:'qzscore'},el('b',{},`${sc} / ${N}`),el('span',{},`${pc} %`)),
+      el('p',{class:'qzmsg'},msg),
+      el('table',{class:'lt qztab'},el('tr',{},el('th',{},'Sujet'),el('th',{},'Réussite'),el('th',{},'')),rows),
+      el('div',{class:'qzbtns'},
+        btn('Créer le PDF de mes résultats',async ev=>{await qzMakePdf(ev.currentTarget,out,()=>qzPdfResult(t),`MusicDEV-resultats-${(t.name||'eleve').replace(/[^\p{L}\p{N}]+/gu,'-')}-${new Date(t.date).toISOString().slice(0,10)}.pdf`);},'primary'),
+        btn('Revoir mes réponses',()=>{QZ.view='q';qzGo(0);}),
+        btn('Nouveau questionnaire',()=>{QZ.view='start';qzRender();},'quiet')),
+      out),
+    el('div',{class:'qzcard'},el('h3',{},'Détail des questions'),el('p',{class:'hint'},'Touche une question pour voir ta réponse, la bonne réponse et un lien vers la notion.'),list));
+}
+
+/* ---------- PDF : création et partage ---------- */
+async function qzMakePdf(button,out,build,fileName){
+  const lab=button.textContent;button.disabled=true;button.textContent='Création du PDF…';out.replaceChildren(el('p',{class:'hint'},'Préparation des pages…'));
+  try{const blob=await build();qzDeliver(out,blob,fileName);}
+  catch(e){console.error(e);out.replaceChildren(el('p',{class:'qzwarn'},'Le PDF n\'a pas pu être créé : '+(e&&e.message||e)));}
+  finally{button.disabled=false;button.textContent=lab;}
+}
+function qzDeliver(out,blob,fileName){
+  const url=URL.createObjectURL(blob),file=new File([blob],fileName,{type:'application/pdf'});
+  const canShare=!!(navigator.canShare&&navigator.share&&(()=>{try{return navigator.canShare({files:[file]});}catch(e){return false;}})());
+  const kb=Math.max(1,Math.round(blob.size/1024));
+  out.replaceChildren(el('div',{class:'qzpdfready'},
+    el('p',{},el('b',{},'PDF prêt'),` · ${fileName} · ${kb>1024?(kb/1024).toFixed(1).replace('.',',')+' Mo':kb+' ko'}`),
+    el('div',{class:'qzbtns'},
+      canShare?btn('Partager (courriel, imprimer, enregistrer…)',async()=>{try{await navigator.share({files:[file],title:fileName});}catch(e){}},'primary'):null,
+      el('a',{class:'btn'+(canShare?'':' primary'),href:url,download:fileName},'Télécharger le PDF'),
+      btn('Ouvrir pour imprimer',()=>{const w=window.open(url,'_blank');if(!w)location.href=url;}))));
+}
+
+/* ========== MODULE : Tester mes connaissances — PDF (pages dessinées puis assemblées en PDF) ========== */
+const PDF_W=816,PDF_H=1056,PDF_MX=60,PDF_MT=54,PDF_MB=64,PDF_S=2.4;      /* format lettre, en px CSS (96 ppp) */
+const PDF_CW=PDF_W-2*PDF_MX;
+const PF='"Atkinson Hyperlegible","Helvetica Neue",Arial,"Apple Symbols","Noto Music","Segoe UI Symbol",sans-serif';
+const PFT='Lora,Georgia,"Times New Roman",serif';
+async function pdfFonts(){try{await Promise.all(['400 14px "Atkinson Hyperlegible"','700 14px "Atkinson Hyperlegible"','700 22px Lora'].map(f=>document.fonts.load(f)));}catch(e){}}
+/* partition ABC -> image nette (SVG agrandi) */
+async function pdfStaff(abc,width,scale=.82){
+  if(!HAS_ABC())return null;
+  const box=document.createElement('div');box.style.cssText=`position:fixed;left:-20000px;top:0;width:${width}px;color:#000;background:#fff`;document.body.append(box);
+  try{
+    ABCJS.renderAbc(box,abc,{add_classes:false,staffwidth:Math.max(60,width/scale-16),scale,paddingleft:2,paddingright:2,paddingtop:4,paddingbottom:2,foregroundColor:'#000'});
+    const svg=box.querySelector('svg');if(!svg)return null;
+    const bb=svg.getBoundingClientRect();const w=parseFloat(svg.getAttribute('width'))||bb.width,h=parseFloat(svg.getAttribute('height'))||bb.height;
+    svg.setAttribute('xmlns','http://www.w3.org/2000/svg');if(!svg.getAttribute('viewBox'))svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
+    svg.removeAttribute('style');svg.setAttribute('width',String(w*PDF_S));svg.setAttribute('height',String(h*PDF_S));
+    const xml=new XMLSerializer().serializeToString(svg);const img=new Image();
+    await new Promise((res,rej)=>{img.onload=res;img.onerror=()=>rej(new Error('image de portée'));img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(xml);});
+    return{img,w,h};
+  }finally{box.remove();}
+}
+/* texte */
+const pctx=(()=>{let c=null;return()=>c||(c=document.createElement('canvas').getContext('2d'));})();
+function pfont(x,size,w='400',fam=PF){x.font=`${w} ${size}px ${fam}`;}
+function pwrap(text,size,maxW,w='400',fam=PF){
+  const x=pctx();pfont(x,size,w,fam);const out=[];
+  for(const para of String(text).split('\n')){let line='';for(const word of para.split(/\s+/)){const t=line?line+' '+word:word;if(x.measureText(t).width>maxW&&line){out.push(line);line=word;}else line=t;}out.push(line);}
+  return out;
+}
+/* bloc = {h, draw(x,y)} ; mise en page en deux temps (mesure puis dessin) pour numéroter les pages */
+function blkText(text,{size=13,w='400',fam=PF,color='#111',indent=0,lh=1.38,gap=0,maxW=PDF_CW-indent}={}){
+  const lines=pwrap(text,size,maxW,w,fam),L=size*lh;
+  return{h:lines.length*L+gap,draw(x,y){pfont(x,size,w,fam);x.fillStyle=color;lines.forEach((s,i)=>x.fillText(s,PDF_MX+indent,y+size+i*L));}};
+}
+function blkImg(st,{indent=0,maxW=PDF_CW-indent,gap=4}={}){
+  if(!st)return{h:0,draw(){}};const sc=Math.min(1,maxW/st.w),w=st.w*sc,h=st.h*sc;
+  return{h:h+gap,draw(x,y){x.drawImage(st.img,PDF_MX+indent,y,w,h);}};
+}
+function blkGroup(parts,gap=0){return{h:parts.reduce((a,p)=>a+p.h,0)+gap,draw(x,y){let yy=y;for(const p of parts){p.draw(x,yy);yy+=p.h;}}};}
+function blkRule(gap=10){return{h:gap*2,draw(x,y){x.strokeStyle='#bbb';x.lineWidth=1;x.beginPath();x.moveTo(PDF_MX,y+gap);x.lineTo(PDF_W-PDF_MX,y+gap);x.stroke();}};}
+function blkLine(label,{indent=28,len=300,size=12.5}={}){
+  return{h:size*2.4,draw(x,y){pfont(x,size);x.fillStyle='#111';const by=y+size*1.6;x.fillText(label,PDF_MX+indent,by);const lw=x.measureText(label).width;
+    x.strokeStyle='#555';x.lineWidth=.8;x.beginPath();x.moveTo(PDF_MX+indent+lw+6,by+2);x.lineTo(PDF_MX+indent+lw+6+len,by+2);x.stroke();}};
+}
+function blkNum(n,mark){ /* numéro (et ✓ / ✗) dessiné dans la marge de la question */
+  return{h:0,draw(x,y){pfont(x,13,'700');x.fillStyle='#111';x.fillText(n+'.',PDF_MX,y+13);
+    if(mark!=null){pfont(x,16,'700');x.fillStyle=mark?'#1C7F4F':'#C2352E';x.fillText(mark?'✓':'✗',PDF_MX-22,y+14);}}};
+}
+async function pdfPages(blocks,{footer}){
+  /* pagination */
+  const pages=[[]];let y=PDF_MT;const maxY=PDF_H-PDF_MB;
+  for(const b of blocks){
+    if(b.pageBreak){if(pages[pages.length-1].length){pages.push([]);}y=PDF_MT;continue;}
+    if(y+b.h>maxY&&pages[pages.length-1].length){pages.push([]);y=PDF_MT;}
+    pages[pages.length-1].push([b,y]);y+=b.h;
+  }
+  const jpgs=[];
+  for(let p=0;p<pages.length;p++){
+    const c=document.createElement('canvas');c.width=Math.round(PDF_W*PDF_S);c.height=Math.round(PDF_H*PDF_S);
+    const x=c.getContext('2d');x.scale(PDF_S,PDF_S);x.fillStyle='#fff';x.fillRect(0,0,PDF_W,PDF_H);x.textBaseline='alphabetic';
+    for(const[b,yy]of pages[p])b.draw(x,yy);
+    pfont(x,9.5);x.fillStyle='#777';x.fillText(footer,PDF_MX,PDF_H-30);const pg=`Page ${p+1} de ${pages.length}`;x.fillText(pg,PDF_W-PDF_MX-x.measureText(pg).width,PDF_H-30);
+    const blob=await new Promise(res=>c.toBlob(res,'image/jpeg',.9));c.width=c.height=0;
+    jpgs.push({bytes:new Uint8Array(await blob.arrayBuffer()),w:Math.round(PDF_W*PDF_S),h:Math.round(PDF_H*PDF_S)});
+  }
+  return pdfAssemble(jpgs);
+}
+/* petit écrivain PDF : une image JPEG pleine page par page */
+function pdfAssemble(pages,title='MusicDEV'){
+  const enc=new TextEncoder(),parts=[],offs=[];let pos=0;
+  const put=x=>{const b=typeof x==='string'?enc.encode(x):x;parts.push(b);pos+=b.length;};
+  const obj=(n,body)=>{offs[n]=pos;put(`${n} 0 obj\n`);body();put('\nendobj\n');};
+  put('%PDF-1.4\n');put(new Uint8Array([37,226,227,207,211,10]));
+  const n=pages.length,kids=pages.map((_,i)=>`${3+i*3} 0 R`).join(' ');
+  obj(1,()=>put('<< /Type /Catalog /Pages 2 0 R >>'));
+  obj(2,()=>put(`<< /Type /Pages /Kids [${kids}] /Count ${n} >>`));
+  pages.forEach((pg,i)=>{
+    const P=3+i*3,C=P+1,I=P+2,cs=`q 612 0 0 792 0 0 cm /Im0 Do Q`;
+    obj(P,()=>put(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /XObject << /Im0 ${I} 0 R >> >> /Contents ${C} 0 R >>`));
+    obj(C,()=>put(`<< /Length ${cs.length} >>\nstream\n${cs}\nendstream`));
+    obj(I,()=>{put(`<< /Type /XObject /Subtype /Image /Width ${pg.w} /Height ${pg.h} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${pg.bytes.length} >>\nstream\n`);put(pg.bytes);put('\nendstream');});
+  });
+  const info=3+n*3;const esc=s=>s.replace(/[()\\]/g,'\\$&').replace(/[^\x20-\x7e]/g,'');
+  obj(info,()=>put(`<< /Title (${esc(title)}) /Producer (MusicDEV) >>`));
+  const xref=pos;let x=`xref\n0 ${info+1}\n0000000000 65535 f \n`;for(let k=1;k<=info;k++)x+=String(offs[k]).padStart(10,'0')+' 00000 n \n';
+  put(x+`trailer\n<< /Size ${info+1} /Root 1 0 R /Info ${info} 0 R >>\nstartxref\n${xref}\n%%EOF\n`);
+  return new Blob(parts,{type:'application/pdf'});
+}
+/* ---------- contenu des questions ---------- */
+const QW=PDF_CW-28;   /* largeur utile à droite du numéro */
+async function pdfQuestion(q,k,{mode,resp}){
+  /* mode : 'blank' (questionnaire vierge) ou 'result' (copie corrigée de l'élève) */
+  const parts=[],res=mode==='result',ok=res?q.check(resp):null;
+  parts.push(blkNum(k+1,res?ok:null));
+  parts.push(blkText(q.prompt+(q.fmt==='listen'?' (question d\'écoute)':''),{size:13,w:'700',indent:28,maxW:QW,gap:4}));
+  if(q.abc&&!q.rhy)parts.push(blkImg(await pdfStaff(q.abc,q.small?220:Math.min(QW,520)),{indent:28}));
+  if(!res){
+    if(q.opts){
+      if(q.opts.some(o=>o.abc)){
+        const cols=Math.min(4,q.opts.length),cw=(QW-(cols-1)*12)/cols,imgs=await Promise.all(q.opts.map(o=>pdfStaff(o.abc,o.small?Math.min(cw,150):cw-20,.7)));
+        let rowH=0;imgs.forEach(im=>{if(im)rowH=Math.max(rowH,im.h*Math.min(1,(cw-20)/im.w));});
+        parts.push({h:rowH+16,draw(x,y){imgs.forEach((im,i)=>{const cx=PDF_MX+28+i*(cw+12);pfont(x,12.5,'700');x.fillStyle='#111';
+          x.beginPath();x.arc(cx+6,y+9,5.5,0,Math.PI*2);x.strokeStyle='#333';x.lineWidth=1;x.stroke();x.fillText(QA[i],cx+16,y+13);
+          if(im){const s=Math.min(1,(cw-20)/im.w);x.drawImage(im.img,cx+4,y+18,im.w*s,im.h*s);}});}});
+      }else q.opts.forEach((o,i)=>{const t=blkText(`${QA[i]})  ${o.t}`,{size:12.5,indent:48,maxW:QW-24,lh:1.35});
+        parts.push({h:t.h+3,draw(x,y){x.beginPath();x.arc(PDF_MX+38,y+8.5,5.5,0,Math.PI*2);x.strokeStyle='#333';x.lineWidth=1;x.stroke();t.draw(x,y);}});});
+    }else if(q.pad){parts.push(blkImg(await pdfStaff(q.paperAbc,q.pad.mode==='seq'?QW:Math.min(QW,340),.95),{indent:28}));parts.push(blkText('Écris ta réponse sur la portée.',{size:11,color:'#555',indent:28}));}
+    else if(q.rhy){parts.push(blkImg(await pdfStaff(q.paperAbc,Math.min(QW,460),.95),{indent:28}));parts.push(blkText('Ajoute tes figures dans l\'espace vide de la mesure.',{size:11,color:'#555',indent:28}));}
+    else if(q.fields)parts.push(blkLine(`Réponse (${q.fields.map(f=>f.label.toLowerCase()).join(' et ')}) :`,{len:220}));
+    else parts.push(blkLine('Réponse :',{len:260}));
+  }else{
+    if(q.rhy)parts.push(blkImg(await pdfStaff(q.paperAbc,Math.min(QW,460)),{indent:28}));
+    const has=qzAnswered(q,resp);
+    if((q.pad||q.rhy)&&has){parts.push(blkText('Ta réponse :',{size:12,indent:28,color:'#333'}));parts.push(blkImg(await pdfStaff(q.respAbc(resp),q.pad&&q.pad.mode==='seq'?QW:Math.min(QW,340)),{indent:28}));}
+    else parts.push(blkText('Ta réponse : '+(has?q.respText(resp):'(aucune réponse)'),{size:12.5,indent:28,color:'#222',maxW:QW}));
+    if(!ok){parts.push(blkText('Bonne réponse : '+q.answerText,{size:12.5,w:'700',indent:28,color:'#1C7F4F',maxW:QW}));
+      if(q.answerAbc&&(q.pad||q.rhy))parts.push(blkImg(await pdfStaff(q.answerAbc,q.pad&&q.pad.mode==='seq'?QW:Math.min(QW,340)),{indent:28}));}
+  }
+  return blkGroup(parts,18);
+}
+const pdfSubjHead=id=>blkText(QZ_SUBJ.find(s=>s.id===id).t.toUpperCase(),{size:10.5,w:'700',color:'#2F5B53',gap:6});
+function pdfHeader(title,lines){
+  const parts=[blkText(title,{size:22,w:'700',fam:PFT,gap:6})];
+  lines.forEach(l=>parts.push(typeof l==='string'?blkText(l,{size:11.5,color:'#444',gap:2}):l));
+  parts.push(blkRule(8));return blkGroup(parts,4);
+}
+const qzSubjSummary=(cfg,paper)=>QZ_SUBJ.filter(s=>!(paper&&s.listen)).map(s=>{const on=s.subs.filter(([id])=>cfg.topics.includes(id));return !on.length?null:on.length===s.subs.length?s.t:`${s.t} (${on.map(x=>x[1].toLowerCase()).join(', ')})`;}).filter(Boolean).join(' · ');
+async function qzPdfBlank(qs,cfg){
+  await pdfFonts();
+  const title=(QZ.title||'').trim()||'Évaluation de théorie musicale',lv=QZ_LEVELS[cfg.level-1][1];
+  const nameLine={h:30,draw(x,y){pfont(x,12.5);x.fillStyle='#111';const by=y+20;let cx=PDF_MX;
+    for(const[lab,len]of[['Nom :',250],['Groupe :',90],['Date :',120]]){x.fillText(lab,cx,by);const w=x.measureText(lab).width;x.strokeStyle='#555';x.lineWidth=.8;x.beginPath();x.moveTo(cx+w+6,by+2);x.lineTo(cx+w+6+len,by+2);x.stroke();cx+=w+len+26;}}};
+  const blocks=[pdfHeader(title,[nameLine,`${qs.length} questions · niveau ${lv.toLowerCase()} · Résultat : ______ / ${qs.length}`,'Sujets : '+qzSubjSummary(cfg,true),'Pour les questions à choix, coche la bonne réponse. Pour les questions sur la portée, écris directement sur la portée.'])];
+  let cur=null;
+  for(let k=0;k<qs.length;k++){const q=qs[k],b=await pdfQuestion(q,k,{mode:'blank'});
+    if(q.subj!==cur){cur=q.subj;blocks.push(blkGroup([pdfSubjHead(cur),b]));}else blocks.push(b);}
+  blocks.push({pageBreak:true});
+  blocks.push(pdfHeader('Corrigé',[title+` · ${qs.length} questions · niveau ${lv.toLowerCase()}`]));
+  /* corrigé sur deux colonnes ; les réponses avec portée prennent toute la largeur */
+  const half=PDF_CW/2-10;let pend=null;
+  const flush=()=>{if(pend){blocks.push(pend.blk);pend=null;}};
+  for(let k=0;k<qs.length;k++){const q=qs[k],staff=q.answerAbc&&(q.pad||q.rhy);
+    if(staff){flush();const parts=[blkNum(k+1,null),blkText(q.answerText,{size:12,indent:28,maxW:QW})];
+      parts.push(blkImg(await pdfStaff(q.answerAbc,q.pad&&q.pad.mode==='seq'?Math.min(QW,460):Math.min(QW,260),.75),{indent:28}));blocks.push(blkGroup(parts,8));continue;}
+    const t=blkText(q.answerText,{size:12,indent:28,maxW:half-28});const cell={h:t.h,draw(x,y,dx=0){x.save();x.translate(dx,0);blkNum(k+1,null).draw(x,y);t.draw(x,y);x.restore();}};
+    if(!pend){pend={a:cell,blk:{h:cell.h+8,draw(x,y){cell.draw(x,y);}}};}
+    else{const a=pend.a;blocks.push({h:Math.max(a.h,cell.h)+8,draw(x,y){a.draw(x,y);cell.draw(x,y,PDF_CW/2+10);}});pend=null;}}
+  flush();
+  return pdfPages(blocks,{footer:`MusicDEV · ${title}`});
+}
+async function qzPdfResult(t){
+  await pdfFonts();
+  const N=t.qs.length,sc=qzScore(t),pc=Math.round(100*sc/N),lv=QZ_LEVELS[t.cfg.level-1][1];
+  const by=QZ_SUBJ.map(s=>{const qs=t.qs.map((q,i)=>[q,i]).filter(([q])=>q.subj===s.id);if(!qs.length)return null;return `${s.t} : ${qs.filter(([q,i])=>q.check(t.resp[i])).length}/${qs.length}`;}).filter(Boolean).join(' · ');
+  const scoreBox={h:58,draw(x,y){x.fillStyle='#EEF5F2';x.fillRect(PDF_MX,y+4,PDF_CW,48);pfont(x,24,'700',PFT);x.fillStyle='#2F5B53';x.fillText(`Résultat : ${sc} / ${N}`,PDF_MX+16,y+37);
+    pfont(x,18,'700');const s=`${pc} %`;x.fillText(s,PDF_W-PDF_MX-16-x.measureText(s).width,y+36);}};
+  const blocks=[pdfHeader('Tester mes connaissances : résultats',[(t.name?`Nom : ${t.name} · `:'')+`Date : ${qzDate(t.date)} · niveau ${lv.toLowerCase()}`,scoreBox,by])];
+  let cur=null;
+  for(let k=0;k<N;k++){const q=t.qs[k],b=await pdfQuestion(q,k,{mode:'result',resp:t.resp[k]});
+    if(q.subj!==cur){cur=q.subj;blocks.push(blkGroup([pdfSubjHead(cur),b]));}else blocks.push(b);}
+  return pdfPages(blocks,{footer:`MusicDEV · Tester mes connaissances${t.name?' · '+t.name:''}`});
+}
+
 /* ---------- démarrage ---------- */
 document.addEventListener('keydown',e=>{
   if(e.repeat||e.metaKey||e.ctrlKey||e.altKey)return;
@@ -2930,7 +4145,7 @@ $('#setbtn').addEventListener('click',()=>{const p=$('#settings'),open=p.hidden,
 let rz;window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{const M=MOD[S.mod];if(S.ex&&M.redraw)M.redraw();},200);});
 (function boot(){
   const lb=(location.hash||'').match(/^#?bt(?:-([a-z0-9-]+))?$/);if(lb){if(lb[1]&&LIB_TOPICS[lb[1]])S.lib.topic=lb[1];openModule('bt');return;}
-  const m=(location.hash||'').match(/^#?(dm|dr|iv|pc|ln|lm|lr|so|la)(?:-([A-Za-z0-9_-]+))?$/);let shared=null;
+  const m=(location.hash||'').match(/^#?(dm|dr|iv|pc|ln|lm|lr|so|la|tq)(?:-([A-Za-z0-9_-]+))?$/);let shared=null;
   if(m&&m[2]){try{shared=dec(m[2]);}catch(e){shared=null;}}
   openModule(m?m[1]:'dm',shared);
 })();
