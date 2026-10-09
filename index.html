@@ -1521,7 +1521,7 @@ const P={sess:null};
 const SILENT_WAV='data:audio/wav;base64,UklGRvQHAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YdAHAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgA==';
 let UNMUTE=null;
 function qzUnmute(){
-  try{if(navigator.audioSession){if(!MIC.on&&!(typeof TS!=='undefined'&&TS.on)&&navigator.audioSession.type!=='playback')navigator.audioSession.type='playback';return;}}catch(e){}
+  try{if(navigator.audioSession){if(!MIC.on&&!(typeof TS!=='undefined'&&TS.on)&&!(typeof RS!=='undefined'&&(RS.stream||RS.on))&&navigator.audioSession.type!=='playback')navigator.audioSession.type='playback';return;}}catch(e){}
   if(UNMUTE||!/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)||!('ontouchend' in document))return;
   try{UNMUTE=new Audio();UNMUTE.src=SILENT_WAV;UNMUTE.loop=true;UNMUTE.setAttribute('playsinline','');UNMUTE.setAttribute('x-webkit-airplay','deny');UNMUTE.preload='auto';
     const p=UNMUTE.play();if(p&&p.catch)p.catch(()=>{UNMUTE=null;});}catch(e){UNMUTE=null;}
@@ -4897,8 +4897,10 @@ async function recStart(){
   RS.confirmNew=false;
   const c=A.init();
   let stream;
+  if(typeof qzSessionForMic==='function')qzSessionForMic(true);
   try{stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});}
-  catch(e){const n=e&&e.name;feedback(n==='NotAllowedError'||n==='SecurityError'?'Le micro a été refusé. Autorise-le dans les réglages de l\'appareil ou du navigateur, puis réessaie.':n==='NotFoundError'?'Aucun micro détecté.':'Le micro n\'est pas disponible ici.','bad');return;}
+  catch(e0){try{stream=await navigator.mediaDevices.getUserMedia({audio:true});}catch(e){stream=null;var err=e;}}
+  if(!stream){const e=err;if(typeof qzSessionForMic==='function')qzSessionForMic(false);const n=e&&e.name;feedback(n==='NotAllowedError'||n==='SecurityError'?'Le micro a été refusé. Autorise-le dans les réglages de l\'appareil ou du navigateur, puis réessaie.':n==='NotFoundError'?'Aucun micro détecté.':'Le micro n\'est pas disponible ici.'+(n?' ('+n+')':''),'bad');return;}
   feedback('');
   await recDelete(true);
   RS.stream=stream;RS.src=c.createMediaStreamSource(stream);RS.an=c.createAnalyser();RS.an.fftSize=2048;RS.buf=new Float32Array(RS.an.fftSize);RS.src.connect(RS.an);
@@ -4934,6 +4936,7 @@ function recStop(){
   recRelease();recUi();
 }
 function recRelease(){
+  if(RS.stream&&typeof qzSessionForMic==='function')qzSessionForMic(false);
   cancelAnimationFrame(RS.raf);RS.raf=0;
   if(RS.stream)RS.stream.getTracks().forEach(t=>t.stop());try{RS.src&&RS.src.disconnect();}catch(e){}
   Object.assign(RS,{stream:null,src:null,an:null});
