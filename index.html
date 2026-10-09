@@ -4608,8 +4608,8 @@ function tnStringsMark(k,ok,state){const u=TS.ui;if(!u||!u.head)return;
 function tnHead(s){
   const NS='http://www.w3.org/2000/svg',mk=(t,a,...k)=>{const e=document.createElementNS(NS,t);for(const[x,v]of Object.entries(a))e.setAttribute(x,v);k.forEach(c=>e.append(c));return e;};
   const notes=s.notes,n=notes.length,banjo=TN.inst==='banjo',hs=banjo?[1,2,3,4]:notes.map((_,i)=>i),m=hs.length,Lc=Math.ceil(m/2);
-  /* vue de face : la corde la plus près du centre va à la cheville la plus haute, la corde extérieure à la cheville près du sillet */
-  const left=hs.slice(0,Lc).reverse(),right=hs.slice(Lc),rows=Math.max(left.length,right.length);
+  /* vue de face : les cordes extérieures (mi grave, mi aigu) vont aux chevilles du haut, les cordes du centre (ré, sol) aux chevilles près du sillet */
+  const left=hs.slice(0,Lc),right=hs.slice(Lc).reverse(),rows=Math.max(left.length,right.length);
   const W=320,top=18,nut=rows===2?178:228,H=nut+86,svg=mk('svg',{viewBox:`0 0 ${W} ${H}`,class:'tnheadsvg',role:'img','aria-label':'Tête de l\'instrument : touche une cheville pour viser cette corde'});
   const sp=Math.min(17,96/Math.max(1,n-1)),nx=i=>W/2-(n-1)/2*sp+i*sp,nutL=nx(0)-12,nutR=nx(n-1)+12;
   const rowY=r=>top+30+r*((nut-top-50)/Math.max(1,rows-1||1));
@@ -4625,8 +4625,10 @@ function tnHead(s){
       mk('text',{x:px+15,y:py-12,class:'tnchk'},document.createTextNode('✓')));
     g.addEventListener('click',()=>{TS.lock=TS.lock===i&&!TN.learner?null:i;TS.hist=[];tnStringsMark(-1,false);if(TS.ui&&TS.ui.auto)TS.ui.auto.classList.toggle('on',TS.lock==null);tnGuide(null);});
     return g;};
-  left.forEach((i,r)=>svg.append(peg(i,40,rowY(r),[W/2-46,rowY(r)])));
-  right.forEach((i,r)=>svg.append(peg(i,W-40,rowY(r),[W/2+46,rowY(r)])));
+  /* les tiges s'écartent vers le haut, comme la tête : les cordes forment un éventail sans se croiser */
+  const off=r=>30+32*(rows-1-r)/Math.max(1,rows-1);
+  left.forEach((i,r)=>svg.append(peg(i,40,rowY(r),[W/2-off(r),rowY(r)])));
+  right.forEach((i,r)=>svg.append(peg(i,W-40,rowY(r),[W/2+off(r),rowY(r)])));
   if(banjo){const y=nut+58;svg.append(peg(0,40,y,[nx(0),y]));}
   return el('div',{class:'tnhead'},svg);
 }
