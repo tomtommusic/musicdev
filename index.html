@@ -850,6 +850,57 @@ main[data-kind="tools"] > .stand,main[data-kind="tools"] > #toolbar,main[data-ki
 .tnarrow{position:absolute;top:0;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:8px solid #FF5A4A;transform:translateX(-50%);transition:left .07s linear}
 .tnarrow.off{opacity:0}
 .tnwr{font:500 .7rem/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:#6FB79C;min-height:.7rem}
+/* tête d'instrument */
+.tnstrings{flex-direction:column;flex-wrap:nowrap;align-items:stretch;gap:10px}
+.tnhead{display:flex;justify-content:center}
+.tnheadsvg{width:100%;max-width:340px;height:auto;overflow:visible}
+.tnhs{fill:#3B2E22;stroke:#5A4636;stroke-width:1.5}
+.tnneck{fill:#2C2219}
+.tnnut{fill:#E9E3D7}
+.tnstrg{stroke:#9A9488;stroke-width:1.6}
+.tnshaft{stroke:#7C7466;stroke-width:4;stroke-linecap:round}
+.tnpost{fill:#C9C1B2}
+.tnknob{fill:#2E3331;stroke:#56605B;stroke-width:1.5;transition:fill .15s,stroke .15s}
+.tnpegn{fill:#E8EFEA;font:700 13px var(--f-body);text-anchor:middle}
+.tnpegs{fill:#7C8A84;font:500 9px var(--f-mono);text-anchor:middle}
+.tnchk{fill:#10201B;font:700 11px var(--f-body);text-anchor:middle;opacity:0}
+.tnpeg{cursor:pointer;outline:none}
+.tnpeg:hover .tnknob,.tnpeg:focus-visible .tnknob{stroke:#9BE7C9}
+.tnpeg.lock .tnknob{stroke:#9BE7C9;stroke-width:3}
+.tnpeg.cur .tnstrg{stroke:#FFC46B;stroke-width:2.6}
+.tnpeg.cur .tnknob{fill:#3A4A44}
+.tnpeg.cur.high .tnstrg{stroke:#FF8A78}
+.tnpeg.cur.high .tnknob{fill:#5A2E28}
+.tnpeg.done .tnknob{fill:#2F6B57;stroke:#9BE7C9}
+.tnpeg.done .tnchk{opacity:1;fill:#9BE7C9}
+.tnpeg.cur.done:not(.high):not(.low) .tnstrg{stroke:#9BE7C9}
+.tnauto{align-self:center;border-radius:999px!important;padding:8px 16px!important}
+.tnlearn{display:flex;align-items:center;gap:6px;font:700 .8rem/1 var(--f-body);color:#CDE9DD;white-space:nowrap;cursor:pointer}
+.tnlearn input{accent-color:#9BE7C9;width:18px;height:18px}
+.tnguide{background:#10201B;border:1px solid #2F4A41;border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.tnguide.danger{border-color:#FF8A78;background:#3A1A16;animation:tnpulse 1s ease-in-out infinite alternate}
+@keyframes tnpulse{from{box-shadow:0 0 0 rgb(255 138 120/0)}to{box-shadow:0 0 18px rgb(255 138 120/.45)}}
+.tnguide.ok{border-color:#9BE7C9}
+.tngh{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline}
+.tngh b{font:700 1.05rem/1.2 var(--f-body);color:#E8EFEA}
+.tngh span{font:500 .75rem/1 var(--f-mono);color:#6FB79C}
+.tnladder{display:flex;gap:4px;justify-content:center;flex-wrap:nowrap;overflow-x:auto}
+.tnrung{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:38px;padding:6px 4px;border-radius:10px;background:#1C2A25;color:#9FB3AA;font:700 .85rem/1.1 var(--f-body)}
+.tnrung small{font:500 .6rem/1 var(--f-mono);margin-top:3px}
+.tnrung.tgt{outline:2px solid #9BE7C9;color:#E8EFEA}
+.tnrung.here.hi{background:#FF8A78;color:#2A0F0B}
+.tnrung.here.lo{background:#FFC46B;color:#2A1A05}
+.tnrung.here.ok{background:#9BE7C9;color:#10201B}
+.tnmsg{margin:0;font:700 1rem/1.4 var(--f-body);color:#E8EFEA;text-align:center}
+.tnguide.danger .tnmsg{color:#FFD2CA}
+.tngbtn{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.tngbtn .btn{background:#2E3331;color:#E8EFEA;border-color:#3A403D;box-shadow:none;font-size:.85rem;padding:7px 12px}
+@media (max-width:600px){.tntop{flex-wrap:wrap}.tnlevel{order:3;flex-basis:100%}.tnrung{min-width:32px}}
+.tnpanel,.tnstrings,.tnguide{min-width:0}
+.tnguide{overflow:hidden}
+.tnladder{max-width:100%;padding-bottom:2px;scrollbar-width:none}
+.tnladder::-webkit-scrollbar{display:none}
+@media (max-width:600px){.tnrung{min-width:30px;padding:5px 3px;font-size:.78rem}.tnmsg{font-size:.92rem}}
 </style>
 
 <div class="app">
@@ -4448,9 +4499,9 @@ const TUNINGS={
 const FR_SH=['do','do♯','ré','ré♯','mi','fa','fa♯','sol','sol♯','la','la♯','si'],FR_FL=['do','ré♭','ré','mi♭','mi','fa','sol♭','sol','la♭','la','si♭','si'];
 const TN_LEDS=[-50,-35,-25,-17,-11,-7,-4,0,4,7,11,17,25,35,50];
 const tnName=(m,fl)=>(fl?FR_FL:FR_SH)[((m%12)+12)%12];
-const TN_DEF={inst:'chroma',set:{},a4:440,tol:2};
+const TN_DEF={inst:'chroma',set:{},a4:440,tol:2,learner:false};
 const TN=tlLoad('atelier-tuner',TN_DEF);TN.set=Object.assign({},TN.set);
-const TS={on:false,stream:null,src:null,an:null,buf:null,timer:0,hist:[],lock:null,ui:null,needle:0,lastOk:0,okSince:0,ref:null};
+const TS={done:new Set(),adv:false,on:false,stream:null,src:null,an:null,buf:null,timer:0,hist:[],lock:null,ui:null,needle:0,lastOk:0,okSince:0,ref:null};
 const tnSave=()=>tlSave('atelier-tuner',TN);
 const midiHz=m=>TN.a4*Math.pow(2,(m-69)/12);
 function tnStrings(){const I=TUNINGS[TN.inst];if(!I.sets)return null;const k=TN.set[TN.inst]||I.sets[0][0];const s=I.sets.find(x=>x[0]===k)||I.sets[0];return{set:s,notes:s[2],flat:s[3]==='b',order:I.order};}
@@ -4514,7 +4565,7 @@ function tnShow(f,rms){
   const u=TS.ui;if(!u)return;
   u.level.style.width=Math.min(100,Math.round((rms||0)*900))+'%';
   const ledsOff=()=>u.leds.querySelectorAll('i').forEach(x=>x.className='');
-  if(!f){u.box.classList.add('idle');u.box.classList.remove('ok','low','high');u.note.textContent='–';u.oct.textContent='';u.cents.textContent=TS.on?'Joue une note':'';u.hz.textContent='';TS.okSince=0;ledsOff();u.arrow.classList.add('off');tnStringsMark(-1,false);return;}
+  if(!f){u.box.classList.add('idle');u.box.classList.remove('ok','low','high');u.note.textContent='–';u.oct.textContent='';u.cents.textContent=TS.on?'Joue une note':'';u.hz.textContent='';TS.okSince=0;ledsOff();u.arrow.classList.add('off');tnStringsMark(-1,false);tnGuide(null);return;}
   const tg=tnTarget(f),s=tnStrings(),c=tg.cents;
   u.box.classList.remove('idle');
   const shown=s?tg.midi:tg.midi-transp();u.note.textContent=tnName(shown,s&&s.flat);u.oct.textContent=String(Math.floor(shown/12)-1);
@@ -4534,9 +4585,63 @@ function tnShow(f,rms){
   ledsOff();const L=u.leds.querySelectorAll('i');
   if(Math.abs(c)<=TN.tol)L[TN_LEDS.indexOf(0)].className=stable?'ok':'near';
   else{let k=0,bd=1e9;TN_LEDS.forEach((v,i)=>{if(v===0)return;if(Math.sign(v)!==Math.sign(c))return;const d=Math.abs(v-Math.max(-50,Math.min(50,c)));if(d<bd){bd=d;k=i;}});L[k].className=Math.abs(c)>25?'far':'off2';}
-  tnStringsMark(tg.k,stable);
+  tnStringsMark(tg.k,stable,ok?'':c>0?'high':'low');tnGuide(tg,stable);
+  if(TN.learner&&stable&&s&&now-TS.okSince>1300&&!TS.adv){TS.adv=true;setTimeout(()=>{TS.adv=false;const n=s.notes.length;for(let j=1;j<=n;j++){const kk=((TS.lock||0)+j)%n;if(!TS.done.has(kk)){TS.lock=kk;TS.hist=[];TS.okSince=0;tnStringsMark(-1,false);tnGuide(null);return;}}},600);}
 }
-function tnStringsMark(k,ok){const u=TS.ui;if(!u||!u.strings)return;u.strings.querySelectorAll('button').forEach((b,i)=>{b.classList.toggle('cur',i===k);if(i===k&&ok)b.classList.add('done');});}
+function tnStringsMark(k,ok,state){const u=TS.ui;if(!u||!u.head)return;
+  u.head.querySelectorAll('[data-k]').forEach(g=>{const i=+g.dataset.k;g.classList.toggle('cur',i===k);g.classList.toggle('high',i===k&&state==='high');g.classList.toggle('low',i===k&&state==='low');g.classList.toggle('lock',i===TS.lock);if(i===k&&ok){g.classList.add('done');TS.done.add(i);}});}
+/* tête d'instrument dessinée : chevilles cliquables (viser une corde), corde active en couleur, ✓ quand elle est juste */
+function tnHead(s){
+  const NS='http://www.w3.org/2000/svg',mk=(t,a,...k)=>{const e=document.createElementNS(NS,t);for(const[x,v]of Object.entries(a))e.setAttribute(x,v);k.forEach(c=>e.append(c));return e;};
+  const notes=s.notes,n=notes.length,banjo=TN.inst==='banjo',hs=banjo?[1,2,3,4]:notes.map((_,i)=>i),m=hs.length,Lc=Math.ceil(m/2);
+  const left=hs.slice(0,Lc),right=hs.slice(Lc).reverse(),rows=Math.max(left.length,right.length);
+  const W=320,top=18,nut=rows===2?178:228,H=nut+86,svg=mk('svg',{viewBox:`0 0 ${W} ${H}`,class:'tnheadsvg',role:'img','aria-label':'Tête de l\'instrument : touche une cheville pour viser cette corde'});
+  const sp=Math.min(17,96/Math.max(1,n-1)),nx=i=>W/2-(n-1)/2*sp+i*sp,nutL=nx(0)-12,nutR=nx(n-1)+12;
+  const rowY=r=>top+30+r*((nut-top-50)/Math.max(1,rows-1||1));
+  svg.append(mk('path',{d:`M${nutL-4} ${nut} L${W/2-78} ${top+8} Q${W/2} ${top-10} ${W/2+78} ${top+8} L${nutR+4} ${nut} Z`,class:'tnhs'}));
+  svg.append(mk('rect',{x:nutL,y:nut,width:nutR-nutL,height:H-nut,class:'tnneck'}));
+  svg.append(mk('rect',{x:nutL-2,y:nut-3,width:nutR-nutL+4,height:6,rx:2,class:'tnnut'}));
+  const peg=(i,px,py,post)=>{const num=n-i,name=tnName(notes[i],s.flat);
+    const g=mk('g',{'data-k':i,class:'tnpeg',tabindex:'0',role:'button','aria-label':`Corde ${num}, ${name}`});
+    const below=post[1]>nut;g.append(mk('line',{x1:post[0],y1:post[1],x2:nx(i),y2:below?post[1]:nut,class:'tnstrg'}),mk('line',{x1:nx(i),y1:below?post[1]:nut,x2:nx(i),y2:H,class:'tnstrg'}),
+      mk('line',{x1:px,y1:py,x2:post[0],y2:post[1],class:'tnshaft'}),mk('circle',{cx:post[0],cy:post[1],r:4,class:'tnpost'}),
+      mk('circle',{cx:px,cy:py,r:21,class:'tnknob'}),
+      mk('text',{x:px,y:py+2,class:'tnpegn'},document.createTextNode(name)),mk('text',{x:px,y:py+15,class:'tnpegs'},document.createTextNode(String(num))),
+      mk('text',{x:px+15,y:py-12,class:'tnchk'},document.createTextNode('✓')));
+    g.addEventListener('click',()=>{TS.lock=TS.lock===i&&!TN.learner?null:i;TS.hist=[];tnStringsMark(-1,false);if(TS.ui&&TS.ui.auto)TS.ui.auto.classList.toggle('on',TS.lock==null);tnGuide(null);});
+    return g;};
+  left.forEach((i,r)=>svg.append(peg(i,40,rowY(r),[W/2-46,rowY(r)])));
+  right.forEach((i,r)=>svg.append(peg(i,W-40,rowY(r),[W/2+46,rowY(r)])));
+  if(banjo){const y=nut+58;svg.append(peg(0,40,y,[nx(0),y]));}
+  return el('div',{class:'tnhead'},svg);
+}
+/* mode apprenti : on vise une corde à la fois, on dit clairement s'il faut tendre ou détendre, et on avertit avant que la corde casse */
+function tnGuide(tg,stable){
+  const u=TS.ui;if(!u||!u.guide)return;const s=tnStrings();
+  if(!TN.learner||!s){u.guide.hidden=true;return;}u.guide.hidden=false;
+  const k=TS.lock==null?0:TS.lock,tgt=s.notes[k],num=s.notes.length-k,name=tnName(tgt,s.flat);
+  const semi=tg?Math.round(tg.cents/100):null,ladder=[];
+  for(let d=-3;d<=3;d++){const cls=['tnrung',d===0?'tgt':'',semi===d?(d===0?'here ok':'here '+(d>0?'hi':'lo')):''].join(' ');ladder.push(el('span',{class:cls},tnName(tgt+d,s.flat),d===0?el('small',{},'cible'):semi===d?el('small',{},'toi'):null));}
+  if(semi!=null&&semi>3)ladder.push(el('span',{class:'tnrung here hi'},'▲',el('small',{},'+'+semi)));
+  if(semi!=null&&semi<-3)ladder.unshift(el('span',{class:'tnrung here lo'},'▼',el('small',{},String(semi))));
+  let msg,cls='';
+  if(!tg){msg=TS.on?`Joue la corde ${num} (${name}) toute seule et laisse-la sonner.`:'Active le micro pour commencer.';}
+  else{const c=tg.cents,cur=tnName(tgt+semi,s.flat);
+    if(Math.abs(c)<=TN.tol){msg=stable?'✓ Juste ! On passe à la corde suivante…':'Tiens la note…';cls='ok';}
+    else if(c>150){msg=`⚠ Arrête de tendre ! Ta corde sonne ${cur}, ${semi} demi-ton${semi>1?'s':''} plus haut que ${name}. Détends-la (le son doit descendre), sinon elle risque de casser.`;cls='danger';
+      if(navigator.vibrate&&performance.now()-(TS.vib||0)>2500){TS.vib=performance.now();try{navigator.vibrate(220);}catch(e){}}}
+    else if(c>50)msg=`Trop haut : tu joues ${cur}, qui est après ${name}. Détends un peu la corde (le son doit descendre).`,cls='hi';
+    else if(c>0)msg='Presque ! Un tout petit peu trop haut : détends très légèrement.',cls='hi';
+    else if(c<-150)msg=`Trop bas : tu joues ${cur}, ${-semi} demi-tons sous ${name}. Tends la corde petit à petit en la faisant sonner.`,cls='lo';
+    else if(c<-50)msg=`Trop bas : tu joues ${cur}, qui est avant ${name}. Tends un peu la corde (le son doit monter).`,cls='lo';
+    else msg='Presque ! Un tout petit peu trop bas : tends très légèrement.',cls='lo';}
+  const allDone=s.notes.every((_,i)=>TS.done.has(i));
+  u.guide.className='tnguide '+cls;
+  u.guide.replaceChildren(el('div',{class:'tngh'},el('b',{},`Corde ${num} : ${name}`),el('span',{},allDone?'🎉 Toutes les cordes sont justes':`${TS.done.size} / ${s.notes.length} cordes justes`)),
+    el('div',{class:'tnladder'},ladder),el('p',{class:'tnmsg'},msg),
+    el('div',{class:'tngbtn'},btn('‹ Corde précédente',()=>tnGo(-1),'quiet'),btn('▶ Entendre la note',()=>tnRef(tgt),'quiet'),btn('Corde suivante ›',()=>tnGo(1),'quiet')));
+}
+function tnGo(d){const s=tnStrings();if(!s)return;const n=s.notes.length;TS.lock=((TS.lock==null?0:TS.lock)+d+n)%n;TS.hist=[];TS.okSince=0;tnStringsMark(-1,false);tnGuide(null);}
 function tnRefStop(){if(TS.ref){try{TS.ref.g.gain.setTargetAtTime(0,A.ctx.currentTime,.03);const r=TS.ref;setTimeout(()=>{try{r.o.stop();}catch(e){}},200);}catch(e){}TS.ref=null;}}
 function tnRef(m){
   tnRefStop();const c=A.init(),o=c.createOscillator(),o2=c.createOscillator(),g=c.createGain(),g2=c.createGain();
@@ -4559,24 +4664,25 @@ function tunerView(){
   u.arrow=el('i',{class:'tnarrow off'});
   const scale=el('div',{class:'tnledwrap'},u.leds,el('div',{class:'tnarrowtrack'},u.arrow),el('div',{class:'tnledlab'},el('span',{},'−50'),el('span',{},'0'),el('span',{},'+50')));
   u.box=el('div',{class:'tnbox idle'},el('div',{class:'tnflat'},'♭'),el('div',{class:'tnmid'},el('div',{class:'tnname'},u.note,u.oct),u.wr,u.cents),el('div',{class:'tnsharp'},'♯'));
-  u.strings=el('div',{class:'tnstrings'});
+  u.strings=el('div',{class:'tnstrings'});u.guide=el('div',{class:'tnguide',hidden:true});
+  const lrn=el('input',{type:'checkbox',id:'tn_learn'});lrn.checked=!!TN.learner;
+  lrn.addEventListener('change',()=>{TN.learner=lrn.checked;tnSave();refresh();});
+  u.learn=el('label',{class:'tnlearn',title:'Pour les débutants : une corde à la fois, avec des consignes claires'},lrn,el('span',{},'Mode apprenti'));
   function refresh(){
     const s=tnStrings();setBox.replaceChildren();TS.lock=null;
     if(s){const I=TUNINGS[TN.inst];
       setBox.append(el('label',{class:'qzfield'},el('span',{class:'fl'},'Accord'),sel('tn_set',I.sets.map(x=>[x[0],x[1]]),s.set[0],v=>{TN.set[TN.inst]=v;tnSave();refresh();})));
-      const n=s.notes.length;
-      u.strings.replaceChildren(el('button',{type:'button',class:'tnauto on',onclick:ev=>{TS.lock=null;u.strings.querySelectorAll('button').forEach(b=>b.classList.remove('lock'));ev.currentTarget.classList.add('on');}},'Auto'),
-        ...s.notes.map((m,i)=>{const num=s.order==='play'?n-i:n-i;
-          return el('button',{type:'button',class:'tnstr',title:'Viser cette corde',onclick:ev=>{TS.lock=i;u.strings.querySelectorAll('button').forEach(b=>b.classList.remove('lock','on'));ev.currentTarget.classList.add('lock');}},
-            el('small',{},String(num)),el('b',{},tnName(m,s.flat)),el('span',{},String(Math.floor(m/12)-1)));}));
+      TS.done=new Set();if(TN.learner)TS.lock=0;
+      u.head=tnHead(s);u.auto=el('button',{type:'button',class:'tnauto'+(TS.lock==null?' on':''),onclick:()=>{TS.lock=null;u.auto.classList.add('on');tnStringsMark(-1,false);}},'Auto : corde la plus proche');
+      u.strings.replaceChildren(u.head,TN.learner?u.guide:u.auto);u.learn.hidden=false;
       u.strings.hidden=false;u.refs.replaceChildren(el('span',{class:'fl'},'Entendre une corde'),...s.notes.map((m,i)=>el('button',{type:'button',class:'btn quiet sq',onclick:()=>tnRef(m)},tnName(m,s.flat))));
-    }else{u.strings.hidden=true;u.strings.replaceChildren();
+    }else{u.strings.hidden=true;u.strings.replaceChildren();u.head=null;u.learn.hidden=true;
       setBox.append(el('label',{class:'qzfield'},el('span',{class:'fl'},'Instrument transpositeur'),sel('tn_tr',TRANSP_OPTS,S.transp,v=>{S.transp=v;try{localStorage.setItem('atelier-transp',v)}catch(e){}TS.hist=[];})));u.refs.replaceChildren(el('span',{class:'fl'},'Note de référence'),btn(`▶ La ${TN.a4} Hz`,()=>tnRef(69),'quiet'));}
   }
   u.refs=el('div',{class:'tnrefs'});
   const out=el('div',{class:'tnwrap'},
     el('div',{class:'tnpanel'},
-      el('div',{class:'tntop'},u.mic,el('span',{class:'tnlevel','aria-hidden':'true'},u.level)),
+      el('div',{class:'tntop'},u.mic,el('span',{class:'tnlevel','aria-hidden':'true'},u.level),u.learn),
       u.box,scale,u.hz,u.strings),
     el('section',{class:'mtsec'},el('h3',{},'Instrument et accord'),
       el('div',{class:'mtline'},el('label',{class:'qzfield'},el('span',{class:'fl'},'Instrument'),instSel),setBox),
@@ -4584,8 +4690,8 @@ function tunerView(){
     el('section',{class:'mtsec'},el('h3',{},'Précision'),
       el('div',{class:'mtline'},el('label',{class:'qzfield'},el('span',{class:'fl'},'Zone « juste »'),tolSel),
         el('label',{class:'qzfield'},el('span',{class:'fl'},'Diapason : la ='),el('span',{class:'tna4'},a4,' Hz'))),
-      el('p',{class:'hint'},'« Juste » s\'allume seulement si la note reste dans la zone choisie pendant un court instant. Avec un instrument choisi, l\'accordeur vise la corde la plus proche (Auto) ou la corde que tu touches. Les écarts sont toujours mesurés par rapport à la note exacte de la corde : aucune tolérance cachée.')));
-  refresh();tnShow(null,0);tnUi();
+      el('p',{class:'hint'},'« Juste » s\'allume seulement si la note reste dans la zone choisie pendant un court instant. Avec un instrument choisi, l\'accordeur vise la corde la plus proche (Auto) ou la cheville que tu touches. Le mode apprenti guide une corde à la fois et avertit quand une corde est beaucoup trop tendue. Les écarts sont toujours mesurés par rapport à la note exacte de la corde : aucune tolérance cachée.')));
+  refresh();tnShow(null,0);tnUi();tnGuide(null);
   return out;
 }
 
