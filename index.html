@@ -674,7 +674,9 @@ main[data-kind="quiz"] .stand{padding-bottom:0}
 .qzopt .qzl{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--sunk);font:700 .8rem/1 var(--f-mono);flex:0 0 auto;color:var(--muted)}
 .qzopt[aria-pressed="true"] .qzl{background:var(--accent);color:var(--accent-ink)}
 .qzopt .qzoabc{display:block;flex:1;min-width:0;color:var(--ink)}
-.qzopt .qzoabc svg{max-width:100%}
+.qzopt .qzoabc svg{max-width:100%;height:auto}
+.qzopts.grid .qzopt{min-height:84px}
+.qzopts.grid.wide{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
 .qzopt:disabled{cursor:default}
 .qzopt.right{border-color:var(--ok);background:var(--ok-soft)}
 .qzopt.wrong{border-color:var(--bad);background:var(--bad-soft)}
@@ -728,7 +730,8 @@ main[data-kind="quiz"] .stand{padding-bottom:0}
   .qznav .btn{flex:1 1 auto;justify-content:center;min-height:46px}
   .qznav .hide{display:none}
   .qzbtns .btn,.qzbtns a.btn{flex:1 1 100%;justify-content:center;min-height:46px;white-space:normal}
-  .qzopts.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .qzopts.grid:not(.wide){grid-template-columns:repeat(2,minmax(0,1fr))}
+  .qzopts.grid.wide{grid-template-columns:1fr}
   .qzscore b{font-size:2.4rem}
 }
 .qzpadbox .edwrap{max-width:560px}
@@ -3749,6 +3752,7 @@ function qzBuild(cfg,seed,{paper=false}={}){
 /* ========== MODULE : Tester mes connaissances — interface ========== */
 const QZ={test:null,view:'start',i:0,name:'',title:'Évaluation de théorie musicale',confirm:false};
 const QZ_STORE='atelier-quiz';
+const QZ_ARM={responsive:undefined,staffwidth:150,scale:1.45,paddingtop:6,paddingbottom:6,paddingleft:4,paddingright:4};
 const QZ_GLYPH={responsive:undefined,staffwidth:40,scale:1.6,paddingtop:4,paddingbottom:4,paddingleft:4,paddingright:4};
 function qzSave(){try{if(!QZ.test){localStorage.removeItem(QZ_STORE);return;}const t=QZ.test;
   localStorage.setItem(QZ_STORE,JSON.stringify({seed:t.seed,cfg:t.cfg,resp:t.resp,done:t.done,name:t.name,i:QZ.i,view:QZ.view,date:t.date}));}catch(e){}}
@@ -3821,7 +3825,7 @@ function qzQuestionView(){
   const card=el('div',{class:'qzcard qzq'+(review?' review':'')});
   card.append(el('p',{class:'qzprompt'},q.prompt));
   if(q.play)card.append(el('div',{class:'qzplay'},btn('▶ Écouter',()=>q.play(),'primary'),btn('■',()=>stop(),'quiet sq')));
-  if(q.abc){const st=el('div',{class:'staff qzstaff'+(q.small?' small':'')});card.append(st);requestAnimationFrame(()=>draw(st,q.abc,/clef=none/.test(q.abc)?Object.assign({},QZ_GLYPH,{scale:2}):{paddingtop:12,paddingbottom:8}));}
+  if(q.abc){const st=el('div',{class:'staff qzstaff'+(q.small?' small':'')});card.append(st);requestAnimationFrame(()=>draw(st,q.abc,/clef=none/.test(q.abc)?Object.assign({},QZ_GLYPH,{scale:2}):q.small?Object.assign({},QZ_ARM,{scale:1.9}):{paddingtop:12,paddingbottom:8}));}
   card.append(qzAnswerUI(q,r,set,review));
   if(review)card.append(qzVerdict(q,r));
   const last=i===N-1;
@@ -3862,11 +3866,12 @@ function qzVerdict(q,r){
 /* ---------- zones de réponse ---------- */
 function qzAnswerUI(q,r,set,locked){
   if(q.opts){
-    const box=el('div',{class:'qzopts'+(q.opts.length&&q.opts.every(o=>o.abc&&(o.small||/clef=none/.test(o.abc)))?' grid':'')});
+    const glyph=q.opts.every(o=>o.abc&&/clef=none/.test(o.abc)),arm=!glyph&&q.opts.every(o=>o.abc&&o.small);
+    const box=el('div',{class:'qzopts'+(glyph?' grid':arm?' grid wide':'')});
     q.opts.forEach((o,k)=>{
       const b=el('button',{type:'button',class:'qzopt'+(locked?(k===q.ans?' right':k===r?' wrong':''):''),'aria-pressed':String(r===k),disabled:locked},
         el('span',{class:'qzl'},QA[k]),o.abc?el('span',{class:'qzoabc'}):el('span',{class:'qzot'},o.t));
-      if(o.abc)requestAnimationFrame(()=>draw(b.querySelector('.qzoabc'),o.abc,/clef=none/.test(o.abc)?QZ_GLYPH:{paddingtop:6,paddingbottom:4}));
+      if(o.abc)requestAnimationFrame(()=>{const t=b.querySelector('.qzoabc');draw(t,o.abc,/clef=none/.test(o.abc)?QZ_GLYPH:o.small?QZ_ARM:{paddingtop:6,paddingbottom:4});qzFitSvg(t);});
       b.addEventListener('click',()=>{set(k);box.querySelectorAll('.qzopt').forEach((x,j)=>x.setAttribute('aria-pressed',String(j===k)));});
       box.append(b);});
     return box;
@@ -3893,6 +3898,8 @@ function qzAnswerUI(q,r,set,locked){
   return el('div',{class:'qzshortbox'},inp,locked||q.num?null:el('div',{class:'qzsym'},el('button',{type:'button',class:'btn quiet sq',title:'Dièse',onclick:()=>ins('♯')},'♯'),el('button',{type:'button',class:'btn quiet sq',title:'Bémol',onclick:()=>ins('♭')},'♭')),
     locked?null:el('p',{class:'hint'},q.hint||(q.num?'Écris un nombre.':'Les accents et les majuscules ne comptent pas. Tu peux écrire # pour dièse et b pour bémol.')));
 }
+/* une portée de taille fixe peut rétrécir dans une case étroite */
+function qzFitSvg(t){const sv=t&&t.querySelector('svg');if(!sv||sv.getAttribute('viewBox'))return;const w=parseFloat(sv.getAttribute('width')),h=parseFloat(sv.getAttribute('height'));if(w&&h)sv.setAttribute('viewBox',`0 0 ${w} ${h}`);}
 /* portée où l'on pose des notes (rondes) */
 function makeQzPad(q,resp,onChange){
   const P=q.pad,notes=(Array.isArray(resp)?resp:[]).map(n=>Object.assign({},n));let acc=null;
