@@ -1448,8 +1448,8 @@ const MODS=[
   {id:'la',kind:'mel',t:'Lecture appliquée',s:'Voir → jouer',d:'Joue la mélodie note par note sur le clavier à l\'écran ou avec ton clavier d\'ordinateur.'},
   {id:'bt',g:'Théorie',kind:'lib',t:'Bibliothèque théorique',s:'Comprendre',d:'Toutes les notions utiles pour lire, écouter et analyser la musique : de la portée aux cadences. Cherche une notion ou parcours les onglets.'},
   {id:'tq',kind:'quiz',t:'Tester mes connaissances',s:'Évaluer',d:'Un questionnaire tiré au hasard selon les sujets et le niveau choisis dans les réglages : une question par page, ton résultat à la fin, et des PDF à partager ou à imprimer.'},
-  {id:'mt',g:'Outils',kind:'tools',t:'Métronome',s:'Garder le tempo',d:'Un métronome avec subdivisions à mélanger, accélération progressive et mesures muettes.'},
-  {id:'ac',kind:'tools',t:'Accordeur',s:'Accorder son instrument',d:'Un accordeur chromatique précis, avec les accords courants et alternatifs de la guitare, de la basse, du ukulélé, du banjo et des cordes frottées.'},
+  {id:'mt',g:'Outils',kind:'tools',t:'Métronome',s:'Garder le tempo',d:'Règle le tempo et les subdivisions, puis appuie sur Démarrer (ou sur la barre d\'espace).'},
+  {id:'ac',kind:'tools',t:'Accordeur',s:'Accorder son instrument',d:'Active le micro, choisis ton instrument et joue une corde : vise le voyant vert du centre.'},
 ];
 const MOD=Object.fromEntries(MODS.map(m=>[m.id,m]));
 const S={mic:(()=>{try{return !!localStorage.getItem('atelier-mic')}catch(e){return false}})(),transp:(()=>{try{return localStorage.getItem('atelier-transp')||'ut'}catch(e){return 'ut'}})(),perc:(()=>{try{return localStorage.getItem('atelier-perc')||'wood'}catch(e){return 'wood'}})(),slot:{},rev:(()=>{try{return localStorage.getItem('atelier-rev')||'1'}catch(e){return '1'}})(),inst:(()=>{try{const v=localStorage.getItem('atelier-inst')||'piano';return v==='glock'?'flute':v==='choeur'||v==='pianosynth'?(v==='choeur'?'voix':'piano'):v}catch(e){return 'piano'}})(),auto:{},lastEx:{},mod:'dm',cfg:{},level:{},stats:{},ex:null,st:{},keyHandler:null,midiHandler:null};
