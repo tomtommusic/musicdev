@@ -1008,15 +1008,15 @@ main[data-kind="tools"] > .stand,main[data-kind="tools"] > #toolbar,main[data-ki
 .dgv{font:700 1rem/1 var(--f-mono);color:var(--accent)}
 /* schémas */
 .dgsvg{display:block;color:var(--ink)}
-.dgsvg.flute{width:100%;max-width:340px}.dgsvg.flute.big{width:420px;max-width:100%}.dgsvg.flute.mini{width:100%;max-width:120px}
+.dgsvg.flute{width:100%;max-width:340px}.dgsvg.flute.big{width:440px;max-width:100%}.dgsvg.flute.mini{width:100%;max-width:120px}
 .dgsvg.clar,.dgsvg.asax{width:150px}.dgsvg.clar.big,.dgsvg.asax.big{width:180px}.dgsvg.clar.mini,.dgsvg.asax.mini{width:56px}
 .dgsvg.tpt{width:150px}.dgsvg.tpt.mini{width:70px}
 .dgsvg.tbn{width:100%;max-width:300px}.dgsvg.tbn.mini{width:100%;max-width:110px}
 .dgalt .dgsvg.clar,.dgalt .dgsvg.asax{width:100px}.dgalt .dgsvg.flute{max-width:220px}.dgalt .dgsvg.tpt{width:100px}
 .dgbody{stroke:var(--line);stroke-width:12;stroke-linecap:round}
 .dgsvg.tpt .dgbody,.dgsvg.tbn .dgbody{stroke-width:4}
-.dgsep{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3;opacity:.6}
-.dgk{stroke:var(--ink);stroke-width:1.6}
+.dgsep{stroke:var(--ink);stroke-width:2;stroke-linecap:round}
+.dgk{stroke:var(--ink);stroke-width:1.8;stroke-linejoin:round}
 .dgk.off{fill:var(--surface)}
 .dgk.on{fill:var(--ink)}
 .dgk.alt{fill:var(--accent-soft);stroke:var(--accent)}
@@ -1054,6 +1054,8 @@ main[data-kind="tools"] > .stand,main[data-kind="tools"] > #toolbar,main[data-ki
   .dgcell small{font-size:.55rem}
 }
 @media (max-width:600px){.dgil{display:none}}
+.dggrid.flute{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}.dggrid.flute .dgsvg.flute.mini{max-width:150px}
+@media (max-width:600px){.dggrid.flute{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 
 <div class="app">
@@ -5215,13 +5217,14 @@ const DG_FAMS=['Bois','Cuivres','Cordes frottées','Cordes pincées'];
 /* chaque élément : [id, type, x, y, (r|w,h), étiquette] ; type o = trou/anneau, k = petite clé, p = clé en pastille */
 const nl=(...n)=>n.map(x=>dgCap(T(x))).join('/');
 const DG_LAYOUT={
-  flute:{w:300,h:120,body:[[14,52,286,52]],items:()=>[
-    ['thB','o',40,92,8,T('Si')],['thBb','k',58,92,6,T('Si♭')],
-    ['L1','o',46,52,10],['L2','o',76,52,10],['L3','o',106,52,10],['Gs','p',122,78,20,9,dgCap(T('sol♯'))],
-    ['R1','o',166,52,10],['Tr1','k',181,28,5,'T1'],['R2','o',196,52,10],['Tr2','k',211,28,5,'T2'],['R3','o',226,52,10],
-    ['Ds','p',250,78,20,9,dgCap(T('mi♭'))],['Cs','p',272,92,18,9,dgCap(T('do♯'))],['C','p',272,106,18,9,dgCap(T('do'))]],
-    labels:[[76,22,'Main gauche'],[196,12,'Main droite'],[40,114,'Pouce']]},
-  clar:{w:150,h:330,body:[[75,8,75,322]],items:()=>[
+  flute:{w:280,h:96,body:[],items:()=>[
+    ['thB','d','M20,72 Q31,62 47,64 L47,80 Q31,82 20,72 Z'],['thBb','d','M50,65 h14 a3,3 0 0 1 3,3 v8 a3,3 0 0 1 -3,3 h-14 z'],
+    ['L1','o',28,38,12],['L2','o',58,38,12],['L3','o',88,38,12],['Gs','d','M104,31 A7,7 0 0 1 104,45 Z'],
+    ['R1','o',140,38,12],['Tr1','k',155,19,4],['R2','o',170,38,12],['Tr2','k',185,19,4],['R3','o',200,38,12],
+    ['Ds','d','M218,32 A9,9 0 0 1 218,50 Z'],['Cs','d','M236,29 h9 a4,4 0 0 1 4,4 v3 a4,4 0 0 1 -4,4 h-9 z'],['C','d','M236,45 h16 a3.5,3.5 0 0 1 0,7 h-16 z']],
+    seps:[[120,22,120,54]],
+    labels:[[58,14,'Main gauche'],[170,9,'Main droite'],[44,94,'Pouce']]},
+  clar:{w:150,h:330,body:[],seps:[[58,164,92,164]],items:()=>[
     ['Reg','k',30,52,6,'R'],['T','o',30,72,9,TL('P','T','P')],
     ['A','p',75,20,26,9,dgCap(T('la'))],['Gs','p',104,34,22,9,dgCap(T('sol♯'))],
     ['L1','o',75,62,11],['EbBb','k',96,80,5,dgCap(T('mi♭'))],['L2','o',75,100,11],['L3','o',75,138,11],
@@ -5230,7 +5233,7 @@ const DG_LAYOUT={
     ['R1','o',75,190,11],['R2','o',75,228,11],['R3','o',75,266,11],
     ['rE','p',112,284,28,9,nl('mi','si')],['rF','p',112,298,28,9,nl('fa','do')],['rAb','p',112,312,28,9,nl('la♭','mi♭')]],
     labels:[[75,334,'']]},
-  asax:{w:150,h:340,body:[[75,8,75,330]],items:()=>[
+  asax:{w:150,h:340,body:[],seps:[[58,192,92,192]],items:()=>[
     ['Oct','k',30,70,7,'8va'],
     ['PD','p',22,22,22,9,dgCap(T('ré'))],['PEb','p',22,36,22,9,dgCap(T('mi♭'))],['PF','p',22,50,22,9,dgCap(T('fa'))],
     ['FF','k',96,48,5,'F'],['L1','o',75,72,11],['Bis','k',90,91,4,'bis'],['L2','o',75,110,11],['L3','o',75,148,11],
@@ -5245,9 +5248,9 @@ function dgWindSvg(inst,keys,size){
   const svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox',`0 0 ${L.w} ${L.h}`);svg.setAttribute('class','dgsvg '+inst+(size?' '+size:''));svg.setAttribute('aria-hidden','true');
   const mk=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);svg.append(e);return e;};
   for(const[x1,y1,x2,y2]of L.body)mk('line',{x1,y1,x2,y2,class:'dgbody'});
-  if(inst==='clar'||inst==='asax')mk('line',{x1:20,y1:inst==='clar'?168:200,x2:130,y2:inst==='clar'?168:200,class:'dgsep'});
-  if(inst==='flute')mk('line',{x1:136,y1:30,x2:136,y2:74,class:'dgsep'});
+  for(const[x1,y1,x2,y2]of(L.seps||[]))mk('line',{x1,y1,x2,y2,class:'dgsep'});
   for(const it of L.items()){const[id,tp,x,y]=it,pressed=on.has(id),cls='dgk '+(pressed?'on':'off');
+    if(tp==='d'){mk('path',{d:it[2],class:cls});continue;}
     if(tp==='o'||tp==='k'){const r=it[4];mk('circle',{cx:x,cy:y,r,class:cls+(tp==='k'?' small':'')});
       if(it[5]&&tp==='k'){const t=mk('text',{x:x+(inst==='flute'?0:r+3),y:inst==='flute'?y+(y<50?-8:r+10):y+3,class:'dglab','text-anchor':inst==='flute'?'middle':'start'});t.textContent=it[5];}
       if(it[5]&&tp==='o'){const t=mk('text',{x:x-r-4,y:y+3,class:'dglab','text-anchor':'end'});t.textContent=it[5];}}
@@ -5287,7 +5290,7 @@ function dgRender(){
 /* vents : fiche de la note choisie + toutes les notes */
 function dgWindView(I){
   const notes=DG_DATA[I.data];let cur=DG.sel[I.id];if(!notes.some(n=>n.m===cur))cur=notes.find(n=>n.m>=60&&n.m<=72)?.m??notes[0].m;
-  const detail=el('section',{class:'mtsec dgdet'}),grid=el('div',{class:'dggrid'});
+  const detail=el('section',{class:'mtsec dgdet'}),grid=el('div',{class:'dggrid '+I.data});
   const diag=(n,size,keys)=>I.kind==='tpt'?dgValvesSvg(keys||n.v,size):I.kind==='tbn'?dgSlideSvg(n.p,size==='big'?n.a:[],size):dgWindSvg(I.data,keys||n.k,size);
   const sound=m=>m+I.tr;
   const cards=new Map();
