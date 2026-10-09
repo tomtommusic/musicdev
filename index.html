@@ -849,6 +849,7 @@ main[data-kind="tools"] > .stand,main[data-kind="tools"] > #toolbar,main[data-ki
 .tnarrowtrack{position:relative;height:9px;margin-top:-2px}
 .tnarrow{position:absolute;top:0;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:8px solid #FF5A4A;transform:translateX(-50%);transition:left .07s linear}
 .tnarrow.off{opacity:0}
+.tnwr{font:500 .7rem/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:#6FB79C;min-height:.7rem}
 </style>
 
 <div class="app">
@@ -1449,7 +1450,7 @@ const MODS=[
   {id:'bt',g:'Théorie',kind:'lib',t:'Bibliothèque théorique',s:'Comprendre',d:'Toutes les notions utiles pour lire, écouter et analyser la musique : de la portée aux cadences. Cherche une notion ou parcours les onglets.'},
   {id:'tq',kind:'quiz',t:'Tester mes connaissances',s:'Évaluer',d:'Un questionnaire tiré au hasard selon les sujets et le niveau choisis dans les réglages : une question par page, ton résultat à la fin, et des PDF à partager ou à imprimer.'},
   {id:'mt',g:'Outils',kind:'tools',t:'Métronome',s:'Garder le tempo',d:'Règle le tempo et les subdivisions, puis appuie sur Démarrer (ou sur la barre d\'espace).'},
-  {id:'ac',kind:'tools',t:'Accordeur',s:'Accorder son instrument',d:'Active le micro, choisis ton instrument et joue une corde : vise le voyant vert du centre.'},
+  {id:'ac',kind:'tools',t:'Accordeur',s:'Accorder son instrument',d:'Active le micro, choisis ton instrument et joue une note : vise le voyant vert du centre.'},
 ];
 const MOD=Object.fromEntries(MODS.map(m=>[m.id,m]));
 const S={mic:(()=>{try{return !!localStorage.getItem('atelier-mic')}catch(e){return false}})(),transp:(()=>{try{return localStorage.getItem('atelier-transp')||'ut'}catch(e){return 'ut'}})(),perc:(()=>{try{return localStorage.getItem('atelier-perc')||'wood'}catch(e){return 'wood'}})(),slot:{},rev:(()=>{try{return localStorage.getItem('atelier-rev')||'1'}catch(e){return '1'}})(),inst:(()=>{try{const v=localStorage.getItem('atelier-inst')||'piano';return v==='glock'?'flute':v==='choeur'||v==='pianosynth'?(v==='choeur'?'voix':'piano'):v}catch(e){return 'piano'}})(),auto:{},lastEx:{},mod:'dm',cfg:{},level:{},stats:{},ex:null,st:{},keyHandler:null,midiHandler:null};
@@ -4410,7 +4411,7 @@ function metroView(){
 /* ---------------- ACCORDEUR ---------------- */
 /* accords : notes MIDI de la corde la plus grave à la plus aiguë (sauf indication) ; « b » = noms avec bémols */
 const TUNINGS={
-  chroma:{t:'Chromatique (toutes les notes)'},
+  chroma:{t:'Chromatique (vents, voix, toutes les notes)'},
   guitare:{t:'Guitare',sets:[
     ['std','Standard (mi la ré sol si mi)',[40,45,50,55,59,64]],
     ['half','½ ton plus bas',[39,44,49,54,58,63],'b'],
@@ -4489,7 +4490,7 @@ async function tunerStart(){
   }
 }
 function tunerStop(){if(TS.on)qzSessionForMic(false);clearInterval(TS.timer);TS.timer=0;if(TS.stream)TS.stream.getTracks().forEach(t=>t.stop());try{TS.src&&TS.src.disconnect();}catch(e){}Object.assign(TS,{on:false,stream:null,src:null,an:null,hist:[]});tnRefStop();tnUi();}
-function tnRange(){const s=tnStrings();if(!s)return[27,2100];const lo=Math.min(...s.notes),hi=Math.max(...s.notes);return[midiHz(lo)*.7,midiHz(hi)*1.45];}
+function tnRange(){const s=tnStrings();if(!s)return[27,4200];const lo=Math.min(...s.notes),hi=Math.max(...s.notes);return[midiHz(lo)*.7,midiHz(hi)*1.45];}
 function tunerTick(){
   if(!TS.on||!TS.an)return;TS.an.getFloatTimeDomainData(TS.buf);
   const[fmin,fmax]=tnRange();const sr=A.ctx.sampleRate;
@@ -4516,7 +4517,8 @@ function tnShow(f,rms){
   if(!f){u.box.classList.add('idle');u.box.classList.remove('ok','low','high');u.note.textContent='–';u.oct.textContent='';u.cents.textContent=TS.on?'Joue une note':'';u.hz.textContent='';TS.okSince=0;ledsOff();u.arrow.classList.add('off');tnStringsMark(-1,false);return;}
   const tg=tnTarget(f),s=tnStrings(),c=tg.cents;
   u.box.classList.remove('idle');
-  u.note.textContent=tnName(tg.midi,s&&s.flat);u.oct.textContent=String(Math.floor(tg.midi/12)-1);
+  const shown=s?tg.midi:tg.midi-transp();u.note.textContent=tnName(shown,s&&s.flat);u.oct.textContent=String(Math.floor(shown/12)-1);
+  u.wr.textContent=!s&&transp()?'note écrite':'';
   const ok=Math.abs(c)<=TN.tol;const now=performance.now();
   if(ok){if(!TS.okSince)TS.okSince=now;}else TS.okSince=0;
   const stable=ok&&now-TS.okSince>350;
@@ -4551,12 +4553,12 @@ function tunerView(){
   const a4=el('input',{type:'number',id:'tn_a4',min:415,max:466,step:1,value:TN.a4,class:'mtnum',inputmode:'numeric'});
   a4.addEventListener('change',()=>{TN.a4=Math.max(415,Math.min(466,Math.round(+a4.value||440)));a4.value=TN.a4;tnSave();refresh();});
   u.mic=el('button',{type:'button',class:'btn primary tnmic',onclick:()=>TS.on?tunerStop():tunerStart()},'🎤 Activer le micro');
-  u.note=el('b',{class:'tnnote'},'–');u.oct=el('sub',{class:'tnoct'});u.cents=el('p',{class:'tncents'});u.hz=el('p',{class:'tnhz'});
+  u.note=el('b',{class:'tnnote'},'–');u.wr=el('span',{class:'tnwr'});u.oct=el('sub',{class:'tnoct'});u.cents=el('p',{class:'tncents'});u.hz=el('p',{class:'tnhz'});
   u.level=el('i');
   u.leds=el('div',{class:'tnleds','aria-hidden':'true'},TN_LEDS.map(v=>el('i',{'data-v':v})));
   u.arrow=el('i',{class:'tnarrow off'});
   const scale=el('div',{class:'tnledwrap'},u.leds,el('div',{class:'tnarrowtrack'},u.arrow),el('div',{class:'tnledlab'},el('span',{},'−50'),el('span',{},'0'),el('span',{},'+50')));
-  u.box=el('div',{class:'tnbox idle'},el('div',{class:'tnflat'},'♭'),el('div',{class:'tnmid'},el('div',{class:'tnname'},u.note,u.oct),u.cents),el('div',{class:'tnsharp'},'♯'));
+  u.box=el('div',{class:'tnbox idle'},el('div',{class:'tnflat'},'♭'),el('div',{class:'tnmid'},el('div',{class:'tnname'},u.note,u.oct),u.wr,u.cents),el('div',{class:'tnsharp'},'♯'));
   u.strings=el('div',{class:'tnstrings'});
   function refresh(){
     const s=tnStrings();setBox.replaceChildren();TS.lock=null;
@@ -4568,7 +4570,8 @@ function tunerView(){
           return el('button',{type:'button',class:'tnstr',title:'Viser cette corde',onclick:ev=>{TS.lock=i;u.strings.querySelectorAll('button').forEach(b=>b.classList.remove('lock','on'));ev.currentTarget.classList.add('lock');}},
             el('small',{},String(num)),el('b',{},tnName(m,s.flat)),el('span',{},String(Math.floor(m/12)-1)));}));
       u.strings.hidden=false;u.refs.replaceChildren(el('span',{class:'fl'},'Entendre une corde'),...s.notes.map((m,i)=>el('button',{type:'button',class:'btn quiet sq',onclick:()=>tnRef(m)},tnName(m,s.flat))));
-    }else{u.strings.hidden=true;u.strings.replaceChildren();u.refs.replaceChildren(el('span',{class:'fl'},'Note de référence'),btn(`▶ La ${TN.a4} Hz`,()=>tnRef(69),'quiet'));}
+    }else{u.strings.hidden=true;u.strings.replaceChildren();
+      setBox.append(el('label',{class:'qzfield'},el('span',{class:'fl'},'Instrument transpositeur'),sel('tn_tr',TRANSP_OPTS,S.transp,v=>{S.transp=v;try{localStorage.setItem('atelier-transp',v)}catch(e){}TS.hist=[];})));u.refs.replaceChildren(el('span',{class:'fl'},'Note de référence'),btn(`▶ La ${TN.a4} Hz`,()=>tnRef(69),'quiet'));}
   }
   u.refs=el('div',{class:'tnrefs'});
   const out=el('div',{class:'tnwrap'},
