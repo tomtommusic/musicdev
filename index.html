@@ -610,8 +610,9 @@ main[data-kind="lib"] > .method{display:none}
   .modpick .mp-g{font:500 .66rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
   .modpick .mp-t{font:700 1.1rem/1.2 var(--f-display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .modpick .mp-s{display:none;font:500 .7rem/1.2 var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
-  .modpick .mp-ic{flex:0 0 auto;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;
-    background:var(--btn);border:1px solid var(--btn-edge);color:var(--ink);font-size:.9rem}
+  .modpick .mp-ic{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;padding:9px 12px 9px 14px;border-radius:999px;
+    background:var(--accent);color:var(--accent-ink);font:700 .88rem/1 var(--f-body);box-shadow:var(--shadow-sm)}
+  .modpick .mp-ic svg{width:16px;height:16px}
   .modpick select{position:absolute;inset:0;width:100%;height:100%;opacity:0;font-size:16px;cursor:pointer;-webkit-appearance:none;appearance:none}
   .modpick:has(select:focus-visible){outline:3px solid var(--accent);outline-offset:2px}
 }
@@ -2981,7 +2982,7 @@ mq.addEventListener?.('change',fix);fix();})();
 /* mobile : menu déroulant des modules (même navigation que la barre des modules) */
 (()=>{const mods=document.getElementById('mods');if(!mods||typeof MODS==='undefined')return;
 const box=document.createElement('label');box.className='modpick';
-box.innerHTML='<span class="mp-txt"><span class="mp-g"></span><span class="mp-t"></span><span class="mp-s"></span></span><span class="mp-ic" aria-hidden="true">▾</span>';
+box.innerHTML='<span class="mp-txt"><span class="mp-g"></span><span class="mp-t"></span><span class="mp-s"></span></span><span class="mp-ic" aria-hidden="true">Changer<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6l4.5 4.5L12.5 6"/></svg></span>';
 const sel=document.createElement('select');sel.setAttribute('aria-label','Choisir un module');box.append(sel);
 let grp=null;const gOf={};let cur='';
 for(const m of MODS){if(m.g){cur=m.g;grp=document.createElement('optgroup');grp.label=m.g;sel.append(grp);}
