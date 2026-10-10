@@ -479,7 +479,8 @@
 "Pour marquer un accent ou un début de phrase.": "To mark an accent or the start of a phrase.",
 "Chaque couleur est une corde. Sous chaque note : la case à appuyer (0 = corde à vide); en 1re position, le doigt porte le même numéro que la case. Touche une note pour l'entendre et la voir sur le manche.": "Each color is a string. Under each note: the fret to press (0 = open string); in first position, the finger has the same number as the fret. Tap a note to hear it and see it on the neck.",
 "Chaque couleur est une corde. Sous chaque note : la case à appuyer (0 = corde à vide). Doigts : index pour les cases 1 et 2, majeur 3 et 4, annulaire 5, auriculaire 7. Touche une note pour l'entendre et la voir sur le manche.": "Each color is a string. Under each note: the fret to press (0 = open string). Fingers: index for frets 1 and 2, middle 3 and 4, ring 5, pinky 7. Tap a note to hear it and see it on the neck.",
-"Un mot ou un symbole inconnu dans un exercice ? Touche « ? », puis l'élément : son explication s'ouvre. Essaie-le !": "An unfamiliar word or symbol in an exercise? Tap \"?\", then the item: its explanation opens. Try it!"
+"Un mot ou un symbole inconnu dans un exercice ? Touche « ? », puis l'élément : son explication s'ouvre. Essaie-le !": "An unfamiliar word or symbol in an exercise? Tap \"?\", then the item: its explanation opens. Try it!",
+"Dictionnaire d'accords": "Chord Dictionary"
 },
 "es": {
 "Modules": "Módulos",
@@ -961,6 +962,7 @@
 "Pour marquer un accent ou un début de phrase.": "Para marcar un acento o el inicio de una frase.",
 "Chaque couleur est une corde. Sous chaque note : la case à appuyer (0 = corde à vide); en 1re position, le doigt porte le même numéro que la case. Touche une note pour l'entendre et la voir sur le manche.": "Cada color es una cuerda. Debajo de cada nota: el traste que se pisa (0 = cuerda al aire); en 1.ª posición, el dedo tiene el mismo número que el traste. Toca una nota para escucharla y verla en el mástil.",
 "Chaque couleur est une corde. Sous chaque note : la case à appuyer (0 = corde à vide). Doigts : index pour les cases 1 et 2, majeur 3 et 4, annulaire 5, auriculaire 7. Touche une note pour l'entendre et la voir sur le manche.": "Cada color es una cuerda. Debajo de cada nota: el traste que se pisa (0 = cuerda al aire). Dedos: índice para los trastes 1 y 2, medio 3 y 4, anular 5, meñique 7. Toca una nota para escucharla y verla en el mástil.",
-"Un mot ou un symbole inconnu dans un exercice ? Touche « ? », puis l'élément : son explication s'ouvre. Essaie-le !": "¿Una palabra o un símbolo desconocido en un ejercicio? Toca «?» y luego el elemento: se abre su explicación. ¡Pruébalo!"
+"Un mot ou un symbole inconnu dans un exercice ? Touche « ? », puis l'élément : son explication s'ouvre. Essaie-le !": "¿Una palabra o un símbolo desconocido en un ejercicio? Toca «?» y luego el elemento: se abre su explicación. ¡Pruébalo!",
+"Dictionnaire d'accords": "Diccionario de acordes"
 }
 }
