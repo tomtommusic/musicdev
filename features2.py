@@ -7,7 +7,7 @@ def rep(a,b):
     global s
     assert s.count(a)==1,('introuvable',a[:70],s.count(a));s=s.replace(a,b)
 rep("const MODS=[\n","const MODS=[\n  {id:'ho',kind:'tools',t:'Accueil',s:'Bienvenue',d:'Un tour rapide de l\\'app : où trouver les modules, les explications et comment me joindre.'},\n")
-rep("  {id:'mt',g:'Outils'","  {id:'gc',kind:'tools',t:'Accords de guitare',s:'Trouver un accord',d:'Choisis une fondamentale et un type d\\'accord, ou tape son nom : quelques positions à voir et à entendre.'},\n  {id:'mt',g:'Outils'")
+rep("  {id:'mt',g:'Outils'","  {id:'gc',kind:'tools',t:'Accords',s:'Guitare, ukulélé, piano…',d:'Choisis un instrument, une fondamentale et un type d\\'accord, ou tape son nom : quelques positions à voir et à entendre.'},\n  {id:'mt',g:'Outils'")
 rep("if(id==='bt'||id==='mt'||id==='ac'||id==='en'||id==='dg')return{};","if(id==='bt'||id==='mt'||id==='ac'||id==='en'||id==='dg'||id==='gc'||id==='ho')return{};")
 rep("(dm|dr|iv|pc|ln|lm|lr|so|la|tq|mt|ac|en|dg)","(dm|dr|iv|pc|ln|lm|lr|so|la|tq|mt|ac|en|dg|gc|ho)")
 rep("  openModule(m?m[1]:'dm',shared);","  openModule(m?m[1]:'ho',shared);")

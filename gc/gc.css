@@ -39,3 +39,20 @@
   .gcchips .gctn{display:none}
   .gclab{margin:12px 0 6px}
 }
+/* instruments et piano */
+.gclab.first{margin-top:0}
+.gcpick .gcsearch{margin-top:14px}
+.gcgrid.kb{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.gccard.kb{padding:14px 10px 10px}
+.gckb{width:100%;max-width:330px;height:auto;display:block}
+.gcw{fill:#FBF8F1;stroke:#1d1d1b;stroke-width:1}
+.gcw.on{fill:var(--accent)}
+.gcb{fill:#1d1d1b;stroke:#1d1d1b;stroke-width:1}
+.gcb.on{fill:var(--accent);stroke:#1d1d1b}
+.gckn{font:700 8px/1 var(--f-body);fill:var(--accent-ink)}
+.gckn.b{font-size:6.6px}
+.gckn.root{text-decoration:underline}
+.gcc4{fill:#9C9A95}
+.gckeys{font-weight:700;font-size:.92rem;color:var(--ink)}
+.gcfifth{margin:10px 0 0;font-size:.9rem;color:var(--ink)}
+@media (max-width:600px){.gcgrid.kb{grid-template-columns:1fr}}

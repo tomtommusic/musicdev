@@ -317,3 +317,4 @@
 .dgn4.acc circle:first-child,.dgn5.acc .dgn5c{fill:#1d1d1b}
 .dgn4.nat .dgn4t,.dgn5.nat .dgn5t{fill:#1d1d1b}.dgn4.acc .dgn4t,.dgn5.acc .dgn5t{fill:#FBF8F1}
 .dgn5sep{stroke:#FBF8F1;opacity:.45}
+.dgneck.v4 .dgpeg{fill:var(--sunk);stroke:var(--ink);stroke-width:1.6}

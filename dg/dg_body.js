@@ -182,7 +182,9 @@ function dgStringsView(I){
     if(fret)mk('text',{x:NW+12,y:NUT+ROW*(f-0.5)+3,'text-anchor':'middle',class:'dgfnum'},String(f));}
   if(fret){for(const f of[3,5,7,9,15,17,19])if(f<=maxF)mk('circle',{cx:NW/2,cy:NUT+ROW*(f-0.5)+ (f%2?0:0),r:3.4,class:'dginlay4'});
     if(maxF>=12)for(const dx of[-SP,SP])mk('circle',{cx:NW/2+dx,cy:NUT+ROW*11.5,r:3.4,class:'dginlay4'});}
-  I.strings.forEach((s,i)=>mk('line',{x1:sx(i),y1:NUT-14,x2:sx(i),y2:VH,class:'dgstr4','stroke-width':Math.max(1,(fret?(I.id==='bass'?3.2:2.2):2)-i*(fret?(I.id==='bass'?0.4:0.25):0.3))}));
+  I.strings.forEach((s,i)=>{const sh=I.short&&I.short.i===i,y1=sh?NUT+ROW*I.short.from:NUT-14;
+    mk('line',{x1:sx(i),y1,x2:sx(i),y2:VH,class:'dgstr4','stroke-width':I.short?Math.max(1,2.6-(s-50)/12):Math.max(1,(fret?(I.id==='bass'?3.2:2.2):2)-i*(fret?(I.id==='bass'?0.4:0.25):0.3))});
+    if(sh)mk('circle',{cx:sx(i),cy:y1,r:4,class:'dgpeg'});});
   /* notes */
   const dots=[];
   const pick=(m,si,f,g)=>{dots.forEach(d=>{d.g.classList.toggle('same',d.m%12===m%12);d.g.classList.toggle('exact',d.m===m);d.g.classList.toggle('sel',d.g===g);});
@@ -194,8 +196,9 @@ function dgStringsView(I){
       el('p',{class:'hint'},'En couleur : toutes les places qui donnent la même note ; en plus foncé, exactement la même hauteur.'));
     dgPlay(m,I.timbre);};
   I.strings.forEach((s,si)=>{for(let f=0;f<=maxF;f++){
-    const m=s+f,fg=!fret&&DG_FING[I.fing][f],first=!fret&&f>0&&!!fg,high=!fret&&f>0&&!fg;
-    const x=sx(si),y=rowY(f);
+    const sh=I.short&&I.short.i===si;if(sh&&f>0&&f<=I.short.from)continue;
+    const m=s+(sh&&f>0?f-I.short.from:f),fg=!fret&&DG_FING[I.fing][f],first=!fret&&f>0&&!!fg,high=!fret&&f>0&&!fg;
+    const x=sx(si),y=sh&&f===0?rowY(I.short.from):rowY(f);
     let g;
     if(!fret){g=mk('g',{class:'dgn5'+(dgBlack(m)?' acc':' nat')+(f===0?' open':''),tabindex:'0',role:'button'});
       const pc=((m%12)+12)%12,cs=DG_COL[DG_LSH[pc]],cf=DG_COL[DG_LFL[pc]],nm=fl=>dgCap(T(dgName(m,fl)));
