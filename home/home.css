@@ -30,3 +30,6 @@
   .rail .hotip.lang{order:1}
 }
 @media (max-width:600px){.hologo{display:none}}
+
+/* bouton Explications : seulement là où des éléments y sont reliés (exercices) */
+main[data-kind="tools"] .helpwrap,main[data-kind="lib"] .helpwrap,main[data-kind="quiz"] .helpwrap{display:none}

@@ -27,6 +27,8 @@ const gcType=id=>GC_TYPES.find(t=>t.id===id)||GC_TYPES[0];
 /* nom d'une note selon l'orthographe du symbole (bémols pour mi♭, la♭, si♭, dièses sinon) */
 const gcFlat=r=>[3,8,10].includes(r);
 const gcNote=(pc,flat)=>dgCap(T(dgName(pc,flat)));
+/* symbole d'accord dans la langue choisie : lettres en anglais (Am7), solfège ailleurs (La m7) */
+const gcSym=(r,ty)=>{if(typeof I18N!=='undefined'&&I18N.lang==='en')return GC_LET[r]+ty.sym;return gcNote(r,gcFlat(r))+(/^[a-z]/.test(ty.sym)?' ':'')+ty.sym;};
 
 /* ---------- recherche des positions ---------- */
 function gcVoicings(root,type){
@@ -104,7 +106,7 @@ function gcParse(q){
 /* ---------- vue ---------- */
 function gcRender(){
   const root=MOD.gc.root;if(!root)return;const ty=gcType(GC.type),flat=gcFlat(GC.root);
-  const sym=GC_LET[GC.root]+ty.sym,name=gcNote(GC.root,flat)+' '+T(ty.n);
+  const sym=gcSym(GC.root,ty),name=gcNote(GC.root,flat)+' '+T(ty.n);
   const notes=ty.iv.map(i=>gcNote((GC.root+i)%12,flat||[3,6,10].includes(i)&&ty.id!=='aug'));
   const vs=gcVoicings(GC.root,GC.type);
   const search=el('input',{type:'search',class:'gcq',placeholder:T('Ex. : Am7, Sol7, F♯m'),'aria-label':T('Chercher un accord'),autocomplete:'off',autocapitalize:'off',spellcheck:'false'});
@@ -119,7 +121,7 @@ function gcRender(){
         dgBlack(r)?gcNote(r,false)+' / '+gcNote(r,true):gcNote(r,false)))),
       el('p',{class:'gclab'},'Type d\'accord'),
       el('div',{class:'gcchips'},...GC_TYPES.map(t=>el('button',{type:'button',class:'dgchip','aria-pressed':String(t.id===GC.type),onclick:()=>{GC.type=t.id;gcSave();gcRender();}},
-        el('b',{'data-notr':''},GC_LET[GC.root]+t.sym),el('span',{class:'gctn'},' '+T(t.n)))))),
+        el('b',{'data-notr':''},gcSym(GC.root,t)),el('span',{class:'gctn'},' '+T(t.n)))))),
     el('section',{class:'mtsec gcres'},
       el('div',{class:'gchead'},el('h2',{class:'gcsym','data-notr':''},sym),el('div',{},el('p',{class:'gcname','data-notr':''},name),
         el('p',{class:'gcnotes'},el('span',{},'Notes'),' ',el('b',{'data-notr':''},notes.join(' – '))))),

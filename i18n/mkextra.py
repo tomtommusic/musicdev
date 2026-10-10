@@ -212,5 +212,6 @@ a("Choisis ce que tu veux travailler.","Choose what you want to work on.","Elige
 a("Touche ici pour choisir ce que tu veux travailler.","Tap here to choose what you want to work on.","Toca aquí para elegir lo que quieres practicar.")
 a("Touche « ? », puis l'élément à comprendre.","Tap \"?\", then the item you want explained.","Toca «?» y luego el elemento que quieres entender.")
 a("Ex. : Am7, Sol7, F♯m","e.g. Am7, G7, F♯m","Ej.: Am7, Sol7, F♯m")
+a("Dans un exercice, touche « Explications », puis l'élément à comprendre.","In an exercise, tap \"Help\", then the item you want explained.","En un ejercicio, toca «Ayuda» y luego el elemento que quieres entender.")
 json.dump({'en':E,'es':S},open('extra.json','w'),ensure_ascii=False,indent=0)
 print(len(E))

@@ -11,7 +11,6 @@ function hoTips(){
   if(lang)lang.after(hoTip('up lang','Langue','Français, English, Español.'));
   if(mobile)mp.after(hoTip('up','Les modules','Touche ici pour choisir ce que tu veux travailler.'));
   else if(mods)mods.before(hoTip('down','Les modules','Choisis ce que tu veux travailler.'));
-  if(help)help.after(hoTip('up right','Explications','Touche « ? », puis l\'élément à comprendre.'));
 }
 MOD.ho.mount=function(){
   $('#toolbar').replaceChildren();
@@ -23,7 +22,7 @@ MOD.ho.mount=function(){
     el('ul',{class:'hosteps'},
       el('li',{},el('b',{},'1'),el('span',{},'Choisis un module.')),
       el('li',{},el('b',{},'2'),el('span',{},'Ajuste le niveau avec « Réglages ».')),
-      el('li',{},el('b',{},'3'),el('span',{},'Un mot inconnu ? Touche « Explications ».'))),
+      el('li',{},el('b',{},'3'),el('span',{},'Dans un exercice, touche « Explications », puis l\'élément à comprendre.'))),
     el('div',{class:'homail'},el('p',{},el('b',{},'Une idée ? Un problème ?'),' ',el('span',{},'Écris-moi, ça m\'aide à améliorer l\'app.')),
       el('a',{class:'btn primary',href:mail},'✉ Envoyer un commentaire'),el('span',{class:'homaddr','data-notr':''},HO_MAIL))));
   setTimeout(hoTips,0);
