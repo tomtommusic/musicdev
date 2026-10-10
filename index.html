@@ -1172,6 +1172,30 @@ main[data-kind="tools"] > .stand,main[data-kind="tools"] > #toolbar,main[data-ki
 .dgsilg{opacity:.08}.dgsilf{fill:var(--ink)}.dgsils{fill:none;stroke:var(--ink);stroke-width:16;stroke-linecap:round;stroke-linejoin:round}.dgcell2 .dgsilf{fill:#1d1d1b}.dgcell2 .dgsils{stroke:#1d1d1b}
 .dglk.off{background:var(--surface)}
 .dgsvg.clar.big{width:160px}.dgsvg.clar.mini{width:56px}
+
+/* clarinette réaliste */
+.dgsvg.clar.real{width:auto}
+.dgsvg.clar.real.big{height:420px;width:auto}
+.dgsvg.clar.real.mini{height:200px;width:auto}
+.dgalt .dgsvg.clar.real{height:300px}
+.cbody{fill:#fff;stroke:#9a9a9a;stroke-width:1.2}
+.cring{stroke:#9a9a9a;stroke-width:1.4}
+.carm{fill:none;stroke:#333;stroke-width:1.1}
+.cpad{fill:#a9a9a9;stroke:#555;stroke-width:1}
+.clev{fill:#fff;stroke:#2b2b2b;stroke-width:1.1}
+.chole{fill:#a9a9a9;stroke:#555;stroke-width:1}
+.csliver{fill:none;stroke:#2b2b2b;stroke-width:2.4;stroke-linecap:round}
+.cpad.on,.clev.on,.chole.on{fill:#C8102E;stroke:#7a0a1c}
+.csliver.on{stroke:#C8102E}
+.dgkeyleg.red .dglk.on{background:#C8102E;border-color:#7a0a1c}.dgkeyleg.red .dglk.off{background:#a9a9a9;border-color:#555}
+:root[data-theme="dark"] .cbody{fill:#2b2a27;stroke:#77736b}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cbody{fill:#2b2a27;stroke:#77736b}:root:not([data-theme="light"]) .clev{fill:#2b2a27;stroke:#d8d2c6}:root:not([data-theme="light"]) .carm{stroke:#d8d2c6}}
+:root[data-theme="dark"] .clev{fill:#2b2a27;stroke:#d8d2c6}:root[data-theme="dark"] .carm{stroke:#d8d2c6}
+.dgcell2 .cbody{fill:#fff;stroke:#9a9a9a}.dgcell2 .clev{fill:#fff;stroke:#2b2b2b}.dgcell2 .carm{stroke:#333}
+.dgcell2 .cpad.on,.dgcell2 .clev.on,.dgcell2 .chole.on{fill:#C8102E}
+:root[data-theme="dark"] .csliver{stroke:#d8d2c6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .csliver{stroke:#d8d2c6}}
+.dgcell2 .csliver{stroke:#2b2b2b}.dgcell2 .csliver.on{stroke:#C8102E}
 </style>
 
 <div class="app">
@@ -5372,6 +5396,7 @@ const DG_LAYOUT={
     labels:[]},
 };
 function dgWindSvg(inst,keys,size){
+  if(inst==='clar')return dgClarSvg(keys,size);
   const L=DG_LAYOUT[inst],on=new Set(keys),NS='http://www.w3.org/2000/svg';
   const svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox',L.vb);svg.setAttribute('class','dgsvg '+inst+(size?' '+size:''));svg.setAttribute('aria-hidden','true');
   const mk=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);svg.append(e);return e;};
@@ -5386,6 +5411,53 @@ function dgWindSvg(inst,keys,size){
   for(const[x,y,s]of(L.labels||[])){const t=mk('text',{x,y,class:'dgcap','text-anchor':'middle'});t.textContent=T(s);}
   return svg;
 }
+/* clarinette vue de face, façon schéma réaliste : corps, clés et leviers ; rouge = enfoncé */
+function dgClarSvg(keys,size){
+  const on=new Set(keys),NS='http://www.w3.org/2000/svg';
+  const svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox','0 0 100 334');svg.setAttribute('class','dgsvg clar real'+(size?' '+size:''));svg.setAttribute('aria-hidden','true');
+  const mk=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);svg.append(e);return e;};
+  const st=(id,base)=>base+(on.has(id)?' on':'');
+  /* corps : bec, barillet, corps du haut, corps du bas, pavillon */
+  mk('path',{d:'M45,2 h10 l3,24 h-16 Z',class:'cbody'});
+  mk('rect',{x:40,y:26,width:20,height:20,rx:2,class:'cbody'});
+  mk('rect',{x:41,y:46,width:18,height:132,class:'cbody'});
+  mk('rect',{x:41,y:180,width:18,height:110,class:'cbody'});
+  mk('path',{d:'M41,290 h18 C60,306 70,320 80,330 H20 C30,320 40,306 41,290 Z',class:'cbody'});
+  for(const y of[26,46,178,180,290])mk('line',{x1:39,y1:y,x2:61,y2:y,class:'cring'});
+  /* pouce et clé de registre (au dos, dessinés à gauche) */
+  mk('line',{x1:22,y1:66,x2:22,y2:73,class:'carm'});
+  mk('circle',{cx:22,cy:62,r:4,class:st('Reg','cpad')});
+  mk('path',{d:'M22,72 C27,78 27,86 22,90 C17,86 17,78 22,72 Z',class:st('Reg','clev')});
+  mk('circle',{cx:22,cy:100,r:6.5,class:st('T','chole')});
+  /* clé de la (tampon + palette) et clé de sol♯ (tampon + levier à droite) */
+  mk('line',{x1:50,y1:60,x2:50,y2:68,class:'carm'});
+  mk('circle',{cx:50,cy:56,r:4,class:st('A','cpad')});
+  mk('path',{d:'M50,67 C55,73 55,81 50,86 C45,81 45,73 50,67 Z',class:st('A','clev')});
+  mk('path',{d:'M46,65 H66 V72',class:'carm'});
+  mk('circle',{cx:44,cy:65,r:3.8,class:st('Gs','cpad')});
+  mk('rect',{x:63,y:70,width:6,height:22,rx:3,class:st('Gs','clev')});
+  /* main gauche */
+  mk('circle',{cx:50,cy:100,r:6.5,class:st('L1','chole')});
+  mk('path',{d:'M38,103 q-4,6 0,12',class:st('EbBb','csliver')});
+  mk('circle',{cx:50,cy:114,r:3.4,class:st('EbBb','cpad')});
+  mk('circle',{cx:50,cy:128,r:7.5,class:st('L2','chole')});
+  mk('circle',{cx:50,cy:147,r:5.5,class:st('L3','chole')});
+  /* clés latérales (côté droit) */
+  mk('line',{x1:66,y1:104,x2:66,y2:158,class:'carm'});
+  [['S1',106],['S2',119],['S3',132],['S4',145]].forEach(([id,y])=>{mk('line',{x1:59,y1:y+5,x2:63,y2:y+5,class:'carm'});mk('rect',{x:63.5,y,width:5,height:11,rx:2.5,class:st(id,'clev')});});
+  /* auriculaire gauche (bas du corps du haut, à gauche) */
+  mk('path',{d:'M41,149 C34,150 32,158 32,166 M41,160 C36,161 33,168 33,176',class:'carm'});
+  [['CsGs',148,-14],['lFs',156,-10],['lE',164,-6],['lF',172,-2]].forEach(([id,y,rot],i)=>{mk('rect',{x:21+i,y,width:15,height:7,rx:3.5,transform:`rotate(${rot} ${28+i} ${y+3.5})`,class:st(id,'clev')});});
+  /* main droite */
+  mk('circle',{cx:50,cy:200,r:6.8,class:st('R1','chole')});
+  mk('circle',{cx:50,cy:221,r:6.8,class:st('R2','chole')});
+  mk('circle',{cx:50,cy:243,r:6.8,class:st('R3','chole')});
+  /* auriculaire droit (bas du corps du bas, à gauche) */
+  mk('path',{d:'M41,252 C35,253 32,262 32,270 M41,264 C36,265 34,273 34,282',class:'carm'});
+  [['rAb',252,-14],['rFs',260,-10],['rE',268,-6],['rF',276,-2]].forEach(([id,y,rot],i)=>{mk('rect',{x:20+i,y,width:16,height:7,rx:3.5,transform:`rotate(${rot} ${28+i} ${y+3.5})`,class:st(id,'clev')});});
+  return svg;
+}
+
 /* trompette : trois pistons sur une silhouette de trompette */
 function dgValvesSvg(v,size){
   const NS='http://www.w3.org/2000/svg',svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox','0 0 170 70');svg.setAttribute('class','dgsvg tpt'+(size?' '+size:''));svg.setAttribute('aria-hidden','true');
@@ -5470,7 +5542,7 @@ function dgWindView(I){
     cells.set(n.m,c);chart.append(c);}
   show(cur);
   S.keyHandler=e=>{const i=notes.findIndex(n=>n.m===cur);if(e.code==='ArrowRight'&&i<notes.length-1){show(notes[i+1].m);return true;}if(e.code==='ArrowLeft'&&i>0){show(notes[i-1].m);return true;}if(e.code==='Space'){dgPlay(sound(cur),I.timbre);return true;}};
-  const legend=I.kind==='ww'?el('p',{class:'dgkeyleg'},el('span',{class:'dglk on'}),' ','enfoncé',el('span',{class:'dglk off'}),' ','ouvert'):null;
+  const legend=I.kind==='ww'?el('p',{class:'dgkeyleg'+(I.data==='clar'?' red':'')},el('span',{class:'dglk on'}),' ','enfoncé',el('span',{class:'dglk off'}),' ','ouvert'):null;
   return el('div',{class:'dgwrap'},detail,el('section',{class:'mtsec'},el('div',{class:'dgcharthead'},el('h3',{},'Tableau des doigtés'),legend),el('p',{class:'hint'},'Touche une case pour voir le doigté en grand et l\'entendre.'),chart));
 }
 
