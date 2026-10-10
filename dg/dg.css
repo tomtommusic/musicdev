@@ -295,3 +295,25 @@
   .dgcell2{border:1.5px solid #1d1d1b;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.12)}
   .dgcell2:active{transform:scale(.985)}
 }
+/* ===== cordes : sans panneau blanc, aux couleurs du thème (clair ou sombre) ===== */
+.dgneckwrap{background:transparent;border:0;padding:6px 0 0}
+.dgneck.v4 .dgwood4{fill:var(--sunk)!important;stroke:var(--ink);stroke-width:1.4}
+.dgneck.v4 .dgnut4{fill:var(--ink)}
+.dgneck.v4 .dgfret4{stroke:var(--muted);opacity:.55}
+.dgneck.v4 .dginlay4{fill:var(--muted);opacity:.35}
+.dgneck.v4 .dgstr4{stroke:var(--muted);opacity:.7}
+.dgneck.v4 .dgfnum,.dgneck.v4 .dgtapet{fill:var(--muted)}
+.dgneck.v4 .dgsname{fill:var(--ink)}
+.dgtape{fill:var(--ink);opacity:.85}
+.dgn4 circle:first-child,.dgn4.open circle:first-child{stroke:var(--ink)}
+.dgn4.nat circle:first-child,.dgn5.nat .dgn5c{fill:var(--surface)}
+.dgn4.acc circle:first-child,.dgn5.acc .dgn5c{fill:var(--ink)}
+.dgn4.nat .dgn4t,.dgn5.nat .dgn5t{fill:var(--ink)}.dgn4.acc .dgn4t,.dgn5.acc .dgn5t{fill:var(--surface)}
+.dgn5sep{stroke:var(--surface);opacity:.45}
+.dgn5ring{stroke:var(--ink)}
+.dgn5.sel .dgn5ring{stroke:var(--ink)}
+/* naturelles claires, altérées foncées dans les deux thèmes (comme les touches d'un piano) */
+.dgn4.nat circle:first-child,.dgn5.nat .dgn5c{fill:#FBF8F1}
+.dgn4.acc circle:first-child,.dgn5.acc .dgn5c{fill:#1d1d1b}
+.dgn4.nat .dgn4t,.dgn5.nat .dgn5t{fill:#1d1d1b}.dgn4.acc .dgn4t,.dgn5.acc .dgn5t{fill:#FBF8F1}
+.dgn5sep{stroke:#FBF8F1;opacity:.45}
