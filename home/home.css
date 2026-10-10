@@ -33,3 +33,9 @@
 
 /* bouton Explications : seulement là où des éléments y sont reliés (exercices) */
 main[data-kind="tools"] .helpwrap,main[data-kind="lib"] .helpwrap,main[data-kind="quiz"] .helpwrap{display:none}
+
+/* accueil : le bouton Explications reste visible et mis en valeur */
+main[data-mod="ho"] .helpwrap{display:flex!important}
+main[data-mod="ho"] #helpbtn{box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 35%,transparent);animation:hopulse 2.4s ease-in-out 3}
+@keyframes hopulse{50%{box-shadow:0 0 0 7px color-mix(in srgb,var(--accent) 15%,transparent)}}
+@media (prefers-reduced-motion:reduce){main[data-mod="ho"] #helpbtn{animation:none}}

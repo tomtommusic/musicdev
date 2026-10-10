@@ -11,7 +11,7 @@ rep("  {id:'mt',g:'Outils'","  {id:'gc',kind:'tools',t:'Accords',s:'Guitare, uku
 rep("if(id==='bt'||id==='mt'||id==='ac'||id==='en'||id==='dg')return{};","if(id==='bt'||id==='mt'||id==='ac'||id==='en'||id==='dg'||id==='gc'||id==='ho')return{};")
 rep("(dm|dr|iv|pc|ln|lm|lr|so|la|tq|mt|ac|en|dg)","(dm|dr|iv|pc|ln|lm|lr|so|la|tq|mt|ac|en|dg|gc|ho)")
 rep("  openModule(m?m[1]:'dm',shared);","  openModule(m?m[1]:'ho',shared);")
-rep("function openModule(id,shared,opts={}){\n","function openModule(id,shared,opts={}){\n  if(typeof hoOff==='function'&&id!=='ho')hoOff();\n")
+rep("function openModule(id,shared,opts={}){\n","function openModule(id,shared,opts={}){\n  if(typeof hoOff==='function'&&id!=='ho')hoOff();document.querySelector('main').dataset.mod=id;\n")
 code=open(D+'/gc/gc.js',encoding='utf-8').read()+'\n'+open(D+'/home/home.js',encoding='utf-8').read()
 rep("/* ---------- démarrage ---------- */",code+"\n/* ---------- démarrage ---------- */")
 css=open(D+'/gc/gc.css',encoding='utf-8').read()+open(D+'/home/home.css',encoding='utf-8').read()
