@@ -1,0 +1,32 @@
+
+/* ===== Accueil ===== */
+.ho{display:flex;flex-direction:column;gap:22px;max-width:640px}
+.hohero{display:flex;align-items:center;gap:18px}
+.hologo{width:88px;height:88px;border-radius:22px;box-shadow:var(--shadow-sm);flex:0 0 auto}
+.hotag{margin:0;font:700 1.35rem/1.2 var(--f-display);color:var(--ink)}
+.holead{margin:4px 0 0;color:var(--muted);font-size:1rem;line-height:1.4}
+.hosteps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.hosteps li{display:flex;align-items:center;gap:12px;font-size:.98rem}
+.hosteps li b{flex:0 0 auto;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font:700 .85rem/1 var(--f-mono)}
+.homail{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+.homail p{margin:0;flex:1 1 100%;font-size:.95rem}
+.homail a.btn{text-decoration:none}
+.homaddr{font:500 .8rem/1 var(--f-mono);color:var(--muted);word-break:break-all}
+/* bulles fléchées accrochées aux vrais éléments */
+.hotip{position:relative;align-self:flex-start;max-width:260px;margin:12px 0 4px;padding:9px 13px;border-radius:12px;background:var(--accent);color:var(--accent-ink);font-size:.86rem;line-height:1.35;box-shadow:var(--shadow-sm);animation:hoin .35s ease both}
+.hotip b{font-weight:800}
+.hotip::before{content:"";position:absolute;left:22px;width:0;height:0;border:8px solid transparent}
+.hotip.up::before{top:-15px;border-bottom-color:var(--accent)}
+.hotip.down{margin:4px 0 14px}.hotip.down::before{bottom:-15px;border-top-color:var(--accent)}
+.hotip.right{margin-left:auto}.hotip.right::before{left:auto;right:28px}
+.helpwrap:has(.hotip){display:flex;flex-direction:column;align-items:flex-end}
+.helpwrap .hotip.up.right{align-self:flex-end;text-align:left}
+@keyframes hoin{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.hotip{animation:none}}
+@media (max-width:600px){
+  .hohero{gap:14px}.hologo{width:64px;height:64px;border-radius:16px}
+  .helpwrap:has(.hotip){align-items:flex-start}
+  .helpwrap .hotip.up.right{align-self:flex-start;margin-left:0}.helpwrap .hotip.right::before{right:auto;left:22px}
+  .rail .hotip.lang{order:1}
+}
+@media (max-width:600px){.hologo{display:none}}

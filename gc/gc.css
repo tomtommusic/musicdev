@@ -1,0 +1,41 @@
+
+/* ===== Accords de guitare ===== */
+.gc{display:flex;flex-direction:column;gap:16px}
+.gcsearch{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.gcq{flex:1 1 220px;min-width:0;font:inherit;font-size:16px;padding:10px 14px;border:1px solid var(--btn-edge);border-radius:999px;background:var(--surface);color:var(--ink)}
+.gcq:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.gcmsg{font-size:.85rem;color:var(--bad,#b3261e)}
+.gclab{margin:14px 0 6px;font:500 .7rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.gcchips{display:flex;flex-wrap:wrap;gap:6px}
+.gcchips .dgchip b{font-weight:700}
+.gctn{color:var(--muted);font-size:.85em}
+.gcchips .dgchip[aria-pressed="true"] .gctn{color:inherit;opacity:.85}
+.gchead{display:flex;align-items:center;gap:16px;margin-bottom:10px}
+.gcsym{margin:0;font:700 2.6rem/1 var(--f-display);min-width:2ch}
+.gcname{margin:0;font:700 1.05rem/1.2 var(--f-body)}
+.gcnotes{margin:4px 0 0;color:var(--muted);font-size:.92rem}.gcnotes b{color:var(--ink)}
+.gcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.gccard{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 8px 10px;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);cursor:pointer;font:inherit}
+.gccard:hover{border-color:var(--accent)}.gccard:active{transform:scale(.985)}
+.gccard:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.gccap{font-size:.82rem;color:var(--muted)}
+.gcplay{position:absolute;top:8px;right:10px;font-size:.75rem;color:var(--accent)}
+.gcd{width:100%;max-width:150px;height:auto;display:block}
+.gcfret{stroke:var(--muted);stroke-width:1;opacity:.7}
+.gcstr{stroke:var(--ink)}
+.gcnut{fill:var(--ink)}
+.gcpos{font:600 11px/1 var(--f-mono);fill:var(--muted)}
+.gcdot{fill:var(--ink)}
+.gcfn{font:700 9.5px/1 var(--f-body);fill:var(--surface)}
+.gcx{font:600 13px/1 var(--f-body);fill:var(--muted)}
+.gco{fill:none;stroke:var(--ink);stroke-width:1.4}
+.gcnn{font:500 8px/1 var(--f-body);fill:var(--muted)}.gcnn.root{font-weight:800;fill:var(--ink)}
+@media (max-width:600px){.gcgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.gcsym{font-size:2.1rem}}
+.gc .gchead .gcsym{margin:0;font:700 2.6rem/1 var(--f-display);color:var(--ink);letter-spacing:-.01em}
+@media (max-width:600px){.gc .gchead .gcsym{font-size:2.1rem}}
+@media (max-width:600px){
+  .gcsearch{flex-wrap:nowrap}.gcq{flex:1 1 auto;padding:9px 12px}
+  .gcchips{gap:5px}.gcchips .dgchip{padding:7px 10px;min-height:0;font-size:.88rem}
+  .gcchips .gctn{display:none}
+  .gclab{margin:12px 0 6px}
+}
