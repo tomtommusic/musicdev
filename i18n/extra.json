@@ -416,7 +416,9 @@
 "5e corde (sol aigu) : à vide, elle fait partie de l'accord.": "5th string (high G): play it open, it belongs to the chord.",
 "5e corde (sol aigu) : ne la joue pas, le sol ne fait pas partie de l'accord.": "5th string (high G): don't play it, G is not in the chord.",
 "Quatre paires de cordes accordées sol, ré, la, mi, comme le violon. S'écrit au son réel.": "Four pairs of strings tuned G, D, A, E, like the violin. Written at concert pitch.",
-"Accordage en sol ouvert : sol aigu (5e corde, courte), ré, sol, si, ré. La 5e corde commence à la 5e case. S'écrit une octave plus haut que le son réel.": "Open G tuning: high G (5th string, short), D, G, B, D. The 5th string starts at the 5th fret. Written an octave higher than it sounds."
+"Accordage en sol ouvert : sol aigu (5e corde, courte), ré, sol, si, ré. La 5e corde commence à la 5e case. S'écrit une octave plus haut que le son réel.": "Open G tuning: high G (5th string, short), D, G, B, D. The 5th string starts at the 5th fret. Written an octave higher than it sounds.",
+"Quelle corde ? Quel doigt ?": "Which string? Which finger?",
+"Chaque couleur est une corde. Sous chaque note : le doigt en 1re position (0 = corde à vide, ↓ bas, ↑ haut, x extension). Une même note peut parfois se jouer sur deux cordes. Touche une note pour l'entendre et la voir sur la touche.": "Each color is a string. Under each note: the finger in first position (0 = open string, ↓ low, ↑ high, x extension). The same note can sometimes be played on two strings. Tap a note to hear it and see it on the fingerboard."
 },
 "es": {
 "Modules": "Módulos",
@@ -835,6 +837,8 @@
 "5e corde (sol aigu) : à vide, elle fait partie de l'accord.": "5.ª cuerda (sol agudo): al aire, forma parte del acorde.",
 "5e corde (sol aigu) : ne la joue pas, le sol ne fait pas partie de l'accord.": "5.ª cuerda (sol agudo): no la toques, el sol no forma parte del acorde.",
 "Quatre paires de cordes accordées sol, ré, la, mi, comme le violon. S'écrit au son réel.": "Cuatro pares de cuerdas afinadas sol, re, la, mi, como el violín. Se escribe a sonido real.",
-"Accordage en sol ouvert : sol aigu (5e corde, courte), ré, sol, si, ré. La 5e corde commence à la 5e case. S'écrit une octave plus haut que le son réel.": "Afinación en sol abierto: sol agudo (5.ª cuerda, corta), re, sol, si, re. La 5.ª cuerda empieza en el traste 5. Se escribe una octava más alta de lo que suena."
+"Accordage en sol ouvert : sol aigu (5e corde, courte), ré, sol, si, ré. La 5e corde commence à la 5e case. S'écrit une octave plus haut que le son réel.": "Afinación en sol abierto: sol agudo (5.ª cuerda, corta), re, sol, si, re. La 5.ª cuerda empieza en el traste 5. Se escribe una octava más alta de lo que suena.",
+"Quelle corde ? Quel doigt ?": "¿Qué cuerda? ¿Qué dedo?",
+"Chaque couleur est une corde. Sous chaque note : le doigt en 1re position (0 = corde à vide, ↓ bas, ↑ haut, x extension). Une même note peut parfois se jouer sur deux cordes. Touche une note pour l'entendre et la voir sur la touche.": "Cada color es una cuerda. Debajo de cada nota: el dedo en 1.ª posición (0 = cuerda al aire, ↓ bajo, ↑ alto, x extensión). Una misma nota a veces se puede tocar en dos cuerdas. Toca una nota para escucharla y verla en el diapasón."
 }
 }

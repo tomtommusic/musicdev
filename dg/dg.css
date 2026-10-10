@@ -318,3 +318,14 @@
 .dgn4.nat .dgn4t,.dgn5.nat .dgn5t{fill:#1d1d1b}.dgn4.acc .dgn4t,.dgn5.acc .dgn5t{fill:#FBF8F1}
 .dgn5sep{stroke:#FBF8F1;opacity:.45}
 .dgneck.v4 .dgpeg{fill:var(--sunk);stroke:var(--ink);stroke-width:1.6}
+/* cordes frottées : la portée par corde */
+.dgsrows{display:flex;flex-direction:column;gap:10px}
+.dgsrow{display:grid;grid-template-columns:118px minmax(0,1fr);align-items:center;gap:8px 12px;padding:8px 12px 4px;border-left:7px solid var(--sc);border-radius:12px;background:var(--surface);border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.dgstab b{color:var(--sc);font:800 .95rem/1.2 var(--f-body)}
+.dgsstaff{min-width:0;color:var(--ink)}
+.dgsstaff .abcjs-note,.dgsstaff .abcjs-note path{fill:var(--sc);cursor:pointer}
+.dgsstaff .abcjs-lyric{fill:var(--sc);font-weight:800}
+.dgsstaff .abcjs-note.dgson path{fill:var(--ink);stroke:var(--sc);stroke-width:2.5}
+.dgn5.open .dgn5ring{stroke:var(--sc);stroke-width:3.2}
+@media (max-width:600px){.dgsrow{grid-template-columns:1fr;padding:8px 8px 2px}}
+.dgsstaff{cursor:pointer}

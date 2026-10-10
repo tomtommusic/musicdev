@@ -192,6 +192,7 @@ function dgWindView(I){
 
 /* ---------- cordes : manche dessiné ---------- */
 const DG_COL={C:'#E2312B',D:'#35A2DB',E:'#2BA35A',F:'#2C3A91',G:'#F0A132',A:'#D72679',B:'#7A3E9B'},DG_LSH='CCDDEFFGGAAB',DG_LFL='CDDEEFGGAABB';
+const DG_SCOL=['#D2872C','#2F9C69','#2F73C2','#C2417E'];
 const DG_FING={
   vln:['0','1 bas','1','2 bas','2','3','3 haut','4'],
   vc:['0','1 ext.','1','2','3','4','4 ext.'],
@@ -224,11 +225,12 @@ function dgStringsView(I){
   if(fret){for(const f of[3,5,7,9,15,17,19])if(f<=maxF)mk('circle',{cx:NW/2,cy:NUT+ROW*(f-0.5)+ (f%2?0:0),r:3.4,class:'dginlay4'});
     if(maxF>=12)for(const dx of[-SP,SP])mk('circle',{cx:NW/2+dx,cy:NUT+ROW*11.5,r:3.4,class:'dginlay4'});}
   I.strings.forEach((s,i)=>{const sh=I.short&&I.short.i===i,y1=sh?NUT+ROW*I.short.from:NUT-14;
-    mk('line',{x1:sx(i),y1,x2:sx(i),y2:VH,class:'dgstr4','stroke-width':I.short?Math.max(1,2.6-(s-50)/12):Math.max(1,(fret?(I.id==='bass'?3.2:2.2):2)-i*(fret?(I.id==='bass'?0.4:0.25):0.3))});
+    mk('line',{x1:sx(i),y1,x2:sx(i),y2:VH,class:'dgstr4',...(fret?{}:{style:`stroke:${DG_SCOL[i]}`}),'stroke-width':I.short?Math.max(1,2.6-(s-50)/12):Math.max(1,(fret?(I.id==='bass'?3.2:2.2):2)-i*(fret?(I.id==='bass'?0.4:0.25):0.3))});
     if(sh)mk('circle',{cx:sx(i),cy:y1,r:4,class:'dgpeg'});});
   /* notes */
-  const dots=[];
+  const dots=[],staffBoxes=[];
   const pick=(m,si,f,g)=>{dots.forEach(d=>{d.g.classList.toggle('same',d.m%12===m%12);d.g.classList.toggle('exact',d.m===m);d.g.classList.toggle('sel',d.g===g);});
+    staffBoxes.forEach(b=>b.querySelectorAll('.abcjs-note').forEach(n=>n.classList.toggle('dgson',+n.dataset.m===m&&+n.dataset.si===si)));
     const fg=!fret&&DG_FING[I.fing][f];
     info.replaceChildren(el('div',{class:'dgdtop'},el('div',{class:'dgdname'},dgNameEl(m,'dgnm big'),el('span',{class:'dgsub'},
         `${T('Corde')} ${dgCap(T(dgName(I.strings[si],true)))} · `+(fret?(f===0?T('à vide'):`${T('case')} ${f}`):(f===0?T('à vide'):fg?`${T('doigt')} ${T(fg)}`:T('position plus haute'))))),
@@ -249,7 +251,8 @@ function dgStringsView(I){
         mk('text',{x,y:y-3.2,'text-anchor':'middle',class:'dgn5t s'},nm(false),g);mk('text',{x,y:y+10,'text-anchor':'middle',class:'dgn5t s'},nm(true),g);}
       mk('circle',{cx:x,cy:y,r:R,class:'dgn5ring'},null,g);
       const go=()=>pick(m,si,f,g);g.addEventListener('click',go);g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});
-      dots.push({g,m});continue;}
+      if(f===0)g.style.setProperty('--sc',DG_SCOL[si]);
+      dots.push({g,m,si,f});continue;}
     g=mk('g',{class:'dgn4'+(dgBlack(m)?' acc':' nat')+(f===0?' open':'')+(high?' high':''),tabindex:'0',role:'button'});
     if(f===0){mk('rect',{x:x-SP/2+1,y:y-14,width:SP-2,height:26,rx:6,class:'dgn4hit'},null,g);mk('text',{x,y:y+6,'text-anchor':'middle',class:'dgsname'},dgCap(T(dgName(m,DG.flats))),g);}
     else{mk('circle',{cx:x,cy:y,r:R},null,g);
@@ -263,5 +266,23 @@ function dgStringsView(I){
     fret?el('div',{class:'seg'},...[[12,'Cases 0–12'],[19,'Cases 0–19']].map(([v,l])=>el('button',{type:'button','aria-pressed':String(DG.frets===v),onclick:()=>{DG.frets=v;dgSave();dgRender();}},l))):null);
   info.replaceChildren(el('p',{class:'hint'},fret?'Touche une note sur le manche pour l\'entendre et voir toutes les places qui la donnent.':'Touche une note pour l\'entendre. Les rubans blancs marquent la place des doigts en 1re position, comme sur les touches d\'élèves.'));
   S.keyHandler=null;
-  return el('div',{class:'dgwrap dgstrings'},info,el('section',{class:'mtsec dgnecksec'},el('h3',{},fret?'Toutes les notes du manche':'Notes de la touche'),opts,el('div',{class:'dgneckwrap'},svg)));
+  /* cordes frottées : la portée, corde par corde (une couleur par corde), avec le doigt sous chaque note */
+  let staffSec=null;
+  if(!fret){
+    const labOf=f=>DG_FING[I.fing][f].replace(' bas','↓').replace(' haut','↑').replace(' ext.','x').replace(' (½ pos.)','½');
+    const abcN=m=>(DG.flats?dgAbcFlat:dgAbcNote)(m+I.tr);
+    const rows=I.strings.map((s,si)=>{const fs=DG_FING[I.fing].map((x,f)=>f),box=el('div',{class:'dgsstaff'});staffBoxes.push(box);
+      requestAnimationFrame(()=>{if(!box.isConnected||!HAS_ABC())return;
+        ABCJS.renderAbc(box,`X:1\nL:1/4\nK:C clef=${I.clef}\n${fs.map(f=>abcN(s+f)+'4').join(' ')} |]\nw: ${fs.map(labOf).join(' ')}`,{add_classes:true,responsive:'resize',staffwidth:Math.max(270,Math.min(560,(box.clientWidth||560)-8)),scale:1,paddingtop:4,paddingbottom:0,paddingleft:0,paddingright:4,foregroundColor:'currentColor'});
+        const ns=[...box.querySelectorAll('.abcjs-note')];ns.forEach((n,k)=>{const f=fs[k];if(f==null)return;n.dataset.m=s+f;n.dataset.si=si;n.dataset.f=f;});
+        /* on touche près d'une note (pas forcément dans la tête de la ronde) : la plus proche horizontalement */
+        box.onclick=e=>{let best=null,bd=1e9;ns.forEach(n=>{const r=n.getBoundingClientRect(),d=Math.abs(e.clientX-(r.left+r.right)/2);if(d<bd){bd=d;best=n;}});
+          if(!best||bd>40)return;const f=+best.dataset.f,d=dots.find(d=>d.si===si&&d.f===f);pick(s+f,si,f,d&&d.g);};});
+      const nm=dgCap(T(dgName(s,true)));
+      return el('div',{class:'dgsrow',style:`--sc:${DG_SCOL[si]}`},el('div',{class:'dgstab'},el('b',{'data-notr':''},TL('Corde de '+nm.toLowerCase(),nm+' string','Cuerda de '+nm.toLowerCase()))),box);});
+    staffSec=el('section',{class:'mtsec dgstaffsec'},el('h3',{},'Quelle corde ? Quel doigt ?'),
+      el('p',{class:'hint'},'Chaque couleur est une corde. Sous chaque note : le doigt en 1re position (0 = corde à vide, ↓ bas, ↑ haut, x extension). Une même note peut parfois se jouer sur deux cordes. Touche une note pour l\'entendre et la voir sur la touche.'),
+      el('div',{class:'dgsrows'},...rows));
+  }
+  return el('div',{class:'dgwrap dgstrings'},info,staffSec,el('section',{class:'mtsec dgnecksec'},el('h3',{},fret?'Toutes les notes du manche':'Notes de la touche'),opts,el('div',{class:'dgneckwrap'},svg)));
 }
