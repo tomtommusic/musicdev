@@ -264,3 +264,34 @@
 .dgn5.exact .dgn5ring{stroke:#fff;stroke-width:3.4}
 .dgn5.sel .dgn5ring{stroke:#FFE36E;stroke-width:4}
 .dgn5:focus-visible{outline:none}.dgn5:focus-visible .dgn5ring{stroke:#FFE36E;stroke-width:3}
+/* ===== cordes : noir et blanc, comme les tableaux des vents ===== */
+.dgneckwrap{background:#fff;border:1.5px solid #1d1d1b;border-radius:2px;padding:12px 4px 8px}
+.dgneck.v4 .dgwood4{fill:#F2F1EE!important;stroke:#1d1d1b;stroke-width:1.4}
+.dgneck.v4 .dggrain{display:none}
+.dgneck.v4 .dgnut4{fill:#1d1d1b}
+.dgneck.v4 .dgfret4{stroke:#9C9A95;stroke-width:1.6;opacity:1}
+.dgneck.v4 .dginlay4{fill:#C9C6BF;opacity:1}
+.dgneck.v4 .dgstr4{stroke:#8E8B85;opacity:1}
+.dgneck.v4 .dgfnum,.dgneck.v4 .dgtapet{fill:#55534f}
+.dgneck.v4 .dgsname{fill:#1d1d1b}
+.dgtape{fill:#1d1d1b;opacity:.85}
+.dgn4 circle:first-child{stroke:#1d1d1b;stroke-width:1.4}
+.dgn4.nat circle:first-child{fill:#fff}
+.dgn4.acc circle:first-child{fill:#1d1d1b}
+.dgn4.nat .dgn4t{fill:#1d1d1b}.dgn4.acc .dgn4t{fill:#fff}
+.dgn4.open circle:first-child{stroke:#1d1d1b}
+.dgn5 .dgn5c{stroke:none}.dgn5.nat .dgn5c{fill:#fff}.dgn5.acc .dgn5c{fill:#1d1d1b}
+.dgn5.nat .dgn5t{fill:#1d1d1b}.dgn5.acc .dgn5t{fill:#fff}
+.dgn5sep{stroke:rgba(255,255,255,.45)}
+.dgn5ring{stroke:#1d1d1b;stroke-width:1.4}
+.dgn5.same .dgn5ring,.dgn4.same circle:first-child{stroke:#2E8B6E;stroke-width:3}
+.dgn5.exact .dgn5c,.dgn4.exact circle:first-child{fill:#CFE6DD}.dgn5.exact .dgn5t,.dgn4.exact .dgn4t{fill:#10201B}
+.dgn5.sel .dgn5c,.dgn4.sel circle:first-child{fill:#2E8B6E}.dgn5.sel .dgn5ring{stroke:#1d1d1b;stroke-width:2}.dgn5.sel .dgn5t,.dgn4.sel .dgn4t{fill:#fff}
+.dgn5:focus-visible .dgn5ring{stroke:#2E8B6E;stroke-width:3}
+.dgn4hit{fill:transparent}.dgn4.same .dgn4hit{fill:#CFE6DD}.dgn4.sel .dgn4hit{fill:#2E8B6E}
+/* mobile : petites cases séparées, qu'on devine cliquables */
+@media (max-width:600px){
+  .dgchart{gap:6px;border:0;background:transparent;border-radius:0}
+  .dgcell2{border:1.5px solid #1d1d1b;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+  .dgcell2:active{transform:scale(.985)}
+}

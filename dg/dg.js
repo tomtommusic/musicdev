@@ -216,7 +216,7 @@ function dgStringsView(I){
   /* sillet, frettes (ou repères de demi-tons), cordes */
   mk('rect',{x:4,y:NUT-3,width:NW-8,height:6,class:'dgnut4'});
   if(!fret)for(let f=1;f<=maxF;f++){const fg=DG_FING[I.fing][f];if(!/^\d$/.test(fg||''))continue;const y=bowY(f);
-    mk('rect',{x:0,y:y-2.6,width:NW+2,height:5.2,rx:1,class:'dgtape'});mk('text',{x:NW+5,y:y+4,class:'dgtapet'},TL(fg==='1'?'1er':fg+'e',fg==='1'?'1st':fg==='2'?'2nd':fg==='3'?'3rd':fg+'th',fg+'.º'));}
+    mk('rect',{x:0,y:y-1.6,width:NW+2,height:3.2,rx:1,class:'dgtape'});mk('text',{x:NW+5,y:y+4,class:'dgtapet'},TL(fg==='1'?'1er':fg+'e',fg==='1'?'1st':fg==='2'?'2nd':fg==='3'?'3rd':fg+'th',fg+'.º'));}
   for(let f=1;f<=maxF&&fret;f++){const y=NUT+ROW*f;mk('line',{x1:6,y1:y,x2:NW-6,y2:y,class:'dgfret4'});
     if(fret)mk('text',{x:NW+12,y:NUT+ROW*(f-0.5)+3,'text-anchor':'middle',class:'dgfnum'},String(f));}
   if(fret){for(const f of[3,5,7,9,15,17,19])if(f<=maxF)mk('circle',{cx:NW/2,cy:NUT+ROW*(f-0.5)+ (f%2?0:0),r:3.4,class:'dginlay4'});
@@ -236,10 +236,10 @@ function dgStringsView(I){
     const m=s+f,fg=!fret&&DG_FING[I.fing][f],first=!fret&&f>0&&!!fg,high=!fret&&f>0&&!fg;
     const x=sx(si),y=rowY(f);
     let g;
-    if(!fret){g=mk('g',{class:'dgn5'+(f===0?' open':''),tabindex:'0',role:'button'});
+    if(!fret){g=mk('g',{class:'dgn5'+(dgBlack(m)?' acc':' nat')+(f===0?' open':''),tabindex:'0',role:'button'});
       const pc=((m%12)+12)%12,cs=DG_COL[DG_LSH[pc]],cf=DG_COL[DG_LFL[pc]],nm=fl=>dgCap(T(dgName(m,fl)));
-      if(!dgBlack(m)){mk('circle',{cx:x,cy:y,r:R,fill:cs,class:'dgn5c'},null,g);mk('text',{x,y:y+4,'text-anchor':'middle',class:'dgn5t'},nm(false),g);}
-      else{mk('circle',{cx:x,cy:y,r:R,fill:cf,class:'dgn5c'},null,g);mk('path',{d:`M${x-R},${y} A${R},${R} 0 0 1 ${x+R},${y} Z`,fill:cs},null,g);
+      if(!dgBlack(m)){mk('circle',{cx:x,cy:y,r:R,class:'dgn5c'},null,g);mk('text',{x,y:y+4,'text-anchor':'middle',class:'dgn5t'},nm(false),g);}
+      else{mk('circle',{cx:x,cy:y,r:R,class:'dgn5c'},null,g);
         mk('line',{x1:x-R,y1:y,x2:x+R,y2:y,class:'dgn5sep'},null,g);
         mk('text',{x,y:y-3.2,'text-anchor':'middle',class:'dgn5t s'},nm(false),g);mk('text',{x,y:y+10,'text-anchor':'middle',class:'dgn5t s'},nm(true),g);}
       mk('circle',{cx:x,cy:y,r:R,class:'dgn5ring'},null,g);
