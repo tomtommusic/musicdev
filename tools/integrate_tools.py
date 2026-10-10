@@ -15,7 +15,7 @@ s=s[:j+1]+"""  {id:'mt',g:'Outils',kind:'tools',t:'Métronome',s:'Garder le temp
   {id:'ac',kind:'tools',t:'Accordeur',s:'Accorder son instrument',d:'Active le micro, choisis ton instrument et joue une note : vise le voyant vert du centre.'},
   {id:'en',kind:'tools',t:'Enregistreur',s:'S\\'enregistrer et partager',d:'Enregistre-toi, réécoute, nomme le fichier et partage-le par courriel ou autrement.'},
 """+s[j+1:]
-s=s.replace("  {id:'mt',g:'Outils'","  {id:'dg',kind:'tools',t:'Doigtés',s:'Vents et cordes',d:'Choisis un instrument : tous ses doigtés et toutes les notes du manche, à voir et à entendre.'},\n  {id:'mt',g:'Outils'",1)
+s=s.replace("  {id:'mt',g:'Outils'","  {id:'dg',kind:'tools',t:'Doigtés d\\'instruments',s:'Vents et cordes',d:'Choisis un instrument : tous ses doigtés et toutes les notes du manche, à voir et à entendre.'},\n  {id:'mt',g:'Outils'",1)
 rep("  if(id==='bt')return{};","  if(id==='bt'||id==='mt'||id==='ac'||id==='en'||id==='dg')return{};")
 rep("  if(M.kind==='lib'){S.ex=null;M.fresh();return;}","  if(M.kind==='lib'||M.kind==='tools'){S.ex=null;M.fresh();return;}")
 rep("function openModule(id,shared,opts={}){\n","function openModule(id,shared,opts={}){\n  if(typeof toolsStop==='function')toolsStop();\n")

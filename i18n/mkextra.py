@@ -167,5 +167,6 @@ a("Sans pouce. Le tableau ajoute la clé de mi♭ (auriculaire droit). Avec une 
 a("Si♭ du pouce","Thumb B♭","Si♭ de pulgar")
 a("Si♭ « bis »","Bis B♭","Si♭ «bis»")
 a("Touche une note pour l'entendre. Les rubans blancs marquent la place des doigts en 1re position, comme sur les touches d'élèves.","Tap a note to hear it. The white tapes mark where the fingers go in first position, like on student fingerboards.","Toca una nota para escucharla. Las cintas blancas marcan dónde van los dedos en 1.ª posición, como en los diapasones de estudiantes.")
+a("Doigtés d'instruments","Fingering Charts","Digitaciones de instrumentos")
 json.dump({'en':E,'es':S},open('extra.json','w'),ensure_ascii=False,indent=0)
 print(len(E))
