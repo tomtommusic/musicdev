@@ -1,0 +1,702 @@
+l_sol L1 [staff] Écris la note ré sur la portée (clé de sol).  => ré (à n'importe quelle octave)
+l_sol L1 [mc] Quel est le nom de cette note (clé de sol) ?  ABC:K:C clef=treble / c4 |]  OPTS: si | *do | ré | la  => B) do
+l_sol L1 [mc] Quel est le nom de cette note (clé de sol) ?  ABC:K:C clef=treble / d4 |]  OPTS: fa | do | *ré | mi  => C) ré
+l_sol L1 [short] Quel est le nom de cette note (clé de sol) ?  ABC:K:C clef=treble / A4 |]  => la
+l_sol L1 [staff] Écris la note la sur la portée (clé de sol).  => la (à n'importe quelle octave)
+l_sol L1 [mc] Quel est le nom de cette note (clé de sol) ?  ABC:K:C clef=treble / F4 |]  OPTS: sol | *fa | la | ré  => B) fa
+l_sol L2 [mc] Quel est le nom de cette note (clé de sol) ?  ABC:K:C clef=treble / G4 |]  OPTS: si | *sol | fa | la  => B) sol
+l_sol L2 [staff] Écris la note sol sur la portée (clé de sol).  => sol (à n'importe quelle octave)
+l_sol L2 [short] Quel est le nom de cette note (clé de sol) ?  ABC:K:C clef=treble / C4 |]  => do
+l_sol L2 [mc] Quel est le nom de cette note (clé de sol) ?  ABC:K:C clef=treble / A4 |]  OPTS: *la | sol | do | fa  => A) la
+l_sol L2 [staff] Écris la note la sur la portée (clé de sol).  => la (à n'importe quelle octave)
+l_sol L2 [mc] Quel est le nom de cette note (clé de sol) ?  ABC:K:C clef=treble / f4 |]  OPTS: ré | mi | la | *fa  => D) fa
+l_sol L3 [short] Quel est le nom de cette note (clé de sol) ?  ABC:K:C clef=treble / _c4 |]  => do♭
+l_sol L3 [staff] Écris la note ré sur la portée (clé de sol).  => ré (à n'importe quelle octave)
+l_sol L3 [staff] Écris la note ré sur la portée (clé de sol).  => ré (à n'importe quelle octave)
+l_sol L3 [mc] Quel est le nom de cette note (clé de sol) ?  ABC:K:C clef=treble / ^d4 |]  OPTS: mi♯ | do♯ | si♯ | *ré♯  => D) ré♯
+l_sol L3 [staff] Écris la note fa sur la portée (clé de sol).  => fa (à n'importe quelle octave)
+l_sol L3 [short] Quel est le nom de cette note (clé de sol) ?  ABC:K:C clef=treble / ^A,4 |]  => la♯
+l_fa L1 [staff] Écris la note sol sur la portée (clé de fa).  => sol (à n'importe quelle octave)
+l_fa L1 [mc] Quel est le nom de cette note (clé de fa) ?  ABC:K:C clef=bass / G,4 |]  OPTS: *sol | fa | la | mi  => A) sol
+l_fa L1 [staff] Écris la note sol sur la portée (clé de fa).  => sol (à n'importe quelle octave)
+l_fa L1 [mc] Quel est le nom de cette note (clé de fa) ?  ABC:K:C clef=bass / A,4 |]  OPTS: sol | fa | *la | do  => C) la
+l_fa L1 [short] Quel est le nom de cette note (clé de fa) ?  ABC:K:C clef=bass / G,,4 |]  => sol
+l_fa L1 [short] Quel est le nom de cette note (clé de fa) ?  ABC:K:C clef=bass / F,4 |]  => fa
+l_fa L2 [mc] Quel est le nom de cette note (clé de fa) ?  ABC:K:C clef=bass / D,4 |]  OPTS: si | mi | fa | *ré  => D) ré
+l_fa L2 [mc] Quel est le nom de cette note (clé de fa) ?  ABC:K:C clef=bass / D,4 |]  OPTS: *ré | mi | do | fa  => A) ré
+l_fa L2 [mc] Quel est le nom de cette note (clé de fa) ?  ABC:K:C clef=bass / C4 |]  OPTS: *do | si | mi | la  => A) do
+l_fa L2 [staff] Écris la note do sur la portée (clé de fa).  => do (à n'importe quelle octave)
+l_fa L2 [short] Quel est le nom de cette note (clé de fa) ?  ABC:K:C clef=bass / A,,4 |]  => la
+l_fa L2 [mc] Quel est le nom de cette note (clé de fa) ?  ABC:K:C clef=bass / D,4 |]  OPTS: mi | fa | *ré | si  => C) ré
+l_fa L3 [mc] Quel est le nom de cette note (clé de fa) ?  ABC:K:C clef=bass / ^C4 |]  OPTS: la♯ | ré♯ | *do♯ | mi♯  => C) do♯
+l_fa L3 [mc] Quel est le nom de cette note (clé de fa) ?  ABC:K:C clef=bass / E4 |]  OPTS: do | *mi | fa | sol  => B) mi
+l_fa L3 [mc] Quel est le nom de cette note (clé de fa) ?  ABC:K:C clef=bass / B,,,4 |]  OPTS: *si | ré | do | sol  => A) si
+l_fa L3 [staff] Écris la note si sur la portée (clé de fa).  => si (à n'importe quelle octave)
+l_fa L3 [staff] Écris la note ré sur la portée (clé de fa).  => ré (à n'importe quelle octave)
+l_fa L3 [staff] Écris la note ré♭ sur la portée (clé de fa).  => ré♭ (à n'importe quelle octave)
+l_ut L1 [short] Quel est le nom de cette note (clé d'ut 3e ligne) ?  ABC:K:C clef=alto / G4 |]  => sol
+l_ut L1 [mc] Quel est le nom de cette note (clé d'ut 3e ligne) ?  ABC:K:C clef=alto / F,4 |]  OPTS: mi | ré | *fa | sol  => C) fa
+l_ut L1 [staff] Écris la note mi sur la portée (clé d'ut 3e ligne).  => mi (à n'importe quelle octave)
+l_ut L1 [mc] Quel est le nom de cette note (clé d'ut 3e ligne) ?  ABC:K:C clef=alto / G,4 |]  OPTS: si | mi | *sol | la  => C) sol
+l_ut L1 [short] Quel est le nom de cette note (clé d'ut 3e ligne) ?  ABC:K:C clef=alto / E,4 |]  => mi
+l_ut L1 [short] Quel est le nom de cette note (clé d'ut 3e ligne) ?  ABC:K:C clef=alto / B,4 |]  => si
+l_ut L2 [staff] Écris la note sol sur la portée (clé d'ut 3e ligne).  => sol (à n'importe quelle octave)
+l_ut L2 [mc] Quel est le nom de cette note (clé d'ut 3e ligne) ?  ABC:K:C clef=alto / A4 |]  OPTS: sol | do | si | *la  => D) la
+l_ut L2 [short] Quel est le nom de cette note (clé d'ut 3e ligne) ?  ABC:K:C clef=alto / D,4 |]  => ré
+l_ut L2 [short] Quel est le nom de cette note (clé d'ut 3e ligne) ?  ABC:K:C clef=alto / E4 |]  => mi
+l_ut L2 [short] Quel est le nom de cette note (clé d'ut 3e ligne) ?  ABC:K:C clef=alto / G,4 |]  => sol
+l_ut L2 [staff] Écris la note do sur la portée (clé d'ut 3e ligne).  => do (à n'importe quelle octave)
+l_ut L3 [mc] Quel est le nom de cette note (clé d'ut 3e ligne) ?  ABC:K:C clef=alto / C4 |]  OPTS: mi | ré | *do | si  => C) do
+l_ut L3 [short] Quel est le nom de cette note (clé d'ut 3e ligne) ?  ABC:K:C clef=alto / ^E4 |]  => mi♯
+l_ut L3 [staff] Écris la note sol♭ sur la portée (clé d'ut 3e ligne).  => sol♭ (à n'importe quelle octave)
+l_ut L3 [mc] Quel est le nom de cette note (clé d'ut 3e ligne) ?  ABC:K:C clef=alto / ^D4 |]  OPTS: fa♯ | *ré♯ | do♯ | mi♯  => B) ré♯
+l_ut L3 [mc] Quel est le nom de cette note (clé d'ut 3e ligne) ?  ABC:K:C clef=alto / C4 |]  OPTS: *do | ré | mi | si  => A) do
+l_ut L3 [mc] Quel est le nom de cette note (clé d'ut 3e ligne) ?  ABC:K:C clef=alto / B,,4 |]  OPTS: *si | la | sol | ré  => A) si
+l_lig L1 [staff] Écris la note ré sur la portée (clé de fa). Utilise des lignes supplémentaires.  => ré (à n'importe quelle octave)
+l_lig L1 [short] Quel est le nom de cette note (clé de fa) ?  ABC:K:C clef=bass / C4 |]  => do
+l_lig L1 [short] Quel est le nom de cette note (clé de sol) ?  ABC:K:C clef=treble / C4 |]  => do
+l_lig L1 [staff] Écris la note si sur la portée (clé de sol). Utilise des lignes supplémentaires.  => si (à n'importe quelle octave)
+l_lig L1 [staff] Écris la note do sur la portée (clé de sol). Utilise des lignes supplémentaires.  => do (à n'importe quelle octave)
+l_lig L1 [short] Quel est le nom de cette note (clé de sol) ?  ABC:K:C clef=treble / b4 |]  => si
+l_lig L2 [staff] Écris la note ré sur la portée (clé de fa). Utilise des lignes supplémentaires.  => ré (à n'importe quelle octave)
+l_lig L2 [short] Quel est le nom de cette note (clé de sol) ?  ABC:K:C clef=treble / b4 |]  => si
+l_lig L2 [staff] Écris la note mi sur la portée (clé de fa). Utilise des lignes supplémentaires.  => mi (à n'importe quelle octave)
+l_lig L2 [short] Quel est le nom de cette note (clé de fa) ?  ABC:K:C clef=bass / F4 |]  => fa
+l_lig L2 [short] Quel est le nom de cette note (clé de sol) ?  ABC:K:C clef=treble / a4 |]  => la
+l_lig L2 [mc] Quel est le nom de cette note (clé de fa) ?  ABC:K:C clef=bass / F4 |]  OPTS: *fa | sol | ré | la  => A) fa
+l_lig L3 [mc] Quel est le nom de cette note (clé de fa) ?  ABC:K:C clef=bass / A4 |]  OPTS: do | fa | *la | si  => C) la
+l_lig L3 [staff] Écris la note mi sur la portée (clé de fa). Utilise des lignes supplémentaires.  => mi (à n'importe quelle octave)
+l_lig L3 [staff] Écris la note sol sur la portée (clé de sol). Utilise des lignes supplémentaires.  => sol (à n'importe quelle octave)
+l_lig L3 [mc] Quel est le nom de cette note (clé de sol) ?  ABC:K:C clef=treble / e'4 |]  OPTS: sol | ré | do | *mi  => D) mi
+l_lig L3 [staff] Écris la note fa sur la portée (clé de sol). Utilise des lignes supplémentaires.  => fa (à n'importe quelle octave)
+l_lig L3 [staff] Écris la note mi sur la portée (clé de sol). Utilise des lignes supplémentaires.  => mi (à n'importe quelle octave)
+l_alt L1 [mc] Comment s'appelle le signe placé devant cette note ?  ABC:K:C clef=treble / ^G4 |]  OPTS: *Dièse | Bémol | Bécarre | Point  => A) Dièse
+l_alt L1 [mc] Comment s'appelle le signe placé devant cette note ?  ABC:K:C clef=treble / _A4 |]  OPTS: *Bémol | Dièse | Point | Double dièse  => A) Bémol
+l_alt L1 [staff] Écris la note si♭ sur la portée (clé de sol). N'oublie pas l'altération.  => si♭ : l'altération se place devant la note
+l_alt L1 [short] Quel est le nom exact de la note n° 3 ? Pense à la règle des altérations dans la mesure.  ABC:_F c F e |] / w: 1 2 3 4  => fa♭
+l_alt L1 [staff] Écris la note ré♯ sur la portée (clé de sol). N'oublie pas l'altération.  => ré♯ : l'altération se place devant la note
+l_alt L1 [mc] Quel est le nom exact de la note n° 3 ? Pense à la règle des altérations dans la mesure.  ABC:^F B F D |] / w: 1 2 3 4  OPTS: *fa♯ | fa♭ | sol | fa (bécarre)  => A) fa♯
+l_alt L2 [mc] Quel est le nom exact de la note n° 3 ? Pense à la règle des altérations dans la mesure.  ABC:_A G =A F |] / w: 1 2 3 4  OPTS: la♯ | la♭ | *la (bécarre) | si  => C) la (bécarre)
+l_alt L2 [staff] Écris la note fa♭ sur la portée (clé de sol). N'oublie pas l'altération.  => fa♭ : l'altération se place devant la note
+l_alt L2 [staff] Écris la note fa♯ sur la portée (clé de sol). N'oublie pas l'altération.  => fa♯ : l'altération se place devant la note
+l_alt L2 [staff] Écris la note mi♭ sur la portée (clé de sol). N'oublie pas l'altération.  => mi♭ : l'altération se place devant la note
+l_alt L2 [mc] Comment s'appelle le signe placé devant cette note ?  ABC:K:C clef=treble / ^^G4 |]  OPTS: Bécarre | Bémol | Dièse | *Double dièse  => D) Double dièse
+l_alt L2 [staff] Écris la note ré♯ sur la portée (clé de sol). N'oublie pas l'altération.  => ré♯ : l'altération se place devant la note
+l_alt L3 [staff] Écris la note ré♯ sur la portée (clé de sol). N'oublie pas l'altération.  => ré♯ : l'altération se place devant la note
+l_alt L3 [mc] Quel est le nom exact de la note n° 4 ? Pense à la règle des altérations dans la mesure.  ABC:^F B e z | F B z2 |] / w: 1 2 3 4 5  OPTS: fa♯ | *fa (bécarre) | fa♭ | sol  => B) fa (bécarre)
+l_alt L3 [staff] Écris la note ré♯ sur la portée (clé de sol). N'oublie pas l'altération.  => ré♯ : l'altération se place devant la note
+l_alt L3 [short] Quel est le nom exact de la note n° 3 ? Pense à la règle des altérations dans la mesure.  ABC:^A F A G |] / w: 1 2 3 4  => la♯
+l_alt L3 [mc] Quel est le nom exact de la note n° 3 ? Pense à la règle des altérations dans la mesure.  ABC:^F d F E |] / w: 1 2 3 4  OPTS: *fa♯ | fa♭ | fa (bécarre) | sol  => A) fa♯
+l_alt L3 [staff] Écris la note fa♭ sur la portée (clé de sol). N'oublie pas l'altération.  => fa♭ : l'altération se place devant la note
+l_enh L1 [short] Quelle note est l'enharmonique de ré♯ (même son, autre nom) ?  => mi♭
+l_enh L1 [short] Quelle note est l'enharmonique de mi♭ (même son, autre nom) ?  => ré♯
+l_enh L1 [staff] Voici la note mi♭. Écris à droite sa note enharmonique (même son, autre nom).  => ré♯
+l_enh L1 [staff] Voici la note sol♭. Écris à droite sa note enharmonique (même son, autre nom).  => fa♯
+l_enh L1 [staff] Voici la note si♭. Écris à droite sa note enharmonique (même son, autre nom).  => la♯
+l_enh L1 [mc] Quelle note est l'enharmonique de sol♯ (même son, autre nom) ?  OPTS: la♯ | si♭ | *la♭ | fa♭  => C) la♭
+l_enh L2 [mc] Quelle note est l'enharmonique de ré♯ (même son, autre nom) ?  OPTS: ré♭ | *mi♭ | do♭ | fa♭  => B) mi♭
+l_enh L2 [short] Quelle note est l'enharmonique de do♯ (même son, autre nom) ?  => ré♭
+l_enh L2 [short] Quelle note est l'enharmonique de mi♭ (même son, autre nom) ?  => ré♯
+l_enh L2 [staff] Voici la note do♯. Écris à droite sa note enharmonique (même son, autre nom).  => ré♭
+l_enh L2 [mc] Quelle note est l'enharmonique de fa♯ (même son, autre nom) ?  OPTS: mi♭ | sol♯ | *sol♭ | fa♭  => C) sol♭
+l_enh L2 [staff] Voici la note si♭. Écris à droite sa note enharmonique (même son, autre nom).  => la♯
+l_enh L3 [short] Quelle note est l'enharmonique de la♯ (même son, autre nom) ?  => si♭
+l_enh L3 [short] Quelle note est l'enharmonique de si♭ (même son, autre nom) ?  => la♯
+l_enh L3 [mc] Quelle note est l'enharmonique de si♭ (même son, autre nom) ?  OPTS: *la♯ | la♭ | si♯  => A) la♯
+l_enh L3 [short] Quelle note est l'enharmonique de do♯ (même son, autre nom) ?  => ré♭
+l_enh L3 [staff] Voici la note si. Écris à droite sa note enharmonique (même son, autre nom).  => do♭
+l_enh L3 [staff] Voici la note fa♭. Écris à droite sa note enharmonique (même son, autre nom).  => mi
+r_fig L1 [mc] Combien de croches faut-il pour égaler une ronde ?  OPTS: 16 | 10 | *8 | 7  => C) 8
+r_fig L1 [short] Comment s'appelle cette figure de note ?  ABC:K:C clef=none stafflines=0 / B16  => Ronde
+r_fig L1 [short] Dans une mesure à 4/4, combien de temps dure une blanche ?  => 2
+r_fig L1 [short] Dans une mesure à 4/4, combien de temps dure une noire ?  => 1
+r_fig L1 [short] Dans une mesure à 4/4, combien de temps dure une ronde ?  => 4
+r_fig L1 [mc] Comment s'appelle cette figure de note ?  ABC:K:C clef=none stafflines=0 / B4  OPTS: Croche | *Noire | Ronde | Blanche  => B) Noire
+r_fig L2 [short] Comment s'appelle cette figure de note ?  ABC:K:C clef=none stafflines=0 / B16  => Ronde
+r_fig L2 [short] Dans une mesure à 4/4, combien de temps dure une blanche ?  => 2
+r_fig L2 [mc] Dans une mesure à 4/4, combien de temps dure une double-croche ?  OPTS: ½ | *¼ | 1 | 1 ¼  => B) ¼
+r_fig L2 [mc] Dans une mesure à 4/4, combien de temps dure une blanche ?  OPTS: 3 | 8 | 4 | *2  => D) 2
+r_fig L2 [short] Comment s'appelle cette figure de note ?  ABC:K:C clef=none stafflines=0 / B1  => Double-croche
+r_fig L2 [short] Comment s'appelle cette figure de note ?  ABC:K:C clef=none stafflines=0 / B16  => Ronde
+r_fig L3 [short] Dans une mesure à 4/4, combien de temps dure une ronde ?  => 4
+r_fig L3 [short] Dans une mesure à 4/4, combien de temps dure une noire ?  => 1
+r_fig L3 [mc] Comment s'appelle cette figure de note ?  ABC:K:C clef=none stafflines=0 / B16  OPTS: Blanche | Croche | Noire | *Ronde  => D) Ronde
+r_fig L3 [mc] Comment s'appelle cette figure de note ?  ABC:K:C clef=none stafflines=0 / B1  OPTS: Ronde | Croche | Blanche | *Double-croche  => D) Double-croche
+r_fig L3 [short] Comment s'appelle cette figure de note ?  ABC:K:C clef=none stafflines=0 / B8  => Blanche
+r_fig L3 [mc] Comment s'appelle cette figure de note ?  ABC:K:C clef=none stafflines=0 / B2  OPTS: Ronde | Blanche | Noire | *Croche  => D) Croche
+r_sil L1 [mc] Dans une mesure à 4/4, combien de temps dure un silence appelé « demi-soupir » ?  OPTS: ¼ | *½ | 1 ½ | 2  => B) ½
+r_sil L1 [mc] Quel silence a la même durée qu'une noire ?  OPTS: Pause | Demi-pause | Demi-soupir | *Soupir  => D) Soupir
+r_sil L1 [mc] Quel silence a la même durée qu'une ronde ?  OPTS: Soupir | *Pause | Demi-pause | Demi-soupir  => B) Pause
+r_sil L1 [short] Dans une mesure à 4/4, combien de temps dure un silence appelé « demi-soupir » ?  => ½
+r_sil L1 [short] Dans une mesure à 4/4, combien de temps dure un silence appelé « demi-soupir » ?  => ½
+r_sil L1 [short] Dans une mesure à 4/4, combien de temps dure un silence appelé « demi-pause » ?  => 2
+r_sil L2 [short] Quel silence a la même durée qu'une blanche ?  => Demi-pause
+r_sil L2 [mc] Dans une mesure à 4/4, combien de temps dure un silence appelé « soupir » ?  OPTS: *1 | 4 | 2 | ½  => A) 1
+r_sil L2 [mc] Comment s'appelle ce silence ?  ABC:K:C clef=none stafflines=0 / z16  OPTS: Quart de soupir | *Pause | Demi-soupir | Soupir  => B) Pause
+r_sil L2 [mc] Comment s'appelle ce silence ?  ABC:K:C clef=none stafflines=0 / z4  OPTS: *Soupir | Pause | Demi-soupir | Demi-pause  => A) Soupir
+r_sil L2 [mc] Quel silence a la même durée qu'une double-croche ?  OPTS: Demi-pause | Soupir | Demi-soupir | *Quart de soupir  => D) Quart de soupir
+r_sil L2 [short] Dans une mesure à 4/4, combien de temps dure un silence appelé « quart de soupir » ?  => ¼
+r_sil L3 [short] Comment s'appelle ce silence ?  ABC:K:C clef=none stafflines=0 / z2  => Demi-soupir
+r_sil L3 [short] Quel silence a la même durée qu'une ronde ?  => Pause
+r_sil L3 [mc] Quel silence a la même durée qu'une noire ?  OPTS: Pause | Demi-soupir | Quart de soupir | *Soupir  => D) Soupir
+r_sil L3 [short] Quel silence a la même durée qu'une noire ?  => Soupir
+r_sil L3 [short] Quel silence a la même durée qu'une croche ?  => Demi-soupir
+r_sil L3 [short] Comment s'appelle ce silence ?  ABC:K:C clef=none stafflines=0 / z16  => Pause
+r_pts L1 [short] Dans une mesure à 4/4, combien de temps dure une noire pointée ?  => 1 ½
+r_pts L1 [mc] En 4/4, quelle figure dure 1 ½ temps ?  OPTS: Blanche | *Noire pointée | Croche pointée | Noire  => B) Noire pointée
+r_pts L1 [mc] Dans une mesure à 4/4, combien de temps dure une blanche pointée ?  OPTS: 2 | 6 | 4 | *3  => D) 3
+r_pts L1 [short] Dans une mesure à 4/4, combien de temps dure une blanche pointée ?  => 3
+r_pts L1 [mc] Dans une mesure à 4/4, combien de temps dure une noire pointée ?  OPTS: 3 | 2 ½ | 1 | *1 ½  => D) 1 ½
+r_pts L1 [mc] Dans une mesure à 4/4, combien de temps dure une noire pointée ?  OPTS: 1 | *1 ½ | 2 ½ | 3  => B) 1 ½
+r_pts L2 [short] Une croche pointée vaut combien de doubles-croches ?  => 3
+r_pts L2 [short] Une croche pointée vaut combien de doubles-croches ?  => 3
+r_pts L2 [short] Dans une mesure à 4/4, combien de temps dure une ronde pointée ?  => 6
+r_pts L2 [short] Dans une mesure à 4/4, combien de temps dure une croche pointée ?  => ¾
+r_pts L2 [short] Ces deux notes sont reliées par une liaison de prolongation. En 4/4, combien de temps dure le son au total ?  ABC:K:C / B4-B2 x10 |]  => 1 ½
+r_pts L2 [mc] Ces deux notes sont reliées par une liaison de prolongation. En 4/4, combien de temps dure le son au total ?  ABC:K:C / B8-B8 |]  OPTS: 8 | 5 | 2 | *4  => D) 4
+r_pts L3 [mc] Une croche pointée vaut combien de doubles-croches ?  OPTS: 2 | 4 | 5 | *3  => D) 3
+r_pts L3 [mc] Dans une mesure à 4/4, combien de temps dure une croche pointée ?  OPTS: 1 | *¾ | 1 ¾ | ½  => B) ¾
+r_pts L3 [short] Dans une mesure à 4/4, combien de temps dure une noire pointée ?  => 1 ½
+r_pts L3 [mc] Dans une mesure à 4/4, combien de temps dure une blanche pointée ?  OPTS: 2 | 4 | *3 | 6  => C) 3
+r_pts L3 [mc] En 4/4, quelle figure dure 6 temps ?  OPTS: Croche pointée | *Ronde pointée | Blanche | Blanche pointée  => B) Ronde pointée
+r_pts L3 [mc] Dans une mesure à 4/4, combien de temps dure une blanche pointée ?  OPTS: *3 | 6 | 4 | 2 ½  => A) 3
+r_mes L1 [short] Dans une mesure à 4/4, quelle figure vaut un temps ?  => Noire
+r_mes L1 [mc] Quel chiffre indicateur convient à cette mesure ?  ABC:K:C clef=perc stafflines=1 / B4 z4 B4 z4 |]  OPTS: *4/4 | 3/4 | 2/4  => A) 4/4
+r_mes L1 [mc] Quel chiffre indicateur convient à cette mesure ?  ABC:K:C clef=perc stafflines=1 / z4 B4 |]  OPTS: *2/4 | 4/4 | 3/4  => A) 2/4
+r_mes L1 [mc] Quel chiffre indicateur convient à cette mesure ?  ABC:K:C clef=perc stafflines=1 / B4 B4 B4 |]  OPTS: 2/4 | *3/4 | 4/4  => B) 3/4
+r_mes L1 [mc] Quel chiffre indicateur convient à cette mesure ?  ABC:K:C clef=perc stafflines=1 / B4 B4 B4 |]  OPTS: 2/4 | *3/4 | 4/4  => B) 3/4
+r_mes L1 [short] Combien de temps y a-t-il dans une mesure à 4/4 ?  ABC:K:C / x |]  => 4
+r_mes L2 [mc] Dans une mesure à 12/8, quelle figure vaut un temps ?  OPTS: *Noire pointée | Blanche | Noire | Croche  => A) Noire pointée
+r_mes L2 [mc] La mesure à 12/8 est-elle une mesure simple ou composée ?  OPTS: *Composée | Simple  => A) Composée
+r_mes L2 [mc] Quel chiffre indicateur convient à cette mesure ?  ABC:K:C clef=perc stafflines=1 / B16 |]  OPTS: *4/4 | 2/4 | 5/4 | 3/4  => A) 4/4
+r_mes L2 [mc] Combien de temps y a-t-il dans une mesure à 3/4 ?  ABC:K:C / x |]  OPTS: 2 | 4 | *3 | 8  => C) 3
+r_mes L2 [mc] Quel chiffre indicateur convient à cette mesure ?  ABC:K:C clef=perc stafflines=1 / B4 z4 |]  OPTS: *2/4 | 4/4 | 3/4 | 5/4  => A) 2/4
+r_mes L2 [short] Combien de temps y a-t-il dans une mesure à 4/4 ?  ABC:K:C / x |]  => 4
+r_mes L3 [mc] Quel chiffre indicateur convient à cette mesure ?  ABC:K:C clef=perc stafflines=1 / B1B1B2 B8 B1B1B2 |]  OPTS: 2/4 | 3/4 | 5/4 | *4/4  => D) 4/4
+r_mes L3 [mc] La mesure à 2/4 est-elle une mesure simple ou composée ?  OPTS: *Simple | Composée  => A) Simple
+r_mes L3 [mc] Quel chiffre indicateur convient à cette mesure ?  ABC:K:C clef=perc stafflines=1 / B8 |]  OPTS: 3/4 | *2/4 | 4/4 | 5/4  => B) 2/4
+r_mes L3 [mc] Quel chiffre indicateur convient à cette mesure ?  ABC:K:C clef=perc stafflines=1 / B6 B2 z4 |]  OPTS: *3/4 | 5/4 | 2/4 | 4/4  => A) 3/4
+r_mes L3 [mc] La mesure à 12/8 est-elle une mesure simple ou composée ?  OPTS: Simple | *Composée  => B) Composée
+r_mes L3 [mc] Combien de temps y a-t-il dans une mesure à 2/4 ?  ABC:K:C / x |]  OPTS: 8 | 4 | *2 | 6  => C) 2
+r_cmp L1 [mc] Quelle figure complète cette mesure à 4/4 ?  ABC:K:C clef=perc stafflines=1 / z4 B4 x8 |]  OPTS: Noire pointée | *Blanche | Noire | Croche  => B) Blanche
+r_cmp L1 [staff] Complète la mesure à 2/4 : ajoute des notes ou des silences pour qu'elle contienne exactement 2 temps.  => Toute réponse qui ajoute exactement 1 temps, par exemple : noire.
+r_cmp L1 [mc] Quelle figure complète cette mesure à 4/4 ?  ABC:K:C clef=perc stafflines=1 / B2B2 B2B2 x8 |]  OPTS: Ronde | Noire pointée | Croche | *Blanche  => D) Blanche
+r_cmp L1 [mc] Quelle figure complète cette mesure à 4/4 ?  ABC:K:C clef=perc stafflines=1 / B4 B8 x4 |]  OPTS: Blanche pointée | Noire pointée | *Noire | Blanche  => C) Noire
+r_cmp L1 [mc] Quelle figure complète cette mesure à 2/4 ?  ABC:K:C clef=perc stafflines=1 / B4 x4 |]  OPTS: Croche | Blanche | *Noire | Blanche pointée  => C) Noire
+r_cmp L1 [staff] Complète la mesure à 2/4 : ajoute des notes ou des silences pour qu'elle contienne exactement 2 temps.  => Toute réponse qui ajoute exactement 1 temps, par exemple : noire.
+r_cmp L2 [mc] Quelle figure complète cette mesure à 4/4 ?  ABC:K:C clef=perc stafflines=1 / B1B1B2 B1B1B2 x8 |]  OPTS: Noire | *Blanche | Croche | Noire pointée  => B) Blanche
+r_cmp L2 [mc] Quelle figure complète cette mesure à 3/4 ?  ABC:K:C clef=perc stafflines=1 / B4 x8 |]  OPTS: Noire | Croche | Noire pointée | *Blanche  => D) Blanche
+r_cmp L2 [staff] Complète la mesure à 4/4 : ajoute des notes ou des silences pour qu'elle contienne exactement 4 temps.  => Toute réponse qui ajoute exactement ½ temps, par exemple : croche.
+r_cmp L2 [mc] Quelle figure complète cette mesure à 2/4 ?  ABC:K:C clef=perc stafflines=1 / B4 x6 |]  OPTS: Noire | Blanche pointée | Croche | *Noire pointée  => D) Noire pointée
+r_cmp L2 [staff] Complète la mesure à 4/4 : ajoute des notes ou des silences pour qu'elle contienne exactement 4 temps.  => Toute réponse qui ajoute exactement ½ temps, par exemple : croche.
+r_cmp L2 [mc] Quelle figure complète cette mesure à 3/4 ?  ABC:K:C clef=perc stafflines=1 / z4 B4 x6 |]  OPTS: Blanche pointée | Blanche | *Noire pointée | Ronde  => C) Noire pointée
+r_cmp L3 [staff] Complète la mesure à 3/4 : ajoute des notes ou des silences pour qu'elle contienne exactement 3 temps.  => Toute réponse qui ajoute exactement ½ temps, par exemple : croche.
+r_cmp L3 [mc] Quelle figure complète cette mesure à 3/4 ?  ABC:K:C clef=perc stafflines=1 / B2B1B1 B2B2 B4 x2 |]  OPTS: Noire pointée | Blanche | Ronde | *Croche  => D) Croche
+r_cmp L3 [staff] Complète la mesure à 4/4 : ajoute des notes ou des silences pour qu'elle contienne exactement 4 temps.  => Toute réponse qui ajoute exactement 2 temps, par exemple : blanche.
+r_cmp L3 [staff] Complète la mesure à 6/8 : ajoute des notes ou des silences pour qu'elle contienne exactement 2 temps.  => Toute réponse qui ajoute exactement 1 temps, par exemple : noire pointée.
+r_cmp L3 [staff] Complète la mesure à 3/4 : ajoute des notes ou des silences pour qu'elle contienne exactement 3 temps.  => Toute réponse qui ajoute exactement 1 temps, par exemple : noire.
+r_cmp L3 [mc] Quelle figure complète cette mesure à 3/4 ?  ABC:K:C clef=perc stafflines=1 / B6 B2 x4 |]  OPTS: *Noire | Ronde | Noire pointée | Croche  => A) Noire
+g_arm L1 [mc] Laquelle de ces armures est celle de Ré majeur ?  OPTS: 1 dièse | *Ré majeur (2 dièses) | 2 bémols | aucune altération  => B) Ré majeur (2 dièses)
+g_arm L1 [short] Combien de dièses y a-t-il dans l'armure de Ré majeur ?  => 2
+g_arm L1 [short] Quelle tonalité majeure a cette armure ?  ABC:K:Bb clef=treble / x |]  => Si♭ majeur
+g_arm L1 [short] Combien de dièses y a-t-il dans l'armure de Sol majeur ?  => 1
+g_arm L1 [mc] Laquelle de ces armures est celle de Ré majeur ?  OPTS: 2 bémols | 1 dièse | 1 bémol | *Ré majeur (2 dièses)  => D) Ré majeur (2 dièses)
+g_arm L1 [mc] Combien de dièses y a-t-il dans l'armure de Ré majeur ?  OPTS: 4 | 0 | *2 | 1  => C) 2
+g_arm L2 [mc] Quelles sont les deux tonalités qui ont cette armure ?  ABC:K:E clef=treble / x |]  OPTS: Sol majeur et mi mineur | *Mi majeur et do♯ mineur | Mi majeur et sol mineur | La♭ majeur et fa mineur  => B) Mi majeur et do♯ mineur
+g_arm L2 [mc] Quelle tonalité majeure a cette armure ?  ABC:K:Eb clef=bass / x |]  OPTS: Sol majeur | *Mi♭ majeur | La♭ majeur | Fa majeur  => B) Mi♭ majeur
+g_arm L2 [mc] Quelles sont les deux tonalités qui ont cette armure ?  ABC:K:Ab clef=treble / x |]  OPTS: Mi♭ majeur et do mineur | Sol majeur et mi mineur | Mi majeur et do♯ mineur | *La♭ majeur et fa mineur  => D) La♭ majeur et fa mineur
+g_arm L2 [short] Quelle tonalité majeure a cette armure ?  ABC:K:G clef=treble / x |]  => Sol majeur
+g_arm L2 [mc] Quelle tonalité majeure a cette armure ?  ABC:K:A clef=bass / x |]  OPTS: Do majeur | Fa majeur | *La majeur | Mi majeur  => C) La majeur
+g_arm L2 [mc] Quelles sont les deux tonalités qui ont cette armure ?  ABC:K:C clef=bass / x |]  OPTS: La♭ majeur et fa mineur | *Do majeur et la mineur | Mi majeur et do♯ mineur | Fa majeur et ré mineur  => B) Do majeur et la mineur
+g_arm L3 [mc] Quelles sont les deux tonalités qui ont cette armure ?  ABC:K:C clef=treble / x |]  OPTS: Do majeur et mi mineur | La majeur et fa♯ mineur | Si♭ majeur et sol mineur | *Do majeur et la mineur  => D) Do majeur et la mineur
+g_arm L3 [mc] Laquelle de ces armures est celle de Fa majeur ?  OPTS: 5 bémols | 2 dièses | 3 bémols | *Fa majeur (1 bémol)  => D) Fa majeur (1 bémol)
+g_arm L3 [mc] Laquelle de ces armures est celle de Mi♭ majeur ?  OPTS: 2 dièses | *Mi♭ majeur (3 bémols) | 4 bémols | aucune altération  => B) Mi♭ majeur (3 bémols)
+g_arm L3 [short] Combien de bémols y a-t-il dans l'armure de Sol♭ majeur ?  => 6
+g_arm L3 [mc] Laquelle de ces armures est celle de Do♭ majeur ?  OPTS: 5 bémols | 2 bémols | 3 dièses | *Do♭ majeur (7 bémols)  => D) Do♭ majeur (7 bémols)
+g_arm L3 [short] Quelle tonalité majeure a cette armure ?  ABC:K:C# clef=treble / x |]  => Do♯ majeur
+g_ord L1 [mc] Quel est l'ordre des dièses dans une armure ?  OPTS: fa – do – sol – mi – la – ré – si | *fa – do – sol – ré – la – mi – si | fa – sol – do – ré – la – mi – si | si – mi – la – ré – sol – do – fa  => B) fa – do – sol – ré – la – mi – si
+g_ord L1 [mc] Quel est l'ordre des bémols dans une armure ?  OPTS: si – la – mi – ré – sol – do – fa | fa – do – sol – ré – la – mi – si | *si – mi – la – ré – sol – do – fa | si – mi – la – do – sol – ré – fa  => C) si – mi – la – ré – sol – do – fa
+g_ord L1 [mc] Quel est l'ordre des bémols dans une armure ?  OPTS: *si – mi – la – ré – sol – do – fa | fa – do – sol – ré – la – mi – si | mi – si – la – ré – sol – do – fa | si – la – mi – ré – sol – do – fa  => A) si – mi – la – ré – sol – do – fa
+g_ord L1 [short] Dans l'ordre des bémols, quel est le 4e bémol ?  => ré♭
+g_ord L1 [mc] Quel est l'ordre des bémols dans une armure ?  OPTS: *si – mi – la – ré – sol – do – fa | si – la – mi – ré – sol – do – fa | fa – do – sol – ré – la – mi – si | si – mi – la – do – sol – ré – fa  => A) si – mi – la – ré – sol – do – fa
+g_ord L1 [mc] Quel est le dernier dièse de l'armure de Ré majeur ?  OPTS: mi♯ | *do♯ | ré♯ | si♯  => B) do♯
+g_ord L2 [short] Dans l'ordre des dièses, quel est le 3e dièse ?  => sol♯
+g_ord L2 [mc] Quel est le dernier dièse de l'armure de Mi majeur ?  OPTS: do♯ | si♯ | *ré♯ | la♯  => C) ré♯
+g_ord L2 [short] Dans l'ordre des bémols, quel est le 1er bémol ?  => si♭
+g_ord L2 [mc] Quel est le dernier bémol de l'armure de Mi♭ majeur ?  OPTS: sol♭ | ré♭ | mi♭ | *la♭  => D) la♭
+g_ord L2 [short] Quel est le dernier bémol de l'armure de Si♭ majeur ?  => mi♭
+g_ord L2 [short] Dans l'ordre des bémols, quel est le 2e bémol ?  => mi♭
+g_ord L3 [short] Dans l'ordre des dièses, quel est le 2e dièse ?  => do♯
+g_ord L3 [mc] Quel est le dernier bémol de l'armure de Do♭ majeur ?  OPTS: ré♭ | do♭ | *fa♭ | si♭  => C) fa♭
+g_ord L3 [mc] Dans l'ordre des dièses, quel est le 7e dièse ?  OPTS: ré♯ | *si♯ | fa♯ | mi♯  => B) si♯
+g_ord L3 [mc] Quel est le dernier bémol de l'armure de Fa majeur ?  OPTS: sol♭ | la♭ | *si♭ | do♭  => C) si♭
+g_ord L3 [mc] Dans l'ordre des bémols, quel est le 5e bémol ?  OPTS: do♭ | mi♭ | fa♭ | *sol♭  => D) sol♭
+g_ord L3 [mc] Quel est l'ordre des bémols dans une armure ?  OPTS: fa – do – sol – ré – la – mi – si | *si – mi – la – ré – sol – do – fa | si – mi – la – do – sol – ré – fa | mi – si – la – ré – sol – do – fa  => B) si – mi – la – ré – sol – do – fa
+g_maj L1 [short] Quelle est la 3e note de la gamme de Fa majeur ?  => la
+g_maj L1 [staff] Écris la sensible (VI1er degré) de la gamme de Ré majeur sur la portée (clé de sol).  => do♯
+g_maj L1 [staff] Écris la sensible (VI1er degré) de la gamme de Ré majeur sur la portée (clé de sol).  => do♯
+g_maj L1 [mc] Quelles notes sont altérées dans la gamme de Si♭ majeur ?  OPTS: si♭, mi♭, la♭, ré♭ | si♭ | *si♭, mi♭ | si♭, mi♭, la♭  => C) si♭, mi♭
+g_maj L1 [short] Quelle est la 4e note de la gamme de Ré majeur ?  => sol
+g_maj L1 [staff] Écris la dominante (5e degré) de la gamme de Si♭ majeur sur la portée (clé de sol).  => fa
+g_maj L2 [staff] Écris la gamme de Si♭ majeur en montant, de la tonique à la tonique (8 notes). Ajoute les altérations devant les notes (pas d'armure).  => si♭ – do – ré – mi♭ – fa – sol – la – si♭
+g_maj L2 [mc] Quelle est la 6e note de la gamme de La♭ majeur ?  OPTS: sol | la♭ | *fa | mi♭  => C) fa
+g_maj L2 [staff] Écris la gamme de Ré majeur en montant, de la tonique à la tonique (8 notes). Ajoute les altérations devant les notes (pas d'armure).  => ré – mi – fa♯ – sol – la – si – do♯ – ré
+g_maj L2 [staff] Écris la sensible (VI1er degré) de la gamme de La majeur sur la portée (clé de sol).  => sol♯
+g_maj L2 [mc] Quelles notes sont altérées dans la gamme de Ré majeur ?  OPTS: *fa♯, do♯ | fa♯ | si♭, mi♭ | fa♯, do♯, sol♯, ré♯  => A) fa♯, do♯
+g_maj L2 [mc] Quelles notes sont altérées dans la gamme de La♭ majeur ?  OPTS: si♭, mi♭, la♭, ré♭, sol♭, do♭ | *si♭, mi♭, la♭, ré♭ | si♭, mi♭ | si♭, mi♭, la♭  => B) si♭, mi♭, la♭, ré♭
+g_maj L3 [mc] Quelles notes sont altérées dans la gamme de Do♯ majeur ?  OPTS: fa♯, do♯, sol♯, ré♯, la♯ | *fa♯, do♯, sol♯, ré♯, la♯, mi♯, si♯ | fa♯, do♯, sol♯, ré♯, la♯, mi♯ | si♭, mi♭, la♭, ré♭, sol♭, do♭, fa♭  => B) fa♯, do♯, sol♯, ré♯, la♯, mi♯, si♯
+g_maj L3 [mc] Quelles notes sont altérées dans la gamme de Do♯ majeur ?  OPTS: fa♯, do♯, sol♯, ré♯, la♯, mi♯ | si♭, mi♭, la♭, ré♭, sol♭, do♭, fa♭ | *fa♯, do♯, sol♯, ré♯, la♯, mi♯, si♯ | fa♯, do♯, sol♯, ré♯, la♯  => C) fa♯, do♯, sol♯, ré♯, la♯, mi♯, si♯
+g_maj L3 [mc] Quelles notes sont altérées dans la gamme de Sol majeur ?  OPTS: si♭ | *fa♯ | fa♯, do♯, sol♯ | fa♯, do♯  => B) fa♯
+g_maj L3 [mc] Quelle est la 4e note de la gamme de Si♭ majeur ?  OPTS: fa | ré | sol | *mi♭  => D) mi♭
+g_maj L3 [staff] Écris la sensible (VI1er degré) de la gamme de Si♭ majeur sur la portée (clé de sol).  => la
+g_maj L3 [mc] Quelles notes sont altérées dans la gamme de Ré majeur ?  OPTS: fa♯, do♯, sol♯ | fa♯ | *fa♯, do♯ | fa♯, do♯, sol♯, ré♯  => C) fa♯, do♯
+g_min L1 [mc] Dans la gamme de Ré mineur harmonique, quelle note est haussée (7e degré, la sensible) ?  OPTS: si♭ | *do♯ | do | si♯  => B) do♯
+g_min L1 [mc] Quel type de gamme mineure est écrit ici (si mineur, en montant) ?  ABC:K:Bm clef=treble / B, C D E F ^G ^A B |]  OPTS: Mineure naturelle | Mineure harmonique | *Mineure mélodique  => C) Mineure mélodique
+g_min L1 [mc] Quel type de gamme mineure est écrit ici (sol mineur, en montant) ?  ABC:K:Gm clef=treble / G A B c d e ^f g |]  OPTS: Mineure mélodique | *Mineure harmonique | Mineure naturelle  => B) Mineure harmonique
+g_min L1 [short] Dans la gamme de Sol mineur harmonique, quelle note est haussée (7e degré, la sensible) ?  => fa♯
+g_min L1 [mc] Quel type de gamme mineure est écrit ici (mi mineur, en montant) ?  ABC:K:Em clef=treble / E F G A B ^c ^d e |]  OPTS: Mineure harmonique | Mineure naturelle | *Mineure mélodique  => C) Mineure mélodique
+g_min L1 [mc] Dans la gamme de La mineur harmonique, quelle note est haussée (7e degré, la sensible) ?  OPTS: fa | *sol♯ | sol | fa♯  => B) sol♯
+g_min L2 [mc] Dans la gamme de Do mineur mélodique (en montant), quelles notes sont haussées ?  OPTS: si♮ | mi♭ et si♮ | la♭ et si♮ | *la♮ et si♮  => D) la♮ et si♮
+g_min L2 [mc] Quel type de gamme mineure est écrit ici (fa♯ mineur, en montant) ?  ABC:K:F#m clef=treble / F G A B c d e f |]  OPTS: Mineure mélodique | *Mineure naturelle | Mineure harmonique  => B) Mineure naturelle
+g_min L2 [mc] Dans la gamme de Fa♯ mineur mélodique (en montant), quelles notes sont haussées ?  OPTS: *ré♯ et mi♯ | ré et mi♯ | mi♯ | do♯ et mi♯  => A) ré♯ et mi♯
+g_min L2 [mc] Quel type de gamme mineure est écrit ici (ré mineur, en montant) ?  ABC:K:Dm clef=treble / D E F G A B c d |]  OPTS: *Mineure naturelle | Mineure mélodique | Mineure harmonique  => A) Mineure naturelle
+g_min L2 [mc] Dans la gamme de Do mineur mélodique (en montant), quelles notes sont haussées ?  OPTS: sol et si♮ | mi♭ et si♮ | *la♮ et si♮ | si♮  => C) la♮ et si♮
+g_min L2 [mc] Quel type de gamme mineure est écrit ici (si mineur, en montant) ?  ABC:K:Bm clef=treble / B, C D E F ^G ^A B |]  OPTS: Mineure harmonique | Mineure naturelle | *Mineure mélodique  => C) Mineure mélodique
+g_min L3 [staff] Écris la gamme de La mineur harmonique en montant, de la tonique à la tonique (8 notes). Ajoute les altérations devant les notes (pas d'armure).  => la – si – do – ré – mi – fa – sol♯ – la
+g_min L3 [mc] Dans la gamme de Sol mineur mélodique (en montant), quelles notes sont haussées ?  OPTS: fa♯ | si♭ et fa♯ | *mi♮ et fa♯ | mi♭ et fa♯  => C) mi♮ et fa♯
+g_min L3 [mc] Quel type de gamme mineure est écrit ici (fa♯ mineur, en montant) ?  ABC:K:F#m clef=treble / F G A B c d e f |]  OPTS: Mineure harmonique | Mineure mélodique | *Mineure naturelle  => C) Mineure naturelle
+g_min L3 [staff] Écris la gamme de Do♯ mineur mélodique en montant, de la tonique à la tonique (8 notes). Ajoute les altérations devant les notes (pas d'armure).  => do♯ – ré♯ – mi – fa♯ – sol♯ – la♯ – si♯ – do♯
+g_min L3 [mc] Quel type de gamme mineure est écrit ici (fa♯ mineur, en montant) ?  ABC:K:F#m clef=treble / F G A B c d e f |]  OPTS: Mineure harmonique | *Mineure naturelle | Mineure mélodique  => B) Mineure naturelle
+g_min L3 [short] Dans la gamme de Sol mineur harmonique, quelle note est haussée (7e degré, la sensible) ?  => fa♯
+g_rel L1 [mc] Quelle est la tonalité relative majeure de Sol mineur ?  OPTS: *Si♭ majeur | Mi♭ majeur | Sol majeur | Ré majeur  => A) Si♭ majeur
+g_rel L1 [mc] Quelle est la tonalité relative majeure de Ré mineur ?  OPTS: Ré majeur | Do majeur | *Fa majeur | La majeur  => C) Fa majeur
+g_rel L1 [short] Quelle est la tonalité relative mineure de Ré majeur ?  => Si mineur
+g_rel L1 [mc] Quelle est la tonalité relative mineure de Sol majeur ?  OPTS: La mineur | Si mineur | *Mi mineur | Sol mineur  => C) Mi mineur
+g_rel L1 [short] Quelle est la tonalité relative majeure de La mineur ?  => Do majeur
+g_rel L1 [mc] Quelle est la tonalité relative majeure de Ré mineur ?  OPTS: La majeur | Si♭ majeur | *Fa majeur | Do majeur  => C) Fa majeur
+g_rel L2 [short] Quelle est la tonalité relative majeure de Ré mineur ?  => Fa majeur
+g_rel L2 [mc] Quelle est la tonalité relative majeure de La mineur ?  OPTS: Sol majeur | Fa majeur | La majeur | *Do majeur  => D) Do majeur
+g_rel L2 [mc] Quelle est la tonalité relative mineure de Mi♭ majeur ?  OPTS: *Do mineur | Sol mineur | Sol♭ mineur | Mi♭ mineur  => A) Do mineur
+g_rel L2 [mc] Quelle est la tonalité relative majeure de Do mineur ?  OPTS: Do majeur | *Mi♭ majeur | Sol majeur | La♭ majeur  => B) Mi♭ majeur
+g_rel L2 [mc] Quelle est la tonalité relative mineure de Mi majeur ?  OPTS: Sol♯ mineur | Fa♯ mineur | *Do♯ mineur | Sol mineur  => C) Do♯ mineur
+g_rel L2 [mc] Quelle est la tonalité relative mineure de Ré majeur ?  OPTS: Ré mineur | Fa mineur | Mi mineur | *Si mineur  => D) Si mineur
+g_rel L3 [short] Quelle est la tonalité relative mineure de Do♭ majeur ?  => La♭ mineur
+g_rel L3 [short] Quelle est la tonalité relative majeure de Si mineur ?  => Ré majeur
+g_rel L3 [mc] Quelle est la tonalité relative majeure de Fa mineur ?  OPTS: Mi♭ majeur | Ré♭ majeur | Fa majeur | *La♭ majeur  => D) La♭ majeur
+g_rel L3 [short] Quelle est la tonalité relative majeure de Sol mineur ?  => Si♭ majeur
+g_rel L3 [short] Quelle est la tonalité relative majeure de Do♯ mineur ?  => Mi majeur
+g_rel L3 [short] Quelle est la tonalité relative majeure de Sol♯ mineur ?  => Si majeur
+g_deg L1 [mc] Dans la gamme de Sol majeur, la note fa♯ est…  OPTS: la tonique (I) | la dominante (V) | *la sensible (VII) | la sus-dominante (VI)  => C) la sensible (VII)
+g_deg L1 [short] Comment s'appelle le 4e degré (IV) d'une gamme majeure ?  => Sous-dominante
+g_deg L1 [staff] Écris la dominante de Si♭ majeur sur la portée (clé de sol).  => fa
+g_deg L1 [mc] Quelle est la dominante de Fa majeur ?  OPTS: si♭ | ré | fa | *do  => D) do
+g_deg L1 [staff] Écris la sensible de Do majeur sur la portée (clé de sol).  => si
+g_deg L1 [short] Quelle est la sensible de Ré majeur ?  => do♯
+g_deg L2 [short] Comment s'appelle le 5e degré (V) d'une gamme majeure ?  => Dominante
+g_deg L2 [mc] Comment s'appelle le 6e degré (VI) d'une gamme majeure ?  OPTS: Sous-dominante | *Sus-dominante | Sensible | Dominante  => B) Sus-dominante
+g_deg L2 [mc] Dans la gamme de Fa majeur, la note si♭ est…  OPTS: la médiante (III) | la sus-dominante (VI) | *la sous-dominante (IV) | la sensible (VII)  => C) la sous-dominante (IV)
+g_deg L2 [mc] Dans la gamme de Mi majeur, la note si est…  OPTS: la médiante (III) | la tonique (I) | *la dominante (V) | la sous-dominante (IV)  => C) la dominante (V)
+g_deg L2 [short] Quelle est la sus-dominante de Mi♭ majeur ?  => do
+g_deg L2 [mc] Dans la gamme de La majeur, la note ré est…  OPTS: la dominante (V) | la sensible (VII) | la tonique (I) | *la sous-dominante (IV)  => D) la sous-dominante (IV)
+g_deg L3 [short] Quelle est la sus-tonique de Si majeur ?  => do♯
+g_deg L3 [mc] Dans la gamme de Mi♭ majeur, la note si♭ est…  OPTS: *la dominante (V) | la tonique (I) | la sus-dominante (VI) | la sensible (VII)  => A) la dominante (V)
+g_deg L3 [mc] Comment s'appelle le 2e degré (II) d'une gamme majeure ?  OPTS: *Sus-tonique | Sous-dominante | Tonique | Dominante  => A) Sus-tonique
+g_deg L3 [short] Quelle est la sus-dominante de Do majeur ?  => la
+g_deg L3 [mc] Quelle est la sous-dominante de Si♭ majeur ?  OPTS: mi | *mi♭ | la | fa  => B) mi♭
+g_deg L3 [staff] Écris la dominante de La majeur sur la portée (clé de sol).  => mi
+g_cyc L1 [short] Dans le cycle des quintes, quelle tonalité majeure vient juste après Do majeur, dans le sens des bémols (une quinte plus bas) ?  => Fa majeur
+g_cyc L1 [short] Dans le cycle des quintes, quelle tonalité majeure vient juste après Sol majeur, dans le sens des dièses (une quinte plus haut) ?  => Ré majeur
+g_cyc L1 [mc] Dans le cycle des quintes, quelle tonalité majeure vient juste après Do majeur, dans le sens des dièses (une quinte plus haut) ?  OPTS: Mi majeur | Ré majeur | *Sol majeur | Fa majeur  => C) Sol majeur
+g_cyc L1 [mc] Dans le cycle des quintes, quelle tonalité majeure vient juste après Do majeur, dans le sens des dièses (une quinte plus haut) ?  OPTS: Ré majeur | Mi majeur | Fa majeur | *Sol majeur  => D) Sol majeur
+g_cyc L1 [short] Dans le cycle des quintes, quelle tonalité majeure vient juste après Do majeur, dans le sens des dièses (une quinte plus haut) ?  => Sol majeur
+g_cyc L1 [mc] Dans le cycle des quintes, quelle tonalité majeure vient juste après Fa majeur, dans le sens des bémols (une quinte plus bas) ?  OPTS: *Si♭ majeur | Mi♭ majeur | Sol majeur | Do majeur  => A) Si♭ majeur
+g_cyc L2 [short] Dans le cycle des quintes, quelle tonalité majeure vient juste après Fa majeur, dans le sens des bémols (une quinte plus bas) ?  => Si♭ majeur
+g_cyc L2 [short] Dans le cycle des quintes, quelle tonalité majeure vient juste après Si♭ majeur, dans le sens des bémols (une quinte plus bas) ?  => Mi♭ majeur
+g_cyc L2 [mc] Dans le cycle des quintes, quelle tonalité majeure vient juste après Si♭ majeur, dans le sens des bémols (une quinte plus bas) ?  OPTS: Fa majeur | Do♭ majeur | Ré♭ majeur | *Mi♭ majeur  => D) Mi♭ majeur
+g_cyc L2 [short] Dans le cycle des quintes, quelle tonalité majeure vient juste après Do majeur, dans le sens des dièses (une quinte plus haut) ?  => Sol majeur
+g_cyc L2 [mc] Dans le cycle des quintes, quelle tonalité majeure vient juste après Mi♭ majeur, dans le sens des bémols (une quinte plus bas) ?  OPTS: *La♭ majeur | Fa♭ majeur | Sol♭ majeur | Si♭ majeur  => A) La♭ majeur
+g_cyc L2 [short] Dans le cycle des quintes, quelle tonalité majeure vient juste après Sol majeur, dans le sens des dièses (une quinte plus haut) ?  => Ré majeur
+g_cyc L3 [short] Dans le cycle des quintes, quelle tonalité majeure vient juste après Ré♭ majeur, dans le sens des bémols (une quinte plus bas) ?  => Sol♭ majeur
+g_cyc L3 [short] Dans le cycle des quintes, quelle tonalité majeure vient juste après Fa♯ majeur, dans le sens des dièses (une quinte plus haut) ?  => Do♯ majeur
+g_cyc L3 [short] Dans le cycle des quintes, quelle tonalité majeure vient juste après Sol majeur, dans le sens des dièses (une quinte plus haut) ?  => Ré majeur
+g_cyc L3 [short] Dans le cycle des quintes, quelle tonalité majeure vient juste après Mi♭ majeur, dans le sens des bémols (une quinte plus bas) ?  => La♭ majeur
+g_cyc L3 [short] Dans le cycle des quintes, quelle tonalité majeure vient juste après Sol majeur, dans le sens des dièses (une quinte plus haut) ?  => Ré majeur
+g_cyc L3 [short] Dans le cycle des quintes, quelle tonalité majeure vient juste après Si♭ majeur, dans le sens des bémols (une quinte plus bas) ?  => Mi♭ majeur
+i_nom L1 [short] Quel est le nom de cet intervalle (nombre et qualité) ?  ABC:K:C clef=treble / C2 F2 |]  => Quarte juste
+i_nom L1 [short] Quel est le nom de cet intervalle (nombre et qualité) ?  ABC:K:C clef=treble / D2 d2 |]  => Octave juste
+i_nom L1 [short] Quel est le nom de cet intervalle (nombre et qualité) ?  ABC:K:C clef=treble / E2 d2 |]  => Septième mineure
+i_nom L1 [short] Quel est le nom de cet intervalle (nombre et qualité) ?  ABC:K:C clef=treble / C2 G2 |]  => Quinte juste
+i_nom L1 [mc] Quel est le nom de cet intervalle (nombre et qualité) ?  ABC:K:C clef=treble / D2 c2 |]  OPTS: Sixte mineure | Octave juste | Septième majeure | *Septième mineure  => D) Septième mineure
+i_nom L1 [short] Quel est le nom de cet intervalle (nombre et qualité) ?  ABC:K:C clef=treble / E2 A2 |]  => Quarte juste
+i_nom L2 [mc] Quel est le nom de cet intervalle (nombre et qualité) ?  ABC:K:C clef=treble / _D2 _B2 |]  OPTS: Sixte mineure | Quinte juste | Septième majeure | *Sixte majeure  => D) Sixte majeure
+i_nom L2 [short] Quel est le nom de cet intervalle (nombre et qualité) ?  ABC:K:C clef=treble / _A2 _d2 |]  => Quarte juste
+i_nom L2 [short] Quel est le nom de cet intervalle (nombre et qualité) ?  ABC:K:C clef=treble / D2 ^G2 |]  => Quarte augmentée
+i_nom L2 [short] Quel est le nom de cet intervalle (nombre et qualité) ?  ABC:K:C clef=treble / [^G^c]4 |]  => Quarte juste
+i_nom L2 [mc] Quel est le nom de cet intervalle (nombre et qualité) ?  ABC:K:C clef=treble / [C_A]4 |]  OPTS: Quinte juste | Septième mineure | Sixte augmentée | *Sixte mineure  => D) Sixte mineure
+i_nom L2 [mc] Quel est le nom de cet intervalle (nombre et qualité) ?  ABC:K:C clef=treble / C2 _E2 |]  OPTS: Tierce majeure | Seconde mineure | *Tierce mineure | Tierce augmentée  => C) Tierce mineure
+i_nom L3 [short] Quel est le nom de cet intervalle (nombre et qualité) ?  ABC:K:C clef=treble / [_E_A]4 |]  => Quarte juste
+i_nom L3 [short] Quel est le nom de cet intervalle (nombre et qualité) ?  ABC:K:C clef=treble / [Bb]4 |]  => Octave juste
+i_nom L3 [short] Quel est le nom de cet intervalle (nombre et qualité) ?  ABC:K:C clef=bass / [G,,_A,,]4 |]  => Seconde mineure
+i_nom L3 [mc] Quel est le nom de cet intervalle (nombre et qualité) ?  ABC:K:C clef=bass / [G,,_A,,]4 |]  OPTS: Seconde augmentée | *Seconde mineure | Seconde majeure | Tierce mineure  => B) Seconde mineure
+i_nom L3 [short] Quel est le nom de cet intervalle (nombre et qualité) ?  ABC:K:C clef=treble / _B2 g2 |]  => Sixte majeure
+i_nom L3 [mc] Quel est le nom de cet intervalle (nombre et qualité) ?  ABC:K:C clef=bass / [G,,G,]4 |]  OPTS: *Octave juste | Octave diminuée | Septième majeure | Octave augmentée  => A) Octave juste
+i_ecr L1 [staff] Écris une quinte juste au-dessus de la note donnée.  => sol → ré
+i_ecr L1 [staff] Écris une quinte juste au-dessus de la note donnée.  => la → mi
+i_ecr L1 [staff] Écris une sixte mineure au-dessus de la note donnée.  => si → sol
+i_ecr L1 [staff] Écris une quinte juste au-dessus de la note donnée.  => sol → ré
+i_ecr L1 [staff] Écris une seconde majeure au-dessus de la note donnée.  => do → ré
+i_ecr L1 [staff] Écris une quarte juste au-dessus de la note donnée.  => ré → sol
+i_ecr L2 [staff] Écris une quinte diminuée au-dessus de la note donnée.  => ré → la♭
+i_ecr L2 [staff] Écris une quarte juste au-dessus de la note donnée.  => la♭ → ré♭
+i_ecr L2 [staff] Écris une quarte juste au-dessus de la note donnée.  => ré♭ → sol♭
+i_ecr L2 [staff] Écris une octave juste au-dessus de la note donnée.  => mi → mi
+i_ecr L2 [staff] Écris une sixte mineure au-dessus de la note donnée.  => fa → ré♭
+i_ecr L2 [staff] Écris une seconde mineure au-dessus de la note donnée.  => sol♯ → la
+i_ecr L3 [staff] Écris une quarte augmentée au-dessus de la note donnée.  => sol → do♯
+i_ecr L3 [staff] Écris une tierce augmentée au-dessous de la note donnée.  => si♯ → sol
+i_ecr L3 [staff] Écris une octave juste au-dessous de la note donnée.  => sol♯ → sol♯
+i_ecr L3 [staff] Écris une quarte juste au-dessus de la note donnée.  => si → mi
+i_ecr L3 [staff] Écris une seconde majeure au-dessous de la note donnée.  => ré → do
+i_ecr L3 [staff] Écris une seconde mineure au-dessus de la note donnée.  => si♭ → do♭
+i_dt L1 [mc] Entre fa et sol (en montant), y a-t-il un ton ou un demi-ton ?  OPTS: Un demi-ton | *Un ton  => B) Un ton
+i_dt L1 [short] Combien de demi-tons y a-t-il dans une tierce majeure ?  => 4
+i_dt L1 [short] Combien de demi-tons y a-t-il dans une quinte juste ?  => 7
+i_dt L1 [mc] Entre do et ré (en montant), y a-t-il un ton ou un demi-ton ?  OPTS: *Un ton | Un demi-ton  => A) Un ton
+i_dt L1 [mc] Combien de demi-tons y a-t-il dans une quarte juste ?  OPTS: 7 | 6 | *5 | 3  => C) 5
+i_dt L1 [mc] Combien de demi-tons y a-t-il dans une seconde mineure ?  OPTS: 3 | *1 | 2  => B) 1
+i_dt L2 [mc] Combien de demi-tons y a-t-il dans une octave juste ?  OPTS: 11 | 13 | 10 | *12  => D) 12
+i_dt L2 [mc] Combien de demi-tons y a-t-il dans une sixte mineure ?  OPTS: 6 | 10 | 9 | *8  => D) 8
+i_dt L2 [mc] Combien de demi-tons y a-t-il dans une tierce mineure ?  OPTS: 4 | 5 | *3 | 2  => C) 3
+i_dt L2 [staff] Écris la note située un demi-ton au-dessus de la note donnée.  => mi♭ (ou ré♯)
+i_dt L2 [mc] Entre fa et fa♯ (en montant), y a-t-il un ton ou un demi-ton ?  OPTS: *Un demi-ton | Un ton  => A) Un demi-ton
+i_dt L2 [short] Combien de demi-tons y a-t-il dans une quarte juste ?  => 5
+i_dt L3 [mc] Entre sol et la (en montant), y a-t-il un ton ou un demi-ton ?  OPTS: *Un ton | Un demi-ton  => A) Un ton
+i_dt L3 [staff] Écris la note située un demi-ton au-dessus de la note donnée.  => ré♭ (ou do♯)
+i_dt L3 [mc] Entre fa et sol (en montant), y a-t-il un ton ou un demi-ton ?  OPTS: *Un ton | Un demi-ton  => A) Un ton
+i_dt L3 [mc] Combien de demi-tons y a-t-il dans une seconde majeure ?  OPTS: *2 | 1 | 4 | 3  => A) 2
+i_dt L3 [staff] Écris la note située un demi-ton au-dessus de la note donnée.  => do (ou si♯)
+i_dt L3 [mc] Entre la et la♯ (en montant), y a-t-il un ton ou un demi-ton ?  OPTS: *Un demi-ton | Un ton  => A) Un demi-ton
+i_ren L1 [mc] Quel est le renversement d'une quarte juste ?  OPTS: Quarte juste | *Quinte juste  => B) Quinte juste
+i_ren L1 [short] Un intervalle et son renversement : quand on additionne leurs nombres (ex. : tierce + sixte), quel total obtient-on toujours ?  => 9
+i_ren L1 [mc] Quel est le renversement d'une quarte juste ?  OPTS: *Quinte juste | Quarte juste  => A) Quinte juste
+i_ren L1 [mc] Quel est le renversement d'une tierce majeure ?  OPTS: Tierce mineure | Sixte majeure | Quinte mineure | *Sixte mineure  => D) Sixte mineure
+i_ren L1 [short] Un intervalle et son renversement : quand on additionne leurs nombres (ex. : tierce + sixte), quel total obtient-on toujours ?  => 9
+i_ren L1 [mc] Un intervalle et son renversement : quand on additionne leurs nombres (ex. : tierce + sixte), quel total obtient-on toujours ?  OPTS: *9 | 8 | 10 | 7  => A) 9
+i_ren L2 [mc] Un intervalle et son renversement : quand on additionne leurs nombres (ex. : tierce + sixte), quel total obtient-on toujours ?  OPTS: 7 | 8 | *9 | 10  => C) 9
+i_ren L2 [short] Quel est le renversement d'une sixte majeure ?  => Tierce mineure
+i_ren L2 [mc] Un intervalle et son renversement : quand on additionne leurs nombres (ex. : tierce + sixte), quel total obtient-on toujours ?  OPTS: *9 | 10 | 7 | 8  => A) 9
+i_ren L2 [short] Un intervalle et son renversement : quand on additionne leurs nombres (ex. : tierce + sixte), quel total obtient-on toujours ?  => 9
+i_ren L2 [mc] Quel est le renversement d'une quinte juste ?  OPTS: Quinte juste | *Quarte juste | Tierce juste  => B) Quarte juste
+i_ren L2 [mc] Quel est le renversement d'une seconde majeure ?  OPTS: Sixte mineure | *Septième mineure | Seconde mineure | Septième majeure  => B) Septième mineure
+i_ren L3 [mc] Quel est le renversement d'une quarte augmentée ?  OPTS: *Quinte diminuée | Quinte augmentée | Quarte diminuée  => A) Quinte diminuée
+i_ren L3 [short] Quel est le renversement d'une tierce diminuée ?  => Sixte augmentée
+i_ren L3 [short] Quel est le renversement d'une quinte augmentée ?  => Quarte diminuée
+i_ren L3 [short] Quel est le renversement d'une tierce augmentée ?  => Sixte diminuée
+i_ren L3 [short] Un intervalle et son renversement : quand on additionne leurs nombres (ex. : tierce + sixte), quel total obtient-on toujours ?  => 9
+i_ren L3 [mc] Quel est le renversement d'une quarte augmentée ?  OPTS: *Quinte diminuée | Quarte diminuée | Quinte augmentée  => A) Quinte diminuée
+a_qua L1 [mc] Quelle est la qualité de cette triade ?  ABC:K:C clef=treble / [DFA]4 |]  OPTS: Diminuée | Majeure | Augmentée | *Mineure  => D) Mineure
+a_qua L1 [mc] Quelle est la qualité de cette triade ?  ABC:K:C clef=treble / [B^d^f]4 |]  OPTS: Diminuée | *Majeure | Augmentée | Mineure  => B) Majeure
+a_qua L1 [mc] Quelle est la qualité de cette triade ?  ABC:K:C clef=treble / [C_EG]4 |]  OPTS: Diminuée | Majeure | Augmentée | *Mineure  => D) Mineure
+a_qua L1 [mc] Quelle est la qualité de cette triade ?  ABC:K:C clef=treble / [A^ce]4 |]  OPTS: Augmentée | Mineure | *Majeure | Diminuée  => C) Majeure
+a_qua L1 [mc] Quelle est la qualité de cette triade ?  ABC:K:C clef=treble / [B^d^f]4 |]  OPTS: Diminuée | Mineure | *Majeure | Augmentée  => C) Majeure
+a_qua L1 [mc] Quelle est la qualité de cette triade ?  ABC:K:C clef=treble / [EGB]4 |]  OPTS: Majeure | *Mineure | Diminuée | Augmentée  => B) Mineure
+a_qua L2 [mc] Quelle est la qualité de cette triade ?  ABC:K:C clef=treble / [EG_B]4 |]  OPTS: Augmentée | Mineure | *Diminuée | Majeure  => C) Diminuée
+a_qua L2 [mc] Quelle est la qualité de cette triade ?  ABC:K:C clef=treble / [_E_G_B]4 |]  OPTS: Augmentée | *Mineure | Diminuée | Majeure  => B) Mineure
+a_qua L2 [mc] Quelle est la qualité de cette triade ?  ABC:K:C clef=treble / [GBd]4 |]  OPTS: Diminuée | Mineure | Augmentée | *Majeure  => D) Majeure
+a_qua L2 [mc] Quelle est la qualité de cette triade ?  ABC:K:C clef=treble / [Ac_e]4 |]  OPTS: Mineure | *Diminuée | Augmentée | Majeure  => B) Diminuée
+a_qua L2 [mc] Quelle est la qualité de cette triade ?  ABC:K:C clef=treble / [G_B_d]4 |]  OPTS: Augmentée | Majeure | Mineure | *Diminuée  => D) Diminuée
+a_qua L2 [mc] Quelle est la qualité de cette triade ?  ABC:K:C clef=treble / [A^ce]4 |]  OPTS: Diminuée | Augmentée | Mineure | *Majeure  => D) Majeure
+a_qua L3 [mc] Quelle est la qualité de cette triade ?  ABC:K:C clef=treble / [F_A_c]4 |]  OPTS: Majeure | *Diminuée | Mineure | Augmentée  => B) Diminuée
+a_qua L3 [mc] Quelle est la qualité de cette triade ?  ABC:K:C clef=treble / [G_Bd]4 |]  OPTS: Diminuée | Majeure | *Mineure | Augmentée  => C) Mineure
+a_qua L3 [mc] Quelle est la qualité de cette triade ?  ABC:K:C clef=treble / [G_Bd]4 |]  OPTS: Majeure | Augmentée | *Mineure | Diminuée  => C) Mineure
+a_qua L3 [mc] Quelle est la qualité de cette triade ?  ABC:K:C clef=treble / [CEG]4 |]  OPTS: Diminuée | Augmentée | *Majeure | Mineure  => C) Majeure
+a_qua L3 [mc] Quelle est la qualité de cette triade ?  ABC:K:C clef=treble / [B^d^f]4 |]  OPTS: Augmentée | Mineure | Diminuée | *Majeure  => D) Majeure
+a_qua L3 [mc] Quelle est la qualité de cette triade ?  ABC:K:C clef=treble / [GB^d]4 |]  OPTS: Majeure | *Augmentée | Mineure | Diminuée  => B) Augmentée
+a_nom L1 [short] Nomme cette triade (sa fondamentale et sa qualité).  ABC:K:C clef=treble / [F_Ac]4 |]  => Fa mineur
+a_nom L1 [mc] Nomme cette triade (sa fondamentale et sa qualité).  ABC:K:C clef=treble / [E^GB]4 |]  OPTS: Si majeur | Sol♯ majeur | *Mi majeur | Mi mineur  => C) Mi majeur
+a_nom L1 [mc] Nomme cette triade (sa fondamentale et sa qualité).  ABC:K:C clef=treble / [F_Ac]4 |]  OPTS: Fa majeur | *Fa mineur | La♭ mineur | Ré mineur  => B) Fa mineur
+a_nom L1 [short] Nomme cette triade (sa fondamentale et sa qualité).  ABC:K:C clef=treble / [G_Bd]4 |]  => Sol mineur
+a_nom L1 [short] Nomme cette triade (sa fondamentale et sa qualité).  ABC:K:C clef=treble / [DFA]4 |]  => Ré mineur
+a_nom L1 [mc] Nomme cette triade (sa fondamentale et sa qualité).  ABC:K:C clef=treble / [CEG]4 |]  OPTS: *Do majeur | La majeur | Sol majeur | Do mineur  => A) Do majeur
+a_nom L2 [short] Nomme cette triade (sa fondamentale et sa qualité).  ABC:K:C clef=treble / [F_A_c]4 |]  => Fa diminué
+a_nom L2 [mc] Nomme cette triade (sa fondamentale et sa qualité).  ABC:K:C clef=treble / [Bdf]4 |]  OPTS: Fa mineur | Si majeur | *Si diminué | Sol diminué  => C) Si diminué
+a_nom L2 [short] Nomme cette triade (sa fondamentale et sa qualité).  ABC:K:C clef=treble / [^G^B^d]4 |]  => Sol♯ majeur
+a_nom L2 [mc] Nomme cette triade (sa fondamentale et sa qualité).  ABC:K:C clef=treble / [^D^FA]4 |]  OPTS: Fa♯ diminué | *Ré♯ diminué | Si♯ diminué | La mineur  => B) Ré♯ diminué
+a_nom L2 [mc] Nomme cette triade (sa fondamentale et sa qualité).  ABC:K:C clef=treble / [^FAc]4 |]  OPTS: La diminué | Do mineur | Fa♯ majeur | *Fa♯ diminué  => D) Fa♯ diminué
+a_nom L2 [mc] Nomme cette triade (sa fondamentale et sa qualité).  ABC:K:C clef=treble / [Ace]4 |]  OPTS: La majeur | Fa mineur | *La mineur | Do mineur  => C) La mineur
+a_nom L3 [short] Nomme cette triade (sa fondamentale et sa qualité).  ABC:K:C clef=treble / [^GBd]4 |]  => Sol♯ diminué
+a_nom L3 [mc] Nomme cette triade (sa fondamentale et sa qualité).  ABC:K:C clef=treble / [^C^E^G]4 |]  OPTS: Sol♯ majeur | La♯ majeur | *Do♯ majeur | Mi♯ majeur  => C) Do♯ majeur
+a_nom L3 [mc] Nomme cette triade (sa fondamentale et sa qualité).  ABC:K:C clef=treble / [Bd^f]4 |]  OPTS: Sol mineur | Si majeur | *Si mineur | Ré mineur  => C) Si mineur
+a_nom L3 [mc] Nomme cette triade (sa fondamentale et sa qualité).  ABC:K:C clef=treble / [CE^G]4 |]  OPTS: *Do augmenté | Mi augmenté | La augmenté | Sol♯ mineur  => A) Do augmenté
+a_nom L3 [short] Nomme cette triade (sa fondamentale et sa qualité).  ABC:K:C clef=treble / [G_Bd]4 |]  => Sol mineur
+a_nom L3 [short] Nomme cette triade (sa fondamentale et sa qualité).  ABC:K:C clef=treble / [G_Bd]4 |]  => Sol mineur
+a_ecr L1 [staff] Écris la triade de Do mineur à l'état fondamental (clé de sol).  => do – mi♭ – sol
+a_ecr L1 [staff] Écris la triade de Sol majeur à l'état fondamental (clé de sol).  => sol – si – ré
+a_ecr L1 [staff] Écris la triade de Sol majeur à l'état fondamental (clé de sol).  => sol – si – ré
+a_ecr L1 [staff] Écris la triade de Fa majeur à l'état fondamental (clé de sol).  => fa – la – do
+a_ecr L1 [staff] Écris la triade de Sol mineur à l'état fondamental (clé de sol).  => sol – si♭ – ré
+a_ecr L1 [staff] Écris la triade de Ré mineur à l'état fondamental (clé de sol).  => ré – fa – la
+a_ecr L2 [staff] Écris la triade de Fa mineur à l'état fondamental (clé de sol).  => fa – la♭ – do
+a_ecr L2 [staff] Écris la triade de Mi majeur à l'état fondamental (clé de sol).  => mi – sol♯ – si
+a_ecr L2 [staff] Écris la triade de Sol diminué à l'état fondamental (clé de sol).  => sol – si♭ – ré♭
+a_ecr L2 [staff] Écris la triade de Fa majeur à l'état fondamental (clé de sol).  => fa – la – do
+a_ecr L2 [staff] Écris la triade de Si♯ diminué à l'état fondamental (clé de sol).  => si♯ – ré♯ – fa♯
+a_ecr L2 [staff] Écris la triade de Do diminué à l'état fondamental (clé de sol).  => do – mi♭ – sol♭
+a_ecr L3 [staff] Écris la triade de Si♭ majeur à l'état fondamental (clé de sol).  => si♭ – ré – fa
+a_ecr L3 [staff] Écris la triade de Fa♯ diminué à l'état fondamental (clé de sol).  => fa♯ – la – do
+a_ecr L3 [staff] Écris la triade de Sol augmenté à l'état fondamental (clé de sol).  => sol – si – ré♯
+a_ecr L3 [staff] Écris la triade de La♯ diminué à l'état fondamental (clé de sol).  => la♯ – do♯ – mi
+a_ecr L3 [staff] Écris la triade de La diminué à l'état fondamental (clé de sol).  => la – do – mi♭
+a_ecr L3 [staff] Écris la triade de Sol diminué à l'état fondamental (clé de sol).  => sol – si♭ – ré♭
+a_deg L1 [short] En Do majeur, quel accord est construit sur le 5e degré (V) ?  => Sol majeur
+a_deg L1 [short] En Sol majeur, quel accord est construit sur le 5e degré (V) ?  => Ré majeur
+a_deg L1 [mc] Dans une tonalité majeure, quelle est la qualité de l'accord construit sur le 4e degré (IV) ?  OPTS: Diminuée | Mineure | *Majeure  => C) Majeure
+a_deg L1 [mc] En Fa majeur, quel chiffre romain correspond à l'accord de mi diminué ?  OPTS: IV | *vii° | ii | I  => B) vii°
+a_deg L1 [mc] En Si♭ majeur, quel chiffre romain correspond à l'accord de la diminué ?  OPTS: ii | iii | *vii° | V  => C) vii°
+a_deg L1 [short] En Fa majeur, quel accord est construit sur le 4e degré (IV) ?  => Si♭ majeur
+a_deg L2 [mc] En La♭ majeur, quel chiffre romain correspond à l'accord de ré♭ majeur ?  OPTS: vi | iii | *IV | ii  => C) IV
+a_deg L2 [short] En Ré majeur, quel accord est construit sur le 4e degré (IV) ?  => Sol majeur
+a_deg L2 [mc] Dans une tonalité majeure, quelle est la qualité de l'accord construit sur le 6e degré (vi) ?  OPTS: Majeure | Diminuée | *Mineure  => C) Mineure
+a_deg L2 [mc] En Ré majeur, quel accord est construit sur le 3e degré (iii) ?  OPTS: Mi majeur | Fa♯ majeur | *Fa♯ mineur | Sol mineur  => C) Fa♯ mineur
+a_deg L2 [mc] En Do majeur, quel accord est construit sur le 3e degré (iii) ?  OPTS: Ré majeur | Fa mineur | Mi majeur | *Mi mineur  => D) Mi mineur
+a_deg L2 [mc] En Sol majeur, quel chiffre romain correspond à l'accord de si mineur ?  OPTS: ii | vi | *iii | vii°  => C) iii
+a_deg L3 [short] En La majeur, quel accord est construit sur le 7e degré (vii°) ?  => Sol♯ diminué
+a_deg L3 [mc] Dans une tonalité majeure, quelle est la qualité de l'accord construit sur le 6e degré (vi) ?  OPTS: Majeure | Diminuée | Augmentée | *Mineure  => D) Mineure
+a_deg L3 [mc] En Ré♭ majeur, quel chiffre romain correspond à l'accord de la♭ majeur ?  OPTS: ii | vi | *V | iii  => C) V
+a_deg L3 [mc] Dans une tonalité majeure, quelle est la qualité de l'accord construit sur le 4e degré (IV) ?  OPTS: *Majeure | Mineure | Diminuée | Augmentée  => A) Majeure
+a_deg L3 [mc] En Si♭ majeur, quel accord est construit sur le 4e degré (IV) ?  OPTS: *Mi♭ majeur | Ré majeur | Fa majeur | Mi♭ mineur  => A) Mi♭ majeur
+a_deg L3 [mc] Dans une tonalité mineure (harmonique), quelle est la qualité de l'accord construit sur le 7e degré (vii) ?  OPTS: *Diminuée | Majeure | Augmentée | Mineure  => A) Diminuée
+a_ren L1 [mc] Cet accord de ré mineur est-il à l'état fondamental ou renversé ?  ABC:K:C clef=treble / [DFA]4 |]  OPTS: *État fondamental | Deuxième renversement | Premier renversement  => A) État fondamental
+a_ren L1 [mc] Cet accord de ré majeur est-il à l'état fondamental ou renversé ?  ABC:K:C clef=treble / [^FAd]4 |]  OPTS: *Premier renversement | État fondamental | Deuxième renversement  => A) Premier renversement
+a_ren L1 [mc] Quelle note est à la basse dans le deuxième renversement de l'accord de la majeur ?  OPTS: *mi | do♯ | si | la  => A) mi
+a_ren L1 [mc] Cet accord de mi mineur est-il à l'état fondamental ou renversé ?  ABC:K:C clef=treble / [GBe]4 |]  OPTS: État fondamental | Deuxième renversement | *Premier renversement  => C) Premier renversement
+a_ren L1 [short] Quelle note est à la basse dans le deuxième renversement de l'accord de fa majeur ?  => do
+a_ren L1 [mc] Cet accord de fa mineur est-il à l'état fondamental ou renversé ?  ABC:K:C clef=treble / [_Acf]4 |]  OPTS: Deuxième renversement | État fondamental | *Premier renversement  => C) Premier renversement
+a_ren L2 [mc] Quel est le chiffrage de cet accord ?  ABC:K:C clef=treble / [FAd]4 |]  OPTS: *⁶ (accord de sixte) | ⁵₃ (état fondamental, sans chiffre) | ⁶₄ (accord de quarte et sixte)  => A) ⁶ (accord de sixte)
+a_ren L2 [mc] Cet accord de si majeur est-il à l'état fondamental ou renversé ?  ABC:K:C clef=treble / [B^d^f]4 |]  OPTS: Deuxième renversement | *État fondamental | Premier renversement  => B) État fondamental
+a_ren L2 [mc] Cet accord de ré majeur est-il à l'état fondamental ou renversé ?  ABC:K:C clef=treble / [Ad^f]4 |]  OPTS: État fondamental | *Deuxième renversement | Premier renversement  => B) Deuxième renversement
+a_ren L2 [staff] Écris l'accord de mi mineur au deuxième renversement (clé de sol).  => si – mi – sol (si à la basse)
+a_ren L2 [staff] Écris l'accord de do majeur au premier renversement (clé de sol).  => mi – sol – do (mi à la basse)
+a_ren L2 [mc] Quelle note est à la basse dans le deuxième renversement de l'accord de sol majeur ?  OPTS: la | si | *ré | sol  => C) ré
+a_ren L3 [staff] Écris l'accord de do♯ mineur au premier renversement (clé de sol).  => mi – sol♯ – do♯ (mi à la basse)
+a_ren L3 [mc] Quelle note est à la basse dans le premier renversement de l'accord de fa majeur ?  OPTS: fa | *la | sol | do  => B) la
+a_ren L3 [mc] Quel est le chiffrage de cet accord ?  ABC:K:C clef=treble / [^F^A^d]4 |]  OPTS: ⁵₃ (état fondamental, sans chiffre) | ⁶₄ (accord de quarte et sixte) | *⁶ (accord de sixte)  => C) ⁶ (accord de sixte)
+a_ren L3 [mc] Cet accord de do majeur est-il à l'état fondamental ou renversé ?  ABC:K:C clef=treble / [Gce]4 |]  OPTS: État fondamental | *Deuxième renversement | Premier renversement  => B) Deuxième renversement
+a_ren L3 [mc] Quel est le chiffrage de cet accord ?  ABC:K:C clef=treble / [ea^c']4 |]  OPTS: ⁶ (accord de sixte) | ⁵₃ (état fondamental, sans chiffre) | *⁶₄ (accord de quarte et sixte)  => C) ⁶₄ (accord de quarte et sixte)
+a_ren L3 [staff] Écris l'accord de fa♯ mineur au deuxième renversement (clé de sol).  => do♯ – fa♯ – la (do♯ à la basse)
+a_v7 L1 [mc] Sur quelle note est construit l'accord de septième de dominante (V7) de Fa majeur ?  OPTS: si♭ | fa | mi | *do  => D) do
+a_v7 L1 [mc] Sur quelle note est construit l'accord de septième de dominante (V7) de Do majeur ?  OPTS: do | fa | *sol | si  => C) sol
+a_v7 L1 [short] Sur quelle note est construit l'accord de septième de dominante (V7) de Ré majeur ?  => la
+a_v7 L1 [mc] Quelles notes forment l'accord de septième de dominante (V7) de Sol majeur ?  OPTS: do – mi – sol – si | ré – fa – la – do | *ré – fa♯ – la – do | ré – fa♯ – la – do♯  => C) ré – fa♯ – la – do
+a_v7 L1 [short] Sur quelle note est construit l'accord de septième de dominante (V7) de Ré majeur ?  => la
+a_v7 L1 [mc] Quelles notes forment l'accord de septième de dominante (V7) de Si♭ majeur ?  OPTS: *fa – la – do – mi♭ | fa – la♭ – do – mi♭ | mi♭ – sol – si♭ – ré | fa – la – do – mi  => A) fa – la – do – mi♭
+a_v7 L2 [short] Sur quelle note est construit l'accord de septième de dominante (V7) de Fa majeur ?  => do
+a_v7 L2 [short] Sur quelle note est construit l'accord de septième de dominante (V7) de Do majeur ?  => sol
+a_v7 L2 [mc] Quelles notes forment l'accord de septième de dominante (V7) de La majeur ?  OPTS: *mi – sol♯ – si – ré | la – do♯ – mi – sol♯ | mi – sol – si – ré | ré – fa♯ – la – do♯  => A) mi – sol♯ – si – ré
+a_v7 L2 [staff] Écris l'accord de septième de dominante (V7) de Si♭ majeur, à l'état fondamental (clé de sol).  => fa – la – do – mi♭
+a_v7 L2 [mc] Quelles notes forment l'accord de septième de dominante (V7) de La♭ majeur ?  OPTS: *mi♭ – sol – si♭ – ré♭ | ré♭ – fa – la♭ – do | mi♭ – sol – si♭ – ré | mi♭ – sol♭ – si♭ – ré♭  => A) mi♭ – sol – si♭ – ré♭
+a_v7 L2 [mc] Sur quelle note est construit l'accord de septième de dominante (V7) de La majeur ?  OPTS: *mi | sol♯ | ré | la  => A) mi
+a_v7 L3 [mc] Quelles notes forment l'accord de septième de dominante (V7) de Fa majeur ?  OPTS: *do – mi – sol – si♭ | fa – la – do – mi | si♭ – ré – fa – la | do – mi♭ – sol – si♭  => A) do – mi – sol – si♭
+a_v7 L3 [mc] Sur quelle note est construit l'accord de septième de dominante (V7) de Mi♭ majeur ?  OPTS: *si♭ | mi♭ | la♭ | ré  => A) si♭
+a_v7 L3 [mc] Sur quelle note est construit l'accord de septième de dominante (V7) de La♭ majeur ?  OPTS: sol | ré♭ | *mi♭ | la♭  => C) mi♭
+a_v7 L3 [mc] Sur quelle note est construit l'accord de septième de dominante (V7) de Ré majeur ?  OPTS: ré | sol | *la | do♯  => C) la
+a_v7 L3 [mc] Quelles notes forment l'accord de septième de dominante (V7) de Sol majeur ?  OPTS: sol – si – ré – fa♯ | ré – fa♯ – la – do♯ | *ré – fa♯ – la – do | ré – fa – la – do  => C) ré – fa♯ – la – do
+a_v7 L3 [mc] Quelles notes forment l'accord de septième de dominante (V7) de Sol majeur ?  OPTS: do – mi – sol – si | *ré – fa♯ – la – do | sol – si – ré – fa♯ | ré – fa – la – do  => B) ré – fa♯ – la – do
+h_cad L1 [mc] Quelle cadence correspond à l'enchaînement V – vi à la fin d'une phrase ?  OPTS: Cadence parfaite | Demi-cadence | *Cadence rompue | Cadence plagale  => C) Cadence rompue
+h_cad L1 [mc] Quelle cadence correspond à l'enchaînement V – vi à la fin d'une phrase ?  OPTS: Demi-cadence | Cadence plagale | Cadence parfaite | *Cadence rompue  => D) Cadence rompue
+h_cad L1 [mc] Quelle cadence correspond à l'enchaînement IV – V (arrêt sur la dominante) à la fin d'une phrase ?  OPTS: Cadence plagale | Cadence parfaite | *Demi-cadence | Cadence rompue  => C) Demi-cadence
+h_cad L1 [mc] Quelle cadence correspond à l'enchaînement IV – I à la fin d'une phrase ?  OPTS: Cadence rompue | Cadence parfaite | *Cadence plagale | Demi-cadence  => C) Cadence plagale
+h_cad L1 [mc] Quelle cadence correspond à l'enchaînement IV – V (arrêt sur la dominante) à la fin d'une phrase ?  OPTS: *Demi-cadence | Cadence parfaite | Cadence rompue | Cadence plagale  => A) Demi-cadence
+h_cad L1 [mc] Quelle cadence correspond à l'enchaînement V – vi à la fin d'une phrase ?  OPTS: Demi-cadence | Cadence plagale | Cadence parfaite | *Cadence rompue  => D) Cadence rompue
+h_cad L2 [mc] Quelle cadence correspond à l'enchaînement IV – I à la fin d'une phrase ?  OPTS: Demi-cadence | Cadence imparfaite | *Cadence plagale | Cadence rompue  => C) Cadence plagale
+h_cad L2 [mc] Quelle cadence termine cette phrase en Do majeur ?  ABC:F,,4 |B,,4 |C,4 |] /   OPTS: *Cadence imparfaite | Cadence plagale | Demi-cadence | Cadence rompue  => A) Cadence imparfaite
+h_cad L2 [mc] Quelle cadence correspond à l'enchaînement V – I (les deux accords à l'état fondamental) à la fin d'une phrase ?  OPTS: Cadence plagale | Cadence imparfaite | *Cadence parfaite | Cadence rompue  => C) Cadence parfaite
+h_cad L2 [mc] Quelle cadence correspond à l'enchaînement V⁶ – I (un des accords est renversé) à la fin d'une phrase ?  OPTS: Cadence plagale | Cadence rompue | *Cadence imparfaite | Demi-cadence  => C) Cadence imparfaite
+h_cad L2 [mc] Quelle cadence correspond à l'enchaînement V – vi à la fin d'une phrase ?  OPTS: *Cadence rompue | Cadence imparfaite | Cadence plagale | Demi-cadence  => A) Cadence rompue
+h_cad L2 [mc] Quelle cadence termine cette phrase en Do majeur ?  ABC:C,4 |F,,4 |G,,4 |] /   OPTS: Cadence imparfaite | *Demi-cadence | Cadence rompue | Cadence plagale  => B) Demi-cadence
+h_cad L3 [mc] Quelle cadence termine cette phrase en Fa majeur ?  ABC:B,,4 |C,4 |F,,4 |] /   OPTS: *Cadence parfaite | Cadence plagale | Cadence imparfaite | Cadence rompue  => A) Cadence parfaite
+h_cad L3 [mc] Quelle cadence correspond à l'enchaînement V – vi à la fin d'une phrase ?  OPTS: Cadence imparfaite | Cadence parfaite | Demi-cadence | *Cadence rompue  => D) Cadence rompue
+h_cad L3 [mc] Quelle cadence correspond à l'enchaînement IV – I à la fin d'une phrase ?  OPTS: Cadence imparfaite | *Cadence plagale | Cadence parfaite | Demi-cadence  => B) Cadence plagale
+h_cad L3 [mc] Quelle cadence termine cette phrase en Sol majeur ?  ABC:G,,4 |C,4 |G,,4 |] /   OPTS: *Cadence plagale | Cadence imparfaite | Demi-cadence | Cadence parfaite  => A) Cadence plagale
+h_cad L3 [mc] Quelle cadence termine cette phrase en Do majeur ?  ABC:F,,4 |B,,4 |C,4 |] /   OPTS: *Cadence imparfaite | Cadence parfaite | Demi-cadence | Cadence rompue  => A) Cadence imparfaite
+h_cad L3 [mc] Quelle cadence correspond à l'enchaînement IV – V (arrêt sur la dominante) à la fin d'une phrase ?  OPTS: Cadence rompue | Cadence plagale | Cadence parfaite | *Demi-cadence  => D) Demi-cadence
+h_fon L1 [mc] Lequel de ces accords a une fonction de tonique ?  OPTS: *I | V | ii | vii°  => A) I
+h_fon L1 [mc] Quelle est la fonction tonale de l'accord I ?  OPTS: Prédominante (sous-dominante) | Dominante | *Tonique  => C) Tonique
+h_fon L1 [mc] Lequel de ces accords a une fonction de dominante ?  OPTS: I | *V7 | ii | IV  => B) V7
+h_fon L1 [mc] Quelle est la fonction tonale de l'accord V ?  OPTS: *Dominante | Prédominante (sous-dominante) | Tonique  => A) Dominante
+h_fon L1 [mc] Quelle est la fonction tonale de l'accord V ?  OPTS: *Dominante | Prédominante (sous-dominante) | Tonique  => A) Dominante
+h_fon L1 [mc] Lequel de ces accords a une fonction de tonique ?  OPTS: IV | *I | ii | V7  => B) I
+h_fon L2 [mc] Quelle est la fonction tonale de l'accord IV ?  OPTS: Tonique | Dominante | *Prédominante (sous-dominante)  => C) Prédominante (sous-dominante)
+h_fon L2 [mc] Quelle est la fonction tonale de l'accord I ?  OPTS: Dominante | Prédominante (sous-dominante) | *Tonique  => C) Tonique
+h_fon L2 [mc] Quelle est la fonction tonale de l'accord V7 ?  OPTS: *Dominante | Prédominante (sous-dominante) | Tonique  => A) Dominante
+h_fon L2 [mc] Lequel de ces accords a une fonction de dominante ?  OPTS: *V7 | IV | ii | I  => A) V7
+h_fon L2 [mc] Lequel de ces accords a une fonction de prédominante ?  OPTS: V | vii° | *IV | V7  => C) IV
+h_fon L2 [mc] Quelle est la fonction tonale de l'accord ii ?  OPTS: Dominante | *Prédominante (sous-dominante) | Tonique  => B) Prédominante (sous-dominante)
+h_fon L3 [mc] Quelle est la fonction tonale de l'accord vii° ?  OPTS: *Dominante | Prédominante (sous-dominante) | Tonique  => A) Dominante
+h_fon L3 [mc] Quelle est la fonction tonale de l'accord ii ?  OPTS: Tonique | *Prédominante (sous-dominante) | Dominante  => B) Prédominante (sous-dominante)
+h_fon L3 [mc] Quelle est la fonction tonale de l'accord V7 ?  OPTS: Tonique | *Dominante | Prédominante (sous-dominante)  => B) Dominante
+h_fon L3 [mc] Lequel de ces accords a une fonction de dominante ?  OPTS: *V7 | ii | IV | I  => A) V7
+h_fon L3 [mc] Lequel de ces accords a une fonction de tonique ?  OPTS: IV | ii | *I | V7  => C) I
+h_fon L3 [mc] Quelle est la fonction tonale de l'accord vii° ?  OPTS: Tonique | Prédominante (sous-dominante) | *Dominante  => C) Dominante
+t_nua L1 [mc] Que signifie la nuance mf (mezzo forte) ?  ABC:K:C / !mf!B4 |]  OPTS: Doux | Fort | *Moyennement fort | Moyennement doux  => C) Moyennement fort
+t_nua L1 [short] Quelle nuance (abréviation) signifie « fort » ?  => f (forte)
+t_nua L1 [mc] Que signifie la nuance mf (mezzo forte) ?  ABC:K:C / !mf!B4 |]  OPTS: Fort | Très fort | Très doux | *Moyennement fort  => D) Moyennement fort
+t_nua L1 [mc] Quelle nuance (abréviation) signifie « fort » ?  OPTS: mp | ff | *f | mf  => C) f
+t_nua L1 [mc] Quelle nuance (abréviation) signifie « doux » ?  OPTS: f | pp | *p | ff  => C) p
+t_nua L1 [mc] Que signifie la nuance ff (fortissimo) ?  ABC:K:C / !ff!B4 |]  OPTS: Doux | Moyennement fort | Très doux | *Très fort  => D) Très fort
+t_nua L2 [mc] Que signifie la nuance mp (mezzo piano) ?  ABC:K:C / !mp!B4 |]  OPTS: *Moyennement doux | Très fort | Très doux | Doux  => A) Moyennement doux
+t_nua L2 [mc] Quelle nuance (abréviation) signifie « moyennement doux » ?  OPTS: f | mf | *mp | fff  => C) mp
+t_nua L2 [mc] Quelle nuance (abréviation) signifie « moyennement fort » ?  OPTS: *mf | mp | f | p  => A) mf
+t_nua L2 [mc] Quelle nuance (abréviation) signifie « moyennement fort » ?  OPTS: ppp | *mf | ff | mp  => B) mf
+t_nua L2 [mc] Parmi ces nuances, laquelle est la plus forte ?  OPTS: pp | *fff | ff  => B) fff
+t_nua L2 [mc] Que signifie la nuance f (forte) ?  ABC:K:C / !f!B4 |]  OPTS: Très fort | Très doux | Extrêmement doux | *Fort  => D) Fort
+t_nua L3 [mc] Que signifie ce signe ?  ABC:K:C / !diminuendo(!B B B !diminuendo)!B |]  OPTS: Crescendo : en augmentant le volume | *Decrescendo (diminuendo) : en diminuant le volume | Accelerando : en accélérant | Legato : notes liées  => B) Decrescendo (diminuendo) : en diminuant le volume
+t_nua L3 [mc] Que signifie la nuance f (forte) ?  ABC:K:C / !f!B4 |]  OPTS: Extrêmement doux | Très fort | *Fort | Moyennement doux  => C) Fort
+t_nua L3 [mc] Parmi ces nuances, laquelle est la plus douce ?  OPTS: fff | *ppp | mf  => B) ppp
+t_nua L3 [mc] Quelle nuance (abréviation) signifie « extrêmement fort » ?  OPTS: pp | p | *fff | mp  => C) fff
+t_nua L3 [mc] Que signifie la nuance ppp (pianississimo) ?  ABC:K:C / !ppp!B4 |]  OPTS: *Extrêmement doux | Moyennement fort | Très fort | Doux  => A) Extrêmement doux
+t_nua L3 [mc] Que signifie ce signe ?  ABC:K:C / !diminuendo(!B B B !diminuendo)!B |]  OPTS: *Decrescendo (diminuendo) : en diminuant le volume | Legato : notes liées | Accelerando : en accélérant | Crescendo : en augmentant le volume  => A) Decrescendo (diminuendo) : en diminuant le volume
+t_tem L1 [mc] Quel terme italien indique un tempo allant, au pas ?  OPTS: Adagio | *Andante | Moderato | Largo  => B) Andante
+t_tem L1 [mc] Que signifie l'indication de tempo « Moderato » ?  OPTS: Lent | Rapide, joyeux | *Modéré | Très rapide  => C) Modéré
+t_tem L1 [mc] Quel terme italien indique un tempo très lent ?  OPTS: Allegro | Moderato | *Largo | Andante  => C) Largo
+t_tem L1 [mc] Quel terme italien indique un tempo allant, au pas ?  OPTS: Adagio | Largo | Presto | *Andante  => D) Andante
+t_tem L1 [mc] Quel terme italien indique un tempo très lent ?  OPTS: Andante | *Largo | Moderato | Allegro  => B) Largo
+t_tem L1 [mc] Quel terme italien indique un tempo allant, au pas ?  OPTS: Allegro | Presto | *Andante | Largo  => C) Andante
+t_tem L2 [mc] Quel terme italien indique un tempo très lent ?  OPTS: Adagio | *Largo | Presto | Andante  => B) Largo
+t_tem L2 [mc] Que signifie l'indication de tempo « Presto » ?  OPTS: *Très rapide | Lent | Très lent | Modéré  => A) Très rapide
+t_tem L2 [mc] Quel terme italien signifie « en ralentissant » ?  OPTS: *Ritardando | Rubato | A tempo | Accelerando  => A) Ritardando
+t_tem L2 [mc] Parmi ces tempos, lequel est le plus rapide ?  OPTS: Largo | *Moderato | Adagio  => B) Moderato
+t_tem L2 [mc] Quel terme italien indique un tempo lent ?  OPTS: Andante | Allegro | Presto | *Adagio  => D) Adagio
+t_tem L2 [mc] Que signifie l'indication de tempo « Largo » ?  OPTS: Lent | Allant, au pas | *Très lent | Rapide, joyeux  => C) Très lent
+t_tem L3 [mc] Que signifie l'indication de tempo « Adagio » ?  OPTS: Rapide, joyeux | *Lent | Modéré | Très lent  => B) Lent
+t_tem L3 [short] Quel terme italien signifie « en accélérant » ?  => Accelerando
+t_tem L3 [mc] Quel terme italien indique un tempo lent ?  OPTS: Presto | Largo | *Adagio | Andante  => C) Adagio
+t_tem L3 [mc] Parmi ces tempos, lequel est le plus lent ?  OPTS: *Adagio | Moderato | Andante  => A) Adagio
+t_tem L3 [mc] Parmi ces tempos, lequel est le plus rapide ?  OPTS: Allegro | *Presto | Andante  => B) Presto
+t_tem L3 [mc] Que signifie l'indication de tempo « Largo » ?  OPTS: Allant, au pas | Modéré | Rapide, joyeux | *Très lent  => D) Très lent
+t_art L1 [mc] Comment s'appelle le signe d'articulation écrit sur ces notes ?  ABC:K:C / !accent!B2 !accent!c2 !accent!d2 !accent!e2 |]  OPTS: Legato | Staccato | *Accent | Point d'orgue  => C) Accent
+t_art L1 [mc] Comment s'appelle le signe d'articulation écrit sur ces notes ?  ABC:K:C / .B2 .c2 .d2 .e2 |]  OPTS: Point d'orgue | Accent | Legato | *Staccato  => D) Staccato
+t_art L1 [mc] Quel est l'effet du signe « accent » ?  ABC:K:C / !accent!B2 !accent!c2 !accent!d2 !accent!e2 |]  OPTS: *Attaque plus forte | Tenir plus longtemps, au choix | Note détachée, courte | Notes liées, sans interruption  => A) Attaque plus forte
+t_art L1 [mc] Quel est l'effet du signe « accent » ?  ABC:K:C / !accent!B2 !accent!c2 !accent!d2 !accent!e2 |]  OPTS: *Attaque plus forte | Tenir plus longtemps, au choix | Notes liées, sans interruption | Note détachée, courte  => A) Attaque plus forte
+t_art L1 [mc] Comment s'appelle le signe d'articulation écrit sur ces notes ?  ABC:K:C / (B2 c2 d2 e2) |]  OPTS: Point d'orgue | Accent | Staccato | *Legato  => D) Legato
+t_art L1 [mc] Quel est l'effet du signe « staccato » ?  ABC:K:C / .B2 .c2 .d2 .e2 |]  OPTS: *Note détachée, courte | Notes liées, sans interruption | Attaque plus forte | Tenir plus longtemps, au choix  => A) Note détachée, courte
+t_art L2 [mc] Comment s'appelle le signe d'articulation écrit sur ces notes ?  ABC:K:C / B2 c2 d2 !fermata!e2 |]  OPTS: Tenuto | Accent | *Point d'orgue | Staccato  => C) Point d'orgue
+t_art L2 [mc] Comment s'appelle le signe d'articulation écrit sur ces notes ?  ABC:K:C / (B2 c2 d2 e2) |]  OPTS: *Legato | Tenuto | Point d'orgue | Accent  => A) Legato
+t_art L2 [mc] Comment s'appelle le signe d'articulation écrit sur ces notes ?  ABC:K:C / !accent!B2 !accent!c2 !accent!d2 !accent!e2 |]  OPTS: *Accent | Legato | Staccato | Point d'orgue  => A) Accent
+t_art L2 [mc] Quel est l'effet du signe « accent » ?  ABC:K:C / !accent!B2 !accent!c2 !accent!d2 !accent!e2 |]  OPTS: Note détachée, courte | Tenir plus longtemps, au choix | *Attaque plus forte | Notes liées, sans interruption  => C) Attaque plus forte
+t_art L2 [mc] Comment s'appelle le signe d'articulation écrit sur ces notes ?  ABC:K:C / .B2 .c2 .d2 .e2 |]  OPTS: Tenuto | Point d'orgue | Legato | *Staccato  => D) Staccato
+t_art L2 [mc] Comment s'appelle le signe d'articulation écrit sur ces notes ?  ABC:K:C / (B2 c2 d2 e2) |]  OPTS: Staccato | Accent | *Legato | Point d'orgue  => C) Legato
+t_art L3 [mc] Comment s'appelle le signe d'articulation écrit sur ces notes ?  ABC:K:C / B2 c2 d2 !fermata!e2 |]  OPTS: *Point d'orgue | Tenuto | Accent | Legato  => A) Point d'orgue
+t_art L3 [mc] Quel est l'effet du signe « legato » ?  ABC:K:C / (B2 c2 d2 e2) |]  OPTS: Accent très marqué | Note tenue toute sa valeur, légèrement appuyée | Note détachée, courte | *Notes liées, sans interruption  => D) Notes liées, sans interruption
+t_art L3 [mc] Quel est l'effet du signe « accent » ?  ABC:K:C / !accent!B2 !accent!c2 !accent!d2 !accent!e2 |]  OPTS: Notes liées, sans interruption | Accent très marqué | *Attaque plus forte | Tenir plus longtemps, au choix  => C) Attaque plus forte
+t_art L3 [mc] Quel est l'effet du signe « tenuto » ?  ABC:K:C / !tenuto!B2 !tenuto!c2 !tenuto!d2 !tenuto!e2 |]  OPTS: *Note tenue toute sa valeur, légèrement appuyée | Attaque plus forte | Note détachée, courte | Notes liées, sans interruption  => A) Note tenue toute sa valeur, légèrement appuyée
+t_art L3 [mc] Quel est l'effet du signe « marcato » ?  ABC:K:C / !marcato!B2 !marcato!c2 !marcato!d2 !marcato!e2 |]  OPTS: Note détachée, courte | Notes liées, sans interruption | *Accent très marqué | Note tenue toute sa valeur, légèrement appuyée  => C) Accent très marqué
+t_art L3 [mc] Quel est l'effet du signe « tenuto » ?  ABC:K:C / !tenuto!B2 !tenuto!c2 !tenuto!d2 !tenuto!e2 |]  OPTS: *Note tenue toute sa valeur, légèrement appuyée | Tenir plus longtemps, au choix | Attaque plus forte | Notes liées, sans interruption  => A) Note tenue toute sa valeur, légèrement appuyée
+t_rep L1 [mc] Que signifie l'indication « D.S. » ?  OPTS: Jouer le passage deux fois | Reprendre au début et s'arrêter au mot Fine | Jouer la case 1, reprendre, puis sauter à la case 2 | *Retourner au signe 𝄋  => D) Retourner au signe 𝄋
+t_rep L1 [mc] Comment lit-on ce passage ?  ABC:K:C / |: c d e f |[1 g a g2 :|[2 e d c2 |]  OPTS: Jouer le passage deux fois | Retourner au signe 𝄋 | Reprendre au début et s'arrêter au mot Fine | *Jouer la case 1, reprendre, puis sauter à la case 2  => D) Jouer la case 1, reprendre, puis sauter à la case 2
+t_rep L1 [mc] Que signifient ces barres de mesure ?  ABC:K:C / |: c d e f | g2 g2 :|  OPTS: *Jouer le passage deux fois | Jouer la case 1, reprendre, puis sauter à la case 2 | Reprendre au début et s'arrêter au mot Fine | Retourner au signe 𝄋  => A) Jouer le passage deux fois
+t_rep L1 [mc] Que signifient ces barres de mesure ?  ABC:K:C / |: c d e f | g2 g2 :|  OPTS: Retourner au signe 𝄋 | *Jouer le passage deux fois | Reprendre au début et s'arrêter au mot Fine | Jouer la case 1, reprendre, puis sauter à la case 2  => B) Jouer le passage deux fois
+t_rep L1 [mc] Comment lit-on ce passage ?  ABC:K:C / |: c d e f |[1 g a g2 :|[2 e d c2 |]  OPTS: Reprendre au début et s'arrêter au mot Fine | Jouer le passage deux fois | Retourner au signe 𝄋 | *Jouer la case 1, reprendre, puis sauter à la case 2  => D) Jouer la case 1, reprendre, puis sauter à la case 2
+t_rep L1 [mc] Comment lit-on ce passage ?  ABC:K:C / |: c d e f |[1 g a g2 :|[2 e d c2 |]  OPTS: *Jouer la case 1, reprendre, puis sauter à la case 2 | Jouer le passage deux fois | Retourner au signe 𝄋 | Reprendre au début et s'arrêter au mot Fine  => A) Jouer la case 1, reprendre, puis sauter à la case 2
+t_rep L2 [mc] Comment lit-on ce passage ?  ABC:K:C / |: c d e f |[1 g a g2 :|[2 e d c2 |]  OPTS: Jouer le passage deux fois | Section de fin du morceau | *Jouer la case 1, reprendre, puis sauter à la case 2 | Reprendre au début et s'arrêter au mot Fine  => C) Jouer la case 1, reprendre, puis sauter à la case 2
+t_rep L2 [mc] Que signifie l'indication « D.C. al Fine » ?  OPTS: Retourner au signe 𝄋 | Section de fin du morceau | Jouer la case 1, reprendre, puis sauter à la case 2 | *Reprendre au début et s'arrêter au mot Fine  => D) Reprendre au début et s'arrêter au mot Fine
+t_rep L2 [mc] Que signifie l'indication « D.C. al Fine » ?  OPTS: *Reprendre au début et s'arrêter au mot Fine | Retourner au signe 𝄋 | Jouer la case 1, reprendre, puis sauter à la case 2 | Section de fin du morceau  => A) Reprendre au début et s'arrêter au mot Fine
+t_rep L2 [mc] Que signifie l'indication « Coda » ?  OPTS: Retourner au signe 𝄋 | *Section de fin du morceau | Jouer le passage deux fois | Reprendre au début et s'arrêter au mot Fine  => B) Section de fin du morceau
+t_rep L2 [mc] Que signifient ces barres de mesure ?  ABC:K:C / |: c d e f | g2 g2 :|  OPTS: Retourner au signe 𝄋 | Section de fin du morceau | *Jouer le passage deux fois | Reprendre au début et s'arrêter au mot Fine  => C) Jouer le passage deux fois
+t_rep L2 [mc] Comment lit-on ce passage ?  ABC:K:C / |: c d e f |[1 g a g2 :|[2 e d c2 |]  OPTS: Jouer le passage deux fois | *Jouer la case 1, reprendre, puis sauter à la case 2 | Section de fin du morceau | Retourner au signe 𝄋  => B) Jouer la case 1, reprendre, puis sauter à la case 2
+t_rep L3 [mc] Que signifie l'indication « D.C. al Fine » ?  OPTS: Section de fin du morceau | Jouer la case 1, reprendre, puis sauter à la case 2 | Retourner au signe 𝄋 | *Reprendre au début et s'arrêter au mot Fine  => D) Reprendre au début et s'arrêter au mot Fine
+t_rep L3 [mc] Comment lit-on ce passage ?  ABC:K:C / |: c d e f |[1 g a g2 :|[2 e d c2 |]  OPTS: Reprendre au début et s'arrêter au mot Fine | Jouer le passage deux fois | *Jouer la case 1, reprendre, puis sauter à la case 2 | Section de fin du morceau  => C) Jouer la case 1, reprendre, puis sauter à la case 2
+t_rep L3 [mc] Comment lit-on ce passage ?  ABC:K:C / |: c d e f |[1 g a g2 :|[2 e d c2 |]  OPTS: *Jouer la case 1, reprendre, puis sauter à la case 2 | Retourner au signe 𝄋 | Section de fin du morceau | Reprendre au début et s'arrêter au mot Fine  => A) Jouer la case 1, reprendre, puis sauter à la case 2
+t_rep L3 [mc] Que signifient ces barres de mesure ?  ABC:K:C / |: c d e f | g2 g2 :|  OPTS: Jouer la case 1, reprendre, puis sauter à la case 2 | Retourner au signe 𝄋 | Reprendre au début et s'arrêter au mot Fine | *Jouer le passage deux fois  => D) Jouer le passage deux fois
+t_rep L3 [mc] Que signifie l'indication « Coda » ?  OPTS: Jouer la case 1, reprendre, puis sauter à la case 2 | Reprendre au début et s'arrêter au mot Fine | Retourner au signe 𝄋 | *Section de fin du morceau  => D) Section de fin du morceau
+t_rep L3 [mc] Que signifie l'indication « Coda » ?  OPTS: Retourner au signe 𝄋 | Jouer la case 1, reprendre, puis sauter à la case 2 | Jouer le passage deux fois | *Section de fin du morceau  => D) Section de fin du morceau
+e_int L1 [listen] Écoute l'intervalle mélodique (en montant) et nomme-le.  OPTS: Quinte juste | Octave juste | *Tierce majeure | Quarte juste  => C) Tierce majeure
+e_int L1 [listen] Écoute l'intervalle mélodique (en montant) et nomme-le.  OPTS: Quarte juste | Quinte juste | *Tierce mineure | Tierce majeure  => C) Tierce mineure
+e_int L1 [listen] Écoute l'intervalle mélodique (en montant) et nomme-le.  OPTS: Octave juste | Quarte juste | *Quinte juste | Tierce majeure  => C) Quinte juste
+e_int L1 [listen] Écoute l'intervalle mélodique (en montant) et nomme-le.  OPTS: Octave juste | *Quarte juste | Tierce majeure | Quinte juste  => B) Quarte juste
+e_int L1 [listen] Écoute l'intervalle mélodique (en montant) et nomme-le.  OPTS: *Tierce mineure | Octave juste | Tierce majeure | Quinte juste  => A) Tierce mineure
+e_int L1 [listen] Écoute l'intervalle mélodique (en montant) et nomme-le.  OPTS: *Tierce mineure | Quarte juste | Octave juste | Tierce majeure  => A) Tierce mineure
+e_int L2 [listen] Écoute l'intervalle mélodique (en montant) et nomme-le.  OPTS: Quarte juste | Quinte juste | Sixte mineure | *Tierce majeure  => D) Tierce majeure
+e_int L2 [listen] Écoute l'intervalle mélodique (en montant) et nomme-le.  OPTS: Tierce mineure | *Seconde mineure | Sixte mineure | Seconde majeure  => B) Seconde mineure
+e_int L2 [listen] Écoute l'intervalle mélodique (en montant) et nomme-le.  OPTS: Quarte juste | Tierce mineure | Tierce majeure | *Sixte majeure  => D) Sixte majeure
+e_int L2 [listen] Écoute l'intervalle mélodique (en montant) et nomme-le.  OPTS: Seconde majeure | Sixte mineure | Tierce majeure | *Seconde mineure  => D) Seconde mineure
+e_int L2 [listen] Écoute l'intervalle mélodique (en montant) et nomme-le.  OPTS: *Sixte mineure | Sixte majeure | Quarte juste | Quinte juste  => A) Sixte mineure
+e_int L2 [listen] Écoute l'intervalle mélodique (en montant) et nomme-le.  OPTS: Sixte majeure | *Tierce majeure | Octave juste | Seconde mineure  => B) Tierce majeure
+e_int L3 [listen] Écoute l'intervalle mélodique (en montant) et nomme-le.  OPTS: Tierce majeure | Seconde mineure | Sixte majeure | *Octave juste  => D) Octave juste
+e_int L3 [listen] Écoute l'intervalle mélodique (en montant) et nomme-le.  OPTS: Quarte juste | Septième majeure | Tierce majeure | *Sixte mineure  => D) Sixte mineure
+e_int L3 [listen] Écoute l'intervalle harmonique (les deux notes ensemble) et nomme-le.  OPTS: Seconde mineure | *Septième majeure | Sixte majeure | Septième mineure  => B) Septième majeure
+e_int L3 [listen] Écoute l'intervalle mélodique (en montant) et nomme-le.  OPTS: *Seconde majeure | Tierce majeure | Quarte juste | Octave juste  => A) Seconde majeure
+e_int L3 [listen] Écoute l'intervalle harmonique (les deux notes ensemble) et nomme-le.  OPTS: Septième majeure | Sixte mineure | Quarte augmentée (triton) | *Quarte juste  => D) Quarte juste
+e_int L3 [listen] Écoute l'intervalle harmonique (les deux notes ensemble) et nomme-le.  OPTS: *Sixte mineure | Sixte majeure | Seconde mineure | Septième majeure  => A) Sixte mineure
+e_acc L1 [listen] Écoute l'accord (arpégé puis plaqué). Quelle est sa qualité ?  OPTS: Accord diminué | Accord mineur | *Accord majeur  => C) Accord majeur
+e_acc L1 [listen] Écoute l'accord (arpégé puis plaqué). Quelle est sa qualité ?  OPTS: *Accord mineur | Accord diminué | Accord majeur  => A) Accord mineur
+e_acc L1 [listen] Écoute l'accord (arpégé puis plaqué). Quelle est sa qualité ?  OPTS: Accord diminué | Accord mineur | *Accord majeur  => C) Accord majeur
+e_acc L1 [listen] Écoute l'accord (arpégé puis plaqué). Quelle est sa qualité ?  OPTS: Accord mineur | *Accord majeur | Accord diminué  => B) Accord majeur
+e_acc L1 [listen] Écoute l'accord (arpégé puis plaqué). Quelle est sa qualité ?  OPTS: Accord diminué | *Accord mineur | Accord majeur  => B) Accord mineur
+e_acc L1 [listen] Écoute l'accord (arpégé puis plaqué). Quelle est sa qualité ?  OPTS: Accord diminué | *Accord mineur | Accord majeur  => B) Accord mineur
+e_acc L2 [listen] Écoute l'accord (arpégé puis plaqué). Quelle est sa qualité ?  OPTS: *Accord mineur | Accord augmenté | Accord majeur | Accord diminué  => A) Accord mineur
+e_acc L2 [listen] Écoute l'accord (arpégé puis plaqué). Quelle est sa qualité ?  OPTS: Accord augmenté | Accord diminué | Accord majeur | *Accord mineur  => D) Accord mineur
+e_acc L2 [listen] Écoute l'accord (arpégé puis plaqué). Quelle est sa qualité ?  OPTS: *Accord mineur | Accord augmenté | Accord diminué | Accord majeur  => A) Accord mineur
+e_acc L2 [listen] Écoute l'accord (arpégé puis plaqué). Quelle est sa qualité ?  OPTS: Accord mineur | *Accord majeur | Accord augmenté | Accord diminué  => B) Accord majeur
+e_acc L2 [listen] Écoute l'accord (arpégé puis plaqué). Quelle est sa qualité ?  OPTS: Accord majeur | Accord mineur | Accord augmenté | *Accord diminué  => D) Accord diminué
+e_acc L2 [listen] Écoute l'accord (arpégé puis plaqué). Quelle est sa qualité ?  OPTS: Accord mineur | *Accord majeur | Accord augmenté | Accord diminué  => B) Accord majeur
+e_acc L3 [listen] Écoute l'accord (arpégé puis plaqué). Quelle est sa qualité ?  OPTS: *Accord majeur | Accord diminué | Accord mineur | Accord augmenté  => A) Accord majeur
+e_acc L3 [listen] Écoute l'accord (arpégé puis plaqué). Quelle est sa qualité ?  OPTS: Accord mineur | Accord augmenté | *Accord majeur | Accord diminué  => C) Accord majeur
+e_acc L3 [listen] Écoute l'accord (arpégé puis plaqué). Quelle est sa qualité ?  OPTS: *Accord diminué | Accord majeur | Accord augmenté | Accord mineur  => A) Accord diminué
+e_acc L3 [listen] Écoute l'accord (arpégé puis plaqué). Quelle est sa qualité ?  OPTS: Accord diminué | Accord mineur | *Accord majeur | Accord augmenté  => C) Accord majeur
+e_acc L3 [listen] Écoute l'accord (arpégé puis plaqué). Quelle est sa qualité ?  OPTS: *Accord majeur | Accord augmenté | Accord mineur | Accord diminué  => A) Accord majeur
+e_acc L3 [listen] Écoute l'accord (arpégé puis plaqué). Quelle est sa qualité ?  OPTS: Accord majeur | Accord augmenté | Accord mineur | *Accord diminué  => D) Accord diminué
+e_mod L1 [listen] Écoute cette gamme. Est-elle majeure ou mineure ?  OPTS: *Mineur | Majeur  => A) Mineur
+e_mod L1 [listen] Écoute cette gamme. Est-elle majeure ou mineure ?  OPTS: Majeur | *Mineur  => B) Mineur
+e_mod L1 [listen] Écoute cette gamme. Est-elle majeure ou mineure ?  OPTS: *Majeur | Mineur  => A) Majeur
+e_mod L1 [listen] Écoute cette gamme. Est-elle majeure ou mineure ?  OPTS: *Majeur | Mineur  => A) Majeur
+e_mod L1 [listen] Écoute cette gamme. Est-elle majeure ou mineure ?  OPTS: Mineur | *Majeur  => B) Majeur
+e_mod L1 [listen] Écoute cette gamme. Est-elle majeure ou mineure ?  OPTS: Mineur | *Majeur  => B) Majeur
+e_mod L2 [listen] Écoute ce court motif. Est-il en mode majeur ou mineur ?  OPTS: Majeur | *Mineur  => B) Mineur
+e_mod L2 [listen] Écoute ce court motif. Est-il en mode majeur ou mineur ?  OPTS: Mineur | *Majeur  => B) Majeur
+e_mod L2 [listen] Écoute ce court motif. Est-il en mode majeur ou mineur ?  OPTS: Mineur | *Majeur  => B) Majeur
+e_mod L2 [listen] Écoute ce court motif. Est-il en mode majeur ou mineur ?  OPTS: *Majeur | Mineur  => A) Majeur
+e_mod L2 [listen] Écoute ce court motif. Est-il en mode majeur ou mineur ?  OPTS: *Mineur | Majeur  => A) Mineur
+e_mod L2 [listen] Écoute ce court motif. Est-il en mode majeur ou mineur ?  OPTS: *Majeur | Mineur  => A) Majeur
+e_mod L3 [listen] Écoute ce court motif. Est-il en mode majeur ou mineur ?  OPTS: *Majeur | Mineur  => A) Majeur
+e_mod L3 [listen] Écoute ce court motif. Est-il en mode majeur ou mineur ?  OPTS: Mineur | *Majeur  => B) Majeur
+e_mod L3 [listen] Écoute ce court motif. Est-il en mode majeur ou mineur ?  OPTS: Mineur | *Majeur  => B) Majeur
+e_mod L3 [listen] Écoute ce court motif. Est-il en mode majeur ou mineur ?  OPTS: Mineur | *Majeur  => B) Majeur
+e_mod L3 [listen] Écoute ce court motif. Est-il en mode majeur ou mineur ?  OPTS: *Mineur | Majeur  => A) Mineur
+e_mod L3 [listen] Écoute ce court motif. Est-il en mode majeur ou mineur ?  OPTS: *Majeur | Mineur  => A) Majeur
+e_cad L1 [listen] Écoute la fin de la phrase. Quelle cadence entends-tu ?  OPTS: Cadence parfaite | *Demi-cadence  => B) Demi-cadence
+e_cad L1 [listen] Écoute la fin de la phrase. Quelle cadence entends-tu ?  OPTS: Demi-cadence | *Cadence parfaite  => B) Cadence parfaite
+e_cad L1 [listen] Écoute la fin de la phrase. Quelle cadence entends-tu ?  OPTS: *Cadence parfaite | Demi-cadence  => A) Cadence parfaite
+e_cad L1 [listen] Écoute la fin de la phrase. Quelle cadence entends-tu ?  OPTS: *Demi-cadence | Cadence parfaite  => A) Demi-cadence
+e_cad L1 [listen] Écoute la fin de la phrase. Quelle cadence entends-tu ?  OPTS: Demi-cadence | *Cadence parfaite  => B) Cadence parfaite
+e_cad L1 [listen] Écoute la fin de la phrase. Quelle cadence entends-tu ?  OPTS: *Cadence parfaite | Demi-cadence  => A) Cadence parfaite
+e_cad L2 [listen] Écoute la fin de la phrase. Quelle cadence entends-tu ?  OPTS: Cadence plagale | Cadence parfaite | *Demi-cadence | Cadence rompue  => C) Demi-cadence
+e_cad L2 [listen] Écoute la fin de la phrase. Quelle cadence entends-tu ?  OPTS: Cadence plagale | Cadence rompue | *Demi-cadence | Cadence parfaite  => C) Demi-cadence
+e_cad L2 [listen] Écoute la fin de la phrase. Quelle cadence entends-tu ?  OPTS: Demi-cadence | Cadence parfaite | *Cadence plagale | Cadence rompue  => C) Cadence plagale
+e_cad L2 [listen] Écoute la fin de la phrase. Quelle cadence entends-tu ?  OPTS: *Cadence rompue | Cadence plagale | Cadence parfaite | Demi-cadence  => A) Cadence rompue
+e_cad L2 [listen] Écoute la fin de la phrase. Quelle cadence entends-tu ?  OPTS: Cadence plagale | Cadence rompue | Demi-cadence | *Cadence parfaite  => D) Cadence parfaite
+e_cad L2 [listen] Écoute la fin de la phrase. Quelle cadence entends-tu ?  OPTS: Cadence rompue | Demi-cadence | Cadence plagale | *Cadence parfaite  => D) Cadence parfaite
+e_cad L3 [listen] Écoute la fin de la phrase. Quelle cadence entends-tu ?  OPTS: Cadence parfaite | Cadence rompue | Demi-cadence | *Cadence plagale  => D) Cadence plagale
+e_cad L3 [listen] Écoute la fin de la phrase. Quelle cadence entends-tu ?  OPTS: *Demi-cadence | Cadence rompue | Cadence plagale | Cadence parfaite  => A) Demi-cadence
+e_cad L3 [listen] Écoute la fin de la phrase. Quelle cadence entends-tu ?  OPTS: Cadence rompue | Demi-cadence | Cadence plagale | *Cadence parfaite  => D) Cadence parfaite
+e_cad L3 [listen] Écoute la fin de la phrase. Quelle cadence entends-tu ?  OPTS: Cadence parfaite | *Cadence rompue | Demi-cadence | Cadence plagale  => B) Cadence rompue
+e_cad L3 [listen] Écoute la fin de la phrase. Quelle cadence entends-tu ?  OPTS: Demi-cadence | Cadence rompue | Cadence plagale | *Cadence parfaite  => D) Cadence parfaite
+e_cad L3 [listen] Écoute la fin de la phrase. Quelle cadence entends-tu ?  OPTS: Cadence plagale | Cadence parfaite | Cadence rompue | *Demi-cadence  => D) Demi-cadence
+e_rhy L1 [listen] Écoute le rythme (après une mesure de décompte). Lequel as-tu entendu ?  OPTS: autre rythme | autre rythme | *le rythme entendu  => C) le rythme entendu
+e_rhy L1 [listen] Écoute le rythme (après une mesure de décompte). Lequel as-tu entendu ?  OPTS: autre rythme | autre rythme | *le rythme entendu  => C) le rythme entendu
+e_rhy L1 [listen] Écoute le rythme (après une mesure de décompte). Lequel as-tu entendu ?  OPTS: autre rythme | autre rythme | *le rythme entendu  => C) le rythme entendu
+e_rhy L1 [listen] Écoute le rythme (après une mesure de décompte). Lequel as-tu entendu ?  OPTS: autre rythme | autre rythme | *le rythme entendu  => C) le rythme entendu
+e_rhy L1 [listen] Écoute le rythme (après une mesure de décompte). Lequel as-tu entendu ?  OPTS: autre rythme | *le rythme entendu | autre rythme  => B) le rythme entendu
+e_rhy L1 [listen] Écoute le rythme (après une mesure de décompte). Lequel as-tu entendu ?  OPTS: autre rythme | *le rythme entendu | autre rythme  => B) le rythme entendu
+e_rhy L2 [listen] Écoute le rythme (après une mesure de décompte). Lequel as-tu entendu ?  OPTS: autre rythme | autre rythme | *le rythme entendu  => C) le rythme entendu
+e_rhy L2 [listen] Écoute le rythme (après une mesure de décompte). Lequel as-tu entendu ?  OPTS: autre rythme | *le rythme entendu | autre rythme  => B) le rythme entendu
+e_rhy L2 [listen] Écoute le rythme (après une mesure de décompte). Lequel as-tu entendu ?  OPTS: autre rythme | autre rythme | *le rythme entendu  => C) le rythme entendu
+e_rhy L2 [listen] Écoute le rythme (après une mesure de décompte). Lequel as-tu entendu ?  OPTS: *le rythme entendu | autre rythme | autre rythme  => A) le rythme entendu
+e_rhy L2 [listen] Écoute le rythme (après une mesure de décompte). Lequel as-tu entendu ?  OPTS: autre rythme | *le rythme entendu | autre rythme  => B) le rythme entendu
+e_rhy L2 [listen] Écoute le rythme (après une mesure de décompte). Lequel as-tu entendu ?  OPTS: autre rythme | *le rythme entendu | autre rythme  => B) le rythme entendu
+e_rhy L3 [listen] Écoute le rythme (après une mesure de décompte). Lequel as-tu entendu ?  OPTS: autre rythme | autre rythme | *le rythme entendu  => C) le rythme entendu
+e_rhy L3 [listen] Écoute le rythme (après une mesure de décompte). Lequel as-tu entendu ?  OPTS: *le rythme entendu | autre rythme | autre rythme  => A) le rythme entendu
+e_rhy L3 [listen] Écoute le rythme (après une mesure de décompte). Lequel as-tu entendu ?  OPTS: *le rythme entendu | autre rythme | autre rythme  => A) le rythme entendu
+e_rhy L3 [listen] Écoute le rythme (après une mesure de décompte). Lequel as-tu entendu ?  OPTS: autre rythme | *le rythme entendu | autre rythme  => B) le rythme entendu
+e_rhy L3 [listen] Écoute le rythme (après une mesure de décompte). Lequel as-tu entendu ?  OPTS: autre rythme | *le rythme entendu | autre rythme  => B) le rythme entendu
+e_rhy L3 [listen] Écoute le rythme (après une mesure de décompte). Lequel as-tu entendu ?  OPTS: autre rythme | autre rythme | *le rythme entendu  => C) le rythme entendu

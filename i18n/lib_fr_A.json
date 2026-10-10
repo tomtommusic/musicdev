@@ -1,0 +1,437 @@
+[
+ {
+  "id": "lecture",
+  "t": "Lecture",
+  "topics": [
+   {
+    "id": "lire-partition",
+    "t": "Lire une partition",
+    "title": "Lire une partition : vue d'ensemble",
+    "k": "symboles partition portee lecture vue ensemble",
+    "html": "<p>Une partition se lit comme un texte : de gauche à droite, ligne après ligne. Avant de jouer la première note, prends quelques secondes pour repérer les informations placées au début.</p>\n<ol>\n<li><b>La portée</b> : les 5 lignes sur lesquelles on écrit les notes (<a href=\"#\" data-go=\"portee\">La portée</a>).</li>\n<li><b>La clé</b>, au tout début : elle fixe le nom des notes (<a href=\"#\" data-go=\"cles\">Les clés</a>).</li>\n<li><b>L'armure</b>, juste après la clé : les dièses ou les bémols valables pour tout le morceau. Elle indique la tonalité (<a href=\"#\" data-go=\"armures\">Les armures</a>).</li>\n<li><b>Le chiffre de mesure</b> : combien de temps par mesure et quelle figure vaut un temps (<a href=\"#\" data-go=\"mesures-simples\">Mesures simples</a>).</li>\n<li><b>L'indication de tempo</b>, au-dessus de la portée : la vitesse (<a href=\"#\" data-go=\"tempo\">Le tempo</a>).</li>\n<li><b>Les nuances</b>, sous la portée : le volume (<a href=\"#\" data-go=\"nuances\">Les nuances</a>).</li>\n<li><b>Les notes et les silences</b> : leur position donne la hauteur, leur forme donne la durée (<a href=\"#\" data-go=\"figures-notes\">Figures de notes</a>, <a href=\"#\" data-go=\"silences\">Figures de silence</a>).</li>\n<li><b>Les barres de mesure</b>, les liaisons, les articulations et les signes de reprise (<a href=\"#\" data-go=\"barres\">Barres de mesure</a>, <a href=\"#\" data-go=\"reprises\">Reprises</a>).</li>\n</ol>\n<p><b>Conseil de lecture à vue</b> : avant de commencer, repère la tonalité, la mesure, le rythme le plus difficile et les sauts importants. Compte une mesure à vide pour installer la pulsation, puis ne t'arrête plus : on corrige les erreurs à la prochaine lecture.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nT:Petite pièce\nM:3/4\nL:1/8\nQ:\"Moderato\" 1/4=100\nK:G\n!mp! G2 B2 d2 | (c2 B2) A2 | B4 z2 |: !f! d3 c B2 | .A2 .G2 .F2 | G6 :|",
+      "cap": "Titre, tempo, clé de sol, armure (un dièse : sol majeur), mesure à 3/4, nuances, liaison, silence, staccato et barres de reprise."
+     }
+    ]
+   },
+   {
+    "id": "portee",
+    "t": "La portée",
+    "title": null,
+    "k": "lignes interlignes",
+    "html": "<p>La <b>portée</b> est formée de <b>5 lignes</b> horizontales et de <b>4 interlignes</b> (les espaces entre les lignes). On les compte toujours <b>de bas en haut</b> : la 1<sup>re</sup> ligne est la plus basse.</p>\n<p>Plus une note est placée haut sur la portée, plus elle est aiguë. Une note peut être <b>sur une ligne</b> (la ligne la traverse) ou <b>dans un interligne</b>. Pour aller plus haut ou plus bas que la portée, on ajoute de petites <a href=\"#\" data-go=\"lignes-sup\">lignes supplémentaires</a>.</p>\n<p>La portée seule ne dit pas quelles notes sont écrites : c'est la <a href=\"#\" data-go=\"cles\">clé</a> qui donne le nom des lignes.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\nE G B d f |]\nw: 1re 2e 3e 4e 5e",
+      "cap": "Les 5 lignes, en clé de sol : mi, sol, si, ré, fa."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:C\nF A c e |]\nw: 1er 2e 3e 4e",
+      "cap": "Les 4 interlignes : fa, la, do, mi."
+     }
+    ]
+   },
+   {
+    "id": "cles",
+    "t": "Les clés",
+    "title": null,
+    "k": "cle de sol fa ut alto tenor",
+    "html": "<p>La <b>clé</b> donne le nom d'une ligne ; toutes les autres notes se déduisent à partir d'elle.</p>\n<ul>\n<li><b>Clé de sol</b> (2<sup>e</sup> ligne) : la note sur la 2<sup>e</sup> ligne est le <b>sol</b> au-dessus du do central. Pour les voix aiguës, la flûte, le violon, la trompette, la main droite du piano…</li>\n<li><b>Clé de fa</b> (4<sup>e</sup> ligne) : la note sur la 4<sup>e</sup> ligne est le <b>fa</b> sous le do central. Pour les voix graves, la contrebasse, le basson, le trombone, la main gauche du piano…</li>\n<li><b>Clé d'ut 3<sup>e</sup> ligne</b> (clé d'alto) : la 3<sup>e</sup> ligne est le <b>do central</b>. Utilisée surtout par l'alto (violon alto).</li>\n<li><b>Clé d'ut 4<sup>e</sup> ligne</b> (clé de ténor) : la 4<sup>e</sup> ligne est le do central. Pour les passages aigus du violoncelle, du basson et du trombone.</li>\n</ul>\n<p>Truc pour la clé de fa : les lignes se lisent <b>sol, si, ré, fa, la</b> et les interlignes <b>la, do, mi, sol</b>.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C clef=treble\nC4 | [K:clef=bass] C4 | [K:clef=alto] C4 | [K:clef=tenor] C4 |]\nw: sol fa ut~3 ut~4",
+      "cap": "Le même do central écrit dans les quatre clés."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:C clef=bass\nG,, B,, D, F, A, |]\nw: sol si ré fa la",
+      "cap": "Les lignes en clé de fa."
+     }
+    ]
+   },
+   {
+    "id": "noms-notes",
+    "t": "Le nom des notes",
+    "title": null,
+    "k": "do re mi fa sol la si lettres C D E F G A B",
+    "html": "<p>Il y a <b>7 noms de notes</b> qui reviennent dans le même ordre : <b>do, ré, mi, fa, sol, la, si</b>, puis do de nouveau, une octave plus haut.</p>\n<p>Dans les pays anglophones et en jazz, on utilise des <b>lettres</b> :</p>\n<table class=\"lt\"><tr><th>Français</th><td>do</td><td>ré</td><td>mi</td><td>fa</td><td>sol</td><td>la</td><td>si</td></tr>\n<tr><th>Lettres</th><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><td>A</td><td>B</td></tr></table>\n<p>Attention : en allemand, B désigne si♭ et H désigne si.</p>\n<p><b>Les octaves.</b> Pour préciser la hauteur exacte, on ajoute un numéro d'octave. Selon les ouvrages, le do central du piano s'appelle <b>do3</b> (tradition française) ou <b>C4</b> (notation scientifique anglo-saxonne, courante en Amérique du Nord). Vérifie toujours le système utilisé dans ton manuel.</p>\n<p>Le <b>la de référence</b> pour accorder les instruments (la3 ou A4) vibre à 440 Hz.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\nC D E F G A B c |]\nw: do ré mi fa sol la si do\nw: C D E F G A B C",
+      "cap": "Une octave de do à do, avec les deux systèmes de noms."
+     }
+    ]
+   },
+   {
+    "id": "lignes-sup",
+    "t": "Lignes supplémentaires",
+    "title": null,
+    "k": "lignes additionnelles ledger",
+    "html": "<p>Quand une note dépasse la portée, on trace de <b>courtes lignes supplémentaires</b> (ou additionnelles) au-dessus ou au-dessous. On continue de compter lignes et interlignes comme sur la portée.</p>\n<p>Le <b>do central</b> s'écrit sur une ligne supplémentaire, sous la portée en clé de sol et au-dessus de la portée en clé de fa.</p>\n<p>Au-delà de trois ou quatre lignes supplémentaires, on préfère changer de clé ou utiliser l'indication <b>8va</b> (jouer une octave plus haut) ou <b>8vb</b> (une octave plus bas).</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\nA, B, C D | g a b c' |]\nw: la si do ré sol la si do",
+      "cap": "En clé de sol : sous la portée (la, si, do central, ré) et au-dessus (sol, la, si, do)."
+     }
+    ]
+   },
+   {
+    "id": "grand-systeme",
+    "t": "Le grand système (piano)",
+    "title": null,
+    "k": "grand systeme accolade piano main droite gauche do central",
+    "html": "<p>Le piano utilise deux portées réunies par une <b>accolade</b> : la clé de sol en haut (souvent la main droite) et la clé de fa en bas (souvent la main gauche). C'est le <b>grand système</b>.</p>\n<p>Le <b>do central</b> se trouve exactement entre les deux portées : une ligne supplémentaire sous la clé de sol, ou une ligne supplémentaire au-dessus de la clé de fa. C'est la même touche du piano.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\n%%staves {1 2}\nV:1 clef=treble\nC2 E2 G2 c2 |]\nV:2 clef=bass\nC2 G,2 E,2 C,2 |]",
+      "cap": "Le do central écrit dans chaque portée, puis les deux mains qui s'éloignent."
+     }
+    ]
+   },
+   {
+    "id": "clavier",
+    "t": "Le clavier",
+    "title": null,
+    "k": "piano touches blanches noires demi-ton",
+    "html": "<p>Sur un clavier, les <b>touches noires</b> sont groupées par <b>2</b> et par <b>3</b>. Le <b>do</b> est la touche blanche juste à gauche d'un groupe de 2 touches noires ; le <b>fa</b>, juste à gauche d'un groupe de 3.</p>\n<p>Deux touches voisines (blanche ou noire) sont à un <b>demi-ton</b> l'une de l'autre. Entre <b>mi et fa</b> et entre <b>si et do</b>, il n'y a pas de touche noire : ce sont des demi-tons naturels (<a href=\"#\" data-go=\"tons-demitons\">Tons et demi-tons</a>).</p>\n<p>Une touche noire porte deux noms : do♯ = ré♭, ré♯ = mi♭, etc. (<a href=\"#\" data-go=\"alterations\">enharmonie</a>). Essaie le clavier ci-dessous.</p>\n<div data-piano=\"48,71\"></div>",
+    "ex": []
+   },
+   {
+    "id": "alterations",
+    "t": "Les altérations",
+    "title": null,
+    "k": "diese bemol becarre double enharmonie accidentelle",
+    "html": "<p>Une <b>altération</b> modifie la hauteur d'une note :</p>\n<table class=\"lt\"><tr><th>♯</th><td><b>dièse</b> : hausse la note d'un demi-ton</td></tr>\n<tr><th>♭</th><td><b>bémol</b> : baisse la note d'un demi-ton</td></tr>\n<tr><th>♮</th><td><b>bécarre</b> : annule le dièse ou le bémol, la note redevient naturelle</td></tr>\n<tr><th>𝄪</th><td><b>double dièse</b> : hausse de deux demi-tons</td></tr>\n<tr><th>𝄫</th><td><b>double bémol</b> : baisse de deux demi-tons</td></tr></table>\n<ul><li>Placées à la clé (<a href=\"#\" data-go=\"armures\">armure</a>), les altérations valent pour tout le morceau, à toutes les octaves.</li>\n<li>Placées devant une note (<b>altération accidentelle</b>), elles valent jusqu'à la fin de la mesure, pour cette note à cette octave seulement.</li></ul>\n<p><b>Enharmonie</b> : deux noms pour le même son. Do♯ et ré♭ sonnent pareil sur le piano, mais on choisit l'un ou l'autre selon la tonalité et le sens de la mélodie.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\n^F2 | _B2 | =B2 | ^^F2 | __B2 |]\nw: fa♯ si♭ si♮ fa𝄪 si𝄫",
+      "cap": "Dièse, bémol, bécarre, double dièse, double bémol."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:C\n^C2 _D2 | ^F2 _G2 |]\nw: do♯ ré♭ fa♯ sol♭",
+      "cap": "Notes enharmoniques : même son, nom différent."
+     }
+    ]
+   },
+   {
+    "id": "transpositeurs",
+    "t": "Instruments transpositeurs",
+    "title": null,
+    "k": "si bemol mi bemol fa clarinette trompette saxophone cor transposition",
+    "html": "<p>Certains instruments lisent une note mais en font entendre une autre : ce sont les <b>instruments transpositeurs</b>. On dit qu'un instrument est « en si♭ » quand le do écrit sonne si♭.</p>\n<table class=\"lt\"><tr><th>Instrument</th><th>Le do écrit sonne…</th></tr>\n<tr><td>Clarinette en si♭, trompette en si♭, sax soprano</td><td>si♭ : une <b>seconde majeure plus bas</b></td></tr>\n<tr><td>Sax ténor (si♭)</td><td>une <b>neuvième majeure plus bas</b> (octave + seconde)</td></tr>\n<tr><td>Sax alto (mi♭)</td><td>mi♭ : une <b>sixte majeure plus bas</b></td></tr>\n<tr><td>Sax baryton (mi♭)</td><td>une octave + une sixte majeure plus bas</td></tr>\n<tr><td>Cor en fa</td><td>fa : une <b>quinte juste plus bas</b></td></tr></table>\n<p>Pour jouer ensemble, chaque musicien a sa partie déjà transposée. Dans MusicDEV, le réglage <b>Instrument de l'élève (micro)</b> tient compte de cette transposition : tu lis la note écrite pour ton instrument et le micro compare avec le son réel.</p>",
+    "ex": []
+   }
+  ]
+ },
+ {
+  "id": "rythme",
+  "t": "Rythme",
+  "topics": [
+   {
+    "id": "pulsation",
+    "t": "Pulsation, temps et mesure",
+    "title": null,
+    "k": "pulsation temps fort faible compter battue",
+    "html": "<p>La <b>pulsation</b> est le battement régulier que l'on sent en écoutant de la musique, celui qu'on suit en tapant du pied. Chaque battement est un <b>temps</b>.</p>\n<p>Les temps se regroupent en <b>mesures</b> de 2, 3 ou 4 temps. Le <b>1<sup>er</sup> temps</b> de la mesure est le <b>temps fort</b> : c'est sur lui qu'on sent l'appui. Les autres sont plus faibles. En 4/4 : <b>fort</b> – faible – <b>mi-fort</b> – faible.</p>\n<p><b>Compter</b> : on dit les numéros des temps (« 1, 2, 3, 4 ») et on ajoute « et » pour les moitiés de temps (« 1 et 2 et »). Pour les quarts de temps : « 1 i et a ».</p>\n<p>Dans le module Lecture rythmique, garde la pulsation dans ton corps (pied, tête) pendant que tu frappes le rythme avec les mains.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nM:4/4\nL:1/8\nQ:1/4=80\nK:C clef=perc stafflines=1\nB2 B2 B2 B2 | BB BB BB BB | B2 BB B4 |]\nw: 1 2 3 4 1 et 2 et 3 et 4 et 1 2 et 3",
+      "cap": "Compter les temps et les demi-temps."
+     }
+    ]
+   },
+   {
+    "id": "figures-notes",
+    "t": "Figures de notes",
+    "title": null,
+    "k": "ronde blanche noire croche double triple duree valeur hampe crochet",
+    "html": "<p>La forme de la note indique sa <b>durée</b>. Chaque figure vaut la moitié de la précédente :</p>\n<table class=\"lt\"><tr><th>Figure</th><th>Valeur (en noires)</th><th>Équivaut à</th></tr>\n<tr><td>Ronde</td><td>4</td><td>2 blanches</td></tr>\n<tr><td>Blanche</td><td>2</td><td>2 noires</td></tr>\n<tr><td>Noire</td><td>1</td><td>2 croches</td></tr>\n<tr><td>Croche</td><td>½</td><td>2 doubles-croches</td></tr>\n<tr><td>Double-croche</td><td>¼</td><td>2 triples-croches</td></tr>\n<tr><td>Triple-croche</td><td>⅛</td><td></td></tr></table>\n<p>La note est formée d'une <b>tête</b> (vide ou noire), parfois d'une <b>hampe</b> (le trait vertical) et de <b>crochets</b>. Quand plusieurs croches se suivent dans le même temps, on remplace les crochets par une <b>ligature</b> (barre) qui montre le groupement par temps.</p>\n<p>Hampe : vers le haut, à droite de la tête, si la note est sous la 3<sup>e</sup> ligne ; vers le bas, à gauche, à partir de la 3<sup>e</sup> ligne.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nM:4/4\nL:1/16\nK:C\nc16 | c8 c8 | c4 c4 c4 c4 | c2 c2 c2 c2 c2 c2 c2 c2 |]",
+      "cap": "Ronde, 2 blanches, 4 noires, 8 croches : chaque mesure dure 4 temps."
+     },
+     {
+      "abc": "X:1\nM:4/4\nL:1/16\nK:C\nc2c2 c2c2 c2c2 c2c2 | cccc cccc cccc cccc |]",
+      "cap": "Croches et doubles-croches regroupées par temps avec des ligatures."
+     }
+    ]
+   },
+   {
+    "id": "silences",
+    "t": "Figures de silence",
+    "title": null,
+    "k": "pause demi-pause soupir demi-soupir quart huitieme",
+    "html": "<p>À chaque figure de note correspond un <b>silence</b> de même durée :</p>\n<table class=\"lt\"><tr><th>Note</th><th>Silence</th><th>Durée (en noires)</th></tr>\n<tr><td>Ronde</td><td><b>Pause</b> (rectangle accroché sous la 4<sup>e</sup> ligne)</td><td>4</td></tr>\n<tr><td>Blanche</td><td><b>Demi-pause</b> (rectangle posé sur la 3<sup>e</sup> ligne)</td><td>2</td></tr>\n<tr><td>Noire</td><td><b>Soupir</b></td><td>1</td></tr>\n<tr><td>Croche</td><td><b>Demi-soupir</b></td><td>½</td></tr>\n<tr><td>Double-croche</td><td><b>Quart de soupir</b></td><td>¼</td></tr>\n<tr><td>Triple-croche</td><td><b>Huitième de soupir</b></td><td>⅛</td></tr></table>\n<p>La <b>pause</b> sert aussi à indiquer <b>une mesure entière de silence</b>, quelle que soit la mesure (3/4, 6/8…).</p>\n<p>Truc : la pause « pend » comme un objet lourd ; la demi-pause est « posée » comme un chapeau.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nM:4/4\nL:1/16\nK:C\nz16 | z8 z8 | z4 z4 z4 z4 | z2 z2 z2 z2 z2 z2 z2 z2 | z z z z z z z z z z z z z z z z |]",
+      "cap": "Pause, demi-pauses, soupirs, demi-soupirs, quarts de soupir."
+     }
+    ]
+   },
+   {
+    "id": "points-liaisons",
+    "t": "Points et liaisons",
+    "title": null,
+    "k": "note pointee double point liaison prolongation phrase legato",
+    "html": "<p><b>Le point</b> placé après une note ou un silence ajoute <b>la moitié de sa valeur</b> :</p>\n<ul><li>blanche pointée = 2 + 1 = <b>3 temps</b></li><li>noire pointée = 1 + ½ = <b>1 temps ½</b></li><li>croche pointée = ½ + ¼ = <b>¾ de temps</b> (souvent suivie d'une double-croche)</li></ul>\n<p><b>Le double point</b> ajoute la moitié, puis le quart de la valeur : noire doublement pointée = 1 + ½ + ¼ = 1 ¾ temps.</p>\n<p><b>La liaison de prolongation</b> relie deux notes <b>de même hauteur</b> : on joue la première et on tient pendant la durée des deux. Elle permet de dépasser une barre de mesure.</p>\n<p><b>La liaison d'expression</b> (ou de phrasé) relie des notes <b>de hauteurs différentes</b> : on les joue lié (legato), sans couper le son entre elles.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nM:4/4\nL:1/16\nK:C\nc6 c2 c4 c4 | c12 c4 | c4- c4 (c2 d2 e2 f2) |]",
+      "cap": "Noire pointée + croche, blanche pointée + noire, puis liaison de prolongation et liaison d'expression."
+     }
+    ]
+   },
+   {
+    "id": "mesures-simples",
+    "t": "Mesures simples",
+    "title": null,
+    "k": "chiffre indicateur 2/4 3/4 4/4 C alla breve",
+    "html": "<p>Le <b>chiffre de mesure</b> (ou chiffre indicateur) se place après l'armure. Dans une <b>mesure simple</b>, chaque temps se divise en <b>deux</b>.</p>\n<ul><li>Le chiffre du <b>haut</b> = le <b>nombre de temps</b> par mesure.</li>\n<li>Le chiffre du <b>bas</b> = la figure qui vaut <b>un temps</b> : 2 = blanche, 4 = noire, 8 = croche.</li></ul>\n<table class=\"lt\"><tr><th>Mesure</th><th>Temps</th><th>Unité de temps</th></tr>\n<tr><td>2/4</td><td>2</td><td>noire (marche)</td></tr>\n<tr><td>3/4</td><td>3</td><td>noire (valse, menuet)</td></tr>\n<tr><td>4/4 ou <b>C</b></td><td>4</td><td>noire (la plus courante)</td></tr>\n<tr><td>2/2 ou <b>¢</b> (alla breve)</td><td>2</td><td>blanche</td></tr></table>",
+    "ex": [
+     {
+      "abc": "X:1\nM:2/4\nL:1/4\nK:C\nc c | [M:3/4] c c c | [M:4/4] c c c c | [M:C|] c2 c2 |]",
+      "cap": "2/4, 3/4, 4/4 et alla breve."
+     }
+    ]
+   },
+   {
+    "id": "mesures-composees",
+    "t": "Mesures composées",
+    "title": null,
+    "k": "6/8 9/8 12/8 noire pointee ternaire",
+    "html": "<p>Dans une <b>mesure composée</b>, chaque temps se divise en <b>trois</b>. L'unité de temps est une <b>figure pointée</b> (le plus souvent la noire pointée).</p>\n<ul><li>Chiffre du haut ÷ 3 = <b>nombre de temps</b>.</li><li>Le chiffre du bas indique la figure qui vaut <b>un tiers de temps</b> (8 = croche).</li></ul>\n<table class=\"lt\"><tr><th>Mesure</th><th>Temps</th><th>Unité de temps</th><th>Division</th></tr>\n<tr><td>6/8</td><td>2</td><td>noire pointée</td><td>3 croches par temps</td></tr>\n<tr><td>9/8</td><td>3</td><td>noire pointée</td><td>3 croches par temps</td></tr>\n<tr><td>12/8</td><td>4</td><td>noire pointée</td><td>3 croches par temps</td></tr>\n<tr><td>6/4</td><td>2</td><td>blanche pointée</td><td>3 noires par temps</td></tr></table>\n<p>Attention : 6/8 n'est pas « 6 temps de croche » joués vite, mais <b>2 grands temps</b> balancés : « <b>1</b> 2 3 <b>4</b> 5 6 ».</p>",
+    "ex": [
+     {
+      "abc": "X:1\nM:6/8\nL:1/8\nK:C\nc3 c3 | ccc ccc | c2c c2c | [M:9/8] c3 c3 c3 | [M:12/8] c3 c3 c3 c3 |]",
+      "cap": "6/8 (deux temps de noire pointée), 9/8 et 12/8."
+     }
+    ]
+   },
+   {
+    "id": "nolets",
+    "t": "Triolets et autres n-olets",
+    "title": null,
+    "k": "triolet duolet quintolet division irreguliere",
+    "html": "<p>Un <b>n-olet</b> divise une durée de façon inhabituelle. On l'indique par un chiffre au-dessus du groupe.</p>\n<ul><li><b>Triolet</b> (3) : <b>3 notes dans le temps de 2</b>. En 4/4, un triolet de croches remplit un temps ; un triolet de noires remplit deux temps.</li>\n<li><b>Duolet</b> (2) : <b>2 notes dans le temps de 3</b>, utilisé en mesure composée.</li>\n<li><b>Quintolet</b> (5), <b>sextolet</b> (6)… : 5 ou 6 notes dans le temps de 4.</li></ul>\n<p>Pour bien jouer un triolet, pense à la syllabe « tri-o-let » répartie également sur le temps.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nM:4/4\nL:1/8\nK:C\nc c (3ccc c2 c2 | c2 c2 (3c2c2c2 |]",
+      "cap": "Triolet de croches (un temps), puis triolet de noires (deux temps)."
+     },
+     {
+      "abc": "X:1\nM:6/8\nL:1/8\nK:C\nccc (2cc | c3 c3 |]",
+      "cap": "Duolet en 6/8 : deux croches dans le temps de trois."
+     }
+    ]
+   },
+   {
+    "id": "syncope",
+    "t": "Syncope et contretemps",
+    "title": null,
+    "k": "syncope contretemps decalage accent",
+    "html": "<p>Une <b>syncope</b> est une note qui commence sur une partie <b>faible</b> du temps (ou sur un temps faible) et qui se prolonge sur la partie <b>forte</b> suivante. L'accent est déplacé : on sent un décalage. Exemple classique : croche – noire – croche.</p>\n<p>Un <b>contretemps</b> est une note jouée sur la partie faible, précédée d'un silence sur la partie forte (demi-soupir – croche). La note ne se prolonge pas.</p>\n<p>Truc : compte les « et » à voix haute (« 1 et 2 et ») et place la note sur le « et » sans la couper trop tôt.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nM:2/4\nL:1/8\nK:C\nc c2 c | c c2 c | z c z c | z c z c |]",
+      "cap": "Deux syncopes (croche – noire – croche), puis des contretemps."
+     }
+    ]
+   },
+   {
+    "id": "barres",
+    "t": "Barres de mesure",
+    "title": null,
+    "k": "barre double barre finale mesure",
+    "html": "<p>La <b>barre de mesure</b> est un trait vertical qui sépare les mesures. Chaque mesure contient exactement le nombre de temps indiqué par le <a href=\"#\" data-go=\"mesures-simples\">chiffre de mesure</a>.</p>\n<ul><li><b>Double barre</b> (deux traits fins) : fin d'une section, changement d'armure ou de mesure.</li>\n<li><b>Barre finale</b> (trait fin + trait épais) : fin du morceau.</li>\n<li><b>Barres de reprise</b> (avec deux points) : passage à jouer deux fois (<a href=\"#\" data-go=\"reprises\">Signes de reprise</a>).</li></ul>\n<p>Une <b>anacrouse</b> est une mesure incomplète au début du morceau (une ou quelques notes avant le premier temps fort). La dernière mesure est alors souvent raccourcie d'autant.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nM:2/4\nL:1/4\nK:C\nc c | d d || e e |: f f :| g2 |]",
+      "cap": "Barre simple, double barre, barres de reprise, barre finale."
+     }
+    ]
+   },
+   {
+    "id": "tempo",
+    "t": "Le tempo",
+    "title": null,
+    "k": "tempo bpm metronome allegro andante adagio largo presto moderato ritardando accelerando",
+    "html": "<p>Le <b>tempo</b> est la vitesse de la pulsation. On l'indique de deux façons :</p>\n<ul><li>avec un <b>nombre de pulsations par minute</b> (♩ = 60 : une noire par seconde), que l'on règle sur un métronome ;</li>\n<li>avec un <b>terme italien</b> (valeurs approximatives) :</li></ul>\n<table class=\"lt\"><tr><th>Terme</th><th>Sens</th><th>Environ</th></tr>\n<tr><td>Largo, Lento</td><td>très lent</td><td>40–60</td></tr>\n<tr><td>Adagio</td><td>lent</td><td>60–76</td></tr>\n<tr><td>Andante</td><td>allant, au pas</td><td>76–108</td></tr>\n<tr><td>Moderato</td><td>modéré</td><td>108–120</td></tr>\n<tr><td>Allegro</td><td>rapide, joyeux</td><td>120–168</td></tr>\n<tr><td>Presto</td><td>très rapide</td><td>168–200</td></tr></table>\n<p><b>Changements de tempo</b> : <i>accelerando</i> (accel., en accélérant), <i>ritardando</i> ou <i>rallentando</i> (rit., rall., en ralentissant), <i>a tempo</i> (revenir au tempo), <i>rubato</i> (tempo souple). Le <b>point d'orgue</b> (𝄐) prolonge une note ou un silence au gré de l'interprète.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nM:4/4\nL:1/4\nQ:\"Adagio\" 1/4=66\nK:C\nc d e f | g2 !fermata!g2 |]",
+      "cap": "Indication de tempo et point d'orgue."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "gammes",
+  "t": "Gammes et tonalités",
+  "topics": [
+   {
+    "id": "tons-demitons",
+    "t": "Tons et demi-tons",
+    "title": null,
+    "k": "ton demi-ton chromatique diatonique",
+    "html": "<p>Le <b>demi-ton</b> est le plus petit écart entre deux notes dans notre musique : deux touches voisines du piano. Le <b>ton</b> vaut deux demi-tons.</p>\n<p>Entre les notes naturelles, il y a un ton partout, <b>sauf entre mi–fa et si–do</b>, où il n'y a qu'un demi-ton.</p>\n<ul><li><b>Demi-ton diatonique</b> : deux noms différents (mi–fa, do–ré♭).</li>\n<li><b>Demi-ton chromatique</b> : même nom, altéré (do–do♯).</li></ul>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\nC D E F G A B c |]\nw: do ré mi fa sol la si do",
+      "cap": "Do ré (ton) ré mi (ton) mi fa (demi-ton) fa sol, sol la, la si (tons) si do (demi-ton)."
+     }
+    ]
+   },
+   {
+    "id": "gamme-majeure",
+    "t": "La gamme majeure",
+    "title": null,
+    "k": "gamme majeure ton ton demi-ton structure",
+    "html": "<p>Une <b>gamme</b> est une suite de notes conjointes qui part d'une note (la <b>tonique</b>) et monte jusqu'à la même note une octave plus haut.</p>\n<p>La <b>gamme majeure</b> suit toujours le même modèle :</p>\n<p class=\"formula\">T – T – ½ – T – T – T – ½</p>\n<p>(T = ton, ½ = demi-ton). Les demi-tons sont entre les degrés 3–4 et 7–8. La gamme de do majeur n'utilise que des notes naturelles ; pour les autres, on ajoute des dièses ou des bémols afin de respecter le modèle. Ces altérations forment l'<a href=\"#\" data-go=\"armures\">armure</a>.</p>\n<p>Une gamme majeure est formée de deux <b>tétracordes</b> identiques (T–T–½) séparés par un ton : do-ré-mi-fa / sol-la-si-do.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\nC D E F G A B c | c B A G F E D C |]",
+      "cap": "Do majeur, montante et descendante."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:G\nG A B c d e f g |]\nw: sol la si do ré mi fa♯ sol",
+      "cap": "Sol majeur : il faut un fa♯ pour garder le demi-ton entre les degrés 7 et 8."
+     }
+    ]
+   },
+   {
+    "id": "gammes-mineures",
+    "t": "Les gammes mineures",
+    "title": null,
+    "k": "mineur naturelle harmonique melodique sensible",
+    "html": "<p class=\"lxtip\">Nouveau ? Commence par la démarche pas à pas : <a href=\"#\" data-go=\"relatives\">du majeur à ses trois gammes mineures</a>.</p>\n<p>Il existe trois formes de gamme mineure. Elles ont en commun le début : <b>T – ½ – T – T</b> (la tierce est mineure).</p>\n<ul><li><b>Mineure naturelle</b> : T – ½ – T – T – ½ – T – T. Mêmes notes que sa <a href=\"#\" data-go=\"relatives\">relative majeure</a> (la mineur = notes de do majeur).</li>\n<li><b>Mineure harmonique</b> : on <b>hausse le 7<sup>e</sup> degré</b> d'un demi-ton. Il devient une <b>sensible</b>, à un demi-ton de la tonique. Entre les degrés 6 et 7 apparaît une <b>seconde augmentée</b> (1 ton ½), très caractéristique.</li>\n<li><b>Mineure mélodique</b> : en montant, on <b>hausse le 6<sup>e</sup> et le 7<sup>e</sup> degré</b> ; en descendant, on reprend la forme naturelle.</li></ul>\n<p>La forme harmonique sert surtout à construire les accords (V et vii°) ; la forme mélodique, à écrire des mélodies fluides.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:Am\nA, B, C D E F G A |]\nw: la si do ré mi fa sol la",
+      "cap": "La mineur naturelle."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:Am\nA, B, C D E F ^G A |]\nw: la si do ré mi fa sol♯ la",
+      "cap": "La mineur harmonique : sol♯ (sensible)."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:Am\nA, B, C D E ^F ^G A | A =G =F E D C B, A, |]",
+      "cap": "La mineur mélodique : fa♯ et sol♯ en montant, naturels en descendant."
+     }
+    ]
+   },
+   {
+    "id": "degres",
+    "t": "Les degrés de la gamme",
+    "title": null,
+    "k": "tonique sus-tonique mediante sous-dominante dominante sus-dominante sensible sous-tonique chiffres romains",
+    "html": "<p>Chaque note de la gamme est un <b>degré</b>, numéroté en chiffres romains et porteur d'un nom qui décrit son rôle :</p>\n<table class=\"lt\"><tr><th>Degré</th><th>Nom</th><th>En do majeur</th></tr>\n<tr><td>I</td><td><b>Tonique</b> : la note de repos, celle qui donne son nom à la tonalité</td><td>do</td></tr>\n<tr><td>II</td><td>Sus-tonique</td><td>ré</td></tr>\n<tr><td>III</td><td>Médiante (détermine majeur ou mineur)</td><td>mi</td></tr>\n<tr><td>IV</td><td>Sous-dominante</td><td>fa</td></tr>\n<tr><td>V</td><td><b>Dominante</b> : le degré le plus important après la tonique</td><td>sol</td></tr>\n<tr><td>VI</td><td>Sus-dominante</td><td>la</td></tr>\n<tr><td>VII</td><td><b>Sensible</b> (à un demi-ton de la tonique) ; <b>sous-tonique</b> si elle est à un ton (mineur naturel)</td><td>si</td></tr></table>\n<p>La sensible « attire » l'oreille vers la tonique : c'est ce qui donne l'impression de conclusion.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/2\nK:C\nC D E F G A B c |]\nw: I II III IV V VI VII I",
+      "cap": "Les degrés en do majeur."
+     }
+    ]
+   },
+   {
+    "id": "armures",
+    "t": "Les armures",
+    "title": null,
+    "k": "armure dieses bemols ordre trouver tonalite",
+    "html": "<p>L'<b>armure</b> regroupe, au début de chaque portée, les dièses ou les bémols de la tonalité. Ils sont toujours écrits <b>dans le même ordre</b> :</p>\n<p class=\"formula\">Dièses : fa – do – sol – ré – la – mi – si<br>Bémols : si – mi – la – ré – sol – do – fa</p>\n<p>(L'ordre des bémols est celui des dièses à l'envers.) Pour tout retenir d'un coup, vois <a href=\"#\" data-go=\"truc-armures\">le truc du Boss</a>.</p>\n<p><b>Trouver la tonalité majeure</b> :</p>\n<ul><li>avec des dièses : la tonique est <b>un demi-ton au-dessus du dernier dièse</b> (dernier dièse do♯ → ré majeur) ;</li>\n<li>avec des bémols : la tonique est <b>l'avant-dernier bémol</b> (si♭, mi♭ → mi♭ majeur). Exception à retenir : un seul bémol = fa majeur ;</li>\n<li>aucune altération : do majeur.</li></ul>\n<p>Chaque armure correspond aussi à une tonalité mineure, la <a href=\"#\" data-go=\"relatives\">relative</a>, située une tierce mineure plus bas. Pour savoir laquelle, regarde la mélodie : la dernière note, la basse finale et la présence de la sensible (une altération accidentelle) trahissent le mineur.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:G\nG4 | [K:D] D4 | [K:A] A4 | [K:E] E4 | [K:B] B4 |]\nw: Sol Ré La Mi Si",
+      "cap": "Armures avec dièses : sol, ré, la, mi, si majeur (1 à 5 dièses)."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:F\nF4 | [K:Bb] B4 | [K:Eb] E4 | [K:Ab] A4 | [K:Db] D4 |]\nw: Fa Si♭ Mi♭ La♭ Ré♭",
+      "cap": "Armures avec bémols : fa, si♭, mi♭, la♭, ré♭ majeur (1 à 5 bémols)."
+     }
+    ]
+   },
+   {
+    "id": "truc-armures",
+    "t": "Le truc du Boss",
+    "title": "Le truc du Boss : trouver une armure en un coup d'œil",
+    "k": "boss truc armure dieses bemols ordre rangee tonalite nombre alterations trouver relative",
+    "html": "<p>Le truc du Boss : il suffit de retenir <b>deux rangées de noms</b>. Chaque rangée donne à la fois <b>l'ordre des altérations</b> et <b>le nom des tonalités</b>, et le chiffre sous chaque nom indique <b>combien d'altérations</b> a cette tonalité majeure.</p>\n<div class=\"trick-static\">\n<div class=\"tsrow\"><span class=\"tslab\">Dièses ♯</span><span>Fa♯<i>6</i></span><span>Do♯<i>7</i></span><span>Sol<i>1</i></span><span>Ré<i>2</i></span><span>La<i>3</i></span><span>Mi<i>4</i></span><span>Si<i>5</i></span></div>\n<div class=\"tsrow\"><span class=\"tslab\">Bémols ♭</span><span>Si♭<i>2</i></span><span>Mi♭<i>3</i></span><span>La♭<i>4</i></span><span>Ré♭<i>5</i></span><span>Sol♭<i>6</i></span><span>Do♭<i>7</i></span><span>Fa<i>1</i></span></div>\n</div>\n<p><b>Lire la rangée de gauche à droite</b> donne l'ordre des altérations : <b>fa, do, sol, ré, la, mi, si</b> pour les dièses et <b>si, mi, la, ré, sol, do, fa</b> pour les bémols.</p>\n<p><b>De la tonalité vers l'armure</b> : trouve la tonalité dans sa rangée ; le chiffre dessous dit combien d'altérations il y a. On les prend ensuite <b>depuis le début de la rangée</b>.<br>\n<i>Exemple</i> : ré majeur → chiffre <b>2</b> → les 2 premiers de la rangée des dièses : <b>fa♯ et do♯</b>.</p>\n<p><b>De l'armure vers la tonalité</b> : compte les altérations sur la partition et cherche ce chiffre dans la bonne rangée.<br>\n<i>Exemple</i> : 4 bémols → le <b>4</b> est sous <b>la♭</b> : on est en <b>la♭ majeur</b>… ou dans sa <a href=\"#\" data-go=\"relatives\">relative</a>, <b>fa mineur</b> (une tierce mineure plus bas).</p>\n<p>Aucune altération : do majeur (ou la mineur). Essaie : clique sur une tonalité ci-dessous.</p>\n<div data-widget=\"armtrick\"></div>",
+    "ex": []
+   },
+   {
+    "id": "quintes",
+    "t": "Le cycle des quintes",
+    "title": null,
+    "k": "cycle cercle quintes tonalites voisines",
+    "html": "<p>En montant de <b>quinte en quinte</b> à partir de do, on ajoute un dièse à chaque tonalité ; en descendant de quinte en quinte (ou en montant de quarte), on ajoute un bémol.</p>\n<table class=\"lt\"><tr><th>Altérations</th><th>Majeur</th><th>Mineur relatif</th></tr>\n<tr><td>aucune</td><td>do</td><td>la</td></tr>\n<tr><td>1♯ (fa)</td><td>sol</td><td>mi</td></tr><tr><td>2♯</td><td>ré</td><td>si</td></tr><tr><td>3♯</td><td>la</td><td>fa♯</td></tr>\n<tr><td>4♯</td><td>mi</td><td>do♯</td></tr><tr><td>5♯</td><td>si</td><td>sol♯</td></tr><tr><td>6♯</td><td>fa♯</td><td>ré♯</td></tr><tr><td>7♯</td><td>do♯</td><td>la♯</td></tr>\n<tr><td>1♭ (si)</td><td>fa</td><td>ré</td></tr><tr><td>2♭</td><td>si♭</td><td>sol</td></tr><tr><td>3♭</td><td>mi♭</td><td>do</td></tr>\n<tr><td>4♭</td><td>la♭</td><td>fa</td></tr><tr><td>5♭</td><td>ré♭</td><td>si♭</td></tr><tr><td>6♭</td><td>sol♭</td><td>mi♭</td></tr><tr><td>7♭</td><td>do♭</td><td>la♭</td></tr></table>\n<p>Les tonalités <b>voisines</b> (à une altération près) partagent beaucoup de notes : la musique y module facilement. Fa♯ majeur et sol♭ majeur sont enharmoniques, comme do♯/ré♭ et si/do♭.</p>",
+    "ex": []
+   },
+   {
+    "id": "relatives",
+    "t": "Tonalités relatives et gammes mineures",
+    "title": "Tonalités relatives : du majeur au mineur",
+    "k": "relative mineur naturelle ancienne harmonique melodique sixieme degre sensible armure",
+    "html": "<p>Chaque gamme majeure a une « sœur » mineure qui utilise <b>exactement les mêmes notes</b> et donc la <b>même armure</b> : c'est sa <b>relative mineure</b>. Pour la trouver, il suffit de partir du <b>6<sup>e</sup> degré</b> de la gamme majeure.</p>\n<p>Suivons la démarche avec do majeur, étape par étape.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\nC D E F G A B c |]\nw: 1 2 3 4 5 6 7 8",
+      "cap": "Do majeur : aucune altération. Le 6<sup>e</sup> degré est encerclé."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:Am\nA, B, C D E F G A |]\nw: la si do ré mi fa sol la",
+      "cap": "La mineur naturelle : mêmes notes que do majeur, même armure (aucune altération). Do majeur et la mineur sont des <b>tonalités relatives</b>. Écoute : la couleur est plus sombre, mais la fin manque d'élan, car le sol est à un ton entier du la."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:Am\nA, B, C D E F ^G A |]\nw: la si do ré mi fa sol♯ la",
+      "cap": "Le sol♯ est maintenant à un demi-ton du la : c'est la <b>sensible</b>, qui « attire » vers la tonique. Cette forme sert à construire les accords (le V devient majeur : mi–sol♯–si). Mais entre fa et sol♯, il y a un grand saut d'<b>un ton et demi</b> (seconde augmentée), à la couleur un peu orientale."
+     },
+     {
+      "abc": "X:1\nL:1/4\n%%stretchlast 1\nK:Am\nA, B, C D E ^F ^G A |\nw: la si do ré mi fa♯ sol♯ la\nA =G =F E D C B, A, |]\nw: la sol fa mi ré do si la",
+      "cap": "En <b>montant</b>, fa♯ et sol♯ rendent la mélodie fluide vers la tonique. En <b>descendant</b>, on n'a plus besoin de la sensible : on reprend la forme naturelle (sol et fa encerclés)."
+     }
+    ]
+   },
+   {
+    "id": "modes",
+    "t": "Les modes",
+    "title": null,
+    "k": "modes ionien dorien phrygien lydien mixolydien eolien locrien",
+    "html": "<p>Un <b>mode</b> est une gamme de 7 notes définie par la place de ses demi-tons. En jouant les notes blanches du piano à partir de chaque note, on obtient les 7 modes :</p>\n<table class=\"lt\"><tr><th>Mode</th><th>Sur les touches blanches</th><th>Couleur</th></tr>\n<tr><td>Ionien</td><td>do à do</td><td>= majeur</td></tr>\n<tr><td>Dorien</td><td>ré à ré</td><td>mineur avec 6<sup>te</sup> majeure</td></tr>\n<tr><td>Phrygien</td><td>mi à mi</td><td>mineur avec 2<sup>de</sup> mineure</td></tr>\n<tr><td>Lydien</td><td>fa à fa</td><td>majeur avec 4<sup>te</sup> augmentée</td></tr>\n<tr><td>Mixolydien</td><td>sol à sol</td><td>majeur avec 7<sup>e</sup> mineure</td></tr>\n<tr><td>Éolien</td><td>la à la</td><td>= mineur naturel</td></tr>\n<tr><td>Locrien</td><td>si à si</td><td>2<sup>de</sup> mineure et 5<sup>te</sup> diminuée</td></tr></table>\n<p>On les entend dans le chant grégorien, la musique traditionnelle, le jazz, le rock et les musiques de film.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\nD E F G A B c d |]\nw: ré mi fa sol la si do ré",
+      "cap": "Mode de ré (dorien)."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:C\nG A B c d e f g |]\nw: sol la si do ré mi fa sol",
+      "cap": "Mode de sol (mixolydien) : la 7e est un fa naturel."
+     }
+    ]
+   },
+   {
+    "id": "autres-gammes",
+    "t": "Autres gammes",
+    "title": null,
+    "k": "pentatonique chromatique blues par tons",
+    "html": "<ul><li><b>Pentatonique majeure</b> (5 notes, sans demi-ton) : degrés 1, 2, 3, 5, 6 (do ré mi sol la). Très présente dans les musiques traditionnelles et populaires.</li>\n<li><b>Pentatonique mineure</b> : la do ré mi sol (degrés 1, ♭3, 4, 5, ♭7).</li>\n<li><b>Gamme blues</b> : la pentatonique mineure + la « blue note » (quinte diminuée, ♭5) : la do ré mi♭ mi sol.</li>\n<li><b>Gamme chromatique</b> : les 12 demi-tons. On l'écrit généralement avec des dièses en montant et des bémols en descendant.</li>\n<li><b>Gamme par tons</b> : 6 notes séparées par des tons entiers (do ré mi fa♯ sol♯ la♯). Couleur flottante, chère à Debussy.</li></ul>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\nC D E G A c |]\nw: do ré mi sol la do",
+      "cap": "Pentatonique majeure de do."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:C\nA, C D _E =E G A |]\nw: la do ré mi♭ mi sol la",
+      "cap": "Gamme blues de la."
+     },
+     {
+      "abc": "X:1\nL:1/8\nK:C\nC ^C D ^D E F ^F G ^G A ^A B c |]",
+      "cap": "Gamme chromatique montante."
+     }
+    ]
+   }
+  ]
+ }
+]

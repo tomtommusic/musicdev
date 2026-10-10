@@ -1,0 +1,203 @@
+285	held on the dominant
+286	no accidentals
+287	augmented
+288	augmented
+289	dotted half note
+290	flat
+291	flats
+292	alto clef (C clef on the 3rd line)
+293	bass clef
+294	treble clef
+295	dotted eighth note
+297	diminished
+298	diminished
+299	sharp
+300	sharps
+301	sharps and flats
+302	C
+303	C♯
+306	accelerating
+307	and
+308	e.g. 1 ½
+309	e.g. 2 or ½
+310	e.g. D major
+311	e.g. G major
+312	e.g. F♯
+313	e.g. F♯, B♭, E
+314	e.g. E
+315	e.g. E minor
+316	e.g. D♭
+317	e.g. G
+318	e.g. G, F♯
+319	e.g. G♯
+320	extremely soft
+321	extremely loud
+322	F
+323	F♯
+349	staff image
+352	A
+353	the {0} ({1})
+354	A♭
+355	A♯
+356	the rhythm you heard
+357	both chords in root position
+358	measures, up to
+359	E
+360	E♭
+361	moderate
+362	melodic
+363	dotted quarter note
+364	written note
+365	or press the space bar
+366	dotted
+367	staff + {0} ledger line{1}
+368	staff only
+376	dotted whole note
+377	D
+378	D♭
+379	D♯
+381	B
+382	B♭
+383	G
+384	treble and bass
+385	G♭
+386	G♯
+390	very soft
+391	very loud
+392	very slow
+393	very fast
+394	a half
+395	one of the chords is inverted
+396	a number
+397	a quarter
+398	an Italian term
+407	{0} (or {1})
+408	{0} ({1} key)
+409	{0} ({1} in the bass)
+410	{0} (in any octave)
+411	{0} / {1} strings in tune
+414	{0}: the accidental goes in front of the note
+415	{0} Hz · target {1} Hz
+416	{0} to choose from
+417	{0} and a half
+418	{0} and {1}
+419	{0} of {3} note value{1} correct
+420	{0} of {3} measure{1} correct. Compare with the answer at the top.
+421	{0} notes
+422	{0} of {3} note{1} correct and on time
+423	{0} of {3} note{1} correct
+424	{0} of {2} note{1} on time
+425	{0} topic{1}
+426	{0} for the next note
+427	{0} for the next note ({1} key)
+428	{0} beats/min
+429	{0} random questions · level {1} · {2}
+430	{0} questions · level {1} · Result: ______ / {2}
+431	{0} answers
+432	{0} result{1} for "{2}"
+433	{0} s per chord
+434	{0} beats (1 measure of {1})
+436	{0}. Listen to the progression, then choose the right answer (keys 1 to {1}). Tip: listen to the bass first.
+437	"In tune" only lights up if the note stays in the chosen zone for a short moment. With an instrument selected, the tuner targets the closest string (Auto) or the tuning peg you tap. Apprentice mode guides you one string at a time and warns you when a string is way too tight. Gaps are always measured against the exact note of the string: no hidden tolerance.
+438	± 1 cent (very strict)
+439	± 2 cents (strict)
+440	± 3 cents
+441	· Enter = add the note value.
+442	· click on the staff to add it
+443	· click on the staff to place the rest
+444	· click on the staff at the pitch you want
+445	· {0} correct pitch{1} with rhythm to fix (in orange)
+446	· {0} too many
+447	· {0} extra tap{1}
+448	· {0} but off time
+449	· {0} questions · level {1}
+450	· listen {0}/{1}
+451	· ↑ ↓ = move the last note · + − = = sharp, flat, natural.
+452	½ step lower
+453	Needs work
+454	Your turn!
+455	Listening
+456	Listening (in the app only)
+457	Listen to this short motif. Is it in major or minor?
+458	Listen to this scale. Is it major or minor?
+459	Listen to each chord
+460	Listen to two notes and name the interval: ascending, descending or harmonic. After you answer, compare with the other intervals from the same note.
+461	Listen to the chord (arpeggiated, then blocked). What's its quality?
+462	Listen to the {0} interval and name it.
+463	Listen to the end of the phrase. Which cadence do you hear?
+464	Listen to the melody and write it directly on the answer staff: choose a note value, then click at the right pitch. Then check pitches and rhythm.
+465	Listen to the rhythm (after a one-measure count-in). Which one did you hear?
+466	Listen to the rhythm and write it on the answer staff: choose a note or rest value, then click to add it.
+467	Listen measure by measure
+468	Listen to a chord sequence and choose the right progression from the options. Then listen to each chord again to really hear its color.
+469	Listen, then choose. After you answer, click any interval to hear it from the same note. Space bar: listen again.
+470	Write an interval
+471	Write a triad
+472	Write the dominant seventh chord (V7) of {0} in root position (treble clef).
+473	Write the {0} chord in {1} inversion (treble clef).
+474	Write the {0} scale ascending, from tonic to tonic (8 notes). Add the accidentals in front of the notes (no key signature).
+475	Write the {0} {1} scale ascending, from tonic to tonic (8 notes). Add the accidentals in front of the notes (no key signature).
+476	Write the note {0} above the given note.
+477	Write the note {0} on the staff (treble clef). Don't forget the accidental.
+478	Write the note {0} on the staff {1}.
+479	Write the {0} triad in root position (treble clef).
+480	Write the {0} ({1} degree) of the {2} scale on the staff (treble clef).
+481	Write the {0} of {1} on the staff (treble clef).
+482	Write your answer on the staff.
+483	Write a number.
+484	Write a {0} {1} the given note.
+485	Widen the register or the largest leap.
+486	Step
+487	Step 1: I and V
+488	Step 2: I, IV and V
+489	Step 3: + ii
+490	Step 4: + vi
+491	Step 5: all chords (+ iii, vii°)
+492	Step 6: + V7 and inversions
+493	Root position
+494	Range
+495	Music theory assessment
+496	Grade
+497	to
+498	‹ Previous string
+499	‹ Previous
+500	⁵₃ (root position, no figures)
+501	⁶ (sixth chord)
+502	⁶₄ (six-four chord)
+503	← Back to
+504	■ Stop
+505	■ Turn off mic
+506	▲ Up
+507	▶ 1st note
+508	▶ Start
+509	▶ Start
+510	▶ Hear the note
+511	▶ Scale and arpeggio
+512	▶ A {0} Hz
+513	▶ Measure {0} / {1}
+514	▶ Melody
+515	▶ Note by note
+516	▶ Progression
+517	▶ Listen again
+518	▶ Answer
+519	▶ Key
+520	▶ Listen
+521	▶ Listen to the melody
+522	▶ Listen to the piece
+523	▶ Listen to the model
+524	▶ Listen to my answer
+525	▼ Down
+526	● Sing
+527	● Start
+528	♭ flat
+529	♮ none
+530	♯ sharp
+531	⚠ Stop tightening! Your string sounds {0}, {1} half step{2} higher than {3}. Loosen it (the pitch should go down), or it might break.
+532	✓ Right answer
+533	✓ In tune! On to the next string…
+534	✗ That's not the right answer
+535	✗ No answer
+536	🎉 All strings are in tune
+537	🎤 Turn on mic
+538	🎤 clap (headphones recommended)
+540	📖 Review this topic in the library

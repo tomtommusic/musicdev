@@ -1,0 +1,252 @@
+[
+ {
+  "id": "intervalles",
+  "t": "Intervals",
+  "topics": [
+   {
+    "id": "intervalles-def",
+    "t": "What Is an Interval?",
+    "title": null,
+    "k": "interval melodic harmonic count second third fourth fifth sixth seventh octave",
+    "html": "<p>An <b>interval</b> is the distance between two notes.</p>\n<ul><li><b>Melodic</b>: the notes are played one after the other (going up or down).</li>\n<li><b>Harmonic</b>: the notes are played at the same time.</li></ul>\n<p><b>The name (the number)</b> is found by counting the note names, <b>including the first and the last</b>: C → E = C, D, E = 3 notes = a <b>third</b>. C → G = a <b>fifth</b>. C → C = an <b>octave</b> (8).</p>\n<p>The number isn't enough: C–E and C–E♭ are both thirds, but they don't sound the same. You also need the <a href=\"#\" data-go=\"intervalles-qualites\">quality</a>, which you find by counting half steps.</p>\n<p>On the staff: from a line to the next line = a third; from a line to the neighboring space = a second; for an octave, you go from a line to a space (or the other way around).</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\nC2 D2 | C2 E2 | C2 F2 | C2 G2 | C2 A2 | C2 B2 | C2 c2 |]\nw: 2nd * 3rd * 4th * 5th * 6th * 7th * 8ve *",
+      "cap": "Melodic intervals starting on C."
+     }
+    ]
+   },
+   {
+    "id": "intervalles-qualites",
+    "t": "Interval Qualities and Chart",
+    "title": null,
+    "k": "perfect major minor augmented diminished tritone half steps semitones chart",
+    "html": "<p>The <b>quality</b> makes an interval more precise: <b>perfect</b> (P), <b>major</b> (M), <b>minor</b> (m), <b>augmented</b> (A) or <b>diminished</b> (d).</p>\n<ul><li>Unisons, fourths, fifths and octaves are <b>perfect</b> (or augmented/diminished).</li>\n<li>Seconds, thirds, sixths and sevenths are <b>major or minor</b> (or augmented/diminished).</li></ul>\n<table class=\"lt\"><tr><th>Interval</th><th>Abbr.</th><th>Half steps</th><th>Starting on C</th></tr>\n<tr><td>Unison</td><td>P1</td><td>0</td><td>C</td></tr>\n<tr><td>Minor second</td><td>m2</td><td>1</td><td>D♭</td></tr>\n<tr><td>Major second</td><td>M2</td><td>2</td><td>D</td></tr>\n<tr><td>Minor third</td><td>m3</td><td>3</td><td>E♭</td></tr>\n<tr><td>Major third</td><td>M3</td><td>4</td><td>E</td></tr>\n<tr><td>Perfect fourth</td><td>P4</td><td>5</td><td>F</td></tr>\n<tr><td>Augmented fourth / diminished fifth (tritone)</td><td>A4 / d5</td><td>6</td><td>F♯ / G♭</td></tr>\n<tr><td>Perfect fifth</td><td>P5</td><td>7</td><td>G</td></tr>\n<tr><td>Minor sixth</td><td>m6</td><td>8</td><td>A♭</td></tr>\n<tr><td>Major sixth</td><td>M6</td><td>9</td><td>A</td></tr>\n<tr><td>Minor seventh</td><td>m7</td><td>10</td><td>B♭</td></tr>\n<tr><td>Major seventh</td><td>M7</td><td>11</td><td>B</td></tr>\n<tr><td>Perfect octave</td><td>P8</td><td>12</td><td>C</td></tr></table>\n<p><b>Tip</b>: in a major scale, all the intervals going up from the tonic are major or perfect. One half step smaller = minor (or diminished for a perfect interval); one half step larger = augmented.</p>\n<p>The <b>tritone</b> (three whole steps) splits the octave in half: it sounds tense and unstable.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\n[C_D]2 [C=D]2 [C_E]2 [C=E]2 [CF]2 [C^F]2 | [CG]2 [C_A]2 [C=A]2 [C_B]2 [C=B]2 [Cc]2 |]\nw: m2 M2 m3 M3 P4 tritone P5 m6 M6 m7 M7 P8",
+      "cap": "Harmonic intervals starting on C."
+     }
+    ]
+   },
+   {
+    "id": "renversement-intervalles",
+    "t": "Inverting Intervals",
+    "title": null,
+    "k": "invert inversion interval complementary nine",
+    "html": "<p>To <b>invert</b> an interval, you move the bottom note up an octave (or the top note down an octave). C–E becomes E–C.</p>\n<ul><li>The numbers add up to <b>9</b>: a third becomes a sixth, a second becomes a seventh, a fourth becomes a fifth.</li>\n<li>The quality flips: <b>major ↔ minor</b>, <b>augmented ↔ diminished</b>, <b>perfect stays perfect</b>.</li></ul>\n<p>Examples: M3 → m6; m2 → M7; P4 → P5; A4 → d5. This is handy for figuring out a large interval: it's often easier to work out its inversion.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\nC2 E2 | E2 c2 | D2 G2 | G2 d2 |]\nw: M3 * m6 * P4 * P5 *",
+      "cap": "M3 becomes m6; P4 becomes P5."
+     }
+    ]
+   },
+   {
+    "id": "intervalles-composes",
+    "t": "Compound Intervals",
+    "title": null,
+    "k": "ninth tenth eleventh thirteenth compound simple",
+    "html": "<p>An interval larger than an octave is a <b>compound interval</b>. You can reduce it to a simple interval by subtracting 7: a <b>9<sup>th</sup></b> = octave + second, a <b>10<sup>th</sup></b> = octave + third, an <b>11<sup>th</sup></b> = octave + fourth, a <b>13<sup>th</sup></b> = octave + sixth.</p>\n<p>The quality stays the same as the simple interval's: C–D (an octave higher) is a major 9<sup>th</sup>. These names are used a lot for jazz chords (C9, C11, C13).</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\nC2 d2 | C2 e2 | C2 f2 | C2 a2 |]\nw: M9 * M10 * P11 * M13 *",
+      "cap": "Compound intervals starting on C."
+     }
+    ]
+   },
+   {
+    "id": "consonances",
+    "t": "Consonance and Dissonance",
+    "title": null,
+    "k": "consonance dissonance perfect imperfect tension rest",
+    "html": "<p>According to the classical tradition:</p>\n<ul><li><b>Perfect consonances</b>: unison, perfect fifth, octave. Very stable, “hollow.”</li>\n<li><b>Imperfect consonances</b>: thirds and sixths (major and minor). Stable and colorful.</li>\n<li><b>Dissonances</b>: seconds, sevenths, augmented and diminished intervals (including the tritone). They create tension that needs to resolve.</li></ul>\n<p>The <b>perfect fourth</b> is a special case: consonant between two upper voices, but treated as a dissonance when it's formed with the bass (e.g., the <a href=\"#\" data-go=\"renversements\">six-four chord</a>).</p>\n<p>Consonance and dissonance don't mean “pretty” and “ugly”: music moves forward thanks to the back-and-forth between tension and release.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\n[CG]2 [Cc]2 | [CE]2 [CA]2 | [CD]2 [CB]2 [B,F]2 [CE]2 |]",
+      "cap": "Perfect consonances, imperfect consonances, then dissonances (the B–F tritone resolves to C–E)."
+     }
+    ]
+   },
+   {
+    "id": "reperes",
+    "t": "Reference Songs for Ear Training",
+    "title": null,
+    "k": "song reference memorize ear intervals beginning",
+    "html": "<p>To recognize a melodic interval, link it to the <b>beginning of a song you know</b>. Pick your own reference songs: ones you can sing without hesitating. A few classic examples:</p>\n<table class=\"lt\"><tr><th>Interval</th><th>Ascending</th><th>Descending</th></tr>\n<tr><td>m2</td><td>Jaws (theme)</td><td>Für Elise (Beethoven)</td></tr>\n<tr><td>M2</td><td>Frère Jacques; Happy Birthday (between the 2<sup>nd</sup> and 3<sup>rd</sup> notes)</td><td>Mary Had a Little Lamb</td></tr>\n<tr><td>m3</td><td>Brahms' Lullaby</td><td>Hey Jude (Beatles)</td></tr>\n<tr><td>M3</td><td>When the Saints Go Marching In</td><td>Swing Low, Sweet Chariot</td></tr>\n<tr><td>P4</td><td>Bridal Chorus (Wagner, “Here Comes the Bride”); La Marseillaise</td><td></td></tr>\n<tr><td>Tritone</td><td>Maria (West Side Story)</td><td></td></tr>\n<tr><td>P5</td><td>Twinkle, Twinkle, Little Star; Star Wars (main theme, 2<sup>nd</sup> interval)</td><td>The Flintstones (theme)</td></tr>\n<tr><td>m6</td><td>The Entertainer (Joplin), from the 3<sup>rd</sup> to the 4<sup>th</sup> note</td><td></td></tr>\n<tr><td>M6</td><td>My Bonnie</td><td>Nobody Knows the Trouble I've Seen</td></tr>\n<tr><td>m7</td><td>Somewhere (West Side Story)</td><td></td></tr>\n<tr><td>M7</td><td>Think of an octave minus a half step: very tense, it “wants” to go up</td><td></td></tr>\n<tr><td>P8</td><td>Over the Rainbow</td><td></td></tr></table>\n<p><b>Other strategies</b>: place the notes in a scale (C–G: “1 to 5”), listen to the color (thirds are “sweet,” seconds “rub,” the tritone sounds “uneasy”), and sing the interval in your head before answering. The <b>Intervals</b> module lets you hear each interval again from the same starting note so you can compare.</p>",
+    "ex": []
+   }
+  ]
+ },
+ {
+  "id": "harmonie",
+  "t": "Chords and Harmony",
+  "topics": [
+   {
+    "id": "triades",
+    "t": "Triads",
+    "title": null,
+    "k": "chord major minor diminished augmented root third fifth stacked thirds",
+    "html": "<p>A <b>triad</b> is a chord of three notes stacked in <b>thirds</b>: the <b>root</b>, the <b>third</b> and the <b>fifth</b>. C–E–G is the C triad.</p>\n<table class=\"lt\"><tr><th>Type</th><th>Construction (from the root)</th><th>Example</th><th>Symbol</th></tr>\n<tr><td>Major (major triad)</td><td>M3 + P5</td><td>C E G</td><td>C</td></tr>\n<tr><td>Minor (minor triad)</td><td>m3 + P5</td><td>C E♭ G</td><td>Cm</td></tr>\n<tr><td>Diminished (diminished fifth)</td><td>m3 + d5</td><td>C E♭ G♭</td><td>C°</td></tr>\n<tr><td>Augmented (augmented fifth)</td><td>M3 + A5</td><td>C E G♯</td><td>C+</td></tr></table>\n<p>By ear: major sounds bright and stable; minor sounds darker; diminished sounds tense and “tight”; augmented sounds floating, like a question.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\n[CEG]4 | [C_EG]4 | [C_E_G]4 | [CE^G]4 |]\nw: major minor diminished augmented",
+      "cap": "The four types of triads on C."
+     }
+    ]
+   },
+   {
+    "id": "accords-degres",
+    "t": "Chords on Each Scale Degree",
+    "title": null,
+    "k": "diatonic chords scale degrees roman numerals major minor I ii iii IV V vi vii",
+    "html": "<p>When you build a triad on each note of the scale (using only the notes of the key), you get the <b>diatonic chords</b>. They're named with <b>Roman numerals</b>: <b>uppercase</b> = major, <b>lowercase</b> = minor, ° = diminished, + = augmented.</p>\n<table class=\"lt\"><tr><th>Major</th><td>I</td><td>ii</td><td>iii</td><td>IV</td><td>V</td><td>vi</td><td>vii°</td></tr>\n<tr><th>C major</th><td>C</td><td>Dm</td><td>Em</td><td>F</td><td>G</td><td>Am</td><td>B°</td></tr>\n<tr><th>Harmonic minor</th><td>i</td><td>ii°</td><td>III+ (or III)</td><td>iv</td><td>V</td><td>VI</td><td>vii°</td></tr>\n<tr><th>A minor</th><td>Am</td><td>B°</td><td>C+ (C)</td><td>Dm</td><td>E</td><td>F</td><td>G♯°</td></tr></table>\n<p>Remember: in major, <b>I, IV and V are major</b>; ii, iii and vi are minor; vii° is diminished. In minor, you raise the leading tone so that <b>V is major</b> (harmonic minor). III usually uses the natural 7<sup>th</sup> (C rather than C+).</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\n[CEG]4 | [DFA]4 | [EGB]4 | [FAc]4 | [GBd]4 | [Ace]4 | [Bdf]4 |]\nw: I ii iii IV V vi vii°",
+      "cap": "The chords of C major."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:Am\n[A,CE]4 | [B,DF]4 | [CEG]4 | [DFA]4 | [E^GB]4 | [FAc]4 | [^GBd]4 |]\nw: i ii° III iv V VI vii°",
+      "cap": "The chords of A minor (V and vii° with the leading tone G♯)."
+     }
+    ]
+   },
+   {
+    "id": "renversements",
+    "t": "Chord Inversions",
+    "title": null,
+    "k": "root position first second inversion six four bass",
+    "html": "<p>A chord is in <b>root position</b> when its root is in the bass. If another note is in the bass, the chord is <b>inverted</b>. What matters is the lowest note, not the order of the other notes.</p>\n<table class=\"lt\"><tr><th>Note in the bass</th><th>Name</th><th>Figures</th></tr>\n<tr><td>Root</td><td>Root position</td><td>(5/3) — nothing written</td></tr>\n<tr><td>Third</td><td>1<sup>st</sup> inversion (six chord)</td><td>⁶</td></tr>\n<tr><td>Fifth</td><td>2<sup>nd</sup> inversion (six-four chord)</td><td>⁶₄</td></tr></table>\n<p>The figures describe the intervals above the bass: in 1<sup>st</sup> inversion (E–G–C), you find a third and a <b>sixth</b>; in 2<sup>nd</sup> inversion (G–C–E), a <b>fourth</b> and a <b>sixth</b>.</p>\n<p>By ear, listen mostly to the <b>bass line</b>: a six chord sounds lighter, less “settled.” The most common six-four chord is the <b>cadential I⁶₄</b>, right before V.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\n%%staves {1 2}\nV:1 clef=treble\n[EGc]4 | [Gce]4 | [ce]4 |]\nV:2 clef=bass\nC,4 | E,4 | G,4 |]\nw: I I⁶ I⁶₄",
+      "cap": "The C chord in root position, then in 1st and 2nd inversion: the bass changes."
+     }
+    ]
+   },
+   {
+    "id": "septiemes",
+    "t": "Seventh Chords",
+    "title": null,
+    "k": "seventh dominant V7 major minor half-diminished diminished inversions 6/5 4/3 4/2",
+    "html": "<p>A <b>seventh chord</b> adds one more third on top of the triad: root, third, fifth and <b>seventh</b>.</p>\n<table class=\"lt\"><tr><th>Type</th><th>Triad + 7<sup>th</sup></th><th>On C</th><th>Where?</th></tr>\n<tr><td><b>Dominant 7<sup>th</sup></b></td><td>major + m7</td><td>C7: C E G B♭</td><td>V7</td></tr>\n<tr><td>Major 7<sup>th</sup></td><td>major + M7</td><td>Cmaj7: C E G B</td><td>I, IV in major</td></tr>\n<tr><td>Minor 7<sup>th</sup></td><td>minor + m7</td><td>Cm7: C E♭ G B♭</td><td>ii, iii, vi in major</td></tr>\n<tr><td>Half-diminished 7<sup>th</sup></td><td>diminished + m7</td><td>Cø7: C E♭ G♭ B♭</td><td>vii in major</td></tr>\n<tr><td>Diminished 7<sup>th</sup></td><td>diminished + d7</td><td>C°7: C E♭ G♭ B𝄫</td><td>vii in minor</td></tr></table>\n<p><b>V7</b> is the most important one: it contains the leading tone and the tritone (B–F in C), which resolve toward the tonic.</p>\n<p><b>Inversions of V7</b>: V7 (root in the bass), <b>V⁶₅</b> (third), <b>V⁴₃</b> (fifth), <b>V⁴₂</b> (seventh). In the French tradition, you'll also see 7+, 6/5 (with the 5 crossed out), +6 and +4.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\n[CEGB]4 | [CEG_B]4 | [C_EG_B]4 | [C_E_G_B]4 | [C_E_G__B]4 |]\nw: maj7 7 m7 ø7 °7",
+      "cap": "The five seventh chords on C."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:C\n[G,B,DF]4 | [B,DFG]4 | [DFGB]4 | [FGBd]4 | [EGc]4 |]\nw: V7 V⁶₅ V⁴₃ V⁴₂ I⁶",
+      "cap": "V7 in C major and its inversions."
+     }
+    ]
+   },
+   {
+    "id": "chiffrage",
+    "t": "Chord Symbols and Analysis",
+    "title": null,
+    "k": "figures roman numerals lead sheet letter chord symbols C Cm C7 slash",
+    "html": "<p>Two systems are used side by side:</p>\n<p><b>1. Roman numerals</b> (analysis): they show the chord's <b>degree</b> in the key, and therefore its function. I–IV–V–I is the same progression in C major or in G major. Arabic numerals add the inversion (I⁶, V⁶₅…). This is what the <b>Progressions</b> module asks for.</p>\n<p><b>2. Chord symbols</b> (letters): they show the actual chord, with no reference to the key. Used in jazz, popular music and on lead sheets:</p>\n<table class=\"lt\"><tr><th>Symbol</th><th>Chord</th></tr>\n<tr><td>C</td><td>C major</td></tr><tr><td>Cm (or C−)</td><td>C minor</td></tr>\n<tr><td>C° (or Cdim)</td><td>C diminished</td></tr><tr><td>C+ (or Caug)</td><td>C augmented</td></tr>\n<tr><td>C7</td><td>C dominant 7<sup>th</sup></td></tr><tr><td>Cmaj7 (or CΔ)</td><td>C major 7<sup>th</sup></td></tr>\n<tr><td>Cm7</td><td>C minor 7</td></tr><tr><td>Cø (or Cm7♭5)</td><td>C half-diminished</td></tr>\n<tr><td>Csus4</td><td>C–F–G (a fourth instead of the third)</td></tr>\n<tr><td>C/E</td><td>C chord with E in the bass</td></tr></table>",
+    "ex": []
+   },
+   {
+    "id": "fonctions",
+    "t": "Tonal Functions and Progressions",
+    "title": null,
+    "k": "tonic subdominant predominant dominant function progression chord succession",
+    "html": "<p>In a key, chords fall into three <b>functions</b>:</p>\n<ul><li><b>Tonic</b> (rest): I, and sometimes vi or iii.</li>\n<li><b>Predominant</b> or subdominant (moving away): IV and ii.</li>\n<li><b>Dominant</b> (tension, pull toward the tonic): V, V7 and vii°.</li></ul>\n<p>The most natural motion is: <b>Tonic → Predominant → Dominant → Tonic</b>. Some very common progressions:</p>\n<ul><li>I – IV – V – I</li><li>I – ii – V – I (and ii – V – I in jazz)</li><li>I – vi – IV – V</li><li>I – V – vi – IV (very common in pop music)</li><li>vi – ii – V – I (circle-of-fifths sequence)</li></ul>\n<p><b>How to approach harmonic dictation</b>: first listen to the <b>bass</b>, then the <b>quality</b> of each chord (major or minor), then use what you know about progressions. Examples: a bass going up from C to F suggests IV; D in the bass often suggests ii; a bass moving from G to A (instead of G to C) signals a deceptive cadence.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\n%%staves {1 2}\nV:1 clef=treble\n[EGc]2 [FAc]2 [DGB]2 [EGc]2 || [DFA]2 [DGB]2 [EGc]2 |]\nV:2 clef=bass\nC,2 F,,2 G,,2 C,2 || D,2 G,,2 C,2 |]\nw: I IV V I ii V I",
+      "cap": "I – IV – V – I, then ii – V – I in C major."
+     }
+    ]
+   },
+   {
+    "id": "cadences",
+    "t": "Cadences",
+    "title": null,
+    "k": "cadence perfect authentic imperfect plagal half deceptive evaded",
+    "html": "<p>A <b>cadence</b> is the chord progression that ends a phrase, like the punctuation at the end of a sentence.</p>\n<table class=\"lt\"><tr><th>Cadence</th><th>Chords</th><th>Effect</th></tr>\n<tr><td><b>Perfect</b> (authentic)</td><td>V – I, both chords in root position</td><td>Period</td></tr>\n<tr><td><b>Imperfect</b></td><td>V – I with at least one of the two chords inverted</td><td>Weaker ending</td></tr>\n<tr><td><b>Half cadence</b></td><td>… – V (stops on the dominant)</td><td>Comma, question</td></tr>\n<tr><td><b>Plagal</b></td><td>IV – I</td><td>The “Amen” of hymns</td></tr>\n<tr><td><b>Deceptive</b></td><td>V – vi</td><td>Surprise: you expected I</td></tr></table>\n<p>Variation: in many North American textbooks, a perfect authentic cadence also requires the tonic in the top voice; otherwise, it's called an imperfect authentic cadence. Check which definition your course uses.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\n%%staves {1 2}\nV:1 clef=treble\n[DGB]2 [EGc]2 || [FAc]2 [EGc]2 || [EGc]2 [DGB]2 || [DGB]2 [CEc]2 |]\nV:2 clef=bass\nG,,2 C,2 || F,,2 C,2 || C,2 G,,2 || G,,2 A,,2 |]\nw: V I IV I I V V vi",
+      "cap": "Perfect, plagal, half and deceptive cadences in C major."
+     }
+    ]
+   },
+   {
+    "id": "notes-etrangeres",
+    "t": "Nonchord Tones",
+    "title": null,
+    "k": "nonchord tone non-harmonic passing tone neighbor tone appoggiatura suspension anticipation escape tone pedal",
+    "html": "<p>A melody isn't made only of chord tones. <b>Nonchord tones</b> (notes that don't belong to the chord) connect and color the line:</p>\n<ul><li><b>Passing tone</b>: connects two chord tones by step (C–<u>D</u>–E over a C chord).</li>\n<li><b>Neighbor tone</b>: leaves a chord tone by step and comes back to it (E–<u>F</u>–E).</li>\n<li><b>Appoggiatura</b>: a dissonance on the strong beat, struck directly, that resolves by step.</li>\n<li><b>Suspension</b>: a note from the previous chord is held over the new chord, then moves down (preparation – dissonance – resolution).</li>\n<li><b>Anticipation</b>: a note from the next chord arrives a little early.</li>\n<li><b>Pedal tone</b>: a held note (often in the bass) while the chords change.</li></ul>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/8\nK:C\n%%staves {1 2}\nV:1 clef=treble\nc2 d2 e4 | e2 f2 e4 | d4 c4 |]\nw: * passing * * neighbor * appog. *\nV:2 clef=bass\n[C,E,G,]8 | [C,E,G,]8 | [C,E,G,]8 |]",
+      "cap": "Over a C chord: passing tone, neighbor tone, appoggiatura."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "expression",
+  "t": "Expression",
+  "topics": [
+   {
+    "id": "nuances",
+    "t": "Dynamics",
+    "title": null,
+    "k": "dynamics piano forte mezzo crescendo decrescendo diminuendo sforzando fortepiano",
+    "html": "<p><b>Dynamics</b> show the intensity (the volume). They're written below the staff, as Italian abbreviations:</p>\n<table class=\"lt\"><tr><th>Sign</th><th>Italian</th><th>Meaning</th></tr>\n<tr><td><b><i>ppp</i></b></td><td>pianississimo</td><td>extremely soft</td></tr>\n<tr><td><b><i>pp</i></b></td><td>pianissimo</td><td>very soft</td></tr>\n<tr><td><b><i>p</i></b></td><td>piano</td><td>soft</td></tr>\n<tr><td><b><i>mp</i></b></td><td>mezzo piano</td><td>moderately soft</td></tr>\n<tr><td><b><i>mf</i></b></td><td>mezzo forte</td><td>moderately loud</td></tr>\n<tr><td><b><i>f</i></b></td><td>forte</td><td>loud</td></tr>\n<tr><td><b><i>ff</i></b></td><td>fortissimo</td><td>very loud</td></tr>\n<tr><td><b><i>fff</i></b></td><td>fortississimo</td><td>extremely loud</td></tr></table>\n<ul><li><b>Crescendo</b> (cresc. or ⟨): getting louder; <b>decrescendo</b> or <b>diminuendo</b> (decresc., dim. or ⟩): getting softer.</li>\n<li><b><i>sfz</i></b> (sforzando): sudden accent on one note; <b><i>fp</i></b> (fortepiano): loud, then immediately soft; <i>subito</i>: suddenly.</li></ul>",
+    "ex": [
+     {
+      "abc": "X:1\nM:4/4\nL:1/8\nK:C\n!p! c2 d2 e2 f2 | !crescendo(! g2 a2 b2 c'2 !crescendo)! | !f! d'4 !diminuendo(! c'2 b2 !diminuendo)! | !pp! c8 |]",
+      "cap": "Piano, crescendo, forte, diminuendo, pianissimo."
+     }
+    ]
+   },
+   {
+    "id": "articulations",
+    "t": "Articulations",
+    "title": null,
+    "k": "staccato legato tenuto accent marcato fermata slur",
+    "html": "<p><b>Articulations</b> show how to attack and connect the notes:</p>\n<table class=\"lt\"><tr><th>Sign</th><th>Name</th><th>Effect</th></tr>\n<tr><td>dot above or below</td><td><b>Staccato</b></td><td>detached, short note</td></tr>\n<tr><td>horizontal line</td><td><b>Tenuto</b></td><td>note held for its full value, slightly stressed</td></tr>\n<tr><td>&gt;</td><td><b>Accent</b></td><td>stronger attack</td></tr>\n<tr><td>^</td><td><b>Marcato</b></td><td>very strong accent</td></tr>\n<tr><td>curve over several notes</td><td><b>Legato</b> (slur)</td><td>connected notes, without a break</td></tr>\n<tr><td>𝄐</td><td><b>Fermata</b></td><td>hold longer, as long as you choose</td></tr></table>",
+    "ex": [
+     {
+      "abc": "X:1\nM:4/4\nL:1/8\nK:C\n.c2 .d2 !tenuto!e2 !tenuto!f2 | !accent!g2 !accent!g2 !marcato!a2 !marcato!a2 | (g2 f2 e2 d2) | !fermata!c8 |]",
+      "cap": "Staccato, tenuto, accent, marcato, legato and fermata."
+     }
+    ]
+   },
+   {
+    "id": "reprises",
+    "t": "Repeat and Form Signs",
+    "title": null,
+    "k": "repeat volta first second ending da capo dal segno coda fine",
+    "html": "<ul><li><b>Repeat signs</b> (‖: … :‖): you play the passage twice. If there's no opening repeat sign, you go back to the beginning of the piece.</li>\n<li><b>1<sup>st</sup> and 2<sup>nd</sup> endings</b> (numbered brackets): the first time, you play ending 1 and repeat; the second time, you skip ending 1 and play ending 2.</li>\n<li><b>D.C.</b> (<i>Da Capo</i>): go back to the beginning. <b>D.C. al Fine</b>: go back to the beginning and stop at the word <b>Fine</b>.</li>\n<li><b>D.S.</b> (<i>Dal Segno</i>): go back to the sign 𝄋.</li>\n<li><b>Coda</b> (𝄌): ending section. “D.S. al Coda”: go back to the sign, play until “To Coda” (𝄌), then jump to the coda.</li></ul>\n<p>Before you read, map out the road: where the repeats, endings, sign and coda are.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nM:4/4\nL:1/4\nK:C\n|: c d e f | g a g f |[1 e d c2 :|[2 e d c2 |]",
+      "cap": "Repeat with 1st and 2nd endings."
+     }
+    ]
+   },
+   {
+    "id": "ornements",
+    "t": "Ornaments",
+    "title": null,
+    "k": "trill mordent turn appoggiatura acciaccatura grace note",
+    "html": "<ul><li><b>Trill</b> (tr): fast alternation between the written note and the note just above it.</li>\n<li><b>Mordent</b>: written note – neighboring note – written note, very fast. Going down: the mordent (the <i>pincé</i> of the French harpsichordists); going up: the upper mordent (<i>pralltriller</i>, short trill).</li>\n<li><b>Turn</b> (∽): upper note – written note – lower note – written note.</li>\n<li><b>Appoggiatura</b> (grace note): it takes part of the main note's value, on the beat.</li>\n<li><b>Acciaccatura</b> (grace note with a slash): played very quickly, just before the main note.</li></ul>\n<p>How exactly they're played depends on the period and style: in Baroque music, for example, the trill often starts on the upper note.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nM:4/4\nL:1/4\nK:C\n!trill!c2 !mordent!d2 | !turn!e2 {f}e2 | {/f}e2 c2 |]",
+      "cap": "Trill, mordent, turn, appoggiatura and acciaccatura."
+     }
+    ]
+   }
+  ]
+ }
+]

@@ -1,0 +1,541 @@
+Pasar a la siguiente automáticamente después de una respuesta correcta
+Pasar a la siguiente después de 1 escucha
+Pasar a la siguiente después de 2 escuchas
+Pasar a la siguiente después de 3 escuchas
+Pasar a la siguiente después de 4 escuchas
+Silencio de redonda
+Personalizado
+Piano
+Pieza terminada: {0} / {1} notas a la primera.
+Plagal
+Puntillo
+Puntillo (tecla .)
+Calderón
+Pentagrama: toca una línea o un espacio para poner una nota
+Pentagrama de respuesta: haz clic para poner la nota elegida
+Solo el pentagrama
+Primero pon notas en el pentagrama.
+Pon el dedo en el pentagrama y deslízalo hasta la nota correcta (se muestra su nombre), luego levanta el dedo. ▲ ▼ ajustan la nota después. Elige primero ♯ o ♭ si está alterada.
+Para el docente: un cuestionario para imprimir
+Para principiantes: una cuerda a la vez, con instrucciones claras
+En las preguntas de opción múltiple, marca la respuesta correcta. En las preguntas sobre el pentagrama, escribe directamente en el pentagrama.
+Para comprobar si mantienes el tempo solo: debes coincidir justo con el metrónomo cuando vuelva.
+Primer acorde
+Primera inversión
+¡Casi! Un poquito demasiado bajo: tensa muy ligeramente.
+¡Casi! Un poquito demasiado alto: afloja muy ligeramente.
+Prestissimo
+Presto
+Progresión de aprendizaje: se agregan los acordes uno por uno, como en las clases de entrenamiento auditivo
+Progresiones de acordes
+Precisión
+Predominante (subdominante)
+Preparando las páginas…
+¿Listo para poner a prueba tus conocimientos?
+Pulso
+Calidad
+Calidad de los acordes
+Calidad de las tríadas
+Silencio de semicorchea
+Cuarta
+Cuarta aumentada (tritono)
+Cuarta justa
+¿Qué significa este signo?
+¿Qué significa la indicación de tempo « {0} »?
+¿Qué significa la indicación « {0} »?
+¿Qué significa el matiz {0} ({1})?
+¿Qué significan estas barras de compás?
+¿Qué indicación de compás corresponde a este compás?
+¿Qué intervalo es este?
+¿Qué efecto tiene el signo « {0} »?
+¿Cuál es el orden de los {0}s en una armadura?
+¿Cuál es el cifrado de este acorde?
+¿Cuál es el último {0} de la armadura de {1}?
+¿Cuál es el nombre de este intervalo (número y calidad)?
+¿Cuál es el nombre de esta nota {0}?
+¿Cuál es el nombre exacto de la nota n.º {0}? Piensa en la regla de las alteraciones dentro del compás.
+¿Cuál es la inversión de una {0}?
+¿Qué silencio dura lo mismo que una {0}?
+¿Qué término italiano indica un tempo {0}?
+¿Qué término italiano significa « {0} »?
+¿Qué tipo de escala menor está escrita aquí ({0}, ascendente)?
+¿Qué tipo de ligadura une estas dos notas?
+¿Qué cadencia corresponde al enlace {0}{1} al final de una frase?
+¿Qué cadencia termina esta frase en {0}?
+¿Qué nota es esta?
+¿Cuál es la función tonal del acorde {0}?
+¿Cuál es la calidad de esta tríada?
+¿Cuál es la tonalidad relativa mayor de {0}?
+¿Cuál es la tonalidad relativa menor de {0}?
+¿Cuál es la {0} de {1}?
+¿Cuál es la {0} nota de la escala de {1}?
+¿Qué figura completa este compás de {0}?
+¿Qué nota es la enarmónica de {0} (mismo sonido, otro nombre)?
+¿Qué nota está en el bajo en la {0} inversión del acorde de {1}?
+¿Qué matiz (abreviatura) significa « {0} »?
+¿Qué progresión escuchaste?
+¿Qué tonalidad mayor tiene esta armadura?
+¿Qué notas forman el acorde de séptima de dominante (V7) de {0}?
+¿Qué notas están alteradas en la escala de {0}?
+¿Cuáles son las dos tonalidades que tienen esta armadura?
+Pregunta {0}
+Pregunta {0} de {1}
+Pregunta {0} · {1}
+Cuestionario
+Preguntas
+Preguntas en las que hay que escuchar. Nunca se incluyen en el PDF para imprimir.
+Quinta
+Quinta justa
+Salir (el cuestionario se guarda)
+Atajos: 2 a 6 = duraciones (semicorchea … redonda) · . = puntillo · 0 = silencio · Retroceso = borrar
+Volver a empezar
+Registro
+Registro (grados nombrados como en do)
+Inversión de intervalos
+Inversiones
+Volver al ajuste básico
+Volver al principio y detenerse en la palabra Fine
+Continuar el cuestionario en curso ({0}/{1} respondidas)
+Repeticiones y estructura
+Volver al resultado
+Volver al signo 𝄋
+Ir a la primera sin respuesta
+Revisar mis respuestas
+Ritardando
+Rota
+Redonda
+Redonda con puntillo
+Rubato
+Ritmo
+Ritmos
+Ajusta el tempo y las subdivisiones, luego presiona Iniciar (o la barra espaciadora).
+Re
+Re mayor
+Re menor
+Ajuste
+Ajuste básico: no se puede modificar. Cambia un ajuste abajo y luego guárdalo en uno de tus 3 guardados.
+Ajustes
+Ajustes modificados, todavía sin guardar.
+Ajustes recibidos por un enlace. Puedes guardarlos en uno de tus guardados.
+Respuesta ({0}):
+Respuesta:
+Respuesta esperada:
+Respuesta corta
+Resultado: {0} / {1}
+Logrado
+Aciertos
+Aciertos <b>{0}</b> / {1}
+Reverberación
+Re♭
+Sala
+Salto máximo
+Guardado {0}
+Segunda
+Segunda (por grado conjunto)
+Segunda mayor
+Segunda menor
+Sección final de la pieza
+SecurityError
+Sensible
+Séptima
+Séptima de dominante
+Séptima mayor
+Séptima menor
+Shuffle
+Si
+Silencio
+Silencio (tecla 0)
+Simple
+Sexta
+Sexta mayor
+Sexta menor
+Si♭
+Si♭ mayor
+Sol
+Sol grave (Low G)
+Sol mayor
+Sol menor
+Sol modal (sol re sol do re)
+Solfeo
+Solución
+Solución:
+Sol♭
+Sonido
+Sonido del ritmo
+Silencio de negra
+Silencio de negra con puntillo
+Subdominante
+Space
+Staccato
+Estándar (do sol re la)
+Estándar (mi la re sol si mi)
+Estándar (mi la re sol)
+Estándar (si mi la re sol)
+Estándar (sol do mi la, sol agudo)
+Estándar (sol re la mi)
+Subdivisiones
+Siguiente ›
+Tema
+Temas
+Temas:
+En el pentagrama
+¿Sobre qué nota se construye el acorde de séptima de dominante (V7) de {0}?
+Superdominante
+Supertónica
+Síncopa
+Serie
+Serie terminada: {0} / {1} correctas en {2} s ({3} s por nota).
+T
+Tu respuesta
+Tu respuesta:
+Tap
+Tempo
+Tiempo
+Tiempo fuerte
+Tiempos por compás
+Mantener más tiempo, a elección
+Tenuto
+Términos de tempo
+Términos y signos
+Terminar y ver mi resultado
+Terminar ahora
+Terminar de todos modos
+Pon a prueba tus conocimientos
+Pon a prueba tus conocimientos: resultados
+Teoría
+Mantén la nota…
+Tercera
+Tercera mayor
+Tercera menor
+Título
+Tu nombre (opcional)
+Tonalidad
+Tonalidades
+Tonalidades relativas
+Tónica
+Tonos y semitonos
+Toca el pentagrama para agregar las notas de izquierda a derecha ({0}/{1}).
+Toca el pentagrama para agregar una nota (todas apiladas). Toca una nota puesta para quitarla.{0}
+Toca una pregunta para ver tu respuesta, la respuesta correcta y un enlace al concepto.
+Teclas 1 a 7 del teclado.
+Empezar siempre en la tónica (dada)
+Borrar todo
+Cualquier respuesta que sume exactamente {0} tiempos, por ejemplo: {1}.
+Todos los compases están completos: haz clic en Verificar.
+Todos los compases están completos. Verifica tu respuesta o borra la última figura.
+Todos los conceptos útiles para leer, escuchar y analizar la música: del pentagrama a las cadencias. Busca un concepto o recorre las pestañas.
+Tresillos
+Tresillos en shuffle (solo se oye la 3.ª nota del tresillo)
+Tritono
+Demasiado bajo: tocas {0}, que está antes de {1}. Tensa un poco la cuerda (el sonido debe subir).
+Demasiado bajo: tocas {0}, {1} semitonos por debajo de {2}. Tensa la cuerda poco a poco mientras la haces sonar.
+Demasiado alto: tocas {0}, que está después de {1}. Afloja un poco la cuerda (el sonido debe bajar).
+¡Muy bien!
+Estás modificando « {0} ». Cada cambio se guarda automáticamente en este dispositivo.
+Descargar el PDF
+Clavijero del instrumento: toca una clavija para elegir esa cuerda
+Ukelele
+Un semitono
+Un intervalo y su inversión: cuando sumas sus números (p. ej.: tercera + sexta), ¿qué total obtienes siempre?
+Un cuestionario al azar según los temas y el nivel elegidos en los ajustes: una pregunta por página, tu resultado al final y PDF para compartir o imprimir.
+Un tono
+Una nota a la vez en el pentagrama: encuentra su nombre lo más rápido posible. Clave de sol, clave de fa, líneas adicionales y alteraciones a elección.
+Una pregunta por página. Puedes volver atrás y cambiar tus respuestas antes de terminar. Tu resultado aparece enseguida al final.
+¿Cuántas {1} vale una {0}?
+Unísono
+Usa líneas adicionales.
+V
+V – I
+V – vi
+V7
+VI
+VII
+Vacío: haz clic para guardar aquí los ajustes actuales
+Violín
+Violonchelo
+Vivace
+Esta es la nota {0}. Escribe a la derecha su nota enarmónica (mismo sonido, otro nombre).
+Ver también
+Ver mi último resultado
+Ver → cantar
+Ver → percutir
+Ver → tocar
+Ver → leer en ritmo
+Ver → nombrar
+Voz
+Volumen
+Verificar
+V⁶ – I
+Woodblock
+Zona de golpe
+Zona « afinado »
+[aria-current="true"]
+[aria-selected="true"]
+[class*="abcjs-"]
+[data-widget="armtrick"]
+a_deg:q{0}{1}
+a_deg:{0}{1}{2}{3}{4}
+a_ecr:{0}{1}
+a_nom:{0}{1}
+a_qua:{0}{1}
+a_ren:b{0}{1}{2}
+a_ren:w{0}{1}{2}
+a_ren:{0}{1}{2}{3}
+a_v7:{0}{1}
+application/pdf
+detención en la dominante
+ninguna alteración
+aumentado
+aumentada
+blanca con puntillo
+bemol
+bemoles
+clave de do en 3.ª
+clave de fa
+clave de sol
+corchea con puntillo
+currentColor
+disminuido
+disminuida
+sostenido
+sostenidos
+sostenidos y bemoles
+do
+do♯
+e_int:{0}{1}
+e_mod:{0}{1}
+acelerando
+y
+p. ej.: 1 ½
+p. ej.: 2 o ½
+p. ej.: Re mayor
+p. ej.: Sol mayor
+p. ej.: fa♯
+p. ej.: fa♯, si♭, mi
+p. ej.: mi
+p. ej.: mi menor
+p. ej.: re♭
+p. ej.: sol
+p. ej.: sol, fa♯
+p. ej.: sol♯
+extremadamente suave
+extremadamente fuerte
+fa
+fa♯
+fr-CA
+g_arm:{0}:{1}
+g_cyc:{0}{1}
+g_deg:p{0}.{1}
+g_deg:t{0}.{1}
+g_deg:w{0}.{1}
+g_maj:a{0}
+g_maj:n{0}.{1}
+g_maj:s{0}
+g_maj:w{0}.{1}
+g_min:m{0}
+g_min:r{0}
+g_min:t{0}{1}
+g_min:w{0}{1}
+g_ord:l{0}
+g_ord:n{0}{1}
+g_rel:{0}{1}
+i_dt:p{0}{1}
+i_dt:w{0}{1}
+i_ecr:{0}{1}{2}
+i_nom:{0}{1}
+i_ren:{0}{1}
+ii / ii°
+iii / III
+ii°
+imagen del pentagrama
+image/jpeg
+l_alt:{0}:{1}
+la
+la {0} ({1})
+la♭
+la♯
+el ritmo escuchado
+los dos acordes en estado fundamental
+compases, hasta
+mi
+mi♭
+moderado
+melódica
+negra con puntillo
+nota escrita
+o presiona la barra espaciadora
+con puntillo
+pentagrama + {0} línea{1} suplementaria{2}
+solo el pentagrama
+position:fixed;left:-20000px;top:0;width:{0}px;color:#000;background:#fff
+q 612 0 0 792 0 0 cm /Im0 Do Q
+r_cmp:{0}:{1}
+r_fig:r{0}/{1}
+r_lia:b{0}{1}{2}
+r_lia:t{0}-{1}
+r_pts:t{0}-{1}
+redonda con puntillo
+re
+re♭
+re♯
+serviceWorker
+si
+si♭
+sol
+sol y fa
+sol♭
+sol♯
+s{0}
+t_art:{0}{1}
+@@PDF_TRAILER@@
+muy suave
+muy fuerte
+muy lento
+muy rápido
+un medio
+uno de los acordes está invertido
+un número
+un cuarto
+un término italiano
+vi / VI
+viewBox
+vii°
+width:{0}%
+x |]
+x4 |
+@@PDF_XREF@@
+z |
+{0} (o {1})
+{0} (tecla {1})
+{0} ({1} en el bajo)
+{0} (en cualquier octava)
+{0} / {1} cuerdas afinadas
+{0} 0 R
+{0} 0 obj
+{0}: la alteración se coloca delante de la nota
+{0} Hz · objetivo {1} Hz
+{0} a elección
+{0} y medio
+{0} y {1}
+{0} figura{1} correcta{2} de {3}
+{0} de {3} compás{1} correcto{2}. Compara con la solución de arriba.
+{0} notas
+{0} nota{1} correcta{2} y a tiempo de {3}
+{0} nota{1} correcta{2} de {3}
+{0} nota{1} a tiempo de {2}
+{0} concepto{1}
+{0} para la próxima nota
+{0} para la próxima nota (tecla {1})
+{0} pulsos/min
+{0} preguntas al azar · nivel {1} · {2}
+{0} preguntas · nivel {1} · Resultado: ______ / {2}
+{0} respuestas
+{0} resultado{1} para « {2} »
+{0} s por acorde
+{0} tiempos (1 compás de {1})
+{0} {1}px {2}
+{0}. Escucha la progresión y luego elige la respuesta correcta (teclas 1 a {1}). Truco: escucha primero el bajo.
+« Afinado » se enciende solo si la nota se mantiene en la zona elegida durante un instante. Con un instrumento elegido, el afinador apunta a la cuerda más cercana (Auto) o a la clavija que toques. El modo aprendiz guía una cuerda a la vez y avisa cuando una cuerda está demasiado tensa. Las diferencias siempre se miden respecto a la nota exacta de la cuerda: sin tolerancia oculta.
+± 1 cent (muy estricto)
+± 2 cents (estricto)
+± 3 cents
+· Enter = agregar la figura.
+· haz clic en el pentagrama para agregarla
+· haz clic en el pentagrama para poner el silencio
+· haz clic en el pentagrama a la altura deseada
+· {0} altura{1} correcta{2} con un ritmo por revisar (en naranja)
+· {0} de más
+· {0} golpe{1} de más
+· {0} pero desfasada{1}
+· {0} preguntas · nivel {1}
+· escucha {0}/{1}
+· ↑ ↓ = mover la última nota · + − = = sostenido, bemol, becuadro.
+½ tono más bajo
+Por practicar
+¡Te toca!
+Escucha
+Escucha (solo en la app)
+Escucha este motivo corto. ¿Está en modo mayor o menor?
+Escucha esta escala. ¿Es mayor o menor?
+Escucha cada acorde
+Escucha dos notas y nombra el intervalo: ascendente, descendente o armónico. Después de responder, compáralo con los otros intervalos a partir de la misma nota.
+Escucha el acorde (arpegiado y luego plaqué). ¿Cuál es su calidad?
+Escucha el intervalo {0} y nómbralo.
+Escucha el final de la frase. ¿Qué cadencia oyes?
+Escucha la melodía y escríbela directamente en el pentagrama de respuesta: elige una figura y luego haz clic a la altura correcta. Después verifica alturas y ritmo.
+Escucha el ritmo (después de un compás de cuenta previa). ¿Cuál escuchaste?
+Escucha el ritmo y escríbelo en el pentagrama de respuesta: elige una figura de nota o de silencio y luego haz clic para agregarla.
+Escucha compás por compás
+Escucha una serie de acordes y elige la progresión correcta entre las opciones. Después, vuelve a escuchar cada acorde para oír bien su color.
+Escucha y luego elige. Después de responder, haz clic en cualquier intervalo para oírlo a partir de la misma nota. Barra espaciadora: volver a escuchar.
+Escribir un intervalo
+Escribir una tríada
+Escribe el acorde de séptima de dominante (V7) de {0}, en estado fundamental (clave de sol).
+Escribe el acorde de {0} en {1} inversión (clave de sol).
+Escribe la escala de {0} ascendente, de tónica a tónica (8 notas). Agrega las alteraciones delante de las notas (sin armadura).
+Escribe la escala de {0} {1} ascendente, de tónica a tónica (8 notas). Agrega las alteraciones delante de las notas (sin armadura).
+Escribe la nota situada {0} por encima de la nota dada.
+Escribe la nota {0} en el pentagrama (clave de sol). No olvides la alteración.
+Escribe la nota {0} en el pentagrama {1}.
+Escribe la tríada de {0} en estado fundamental (clave de sol).
+Escribe la {0} ({1} grado) de la escala de {2} en el pentagrama (clave de sol).
+Escribe la {0} de {1} en el pentagrama (clave de sol).
+Escribe tu respuesta en el pentagrama.
+Escribe un número.
+Escribe una {0} {1} de la nota dada.
+Amplía el registro o el salto máximo.
+Paso
+Paso 1: I y V
+Paso 2: I, IV y V
+Paso 3: + ii
+Paso 4: + vi
+Paso 5: todos los acordes (+ iii, vii°)
+Paso 6: + V7 e inversiones
+Estado fundamental
+Extensión
+Evaluación de teoría musical
+Evaluar
+a
+‹ Cuerda anterior
+‹ Anterior
+⁵₃ (estado fundamental, sin cifra)
+⁶ (acorde de sexta)
+⁶₄ (acorde de cuarta y sexta)
+← Volver a
+■ Detener
+■ Apagar el micrófono
+▲ Subir
+▶ 1.ª nota
+▶ Comenzar
+▶ Iniciar
+▶ Oír la nota
+▶ Escala y arpegio
+▶ La {0} Hz
+▶ Compás {0} / {1}
+▶ Melodía
+▶ Nota por nota
+▶ Progresión
+▶ Volver a escuchar
+▶ Solución
+▶ Tonalidad
+▶ Escuchar
+▶ Escuchar la melodía
+▶ Escuchar la pieza
+▶ Escuchar el modelo
+▶ Escuchar mi respuesta
+▼ Bajar
+● Cantar
+● Comenzar
+♭ bemol
+♮ ninguna
+♯ sostenido
+⚠ ¡Deja de tensar! Tu cuerda suena {0}, {1} semitono{2} más alto que {3}. Aflójala (el sonido debe bajar), si no podría romperse.
+✓ Respuesta correcta
+✓ ¡Afinado! Pasamos a la siguiente cuerda…
+✗ No es la respuesta correcta
+✗ Sin respuesta
+🎉 Todas las cuerdas están afinadas
+🎤 Activar el micrófono
+🎤 aplaude (se recomiendan audífonos)
+🎤 {0} {1}{2} c
+📖 Repasar este concepto en la biblioteca

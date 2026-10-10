@@ -1,0 +1,271 @@
+Move on automatically after a correct answer
+Move to the next one after 1 listen
+Move to the next one after 2 listens
+Move to the next one after 3 listens
+Move to the next one after 4 listens
+Pause
+Custom
+Piano
+Piece finished: {0} / {1} notes right on the first try.
+Plagal
+Dot
+Dot (. key)
+Fermata
+Staff: tap a line or a space to place a note
+Answer staff: click to place the chosen note
+Staff only
+Place some notes on the staff first.
+Put your finger on the staff and slide to the right note (its name appears), then lift your finger. ▲ ▼ then adjust the note. Choose ♯ or ♭ first if it has an accidental.
+For the teacher: a printable quiz
+For beginners: one string at a time, with clear instructions
+For multiple-choice questions, check the right answer. For staff questions, write directly on the staff.
+To check whether you keep the tempo on your own: you should land right with the metronome when it comes back.
+First chord
+First inversion
+Almost! Just a tiny bit too low: tighten very slightly.
+Almost! Just a tiny bit too high: loosen very slightly.
+Prestissimo
+Presto
+Learning path: chords are added one by one, like in ear-training classes
+Chord progressions
+Accuracy
+Predominant (subdominant)
+Preparing pages…
+Ready to test your knowledge?
+Pulse
+Quality
+Chord quality
+Triad quality
+Sixteenth rest
+Fourth
+Augmented fourth (tritone)
+Perfect fourth
+What does this sign mean?
+What does the tempo marking "{0}" mean?
+What does the marking "{0}" mean?
+What does the dynamic {0} ({1}) mean?
+What do these bar lines mean?
+Which time signature fits this measure?
+What is this interval?
+What does the "{0}" sign do?
+What's the order of {0}s in a key signature?
+What are the figures for this chord?
+What's the last {0} in the key signature of {1}?
+What's the name of this interval (number and quality)?
+What's the name of this note {0}?
+What's the exact name of note no. {0}? Remember the rule for accidentals within a measure.
+What's the inversion of a {0}?
+Which rest lasts as long as a {0}?
+Which Italian term means a {0} tempo?
+Which Italian term means "{0}"?
+Which type of minor scale is written here ({0}, ascending)?
+What kind of curved line connects these two notes?
+Which cadence matches the progression {0}{1} at the end of a phrase?
+Which cadence ends this phrase in {0}?
+What's this note?
+What's the tonal function of the {0} chord?
+What's the quality of this triad?
+What's the relative major of {0}?
+What's the relative minor of {0}?
+What's the {0} of {1}?
+What's the {0} note of the {1} scale?
+Which note value completes this measure in {0}?
+Which note is the enharmonic of {0} (same sound, different name)?
+Which note is in the bass in the {0} inversion of the {1} chord?
+Which dynamic (abbreviation) means "{0}"?
+Which progression did you hear?
+Which major key has this key signature?
+Which notes make up the dominant seventh chord (V7) of {0}?
+Which notes have accidentals in the {0} scale?
+Which two keys have this key signature?
+Question {0}
+Question {0} of {1}
+Question {0} · {1}
+Quiz
+Questions
+Listening questions. They're never included in the printable PDF.
+Fifth
+Perfect fifth
+Quit (your quiz is saved)
+Shortcuts: 2 to 6 = durations (sixteenth … whole) · . = dot · 0 = rest · Backspace = delete
+Start over
+Register
+Register (degrees named as in C)
+Interval inversion
+Inversions
+Go back to the default settings
+Go back to the beginning and stop at the word Fine
+Resume the current quiz ({0}/{1} answered)
+Repeats and form
+Back to results
+Go back to the 𝄋 sign
+Go to the first unanswered one
+Review my answers
+Ritardando
+Deceptive
+Whole note
+Dotted whole note
+Rubato
+Rhythm
+Rhythms
+Set the tempo and subdivisions, then press Start (or the space bar).
+D
+D major
+D minor
+Setting
+Default setting: it can't be changed. Change a setting below, then save it in one of your 3 save slots.
+Settings
+Settings changed, not saved yet.
+Settings received from a link. You can save them in one of your save slots.
+Answer ({0}):
+Answer:
+Expected answer:
+Short answer
+Result: {0} / {1}
+Passed
+Success
+Correct <b>{0}</b> / {1}
+Reverb
+D♭
+Room
+Largest leap
+Save slot {0}
+Second
+Second (stepwise)
+Major second
+Minor second
+Final section of the piece
+SecurityError
+Leading tone
+Seventh
+Dominant seventh
+Major seventh
+Minor seventh
+Shuffle
+B
+Rest
+Rest (0 key)
+Simple
+Sixth
+Major sixth
+Minor sixth
+B♭
+B♭ major
+G
+Low G
+G major
+G minor
+G modal (G D G C D)
+Solfège
+Answer
+Answer:
+G♭
+Sound
+Rhythm sound
+Quarter rest
+Dotted quarter rest
+Subdominant
+Space
+Staccato
+Standard (C G D A)
+Standard (E A D G B E)
+Standard (E A D G)
+Standard (B E A D G)
+Standard (G C E A, high G)
+Standard (G D A E)
+Subdivisions
+Next ›
+Topic
+Topics
+Topics:
+On the staff
+On which note is the dominant seventh chord (V7) of {0} built?
+Submediant
+Supertonic
+Syncopation
+Set
+Set finished: {0} / {1} correct in {2} s ({3} s per note).
+T
+Your answer
+Your answer:
+Tap
+Tempo
+Beats
+Strong beat
+Beats per measure
+Hold longer, as you like
+Tenuto
+Tempo terms
+Terms and signs
+Finish and see my result
+Finish now
+Finish anyway
+Test my knowledge
+Test my knowledge: results
+Theory
+Hold the note…
+Third
+Major third
+Minor third
+Title
+Your name (optional)
+Key
+Keys
+Relative keys
+Tonic
+Whole steps and half steps
+Tap the staff to add the notes from left to right ({0}/{1}).
+Tap the staff to add a note (all stacked). Tap a placed note to remove it.{0}
+Tap a question to see your answer, the right answer and a link to the topic.
+Keys 1 to 7 on the keyboard.
+Always start on the tonic (given)
+Clear all
+Any answer that adds exactly {0} beats, for example: {1}.
+All measures are full: click Check.
+All measures are full. Check your answer or delete the last note value.
+Everything you need to read, hear and analyze music: from the staff to cadences. Search for a topic or browse the tabs.
+Triplets
+Shuffle triplets (you only hear the 3rd note of the triplet)
+Tritone
+Too low: you're playing {0}, which is below {1}. Tighten the string a little (the pitch should go up).
+Too low: you're playing {0}, {1} half steps below {2}. Tighten the string bit by bit while you play it.
+Too high: you're playing {0}, which is above {1}. Loosen the string a little (the pitch should go down).
+Very good!
+You're editing "{0}". Every change is saved automatically on this device.
+Download the PDF
+Instrument head: tap a tuning peg to target that string
+Ukulele
+A half step
+An interval and its inversion: when you add their numbers (e.g. third + sixth), what total do you always get?
+A random quiz based on the topics and level chosen in the settings: one question per page, your result at the end, and PDFs to share or print.
+A whole step
+One note at a time on the staff: find its name as fast as you can. Treble clef, bass clef, ledger lines and accidentals as you choose.
+One question per page. You can go back and change your answers before finishing. Your result shows up right at the end.
+How many {1} is a {0} worth?
+Unison
+Use ledger lines.
+V
+V – I
+V – vi
+V7
+VI
+VII
+Empty: click to save the current settings here
+Violin
+Cello
+Vivace
+Here's the note {0}. On the right, write its enharmonic note (same sound, different name).
+See also
+See my last result
+See → sing
+See → clap
+See → play
+See → read in rhythm
+See → name
+Voice
+Volume
+Check
+V⁶ – I
+Woodblock
+Tap zone
+"In tune" zone

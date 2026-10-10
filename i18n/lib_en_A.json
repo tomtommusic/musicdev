@@ -1,0 +1,437 @@
+[
+ {
+  "id": "lecture",
+  "t": "Reading",
+  "topics": [
+   {
+    "id": "lire-partition",
+    "t": "Reading a score",
+    "title": "Reading a score: overview",
+    "k": "symbols score sheet music staff reading overview",
+    "html": "<p>You read a score like a text: left to right, line after line. Before you play the first note, take a few seconds to spot the information placed at the beginning.</p>\n<ol>\n<li><b>The staff</b>: the 5 lines the notes are written on (<a href=\"#\" data-go=\"portee\">The staff</a>).</li>\n<li><b>The clef</b>, at the very beginning: it sets the names of the notes (<a href=\"#\" data-go=\"cles\">Clefs</a>).</li>\n<li><b>The key signature</b>, right after the clef: the sharps or flats that apply to the whole piece. It tells you the key (<a href=\"#\" data-go=\"armures\">Key signatures</a>).</li>\n<li><b>The time signature</b>: how many beats per measure and which note value gets one beat (<a href=\"#\" data-go=\"mesures-simples\">Simple meters</a>).</li>\n<li><b>The tempo marking</b>, above the staff: the speed (<a href=\"#\" data-go=\"tempo\">Tempo</a>).</li>\n<li><b>The dynamics</b>, below the staff: the volume (<a href=\"#\" data-go=\"nuances\">Dynamics</a>).</li>\n<li><b>The notes and rests</b>: their position gives the pitch, their shape gives the duration (<a href=\"#\" data-go=\"figures-notes\">Note values</a>, <a href=\"#\" data-go=\"silences\">Rest values</a>).</li>\n<li><b>The bar lines</b>, slurs and ties, articulations and repeat signs (<a href=\"#\" data-go=\"barres\">Bar lines</a>, <a href=\"#\" data-go=\"reprises\">Repeats</a>).</li>\n</ol>\n<p><b>Sight-reading tip</b>: before you start, find the key, the time signature, the hardest rhythm and the big leaps. Count one empty measure to set the pulse, then don't stop: you fix mistakes on the next read-through.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nT:Little Piece\nM:3/4\nL:1/8\nQ:\"Moderato\" 1/4=100\nK:G\n!mp! G2 B2 d2 | (c2 B2) A2 | B4 z2 |: !f! d3 c B2 | .A2 .G2 .F2 | G6 :|",
+      "cap": "Title, tempo, treble clef, key signature (one sharp: G major), 3/4 time, dynamics, slur, rest, staccato and repeat bar lines."
+     }
+    ]
+   },
+   {
+    "id": "portee",
+    "t": "The staff",
+    "title": null,
+    "k": "staff lines spaces",
+    "html": "<p>The <b>staff</b> is made of <b>5 horizontal lines</b> and <b>4 spaces</b> (the gaps between the lines). They are always counted <b>from bottom to top</b>: the 1<sup>st</sup> line is the lowest.</p>\n<p>The higher a note sits on the staff, the higher it sounds. A note can be <b>on a line</b> (the line goes through it) or <b>in a space</b>. To go higher or lower than the staff, you add small <a href=\"#\" data-go=\"lignes-sup\">ledger lines</a>.</p>\n<p>The staff alone doesn't tell you which notes are written: the <a href=\"#\" data-go=\"cles\">clef</a> gives the names of the lines.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\nE G B d f |]\nw: 1st 2nd 3rd 4th 5th",
+      "cap": "The 5 lines in treble clef: E, G, B, D, F."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:C\nF A c e |]\nw: 1st 2nd 3rd 4th",
+      "cap": "The 4 spaces: F, A, C, E."
+     }
+    ]
+   },
+   {
+    "id": "cles",
+    "t": "Clefs",
+    "title": null,
+    "k": "clef treble bass c clef alto tenor",
+    "html": "<p>The <b>clef</b> gives the name of one line; all the other notes are worked out from it.</p>\n<ul>\n<li><b>Treble clef</b> (G clef, 2<sup>nd</sup> line): the note on the 2<sup>nd</sup> line is the <b>G</b> above middle C. Used for high voices, flute, violin, trumpet, the piano's right hand…</li>\n<li><b>Bass clef</b> (F clef, 4<sup>th</sup> line): the note on the 4<sup>th</sup> line is the <b>F</b> below middle C. Used for low voices, double bass, bassoon, trombone, the piano's left hand…</li>\n<li><b>C clef on the 3<sup>rd</sup> line</b> (alto clef): the 3<sup>rd</sup> line is <b>middle C</b>. Used mostly by the viola.</li>\n<li><b>C clef on the 4<sup>th</sup> line</b> (tenor clef): the 4<sup>th</sup> line is middle C. Used for high passages on cello, bassoon and trombone.</li>\n</ul>\n<p>Tip for bass clef: the lines read <b>G, B, D, F, A</b> (“Good Boys Do Fine Always”) and the spaces <b>A, C, E, G</b> (“All Cows Eat Grass”).</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C clef=treble\nC4 | [K:clef=bass] C4 | [K:clef=alto] C4 | [K:clef=tenor] C4 |]\nw: treble bass alto tenor",
+      "cap": "The same middle C written in all four clefs."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:C clef=bass\nG,, B,, D, F, A, |]\nw: G B D F A",
+      "cap": "The lines in bass clef."
+     }
+    ]
+   },
+   {
+    "id": "noms-notes",
+    "t": "Note names",
+    "title": null,
+    "k": "note names letters c d e f g a b do re mi fa sol la si solfege octave",
+    "html": "<p>There are <b>7 note names</b> that keep coming back in the same order: <b>C, D, E, F, G, A, B</b>, then C again, one octave higher.</p>\n<p>In English-speaking countries and in jazz, notes are named with <b>letters</b>. In French and many other languages, they use solfège syllables instead:</p>\n<table class=\"lt\"><tr><th>French</th><td>do</td><td>ré</td><td>mi</td><td>fa</td><td>sol</td><td>la</td><td>si</td></tr>\n<tr><th>Letters</th><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><td>A</td><td>B</td></tr></table>\n<p>Watch out: in German, B means B♭ and H means B.</p>\n<p><b>Octaves.</b> To give the exact pitch, you add an octave number. Depending on the book, middle C on the piano is called <b>do3</b> (French tradition) or <b>C4</b> (scientific pitch notation, common in North America). Always check which system your textbook uses.</p>\n<p>The <b>reference A</b> used to tune instruments (A4, or la3 in the French system) vibrates at 440 Hz.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\nC D E F G A B c |]\nw: do ré mi fa sol la si do\nw: C D E F G A B C",
+      "cap": "One octave from C to C, with both naming systems."
+     }
+    ]
+   },
+   {
+    "id": "lignes-sup",
+    "t": "Ledger lines",
+    "title": null,
+    "k": "ledger lines additional lines above below staff",
+    "html": "<p>When a note goes past the staff, you draw <b>short ledger lines</b> above or below it. You keep counting lines and spaces just like on the staff.</p>\n<p><b>Middle C</b> is written on a ledger line: below the staff in treble clef and above the staff in bass clef.</p>\n<p>Beyond three or four ledger lines, it's better to change clef or use the marking <b>8va</b> (play an octave higher) or <b>8vb</b> (an octave lower).</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\nA, B, C D | g a b c' |]\nw: A B C D G A B C",
+      "cap": "In treble clef: below the staff (A, B, middle C, D) and above it (G, A, B, C)."
+     }
+    ]
+   },
+   {
+    "id": "grand-systeme",
+    "t": "The grand staff (piano)",
+    "title": null,
+    "k": "grand staff brace piano right hand left hand middle c",
+    "html": "<p>The piano uses two staves joined by a <b>brace</b>: treble clef on top (usually the right hand) and bass clef below (usually the left hand). This is the <b>grand staff</b>.</p>\n<p><b>Middle C</b> sits exactly between the two staves: one ledger line below the treble clef staff, or one ledger line above the bass clef staff. It's the same key on the piano.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\n%%staves {1 2}\nV:1 clef=treble\nC2 E2 G2 c2 |]\nV:2 clef=bass\nC2 G,2 E,2 C,2 |]",
+      "cap": "Middle C written in each staff, then the two hands moving apart."
+     }
+    ]
+   },
+   {
+    "id": "clavier",
+    "t": "The keyboard",
+    "title": null,
+    "k": "piano keyboard white black keys half step",
+    "html": "<p>On a keyboard, the <b>black keys</b> are grouped in <b>2s</b> and <b>3s</b>. <b>C</b> is the white key just to the left of a group of 2 black keys; <b>F</b> is just to the left of a group of 3.</p>\n<p>Two neighboring keys (white or black) are a <b>half step</b> apart. Between <b>E and F</b> and between <b>B and C</b>, there is no black key: these are natural half steps (<a href=\"#\" data-go=\"tons-demitons\">Whole steps and half steps</a>).</p>\n<p>A black key has two names: C♯ = D♭, D♯ = E♭, etc. (<a href=\"#\" data-go=\"alterations\">enharmonics</a>). Try the keyboard below.</p>\n<div data-piano=\"48,71\"></div>",
+    "ex": []
+   },
+   {
+    "id": "alterations",
+    "t": "Accidentals",
+    "title": null,
+    "k": "accidentals sharp flat natural double sharp double flat enharmonic",
+    "html": "<p>An <b>accidental</b> changes the pitch of a note:</p>\n<table class=\"lt\"><tr><th>♯</th><td><b>sharp</b>: raises the note by a half step</td></tr>\n<tr><th>♭</th><td><b>flat</b>: lowers the note by a half step</td></tr>\n<tr><th>♮</th><td><b>natural</b>: cancels the sharp or flat, the note becomes natural again</td></tr>\n<tr><th>𝄪</th><td><b>double sharp</b>: raises by two half steps</td></tr>\n<tr><th>𝄫</th><td><b>double flat</b>: lowers by two half steps</td></tr></table>\n<ul><li>Placed in the <a href=\"#\" data-go=\"armures\">key signature</a>, accidentals apply to the whole piece, in every octave.</li>\n<li>Placed in front of a note (an <b>accidental</b> in the strict sense), they last until the end of the measure, for that note in that octave only.</li></ul>\n<p><b>Enharmonics</b>: two names for the same sound. C♯ and D♭ sound the same on the piano, but you choose one or the other depending on the key and the direction of the melody.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\n^F2 | _B2 | =B2 | ^^F2 | __B2 |]\nw: F♯ B♭ B♮ F𝄪 B𝄫",
+      "cap": "Sharp, flat, natural, double sharp, double flat."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:C\n^C2 _D2 | ^F2 _G2 |]\nw: C♯ D♭ F♯ G♭",
+      "cap": "Enharmonic notes: same sound, different name."
+     }
+    ]
+   },
+   {
+    "id": "transpositeurs",
+    "t": "Transposing instruments",
+    "title": null,
+    "k": "b flat e flat f clarinet trumpet saxophone horn transposition transposing",
+    "html": "<p>Some instruments read one note but make another one sound: these are <b>transposing instruments</b>. An instrument is said to be “in B♭” when its written C sounds as B♭.</p>\n<table class=\"lt\"><tr><th>Instrument</th><th>Written C sounds…</th></tr>\n<tr><td>B♭ clarinet, B♭ trumpet, soprano sax</td><td>B♭: a <b>major second lower</b></td></tr>\n<tr><td>Tenor sax (B♭)</td><td>a <b>major ninth lower</b> (octave + second)</td></tr>\n<tr><td>Alto sax (E♭)</td><td>E♭: a <b>major sixth lower</b></td></tr>\n<tr><td>Baritone sax (E♭)</td><td>an octave + a major sixth lower</td></tr>\n<tr><td>Horn in F</td><td>F: a <b>perfect fifth lower</b></td></tr></table>\n<p>To play together, each musician gets a part that's already transposed. In MusicDEV, the <b>Student instrument (mic)</b> setting takes this transposition into account: you read the written note for your instrument and the mic compares it with the real sound.</p>",
+    "ex": []
+   }
+  ]
+ },
+ {
+  "id": "rythme",
+  "t": "Rhythm",
+  "topics": [
+   {
+    "id": "pulsation",
+    "t": "Pulse, beats and measures",
+    "title": null,
+    "k": "pulse beat strong weak downbeat counting conducting",
+    "html": "<p>The <b>pulse</b> is the steady beat you feel when you listen to music, the one you follow by tapping your foot. Each pulse is a <b>beat</b>.</p>\n<p>Beats are grouped into <b>measures</b> of 2, 3 or 4 beats. The <b>1<sup>st</sup> beat</b> of the measure is the <b>strong beat</b> (downbeat): that's where you feel the weight. The others are weaker. In 4/4: <b>strong</b> – weak – <b>medium-strong</b> – weak.</p>\n<p><b>Counting</b>: say the beat numbers (“1, 2, 3, 4”) and add “and” for half beats (“1 and 2 and”). For quarter beats: “1 e and a”.</p>\n<p>In the Rhythm reading module, keep the pulse in your body (foot, head) while you clap the rhythm with your hands.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nM:4/4\nL:1/8\nQ:1/4=80\nK:C clef=perc stafflines=1\nB2 B2 B2 B2 | BB BB BB BB | B2 BB B4 |]\nw: 1 2 3 4 1 & 2 & 3 & 4 & 1 2 & 3",
+      "cap": "Counting beats and half beats."
+     }
+    ]
+   },
+   {
+    "id": "figures-notes",
+    "t": "Note values",
+    "title": null,
+    "k": "whole half quarter eighth sixteenth thirty-second note duration value stem flag beam",
+    "html": "<p>The shape of a note shows its <b>duration</b>. Each note value is worth half of the one before:</p>\n<table class=\"lt\"><tr><th>Note</th><th>Value (in quarter notes)</th><th>Equals</th></tr>\n<tr><td>Whole note</td><td>4</td><td>2 half notes</td></tr>\n<tr><td>Half note</td><td>2</td><td>2 quarter notes</td></tr>\n<tr><td>Quarter note</td><td>1</td><td>2 eighth notes</td></tr>\n<tr><td>Eighth note</td><td>½</td><td>2 sixteenth notes</td></tr>\n<tr><td>Sixteenth note</td><td>¼</td><td>2 thirty-second notes</td></tr>\n<tr><td>Thirty-second note</td><td>⅛</td><td></td></tr></table>\n<p>A note is made of a <b>notehead</b> (hollow or filled), sometimes a <b>stem</b> (the vertical line) and <b>flags</b>. When several eighth notes follow each other within the same beat, the flags are replaced by a <b>beam</b> that shows the grouping by beat.</p>\n<p>Stem: up, on the right of the notehead, if the note is below the 3<sup>rd</sup> line; down, on the left, from the 3<sup>rd</sup> line up.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nM:4/4\nL:1/16\nK:C\nc16 | c8 c8 | c4 c4 c4 c4 | c2 c2 c2 c2 c2 c2 c2 c2 |]",
+      "cap": "Whole note, 2 half notes, 4 quarter notes, 8 eighth notes: each measure lasts 4 beats."
+     },
+     {
+      "abc": "X:1\nM:4/4\nL:1/16\nK:C\nc2c2 c2c2 c2c2 c2c2 | cccc cccc cccc cccc |]",
+      "cap": "Eighth notes and sixteenth notes grouped by beat with beams."
+     }
+    ]
+   },
+   {
+    "id": "silences",
+    "t": "Rest values",
+    "title": null,
+    "k": "rests whole half quarter eighth sixteenth thirty-second rest",
+    "html": "<p>Each note value has a matching <b>rest</b> of the same duration:</p>\n<table class=\"lt\"><tr><th>Note</th><th>Rest</th><th>Duration (in quarter notes)</th></tr>\n<tr><td>Whole note</td><td><b>Whole rest</b> (rectangle hanging below the 4<sup>th</sup> line)</td><td>4</td></tr>\n<tr><td>Half note</td><td><b>Half rest</b> (rectangle sitting on the 3<sup>rd</sup> line)</td><td>2</td></tr>\n<tr><td>Quarter note</td><td><b>Quarter rest</b></td><td>1</td></tr>\n<tr><td>Eighth note</td><td><b>Eighth rest</b></td><td>½</td></tr>\n<tr><td>Sixteenth note</td><td><b>Sixteenth rest</b></td><td>¼</td></tr>\n<tr><td>Thirty-second note</td><td><b>Thirty-second rest</b></td><td>⅛</td></tr></table>\n<p>The <b>whole rest</b> is also used to show <b>a full measure of silence</b>, whatever the meter (3/4, 6/8…).</p>\n<p>Tip: the whole rest “hangs” like a heavy object; the half rest “sits” like a hat.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nM:4/4\nL:1/16\nK:C\nz16 | z8 z8 | z4 z4 z4 z4 | z2 z2 z2 z2 z2 z2 z2 z2 | z z z z z z z z z z z z z z z z |]",
+      "cap": "Whole rest, half rests, quarter rests, eighth rests, sixteenth rests."
+     }
+    ]
+   },
+   {
+    "id": "points-liaisons",
+    "t": "Dots and ties",
+    "title": null,
+    "k": "dotted note double dot tie slur phrase legato",
+    "html": "<p><b>A dot</b> placed after a note or rest adds <b>half of its value</b>:</p>\n<ul><li>dotted half note = 2 + 1 = <b>3 beats</b></li><li>dotted quarter note = 1 + ½ = <b>1½ beats</b></li><li>dotted eighth note = ½ + ¼ = <b>¾ of a beat</b> (often followed by a sixteenth note)</li></ul>\n<p><b>A double dot</b> adds half, then a quarter of the value: double-dotted quarter note = 1 + ½ + ¼ = 1¾ beats.</p>\n<p><b>A tie</b> connects two notes <b>of the same pitch</b>: you play the first one and hold it for the length of both. It lets a note last across a bar line.</p>\n<p><b>A slur</b> (or phrase mark) connects notes <b>of different pitches</b>: you play them smoothly connected (legato), without breaking the sound between them.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nM:4/4\nL:1/16\nK:C\nc6 c2 c4 c4 | c12 c4 | c4- c4 (c2 d2 e2 f2) |]",
+      "cap": "Dotted quarter + eighth, dotted half + quarter, then a tie and a slur."
+     }
+    ]
+   },
+   {
+    "id": "mesures-simples",
+    "t": "Simple meters",
+    "title": null,
+    "k": "time signature simple meter 2/4 3/4 4/4 common time cut time alla breve",
+    "html": "<p>The <b>time signature</b> is placed after the key signature. In a <b>simple meter</b>, each beat divides into <b>two</b>.</p>\n<ul><li>The <b>top</b> number = the <b>number of beats</b> per measure.</li>\n<li>The <b>bottom</b> number = the note value that gets <b>one beat</b>: 2 = half note, 4 = quarter note, 8 = eighth note.</li></ul>\n<table class=\"lt\"><tr><th>Meter</th><th>Beats</th><th>Beat unit</th></tr>\n<tr><td>2/4</td><td>2</td><td>quarter note (march)</td></tr>\n<tr><td>3/4</td><td>3</td><td>quarter note (waltz, minuet)</td></tr>\n<tr><td>4/4 or <b>C</b></td><td>4</td><td>quarter note (the most common)</td></tr>\n<tr><td>2/2 or <b>¢</b> (alla breve)</td><td>2</td><td>half note</td></tr></table>",
+    "ex": [
+     {
+      "abc": "X:1\nM:2/4\nL:1/4\nK:C\nc c | [M:3/4] c c c | [M:4/4] c c c c | [M:C|] c2 c2 |]",
+      "cap": "2/4, 3/4, 4/4 and alla breve."
+     }
+    ]
+   },
+   {
+    "id": "mesures-composees",
+    "t": "Compound meters",
+    "title": null,
+    "k": "compound meter 6/8 9/8 12/8 dotted quarter triple division",
+    "html": "<p>In a <b>compound meter</b>, each beat divides into <b>three</b>. The beat unit is a <b>dotted note</b> (most often the dotted quarter note).</p>\n<ul><li>Top number ÷ 3 = <b>number of beats</b>.</li><li>The bottom number shows the note value worth <b>one third of a beat</b> (8 = eighth note).</li></ul>\n<table class=\"lt\"><tr><th>Meter</th><th>Beats</th><th>Beat unit</th><th>Division</th></tr>\n<tr><td>6/8</td><td>2</td><td>dotted quarter note</td><td>3 eighth notes per beat</td></tr>\n<tr><td>9/8</td><td>3</td><td>dotted quarter note</td><td>3 eighth notes per beat</td></tr>\n<tr><td>12/8</td><td>4</td><td>dotted quarter note</td><td>3 eighth notes per beat</td></tr>\n<tr><td>6/4</td><td>2</td><td>dotted half note</td><td>3 quarter notes per beat</td></tr></table>\n<p>Watch out: 6/8 isn't “6 eighth-note beats” played fast, but <b>2 big beats</b> that swing: “<b>1</b> 2 3 <b>4</b> 5 6”.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nM:6/8\nL:1/8\nK:C\nc3 c3 | ccc ccc | c2c c2c | [M:9/8] c3 c3 c3 | [M:12/8] c3 c3 c3 c3 |]",
+      "cap": "6/8 (two dotted-quarter beats), 9/8 and 12/8."
+     }
+    ]
+   },
+   {
+    "id": "nolets",
+    "t": "Triplets and other tuplets",
+    "title": null,
+    "k": "triplet duplet quintuplet sextuplet tuplet irregular division",
+    "html": "<p>A <b>tuplet</b> divides a duration in an unusual way. It's shown by a number above the group.</p>\n<ul><li><b>Triplet</b> (3): <b>3 notes in the time of 2</b>. In 4/4, an eighth-note triplet fills one beat; a quarter-note triplet fills two beats.</li>\n<li><b>Duplet</b> (2): <b>2 notes in the time of 3</b>, used in compound meter.</li>\n<li><b>Quintuplet</b> (5), <b>sextuplet</b> (6)…: 5 or 6 notes in the time of 4.</li></ul>\n<p>To play a triplet well, think of the word “tri-pl-et” (or “straw-ber-ry”) spread evenly over the beat.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nM:4/4\nL:1/8\nK:C\nc c (3ccc c2 c2 | c2 c2 (3c2c2c2 |]",
+      "cap": "Eighth-note triplet (one beat), then quarter-note triplet (two beats)."
+     },
+     {
+      "abc": "X:1\nM:6/8\nL:1/8\nK:C\nccc (2cc | c3 c3 |]",
+      "cap": "Duplet in 6/8: two eighth notes in the time of three."
+     }
+    ]
+   },
+   {
+    "id": "syncope",
+    "t": "Syncopation and offbeats",
+    "title": null,
+    "k": "syncopation offbeat shifted accent",
+    "html": "<p>A <b>syncopation</b> is a note that starts on a <b>weak</b> part of the beat (or on a weak beat) and is held into the next <b>strong</b> part. The accent is shifted: you feel things are off. Classic example: eighth – quarter – eighth.</p>\n<p>An <b>offbeat</b> note is played on the weak part, after a rest on the strong part (eighth rest – eighth note). The note isn't held over.</p>\n<p>Tip: count the “ands” out loud (“1 and 2 and”) and place the note on the “and” without cutting it short.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nM:2/4\nL:1/8\nK:C\nc c2 c | c c2 c | z c z c | z c z c |]",
+      "cap": "Two syncopations (eighth – quarter – eighth), then offbeats."
+     }
+    ]
+   },
+   {
+    "id": "barres",
+    "t": "Bar lines",
+    "title": null,
+    "k": "bar line double bar final barline measure pickup anacrusis",
+    "html": "<p>A <b>bar line</b> is a vertical line that separates measures. Each measure contains exactly the number of beats shown by the <a href=\"#\" data-go=\"mesures-simples\">time signature</a>.</p>\n<ul><li><b>Double bar line</b> (two thin lines): end of a section, change of key signature or time signature.</li>\n<li><b>Final bar line</b> (thin line + thick line): end of the piece.</li>\n<li><b>Repeat bar lines</b> (with two dots): a passage to play twice (<a href=\"#\" data-go=\"reprises\">Repeat signs</a>).</li></ul>\n<p>A <b>pickup</b> (anacrusis) is an incomplete measure at the start of a piece (one or a few notes before the first downbeat). The last measure is then often shortened by the same amount.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nM:2/4\nL:1/4\nK:C\nc c | d d || e e |: f f :| g2 |]",
+      "cap": "Single bar line, double bar line, repeat bar lines, final bar line."
+     }
+    ]
+   },
+   {
+    "id": "tempo",
+    "t": "Tempo",
+    "title": null,
+    "k": "tempo bpm metronome allegro andante adagio largo presto moderato ritardando accelerando fermata",
+    "html": "<p><b>Tempo</b> is the speed of the pulse. It's shown in two ways:</p>\n<ul><li>with a <b>number of beats per minute</b> (♩ = 60: one quarter note per second), which you set on a metronome;</li>\n<li>with an <b>Italian term</b> (approximate values):</li></ul>\n<table class=\"lt\"><tr><th>Term</th><th>Meaning</th><th>About</th></tr>\n<tr><td>Largo, Lento</td><td>very slow</td><td>40–60</td></tr>\n<tr><td>Adagio</td><td>slow</td><td>60–76</td></tr>\n<tr><td>Andante</td><td>walking pace</td><td>76–108</td></tr>\n<tr><td>Moderato</td><td>moderate</td><td>108–120</td></tr>\n<tr><td>Allegro</td><td>fast, cheerful</td><td>120–168</td></tr>\n<tr><td>Presto</td><td>very fast</td><td>168–200</td></tr></table>\n<p><b>Tempo changes</b>: <i>accelerando</i> (accel., speeding up), <i>ritardando</i> or <i>rallentando</i> (rit., rall., slowing down), <i>a tempo</i> (back to the tempo), <i>rubato</i> (flexible tempo). The <b>fermata</b> (𝄐) holds a note or rest as long as the performer chooses.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nM:4/4\nL:1/4\nQ:\"Adagio\" 1/4=66\nK:C\nc d e f | g2 !fermata!g2 |]",
+      "cap": "Tempo marking and fermata."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "gammes",
+  "t": "Scales and keys",
+  "topics": [
+   {
+    "id": "tons-demitons",
+    "t": "Whole steps and half steps",
+    "title": null,
+    "k": "whole step half step whole tone semitone chromatic diatonic",
+    "html": "<p>The <b>half step</b> (semitone) is the smallest distance between two notes in our music: two neighboring keys on the piano. A <b>whole step</b> (whole tone) equals two half steps.</p>\n<p>Between natural notes, there's a whole step everywhere, <b>except between E–F and B–C</b>, where there's only a half step.</p>\n<ul><li><b>Diatonic half step</b>: two different letter names (E–F, C–D♭).</li>\n<li><b>Chromatic half step</b>: same letter name, altered (C–C♯).</li></ul>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\nC D E F G A B c |]\nw: C D E F G A B C",
+      "cap": "C to D (whole step), D to E (whole step), E to F (half step), F to G, G to A, A to B (whole steps), B to C (half step)."
+     }
+    ]
+   },
+   {
+    "id": "gamme-majeure",
+    "t": "The major scale",
+    "title": null,
+    "k": "major scale whole whole half step pattern structure",
+    "html": "<p>A <b>scale</b> is a series of stepwise notes that starts on one note (the <b>tonic</b>) and goes up to the same note an octave higher.</p>\n<p>The <b>major scale</b> always follows the same pattern:</p>\n<p class=\"formula\">W – W – H – W – W – W – H</p>\n<p>(W = whole step, H = half step). The half steps are between degrees 3–4 and 7–8. The C major scale uses only natural notes; for the others, you add sharps or flats to keep the pattern. These accidentals make up the <a href=\"#\" data-go=\"armures\">key signature</a>.</p>\n<p>A major scale is made of two identical <b>tetrachords</b> (W–W–H) separated by a whole step: C-D-E-F / G-A-B-C.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\nC D E F G A B c | c B A G F E D C |]",
+      "cap": "C major, ascending and descending."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:G\nG A B c d e f g |]\nw: G A B C D E F♯ G",
+      "cap": "G major: you need an F♯ to keep the half step between degrees 7 and 8."
+     }
+    ]
+   },
+   {
+    "id": "gammes-mineures",
+    "t": "Minor scales",
+    "title": null,
+    "k": "minor scale natural harmonic melodic leading tone",
+    "html": "<p class=\"lxtip\">New to this? Start with the step-by-step walkthrough: <a href=\"#\" data-go=\"relatives\">from a major scale to its three minor scales</a>.</p>\n<p>There are three forms of the minor scale. They all start the same way: <b>W – H – W – W</b> (the third is minor).</p>\n<ul><li><b>Natural minor</b>: W – H – W – W – H – W – W. Same notes as its <a href=\"#\" data-go=\"relatives\">relative major</a> (A minor = the notes of C major).</li>\n<li><b>Harmonic minor</b>: you <b>raise the 7<sup>th</sup> degree</b> by a half step. It becomes a <b>leading tone</b>, a half step below the tonic. Between degrees 6 and 7 you get an <b>augmented second</b> (a step and a half), which sounds very distinctive.</li>\n<li><b>Melodic minor</b>: going up, you <b>raise the 6<sup>th</sup> and 7<sup>th</sup> degrees</b>; going down, you go back to the natural form.</li></ul>\n<p>The harmonic form is mainly used to build chords (V and vii°); the melodic form, to write smooth melodies.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:Am\nA, B, C D E F G A |]\nw: A B C D E F G A",
+      "cap": "A natural minor."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:Am\nA, B, C D E F ^G A |]\nw: A B C D E F G♯ A",
+      "cap": "A harmonic minor: G♯ (leading tone)."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:Am\nA, B, C D E ^F ^G A | A =G =F E D C B, A, |]",
+      "cap": "A melodic minor: F♯ and G♯ going up, naturals going down."
+     }
+    ]
+   },
+   {
+    "id": "degres",
+    "t": "Scale degrees",
+    "title": null,
+    "k": "scale degrees tonic supertonic mediant subdominant dominant submediant leading tone subtonic roman numerals",
+    "html": "<p>Each note of the scale is a <b>degree</b>, numbered with Roman numerals and given a name that describes its role:</p>\n<table class=\"lt\"><tr><th>Degree</th><th>Name</th><th>In C major</th></tr>\n<tr><td>I</td><td><b>Tonic</b>: the resting note, the one that gives the key its name</td><td>C</td></tr>\n<tr><td>II</td><td>Supertonic</td><td>D</td></tr>\n<tr><td>III</td><td>Mediant (decides major or minor)</td><td>E</td></tr>\n<tr><td>IV</td><td>Subdominant</td><td>F</td></tr>\n<tr><td>V</td><td><b>Dominant</b>: the most important degree after the tonic</td><td>G</td></tr>\n<tr><td>VI</td><td>Submediant</td><td>A</td></tr>\n<tr><td>VII</td><td><b>Leading tone</b> (a half step below the tonic); <b>subtonic</b> if it's a whole step below (natural minor)</td><td>B</td></tr></table>\n<p>The leading tone “pulls” your ear toward the tonic: that's what gives the feeling of an ending.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/2\nK:C\nC D E F G A B c |]\nw: I II III IV V VI VII I",
+      "cap": "The degrees in C major."
+     }
+    ]
+   },
+   {
+    "id": "armures",
+    "t": "Key signatures",
+    "title": null,
+    "k": "key signature sharps flats order find key",
+    "html": "<p>The <b>key signature</b> groups, at the start of each staff, the sharps or flats of the key. They're always written <b>in the same order</b>:</p>\n<p class=\"formula\">Sharps: F – C – G – D – A – E – B<br>Flats: B – E – A – D – G – C – F</p>\n<p>(The order of flats is the order of sharps backwards.) To remember it all at once, see <a href=\"#\" data-go=\"truc-armures\">the Boss trick</a>.</p>\n<p><b>Finding the major key</b>:</p>\n<ul><li>with sharps: the tonic is <b>a half step above the last sharp</b> (last sharp C♯ → D major);</li>\n<li>with flats: the tonic is <b>the second-to-last flat</b> (B♭, E♭ → E♭ major). Exception to remember: one flat = F major;</li>\n<li>no accidentals: C major.</li></ul>\n<p>Each key signature also matches a minor key, its <a href=\"#\" data-go=\"relatives\">relative</a>, a minor third lower. To tell which one, look at the melody: the last note, the final bass note and the presence of the leading tone (an accidental) give away the minor key.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:G\nG4 | [K:D] D4 | [K:A] A4 | [K:E] E4 | [K:B] B4 |]\nw: G D A E B",
+      "cap": "Key signatures with sharps: G, D, A, E, B major (1 to 5 sharps)."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:F\nF4 | [K:Bb] B4 | [K:Eb] E4 | [K:Ab] A4 | [K:Db] D4 |]\nw: F B♭ E♭ A♭ D♭",
+      "cap": "Key signatures with flats: F, B♭, E♭, A♭, D♭ major (1 to 5 flats)."
+     }
+    ]
+   },
+   {
+    "id": "truc-armures",
+    "t": "The Boss trick",
+    "title": "The Boss trick: find a key signature at a glance",
+    "k": "boss trick key signature sharps flats order row key number accidentals find relative",
+    "html": "<p>The Boss trick: all you need to remember is <b>two rows of names</b>. Each row gives you both <b>the order of the accidentals</b> and <b>the names of the keys</b>, and the number under each name tells you <b>how many accidentals</b> that major key has.</p>\n<div class=\"trick-static\">\n<div class=\"tsrow\"><span class=\"tslab\">Sharps ♯</span><span>F♯<i>6</i></span><span>C♯<i>7</i></span><span>G<i>1</i></span><span>D<i>2</i></span><span>A<i>3</i></span><span>E<i>4</i></span><span>B<i>5</i></span></div>\n<div class=\"tsrow\"><span class=\"tslab\">Flats ♭</span><span>B♭<i>2</i></span><span>E♭<i>3</i></span><span>A♭<i>4</i></span><span>D♭<i>5</i></span><span>G♭<i>6</i></span><span>C♭<i>7</i></span><span>F<i>1</i></span></div>\n</div>\n<p><b>Reading the row from left to right</b> gives the order of the accidentals: <b>F, C, G, D, A, E, B</b> for sharps and <b>B, E, A, D, G, C, F</b> for flats.</p>\n<p><b>From the key to the key signature</b>: find the key in its row; the number underneath tells you how many accidentals there are. Then take them <b>from the beginning of the row</b>.<br>\n<i>Example</i>: D major → number <b>2</b> → the first 2 in the sharps row: <b>F♯ and C♯</b>.</p>\n<p><b>From the key signature to the key</b>: count the accidentals on the score and look for that number in the right row.<br>\n<i>Example</i>: 4 flats → the <b>4</b> is under <b>A♭</b>: you're in <b>A♭ major</b>… or in its <a href=\"#\" data-go=\"relatives\">relative</a>, <b>F minor</b> (a minor third lower).</p>\n<p>No accidentals: C major (or A minor). Try it: click a key below.</p>\n<div data-widget=\"armtrick\"></div>",
+    "ex": []
+   },
+   {
+    "id": "quintes",
+    "t": "The circle of fifths",
+    "title": null,
+    "k": "circle of fifths cycle keys closely related neighboring",
+    "html": "<p>Going <b>up by fifths</b> from C, you add one sharp with each key; going down by fifths (or up by fourths), you add one flat.</p>\n<table class=\"lt\"><tr><th>Accidentals</th><th>Major</th><th>Relative minor</th></tr>\n<tr><td>none</td><td>C</td><td>A</td></tr>\n<tr><td>1♯ (F)</td><td>G</td><td>E</td></tr><tr><td>2♯</td><td>D</td><td>B</td></tr><tr><td>3♯</td><td>A</td><td>F♯</td></tr>\n<tr><td>4♯</td><td>E</td><td>C♯</td></tr><tr><td>5♯</td><td>B</td><td>G♯</td></tr><tr><td>6♯</td><td>F♯</td><td>D♯</td></tr><tr><td>7♯</td><td>C♯</td><td>A♯</td></tr>\n<tr><td>1♭ (B)</td><td>F</td><td>D</td></tr><tr><td>2♭</td><td>B♭</td><td>G</td></tr><tr><td>3♭</td><td>E♭</td><td>C</td></tr>\n<tr><td>4♭</td><td>A♭</td><td>F</td></tr><tr><td>5♭</td><td>D♭</td><td>B♭</td></tr><tr><td>6♭</td><td>G♭</td><td>E♭</td></tr><tr><td>7♭</td><td>C♭</td><td>A♭</td></tr></table>\n<p><b>Neighboring</b> (closely related) keys, one accidental apart, share many notes: music modulates between them easily. F♯ major and G♭ major are enharmonic, as are C♯/D♭ and B/C♭.</p>",
+    "ex": []
+   },
+   {
+    "id": "relatives",
+    "t": "Relative keys and minor scales",
+    "title": "Relative keys: from major to minor",
+    "k": "relative minor natural harmonic melodic sixth degree leading tone key signature",
+    "html": "<p>Every major scale has a minor “sister” that uses <b>exactly the same notes</b> and therefore the <b>same key signature</b>: its <b>relative minor</b>. To find it, just start from the <b>6<sup>th</sup> degree</b> of the major scale.</p>\n<p>Let's go through it with C major, step by step.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\nC D E F G A B c |]\nw: 1 2 3 4 5 6 7 8",
+      "cap": "C major: no accidentals. The 6<sup>th</sup> degree is circled."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:Am\nA, B, C D E F G A |]\nw: A B C D E F G A",
+      "cap": "A natural minor: same notes as C major, same key signature (no accidentals). C major and A minor are <b>relative keys</b>. Listen: the color is darker, but the ending lacks drive, because G is a whole step away from A."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:Am\nA, B, C D E F ^G A |]\nw: A B C D E F G♯ A",
+      "cap": "G♯ is now a half step below A: it's the <b>leading tone</b>, which “pulls” toward the tonic. This form is used to build chords (V becomes major: E–G♯–B). But between F and G♯ there's a big leap of <b>a step and a half</b> (augmented second), with a slightly exotic flavor."
+     },
+     {
+      "abc": "X:1\nL:1/4\n%%stretchlast 1\nK:Am\nA, B, C D E ^F ^G A |\nw: A B C D E F♯ G♯ A\nA =G =F E D C B, A, |]\nw: A G F E D C B A",
+      "cap": "Going <b>up</b>, F♯ and G♯ make the melody flow smoothly to the tonic. Going <b>down</b>, you no longer need the leading tone: you go back to the natural form (G and F circled)."
+     }
+    ]
+   },
+   {
+    "id": "modes",
+    "t": "Modes",
+    "title": null,
+    "k": "modes ionian dorian phrygian lydian mixolydian aeolian locrian",
+    "html": "<p>A <b>mode</b> is a 7-note scale defined by where its half steps fall. By playing the white keys of the piano starting from each note, you get the 7 modes:</p>\n<table class=\"lt\"><tr><th>Mode</th><th>On the white keys</th><th>Color</th></tr>\n<tr><td>Ionian</td><td>C to C</td><td>= major</td></tr>\n<tr><td>Dorian</td><td>D to D</td><td>minor with a major 6<sup>th</sup></td></tr>\n<tr><td>Phrygian</td><td>E to E</td><td>minor with a minor 2<sup>nd</sup></td></tr>\n<tr><td>Lydian</td><td>F to F</td><td>major with an augmented 4<sup>th</sup></td></tr>\n<tr><td>Mixolydian</td><td>G to G</td><td>major with a minor 7<sup>th</sup></td></tr>\n<tr><td>Aeolian</td><td>A to A</td><td>= natural minor</td></tr>\n<tr><td>Locrian</td><td>B to B</td><td>minor 2<sup>nd</sup> and diminished 5<sup>th</sup></td></tr></table>\n<p>You can hear them in Gregorian chant, folk music, jazz, rock and film music.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\nD E F G A B c d |]\nw: D E F G A B C D",
+      "cap": "Mode on D (Dorian)."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:C\nG A B c d e f g |]\nw: G A B C D E F G",
+      "cap": "Mode on G (Mixolydian): the 7th is an F natural."
+     }
+    ]
+   },
+   {
+    "id": "autres-gammes",
+    "t": "Other scales",
+    "title": null,
+    "k": "pentatonic chromatic blues whole tone scale",
+    "html": "<ul><li><b>Major pentatonic</b> (5 notes, no half steps): degrees 1, 2, 3, 5, 6 (C D E G A). Very common in folk and popular music.</li>\n<li><b>Minor pentatonic</b>: A C D E G (degrees 1, ♭3, 4, 5, ♭7).</li>\n<li><b>Blues scale</b>: the minor pentatonic + the “blue note” (diminished fifth, ♭5): A C D E♭ E G.</li>\n<li><b>Chromatic scale</b>: all 12 half steps. It's usually written with sharps going up and flats going down.</li>\n<li><b>Whole-tone scale</b>: 6 notes separated by whole steps (C D E F♯ G♯ A♯). A floating color, a favorite of Debussy.</li></ul>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\nC D E G A c |]\nw: C D E G A C",
+      "cap": "C major pentatonic."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:C\nA, C D _E =E G A |]\nw: A C D E♭ E G A",
+      "cap": "A blues scale."
+     },
+     {
+      "abc": "X:1\nL:1/8\nK:C\nC ^C D ^D E F ^F G ^G A ^A B c |]",
+      "cap": "Ascending chromatic scale."
+     }
+    ]
+   }
+  ]
+ }
+]

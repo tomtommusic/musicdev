@@ -1,0 +1,321 @@
+291 73 320
+ES dm | @aria-label: Modules
+ES dm | Développement de l'oreille musicale
+E  dm | Solfège
+ES dm | Chaque exercice est généré au hasard selon le réglage choisi. Le bouton
+ES dm | ? Explications
+E  dm | explique tout élément de la page.
+ES dm | @title: Clique ensuite sur l'élément qui te cause problème : son explication s'ouvre dans la bibliothèque
+ES dm | Explications
+ES dm | @aria-label: Partition
+ES dm | 2 mesures
+E  dm | Tempo
+ES dm | @aria-label: Réglages du module
+ES dm | Réussites
+ES dm | Raccourcis : 2 à 6 = durées (double … ronde) · . = point · 0 = silence · Retour arrière = effacer · ↑ ↓ = déplacer la dernière note · + − = = dièse, bémol, bécarre.
+E  dm | Méthode de travail
+ES dm | Conseils pour réussir ce module
+E  dm | : leaps often land on notes of the tonic chord; the rest mostly moves by step.
+E  dm:set | do grave
+E  dm:set | ré grave
+E  dm:set | mi grave
+E  dm:set | fa grave
+E  dm:set | sol grave
+E  dm:set | la grave
+E  dm:set | si grave
+ES dm:set | do aigu
+ES dm:set | ré aigu
+ES dm:set | mi aigu
+ES dm:set | fa aigu
+ES dm:set | sol aigu
+ES dm:set | la aigu
+ES dm:set | si aigu
+ES dm:set | do suraigu
+ES dm:set | 2 croches
+ES dm:set | 4 doubles
+ES dm:set | 3 croches
+ES dm:set | 6 doubles
+ES dr | Raccourcis : 2 à 6 = durées (double … ronde) · . = point · 0 = silence · Retour arrière = effacer · Entrée = ajouter la figure.
+E  dr | : how many sounds in this beat? One (quarter note), two (eighth notes), four (sixteenths)…
+ES iv | montant
+E  iv | , listen to the other intervals from the same note to compare.
+ES pc:set | 1 s (rapide)
+ES pc:set | 3 s (lent)
+ES ln | aucune
+E  ln | 20 notes
+E  ln | Note
+E  ln | Start from landmark notes
+E  ln | line. Find the other notes from there.
+E  ln | : naming a note in under a second is what makes sight-reading possible.
+E  ln:set | Notes
+ES lm | 4 mesures
+E  lm | Keep the tempo
+E  lm | Read one note ahead.
+E  lr | : "1 and 2 and" for eighth notes, "1 e & a" for sixteenth notes.
+E  lr | Hold long notes
+E  lr | for their full value; rests count just as much as notes.
+E  so | , then the first note with
+E  so | ▶ 1st note
+E  la | Find the first note
+E  la | ("I go up a third") rather than note by note.
+E  bt | Note names
+E  bt | You read a score like a text: left to right, line after line. Before you play the first note, take a few seconds to spot the information placed at the beginning.
+E  bt | : the 5 lines the notes are written on (
+E  bt | , at the very beginning: it sets the names of the notes (
+E  bt | : how many beats per measure and which note value gets one beat (
+E  bt | The tempo marking
+E  bt | The notes and rests
+E  bt | Note values
+E  bt | Title, tempo, treble clef, key signature (one sharp: G major), 3/4 time, dynamics, slur, rest, staccato and repeat bar lines.
+ES tq | tous
+E  mt | @aria-label: Tempo
+ES mt | mesures, puis
+ES mt | mesures en silence.
+E  tq:cfg | Intervalles, Qualité des accords, Majeur ou mineur, Cadences, Rythmes
+E  tq:q0a | @aria-label: Question 1 (répondue)
+E  tq:q1a | @aria-label: Question 2 (répondue)
+E  tq:q4a | @aria-label: Question 5 (répondue)
+E  tq:q6a | @aria-label: Question 7 (répondue)
+E  tq:q7a | @aria-label: Question 8 (répondue)
+E  tq:q8a | @aria-label: Question 9 (répondue)
+E  tq:q9a | @aria-label: Question 10 (répondue)
+E  tq:q10a | @aria-label: Question 11 (répondue)
+E  tq:q11a | @aria-label: Question 12 (répondue)
+E  tq:q14a | @aria-label: Question 15 (répondue)
+E  tq:q15a | @aria-label: Question 16 (répondue)
+E  tq:q16a | @aria-label: Question 17 (répondue)
+E  tq:q18a | @aria-label: Question 19 (répondue)
+E  tq:q19a | @aria-label: Question 20 (répondue)
+E  tq:q20a | @aria-label: Question 21 (répondue)
+E  tq:q21a | @aria-label: Question 22 (répondue)
+E  tq:q22a | @aria-label: Question 23 (répondue)
+E  tq:q23a | @aria-label: Question 24 (répondue)
+E  tq:q24a | @aria-label: Question 25 (répondue)
+E  tq:q25a | @aria-label: Question 26 (répondue)
+E  tq:q26a | @aria-label: Question 27 (répondue)
+E  tq:q27a | @aria-label: Question 28 (répondue)
+E  tq:q29a | @aria-label: Question 30 (répondue)
+E  tq:q30a | @aria-label: Question 31 (répondue)
+E  tq:q31a | @aria-label: Question 32 (répondue)
+E  tq:q33a | @aria-label: Question 34 (répondue)
+E  tq:q34 | Qualité…
+E  tq:q35a | @aria-label: Question 36 (répondue)
+E  tq:q37a | @aria-label: Question 38 (répondue)
+E  tq:q38a | @aria-label: Question 39 (répondue)
+E  tq:q39a | @aria-label: Question 40 (répondue)
+E  tq:q40a | @aria-label: Question 41 (répondue)
+ES tq:q41 | Touche la portée pour ajouter une note (toutes empilées). Touche une note posée pour l'enlever.
+E  tq:q43a | @aria-label: Question 44 (répondue)
+E  tq:q44a | @aria-label: Question 45 (répondue)
+E  tq:q45a | @aria-label: Question 46 (répondue)
+E  tq:q46 | En Do mineur, quel accord est construit sur le 4e degré (iv) ? (gamme mineure harmonique)
+E  tq:q46a | @aria-label: Question 47 (répondue)
+E  tq:q47a | @aria-label: Question 48 (répondue)
+E  tq:q48a | @aria-label: Question 49 (répondue)
+E  tq:q49a | @aria-label: Question 50 (répondue)
+E  tq:q50a | @aria-label: Question 51 (répondue)
+E  tq:q51 | Modéré
+E  tq:q51 | Lent
+ES tq:q51 | Très rapide
+ES tq:q51 | Rapide, joyeux
+E  tq:q51a | @aria-label: Question 52 (répondue)
+E  tq:q52a | @aria-label: Question 53 (répondue)
+E  tq:q53a | @aria-label: Question 54 (répondue)
+E  tq:q54a | @aria-label: Question 55 (répondue)
+E  tq:q55a | @aria-label: Question 56 (répondue)
+E  tq:q56a | @aria-label: Question 57 (répondue)
+E  tq:q57a | @aria-label: Question 58 (répondue)
+E  tq:q58a | @aria-label: Question 59 (répondue)
+E  tq:q59a | @aria-label: Question 60 (répondue)
+E  bt:portee | The higher a note sits on the staff, the higher it sounds. A note can be
+E  bt:portee | The staff alone doesn't tell you which notes are written: the
+E  bt:cles | gives the name of one line; all the other notes are worked out from it.
+E  bt:cles | line): the note on the 2
+E  bt:cles | line): the note on the 4
+E  bt:cles | below middle C. Used for low voices, double bass, bassoon, trombone, the piano's left hand…
+E  bt:cles | Note names ›
+E  bt:noms-notes | 7 note names
+E  bt:noms-notes | In English-speaking countries and in jazz, notes are named with
+E  bt:noms-notes | . In French and many other languages, they use solfège syllables instead:
+E  bt:lignes-sup | When a note goes past the staff, you draw
+E  bt:lignes-sup | ‹ Note names
+E  bt:alterations | changes the pitch of a note:
+E  bt:alterations | : raises the note by a half step
+E  bt:alterations | : lowers the note by a half step
+E  bt:alterations | : cancels the sharp or flat, the note becomes natural again
+E  bt:alterations | double sharp
+E  bt:alterations | double flat
+E  bt:alterations | Placed in front of a note (an
+E  bt:alterations | in the strict sense), they last until the end of the measure, for that note in that octave only.
+E  bt:alterations | Sharp, flat, natural, double sharp, double flat.
+E  bt:alterations | Enharmonic notes: same sound, different name.
+E  bt:transpositeurs | Some instruments read one note but make another one sound: these are
+E  bt:transpositeurs | setting takes this transposition into account: you read the written note for your instrument and the mic compares it with the real sound.
+E  bt:pulsation | Note values ›
+E  bt:figures-notes | The shape of a note shows its
+E  bt:figures-notes | . Each note value is worth half of the one before:
+E  bt:figures-notes | Value (in quarter notes)
+E  bt:figures-notes | Whole note
+E  bt:figures-notes | 2 half notes
+E  bt:figures-notes | Half note
+E  bt:figures-notes | 2 quarter notes
+E  bt:figures-notes | Quarter note
+E  bt:figures-notes | 2 eighth notes
+E  bt:figures-notes | Eighth note
+E  bt:figures-notes | 2 sixteenth notes
+E  bt:figures-notes | Sixteenth note
+E  bt:figures-notes | 2 thirty-second notes
+E  bt:figures-notes | Thirty-second note
+E  bt:figures-notes | A note is made of a
+E  bt:figures-notes | . When several eighth notes follow each other within the same beat, the flags are replaced by a
+E  bt:figures-notes | Stem: up, on the right of the notehead, if the note is below the 3
+E  bt:figures-notes | Whole note, 2 half notes, 4 quarter notes, 8 eighth notes: each measure lasts 4 beats.
+E  bt:figures-notes | Eighth notes and sixteenth notes grouped by beat with beams.
+E  bt:silences | Each note value has a matching
+E  bt:silences | Duration (in quarter notes)
+E  bt:silences | ‹ Note values
+E  bt:points-liaisons | placed after a note or rest adds
+E  bt:points-liaisons | dotted half note = 2 + 1 =
+E  bt:points-liaisons | dotted quarter note = 1 + ½ =
+E  bt:points-liaisons | dotted eighth note = ½ + ¼ =
+E  bt:points-liaisons | (often followed by a sixteenth note)
+E  bt:points-liaisons | A double dot
+E  bt:points-liaisons | adds half, then a quarter of the value: double-dotted quarter note = 1 + ½ + ¼ = 1¾ beats.
+E  bt:points-liaisons | connects two notes
+E  bt:points-liaisons | : you play the first one and hold it for the length of both. It lets a note last across a bar line.
+E  bt:points-liaisons | (or phrase mark) connects notes
+E  bt:mesures-simples | number = the note value that gets
+E  bt:mesures-simples | : 2 = half note, 4 = quarter note, 8 = eighth note.
+E  bt:mesures-simples | quarter note (march)
+E  bt:mesures-simples | quarter note (waltz, minuet)
+E  bt:mesures-simples | quarter note (the most common)
+E  bt:mesures-simples | half note
+E  bt:mesures-composees | dotted note
+E  bt:mesures-composees | (most often the dotted quarter note).
+E  bt:mesures-composees | The bottom number shows the note value worth
+E  bt:mesures-composees | (8 = eighth note).
+E  bt:mesures-composees | dotted quarter note
+E  bt:mesures-composees | 3 eighth notes per beat
+E  bt:mesures-composees | dotted half note
+E  bt:mesures-composees | 3 quarter notes per beat
+E  bt:mesures-composees | Watch out: 6/8 isn't “6 eighth-note beats” played fast, but
+E  bt:nolets | 3 notes in the time of 2
+E  bt:nolets | . In 4/4, an eighth-note triplet fills one beat; a quarter-note triplet fills two beats.
+E  bt:nolets | 2 notes in the time of 3
+E  bt:nolets | (6)…: 5 or 6 notes in the time of 4.
+E  bt:nolets | To play a triplet well, think of the word “tri-pl-et” (or “straw-ber-ry”) spread evenly over the beat.
+E  bt:nolets | Eighth-note triplet (one beat), then quarter-note triplet (two beats).
+E  bt:nolets | Duplet in 6/8: two eighth notes in the time of three.
+E  bt:syncope | is a note that starts on a
+E  bt:syncope | note is played on the weak part, after a rest on the strong part (eighth rest – eighth note). The note isn't held over.
+E  bt:syncope | Tip: count the “ands” out loud (“1 and 2 and”) and place the note on the “and” without cutting it short.
+E  bt:barres | Double bar line
+E  bt:barres | (anacrusis) is an incomplete measure at the start of a piece (one or a few notes before the first downbeat). The last measure is then often shortened by the same amount.
+E  bt:barres | Single bar line, double bar line, repeat bar lines, final bar line.
+E  bt:barres | Tempo ›
+E  bt:tempo | (♩ = 60: one quarter note per second), which you set on a metronome;
+E  bt:tempo | Tempo changes
+E  bt:tempo | a tempo
+E  bt:tempo | (back to the tempo),
+E  bt:tempo | (flexible tempo). The
+E  bt:tempo | (𝄐) holds a note or rest as long as the performer chooses.
+E  bt:tempo | Tempo marking and fermata.
+E  bt:tons-demitons | (semitone) is the smallest distance between two notes in our music: two neighboring keys on the piano. A
+E  bt:tons-demitons | Between natural notes, there's a whole step everywhere,
+E  bt:tons-demitons | ‹ Tempo
+E  bt:gamme-majeure | is a series of stepwise notes that starts on one note (the
+E  bt:gamme-majeure | ) and goes up to the same note an octave higher.
+E  bt:gamme-majeure | (W = whole step, H = half step). The half steps are between degrees 3–4 and 7–8. The C major scale uses only natural notes; for the others, you add sharps or flats to keep the pattern. These accidentals make up the
+E  bt:gammes-mineures | : W – H – W – W – H – W – W. Same notes as its
+E  bt:gammes-mineures | (A minor = the notes of C major).
+E  bt:degres | Each note of the scale is a
+E  bt:degres | : the resting note, the one that gives the key its name
+E  bt:armures | , a minor third lower. To tell which one, look at the melody: the last note, the final bass note and the presence of the leading tone (an accidental) give away the minor key.
+ES bt:truc-armures | : 2 dièses — les 2 premiers de la rangée :
+ES bt:truc-armures | (même armure).
+E  bt:quintes | (closely related) keys, one accidental apart, share many notes: music modulates between them easily. F♯ major and G♭ major are enharmonic, as are C♯/D♭ and B/C♭.
+E  bt:relatives | exactly the same notes
+E  bt:relatives | 1. La gamme de do majeur.
+ES bt:relatives | On repère sa 6
+E  bt:relatives | note :
+E  bt:relatives | On repart de ce
+E  bt:relatives | en gardant
+E  bt:relatives | les mêmes notes
+E  bt:relatives | 2. La gamme mineure naturelle
+E  bt:relatives | (aussi appelée gamme mineure
+E  bt:relatives | A natural minor: same notes as C major, same key signature (no accidentals). C major and A minor are
+ES bt:relatives | hausse le 7
+E  bt:relatives | degré
+ES bt:relatives | d'un demi-ton : sol devient
+E  bt:relatives | 3. La gamme mineure harmonique.
+ES bt:relatives | Pour adoucir ce saut, on
+ES bt:relatives | hausse aussi le 6
+ES bt:relatives | en montant : fa devient
+E  bt:relatives | 4. La gamme mineure mélodique.
+E  bt:modes | is a 7-note scale defined by where its half steps fall. By playing the white keys of the piano starting from each note, you get the 7 modes:
+E  bt:autres-gammes | (5 notes, no half steps): degrees 1, 2, 3, 5, 6 (C D E G A). Very common in folk and popular music.
+E  bt:autres-gammes | : the minor pentatonic + the “blue note” (diminished fifth, ♭5): A C D E♭ E G.
+E  bt:autres-gammes | : 6 notes separated by whole steps (C D E F♯ G♯ A♯). A floating color, a favorite of Debussy.
+E  bt:intervalles-def | is the distance between two notes.
+E  bt:intervalles-def | : the notes are played one after the other (going up or down).
+E  bt:intervalles-def | : the notes are played at the same time.
+E  bt:intervalles-def | is found by counting the note names,
+E  bt:intervalles-def | : C → E = C, D, E = 3 notes = a
+E  bt:renversement-intervalles | an interval, you move the bottom note up an octave (or the top note down an octave). C–E becomes E–C.
+E  bt:reperes | Frère Jacques; Happy Birthday (between the 2
+E  bt:reperes | notes)
+E  bt:reperes | Bridal Chorus (Wagner, “Here Comes the Bride”); La Marseillaise
+E  bt:reperes | note
+E  bt:reperes | : place the notes in a scale (C–G: “1 to 5”), listen to the color (thirds are “sweet,” seconds “rub,” the tritone sounds “uneasy”), and sing the interval in your head before answering. The
+E  bt:reperes | module lets you hear each interval again from the same starting note so you can compare.
+E  bt:triades | is a chord of three notes stacked in
+E  bt:accords-degres | When you build a triad on each note of the scale (using only the notes of the key), you get the
+E  bt:renversements | when its root is in the bass. If another note is in the bass, the chord is
+E  bt:renversements | . What matters is the lowest note, not the order of the other notes.
+E  bt:renversements | Note in the bass
+E  bt:notes-etrangeres | (notes that don't belong to the chord) connect and color the line:
+E  bt:notes-etrangeres | : a note from the previous chord is held over the new chord, then moves down (preparation – dissonance – resolution).
+E  bt:notes-etrangeres | : a note from the next chord arrives a little early.
+E  bt:notes-etrangeres | : a held note (often in the bass) while the chords change.
+E  bt:nuances | (sforzando): sudden accent on one note;
+E  bt:articulations | show how to attack and connect the notes:
+E  bt:articulations | detached, short note
+E  bt:articulations | note held for its full value, slightly stressed
+E  bt:articulations | curve over several notes
+E  bt:articulations | connected notes, without a break
+E  bt:ornements | (tr): fast alternation between the written note and the note just above it.
+E  bt:ornements | : written note – neighboring note – written note, very fast. Going down: the mordent (the
+E  bt:ornements | pincé
+E  bt:ornements | (∽): upper note – written note – lower note – written note.
+E  bt:ornements | (grace note): it takes part of the main note's value, on the beat.
+E  bt:ornements | (grace note with a slash): played very quickly, just before the main note.
+E  bt:ornements | How exactly they're played depends on the period and style: in Baroque music, for example, the trill often starts on the upper note.
+ S tq:q50 | Très lent
+ S bt:portee | está formado por
+ S bt:portee | Cuanto más arriba está una nota en el pentagrama, más aguda es. Una nota puede estar
+ S bt:portee | El pentagrama por sí solo no dice qué notas están escritas: es la
+ S bt:grand-systeme | está justo entre los dos pentagramas: una línea adicional debajo de la clave de sol, o una línea adicional encima de la clave de fa. Es la misma tecla del piano.
+ S bt:clavier | están agrupadas de
+ S bt:clavier | Dos teclas vecinas (blanca o negra) están a un
+ S bt:transpositeurs | . Se dice que un instrumento está «en si♭» cuando el do escrito suena si♭.
+ S bt:figures-notes | La nota está formada por una
+ S bt:figures-notes | Plica: hacia arriba, a la derecha de la cabeza, si la nota está por debajo de la 3.
+ S bt:silences | A cada figura de nota le corresponde un
+ S bt:silences | Truco: el silencio de redonda «cuelga» como un objeto pesado; el de blanca está «apoyado» como un sombrero.
+ S bt:points-liaisons | colocado después de una nota o de un silencio le añade
+ S bt:points-liaisons | une dos notas
+ S bt:points-liaisons | (o de fraseo) une notas
+ S bt:gamme-majeure | (T = tono, ½ = semitono). Los semitonos están entre los grados 3–4 y 7–8. La escala de do mayor solo usa notas naturales; para las demás, se añaden sostenidos o bemoles para respetar el modelo. Esas alteraciones forman l
+ S bt:gamme-majeure | Una escala mayor está formada por dos
+ S bt:degres | si está a un tono (menor natural)
+ S bt:armures | con sostenidos: la tónica está
+ S bt:truc-armures | está bajo
+ S bt:relatives | grado está rodeado con un círculo.
+ S bt:relatives | . Escucha: el color es más oscuro, pero al final le falta impulso, porque el sol está a un tono entero del la.
+ S bt:relatives | El sol♯ está ahora a un semitono del la: es la
+ S bt:reperes | Martinillo (Frère Jacques); Cumpleaños feliz (entre la 2.
+ S bt:reperes | Estrellita, ¿dónde estás? (Ah ! vous dirai-je, maman); Star Wars (tema principal, 2.
+ S bt:renversements | Un acorde está en
+ S bt:renversements | cuando su fundamental está en el bajo. Si otra nota está en el bajo, el acorde está
+ S bt:notes-etrangeres | : une dos notas del acorde por movimiento conjunto (do–
+ S bt:reprises | Antes de leer, identifica el recorrido: dónde están las repeticiones, las casillas, el signo y la coda.

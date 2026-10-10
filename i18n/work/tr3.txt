@@ -1,0 +1,268 @@
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+held on the dominant
+no accidentals
+augmented
+augmented
+dotted half note
+flat
+flats
+alto clef (C clef on the 3rd line)
+bass clef
+treble clef
+dotted eighth note
+=
+diminished
+diminished
+sharp
+sharps
+sharps and flats
+C
+C♯
+=
+=
+accelerating
+and
+e.g. 1 ½
+e.g. 2 or ½
+e.g. D major
+e.g. G major
+e.g. F♯
+e.g. F♯, B♭, E
+e.g. E
+e.g. E minor
+e.g. D♭
+e.g. G
+e.g. G, F♯
+extremely soft
+extremely loud
+F
+F♯
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+staff image
+=
+=
+A
+the {0} ({1})
+A♭
+A♯
+the rhythm you heard
+both chords in root position
+measures, up to
+E
+E♭
+moderate
+melodic
+dotted quarter note
+written note
+or press the space bar
+dotted
+staff + {0} ledger line{1}
+staff only
+=
+=
+=
+=
+=
+=
+=
+dotted whole note
+D
+D♭
+D♯
+=
+B
+B♭
+G
+treble and bass
+G♭
+G♯
+=
+=
+=
+very soft
+very loud
+very slow
+very fast
+a half
+one of the chords is inverted
+a number
+a quarter
+an Italian term
+=
+=
+=
+=
+=
+=
+=
+=
+=
+{0} (or {1})
+{0} ({1} key)
+{0} ({1} in the bass)
+{0} (in any octave)
+{0} / {1} strings in tune
+=
+=
+{0}: the accidental goes in front of the note
+{0} Hz · target {1} Hz
+{0} to choose from
+{0} and a half
+{0} and {1}
+{0} of {3} note value{1} correct
+{0} of {3} measure{1} correct. Compare with the answer at the top.
+{0} notes
+{0} of {3} note{1} correct and on time
+{0} of {3} note{1} correct
+{0} of {2} note{1} on time
+{0} topic{1}
+{0} for the next note
+{0} for the next note ({1} key)
+{0} beats/min
+{0} random questions · level {1} · {2}
+{0} questions · level {1} · Result: ______ / {2}
+{0} answers
+{0} result{1} for "{2}"
+{0} s per chord
+{0} beats (1 measure of {1})
+=
+{0}. Listen to the progression, then choose the right answer (keys 1 to {1}). Tip: listen to the bass first.
+"In tune" only lights up if the note stays in the chosen zone for a short moment. With an instrument selected, the tuner targets the closest string (Auto) or the tuning peg you tap. Apprentice mode guides you one string at a time and warns you when a string is way too tight. Gaps are always measured against the exact note of the string: no hidden tolerance.
+± 1 cent (very strict)
+± 2 cents (strict)
+± 3 cents
+· Enter = add the note value.
+· click on the staff to add it
+· click on the staff to place the rest
+· click on the staff at the pitch you want
+· {0} correct pitch{1} with rhythm to fix (in orange)
+· {0} too many
+· {0} extra tap{1}
+· {0} but off time
+· {0} questions · level {1}
+· listen {0}/{1}
+· ↑ ↓ = move the last note · + − = = sharp, flat, natural.
+½ step lower
+Needs work
+Your turn!
+Listening
+Listening (in the app only)
+Listen to this short motif. Is it in major or minor?
+Listen to this scale. Is it major or minor?
+Listen to each chord
+Listen to two notes and name the interval: ascending, descending or harmonic. After you answer, compare with the other intervals from the same note.
+Listen to the chord (arpeggiated, then blocked). What's its quality?
+Listen to the {0} interval and name it.
+Listen to the end of the phrase. Which cadence do you hear?
+Listen to the melody and write it directly on the answer staff: choose a note value, then click at the right pitch. Then check pitches and rhythm.
+Listen to the rhythm (after a one-measure count-in). Which one did you hear?
+Listen to the rhythm and write it on the answer staff: choose a note or rest value, then click to add it.
+Listen measure by measure
+Listen to a chord sequence and choose the right progression from the options. Then listen to each chord again to really hear its color.
+Listen, then choose. After you answer, click any interval to hear it from the same note. Space bar: listen again.
+Write an interval
+Write a triad
+Write the dominant seventh chord (V7) of {0} in root position (treble clef).
+Write the {0} chord in {1} inversion (treble clef).
+Write the {0} scale ascending, from tonic to tonic (8 notes). Add the accidentals in front of the notes (no key signature).
+Write the {0} {1} scale ascending, from tonic to tonic (8 notes). Add the accidentals in front of the notes (no key signature).
+Write the note {0} above the given note.
+Write the note {0} on the staff (treble clef). Don't forget the accidental.
+Write the note {0} on the staff {1}.
+Write the {0} triad in root position (treble clef).
+Write the {0} ({1} degree) of the {2} scale on the staff (treble clef).
+Write the {0} of {1} on the staff (treble clef).
+Write your answer on the staff.
+Write a number.
+Write a {0} {1} the given note.
+Widen the register or the largest leap.
+Step
+Step 1: I and V
+Step 2: I, IV and V
+Step 3: + ii
+Step 4: + vi
+Step 5: all chords (+ iii, vii°)
+Step 6: + V7 and inversions
+Root position
+Range
+Music theory assessment
+Grade
+to
+‹ Previous string
+‹ Previous
+⁵₃ (root position, no figures)
+⁶ (sixth chord)
+⁶₄ (six-four chord)
+← Back to
+■ Stop
+■ Turn off mic
+▲ Up
+▶ 1st note
+▶ Start
+▶ Start
+▶ Hear the note
+▶ Scale and arpeggio
+▶ A {0} Hz
+▶ Measure {0} / {1}
+▶ Melody
+▶ Note by note
+▶ Progression
+▶ Listen again
+▶ Answer
+▶ Key
+▶ Listen
+▶ Listen to the melody
+▶ Listen to the piece
+▶ Listen to the model
+▶ Listen to my answer
+▼ Down
+● Sing
+● Start
+♭ flat
+♮ none
+♯ sharp
+⚠ Stop tightening! Your string sounds {0}, {1} half step{2} higher than {3}. Loosen it (the pitch should go down), or it might break.
+✓ Right answer
+✓ In tune! On to the next string…
+✗ That's not the right answer
+✗ No answer
+🎉 All strings are in tune
+🎤 Turn on mic
+🎤 clap (headphones recommended)
+🎤 {0} {1}{2} c
+📖 Review this topic in the library
