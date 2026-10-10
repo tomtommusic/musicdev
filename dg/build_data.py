@@ -6,9 +6,10 @@ def ww(f,key):
     for n in d['notes']:
         notes.append({'m':n['midi'],'k':n['keys'],'a':[{'k':a['keys'],'l':a.get('label','')} for a in n.get('alt',[])],'c':n.get('comment','')})
     out[key]=notes
-ww('flute.json','flute');ww('clarinet.json','clar');ww('altosax.json','asax')
+ww('flute.json','flute');ww('oboe.json','oboe');ww('bassoon.json','bsn');ww('clarinet.json','clar');ww('altosax.json','asax')
 b=json.load(open(D+'brass.json'))
 out['tpt']=[{'m':n['midi'],'v':n['valves'],'a':n.get('alt',[]),'c':n.get('comment','')} for n in b['trumpet']['notes']]
+out['tuba']=[{'m':n['midi'],'v':n['valves'],'a':n.get('alt',[]),'c':n.get('comment','')} for n in json.load(open(D+'tuba.json'))['notes']]
 tb=[]
 for n in b['trombone']['notes']:
     e={'m':n['midi'],'p':n['pos'],'a':n.get('alt',[]),'c':n.get('comment','')}

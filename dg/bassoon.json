@@ -1,0 +1,572 @@
+{
+ "instrument": "bassoon",
+ "pitch": "concert",
+ "source": "ted's list – Bassoon Fingering Chart (Robert Emery), fourni par l'utilisateur",
+ "notes": [
+  {
+   "note": "A#1",
+   "midi": 46,
+   "keys": [
+    "L1",
+    "L2",
+    "L3",
+    "R1",
+    "R2",
+    "R3",
+    "pF",
+    "tB",
+    "tBb",
+    "rE",
+    "tD",
+    "tC"
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "B1",
+   "midi": 47,
+   "keys": [
+    "L1",
+    "L2",
+    "L3",
+    "R1",
+    "R2",
+    "R3",
+    "pF",
+    "tB",
+    "rE",
+    "tD",
+    "tC"
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "C2",
+   "midi": 48,
+   "keys": [
+    "L1",
+    "L2",
+    "L3",
+    "R1",
+    "R2",
+    "R3",
+    "pF",
+    "rE",
+    "tD",
+    "tC"
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "C#2",
+   "midi": 49,
+   "keys": [
+    "L1",
+    "L2",
+    "L3",
+    "R1",
+    "R2",
+    "R3",
+    "lCs",
+    "pF",
+    "rE",
+    "tD",
+    "tC"
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "D2",
+   "midi": 50,
+   "keys": [
+    "L1",
+    "L2",
+    "L3",
+    "R1",
+    "R2",
+    "R3",
+    "pF",
+    "rE",
+    "tD"
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "D#2",
+   "midi": 51,
+   "keys": [
+    "L1",
+    "L2",
+    "L3",
+    "R1",
+    "R2",
+    "R3",
+    "lEb",
+    "pF",
+    "rE",
+    "tD"
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "E2",
+   "midi": 52,
+   "keys": [
+    "L1",
+    "L2",
+    "L3",
+    "R1",
+    "R2",
+    "R3",
+    "pF",
+    "rE"
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "F2",
+   "midi": 53,
+   "keys": [
+    "L1",
+    "L2",
+    "L3",
+    "R1",
+    "R2",
+    "R3",
+    "W",
+    "pF"
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "F#2",
+   "midi": 54,
+   "keys": [
+    "L1",
+    "L2",
+    "L3",
+    "R1",
+    "R2",
+    "R3",
+    "W",
+    "pF",
+    "rFs"
+   ],
+   "alt": [
+    {
+     "keys": [
+      "L1",
+      "L2",
+      "L3",
+      "R1",
+      "R2",
+      "R3",
+      "W",
+      "pF",
+      "pFs"
+     ],
+     "label": ""
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "note": "G2",
+   "midi": 55,
+   "keys": [
+    "L1",
+    "L2",
+    "L3",
+    "R1",
+    "R2",
+    "R3",
+    "W"
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "G#2",
+   "midi": 56,
+   "keys": [
+    "L1",
+    "L2",
+    "L3",
+    "R1",
+    "R2",
+    "R3",
+    "W",
+    "pAb"
+   ],
+   "alt": [
+    {
+     "keys": [
+      "L1",
+      "L2",
+      "L3",
+      "R1",
+      "R2",
+      "R3",
+      "W",
+      "rAb"
+     ],
+     "label": ""
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "note": "A2",
+   "midi": 57,
+   "keys": [
+    "L1",
+    "L2",
+    "L3",
+    "R1",
+    "R2",
+    "W"
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "A#2",
+   "midi": 58,
+   "keys": [
+    "L1",
+    "L2",
+    "L3",
+    "R1",
+    "R2",
+    "W",
+    "rBb"
+   ],
+   "alt": [
+    {
+     "keys": [
+      "L1",
+      "L2",
+      "L3",
+      "R1",
+      "R2",
+      "R3Bb",
+      "W"
+     ],
+     "label": ""
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "note": "B2",
+   "midi": 59,
+   "keys": [
+    "L1",
+    "L2",
+    "L3",
+    "R1",
+    "W"
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "C3",
+   "midi": 60,
+   "keys": [
+    "L1",
+    "L2",
+    "L3",
+    "W"
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "C#3",
+   "midi": 61,
+   "keys": [
+    "L1",
+    "L2",
+    "L3",
+    "W",
+    "tCs",
+    "tD"
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "D3",
+   "midi": 62,
+   "keys": [
+    "L1",
+    "L2",
+    "W"
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "D#3",
+   "midi": 63,
+   "keys": [
+    "L1",
+    "L3",
+    "R2",
+    "W",
+    "lCs",
+    "lEb",
+    "rBb"
+   ],
+   "alt": [
+    {
+     "keys": [
+      "L1",
+      "L3",
+      "R1",
+      "W",
+      "lCs",
+      "lEb",
+      "rBb"
+     ],
+     "label": ""
+    },
+    {
+     "keys": [
+      "L1",
+      "L3",
+      "W",
+      "lEb"
+     ],
+     "label": ""
+    }
+   ],
+   "comment": "La clé de mi♭ est facultative ici."
+  },
+  {
+   "note": "E3",
+   "midi": 64,
+   "keys": [
+    "L1",
+    "W"
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "F3",
+   "midi": 65,
+   "keys": [
+    "W"
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "F#3",
+   "midi": 66,
+   "keys": [
+    "L1h",
+    "L2",
+    "L3",
+    "R1",
+    "R2",
+    "R3",
+    "W",
+    "pF",
+    "rFs"
+   ],
+   "alt": [
+    {
+     "keys": [
+      "L1h",
+      "L2",
+      "L3",
+      "R1",
+      "R2",
+      "R3",
+      "W",
+      "pF",
+      "pFs"
+     ],
+     "label": ""
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "note": "G3",
+   "midi": 67,
+   "keys": [
+    "L1h",
+    "L2",
+    "L3",
+    "R1",
+    "R2",
+    "R3",
+    "W",
+    "lEb"
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "G#3",
+   "midi": 68,
+   "keys": [
+    "L1h",
+    "L2",
+    "L3",
+    "R1",
+    "R2",
+    "R3",
+    "W",
+    "pAb"
+   ],
+   "alt": [
+    {
+     "keys": [
+      "L1h",
+      "L2",
+      "L3",
+      "R1",
+      "R2",
+      "R3",
+      "W",
+      "rAb"
+     ],
+     "label": ""
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "note": "A3",
+   "midi": 69,
+   "keys": [
+    "L1",
+    "L2",
+    "L3",
+    "R1",
+    "R2",
+    "fC"
+   ],
+   "alt": [
+    {
+     "keys": [
+      "L1",
+      "L2",
+      "L3",
+      "R1",
+      "R2"
+     ],
+     "label": ""
+    }
+   ],
+   "comment": "Clé de flick (en vert sur le tableau) : on l'appuie juste au début du son."
+  },
+  {
+   "note": "A#3",
+   "midi": 70,
+   "keys": [
+    "L1",
+    "L2",
+    "L3",
+    "R1",
+    "R2",
+    "fA",
+    "rBb"
+   ],
+   "alt": [
+    {
+     "keys": [
+      "L1",
+      "L2",
+      "L3",
+      "R1",
+      "R2",
+      "R3Bb",
+      "fA"
+     ],
+     "label": ""
+    },
+    {
+     "keys": [
+      "L1",
+      "L2",
+      "L3",
+      "R1",
+      "R2",
+      "rBb"
+     ],
+     "label": ""
+    },
+    {
+     "keys": [
+      "L1",
+      "L2",
+      "L3",
+      "R1",
+      "R2",
+      "R3Bb"
+     ],
+     "label": ""
+    }
+   ],
+   "comment": "Clé de flick (en vert sur le tableau) : on l'appuie juste au début du son."
+  },
+  {
+   "note": "B3",
+   "midi": 71,
+   "keys": [
+    "L1",
+    "L2",
+    "L3",
+    "R1",
+    "fA"
+   ],
+   "alt": [
+    {
+     "keys": [
+      "L1",
+      "L2",
+      "L3",
+      "R1"
+     ],
+     "label": ""
+    }
+   ],
+   "comment": "Clé de flick (en vert sur le tableau) : on l'appuie juste au début du son."
+  },
+  {
+   "note": "C4",
+   "midi": 72,
+   "keys": [
+    "L1",
+    "L2",
+    "L3",
+    "fA"
+   ],
+   "alt": [
+    {
+     "keys": [
+      "L1",
+      "L2",
+      "L3"
+     ],
+     "label": ""
+    }
+   ],
+   "comment": "Clé de flick (en vert sur le tableau) : on l'appuie juste au début du son."
+  }
+ ]
+}

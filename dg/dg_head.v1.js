@@ -25,21 +25,15 @@ function dgPlay(m,timbre){try{const c=A.init();if(typeof qzUnmute==='function')q
 /* ---------- instruments ---------- */
 const DG_INST=[
   {id:'flute',fam:'Bois',t:'Flûte traversière',kind:'ww',data:'flute',clef:'treble',tr:0,timbre:'flute',info:'En do : on lit les notes réelles.'},
-  {id:'oboe',fam:'Bois',t:'Hautbois',kind:'ww',data:'oboe',clef:'treble',tr:0,info:'En do : on lit les notes réelles. Le demi-trou (index gauche à moitié ouvert) est dessiné à moitié plein.'},
-  {id:'bsn',fam:'Bois',t:'Basson',kind:'ww',data:'bsn',clef:'bass',tr:0,info:'En clé de fa, au son réel. Les clés du haut à gauche sont jouées par le pouce gauche, celles du bas à gauche par le pouce droit. Le demi-trou est dessiné à moitié plein.'},
   {id:'clar',fam:'Bois',t:'Clarinette en si♭',kind:'ww',data:'clar',clef:'treble',tr:-2,info:'Notes écrites. Le son réel est un ton plus bas.'},
   {id:'asax',fam:'Bois',t:'Saxophone alto',kind:'ww',data:'asax',clef:'treble',tr:-9,info:'En mi♭ : notes écrites. Le son réel est une sixte majeure plus bas.'},
   {id:'tpt',fam:'Cuivres',t:'Trompette en si♭',kind:'tpt',data:'tpt',clef:'treble',tr:-2,info:'Notes écrites. Le son réel est un ton plus bas. 0 = aucun piston.'},
   {id:'tbn',fam:'Cuivres',t:'Trombone',kind:'tbn',data:'tbn',clef:'bass',tr:0,info:'Notes réelles en clé de fa. Positions de la coulisse : 1 (fermée) à 7 (la plus sortie).'},
-  {id:'tuba',fam:'Cuivres',t:'Tuba',kind:'tpt',data:'tuba',clef:'bass',tr:0,info:'Tuba en si♭ (BB♭) à 3 pistons, en clé de fa et au son réel. 0 = aucun piston.'},
   {id:'vln',fam:'Cordes frottées',t:'Violon',kind:'bow',strings:[55,62,69,76],clef:'treble',tr:0,fing:'vln',info:'Cordes sol, ré, la, mi. Doigts en 1re position : 0 = corde à vide, 1 = index, 2 = majeur, 3 = annulaire, 4 = auriculaire.'},
   {id:'vla',fam:'Cordes frottées',t:'Alto',kind:'bow',strings:[48,55,62,69],clef:'alto',tr:0,fing:'vln',info:'Cordes do, sol, ré, la (clé d\'ut 3e ligne). Mêmes doigtés que le violon, une quinte plus bas.'},
   {id:'vc',fam:'Cordes frottées',t:'Violoncelle',kind:'bow',strings:[36,43,50,57],clef:'bass',tr:0,fing:'vc',info:'Cordes do, sol, ré, la. Doigts en 1re position : 1 à 4, un doigt par demi-ton.'},
   {id:'cb',fam:'Cordes frottées',t:'Contrebasse',kind:'bow',strings:[28,33,38,43],clef:'bass',tr:12,fing:'cb',info:'Cordes mi, la, ré, sol. S\'écrit une octave plus haut que le son réel. Doigtés 1-2-4 (méthode Simandl).'},
   {id:'gtr',fam:'Cordes pincées',t:'Guitare',kind:'fret',strings:[40,45,50,55,59,64],clef:'treble',tr:12,timbre:'guitare',info:'Accordage standard mi, la, ré, sol, si, mi. S\'écrit une octave plus haut que le son réel.'},
   {id:'bass',fam:'Cordes pincées',t:'Basse électrique',kind:'fret',strings:[28,33,38,43],clef:'bass',tr:12,timbre:'guitare',info:'Accordage standard mi, la, ré, sol. S\'écrit une octave plus haut que le son réel.'},
-  {id:'mando',fam:'Cordes pincées',t:'Mandoline',kind:'fret',strings:[55,62,69,76],clef:'treble',tr:0,timbre:'guitare',info:'Quatre paires de cordes accordées sol, ré, la, mi, comme le violon. S\'écrit au son réel.'},
-  {id:'banjo',fam:'Cordes pincées',t:'Banjo 5 cordes',kind:'fret',strings:[67,50,55,59,62],short:{i:0,from:5},clef:'treble',tr:12,timbre:'guitare',info:'Accordage en sol ouvert : sol aigu (5e corde, courte), ré, sol, si, ré. La 5e corde commence à la 5e case. S\'écrit une octave plus haut que le son réel.'},
-  {id:'drums',fam:'Percussions',t:'Batterie',kind:'drum',info:'Portée à 5 lignes sans hauteur précise (clé de percussion) : chaque ligne ou interligne correspond à un élément de la batterie.'},
 ];
-const DG_FAMS=['Bois','Cuivres','Cordes frottées','Cordes pincées','Percussions'];
+const DG_FAMS=['Bois','Cuivres','Cordes frottées','Cordes pincées'];

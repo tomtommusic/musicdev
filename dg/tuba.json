@@ -1,0 +1,292 @@
+{
+ "pitch": "concert",
+ "source": "Amro Music tuba chart (fourni par l'utilisateur)",
+ "notes": [
+  {
+   "note": "E1",
+   "midi": 28,
+   "valves": [
+    1,
+    2,
+    3
+   ],
+   "alt": [],
+   "comment": "Combinaison 1-3 ou 1-2-3 : la note sonne un peu haute, ajuste avec les lèvres (ou le 4e piston si ton tuba en a un)."
+  },
+  {
+   "note": "F1",
+   "midi": 29,
+   "valves": [
+    1,
+    3
+   ],
+   "alt": [],
+   "comment": "Combinaison 1-3 ou 1-2-3 : la note sonne un peu haute, ajuste avec les lèvres (ou le 4e piston si ton tuba en a un)."
+  },
+  {
+   "note": "F#1",
+   "midi": 30,
+   "valves": [
+    2,
+    3
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "G1",
+   "midi": 31,
+   "valves": [
+    1,
+    2
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "G#1",
+   "midi": 32,
+   "valves": [
+    1
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "A1",
+   "midi": 33,
+   "valves": [
+    2
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "A#1",
+   "midi": 34,
+   "valves": [],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "B1",
+   "midi": 35,
+   "valves": [
+    1,
+    2,
+    3
+   ],
+   "alt": [],
+   "comment": "Combinaison 1-3 ou 1-2-3 : la note sonne un peu haute, ajuste avec les lèvres (ou le 4e piston si ton tuba en a un)."
+  },
+  {
+   "note": "C2",
+   "midi": 36,
+   "valves": [
+    1,
+    3
+   ],
+   "alt": [],
+   "comment": "Combinaison 1-3 ou 1-2-3 : la note sonne un peu haute, ajuste avec les lèvres (ou le 4e piston si ton tuba en a un)."
+  },
+  {
+   "note": "C#2",
+   "midi": 37,
+   "valves": [
+    2,
+    3
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "D2",
+   "midi": 38,
+   "valves": [
+    1,
+    2
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "D#2",
+   "midi": 39,
+   "valves": [
+    1
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "E2",
+   "midi": 40,
+   "valves": [
+    2
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "F2",
+   "midi": 41,
+   "valves": [],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "F#2",
+   "midi": 42,
+   "valves": [
+    2,
+    3
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "G2",
+   "midi": 43,
+   "valves": [
+    1,
+    2
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "G#2",
+   "midi": 44,
+   "valves": [
+    1
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "A2",
+   "midi": 45,
+   "valves": [
+    2
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "A#2",
+   "midi": 46,
+   "valves": [],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "B2",
+   "midi": 47,
+   "valves": [
+    1,
+    2
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "C3",
+   "midi": 48,
+   "valves": [
+    1
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "C#3",
+   "midi": 49,
+   "valves": [
+    2,
+    3
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "D3",
+   "midi": 50,
+   "valves": [
+    1,
+    2
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "D#3",
+   "midi": 51,
+   "valves": [
+    1
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "E3",
+   "midi": 52,
+   "valves": [
+    2
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "F3",
+   "midi": 53,
+   "valves": [],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "F#3",
+   "midi": 54,
+   "valves": [
+    2,
+    3
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "G3",
+   "midi": 55,
+   "valves": [
+    1,
+    2
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "G#3",
+   "midi": 56,
+   "valves": [
+    1
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "A3",
+   "midi": 57,
+   "valves": [
+    2
+   ],
+   "alt": [],
+   "comment": ""
+  },
+  {
+   "note": "A#3",
+   "midi": 58,
+   "valves": [],
+   "alt": [],
+   "comment": ""
+  }
+ ]
+}

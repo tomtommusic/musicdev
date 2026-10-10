@@ -1,49 +1,4 @@
 
-/* ========== MODULE : Doigtés (vents et cordes) ========== */
-MOD.dg.mount=function(){$('#toolbar').replaceChildren();this.root=el('div',{class:'tl dg'});$('#answer').replaceChildren(this.root);};
-MOD.dg.fresh=function(){dgRender();};
-const DG=tlLoad('atelier-dg',{inst:'',sel:{},frets:12,flats:false});DG.sel=Object.assign({},DG.sel);
-const dgSave=()=>tlSave('atelier-dg',DG);
-const DG_SH=['do','do♯','ré','ré♯','mi','fa','fa♯','sol','sol♯','la','la♯','si'],DG_FL=['do','ré♭','ré','mi♭','mi','fa','sol♭','sol','la♭','la','si♭','si'];
-const dgCap=s=>s?s[0].toUpperCase()+s.slice(1):s;
-const dgName=(m,fl)=>(fl?DG_FL:DG_SH)[((m%12)+12)%12];
-const dgBlack=m=>[1,3,6,8,10].includes(((m%12)+12)%12);
-/* nom affiché : « Do♯ / Ré♭ » (chaque nom traduit séparément) */
-function dgNameEl(m,cls){const s=dgName(m,false),f=dgName(m,true);return el('span',{class:cls||'dgnm'},el('b',{},dgCap(T(s))),...(dgBlack(m)?[' / ',el('b',{},dgCap(T(f)))]:[]));}
-const DG_LET=['C','^C','D','^D','E','F','^F','G','^G','A','^A','B'];
-function dgAbcNote(m){const pc=((m%12)+12)%12,o=Math.floor(m/12)-1;let s=DG_LET[pc];const acc=s[0]==='^'?'^':'';let L=acc?s[1]:s;L=o>=5?L.toLowerCase()+"'".repeat(o-5):L+','.repeat(Math.max(0,4-o));return acc+L;}
-const DG_FLET=['C','_D','D','_E','E','F','_G','G','_A','A','_B','B'];
-function dgAbcFlat(m){const pc=((m%12)+12)%12,o=Math.floor(m/12)-1;let s=DG_FLET[pc];const acc=s[0]==='_'?'_':'';let L=acc?s[1]:s;L=o>=5?L.toLowerCase()+"'".repeat(o-5):L+','.repeat(Math.max(0,4-o));return acc+L;}
-/* portée : la note (et son enharmonique, comme dans les tableaux de méthode) */
-function dgStaff(m,clef,small,pair){const box=el('div',{class:'dgstaff'+(small?' small':'')});const two=pair&&dgBlack(m);
-  requestAnimationFrame(()=>{if(!box.isConnected||!HAS_ABC())return;ABCJS.renderAbc(box,`X:1\nL:1/4\nK:C clef=${clef}\n${two?dgAbcNote(m)+'2 '+dgAbcFlat(m)+'2':dgAbcNote(m)+'4'}|]`,{add_classes:true,staffwidth:small?(two?112:62):(two?110:86),scale:small?.68:1.45,paddingleft:0,paddingright:2,paddingtop:0,paddingbottom:0,foregroundColor:'currentColor'});});
-  return box;}
-/* son : la note réelle, timbre proche de l'instrument quand il existe */
-function dgPlay(m,timbre){try{const c=A.init();if(typeof qzUnmute==='function')qzUnmute();const t=c.currentTime+.03;
-  if(timbre==='guitare'&&A.guitar)A.guitar(m,t,1.6,.8);else if(timbre==='flute'&&A.flute)A.flute(m,t,1.2,.8);else A.piano(m,t,1.4,.8);}catch(e){}}
-
-/* ---------- instruments ---------- */
-const DG_INST=[
-  {id:'flute',fam:'Bois',t:'Flûte traversière',kind:'ww',data:'flute',clef:'treble',tr:0,timbre:'flute',info:'En do : on lit les notes réelles.'},
-  {id:'oboe',fam:'Bois',t:'Hautbois',kind:'ww',data:'oboe',clef:'treble',tr:0,info:'En do : on lit les notes réelles. Le demi-trou (index gauche à moitié ouvert) est dessiné à moitié plein.'},
-  {id:'bsn',fam:'Bois',t:'Basson',kind:'ww',data:'bsn',clef:'bass',tr:0,info:'En clé de fa, au son réel. Les clés du haut à gauche sont jouées par le pouce gauche, celles du bas à gauche par le pouce droit. Le demi-trou est dessiné à moitié plein.'},
-  {id:'clar',fam:'Bois',t:'Clarinette en si♭',kind:'ww',data:'clar',clef:'treble',tr:-2,info:'Notes écrites. Le son réel est un ton plus bas.'},
-  {id:'asax',fam:'Bois',t:'Saxophone alto',kind:'ww',data:'asax',clef:'treble',tr:-9,info:'En mi♭ : notes écrites. Le son réel est une sixte majeure plus bas.'},
-  {id:'tpt',fam:'Cuivres',t:'Trompette en si♭',kind:'tpt',data:'tpt',clef:'treble',tr:-2,info:'Notes écrites. Le son réel est un ton plus bas. 0 = aucun piston.'},
-  {id:'tbn',fam:'Cuivres',t:'Trombone',kind:'tbn',data:'tbn',clef:'bass',tr:0,info:'Notes réelles en clé de fa. Positions de la coulisse : 1 (fermée) à 7 (la plus sortie).'},
-  {id:'tuba',fam:'Cuivres',t:'Tuba',kind:'tpt',data:'tuba',clef:'bass',tr:0,info:'Tuba en si♭ (BB♭) à 3 pistons, en clé de fa et au son réel. 0 = aucun piston.'},
-  {id:'vln',fam:'Cordes frottées',t:'Violon',kind:'bow',strings:[55,62,69,76],clef:'treble',tr:0,fing:'vln',info:'Cordes sol, ré, la, mi. Doigts en 1re position : 0 = corde à vide, 1 = index, 2 = majeur, 3 = annulaire, 4 = auriculaire.'},
-  {id:'vla',fam:'Cordes frottées',t:'Alto',kind:'bow',strings:[48,55,62,69],clef:'alto',tr:0,fing:'vln',info:'Cordes do, sol, ré, la (clé d\'ut 3e ligne). Mêmes doigtés que le violon, une quinte plus bas.'},
-  {id:'vc',fam:'Cordes frottées',t:'Violoncelle',kind:'bow',strings:[36,43,50,57],clef:'bass',tr:0,fing:'vc',info:'Cordes do, sol, ré, la. Doigts en 1re position : 1 à 4, un doigt par demi-ton.'},
-  {id:'cb',fam:'Cordes frottées',t:'Contrebasse',kind:'bow',strings:[28,33,38,43],clef:'bass',tr:12,fing:'cb',info:'Cordes mi, la, ré, sol. S\'écrit une octave plus haut que le son réel. Doigtés 1-2-4 (méthode Simandl).'},
-  {id:'gtr',fam:'Cordes pincées',t:'Guitare',kind:'fret',strings:[40,45,50,55,59,64],clef:'treble',tr:12,timbre:'guitare',info:'Accordage standard mi, la, ré, sol, si, mi. S\'écrit une octave plus haut que le son réel.'},
-  {id:'bass',fam:'Cordes pincées',t:'Basse électrique',kind:'fret',strings:[28,33,38,43],clef:'bass',tr:12,timbre:'guitare',info:'Accordage standard mi, la, ré, sol. S\'écrit une octave plus haut que le son réel.'},
-  {id:'mando',fam:'Cordes pincées',t:'Mandoline',kind:'fret',strings:[55,62,69,76],clef:'treble',tr:0,timbre:'guitare',info:'Quatre paires de cordes accordées sol, ré, la, mi, comme le violon. S\'écrit au son réel.'},
-  {id:'banjo',fam:'Cordes pincées',t:'Banjo 5 cordes',kind:'fret',strings:[67,50,55,59,62],short:{i:0,from:5},clef:'treble',tr:12,timbre:'guitare',info:'Accordage en sol ouvert : sol aigu (5e corde, courte), ré, sol, si, ré. La 5e corde commence à la 5e case. S\'écrit une octave plus haut que le son réel.'},
-  {id:'drums',fam:'Percussions',t:'Batterie',kind:'drum',info:'Portée à 5 lignes sans hauteur précise (clé de percussion) : chaque ligne ou interligne correspond à un élément de la batterie.'},
-];
-const DG_FAMS=['Bois','Cuivres','Cordes frottées','Cordes pincées','Percussions'];
-
 /* ---------- schémas des vents (façon tableau de méthode) ---------- */
 /* items : [id,'o',x,y,r] trou · [id,'e',x,y,rx,ry,rot] petite clé · [id,'d',path] clé dessinée.
    sil : silhouette discrète de l'instrument, dessinée derrière les clés */
@@ -73,26 +28,6 @@ const DG_LAYOUT={
     ['R1','o',50,105,7.2],['R2','o',50,125,7.2],['BFs','e',43.4,133.4,4.2,1.5,-55],['R3','o',50,145,7.2],
     ['rFs','e',45,158.5,4.8,2.9],['rAb','e',55,158.5,4.8,2.9],['rE','e',45,165,4.8,2.9],['rF','e',55,165,4.8,2.9]],
     labels:[]},
-  oboe:{vb:'0 -50 92 262',
-    sil:['M47.5,-48 h1.6 l1.2,20 h-4 Z','M44,-28 h8 l1,10 h-10 Z','M43.5,-18 h9 V178 h-9 Z','M43.5,176 h9 C53,188 58,198 64,206 H32 C38,198 43,188 43.5,176 Z'],
-    items:()=>[
-    ['Oct1','d','M30,1.5 C31,5.4 33.2,9.4 33.2,11.3 A3.2,3.2 0 0 1 26.8,11.3 C26.8,9.4 29,5.4 30,1.5 Z'],['Oct2','e',63,26,2.4,4.6],
-    ['L1','o',50,40,7.2],['L1h','h',50,40,7.2],['L2','o',50,60,7.2],['L3','o',50,80,7.2],['Gs','e',62.5,78,2.4,4.2],
-    ['lEb','e',67.5,92,3.6,2.6,25],['lB','e',77,91,3.6,2.6,-25],['lBb','d','M70.6,95 h3.2 v10 a1.6,1.6 0 0 1 -3.2,0 Z'],
-    ['R1','o',50,108,7.2],['R2','o',50,128,7.2],['Fk','e',37,138,2.4,4.6],['R3','o',50,148,7.2],
-    ['rC','e',44,161,5,3],['rEb','e',44,169,5,3],['rCs','d','M52,160 h9 a2.5,2.5 0 0 1 0,5 h-9 Z']],
-    labels:[[68.5,28,'2'],[68,81,'4'],[30.5,141,'8']]},
-  bsn:{vb:'4 150 156 312',
-    deco:[['M59,203 V235 H70 V280 H61 V316','dgbsl'],['M14,274 H124','dgbsd']],
-    items:()=>[
-    ['tB','e',29,184,4.2,10],['tBb','e',39,184,4.2,10],['tC','e',19,188,6.2,7.6],['fA','e',55,186,5.4,8.6,-8],['lTop','e',121,170,3.4,5.4],
-    ['L1','o',114,188,6],['L1h','h',114,188,6],['tX','d','M27.5,198.5 h9 v10 h-9 Z'],['fC','e',62,202,12,4.4],['lX','e',117,205,8,3],
-    ['tD','e',22,212,5.6,17,-8],['tCs','e',54,216,6.4,5],['W','e',48,228,6,4],['L2','o',113,226,6],['L3','o',114,257,7.4],
-    ['lEb','e',139,268,8,4.4,-25],['lCs','e',144,280,8,4.4,-25],
-    ['rBb','e',55,329,13,7,-10],['rE','o',54,347,11],['rFs','e',62,366,11,6.8,-25],['rAb','e',71,379,11,6.8,-25],
-    ['R1','o',114,339,6],['R2','o',116,380,8.6],['R3Bb','e',115,400,9,4],['R3','e',110,413,14,6.4],
-    ['pF','e',81,421,8,7,-35],['pFs','e',98,434,8,11,-35],['pAb','e',77,438,10,8]],
-    labels:[]},
   asax:{vb:'-2 -30 108 232',
     sil:[],silS:['M14,-24 C28,-22 40,-14 46,-2 V140 C46,170 56,184 70,184 C84,184 88,172 88,150 V124'],silF:['M76,126 L70,104 H106 L100,126 Z'],
     seps:[[36,87,56,87]],deco:[['M16,18 v28 M33,18 v28','dgbr']],
@@ -116,19 +51,17 @@ function dgWindSvg(inst,keys,size){
   for(const[d,c]of(L.deco||[]))mk('path',{d,class:c});
   for(const it of L.items()){const[id,tp,x,y]=it,cls='dgk '+(on.has(id)?'on':'off');
     if(tp==='d'){mk('path',{d:it[2],class:cls+' small'});continue;}
-    if(tp==='h'){if(on.has(id)){const r=it[4];mk('path',{d:`M${x},${y-r} A${r},${r} 0 0 0 ${x},${y+r} Z`,class:'dgk on half'});}continue;}
     if(tp==='e'){const a={cx:x,cy:y,rx:it[4],ry:it[5],class:cls+' small'};if(it[6])a.transform=`rotate(${it[6]} ${x} ${y})`;mk('ellipse',a);continue;}
     mk('circle',{cx:x,cy:y,r:it[4],class:cls});}
   for(const[x,y,s]of(L.labels||[])){const t=mk('text',{x,y,class:'dgcap','text-anchor':'middle'});t.textContent=T(s);}
   return svg;
 }
 /* trompette : trois pistons sur une silhouette de trompette */
-function dgValvesSvg(v,size,inst){
+function dgValvesSvg(v,size){
   const NS='http://www.w3.org/2000/svg',svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox','0 0 170 70');svg.setAttribute('class','dgsvg tpt'+(size?' '+size:''));svg.setAttribute('aria-hidden','true');
   const mk=(t,a,txt)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;svg.append(e);return e;};
-  if(inst==='tuba'){mk('path',{d:'M18,62 C6,62 6,38 18,36 H124 C136,36 138,22 132,6 H164 C156,22 150,46 140,56 C134,62 128,62 120,62 Z',class:'dgsil'});}
-  else{  mk('path',{d:'M2,46 h6 v-4 h4 v8 h-4 v-4 M12,44 H120 C136,44 150,34 166,22 V66 C150,54 136,48 120,48 H12 Z',class:'dgsil'});
-  mk('path',{d:'M30,58 C24,58 22,62 30,64 H112 C120,62 118,58 112,58',class:'dgsilline'});}
+  mk('path',{d:'M2,46 h6 v-4 h4 v8 h-4 v-4 M12,44 H120 C136,44 150,34 166,22 V66 C150,54 136,48 120,48 H12 Z',class:'dgsil'});
+  mk('path',{d:'M30,58 C24,58 22,62 30,64 H112 C120,62 118,58 112,58',class:'dgsilline'});
   [1,2,3].forEach((n,i)=>{const x=34+i*36;mk('rect',{x:x-9,y:30,width:18,height:30,rx:4,class:'dgsil'});
     mk('rect',{x:x-2.5,y:18,width:5,height:12,class:'dgstem'});
     mk('circle',{cx:x,cy:16,r:12,class:'dgk '+(v.includes(n)?'on':'off')});
@@ -157,10 +90,6 @@ function dgKeyNames(inst){const pg=T('Auriculaire gauche'),pd=T('Auriculaire dro
   flute:{thB:T('Clé de si (pouce)'),thBb:T('Levier de si♭ (pouce)'),Gs:T('Clé de sol♯'),Ds:T('Clé de mi♭'),Cs:T('Clé de do♯'),C:T('Clé de do grave'),Tr1:T('Clé de trille 1'),Tr2:T('Clé de trille 2')},
   clar:{Reg:T('Clé de registre'),A:T('Clé de la'),Gs:T('Clé de sol♯'),EbBb:T('Clé mi♭/si♭ (palette)'),CsGs:`${pg} : ${nl('do♯','sol♯')}`,lFs:`${pg} : ${nl('fa♯','do♯')}`,lE:`${pg} : ${nl('mi','si')}`,lF:`${pg} : ${nl('fa','do')}`,
     S1:T('Clé latérale')+' 1',S2:T('Clé latérale')+' 2',S3:T('Clé latérale')+' 3',S4:T('Clé latérale')+' 4',rAb:`${pd} : ${nl('la♭','mi♭')}`,rFs:`${pd} : ${nl('fa♯','do♯')}`,rE:`${pd} : ${nl('mi','si')}`,rF:`${pd} : ${nl('fa','do')}`,BFs:T('Clé de si/fa♯ (main droite)')},
-  oboe:{Oct1:T('Clé d\'octave (pouce)'),Oct2:T('2e clé d\'octave'),L1h:T('Demi-trou (index gauche)'),Gs:T('Clé de sol♯')+' (4)',lEb:`${pg} : ${nl('mi♭')}`,lB:`${pg} : ${nl('si')}`,lBb:`${pg} : ${nl('si♭')}`,Fk:T('Clé de fa')+' (8)',rC:`${pd} : ${nl('do')}`,rCs:`${pd} : ${nl('do♯')}`,rEb:`${pd} : ${nl('mi♭')}`},
-  bsn:{W:T('Clé de pianissimo (pouce gauche)'),fA:T('Clé de flick : la aigu'),fC:T('Clé de flick : do aigu'),tD:T('Pouce gauche')+' : '+nl('ré'),tC:T('Pouce gauche')+' : '+nl('do'),tB:T('Pouce gauche')+' : '+nl('si'),tBb:T('Pouce gauche')+' : '+nl('si♭'),tCs:T('Pouce gauche')+' : '+nl('do♯'),
-    L1h:T('Demi-trou (index gauche)'),lEb:T('Clé de mi♭'),lCs:T('Clé de do♯ grave'),rBb:T('Pouce droit')+' : '+nl('si♭'),rE:T('Pouce droit')+' : '+nl('mi'),rFs:T('Pouce droit')+' : '+nl('fa♯'),rAb:T('Pouce droit')+' : '+nl('la♭'),
-    pF:`${pd} : ${nl('fa')}`,pFs:`${pd} : ${nl('fa♯')}`,pAb:`${pd} : ${nl('la♭')}`,R3Bb:T('Clé de si♭ (annulaire droit)')},
   asax:{Oct:T('Clé d\'octave'),PD:T('Clé de paume')+' '+T('ré'),PEb:T('Clé de paume')+' '+T('mi♭'),PF:T('Clé de paume')+' '+T('fa'),FF:T('Fa avant'),Bis:T('Clé bis'),Gs:T('Clé de sol♯'),LCs:`${pg} : ${nl('do♯')}`,LB:`${pg} : ${nl('si')}`,LBb:`${pg} : ${nl('si♭')}`,
     SE:T('Clé latérale')+' '+T('mi'),SC:T('Clé latérale')+' '+T('do'),SBb:T('Clé latérale')+' '+T('si♭'),SFs:T('Clé de fa♯ aigu'),AFs:T('Clé de fa♯ auxiliaire'),REb:`${pd} : ${nl('mi♭')}`,RC:`${pd} : ${nl('do')}`}})[inst]||{};}
 function dgLegend(inst,keys){const N=dgKeyNames(inst),l=keys.filter(k=>N[k]).map(k=>N[k]);return l.length?el('p',{class:'dgleg'},el('span',{class:'fl'},'Clés à presser'),...l.map(x=>el('span',{class:'dgkey','data-notr':''},x))):null;}
@@ -173,7 +102,7 @@ function dgRender(){
     el('div',{class:'dgchips'},...DG_INST.filter(i=>i.fam===f).map(i=>el('button',{type:'button',class:'dgchip','aria-pressed':String(i.id===DG.inst),onclick:()=>{DG.inst=i.id;dgSave();dgRender();window.scrollTo({top:0,behavior:'smooth'});}},i.t))))));
   if(!I){root.replaceChildren(el('section',{class:'mtsec'},el('h3',{},'Choisis un instrument'),picker));S.keyHandler=null;return;}
   const head=el('div',{class:'dghead'},el('h2',{},I.t),el('p',{class:'hint'},I.info));
-  const body=I.kind==='drum'?dgDrumView(I):I.kind==='fret'||I.kind==='bow'?dgStringsView(I):dgWindView(I);
+  const body=I.kind==='fret'||I.kind==='bow'?dgStringsView(I):dgWindView(I);
   root.replaceChildren(el('details',{class:'dgpickwrap'},el('summary',{},el('span',{class:'dgil'},'Instrument : '),el('b',{},I.t),el('span',{class:'dgchg'},'Changer')),picker),head,body);
 }
 /* vents : la note choisie en grand, puis le tableau complet comme dans une méthode */
@@ -184,7 +113,7 @@ function dgWindView(I){
   const vtxt=v=>v.length?v.join('-'):'0';
   /* un doigté (principal ou autre) avec sa légende courte */
   const fig=(n,alt,size)=>{
-    if(I.kind==='tpt'){const v=alt||n.v;return el('figure',{class:'dgf'},dgValvesSvg(v,size,I.id),el('figcaption',{class:'dgv'},vtxt(v)));}
+    if(I.kind==='tpt'){const v=alt||n.v;return el('figure',{class:'dgf'},dgValvesSvg(v,size),el('figcaption',{class:'dgv'},vtxt(v)));}
     if(I.kind==='tbn'){const p=alt||n.p;return el('figure',{class:'dgf'},dgSlideSvg(p,[],size),el('figcaption',{class:'dgv'},String(p).replace('-','−')));}
     const ks=alt?alt.k:n.k;let cap=null;
     if(I.data==='clar'&&altsOf(n).length){const side=k2=>{const L=k2.some(k=>/^(lE|lF|lFs|CsGs)$/.test(k)),R=k2.some(k=>/^(rE|rF|rFs|rAb)$/.test(k));
@@ -222,9 +151,6 @@ function dgWindView(I){
 
 /* ---------- cordes : manche dessiné ---------- */
 const DG_COL={C:'#E2312B',D:'#35A2DB',E:'#2BA35A',F:'#2C3A91',G:'#F0A132',A:'#D72679',B:'#7A3E9B'},DG_LSH='CCDDEFFGGAAB',DG_LFL='CDDEEFGGAABB';
-const DG_SCOL=['#D2872C','#2F9C69','#2F73C2','#C2417E','#7A5BC7','#B0632A'];
-/* cases montrées sur la portée (1re position) pour les cordes pincées */
-const DG_FPOS={bass:4,mando:7,banjo:4};
 const DG_FING={
   vln:['0','1 bas','1','2 bas','2','3','3 haut','4'],
   vc:['0','1 ext.','1','2','3','4','4 ext.'],
@@ -257,12 +183,11 @@ function dgStringsView(I){
   if(fret){for(const f of[3,5,7,9,15,17,19])if(f<=maxF)mk('circle',{cx:NW/2,cy:NUT+ROW*(f-0.5)+ (f%2?0:0),r:3.4,class:'dginlay4'});
     if(maxF>=12)for(const dx of[-SP,SP])mk('circle',{cx:NW/2+dx,cy:NUT+ROW*11.5,r:3.4,class:'dginlay4'});}
   I.strings.forEach((s,i)=>{const sh=I.short&&I.short.i===i,y1=sh?NUT+ROW*I.short.from:NUT-14;
-    mk('line',{x1:sx(i),y1,x2:sx(i),y2:VH,class:'dgstr4',...(fret&&DG_FPOS[I.id]==null?{}:{style:`stroke:${DG_SCOL[i]}`}),'stroke-width':I.short?Math.max(1,2.6-(s-50)/12):Math.max(1,(fret?(I.id==='bass'?3.2:2.2):2)-i*(fret?(I.id==='bass'?0.4:0.25):0.3))});
+    mk('line',{x1:sx(i),y1,x2:sx(i),y2:VH,class:'dgstr4','stroke-width':I.short?Math.max(1,2.6-(s-50)/12):Math.max(1,(fret?(I.id==='bass'?3.2:2.2):2)-i*(fret?(I.id==='bass'?0.4:0.25):0.3))});
     if(sh)mk('circle',{cx:sx(i),cy:y1,r:4,class:'dgpeg'});});
   /* notes */
-  const dots=[],staffBoxes=[];
+  const dots=[];
   const pick=(m,si,f,g)=>{dots.forEach(d=>{d.g.classList.toggle('same',d.m%12===m%12);d.g.classList.toggle('exact',d.m===m);d.g.classList.toggle('sel',d.g===g);});
-    staffBoxes.forEach(b=>b.querySelectorAll('.abcjs-note').forEach(n=>n.classList.toggle('dgson',+n.dataset.m===m&&+n.dataset.si===si)));
     const fg=!fret&&DG_FING[I.fing][f];
     info.replaceChildren(el('div',{class:'dgdtop'},el('div',{class:'dgdname'},dgNameEl(m,'dgnm big'),el('span',{class:'dgsub'},
         `${T('Corde')} ${dgCap(T(dgName(I.strings[si],true)))} · `+(fret?(f===0?T('à vide'):`${T('case')} ${f}`):(f===0?T('à vide'):fg?`${T('doigt')} ${T(fg)}`:T('position plus haute'))))),
@@ -283,91 +208,19 @@ function dgStringsView(I){
         mk('text',{x,y:y-3.2,'text-anchor':'middle',class:'dgn5t s'},nm(false),g);mk('text',{x,y:y+10,'text-anchor':'middle',class:'dgn5t s'},nm(true),g);}
       mk('circle',{cx:x,cy:y,r:R,class:'dgn5ring'},null,g);
       const go=()=>pick(m,si,f,g);g.addEventListener('click',go);g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});
-      if(f===0)g.style.setProperty('--sc',DG_SCOL[si]);
-      dots.push({g,m,si,f});continue;}
+      dots.push({g,m});continue;}
     g=mk('g',{class:'dgn4'+(dgBlack(m)?' acc':' nat')+(f===0?' open':'')+(high?' high':''),tabindex:'0',role:'button'});
-    if(f===0){mk('rect',{x:x-SP/2+1,y:y-14,width:SP-2,height:26,rx:6,class:'dgn4hit'},null,g);mk('text',{x,y:y+6,'text-anchor':'middle',class:'dgsname',...(DG_FPOS[I.id]!=null?{style:`fill:${DG_SCOL[si]}`}:{})},dgCap(T(dgName(m,DG.flats))),g);}
+    if(f===0){mk('rect',{x:x-SP/2+1,y:y-14,width:SP-2,height:26,rx:6,class:'dgn4hit'},null,g);mk('text',{x,y:y+6,'text-anchor':'middle',class:'dgsname'},dgCap(T(dgName(m,DG.flats))),g);}
     else{mk('circle',{cx:x,cy:y,r:R},null,g);
     mk('text',{x,y:y+4,'text-anchor':'middle',class:'dgn4t'},dgCap(T(dgName(m,DG.flats))),g);}
     if(first){const lab=fg.replace(' bas','↓').replace(' haut','↑').replace(' ext.','x').replace(' (½ pos.)','½');const w=lab.length>1?15:12.4;
       mk('rect',{x:x+R-3-w/2,y:y+R-10.2,width:w,height:12.4,rx:6.2,class:'dgn4b'},null,g);mk('text',{x:x+R-3,y:y+R-1.6,'text-anchor':'middle',class:'dgn4bt'},lab,g);}
     const go=()=>pick(m,si,f,g);g.addEventListener('click',go);g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});
-    dots.push({g,m,si,f});}});
+    dots.push({g,m});}});
   const opts=el('div',{class:'dgopts'},
     el('div',{class:'seg'},...[[false,'♯ dièses'],[true,'♭ bémols']].map(([v,l])=>el('button',{type:'button','aria-pressed':String(DG.flats===v),onclick:()=>{DG.flats=v;dgSave();dgRender();}},l))),
     fret?el('div',{class:'seg'},...[[12,'Cases 0–12'],[19,'Cases 0–19']].map(([v,l])=>el('button',{type:'button','aria-pressed':String(DG.frets===v),onclick:()=>{DG.frets=v;dgSave();dgRender();}},l))):null);
   info.replaceChildren(el('p',{class:'hint'},fret?'Touche une note sur le manche pour l\'entendre et voir toutes les places qui la donnent.':'Touche une note pour l\'entendre. Les rubans blancs marquent la place des doigts en 1re position, comme sur les touches d\'élèves.'));
   S.keyHandler=null;
-  /* cordes frottées : la portée, corde par corde (une couleur par corde), avec le doigt sous chaque note */
-  let staffSec=null;
-  const staffOn=!fret||DG_FPOS[I.id]!=null;
-  if(staffOn){
-    const labOf=f=>fret?String(f):DG_FING[I.fing][f].replace(' bas','↓').replace(' haut','↑').replace(' ext.','x').replace(' (½ pos.)','½');
-    const abcN=m=>(DG.flats?dgAbcFlat:dgAbcNote)(m+I.tr);
-    const rows=I.strings.map((s,si)=>{const sh=I.short&&I.short.i===si,fs=fret?(sh?[0]:Array.from({length:DG_FPOS[I.id]+1},(x,f)=>f)):DG_FING[I.fing].map((x,f)=>f),box=el('div',{class:'dgsstaff'});staffBoxes.push(box);
-      requestAnimationFrame(()=>{if(!box.isConnected||!HAS_ABC())return;
-        ABCJS.renderAbc(box,`X:1\nL:1/4\nK:C clef=${I.clef}\n${fs.map(f=>abcN(s+f)+'4').join(' ')} |]\nw: ${fs.map(labOf).join(' ')}`,{add_classes:true,responsive:'resize',staffwidth:Math.max(270,Math.min(560,(box.clientWidth||560)-8)),scale:1,paddingtop:4,paddingbottom:0,paddingleft:0,paddingright:4,foregroundColor:'currentColor'});
-        const ns=[...box.querySelectorAll('.abcjs-note')];ns.forEach((n,k)=>{const f=fs[k];if(f==null)return;n.dataset.m=s+f;n.dataset.si=si;n.dataset.f=f;});
-        /* on touche près d'une note (pas forcément dans la tête de la ronde) : la plus proche horizontalement */
-        box.onclick=e=>{let best=null,bd=1e9;ns.forEach(n=>{const r=n.getBoundingClientRect(),d=Math.abs(e.clientX-(r.left+r.right)/2);if(d<bd){bd=d;best=n;}});
-          if(!best||bd>40)return;const f=+best.dataset.f,d=dots.find(d=>d.si===si&&d.f===f);pick(s+f,si,f,d&&d.g);};});
-      const nm=dgCap(T(dgName(s,true)));
-      const lab=sh?TL('5e corde ('+nm.toLowerCase()+')','5th string ('+nm+')','5.ª cuerda ('+nm.toLowerCase()+')'):TL('Corde de '+nm.toLowerCase(),nm+' string','Cuerda de '+nm.toLowerCase());
-      return el('div',{class:'dgsrow',style:`--sc:${DG_SCOL[si]}`},el('div',{class:'dgstab'},el('b',{'data-notr':''},lab)),box);});
-    staffSec=el('section',{class:'mtsec dgstaffsec'},el('h3',{},'Quelle corde ? Quel doigt ?'),
-      el('p',{class:'hint'},fret?(I.id==='mando'?'Chaque couleur est une corde. Sous chaque note : la case à appuyer (0 = corde à vide). Doigts : index pour les cases 1 et 2, majeur 3 et 4, annulaire 5, auriculaire 7. Touche une note pour l\'entendre et la voir sur le manche.':'Chaque couleur est une corde. Sous chaque note : la case à appuyer (0 = corde à vide); en 1re position, le doigt porte le même numéro que la case. Touche une note pour l\'entendre et la voir sur le manche.'):'Chaque couleur est une corde. Sous chaque note : le doigt en 1re position (0 = corde à vide, ↓ bas, ↑ haut, x extension). Une même note peut parfois se jouer sur deux cordes. Touche une note pour l\'entendre et la voir sur la touche.'),
-      el('div',{class:'dgsrows'},...rows));
-  }
-  return el('div',{class:'dgwrap dgstrings'},info,staffSec,el('section',{class:'mtsec dgnecksec'},el('h3',{},fret?'Toutes les notes du manche':'Notes de la touche'),opts,el('div',{class:'dgneckwrap'},svg)));
-}
-
-/* ---------- batterie : chaque élément et sa place sur la portée ---------- */
-const DG_DRUMS=[
-  {id:'hhp',t:'Charleston (au pied)',pos:-1,x:true,w:'Sous la portée, tête en x',h:'Pied gauche : on ferme les deux cymbales.'},
-  {id:'kick',t:'Grosse caisse',pos:1,w:'1er interligne',h:'Pied droit, sur la pédale.'},
-  {id:'ftom',t:'Tom basse',pos:3,w:'2e interligne',h:'Le plus grave des toms, posé au sol.'},
-  {id:'snare',t:'Caisse claire',pos:5,w:'3e interligne',h:'Le cœur du rythme : souvent sur les temps 2 et 4.'},
-  {id:'mtom',t:'Tom médium',pos:6,w:'4e ligne',h:'Fixé sur la grosse caisse.'},
-  {id:'htom',t:'Tom aigu',pos:7,w:'4e interligne',h:'Le plus aigu des toms.'},
-  {id:'ride',t:'Cymbale ride',pos:8,x:true,w:'5e ligne, tête en x',h:'Pour garder un rythme régulier.'},
-  {id:'hh',t:'Charleston (baguettes)',pos:9,x:true,w:'Au-dessus de la portée, tête en x',h:'Les deux cymbales fermées, jouées à la baguette.'},
-  {id:'crash',t:'Cymbale crash',pos:10,x:true,w:'Ligne supplémentaire au-dessus, tête en x',h:'Pour marquer un accent ou un début de phrase.'}];
-function dgDrumPlay(id){try{const c=A.init();if(typeof qzUnmute==='function')qzUnmute();const t=c.currentTime+.02,out=A.out||c.destination;
-  const env=(g,a,d)=>{g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(a,t+.004);g.gain.exponentialRampToValueAtTime(.0001,t+d);};
-  const noise=d=>{const b=c.createBuffer(1,Math.ceil(c.sampleRate*d),c.sampleRate),x=b.getChannelData(0);for(let i=0;i<x.length;i++)x[i]=Math.random()*2-1;const s=c.createBufferSource();s.buffer=b;return s;};
-  const tone=(f0,f1,d,a)=>{const o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.setValueAtTime(f0,t);o.frequency.exponentialRampToValueAtTime(f1,t+d*.8);env(g,a,d);o.connect(g);g.connect(out);o.start(t);o.stop(t+d+.05);};
-  const hiss=(type,f,q,d,a)=>{const s=noise(d+.05),fl=c.createBiquadFilter(),g=c.createGain();fl.type=type;fl.frequency.value=f;fl.Q.value=q;env(g,a,d);s.connect(fl);fl.connect(g);g.connect(out);s.start(t);s.stop(t+d+.05);};
-  if(id==='kick')tone(140,42,.35,.9);
-  else if(id==='snare'){if(A.snare)A.snare(t,out);else{tone(190,150,.12,.4);hiss('highpass',1800,.7,.18,.5);}}
-  else if(id==='ftom')tone(110,80,.45,.7);else if(id==='mtom')tone(165,120,.38,.65);else if(id==='htom')tone(220,165,.32,.6);
-  else if(id==='hh')hiss('highpass',7500,.8,.06,.35);else if(id==='hhp')hiss('highpass',6000,.8,.09,.25);
-  else if(id==='ride'){hiss('bandpass',5200,1.2,.9,.22);tone(3100,3000,.7,.04);}
-  else if(id==='crash')hiss('highpass',4200,.6,1.6,.4);
-}catch(e){}}
-function dgDrumView(I){
-  const NS='http://www.w3.org/2000/svg',SP=7,TOP=34,LW=34,STEP=62,W=LW+40+STEP*DG_DRUMS.length,H=150;
-  const Y=p=>TOP+4*SP*2-p*SP;
-  const svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.setAttribute('class','dgdrum');
-  const mk=(t,a,txt,par)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;(par||svg).append(e);return e;};
-  for(let k=0;k<5;k++)mk('line',{x1:6,x2:W-6,y1:Y(k*2),y2:Y(k*2),class:'dgdl'});
-  mk('rect',{x:16,y:Y(6),width:4,height:SP*2,class:'dgdc'});mk('rect',{x:24,y:Y(6),width:4,height:SP*2,class:'dgdc'});
-  const cards=[],marks=[];
-  const sel=i=>{marks.forEach((g,k)=>g.classList.toggle('on',k===i));cards.forEach((c,k)=>c.setAttribute('aria-pressed',String(k===i)));dgDrumPlay(DG_DRUMS[i].id);};
-  DG_DRUMS.forEach((d,i)=>{const x=LW+40+i*STEP+STEP/2-20,y=Y(d.pos);
-    const g=mk('g',{class:'dgdn',tabindex:'0',role:'button','aria-label':T(d.t)});marks.push(g);
-    mk('rect',{x:x-STEP/2+4,y:8,width:STEP-8,height:H-16,rx:8,class:'dgdhit'},null,g);
-    if(d.pos>=10)mk('line',{x1:x-12,x2:x+12,y1:Y(10),y2:Y(10),class:'dgdl'},null,g);
-    if(d.pos<=-2)mk('line',{x1:x-12,x2:x+12,y1:Y(-2),y2:Y(-2),class:'dgdl'},null,g);
-    if(d.x){mk('path',{d:`M${x-5.5},${y-5.5} L${x+5.5},${y+5.5} M${x-5.5},${y+5.5} L${x+5.5},${y-5.5}`,class:'dgdx'},null,g);}
-    else mk('ellipse',{cx:x,cy:y,rx:6.6,ry:4.8,transform:`rotate(-20 ${x} ${y})`,class:'dgdh'},null,g);
-    mk('line',{x1:x+6,x2:x+6,y1:y-(d.x?5:1),y2:y-26,class:'dgds'},null,g);
-    mk('circle',{cx:x,cy:H-20,r:10,class:'dgdnum'},null,g);mk('text',{x,y:H-16,'text-anchor':'middle',class:'dgdnt'},String(i+1),g);
-    g.addEventListener('click',()=>sel(i));g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();sel(i);}});});
-  DG_DRUMS.forEach((d,i)=>cards.push(el('button',{type:'button',class:'dgdcard','aria-pressed':'false',onclick:()=>sel(i)},
-    el('span',{class:'dgdcn'},String(i+1)),el('span',{class:'dgdct'},el('b',{},d.t),el('span',{class:'dgdw'},d.w),el('span',{class:'dgdhh'},d.h)),el('span',{class:'gcplay','aria-hidden':'true'},'▶'))));
-  S.keyHandler=null;
-  return el('div',{class:'dgwrap dgdrums'},
-    el('section',{class:'mtsec'},el('h3',{},'La batterie sur la portée'),el('p',{class:'hint'},'Chaque élément a sa place sur la portée. Les cymbales s\'écrivent avec une tête en x. Touche une note ou une carte pour l\'entendre.'),
-      el('div',{class:'dgdwrap'},svg)),
-    el('section',{class:'mtsec'},el('div',{class:'dgdgrid'},...cards)));
+  return el('div',{class:'dgwrap dgstrings'},info,el('section',{class:'mtsec dgnecksec'},el('h3',{},fret?'Toutes les notes du manche':'Notes de la touche'),opts,el('div',{class:'dgneckwrap'},svg)));
 }

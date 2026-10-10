@@ -329,3 +329,33 @@
 .dgn5.open .dgn5ring{stroke:var(--sc);stroke-width:3.2}
 @media (max-width:600px){.dgsrow{grid-template-columns:1fr;padding:8px 8px 2px}}
 .dgsstaff{cursor:pointer}
+/* batterie */
+.dgdwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.dgdrum{display:block;width:100%;min-width:560px;height:auto;color:var(--ink)}
+.dgdl{stroke:var(--ink);stroke-width:1.1}
+.dgdc{fill:var(--ink)}
+.dgdh{fill:var(--ink)}
+.dgdx{stroke:var(--ink);stroke-width:2.4;stroke-linecap:round}
+.dgds{stroke:var(--ink);stroke-width:1.3}
+.dgdhit{fill:transparent}
+.dgdn{cursor:pointer}
+.dgdn:hover .dgdhit{fill:var(--sunk)}
+.dgdn.on .dgdhit{fill:color-mix(in srgb,var(--accent) 18%,transparent)}
+.dgdn.on .dgdh,.dgdn.on .dgdnum{fill:var(--accent)}.dgdn.on .dgdx,.dgdn.on .dgds{stroke:var(--accent)}
+.dgdnum{fill:var(--sunk);stroke:var(--line)}
+.dgdnt{font:700 10px/1 var(--f-mono);fill:var(--ink)}
+.dgdn.on .dgdnt{fill:var(--accent-ink)}
+.dgdn:focus-visible{outline:none}.dgdn:focus-visible .dgdhit{stroke:var(--accent);stroke-width:2}
+.dgdgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+.dgdcard{position:relative;display:flex;gap:12px;align-items:flex-start;text-align:left;padding:12px 30px 12px 12px;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);font:inherit;cursor:pointer}
+.dgdcard[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 2px var(--accent)}
+.dgdcn{flex:0 0 auto;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--sunk);font:700 .8rem/1 var(--f-mono)}
+.dgdcard[aria-pressed="true"] .dgdcn{background:var(--accent);color:var(--accent-ink)}
+.dgdct{display:flex;flex-direction:column;gap:2px;min-width:0}
+.dgdct b{font-size:.98rem}
+.dgdw{font:600 .78rem/1.3 var(--f-mono);color:var(--accent);text-transform:none}
+.dgdhh{font-size:.85rem;color:var(--muted);line-height:1.35}
+.dgsvg.oboe .dgcap{font:700 7px/1 var(--f-mono);fill:var(--muted)}.dgcell2 .dgsvg.oboe .dgcap{fill:#555}
+.mini .dgsvg.oboe .dgcap{display:inline}
+.dgbsl{fill:none;stroke:#bbb;stroke-width:1.4}.dgbsd{fill:none;stroke:#bbb;stroke-width:1.2;stroke-dasharray:3 3}
+.dgsvg.bsn .dgk{stroke-width:1.4}
