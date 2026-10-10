@@ -1774,7 +1774,8 @@ const A={ctx:null,out:null,
     hg.gain.setValueAtTime(0,t);hg.gain.linearRampToValueAtTime(.1,t+.012);hg.gain.setTargetAtTime(.02,t+.03,.04);
     ns.connect(bp);bp.connect(bg);bg.connect(lp);ns.connect(hp);hp.connect(hg);hg.connect(env);ns.start(t,off);ns.stop(stopAt);
   },
-  click(t,strong,dest){
+  click(t,strong,dest,ci){
+    if(typeof MIC!=='undefined'&&MIC.on){MIC.clk.push({t,ci:!!ci});if(MIC.clk.length>4000)MIC.clk.shift();}
     const c=this.ctx,o=c.createOscillator(),g=c.createGain();o.type='square';o.frequency.value=strong?1750:1150;
     g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(strong?.32:.2,t+.002);g.gain.exponentialRampToValueAtTime(.0001,t+.045);
     const hp=c.createBiquadFilter();hp.type='highpass';hp.frequency.value=600;o.connect(hp);hp.connect(g);g.connect(dest||this.out);o.start(t);o.stop(t+.06);
@@ -1832,7 +1833,7 @@ function run(plan,{sound='piano',onStep,onBeat,onEnd,lead=.15}={}){
     if(onStep)at(t,()=>onStep(it));
   }
   if(plan.ci&&plan.meter){CI.show(plan.meter);at(t0+plan.ci*plan.us,()=>CI.go());}
-  for(const k of plan.clicks||[]){const t=t0+k.u*plan.us;A.click(t,k.strong,g);at(t,()=>{if(k.ci)CI.beat(k.b);if(onBeat)onBeat(k);});}
+  for(const k of plan.clicks||[]){const t=t0+k.u*plan.us;A.click(t,k.strong,g,k.ci);at(t,()=>{if(k.ci)CI.beat(k.b);if(onBeat)onBeat(k);});}
   at(t0+plan.endU*plan.us+.2,()=>{if(P.sess===s){P.sess=null;setPlaying(false);if(onEnd)onEnd(false);}});
   return s;
 }
@@ -2185,14 +2186,14 @@ function yin(x,sr,fmin=70,fmax=1400){
   return{f:sr/(best+off),clarity:1-bv};
 }
 const MIC={on:false,stream:null,src:null,an:null,buf:null,timer:0,mode:'pitch',onEvent:null,onLive:null,
-  cand:null,stableN:0,emitted:null,peak:0,armed:true,floor:.003,lastOn:0,prevRms:0,samples:null};
+  cand:null,stableN:0,emitted:null,peak:0,armed:true,floor:.003,lastOn:0,prevRms:0,samples:null,clk:[],bleed:0};
 async function micStart(mode,onEvent,onLive){
   micStop();
   try{
     if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error('no');
     const c=A.init();
     const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:mode==='onset',noiseSuppression:false,autoGainControl:false}});
-    Object.assign(MIC,{on:true,stream,mode,onEvent,onLive,cand:null,stableN:0,emitted:null,peak:0,armed:true,floor:.003,lastOn:0,prevRms:0});
+    Object.assign(MIC,{on:true,stream,mode,onEvent,onLive,cand:null,stableN:0,emitted:null,peak:0,armed:true,floor:.003,lastOn:0,prevRms:0,clk:[],bleed:0});
     MIC.src=c.createMediaStreamSource(stream);MIC.an=c.createAnalyser();MIC.an.fftSize=2048;MIC.buf=new Float32Array(2048);MIC.src.connect(MIC.an);
     MIC.timer=setInterval(micTick,mode==='onset'?12:33);
     return true;
@@ -2212,7 +2213,12 @@ function micTick(){
   if(MIC.mode==='onset'){
     // frappe : montée brusque d'énergie au-dessus du bruit ambiant
     const now=c.currentTime;
-    if(rms>Math.max(MIC.floor*5,.012)&&rms>MIC.prevRms*2.2&&now-MIC.lastOn>.09){MIC.lastOn=now;MIC.onEvent&&MIC.onEvent({t:now-.015});}
+    /* fenêtre d'un clic du métronome : le son sort du haut-parleur puis revient au micro (latences comprises) */
+    let win=null;for(const k of MIC.clk){const d=now-k.t;if(d>-.02&&d<.28){win=k;break;}}
+    while(MIC.clk.length&&now-MIC.clk[0].t>1)MIC.clk.shift();
+    if(win&&win.ci)MIC.bleed=Math.max(MIC.bleed,rms);                    // décompte : on apprend le volume du clic au micro
+    const need=Math.max(MIC.floor*5,.012,win?MIC.bleed*1.8:0);
+    if(rms>need&&rms>MIC.prevRms*2.2&&now-MIC.lastOn>.09&&!(win&&win.ci)){MIC.lastOn=now;MIC.onEvent&&MIC.onEvent({t:now-.015});}
     if(rms<MIC.floor*2)MIC.floor=MIC.floor*.97+rms*.03;MIC.prevRms=MIC.prevRms*.5+rms*.5;
     MIC.onLive&&MIC.onLive({level:rms});return;
   }
