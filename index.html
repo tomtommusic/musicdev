@@ -1321,6 +1321,9 @@ main[data-kind="tools"] > .stand,main[data-kind="tools"] > #toolbar,main[data-ki
 .mini .dgsvg.oboe .dgcap{display:inline}
 .dgbsl{fill:none;stroke:#bbb;stroke-width:1.4}.dgbsd{fill:none;stroke:#bbb;stroke-width:1.2;stroke-dasharray:3 3}
 .dgsvg.bsn .dgk{stroke-width:1.4}
+/* manches : largeur raisonnable pour tous les instruments (pas de manche géant sur mobile) */
+.dgneck.v4.mando{max-width:220px}.dgneck.v4.banjo{max-width:250px}
+@media (max-width:600px){.dgneck.v4.bow,.dgneck.v4.bass,.dgneck.v4.mando{max-width:190px}.dgneck.v4.banjo{max-width:220px}.dgneck.v4.gtr{max-width:260px}}
 
 /* ===== Accords de guitare ===== */
 .gc{display:flex;flex-direction:column;gap:16px}
