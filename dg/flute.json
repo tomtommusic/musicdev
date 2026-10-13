@@ -635,10 +635,9 @@
     "L2",
     "L3",
     "Gs",
-    "R1",
-    "Ds"
+    "R1"
    ],
-   "comment": "Sans pouce. Le tableau ajoute la clé de mi♭ (auriculaire droit). Avec une patte de si : clé « gizmo ».",
+   "comment": "Sans pouce ni auriculaire droit. Avec une patte de si : ajouter la clé « gizmo ».",
    "sources": [
     "https://www.wfg.woodwind.org/flute/fl_bas_3.html",
     "https://www.wfg.woodwind.org/flute/fl_alt_3.html",

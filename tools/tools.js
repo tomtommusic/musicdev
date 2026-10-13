@@ -189,7 +189,7 @@ function tnStrings(){const I=TUNINGS[TN.inst];if(!I.sets)return null;const k=TN.
 /* détection de hauteur précise : YIN sur la fonction de différence, interpolation parabolique sur la courbe brute */
 function tnPitch(x,sr,fmin,fmax){
   const N=x.length,tmax=Math.min(Math.floor(sr/fmin),Math.floor(N/2)),tmin=Math.max(2,Math.floor(sr/fmax)),W=N-tmax;
-  let rms=0;for(let i=0;i<N;i++)rms+=x[i]*x[i];rms=Math.sqrt(rms/N);if(rms<.006)return{rms};
+  let rms=0;for(let i=0;i<N;i++)rms+=x[i]*x[i];rms=Math.sqrt(rms/N);if(rms<.0015)return{rms};
   const d=new Float32Array(tmax+2),cm=new Float32Array(tmax+2);
   for(let t=1;t<=tmax+1;t++){let s=0;for(let i=0;i<W;i++){const v=x[i]-x[i+t];s+=v*v;}d[t]=s;}
   let run=0;cm[0]=1;for(let t=1;t<=tmax+1;t++){run+=d[t];cm[t]=run>0?d[t]*t/run:1;}
@@ -203,10 +203,24 @@ function tnPitch(x,sr,fmin,fmax){
     const Tn=(L0-2+k+Math.max(-1,Math.min(1,o)))/n;if(Math.abs(Tn-T)<.5)T=Tn;}
   return{f:sr/T,clarity:1-cm[best],rms};
 }
-/* sous-échantillonnage (moyenne de paires) pour les notes graves : 4 à 16 fois moins de calcul */
+/* détection en deux temps (rapide sur téléphone) :
+   1) recherche grossière sur un signal sous-échantillonné (beaucoup moins de calcul, même pour une basse) ;
+   2) affinage à pleine résolution, en mesurant plusieurs périodes d'un coup autour de la période trouvée. */
+function tnDecim(x,f){const z=new Float32Array(Math.floor(x.length/f));for(let i=0;i<z.length;i++){let s=0;for(let j=0;j<f;j++)s+=x[i*f+j];z[i]=s/f;}return z;}
 function tnDetect(x,sr,fmin,fmax){
-  let y=x,r=sr;while(r/2>=fmax*10&&y.length>=2048){const z=new Float32Array(y.length>>1);for(let i=0;i<z.length;i++)z[i]=.5*(y[2*i]+y[2*i+1]);y=z;r/=2;}
-  return tnPitch(y,r,fmin,fmax);
+  let rms=0;for(let i=0;i<x.length;i++)rms+=x[i]*x[i];rms=Math.sqrt(rms/x.length);if(rms<.0025)return{rms};
+  const fc=Math.min(fmax,1600);let f=1;while(sr/(f*2)>=fc*5&&x.length/(f*2)>=768)f*=2;
+  const r=f>1?tnPitch(tnDecim(x,f),sr/f,fmin,fc):tnPitch(x,sr,fmin,fmax);
+  /* notes très aiguës (piccolo…) : vérification rapide à pleine résolution dans l'aigu */
+  if(fmax>fc){const h=tnPitch(x.subarray(0,Math.min(x.length,2048)),sr,fc*.75,fmax);if(h.f&&h.clarity>.85&&(!r.f||(h.f>r.f*1.5&&h.clarity>=r.clarity-.08)))return{f:h.f,clarity:h.clarity,rms};}
+  if(!r.f)return{rms};
+  if(f===1)return{f:r.f,clarity:r.clarity,rms};
+  /* affinage plein débit : on cherche le meilleur multiple de période autour de n×T */
+  const T=sr/r.f,n=Math.max(1,Math.min(12,Math.floor((x.length*.5-4)/T))),L0=Math.round(n*T),W=Math.min(2400,x.length-L0-4);
+  if(W>256){const span=Math.max(2,Math.ceil(f*n*.12)+1),dd=[];for(let L=L0-span;L<=L0+span;L++){let s2=0;for(let i=0;i<W;i+=1){const v=x[i]-x[i+L];s2+=v*v;}dd.push(s2);}
+    let k=1;for(let j=1;j<dd.length-1;j++)if(dd[j]<dd[k])k=j;const p=dd[k-1],q=dd[k],r2=dd[k+1],dn=p-2*q+r2,o=dn>0?.5*(p-r2)/dn:0;
+    const Tn=(L0-span+k+Math.max(-1,Math.min(1,o)))/n;if(Math.abs(Tn-T)<T*.03)return{f:sr/Tn,clarity:r.clarity,rms};}
+  return{f:r.f,clarity:r.clarity,rms};
 }
 async function tunerStart(){
   if(TS.on)return true;
@@ -214,22 +228,22 @@ async function tunerStart(){
     if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error('no');
     const c=A.init();
     const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});
-    TS.stream=stream;TS.src=c.createMediaStreamSource(stream);TS.an=c.createAnalyser();TS.an.fftSize=4096;TS.buf=new Float32Array(TS.an.fftSize);TS.src.connect(TS.an);
-    TS.on=true;TS.hist=[];TS.timer=setInterval(tunerTick,60);tnUi();feedback('');return true;
+    TS.stream=stream;TS.src=c.createMediaStreamSource(stream);TS.an=c.createAnalyser();TS.an.fftSize=8192;TS.buf=new Float32Array(TS.an.fftSize);TS.src.connect(TS.an);
+    TS.on=true;TS.hist=[];TS.timer=setInterval(tunerTick,80);tnUi();feedback('');return true;
   }catch(e){
     tunerStop();const n=e&&e.name;
     feedback(n==='NotAllowedError'||n==='SecurityError'?'Le micro a été refusé. Autorise-le dans les réglages de l\'appareil ou du navigateur, puis réessaie.':n==='NotFoundError'?'Aucun micro détecté.':'Le micro n\'est pas disponible ici.','bad');return false;
   }
 }
 function tunerStop(){clearInterval(TS.timer);TS.timer=0;if(TS.stream)TS.stream.getTracks().forEach(t=>t.stop());try{TS.src&&TS.src.disconnect();}catch(e){}Object.assign(TS,{on:false,stream:null,src:null,an:null,hist:[]});tnRefStop();tnUi();}
-function tnRange(){const s=tnStrings();if(!s)return[27,4200];const lo=Math.min(...s.notes),hi=Math.max(...s.notes);return[midiHz(lo)*.7,midiHz(hi)*1.45];}
+function tnRange(){const s=tnStrings();if(!s)return[27,4200];const lo=Math.min(...s.notes),hi=Math.max(...s.notes);return[midiHz(lo)*.7,Math.max(midiHz(hi)*1.6,midiHz(lo)*4.5)];}
 function tunerTick(){
   if(!TS.on||!TS.an)return;TS.an.getFloatTimeDomainData(TS.buf);
   const[fmin,fmax]=tnRange();const sr=A.ctx.sampleRate;
   /* fenêtre adaptée : plus courte pour les notes aiguës (plus réactif), longue pour la basse */
-  const need=Math.min(TS.buf.length,Math.max(2048,Math.pow(2,Math.ceil(Math.log2(sr/fmin*2.2)))));
+  const need=Math.min(TS.buf.length,Math.max(2048,Math.pow(2,Math.ceil(Math.log2(sr/fmin*3.2)))));
   const r=tnDetect(TS.buf.subarray(TS.buf.length-need),sr,fmin,fmax);
-  if(!r.f||r.clarity<.88){TS.hist=[];tnShow(null,r.rms);return;}
+  if(!r.f||r.clarity<.8){TS.hist=[];tnShow(null,r.rms);return;}
   TS.hist.push(r.f);if(TS.hist.length>5)TS.hist.shift();
   const srt=TS.hist.slice().sort((a,b)=>a-b),f=srt[srt.length>>1];
   /* une estimation trop loin de la médiane (saut d'octave, attaque) est ignorée */
@@ -238,9 +252,11 @@ function tunerTick(){
 }
 function tnTarget(f){
   const m=69+12*Math.log2(f/TN.a4);const s=tnStrings();
-  if(!s){const n=Math.round(m);return{midi:n,cents:100*(m-n),k:-1};}
-  let k=TS.lock;if(k==null||k>=s.notes.length){let bd=1e9;s.notes.forEach((n,i)=>{const d=Math.abs(m-n);if(d<bd){bd=d;k=i;}});}
-  return{midi:s.notes[k],cents:100*(m-s.notes[k]),k};
+  if(!s||!TN.learner){const n=Math.round(m);return{midi:n,cents:100*(m-n),k:-1};}
+  const k=TS.lock==null?0:Math.min(TS.lock,s.notes.length-1);let c=100*(m-s.notes[k]);
+  /* micro de téléphone : il entend parfois l'harmonique (une octave plus haut) au lieu de la fondamentale */
+  if(Math.abs(c)>900)c-=1200*Math.round(c/1200);
+  return{midi:s.notes[k],cents:c,k};
 }
 function tnShow(f,rms){
   const u=TS.ui;if(!u)return;
@@ -249,7 +265,7 @@ function tnShow(f,rms){
   if(!f){u.box.classList.add('idle');u.box.classList.remove('ok','low','high');u.note.textContent='–';u.oct.textContent='';u.cents.textContent=TS.on?'Joue une note':'';u.hz.textContent='';TS.okSince=0;ledsOff();u.arrow.classList.add('off');tnStringsMark(-1,false);tnGuide(null);return;}
   const tg=tnTarget(f),s=tnStrings(),c=tg.cents;
   u.box.classList.remove('idle');
-  const shown=s?tg.midi:tg.midi-transp();u.note.textContent=tnName(shown,s&&s.flat);u.oct.textContent=String(Math.floor(shown/12)-1);
+  const shown=s?tg.midi:tg.midi-transp();if(s&&!TN.learner)u.note.dataset.k='';u.note.textContent=tnName(shown,s&&s.flat);u.oct.textContent=String(Math.floor(shown/12)-1);
   u.wr.textContent=!s&&transp()?'note écrite':'';
   const ok=Math.abs(c)<=TN.tol;const now=performance.now();
   if(ok){if(!TS.okSince)TS.okSince=now;}else TS.okSince=0;
@@ -266,8 +282,7 @@ function tnShow(f,rms){
   ledsOff();const L=u.leds.querySelectorAll('i');
   if(Math.abs(c)<=TN.tol)L[TN_LEDS.indexOf(0)].className=stable?'ok':'near';
   else{let k=0,bd=1e9;TN_LEDS.forEach((v,i)=>{if(v===0)return;if(Math.sign(v)!==Math.sign(c))return;const d=Math.abs(v-Math.max(-50,Math.min(50,c)));if(d<bd){bd=d;k=i;}});L[k].className=Math.abs(c)>25?'far':'off2';}
-  tnStringsMark(tg.k,stable,ok?'':c>0?'high':'low');tnGuide(tg,stable);
-  if(TN.learner&&stable&&s&&now-TS.okSince>1300&&!TS.adv){TS.adv=true;setTimeout(()=>{TS.adv=false;const n=s.notes.length;for(let j=1;j<=n;j++){const kk=((TS.lock||0)+j)%n;if(!TS.done.has(kk)){TS.lock=kk;TS.hist=[];TS.okSince=0;tnStringsMark(-1,false);tnGuide(null);return;}}},600);}
+  if(TN.learner)tnStringsMark(tg.k,stable,ok?'':c>0?'high':'low');tnGuide(tg,stable);
 }
 function tnStringsMark(k,ok,state){const u=TS.ui;if(!u||!u.head)return;
   u.head.querySelectorAll('[data-k]').forEach(g=>{const i=+g.dataset.k;g.classList.toggle('cur',i===k);g.classList.toggle('high',i===k&&state==='high');g.classList.toggle('low',i===k&&state==='low');g.classList.toggle('lock',i===TS.lock);if(i===k&&ok){g.classList.add('done');TS.done.add(i);}});}
@@ -290,7 +305,7 @@ function tnHead(s){
       mk('circle',{cx:px,cy:py,r:21,class:'tnknob'}),
       mk('text',{x:px,y:py+2,class:'tnpegn'},document.createTextNode(name)),mk('text',{x:px,y:py+15,class:'tnpegs'},document.createTextNode(String(num))),
       mk('text',{x:px+15,y:py-12,class:'tnchk'},document.createTextNode('✓')));
-    g.addEventListener('click',()=>{TS.lock=TS.lock===i&&!TN.learner?null:i;TS.hist=[];tnStringsMark(-1,false);if(TS.ui&&TS.ui.auto)TS.ui.auto.classList.toggle('on',TS.lock==null);tnGuide(null);});
+    g.addEventListener('click',()=>{if(!TN.learner){tnRef(notes[i]);return;}TS.lock=i;TS.hist=[];TS.okSince=0;tnStringsMark(-1,false);tnGuide(null,false,true);});
     return g;};
   const off=()=>40;
   left.forEach((i,r)=>svg.append(peg(i,40,rowY(r),[W/2-off(r),rowY(r)])));
@@ -299,18 +314,23 @@ function tnHead(s){
   return el('div',{class:'tnhead'},svg);
 }
 /* mode apprenti : on vise une corde à la fois, on dit clairement s'il faut tendre ou détendre, et on avertit avant que la corde casse */
-function tnGuide(tg,stable){
+function tnGuide(tg,stable,force){
   const u=TS.ui;if(!u||!u.guide)return;const s=tnStrings();
   if(!TN.learner||!s){u.guide.hidden=true;return;}u.guide.hidden=false;
   const k=TS.lock==null?0:TS.lock,tgt=s.notes[k],num=s.notes.length-k,name=tnName(tgt,s.flat);
-  const semi=tg?Math.round(tg.cents/100):null,ladder=[];
+  if(!u.gparts||force||u.gparts.k!==k){
+    const g={k,title:el('b',{}),count:el('span',{}),ladder:el('div',{class:'tnladder'}),msg:el('p',{class:'tnmsg'})};u.gparts=g;
+    u.guide.replaceChildren(el('div',{class:'tngh'},g.title,g.count),g.ladder,g.msg,
+      el('div',{class:'tngbtn'},btn('‹ Corde précédente',()=>tnGo(-1),'quiet'),btn('▶ Entendre la note',()=>tnRef(s.notes[TS.lock==null?0:TS.lock]),'quiet'),btn('Corde suivante ›',()=>tnGo(1),'quiet'),
+        btn('↺ Recommencer le tour',()=>{TS.done=new Set();tnStringsMark(-1,false);tnGuide(null,false,true);},'quiet')));}
+  const g=u.gparts,semi=tg?Math.round(tg.cents/100):null,ladder=[];
   for(let d=-3;d<=3;d++){const cls=['tnrung',d===0?'tgt':'',semi===d?(d===0?'here ok':'here '+(d>0?'hi':'lo')):''].join(' ');ladder.push(el('span',{class:cls},tnName(tgt+d,s.flat),d===0?el('small',{},'cible'):semi===d?el('small',{},'toi'):null));}
   if(semi!=null&&semi>3)ladder.push(el('span',{class:'tnrung here hi'},'▲',el('small',{},'+'+semi)));
   if(semi!=null&&semi<-3)ladder.unshift(el('span',{class:'tnrung here lo'},'▼',el('small',{},String(semi))));
   let msg,cls='';
   if(!tg){msg=TS.on?`Joue la corde ${num} (${name}) toute seule et laisse-la sonner.`:'Active le micro pour commencer.';}
   else{const c=tg.cents,cur=tnName(tgt+semi,s.flat);
-    if(Math.abs(c)<=TN.tol){msg=stable?'✓ Juste ! On passe à la corde suivante…':'Tiens la note…';cls='ok';}
+    if(Math.abs(c)<=TN.tol){msg=stable?'✓ Juste ! Choisis une autre corde (ou repasse sur celle-ci plus tard).':'Tiens la note…';cls='ok';}
     else if(c>150){msg=`⚠ Arrête de tendre ! Ta corde sonne ${cur}, ${semi} demi-ton${semi>1?'s':''} plus haut que ${name}. Détends-la (le son doit descendre), sinon elle risque de casser.`;cls='danger';
       if(navigator.vibrate&&performance.now()-(TS.vib||0)>2500){TS.vib=performance.now();try{navigator.vibrate(220);}catch(e){}}}
     else if(c>50)msg=`Trop haut : tu joues ${cur}, qui est après ${name}. Détends un peu la corde (le son doit descendre).`,cls='hi';
@@ -320,11 +340,11 @@ function tnGuide(tg,stable){
     else msg='Presque ! Un tout petit peu trop bas : tends très légèrement.',cls='lo';}
   const allDone=s.notes.every((_,i)=>TS.done.has(i));
   u.guide.className='tnguide '+cls;
-  u.guide.replaceChildren(el('div',{class:'tngh'},el('b',{},`Corde ${num} : ${name}`),el('span',{},allDone?'🎉 Toutes les cordes sont justes':`${TS.done.size} / ${s.notes.length} cordes justes`)),
-    el('div',{class:'tnladder'},ladder),el('p',{class:'tnmsg'},msg),
-    el('div',{class:'tngbtn'},btn('‹ Corde précédente',()=>tnGo(-1),'quiet'),btn('▶ Entendre la note',()=>tnRef(tgt),'quiet'),btn('Corde suivante ›',()=>tnGo(1),'quiet')));
+  g.title.textContent=`Corde ${num} : ${name}`;
+  g.count.textContent=allDone?'🎉 Toutes les cordes sont justes. Refais un tour pour vérifier.':`${TS.done.size} / ${s.notes.length} cordes justes`;
+  g.ladder.replaceChildren(...ladder);if(g.msg.textContent!==msg)g.msg.textContent=msg;
 }
-function tnGo(d){const s=tnStrings();if(!s)return;const n=s.notes.length;TS.lock=((TS.lock==null?0:TS.lock)+d+n)%n;TS.hist=[];TS.okSince=0;tnStringsMark(-1,false);tnGuide(null);}
+function tnGo(d){const s=tnStrings();if(!s)return;const n=s.notes.length;TS.lock=((TS.lock==null?0:TS.lock)+d+n)%n;TS.hist=[];TS.okSince=0;tnStringsMark(-1,false);tnGuide(null,false,true);}
 function tnRefStop(){if(TS.ref){try{TS.ref.g.gain.setTargetAtTime(0,A.ctx.currentTime,.03);const r=TS.ref;setTimeout(()=>{try{r.o.stop();}catch(e){}},200);}catch(e){}TS.ref=null;}}
 function tnRef(m){
   tnRefStop();const c=A.init(),o=c.createOscillator(),o2=c.createOscillator(),g=c.createGain(),g2=c.createGain();
@@ -355,9 +375,9 @@ function tunerView(){
     const s=tnStrings();setBox.replaceChildren();TS.lock=null;
     if(s){const I=TUNINGS[TN.inst];
       setBox.append(el('label',{class:'qzfield'},el('span',{class:'fl'},'Accord'),sel('tn_set',I.sets.map(x=>[x[0],x[1]]),s.set[0],v=>{TN.set[TN.inst]=v;tnSave();refresh();})));
-      TS.done=new Set();if(TN.learner)TS.lock=0;
-      u.head=tnHead(s);u.auto=el('button',{type:'button',class:'tnauto'+(TS.lock==null?' on':''),onclick:()=>{TS.lock=null;u.auto.classList.add('on');tnStringsMark(-1,false);}},'Auto : corde la plus proche');
-      u.strings.replaceChildren(u.head,TN.learner?u.guide:u.auto);u.learn.hidden=false;
+      TS.done=new Set();TS.lock=TN.learner?0:null;u.gparts=null;
+      u.head=tnHead(s);
+      u.strings.replaceChildren(u.head,TN.learner?u.guide:el('p',{class:'hint tnhint'},'Mode chromatique : l\'accordeur affiche la note jouée, quelle que soit la corde. Touche une cheville pour entendre la note de la corde.'));u.learn.hidden=false;if(TN.learner)tnStringsMark(-1,false);
       u.strings.hidden=false;u.refs.replaceChildren(el('span',{class:'fl'},'Entendre une corde'),...s.notes.map((m,i)=>el('button',{type:'button',class:'btn quiet sq',onclick:()=>tnRef(m)},tnName(m,s.flat))));
     }else{u.strings.hidden=true;u.strings.replaceChildren();u.head=null;u.learn.hidden=true;
       setBox.append(el('label',{class:'qzfield'},el('span',{class:'fl'},'Instrument transpositeur'),sel('tn_tr',TRANSP_OPTS,S.transp,v=>{S.transp=v;try{localStorage.setItem('atelier-transp',v)}catch(e){}TS.hist=[];})));u.refs.replaceChildren(el('span',{class:'fl'},'Note de référence'),btn(`▶ La ${TN.a4} Hz`,()=>tnRef(69),'quiet'));}
@@ -373,7 +393,7 @@ function tunerView(){
     el('section',{class:'mtsec'},el('h3',{},'Précision'),
       el('div',{class:'mtline'},el('label',{class:'qzfield'},el('span',{class:'fl'},'Zone « juste »'),tolSel),
         el('label',{class:'qzfield'},el('span',{class:'fl'},'Diapason : la ='),el('span',{class:'tna4'},a4,' Hz'))),
-      el('p',{class:'hint'},'« Juste » s\'allume seulement si la note reste dans la zone choisie pendant un court instant. Avec un instrument choisi, l\'accordeur vise la corde la plus proche (Auto) ou la cheville que tu touches. Le mode apprenti guide une corde à la fois et avertit quand une corde est beaucoup trop tendue. Les écarts sont toujours mesurés par rapport à la note exacte de la corde : aucune tolérance cachée.')));
+      el('p',{class:'hint'},'« Juste » s\'allume seulement si la note reste dans la zone choisie pendant un court instant. En mode normal, l\'accordeur est chromatique : il affiche simplement la note jouée. En mode apprenti, tu choisis la corde à accorder (cheville ou boutons) ; elle reçoit un ✓ quand elle est juste, et tu peux revenir à n\'importe quelle corde : on fait souvent deux ou trois fois le tour. Les écarts sont toujours mesurés par rapport à la note exacte de la corde : aucune tolérance cachée.')));
   refresh();tnShow(null,0);tnUi();tnGuide(null);
   return out;
 }

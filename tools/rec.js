@@ -3,7 +3,7 @@
 /* un seul enregistrement à la fois : gardé dans l'appareil jusqu'au partage, puis supprimé */
 MOD.en.mount=function(){$('#toolbar').replaceChildren();this.root=el('div',{class:'tl'});$('#answer').replaceChildren(this.root);};
 MOD.en.fresh=function(){this.root.replaceChildren(recView());recRestore();};
-const RC_DEF={count:true,click:false,max:10};
+const RC_DEF={count:true,click:false,max:10,level:true};
 const RC=tlLoad('atelier-rec',RC_DEF);
 const rcSave=()=>tlSave('atelier-rec',RC);
 const RS={on:false,arming:false,stream:null,rec:null,chunks:[],t0:0,timer:0,an:null,src:null,buf:null,raf:0,wake:null,last:null,url:'',ui:null,cdTimer:0,cdNodes:[]};
@@ -75,11 +75,32 @@ function recRelease(){
   try{RS.wake&&RS.wake.release();}catch(e){}RS.wake=null;
   if(RS.ui)RS.ui.meter.style.setProperty('--lv','0');
 }
+/* égaliseur de volume lent : gain inverse de l'enveloppe (fenêtre ~0,4 s), limité, puis normalisation ; sortie WAV 16 bits */
+async function recLevel(blob){
+  const c=A.init(),buf=await new Promise((ok,ko)=>{blob.arrayBuffer().then(ab=>{const p=c.decodeAudioData(ab,ok,ko);if(p&&p.then)p.then(ok,ko);}).catch(ko);});
+  const sr=buf.sampleRate,n=buf.length,ch=buf.numberOfChannels;if(!n||n>sr*60*12)return null;
+  const x=new Float32Array(n);for(let k=0;k<ch;k++){const d=buf.getChannelData(k);for(let i=0;i<n;i++)x[i]+=d[i]/ch;}
+  const F=Math.round(sr*.05),nf=Math.ceil(n/F),rms=new Float32Array(nf);
+  for(let f=0;f<nf;f++){let s=0,m=0;for(let i=f*F;i<Math.min(n,(f+1)*F);i++){s+=x[i]*x[i];m++;}rms[f]=Math.sqrt(s/Math.max(1,m));}
+  const W=3,env=new Float32Array(nf);for(let f=0;f<nf;f++){let s=0,m=0;for(let j=Math.max(0,f-W);j<=Math.min(nf-1,f+W);j++){s+=rms[j];m++;}env[f]=s/m;}
+  const act=Array.from(env).filter(v=>v>.004).sort((a,b)=>a-b);if(act.length<4)return null;
+  const target=act[Math.floor(act.length*.6)],gate=Math.max(.003,target*.12),gain=new Float32Array(nf);
+  for(let f=0;f<nf;f++)gain[f]=env[f]<gate?Math.min(1.5,target/Math.max(gate,env[f])):Math.max(.4,Math.min(3,target/env[f]));
+  for(let f=1;f<nf;f++)gain[f]=gain[f-1]*.45+gain[f]*.55;for(let f=nf-2;f>=0;f--)gain[f]=gain[f+1]*.45+gain[f]*.55;
+  let pk=0;for(let i=0;i<n;i++){const fi=i/F-.5,a=Math.max(0,Math.min(nf-1,Math.floor(fi))),b=Math.min(nf-1,a+1),t=Math.max(0,Math.min(1,fi-a));x[i]*=gain[a]*(1-t)+gain[b]*t;const v=Math.abs(x[i]);if(v>pk)pk=v;}
+  const norm=pk>0?.89/pk:1,ab=new ArrayBuffer(44+n*2),v=new DataView(ab),w=(o,str)=>{for(let i=0;i<str.length;i++)v.setUint8(o+i,str.charCodeAt(i));};
+  w(0,'RIFF');v.setUint32(4,36+n*2,true);w(8,'WAVE');w(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,n*2,true);
+  for(let i=0;i<n;i++){const s2=Math.max(-1,Math.min(1,x[i]*norm));v.setInt16(44+i*2,s2<0?s2*32768:s2*32767,true);}
+  return new Blob([ab],{type:'audio/wav'});
+}
 async function recFinish(){
   const type=(RS.rec&&RS.rec.mimeType)||(RS.chunks[0]&&RS.chunks[0].type)||'audio/mp4';
   const blob=new Blob(RS.chunks,{type:type.split(';')[0]});RS.chunks=[];RS.rec=null;
   if(!blob.size){feedback('Rien n\'a été enregistré. Vérifie le micro et réessaie.','bad');recUi();return;}
-  const d=new Date();RS.last={blob,type:blob.type,ext:recExt(type),dur:RS.dur||0,date:d.getTime(),name:recDefaultName(d),shared:false};
+  let out=blob,otype=blob.type,oext=recExt(type);
+  /* volume stabilisé : certains téléphones font « pomper » le niveau (fort, moins fort…) ; on le lisse et on normalise */
+  if(RC.level!==false){if(RS.ui)RS.ui.state.textContent='Traitement…';try{const w=await recLevel(blob);if(w){out=w;otype='audio/wav';oext='wav';}}catch(e){}}
+  const d=new Date();RS.last={blob:out,type:otype,ext:oext,dur:RS.dur||0,date:d.getTime(),name:recDefaultName(d),shared:false};
   await recStore(RS.last);recShow();
 }
 async function recRestore(){

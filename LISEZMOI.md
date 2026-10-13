@@ -12,7 +12,7 @@ Cette branche `sources` contient tout ce qui sert à le fabriquer. Point de sauv
    remplacer ces chemins par les nouveaux (`grep -rl scratchpad .` pour les trouver).
 3. Construire : `bash build.sh` → copie `index-before-quiz.html` dans `main/index.html`, puis applique dans l'ordre
    `quiz/integrate.py`, `method.py`, `tools/integrate_tools.py`, `features2.py` (accueil + accords de guitare), `unmute.py`, `micbleed.py`, `i18n/integrate_i18n.py`.
-4. Publier : augmenter `VERSION` dans `sw.js` (actuellement `musicdev-1.16.3`), commit, push sur `main`
+4. Publier : augmenter `VERSION` dans `sw.js` (actuellement `musicdev-1.17.0`), commit, push sur `main`
    (GitHub Pages se met à jour en ~30 s). Pousser aussi les sources modifiées sur cette branche.
 
 ## Repères
@@ -23,3 +23,7 @@ Cette branche `sources` contient tout ce qui sert à le fabriquer. Point de sauv
 - Traductions FR/EN/ES : moteur `i18n/i18n.js`; chaînes ajoutées dans `i18n/mkextra.py` → `python3 i18n/mkextra.py`.
 - Micro : `micbleed.py` empêche le clic du métronome d'être pris pour une frappe; `unmute.py` gère la session audio iPhone.
 - Tests visuels : scripts Playwright `shot_*.py` (serveur local : `python3 -m http.server 8790` dans le dossier de `main`).
+
+## 1.17.0
+- `fixes4.py` : tablature (lecture à vue, appliquée, solfège).
+- `pianosmp.py` : piano échantillonné ; les sons sont dans `piano/` sur `main` (créés par `piano_enc.py` à partir des échantillons mf_RR1).

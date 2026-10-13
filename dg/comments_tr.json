@@ -330,5 +330,9 @@
 "Les deux auriculaires (L+R)": {
 "en": "Both pinkies (L+R)",
 "es": "Ambos meñiques (L+R)"
+},
+"Sans pouce ni auriculaire droit. Avec une patte de si : ajouter la clé « gizmo ».": {
+"en": "No thumb and no right pinky. With a B foot: add the “gizmo” key.",
+"es": "Sin pulgar ni meñique derecho. Con pata de si: añadir la llave «gizmo»."
 }
 }
