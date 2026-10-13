@@ -1,6 +1,6 @@
 import sys
 p=sys.argv[1];s=open(p).read()
-if 'qzUnmute' in s: print('deja');sys.exit()
+if 'function qzUnmute' in s: print('deja');sys.exit()
 def rep(a,b):
     global s
     assert s.count(a)==1,(a[:60],s.count(a)); s=s.replace(a,b)
