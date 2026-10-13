@@ -16,9 +16,12 @@
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}main[data-kind="quiz"] #score,main[data-kind="tools"] #score{display:none!important}
 .methbody a.methl{color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:2px}
 #score.paused{opacity:.25;filter:blur(1px);pointer-events:none}
-#vbeat{position:absolute;top:10px;right:12px;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font:800 1.2rem/1 var(--f-mono);color:var(--muted);border:2px solid var(--line);background:var(--surface);opacity:.5;transition:transform .08s,opacity .08s;z-index:3;pointer-events:none}
-#vbeat.on{opacity:1;color:var(--accent-ink);background:var(--accent);border-color:var(--accent);transform:scale(1.12)}
-#vbeat.on.strong{transform:scale(1.28)}
+#vbeat{position:absolute;right:16px;bottom:14px;display:flex;gap:6px;z-index:3;pointer-events:none;opacity:0;transition:opacity .2s}
+#vbeat.live{opacity:1}
+#vbeat i{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:700 .78rem/1 var(--f-mono);font-style:normal;color:var(--muted);border:1.5px solid var(--line);background:var(--surface);transition:transform .07s,background .07s}
+#vbeat i.on{color:var(--accent-ink);background:var(--accent);border-color:var(--accent);transform:scale(1.18)}
+#vbeat i.on.strong{transform:scale(1.32)}
+@media (max-width:600px){#vbeat{right:10px;bottom:10px;gap:4px}#vbeat i{width:22px;height:22px;font-size:.7rem}}
 .stand{position:relative}
 #score .abcjs-tab-number,#score .abcjs-tabNumber{fill:currentColor}
 @media (max-width:600px){main[data-kind="quiz"] .meta>:nth-child(4){grid-column:1/4}}
@@ -1825,7 +1828,9 @@ const A={ctx:null,out:null,
   },
   smp:{buf:{},started:false},
   loadPiano(){
-    if(this.smp.started||!window.fetch)return;this.smp.started=true;const c=this.ctx;
+    if(this.smp.started||!window.fetch)return;this.smp.started=true;
+    /* décodage sans attendre un geste de l'utilisateur : un contexte hors ligne suffit, les sons servent ensuite partout */
+    const OC=window.OfflineAudioContext||window.webkitOfflineAudioContext;let c=this.ctx;try{if(!c&&OC)c=new OC(1,1,44100);}catch(e){}if(!c){this.smp.started=false;return;}
     for(let m=21;m<=108;m+=3)fetch('piano/'+m+'.mp3').then(r=>{if(!r.ok)throw new Error(r.status);return r.arrayBuffer();})
       .then(b=>new Promise((res,rej)=>c.decodeAudioData(b,res,rej)))
       .then(buf=>{/* début réel du son (le format mp3 ajoute un court silence au début) */
@@ -1838,7 +1843,7 @@ const A={ctx:null,out:null,
     const c=this.ctx,B=this.smp.buf;let best=null,bd=99;
     for(const k in B){const x=Math.abs(k-m);if(x<bd){bd=x;best=+k;}}
     if(best==null||bd>2)return this.pianoSynth(m,t,d,v,dest);
-    const s=B[best],rate=2**((m-best)/12),end=t+Math.max(d,.1),vel=Math.max(.1,Math.min(1,v/.45));
+    const s=B[best],rate=2**((m-best)/12+14.5/1200),end=t+Math.max(d,.1),vel=Math.max(.1,Math.min(1,v/.45));
     const src=c.createBufferSource();src.buffer=s.b;src.playbackRate.value=rate;
     const lp=c.createBiquadFilter();lp.type='lowpass';lp.frequency.value=Math.min(16000,1800+9000*vel**1.5);lp.Q.value=.5;
     const g=c.createGain(),pk=v*2.4;g.gain.setValueAtTime(pk,t);g.gain.setValueAtTime(pk,end);g.gain.setTargetAtTime(0,end,m>84?.06:.11);
@@ -2078,7 +2083,7 @@ function run(plan,{sound='piano',onStep,onBeat,onEnd,lead=.15}={}){
     if(onStep)at(t,()=>onStep(it));
   }
   if(plan.ci&&plan.meter){CI.show(plan.meter);at(t0+plan.ci*plan.us,()=>CI.go());}
-  for(const k of plan.clicks||[]){const t=t0+k.u*plan.us,quiet=MIC.on&&!k.ci&&!S.micMetro;if(!quiet)A.click(t,k.strong,g,k.ci);at(t,()=>{if(k.ci)CI.beat(k.b);else if(MIC.on)vBeat(k);if(onBeat)onBeat(k);});}
+  for(const k of plan.clicks||[]){const t=t0+k.u*plan.us,quiet=MIC.on&&!k.ci&&!S.micMetro;if(!quiet)A.click(t,k.strong,g,k.ci);at(t,()=>{if(k.ci)CI.beat(k.b);else vBeat(k);if(onBeat)onBeat(k);});}
   at(t0+plan.endU*plan.us+.2,()=>{if(P.sess===s){P.sess=null;setPlaying(false);if(onEnd)onEnd(false);}});
   return s;
 }
@@ -2487,9 +2492,11 @@ function micTick(){
    - « Reconnaissance microphone » : interrupteur (mémorisé sur l'appareil, commun aux modules)
    - « Commencer / Arrêter l'exercice » : démarre ou arrête l'écoute (et l'exercice) quand l'interrupteur est actif */
 /* métronome visuel pendant que le micro écoute (le clic audible gênerait la détection) */
-function vBeat(k){let v=document.getElementById('vbeat');const st=document.querySelector('.stand');if(!st)return;
-  if(!v){v=document.createElement('div');v.id='vbeat';v.setAttribute('aria-hidden','true');st.append(v);}
-  v.textContent=String((k.b||0)+1);v.className='on'+(k.strong?' strong':'');clearTimeout(v._t);v._t=setTimeout(()=>{v.className='';},180);}
+function vBeat(k){const st=document.querySelector('.stand');if(!st||!S.ex||!S.ex.meter)return;let v=document.getElementById('vbeat');const n=S.ex.meter.beats||4;
+  if(!v||v.childElementCount!==n||v.parentNode!==st){if(v)v.remove();v=document.createElement('div');v.id='vbeat';v.setAttribute('aria-hidden','true');
+    for(let i=0;i<n;i++){const d=document.createElement('i');d.textContent=String(i+1);v.append(d);}st.append(v);}
+  const b=(k.b||0)%n;[...v.children].forEach((d,i)=>{d.className=i===b?(b===0?'on strong':'on'):'';});
+  v.classList.add('live');clearTimeout(v._t);v._t=setTimeout(()=>{v.classList.remove('live');[...v.children].forEach(d=>d.className='');},1600);}
 function micControls(o){
   const chip=el('span',{class:'micchip',hidden:true,'aria-live':'polite'});
   const tg=el('button',{class:'btn quiet toggle',type:'button'});
@@ -6362,6 +6369,7 @@ const place=()=>{if(meta.lastElementChild!==cell&&meta.querySelector('.mi'))meta
 new MutationObserver(place).observe(meta,{childList:true});
 new MutationObserver(sync).observe(sb,{attributes:true,attributeFilter:['aria-expanded']});place();sync();})();
 </script>
+<script>window.addEventListener('load',()=>setTimeout(()=>{try{A.loadPiano()}catch(e){}},400));</script>
 <script>
 /* langue : sélecteur dans l'en-tête, puis traduction de la page */
 (()=>{const br=document.querySelector('.rail .brand');if(br)br.after(langSwitch());
