@@ -1,6 +1,8 @@
 
 /* ========== ENREGISTREUR : paroles qui défilent + mastering automatique ========== */
 
+/* étiquette « Bêta » : fonction nouvelle, en phase de test */
+function betaTag(){return el('span',{class:'beta',title:T('Fonction nouvelle, en phase de test : tes commentaires sont les bienvenus.')},T('Bêta'));}
 /* ---------- paroles (téléprompteur) ---------- */
 const LY_DEF={text:'',speed:20,size:26,open:false};
 const LY=tlLoad('atelier-lyr',LY_DEF);
@@ -56,7 +58,7 @@ function lyView(u){
   const full=mk('⛶ Plein écran',()=>lyFull(true),'lyfs');
   const close=mk('✕',()=>lyFull(false),'quiet lyclose','Quitter le plein écran');
   u.ly=el('section',{class:'mtsec lysec'},
-    el('div',{class:'lyhead'},el('h3',{},'Paroles à suivre'),el('div',{class:'lyfullbar'},u.lfgo,u.lfclock,close)),
+    el('div',{class:'lyhead'},el('h3',{},'Paroles',betaTag()),el('div',{class:'lyfullbar'},u.lfgo,u.lfclock,close)),
     el('div',{class:'lyedit'},u.lyarea,el('div',{class:'qzbtns'},done)),
     el('div',{class:'lyshow'},
       u.lybox,
@@ -152,7 +154,7 @@ function mstView(au){
     parts.push(el('div',{class:'qzbtns'},undo));
     state.textContent='Le fichier partagé ou téléchargé est la version avec mastering.';
   }
-  box.append(el('h4',{},'Mastering automatique'),
+  box.append(el('h4',{},'Mastering automatique',betaTag()),
     el('p',{class:'hint'},'Rend la prise plus pleine et plus forte, comme une pièce prête à partager : égalisation, compression douce et volume ajusté, sans saturer.'),
     ...parts,state);
   return box;

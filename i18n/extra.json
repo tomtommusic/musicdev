@@ -541,7 +541,10 @@
 "Écouter": "Listen",
 "Original": "Original",
 "Avec mastering": "With mastering",
-"Le fichier partagé ou téléchargé est la version avec mastering.": "The shared or downloaded file is the mastered version."
+"Le fichier partagé ou téléchargé est la version avec mastering.": "The shared or downloaded file is the mastered version.",
+"Paroles": "Lyrics",
+"Bêta": "Beta",
+"Fonction nouvelle, en phase de test : tes commentaires sont les bienvenus.": "New feature, still being tested: your feedback is welcome."
 },
 "es": {
 "Modules": "Módulos",
@@ -1085,6 +1088,9 @@
 "Écouter": "Escuchar",
 "Original": "Original",
 "Avec mastering": "Con masterización",
-"Le fichier partagé ou téléchargé est la version avec mastering.": "El archivo compartido o descargado es la versión masterizada."
+"Le fichier partagé ou téléchargé est la version avec mastering.": "El archivo compartido o descargado es la versión masterizada.",
+"Paroles": "Letra",
+"Bêta": "Beta",
+"Fonction nouvelle, en phase de test : tes commentaires sont les bienvenus.": "Función nueva, en fase de prueba: tus comentarios son bienvenidos."
 }
 }

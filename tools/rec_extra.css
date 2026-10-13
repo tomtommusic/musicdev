@@ -38,3 +38,7 @@ html.lyfull,html.lyfull body{overflow:hidden}
 .mstopt[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .mstdone{margin:6px 0 0;color:var(--accent)}
 .mststate:empty{display:none}
+
+/* étiquette Bêta */
+.beta{display:inline-block;vertical-align:middle;margin-left:8px;padding:2px 8px;border-radius:999px;border:1px solid var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);font:700 .62rem/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;cursor:help}
+.fl .beta{margin-left:6px;font-size:.58rem;padding:1px 6px}

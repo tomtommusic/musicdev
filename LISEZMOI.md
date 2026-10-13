@@ -12,7 +12,7 @@ Cette branche `sources` contient tout ce qui sert à le fabriquer. Point de sauv
    remplacer ces chemins par les nouveaux (`grep -rl scratchpad .` pour les trouver).
 3. Construire : `bash build.sh` → copie `index-before-quiz.html` dans `main/index.html`, puis applique dans l'ordre
    `quiz/integrate.py`, `method.py`, `tools/integrate_tools.py`, `features2.py` (accueil + accords de guitare), `unmute.py`, `micbleed.py`, `i18n/integrate_i18n.py`.
-4. Publier : augmenter `VERSION` dans `sw.js` (actuellement `musicdev-1.18.0`), commit, push sur `main`
+4. Publier : augmenter `VERSION` dans `sw.js` (actuellement `musicdev-1.18.1`), commit, push sur `main`
    (GitHub Pages se met à jour en ~30 s). Pousser aussi les sources modifiées sur cette branche.
 
 ## Repères
@@ -32,3 +32,4 @@ Cette branche `sources` contient tout ce qui sert à le fabriquer. Point de sauv
 - Piano échantillonné retiré de la compilation (délai perçu sur les notes) : on garde le piano de synthèse. `pianosmp.py` reste ici pour mémoire, mais `build.sh` ne l'utilise plus. Ne pas le réactiver sans l'accord de l'utilisateur.
 - 1.17.5 : `unmute.py` vérifie maintenant 'function qzUnmute' (avant, la simple mention de qzUnmute dans dg.js le faisait sauter). `build.sh` s'arrête si un patch répond « déjà appliqué ».
 - 1.18.0 : `tools/rec_extra.js` + `rec_extra.css` (paroles qui défilent, mastering automatique), ajoutés après rec.js par integrate_tools.py.
+- 1.18.1 : `betaTag()` (dans rec_extra.js) : étiquette « Bêta » à mettre sur toute nouvelle fonction. Classe CSS `.beta`.

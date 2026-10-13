@@ -26,7 +26,7 @@ genMelody=function(cfg){const tm=TAB_MODS.includes(S.mod)&&TAB_RANGE[tabMode()];
   return ex;};
 const TAB_DEF={guitar:()=>({instrument:'guitar',label:''}),bass:()=>({instrument:'guitar',label:'',tuning:['E,,','A,,','D,','G,']})};
 function tabMode(){try{return localStorage.getItem('atelier-tab')||''}catch(e){return ''}}""")
-rep("""  if(id==='lr'){const i=el('input',{type:'checkbox',id:'s_metro'})""","""  if(TAB_MODS.includes(id))opts.push(field('Tablature',el('div',{class:'field'},sel('s_tab',[['','Aucune'],['guitar','Guitare'],['bass','Basse électrique']],tabMode(),v=>{try{localStorage.setItem('atelier-tab',v)}catch(e){};newEx();}),el('span',{class:'hint'},'Les numéros de case s\\'affichent sous la portée. La clé est imposée (sol pour la guitare, fa pour la basse) et les notes restent dans les cases 0 à 5.'))));
+rep("""  if(id==='lr'){const i=el('input',{type:'checkbox',id:'s_metro'})""","""  if(TAB_MODS.includes(id))opts.push(field(['Tablature',typeof betaTag==='function'?betaTag():null].filter(Boolean),el('div',{class:'field'},sel('s_tab',[['','Aucune'],['guitar','Guitare'],['bass','Basse électrique']],tabMode(),v=>{try{localStorage.setItem('atelier-tab',v)}catch(e){};newEx();}),el('span',{class:'hint'},'Les numéros de case s\\'affichent sous la portée. La clé est imposée (sol pour la guitare, fa pour la basse) et les notes restent dans les cases 0 à 5.'))));
   if(id==='lr'){const i=el('input',{type:'checkbox',id:'s_metro'})""")
 s=s.replace("</style>","#score .abcjs-tab-number,#score .abcjs-tabNumber{fill:currentColor}\n</style>",1)
 rep("['Sujets',`${c.topics.length} notion${c.topics.length>1?'s':''}`],['Formats',c.formats.length===3?'tous':c.formats.map(f=>QZ_FORMATS.find(x=>x[0]===f)[1]).join(', ')]",
