@@ -1,0 +1,40 @@
+
+/* ===== Enregistreur : paroles ===== */
+.lysec .lyhead{display:flex;align-items:center;gap:10px}
+.lyfullbar{display:none;align-items:center;gap:12px;margin-left:auto}
+.lyedit{display:none}
+.lysec.editing .lyedit{display:block}.lysec.editing .lyshow{display:none}
+.lyarea{width:100%;box-sizing:border-box;min-height:220px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:400 1rem/1.5 var(--f-body,inherit);white-space:pre-wrap;resize:vertical}
+.lybox{position:relative;height:min(46vh,420px);overflow-y:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:0 18px;-webkit-overflow-scrolling:touch;cursor:pointer;
+  -webkit-mask-image:linear-gradient(transparent,#000 12%,#000 82%,transparent);mask-image:linear-gradient(transparent,#000 12%,#000 82%,transparent)}
+.lytxt{white-space:pre-wrap;word-break:break-word;font-weight:600;line-height:1.45;color:var(--ink);font-family:var(--f-body,inherit)}
+.lypad{height:30%}.lypad.end{height:70%}
+.lysec.empty .lybox{display:none}.lyempty{display:none}.lysec.empty .lyempty{display:block}
+.lysec.empty .lyctl>:not(.lyedbtn){}
+.lyctl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px}
+.lygrp{display:flex;align-items:center;gap:4px;padding:3px;border:1px solid var(--line);border-radius:999px}
+.lystep{min-width:38px;padding:6px 10px}
+.lyspd{font:600 .8rem/1 var(--f-mono);min-width:92px;text-align:center}
+/* plein écran : le texte prend tout l'écran, avec l'enregistrement et le chrono en haut */
+html.lyfull,html.lyfull body{overflow:hidden}
+.lysec.full{position:fixed;inset:0;z-index:2000;margin:0;border-radius:0;background:var(--paper);display:flex;flex-direction:column;padding:max(12px,env(safe-area-inset-top)) 14px max(12px,env(safe-area-inset-bottom))}
+.lysec.full .lyfullbar{display:flex}
+.lysec.full .lybox{flex:1 1 0;min-height:0;height:auto;border:none;background:transparent}
+.lysec.full .lyhint,.lysec.full .lyctl .btn.quiet:not(.lystep){display:none}
+.lysec.full .lyctl .lyfs{display:none}
+.lysec.full .lyctl{flex:0 0 auto;justify-content:center}
+.lysec.full .lyshow{flex:1 1 0;min-height:0;display:flex;flex-direction:column}
+.lfgo{width:52px;height:52px;border-radius:50%;border:none;background:#C9372C;color:#fff;font-size:1.4rem;line-height:1;cursor:pointer;box-shadow:0 2px 8px rgb(0 0 0/.25)}
+.lfgo.on{background:#3A2826}
+.lfclock{font:700 1.4rem/1 var(--f-mono);font-variant-numeric:tabular-nums}
+.lyclose{margin-left:6px}
+
+/* ===== Mastering ===== */
+.mstbox{margin:12px 0;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.mstbox h4{margin:0 0 4px;font:700 1rem/1.2 var(--f-display)}
+.mstrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:10px 0}
+.mstrow .fl{min-width:70px}
+.mstseg{display:flex;flex-wrap:wrap;gap:6px}
+.mstopt[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.mstdone{margin:6px 0 0;color:var(--accent)}
+.mststate:empty{display:none}

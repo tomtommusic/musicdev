@@ -54,14 +54,14 @@ async function recStart(){
   catch(e){try{RS.rec=new MediaRecorder(stream);}catch(e2){feedback('L\'enregistrement n\'est pas possible dans ce navigateur.','bad');recRelease();recUi();return;}}
   RS.chunks=[];RS.rec.ondataavailable=e=>{if(e.data&&e.data.size)RS.chunks.push(e.data);};
   RS.rec.onstop=recFinish;
-  RS.rec.start(1000);RS.on=true;RS.t0=performance.now();
+  RS.rec.start(1000);RS.on=true;RS.t0=performance.now();if(typeof lyGo==='function')lyGo(true);
   if(RC.click)metroStart();
-  RS.timer=setInterval(()=>{const s=(performance.now()-RS.t0)/1000;if(RS.ui)RS.ui.clock.textContent=recClock(s);if(s>=RC.max*60)recStop();},250);
+  RS.timer=setInterval(()=>{const s=(performance.now()-RS.t0)/1000;if(RS.ui){RS.ui.clock.textContent=recClock(s);if(RS.ui.lfclock)RS.ui.lfclock.textContent=recClock(s);}if(s>=RC.max*60)recStop();},250);
   recUi();
 }
 function recStop(){
   if(RS.arming){RS.arming=false;clearTimeout(RS.cdTimer);clearTimeout(RS.cdTimer2);RS.cdNodes.forEach(o=>{try{o.stop();}catch(e){}});RS.cdNodes=[];recRelease();recUi();return;}
-  if(!RS.on)return;RS.on=false;clearInterval(RS.timer);RS.timer=0;
+  if(!RS.on)return;RS.on=false;clearInterval(RS.timer);RS.timer=0;if(typeof lyGo==='function')lyGo(false);
   if(RC.click)metroStop();
   RS.dur=(performance.now()-RS.t0)/1000;
   try{RS.rec.state!=='inactive'&&RS.rec.stop();}catch(e){recFinish();}
@@ -152,7 +152,8 @@ function recUi(){
   if(RS.on)u.state.textContent='Enregistrement…';
   else if(RS.arming){if(!RC.count)u.state.textContent='Préparation…';}
   else u.state.textContent=RS.last?'Enregistrement prêt':'Prêt';
-  if(!RS.on&&!RS.arming)u.clock.textContent=recClock(RS.last?RS.last.dur:0);
+  if(!RS.on&&!RS.arming){u.clock.textContent=recClock(RS.last?RS.last.dur:0);if(u.lfclock)u.lfclock.textContent=u.clock.textContent;}
+  if(typeof lyPaint==='function')lyPaint();
   [u.count,u.click,u.max,u.slider,u.tap,u.prev,u.beats,...(u.steps||[])].forEach(x=>{if(x)x.disabled=RS.on||RS.arming;});
   if(u.prev)u.prev.textContent=MS.on&&!RS.on?'■ Arrêter':'▶ Écouter le tempo';
 }
@@ -168,6 +169,7 @@ function recShow(){
   u.take.replaceChildren(
     el('div',{class:'rcmeta'},el('span',{},recClock(RS.last.dur)),el('span',{},recSize(RS.last.blob.size)),el('span',{},'.'+RS.last.ext)),
     au,
+    typeof mstView==='function'?mstView(au):null,
     el('label',{class:'qzfield rcname'},el('span',{class:'fl'},'Nom du fichier'),el('span',{class:'rcnamebox'},u.name,el('span',{class:'rcext','data-notr':''},'.'+RS.last.ext))),
     el('div',{class:'qzbtns'},
       canShare?btn('Partager…',recShare,'primary'):null,
@@ -207,7 +209,7 @@ function recView(){
     el('div',{class:'rctrow'},st(-5),st(-1),el('div',{class:'rctread'},tVal,el('span',{class:'rctu'},'BPM'),tWord),st(1),st(5)),
     u.slider,
     el('div',{class:'rctrow2'},u.tap,u.prev,el('label',{class:'qzfield rcbeats'},el('span',{class:'fl'},'Temps par mesure'),u.beats)));
-  const out=el('div',{class:'mtwrap'},u.panel,
+  const out=el('div',{class:'mtwrap'},u.panel,typeof lyView==='function'?lyView(u):null,
     el('section',{class:'mtsec'},el('h3',{},'Ton enregistrement'),u.take,u.after),
     el('section',{class:'mtsec'},el('h3',{},'Avant d\'enregistrer'),
       tempoBox,
