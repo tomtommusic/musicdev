@@ -1,7 +1,7 @@
 name: Verification iOS
 on:
   push:
-    paths: ['ios/**', 'index.html', 'piano/**', '.github/workflows/ios.yml']
+    paths: ['ios/**', 'index.html', '.github/workflows/ios.yml']
   workflow_dispatch:
 permissions:
   contents: write

@@ -1,12 +1,11 @@
 /* MusicDEV : cache pour l'utilisation hors ligne.
    Fichiers de l'app : réseau d'abord (pour recevoir les mises à jour), copie en cache si hors ligne
    ou si le site est fermé (404) : l'app installée continue de fonctionner. */
-const VERSION='musicdev-1.17.3';
+const VERSION='musicdev-1.17.4';
 const SHELL=['./','./index.html','./manifest.webmanifest','./abcjs-basic-min.js','./fonts/fonts.css',
   './fonts/AtkinsonHyperlegible-Regular.ttf','./fonts/AtkinsonHyperlegible-Bold.ttf','./fonts/Lora.ttf','./fonts/BricolageGrotesque.ttf',
   './fonts/IBMPlexMono-Regular.ttf','./fonts/IBMPlexMono-Medium.ttf',
-  './icons/icon-192.png','./icons/icon-512.png','./icons/apple-touch-icon.png','./icons/favicon-32.png',
-  ...Array.from({length:30},(_,i)=>`./piano/${21+i*3}.mp3`)];
+  './icons/icon-192.png','./icons/icon-512.png','./icons/apple-touch-icon.png','./icons/favicon-32.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(VERSION).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==VERSION).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
 self.addEventListener('fetch',e=>{

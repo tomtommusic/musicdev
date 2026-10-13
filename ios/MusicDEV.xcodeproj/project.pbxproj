@@ -139,7 +139,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\nSRC=\"${PROJECT_DIR}/..\"\nDST=\"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/web\"\nrm -rf \"$DST\"\nmkdir -p \"$DST\"\ncp \"$SRC/index.html\" \"$SRC/abcjs-basic-min.js\" \"$SRC/manifest.webmanifest\" \"$DST/\"\ncp -R \"$SRC/fonts\" \"$SRC/icons\" \"$SRC/piano\" \"$DST/\"\necho \"App web copiee dans $DST\"\n";
+			shellScript = "set -e\nSRC=\"${PROJECT_DIR}/..\"\nDST=\"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/web\"\nrm -rf \"$DST\"\nmkdir -p \"$DST\"\ncp \"$SRC/index.html\" \"$SRC/abcjs-basic-min.js\" \"$SRC/manifest.webmanifest\" \"$DST/\"\ncp -R \"$SRC/fonts\" \"$SRC/icons\" \"$DST/\"\necho \"App web copiee dans $DST\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
