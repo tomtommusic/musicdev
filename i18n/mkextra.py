@@ -313,5 +313,8 @@ a("Les numéros de case s'affichent sous la portée. « ? » : note trop grave p
 a("Auriculaire","Pinky","Meñique")
 a("Les numéros de case s'affichent sous la portée. La clé est imposée (sol pour la guitare, fa pour la basse) et les notes restent dans les cases 0 à 5.","Fret numbers appear under the staff. The clef is set for you (treble for guitar, bass for bass) and notes stay within frets 0 to 5.","Los números de traste aparecen bajo el pentagrama. La clave se fija sola (sol para la guitarra, fa para el bajo) y las notas se quedan entre los trastes 0 y 5.")
 a("aucun","none","ninguno")
+a("Lecture mélodique","Melodic reading","Lectura melódica")
+a("Voir → jouer note par note","See → play note by note","Ver → tocar nota a nota")
+a("Joue la mélodie note par note, sans tempo : sur le clavier à l'écran, avec ton clavier d'ordinateur ou sur ton instrument avec le micro.","Play the melody note by note, with no tempo: on the on-screen keyboard, with your computer keyboard, or on your instrument with the microphone.","Toca la melodía nota a nota, sin tempo: en el teclado de la pantalla, con el teclado del ordenador o con tu instrumento y el micrófono.")
 json.dump({'en':E,'es':S},open('extra.json','w'),ensure_ascii=False,indent=0)
 print(len(E))

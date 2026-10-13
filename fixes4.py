@@ -32,4 +32,6 @@ s=s.replace("</style>","#score .abcjs-tab-number,#score .abcjs-tabNumber{fill:cu
 rep("['Sujets',`${c.topics.length} notion${c.topics.length>1?'s':''}`],['Formats',c.formats.length===3?'tous':c.formats.map(f=>QZ_FORMATS.find(x=>x[0]===f)[1]).join(', ')]",
  "['Formats',c.formats.length===3?'tous':c.formats.map(f=>QZ_FORMATS.find(x=>x[0]===f)[1]).join(', ')],['Sujets',QZ_SUBJ.filter(x=>x.subs.some(([id])=>c.topics.includes(id))).map(x=>T(x.t)).join(', ')||'aucun']")
 s=s.replace("</style>","@media (max-width:600px){main[data-kind=\"quiz\"] .meta>:nth-child(4){grid-column:1/4}}\n</style>",1)
+rep("{id:'la',kind:'mel',t:'Lecture appliquée',s:'Voir → jouer',d:'Joue la mélodie note par note sur le clavier à l\\'écran ou avec ton clavier d\\'ordinateur.'}",
+ "{id:'la',kind:'mel',t:'Lecture mélodique',s:'Voir → jouer note par note',d:'Joue la mélodie note par note, sans tempo : sur le clavier à l\\'écran, avec ton clavier d\\'ordinateur ou sur ton instrument avec le micro.'}")
 open(p,'w',encoding='utf-8').write(s)
