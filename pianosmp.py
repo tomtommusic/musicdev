@@ -12,7 +12,9 @@ rep("""    comp.connect(c.destination);
 rep("""  piano(m,t,d,v,dest){
     /* piano de synthèse""","""  smp:{buf:{},started:false},
   loadPiano(){
-    if(this.smp.started||!window.fetch)return;this.smp.started=true;const c=this.ctx;
+    if(this.smp.started||!window.fetch)return;this.smp.started=true;
+    /* décodage sans attendre un geste de l'utilisateur : un contexte hors ligne suffit, les sons servent ensuite partout */
+    const OC=window.OfflineAudioContext||window.webkitOfflineAudioContext;let c=this.ctx;try{if(!c&&OC)c=new OC(1,1,44100);}catch(e){}if(!c){this.smp.started=false;return;}
     for(let m=21;m<=108;m+=3)fetch('piano/'+m+'.mp3').then(r=>{if(!r.ok)throw new Error(r.status);return r.arrayBuffer();})
       .then(b=>new Promise((res,rej)=>c.decodeAudioData(b,res,rej)))
       .then(buf=>{/* début réel du son (le format mp3 ajoute un court silence au début) */
@@ -25,7 +27,7 @@ rep("""  piano(m,t,d,v,dest){
     const c=this.ctx,B=this.smp.buf;let best=null,bd=99;
     for(const k in B){const x=Math.abs(k-m);if(x<bd){bd=x;best=+k;}}
     if(best==null||bd>2)return this.pianoSynth(m,t,d,v,dest);
-    const s=B[best],rate=2**((m-best)/12),end=t+Math.max(d,.1),vel=Math.max(.1,Math.min(1,v/.45));
+    const s=B[best],rate=2**((m-best)/12+14.5/1200),end=t+Math.max(d,.1),vel=Math.max(.1,Math.min(1,v/.45));
     const src=c.createBufferSource();src.buffer=s.b;src.playbackRate.value=rate;
     const lp=c.createBiquadFilter();lp.type='lowpass';lp.frequency.value=Math.min(16000,1800+9000*vel**1.5);lp.Q.value=.5;
     const g=c.createGain(),pk=v*2.4;g.gain.setValueAtTime(pk,t);g.gain.setValueAtTime(pk,end);g.gain.setTargetAtTime(0,end,m>84?.06:.11);
@@ -35,4 +37,5 @@ rep("""  piano(m,t,d,v,dest){
   },
   pianoSynth(m,t,d,v,dest){
     /* piano de synthèse""")
+s=s.replace("</body>","<script>window.addEventListener('load',()=>setTimeout(()=>{try{A.loadPiano()}catch(e){}},400));</script>\n</body>",1) if "</body>" in s else s
 open(p,'w',encoding='utf-8').write(s)

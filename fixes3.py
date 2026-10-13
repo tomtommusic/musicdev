@@ -50,12 +50,14 @@ rep("const r=yin(x,c.sampleRate);if(!r||r.clarity<.8){","const r=yin(x,c.sampleR
 rep("const need=Math.max(MIC.floor*5,.012,win?MIC.bleed*1.8:0);","const need=Math.max(MIC.floor*4,.005,win?MIC.bleed*1.8:0);")
 rep("if(rms>need&&rms>MIC.prevRms*2.2&&","if(rms>need&&rms>MIC.prevRms*1.9&&")
 rep("for(const k of plan.clicks||[]){const t=t0+k.u*plan.us;A.click(t,k.strong,g,k.ci);at(t,()=>{if(k.ci)CI.beat(k.b);if(onBeat)onBeat(k);});}",
-    "for(const k of plan.clicks||[]){const t=t0+k.u*plan.us,quiet=MIC.on&&!k.ci&&!S.micMetro;if(!quiet)A.click(t,k.strong,g,k.ci);at(t,()=>{if(k.ci)CI.beat(k.b);else if(MIC.on)vBeat(k);if(onBeat)onBeat(k);});}")
+    "for(const k of plan.clicks||[]){const t=t0+k.u*plan.us,quiet=MIC.on&&!k.ci&&!S.micMetro;if(!quiet)A.click(t,k.strong,g,k.ci);at(t,()=>{if(k.ci)CI.beat(k.b);else vBeat(k);if(onBeat)onBeat(k);});}")
 rep("const S={mic:","const S={micMetro:(()=>{try{return localStorage.getItem('atelier-micmetro')==='1'}catch(e){return false}})(),mic:")
 rep("function micControls(o){","""/* métronome visuel pendant que le micro écoute (le clic audible gênerait la détection) */
-function vBeat(k){let v=document.getElementById('vbeat');const st=document.querySelector('.stand');if(!st)return;
-  if(!v){v=document.createElement('div');v.id='vbeat';v.setAttribute('aria-hidden','true');st.append(v);}
-  v.textContent=String((k.b||0)+1);v.className='on'+(k.strong?' strong':'');clearTimeout(v._t);v._t=setTimeout(()=>{v.className='';},180);}
+function vBeat(k){const st=document.querySelector('.stand');if(!st||!S.ex||!S.ex.meter)return;let v=document.getElementById('vbeat');const n=S.ex.meter.beats||4;
+  if(!v||v.childElementCount!==n||v.parentNode!==st){if(v)v.remove();v=document.createElement('div');v.id='vbeat';v.setAttribute('aria-hidden','true');
+    for(let i=0;i<n;i++){const d=document.createElement('i');d.textContent=String(i+1);v.append(d);}st.append(v);}
+  const b=(k.b||0)%n;[...v.children].forEach((d,i)=>{d.className=i===b?(b===0?'on strong':'on'):'';});
+  v.classList.add('live');clearTimeout(v._t);v._t=setTimeout(()=>{v.classList.remove('live');[...v.children].forEach(d=>d.className='');},1600);}
 function micControls(o){""")
 rep("  const go=o.noGo?null:el('button',{class:'btn primary',type:'button'});",
     """  const go=o.noGo?null:el('button',{class:'btn primary',type:'button'});
@@ -64,9 +66,12 @@ rep("  const go=o.noGo?null:el('button',{class:'btn primary',type:'button'});",
 rep("    if(go){go.hidden=!S.mic;go.replaceChildren(running?'■ Arrêter':'▶ Commencer');}",
     "    if(go){go.hidden=!S.mic;go.replaceChildren(running?'■ Arrêter':'▶ Commencer');}\n    if(met){met.hidden=!S.mic;met.replaceChildren(el('span',{class:'sw'+(S.micMetro?' on':''),'aria-hidden':'true'}),'Clic audible');met.setAttribute('aria-pressed',String(!!S.micMetro));}")
 rep("  return (o.always?[go,chip]:[tg,go,chip]).filter(Boolean);","  return (o.always?[go,met,chip]:[tg,go,met,chip]).filter(Boolean);")
-s=s.replace("</style>","""#vbeat{position:absolute;top:10px;right:12px;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font:800 1.2rem/1 var(--f-mono);color:var(--muted);border:2px solid var(--line);background:var(--surface);opacity:.5;transition:transform .08s,opacity .08s;z-index:3;pointer-events:none}
-#vbeat.on{opacity:1;color:var(--accent-ink);background:var(--accent);border-color:var(--accent);transform:scale(1.12)}
-#vbeat.on.strong{transform:scale(1.28)}
+s=s.replace("</style>","""#vbeat{position:absolute;right:16px;bottom:14px;display:flex;gap:6px;z-index:3;pointer-events:none;opacity:0;transition:opacity .2s}
+#vbeat.live{opacity:1}
+#vbeat i{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:700 .78rem/1 var(--f-mono);font-style:normal;color:var(--muted);border:1.5px solid var(--line);background:var(--surface);transition:transform .07s,background .07s}
+#vbeat i.on{color:var(--accent-ink);background:var(--accent);border-color:var(--accent);transform:scale(1.18)}
+#vbeat i.on.strong{transform:scale(1.32)}
+@media (max-width:600px){#vbeat{right:10px;bottom:10px;gap:4px}#vbeat i{width:22px;height:22px;font-size:.7rem}}
 .stand{position:relative}
 </style>""",1)
 open(p,'w',encoding='utf-8').write(s);print('fixes3 ok')
