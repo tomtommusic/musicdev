@@ -6078,21 +6078,22 @@ const DG_FAMS=['Bois','Cuivres','Cordes frottées','Cordes pincées','Percussion
    sil : silhouette discrète de l'instrument, dessinée derrière les clés */
 const nl=(...n)=>n.map(x=>dgCap(T(x))).join('/');
 const DG_LAYOUT={
-  flute:{vb:'4 0 262 90',
-    /* comme les tableaux de méthode (vue de face, embouchure à gauche) : clé de sol♯ en drapeau au-dessus,
-       pouce, levier de si♭, clés de trille et clé de mi♭ en dessous, rouleaux de la patte au bout */
-    sil:['M8,31 H236 V45 H8 Z','M238,31 H262 V45 H238 Z'],
-    seps:[],
+  flute:{vb:'4 6 304 100',
+    /* disposition des tableaux de méthode (ex. Quality Music Gear) : pouce en bas à gauche, sol♯ en drapeau au-dessus,
+       levier de si♭ et clés de trille sous la main droite, mi♭ en « d », rouleaux de la patte empilés, clé gizmo */
+    sil:[],seps:[],
     items:()=>[
-    ['thBb','d','M14,52 h30 v4 h-26 v13 a2,2 0 0 1 -4,0 Z'],['thB','d','M46,54 h28 a14,12 0 0 1 -28,0 Z'],
-    ['L1','o',30,38,9],['L2','o',58,38,12],['L3','o',86,38,12],
-    ['Gs','d','M93,10 h14 v32 h-4 v-27 h-10 Z'],
-    ['Bbl','d','M104,58 h11 a5,5 0 1 1 0,6 h-11 a3,3 0 0 1 0,-6 Z'],
-    ['R1','o',132,38,12],['Tr1','e',146,55,3.6,5],['R2','o',160,38,12],['Tr2','e',174,55,3.6,5],['R3','o',188,38,12],
-    ['Ds','d','M212,22 h4 v38 h-11 a7,9 0 0 1 0,-18 h7 Z'],
-    ['Bft','d','M226,25 h20 v5 h-20 Z'],['C','d','M226,33 h20 v5 h-20 Z'],['Cs','d','M226,41 h20 v3 a10,8 0 0 1 -20,0 Z'],
-    ['Gz','e',252,38,2.8,4.5]],
-    labels:[[58,16,'Main gauche'],[160,16,'Main droite'],[44,84,'Pouce'],[226,72,'Auriculaire']]},
+    ['thBb','d','M12,74 a4,4 0 0 1 4,-4 h50 v6 h-38 v18 a6,6 0 0 1 -6,6 h-4 a6,6 0 0 1 -6,-6 Z'],
+    ['thB','d','M40,82 h36 a18,18 0 0 1 -36,0 Z'],
+    ['L1','o',30,50,10],['L2','o',66,50,14],['L3','o',100,50,14],
+    ['Gs','d','M104,17 a3,3 0 0 1 3,-3 h18 a3,3 0 0 1 3,3 v35 h-6 v-32 h-15 a3,3 0 0 1 -3,-3 Z'],
+    ['Bbl','d','M116,76 a2,2 0 0 1 2,-2 h14 a7,6 0 0 1 14,0 v4 a2,2 0 0 1 -2,2 h-26 a2,2 0 0 1 -2,-2 Z'],
+    ['R1','o',160,50,14],['Tr1','e',178,72,4.5,7],['R2','o',196,50,14],['Tr2','e',214,72,4.5,7],['R3','o',232,50,14],
+    ['Ds','d','M254,50 h6 v44 h-16 v-12 C244,74 247,70 254,70 Z'],
+    ['Bft','d','M270,46 h22 a3,3 0 0 1 0,6 h-22 a3,3 0 0 1 0,-6 Z'],['C','d','M270,56 h22 a3,3 0 0 1 0,6 h-22 a3,3 0 0 1 0,-6 Z'],
+    ['Cs','d','M268,68 h26 v3 a13,11 0 0 1 -26,0 Z'],
+    ['Gz','d','M302,52 c3,4 4,7 4,9 a4,4 0 0 1 -8,0 c0,-2 1,-5 4,-9 Z']],
+    labels:[]},
   clar:{vb:'0 -46 92 262',
     sil:['M44,-44 h8 l3,22 h-14 Z','M41,-22 h14 v14 h-14 Z','M43,-8 h10 V178 h-10 Z','M43,176 h10 C54,190 62,204 72,214 H24 C34,204 42,190 43,176 Z'],
     seps:[],
@@ -6627,7 +6628,7 @@ matchMedia('(max-width:600px)').addEventListener?.('change',()=>{if(S.mod==='ho'
 document.addEventListener('click',e=>{if(S.mod!=='ho'||!e.target.closest||!e.target.closest('#helpbtn'))return;
   e.stopImmediatePropagation();e.preventDefault();openModule('ln');setTimeout(()=>{if(typeof helpSet==='function')helpSet(true);},250);},true);
 
-const AP_VERSION='1.20.1';
+const AP_VERSION='1.20.2';
 const AP_MIT="Copyright (c) 2009-2026 Paul Rosen and Gregory Dyke\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.";
 const AP_OFL="-----------------------------------------------------------\nSIL OPEN FONT LICENSE Version 1.1 - 26 February 2007\n-----------------------------------------------------------\n\nPREAMBLE\nThe goals of the Open Font License (OFL) are to stimulate worldwide\ndevelopment of collaborative font projects, to support the font creation\nefforts of academic and linguistic communities, and to provide a free and\nopen framework in which fonts may be shared and improved in partnership\nwith others.\n\nThe OFL allows the licensed fonts to be used, studied, modified and\nredistributed freely as long as they are not sold by themselves. The\nfonts, including any derivative works, can be bundled, embedded, \nredistributed and/or sold with any software provided that any reserved\nnames are not used by derivative works. The fonts and derivatives,\nhowever, cannot be released under any other type of license. The\nrequirement for fonts to remain under this license does not apply\nto any document created using the fonts or their derivatives.\n\nDEFINITIONS\n\"Font Software\" refers to the set of files released by the Copyright\nHolder(s) under this license and clearly marked as such. This may\ninclude source files, build scripts and documentation.\n\n\"Reserved Font Name\" refers to any names specified as such after the\ncopyright statement(s).\n\n\"Original Version\" refers to the collection of Font Software components as\ndistributed by the Copyright Holder(s).\n\n\"Modified Version\" refers to any derivative made by adding to, deleting,\nor substituting -- in part or in whole -- any of the components of the\nOriginal Version, by changing formats or by porting the Font Software to a\nnew environment.\n\n\"Author\" refers to any designer, engineer, programmer, technical\nwriter or other person who contributed to the Font Software.\n\nPERMISSION & CONDITIONS\nPermission is hereby granted, free of charge, to any person obtaining\na copy of the Font Software, to use, study, copy, merge, embed, modify,\nredistribute, and sell modified and unmodified copies of the Font\nSoftware, subject to the following conditions:\n\n1) Neither the Font Software nor any of its individual components,\nin Original or Modified Versions, may be sold by itself.\n\n2) Original or Modified Versions of the Font Software may be bundled,\nredistributed and/or sold with any software, provided that each copy\ncontains the above copyright notice and this license. These can be\nincluded either as stand-alone text files, human-readable headers or\nin the appropriate machine-readable metadata fields within text or\nbinary files as long as those fields can be easily viewed by the user.\n\n3) No Modified Version of the Font Software may use the Reserved Font\nName(s) unless explicit written permission is granted by the corresponding\nCopyright Holder. This restriction only applies to the primary font name as\npresented to the users.\n\n4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font\nSoftware shall not be used to promote, endorse or advertise any\nModified Version, except to acknowledge the contribution(s) of the\nCopyright Holder(s) and the Author(s) or with their explicit written\npermission.\n\n5) The Font Software, modified or unmodified, in part or in whole,\nmust be distributed entirely under this license, and must not be\ndistributed under any other license. The requirement for fonts to\nremain under this license does not apply to any document created\nusing the Font Software.\n\nTERMINATION\nThis license becomes null and void if any of the above conditions are\nnot met.\n\nDISCLAIMER\nTHE FONT SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\nOF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE\nCOPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nINCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL\nDAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM\nOTHER DEALINGS IN THE FONT SOFTWARE.";
 /* ========== MODULE : À propos (confidentialité, licences, crédits) ========== */
