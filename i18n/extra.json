@@ -544,7 +544,18 @@
 "Le fichier partagé ou téléchargé est la version avec mastering.": "The shared or downloaded file is the mastered version.",
 "Paroles": "Lyrics",
 "Bêta": "Beta",
-"Fonction nouvelle, en phase de test : tes commentaires sont les bienvenus.": "New feature, still being tested: your feedback is welcome."
+"Fonction nouvelle, en phase de test : tes commentaires sont les bienvenus.": "New feature, still being tested: your feedback is welcome.",
+"Mastering en cours…": "Mastering…",
+"Analyse…": "Analyzing…",
+"Nettoyage…": "Cleaning up…",
+"Égalisation…": "EQ…",
+"Compression…": "Compressing…",
+"Ambiance…": "Room sound…",
+"Finition…": "Finishing…",
+"ambiance": "room sound",
+"Volume": "Volume",
+"Ajouter une légère ambiance de salle (utile pour une voix enregistrée de près)": "Add a light room sound (useful for a voice recorded up close)",
+"Analyse ta prise, puis corrige ce qui manque : égalisation adaptée à ta voix ou ton instrument, souffle atténué entre les phrases, « s » adoucis, compression sur 3 bandes et volume ajusté, sans saturer.": "Analyzes your take, then fixes what is missing: EQ adapted to your voice or instrument, less hiss between phrases, softer “s” sounds, 3-band compression and adjusted volume, without distortion."
 },
 "es": {
 "Modules": "Módulos",
@@ -1091,6 +1102,17 @@
 "Le fichier partagé ou téléchargé est la version avec mastering.": "El archivo compartido o descargado es la versión masterizada.",
 "Paroles": "Letra",
 "Bêta": "Beta",
-"Fonction nouvelle, en phase de test : tes commentaires sont les bienvenus.": "Función nueva, en fase de prueba: tus comentarios son bienvenidos."
+"Fonction nouvelle, en phase de test : tes commentaires sont les bienvenus.": "Función nueva, en fase de prueba: tus comentarios son bienvenidos.",
+"Mastering en cours…": "Masterizando…",
+"Analyse…": "Analizando…",
+"Nettoyage…": "Limpiando…",
+"Égalisation…": "Ecualizando…",
+"Compression…": "Comprimiendo…",
+"Ambiance…": "Ambiente…",
+"Finition…": "Terminando…",
+"ambiance": "ambiente",
+"Volume": "Volumen",
+"Ajouter une légère ambiance de salle (utile pour une voix enregistrée de près)": "Añadir un ligero ambiente de sala (útil para una voz grabada de cerca)",
+"Analyse ta prise, puis corrige ce qui manque : égalisation adaptée à ta voix ou ton instrument, souffle atténué entre les phrases, « s » adoucis, compression sur 3 bandes et volume ajusté, sans saturer.": "Analiza tu toma y corrige lo que falta: ecualización adaptada a tu voz o instrumento, menos soplido entre frases, «s» suavizadas, compresión en 3 bandas y volumen ajustado, sin saturar."
 }
 }

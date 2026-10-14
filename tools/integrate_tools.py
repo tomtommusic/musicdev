@@ -22,7 +22,7 @@ rep("function openModule(id,shared,opts={}){\n","function openModule(id,shared,o
 rep("function buildSettings(){\n  if(MOD[S.mod].kind==='lib')return;","function buildSettings(){\n  if(MOD[S.mod].kind==='lib'||MOD[S.mod].kind==='tools')return;")
 rep("(dm|dr|iv|pc|ln|lm|lr|so|la|tq)","(dm|dr|iv|pc|ln|lm|lr|so|la|tq|mt|ac|en|dg)")
 rep("  openModule(m?m[1]:'dm',shared);","  if(/^#?ou\\b/.test(location.hash||'')){openModule('mt');return;}\n  openModule(m?m[1]:'dm',shared);")
-code=open(T+'tools.js').read().replace('function toolsStop(){metroStop();tunerStop();}','function toolsStop(){if(typeof recStop===\'function\')recStop();metroStop();tunerStop();}')+open(T+'rec.js').read()+open(T+'rec_extra.js').read()+open(T+'../dg/dg_data.js').read()+open(T+'../dg/dg.js').read()
+code=open(T+'tools.js').read().replace('function toolsStop(){metroStop();tunerStop();}','function toolsStop(){if(typeof recStop===\'function\')recStop();metroStop();tunerStop();}')+open(T+'rec.js').read()+open(T+'rec_extra.js').read()+open(T+'mst2.js').read()+open(T+'../dg/dg_data.js').read()+open(T+'../dg/dg.js').read()
 rep("/* ---------- démarrage ---------- */",code+"\n/* ---------- démarrage ---------- */")
 css=open(T+'tools.css').read()+open(T+'rec.css').read()+open(T+'rec_extra.css').read()+open(T+'../dg/dg.css').read();i=s.rfind('</style>',0,s.find('<body'));s=s[:i]+css+s[i:]
 open(p,'w').write(s);print('ok',p)

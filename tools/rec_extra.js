@@ -77,7 +77,7 @@ function lyView(u){
 /* chaîne : passe-haut → égaliseur selon le style → compresseur doux → volume visé (LUFS approx.) → limiteur à -1 dB ; tout se fait sur l'appareil */
 const MST_STYLES=[['chaud','Chaud'],['equilibre','Équilibré'],['brillant','Brillant']];
 const MST_INT=[['leger','Léger'],['moyen','Moyen'],['fort','Fort']];
-const MST=tlLoad('atelier-mst',{style:'equilibre',int:'moyen'});
+const MST=tlLoad('atelier-mst',{style:'equilibre',int:'moyen',room:false});
 async function mstDecode(blob){const c=A.init();return await new Promise((ok,ko)=>{blob.arrayBuffer().then(ab=>{const p=c.decodeAudioData(ab,ok,ko);if(p&&p.then)p.then(ok,ko);}).catch(ko);});}
 /* volume intégré approximatif : blocs de 400 ms, porte absolue -70 et relative -10 (comme le LUFS, sans pondération K) */
 function mstLoud(chs,sr){
@@ -87,41 +87,6 @@ function mstLoud(chs,sr){
   let g=ms.filter(m=>L(m)>-70);if(!g.length)return -70;
   const rel=L(g.reduce((a,b)=>a+b,0)/g.length)-10;g=g.filter(m=>L(m)>rel);
   return L(g.reduce((a,b)=>a+b,0)/g.length);
-}
-async function mstProcess(blob,style,intensity){
-  const src=await mstDecode(blob),sr=src.sampleRate,n=src.length,nch=Math.min(2,src.numberOfChannels);
-  if(!n)throw new Error('vide');
-  const k={leger:.6,moyen:1,fort:1.35}[intensity]||1;
-  const target={leger:-16,moyen:-14,fort:-11.5}[intensity]||-14;
-  /* 1) pré-niveau : on amène le volume à environ -20 pour que le compresseur agisse pareil sur toutes les prises */
-  const pre=[];for(let c=0;c<nch;c++)pre.push(src.getChannelData(c));
-  const g0=Math.pow(10,(-20-mstLoud(pre,sr))/20);
-  const OC=window.OfflineAudioContext||window.webkitOfflineAudioContext,oc=new OC(nch,n,sr);
-  const bs=oc.createBufferSource();bs.buffer=src;
-  const gin=oc.createGain();gin.gain.value=Math.min(30,g0);
-  const f=(type,freq,gain,Q)=>{const b=oc.createBiquadFilter();b.type=type;b.frequency.value=freq;if(gain!=null)b.gain.value=gain*k;if(Q)b.Q.value=Q;return b;};
-  const EQ={
-    chaud:[f('highpass',35,null,.7),f('lowshelf',180,2.2),f('peaking',2800,-.5,.9),f('highshelf',9000,-1.2)],
-    equilibre:[f('highpass',40,null,.7),f('lowshelf',110,1),f('peaking',320,-1.5,1),f('peaking',3200,1.5,.9),f('highshelf',10000,1.5)],
-    brillant:[f('highpass',50,null,.7),f('peaking',300,-2,1),f('peaking',3500,2.5,.8),f('highshelf',9000,3.2)]}[style]||[];
-  const comp=oc.createDynamicsCompressor();comp.threshold.value=-24-4*(k-1);comp.knee.value=10;comp.ratio.value=2+1.5*k;comp.attack.value=.012;comp.release.value=.22;
-  let node=bs;node.connect(gin);node=gin;for(const e of EQ){node.connect(e);node=e;}node.connect(comp);comp.connect(oc.destination);
-  bs.start(0);
-  const out=await oc.startRendering();
-  const ch=[];for(let c=0;c<nch;c++)ch.push(out.getChannelData(c));
-  /* 2) volume visé */
-  const g1=Math.pow(10,(target-mstLoud(ch,sr))/20);for(const d of ch)for(let i=0;i<n;i++)d[i]*=g1;
-  /* 3) limiteur avec anticipation (5 ms), plafond -1 dBFS, relâchement 80 ms */
-  const ceil=Math.pow(10,-1/20),LA=Math.max(1,Math.round(sr*.005)),rel=Math.exp(-1/(sr*.08));
-  const need=new Float32Array(n);for(let i=0;i<n;i++){let p=0;for(const d of ch){const a=Math.abs(d[i]);if(a>p)p=a;}need[i]=p>ceil?ceil/p:1;}
-  /* minimum glissant sur la fenêtre d'anticipation (file monotone) */
-  const gmin=new Float32Array(n),q=new Int32Array(n+LA+1);let qh=0,qt=0;
-  for(let i=0;i<n+LA;i++){if(i<n){while(qt>qh&&need[q[qt-1]]>=need[i])qt--;q[qt++]=i;}const j=i-LA;if(j>=0){while(q[qh]<j-LA)qh++;gmin[j]=need[q[qh]];}}
-  /* moyenne glissante sur LA échantillons : descente en douceur, toujours sous le gain nécessaire au pic */
-  let gc=1,acc=0;const hist=new Float32Array(LA).fill(1);acc=LA;
-  for(let i=0;i<n;i++){acc+=gmin[i]-hist[i%LA];hist[i%LA]=gmin[i];const t=acc/LA;gc=t<gc?t:t+(gc-t)*rel;if(gc>1)gc=1;
-    for(const d of ch){let v=d[i]*gc;if(v>ceil)v=ceil;else if(v<-ceil)v=-ceil;d[i]=v;}}
-  return mstWav(ch,sr);
 }
 function mstWav(ch,sr){
   const n=ch[0].length,nc=ch.length,ab=new ArrayBuffer(44+n*2*nc),v=new DataView(ab),w=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i));};
@@ -135,11 +100,13 @@ function mstView(au){
     b.addEventListener('click',()=>{MST[key]=v;tlSave('atelier-mst',MST);b.parentNode.querySelectorAll('.mstopt').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));});return b;}));
   const state=el('p',{class:'hint mststate'});
   const run=btn(L.orig?'Refaire le mastering':'✨ Appliquer le mastering',async()=>{
-    run.disabled=true;state.textContent='Mastering en cours… (quelques secondes)';
-    try{const w=await mstProcess(L.orig||L.blob,MST.style,MST.int);if(!L.orig){L.orig=L.blob;L.origType=L.type;L.origExt=L.ext;}
-      Object.assign(L,{blob:w,type:'audio/wav',ext:'wav',mst:{style:MST.style,int:MST.int},useOrig:false});await recStore(L);recShow();}
+    run.disabled=true;state.textContent=T('Mastering en cours… (quelques secondes)');
+    try{const w=await mstProcess(L.orig||L.blob,MST.style,MST.int,{room:!!MST.room,onStep:t=>{state.textContent=T('Mastering en cours…')+' '+T(t);}});if(!L.orig){L.orig=L.blob;L.origType=L.type;L.origExt=L.ext;}
+      Object.assign(L,{blob:w,type:'audio/wav',ext:'wav',mst:{style:MST.style,int:MST.int,room:!!MST.room,before:MS2.before,after:MS2.after},useOrig:false});await recStore(L);recShow();}
     catch(e){state.textContent='Le mastering n\'a pas fonctionné sur cet appareil.';run.disabled=false;}},'primary');
-  const parts=[el('div',{class:'mstrow'},el('span',{class:'fl'},'Style'),pick(MST_STYLES,'style')),el('div',{class:'mstrow'},el('span',{class:'fl'},'Intensité'),pick(MST_INT,'int')),el('div',{class:'qzbtns'},run)];
+  const room=el('input',{type:'checkbox'});room.checked=!!MST.room;room.addEventListener('change',()=>{MST.room=room.checked;tlSave('atelier-mst',MST);});
+  const parts=[el('div',{class:'mstrow'},el('span',{class:'fl'},'Style'),pick(MST_STYLES,'style')),el('div',{class:'mstrow'},el('span',{class:'fl'},'Intensité'),pick(MST_INT,'int')),
+    el('label',{class:'chk mstroom'},room,'Ajouter une légère ambiance de salle (utile pour une voix enregistrée de près)'),el('div',{class:'qzbtns'},run)];
   if(L.orig){
     /* comparer avant / après au même endroit de la pièce */
     const ab=(useOrig)=>{const t=au.currentTime,pl=!au.paused;L.useOrig=useOrig;au.src=URL.createObjectURL(useOrig?L.orig:L.blob);
@@ -149,13 +116,15 @@ function mstView(au){
     const bm=el('button',{type:'button',class:'btn quiet mstopt','aria-pressed':'true',onclick:()=>ab(false)},'Avec mastering');
     const undo=btn('Retirer le mastering',async()=>{Object.assign(L,{blob:L.orig,type:L.origType,ext:L.origExt,orig:null,mst:null});await recStore(L);recShow();},'quiet');
     const sn=MST_STYLES.find(x=>x[0]===L.mst.style),inn=MST_INT.find(x=>x[0]===L.mst.int);
-    parts.unshift(el('p',{class:'mstdone'},el('b',{},'✓ Mastering appliqué'),' ',el('span',{},`${T(sn?sn[1]:'')} · ${T(inn?inn[1]:'').toLowerCase()}`)),
+    const lu=v=>(v==null||!isFinite(v))?'–':(Math.round(v*10)/10).toString().replace('.',I18N.lang==='en'?'.':',')+' LUFS';
+    parts.unshift(el('p',{class:'mstdone'},el('b',{},'✓ Mastering appliqué'),' ',el('span',{},`${T(sn?sn[1]:'')} · ${T(inn?inn[1]:'').toLowerCase()}${L.mst.room?' · '+T('ambiance'):''}`)),
+      L.mst.before!=null?el('p',{class:'hint mstlu'},T('Volume'),' : ',el('b',{'data-notr':''},lu(L.mst.before)),' → ',el('b',{'data-notr':''},lu(L.mst.after))):null,
       el('div',{class:'mstrow'},el('span',{class:'fl'},'Écouter'),el('div',{class:'mstseg'},bo,bm)));
     parts.push(el('div',{class:'qzbtns'},undo));
     state.textContent='Le fichier partagé ou téléchargé est la version avec mastering.';
   }
   box.append(el('h4',{},'Mastering automatique',betaTag()),
-    el('p',{class:'hint'},'Rend la prise plus pleine et plus forte, comme une pièce prête à partager : égalisation, compression douce et volume ajusté, sans saturer.'),
+    el('p',{class:'hint'},'Analyse ta prise, puis corrige ce qui manque : égalisation adaptée à ta voix ou ton instrument, souffle atténué entre les phrases, « s » adoucis, compression sur 3 bandes et volume ajusté, sans saturer.'),
     ...parts,state);
   return box;
 }
