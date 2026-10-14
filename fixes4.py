@@ -13,8 +13,8 @@ rep("""  return [...target.querySelectorAll('.abcjs-note, .abcjs-rest')];
 }
 /* tablature : la guitare et la basse s'écrivent une octave plus haut que le son réel (comme dans abcjs) */
 const TAB_MODS=['lm','la'];
-/* avec tablature : clé imposée et registre limité aux cases 0 à 5 (1re position) */
-const TAB_RANGE={guitar:['treble',52,81],bass:['bass',40,60]};
+/* avec tablature : clé imposée, notes jouables sur toutes les cordes, jusqu'à la 12e case */
+const TAB_RANGE={guitar:['treble',52,88],bass:['bass',40,67]}; /* de la corde grave à vide jusqu'à la 12e case de la corde aiguë */
 const _genMel=genMelody;
 genMelody=function(cfg){const tm=TAB_MODS.includes(S.mod)&&TAB_RANGE[tabMode()];if(!tm)return _genMel(cfg);
   const[clef,a,b]=tm,c2=Object.assign({},cfg,{clef});let best=null,bp=1e9;
@@ -24,9 +24,11 @@ genMelody=function(cfg){const tm=TAB_MODS.includes(S.mod)&&TAB_RANGE[tabMode()];
       if(p<bp){bp=p;best=[ex,sh];}if(!p)break;}}
   const[ex,sh]=best;if(sh!==ex.shift){ex.shift=sh;ex.events.forEach(e=>{if(!e.rest)Object.assign(e,degInfo(ex.key,clef,sh,e.deg));});}
   return ex;};
-const TAB_DEF={guitar:()=>({instrument:'guitar',label:''}),bass:()=>({instrument:'guitar',label:'',tuning:['E,,','A,,','D,','G,']})};
+const TAB_DEF={guitar:()=>({instrument:'guitar',label:''}),bass:()=>({instrument:'violin',label:'',tuning:['E,,','A,,','D,','G,']})};
+/* basse 4 cordes : le module « violon » d'abcjs dessine bien 4 lignes (celui de la guitare en dessinait 5) */
+
 function tabMode(){try{return localStorage.getItem('atelier-tab')||''}catch(e){return ''}}""")
-rep("""  if(id==='lr'){const i=el('input',{type:'checkbox',id:'s_metro'})""","""  if(TAB_MODS.includes(id))opts.push(field(['Tablature',typeof betaTag==='function'?betaTag():null].filter(Boolean),el('div',{class:'field'},sel('s_tab',[['','Aucune'],['guitar','Guitare'],['bass','Basse électrique']],tabMode(),v=>{try{localStorage.setItem('atelier-tab',v)}catch(e){};newEx();}),el('span',{class:'hint'},'Les numéros de case s\\'affichent sous la portée. La clé est imposée (sol pour la guitare, fa pour la basse) et les notes restent dans les cases 0 à 5.'))));
+rep("""  if(id==='lr'){const i=el('input',{type:'checkbox',id:'s_metro'})""","""  if(TAB_MODS.includes(id))opts.push(field(['Tablature',typeof betaTag==='function'?betaTag():null].filter(Boolean),el('div',{class:'field'},sel('s_tab',[['','Aucune'],['guitar','Guitare'],['bass','Basse électrique']],tabMode(),v=>{try{localStorage.setItem('atelier-tab',v)}catch(e){};newEx();}),el('span',{class:'hint'},'Les numéros de case s\\'affichent sous la portée. La clé est imposée (sol pour la guitare, fa pour la basse) et les notes utilisent toutes les cordes, jusqu\\'à la 12e case.'))));
   if(id==='lr'){const i=el('input',{type:'checkbox',id:'s_metro'})""")
 s=s.replace("</style>","#score .abcjs-tab-number,#score .abcjs-tabNumber{fill:currentColor}\n</style>",1)
 rep("['Sujets',`${c.topics.length} notion${c.topics.length>1?'s':''}`],['Formats',c.formats.length===3?'tous':c.formats.map(f=>QZ_FORMATS.find(x=>x[0]===f)[1]).join(', ')]",
@@ -36,4 +38,8 @@ rep("{id:'la',kind:'mel',t:'Lecture appliquée',s:'Voir → jouer',d:'Joue la m�
  "{id:'la',kind:'mel',t:'Lecture mélodique',s:'Voir → jouer note par note',d:'Joue la mélodie note par note, sans tempo : sur le clavier à l\\'écran, avec ton clavier d\\'ordinateur ou sur ton instrument avec le micro.'}")
 # iPad à la verticale (601 à 860 px) : même menu déroulant des modules que sur mobile
 rep("/* ===== mobile : menu déroulant des modules ===== */\n.modpick{display:none}\n@media (max-width:600px){","/* ===== mobile et tablette : menu déroulant des modules ===== */\n.modpick{display:none}\n@media (max-width:860px){")
+# son de basse électrique
+rep("const INSTRS=[['piano','Piano'],['guitare','Guitare'],['voix','Voix'],['flute','Flûte de pan']];","const INSTRS=[['piano','Piano'],['guitare','Guitare'],['basse','Basse électrique'],['voix','Voix'],['flute','Flûte de pan']];")
+rep("note(m,t,d,v,dest){const k=S.inst;if(k==='guitare')","note(m,t,d,v,dest){const k=S.inst;if(k==='basse')return this.bass(m,t,d,v,dest);if(k==='guitare')")
+rep("  vcache:{},\n  voiceBuf(",open('/tmp/claude-0/-home-claude-musicdev/4258b5e8-eacb-5999-9d1d-cfd4cbd81d51/scratchpad/bassjs.txt').read()+"  vcache:{},\n  voiceBuf(")
 open(p,'w',encoding='utf-8').write(s)

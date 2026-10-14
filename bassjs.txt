@@ -1,0 +1,12 @@
+  bass(m,t,d,v,dest){
+    /* basse électrique (doigts) : la basse sonne une octave plus bas que la note écrite ;
+       dent de scie + sinus grave, filtre passe-bas qui se referme comme une corde pincée */
+    const c=this.ctx,f=440*2**((m-12-69)/12),end=t+Math.max(d,.12);
+    const o1=c.createOscillator(),o2=c.createOscillator(),lp=c.createBiquadFilter(),g=c.createGain(),m2=c.createGain();
+    o1.type='sawtooth';o1.frequency.value=f;o2.type='sine';o2.frequency.value=f;m2.gain.value=.9;
+    lp.type='lowpass';lp.Q.value=2;lp.frequency.setValueAtTime(Math.min(4000,f*14),t);lp.frequency.setTargetAtTime(Math.max(180,f*3),t+.005,.09);
+    const pk=v*1.25;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(pk,t+.006);g.gain.setTargetAtTime(pk*.55,t+.01,.35);
+    g.gain.setValueAtTime(pk*.55*Math.exp(-Math.max(0,end-t-.01)/.35)+.0001,end);g.gain.setTargetAtTime(0,end,.06);
+    o1.connect(lp);o2.connect(m2);m2.connect(lp);lp.connect(g);g.connect(dest||this.out);
+    o1.start(t);o2.start(t);o1.stop(end+.5);o2.stop(end+.5);
+  },

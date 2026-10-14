@@ -395,5 +395,6 @@ a("Levier de si♭ (main droite)","B♭ lever (right hand)","Palanca de si♭ (m
 a("Rouleau de si grave","Low B roller","Rodillo de si grave")
 a("Clé « gizmo »","“Gizmo” key","Llave «gizmo»")
 a("En do : on lit les notes réelles. Demi-trou : l'index gauche est levé et seul le petit point sous le trou est noir.","In C: you read concert pitch. Half-hole: the left index is lifted and only the small dot under the hole is black.","En do: se leen las notas reales. Medio agujero: el índice izquierdo está levantado y solo el puntito bajo el agujero está en negro.")
+a("Les numéros de case s'affichent sous la portée. La clé est imposée (sol pour la guitare, fa pour la basse) et les notes utilisent toutes les cordes, jusqu'à la 12e case.","Fret numbers appear under the staff. The clef is set for you (treble for guitar, bass for bass) and notes use every string, up to the 12th fret.","Los números de traste aparecen bajo el pentagrama. La clave se fija sola (sol para la guitarra, fa para el bajo) y las notas usan todas las cuerdas, hasta el traste 12.")
 json.dump({'en':E,'es':S},open('extra.json','w'),ensure_ascii=False,indent=0)
 print(len(E))
