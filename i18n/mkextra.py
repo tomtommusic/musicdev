@@ -374,5 +374,6 @@ a("Ajouter une légère ambiance de salle (utile pour une voix enregistrée de p
 a("Analyse ta prise, puis corrige ce qui manque : égalisation adaptée à ta voix ou ton instrument, souffle atténué entre les phrases, « s » adoucis, compression sur 3 bandes et volume ajusté, sans saturer.","Analyzes your take, then fixes what is missing: EQ adapted to your voice or instrument, less hiss between phrases, softer “s” sounds, 3-band compression and adjusted volume, without distortion.","Analiza tu toma y corrige lo que falta: ecualización adaptada a tu voz o instrumento, menos soplido entre frases, «s» suavizadas, compresión en 3 bandas y volumen ajustado, sin saturar.")
 exec(open('/tmp/claude-0/-home-claude-musicdev/4258b5e8-eacb-5999-9d1d-cfd4cbd81d51/scratchpad/about/tr.py').read())
 for _f,_e,_s in T:a(_f,_e,_s)
+a("✎ Paroles","✎ Lyrics","✎ Letra")
 json.dump({'en':E,'es':S},open('extra.json','w'),ensure_ascii=False,indent=0)
 print(len(E))

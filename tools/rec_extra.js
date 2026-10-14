@@ -47,7 +47,7 @@ function lyView(u){
   u.lyarea.value=LY.text;
   u.lyarea.addEventListener('input',()=>{LY.text=u.lyarea.value;clearTimeout(u.lyt);u.lyt=setTimeout(lySave,300);});
   const done=mk('✓ Terminé',()=>{LY.text=u.lyarea.value;lySave();u.lyEditing=false;lyPaint();},'primary');
-  const edit=mk('✎ Écrire ou coller',()=>{lyFull(false);lyRun(false);u.lyEditing=true;lyPaint();setTimeout(()=>u.lyarea.focus(),0);},'lyfs');
+  const edit=mk('✎ Paroles',()=>{lyFull(false);lyRun(false);u.lyEditing=true;lyPaint();setTimeout(()=>u.lyarea.focus(),0);},'lyfs');
   u.lyplay=mk('▶ Défiler',()=>{if(!LS.run&&u.lybox.scrollTop+u.lybox.clientHeight>=u.lybox.scrollHeight-1)u.lybox.scrollTop=0;lyRun(!LS.run);});
   const top=mk('⇤ Début',()=>{u.lybox.scrollTop=0;LS.acc=0;},'quiet');
   u.lyspd=el('b',{class:'lyspd'});

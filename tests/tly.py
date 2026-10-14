@@ -5,7 +5,7 @@ with sync_playwright() as p:
     for w in [1200,390]:
         pg=b.new_page(viewport={'width':w,'height':850});errs=[];pg.on('pageerror',lambda e:errs.append(str(e)))
         pg.goto('http://localhost:8790/');pg.wait_for_timeout(500);pg.evaluate("openModule('en')");pg.wait_for_timeout(500)
-        pg.click('text=Écrire ou coller');pg.fill('.lyarea',TXT);pg.click('text=Terminé');pg.wait_for_timeout(200)
+        pg.click('text=✎ Paroles');pg.fill('.lyarea',TXT);pg.click('text=Terminé');pg.wait_for_timeout(200)
         print('texte gardé',pg.evaluate("document.querySelector('.lytxt').textContent")==TXT, pg.evaluate("getComputedStyle(document.querySelector('.lytxt')).whiteSpace"))
         pg.locator('.lysec').screenshot(path=f'ly_{w}.png')
         # record 4 s with count-in
