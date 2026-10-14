@@ -389,5 +389,7 @@ a("Analyse ta prise, puis la peaufine : égalisation adaptée à ta voix ou ton 
 a("↺ Reprendre","↺ Retake","↺ Repetir")
 a("Reprendre","Retake","Repetir")
 a("Efface la prise et recommence tout de suite","Erase the take and start again right away","Borra la toma y vuelve a empezar enseguida")
+exec(open('/tmp/claude-0/-home-claude-musicdev/4258b5e8-eacb-5999-9d1d-cfd4cbd81d51/scratchpad/badges/tr.py').read())
+for _f,_e,_s in T:a(_f,_e,_s)
 json.dump({'en':E,'es':S},open('extra.json','w'),ensure_ascii=False,indent=0)
 print(len(E))
