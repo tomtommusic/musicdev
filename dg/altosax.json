@@ -232,6 +232,13 @@
       "Bis"
      ],
      "label": "Si♭ « bis »"
+    },
+    {
+     "keys": [
+      "L1",
+      "R1"
+     ],
+     "label": "« 1 et 1 »"
     }
    ],
    "comment": "Le tableau donne d'abord le si♭ de côté (clé latérale) ; le si♭ « bis » est pratique quand aucun si naturel n'est proche.",
@@ -446,6 +453,14 @@
       "Bis"
      ],
      "label": "Si♭ « bis »"
+    },
+    {
+     "keys": [
+      "Oct",
+      "L1",
+      "R1"
+     ],
+     "label": "« 1 et 1 »"
     }
    ],
    "comment": "Le tableau donne d'abord le si♭ de côté (clé latérale) ; le si♭ « bis » est pratique quand aucun si naturel n'est proche.",
