@@ -664,7 +664,15 @@
 "Rouleau de si grave": "Low B roller",
 "Clé « gizmo »": "“Gizmo” key",
 "En do : on lit les notes réelles. Demi-trou : l'index gauche est levé et seul le petit point sous le trou est noir.": "In C: you read concert pitch. Half-hole: the left index is lifted and only the small dot under the hole is black.",
-"Les numéros de case s'affichent sous la portée. La clé est imposée (sol pour la guitare, fa pour la basse) et les notes utilisent toutes les cordes, jusqu'à la 12e case.": "Fret numbers appear under the staff. The clef is set for you (treble for guitar, bass for bass) and notes use every string, up to the 12th fret."
+"Les numéros de case s'affichent sous la portée. La clé est imposée (sol pour la guitare, fa pour la basse) et les notes utilisent toutes les cordes, jusqu'à la 12e case.": "Fret numbers appear under the staff. The clef is set for you (treble for guitar, bass for bass) and notes use every string, up to the 12th fret.",
+"En clé de fa, au son réel, d'après le tableau de David Wells. À gauche du trait : les clés des pouces ; à droite : les trous et les clés des doigts. Main gauche en haut, main droite en bas. Le demi-trou est dessiné à moitié plein et les clés de « flick » sont en orange.": "In bass clef, at concert pitch, after David Wells's chart. Left of the line: thumb keys; right: finger holes and keys. Left hand on top, right hand below. The half-hole is drawn half-filled and flick keys are orange.",
+"Les clés en orange sont des clés de « flick » : on les effleure juste au début de la note.": "The orange keys are flick keys: tap them just at the start of the note.",
+"flick": "flick",
+"Clé de do aigu": "High C key",
+"Clé de ré aigu": "High D key",
+"Clé de mi aigu": "High E key",
+"Clé de mi♭ aigu": "High E♭ key",
+"Clé de trille de do♯": "C♯ trill key"
 },
 "es": {
 "Modules": "Módulos",
@@ -1331,6 +1339,14 @@
 "Rouleau de si grave": "Rodillo de si grave",
 "Clé « gizmo »": "Llave «gizmo»",
 "En do : on lit les notes réelles. Demi-trou : l'index gauche est levé et seul le petit point sous le trou est noir.": "En do: se leen las notas reales. Medio agujero: el índice izquierdo está levantado y solo el puntito bajo el agujero está en negro.",
-"Les numéros de case s'affichent sous la portée. La clé est imposée (sol pour la guitare, fa pour la basse) et les notes utilisent toutes les cordes, jusqu'à la 12e case.": "Los números de traste aparecen bajo el pentagrama. La clave se fija sola (sol para la guitarra, fa para el bajo) y las notas usan todas las cuerdas, hasta el traste 12."
+"Les numéros de case s'affichent sous la portée. La clé est imposée (sol pour la guitare, fa pour la basse) et les notes utilisent toutes les cordes, jusqu'à la 12e case.": "Los números de traste aparecen bajo el pentagrama. La clave se fija sola (sol para la guitarra, fa para el bajo) y las notas usan todas las cuerdas, hasta el traste 12.",
+"En clé de fa, au son réel, d'après le tableau de David Wells. À gauche du trait : les clés des pouces ; à droite : les trous et les clés des doigts. Main gauche en haut, main droite en bas. Le demi-trou est dessiné à moitié plein et les clés de « flick » sont en orange.": "En clave de fa, a sonido real, según la tabla de David Wells. A la izquierda de la línea: llaves de los pulgares; a la derecha: agujeros y llaves de los dedos. Mano izquierda arriba, mano derecha abajo. El medio agujero se dibuja medio lleno y las llaves de «flick» están en naranja.",
+"Les clés en orange sont des clés de « flick » : on les effleure juste au début de la note.": "Las llaves en naranja son llaves de «flick»: se tocan apenas al inicio de la nota.",
+"flick": "flick",
+"Clé de do aigu": "Llave de do agudo",
+"Clé de ré aigu": "Llave de re agudo",
+"Clé de mi aigu": "Llave de mi agudo",
+"Clé de mi♭ aigu": "Llave de mi♭ agudo",
+"Clé de trille de do♯": "Llave de trino de do♯"
 }
 }

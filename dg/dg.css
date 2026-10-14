@@ -382,3 +382,10 @@
 .dgsvg.asax .dgk.small{stroke-width:.7}
 .dgsvg.asax .dgbr,.dgsvg.asax .dgsep{stroke-width:.9}
 .dgalt .dgsvg.asax{width:96px}
+/* basson : tableau de Wells (traits fins, clés de flick en orange) */
+.dgsvg.bsn .dgk,.dgsvg.bsn .dgk.small{stroke-width:.8}
+.dgsvg.bsn .dgsep{stroke-width:.8}
+.dgsvg.bsn{width:96px}
+.dgsvg.bsn.big{width:150px;max-width:100%}
+.dgsvg.bsn.mini{width:52px}
+.dgk.on.flick,.dgchart .dgcell2 .dgk.on.flick{fill:#e8590c!important}

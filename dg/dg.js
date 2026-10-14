@@ -26,7 +26,7 @@ function dgPlay(m,timbre){try{const c=A.init();if(typeof qzUnmute==='function')q
 const DG_INST=[
   {id:'flute',fam:'Bois',t:'Flûte traversière',kind:'ww',data:'flute',clef:'treble',tr:0,timbre:'flute',info:'En do : on lit les notes réelles.'},
   {id:'oboe',fam:'Bois',t:'Hautbois',kind:'ww',data:'oboe',clef:'treble',tr:0,info:'En do : on lit les notes réelles. Demi-trou : l\'index gauche est levé et seul le petit point sous le trou est noir.'},
-  {id:'bsn',fam:'Bois',t:'Basson',kind:'ww',data:'bsn',clef:'bass',tr:0,info:'En clé de fa, au son réel. Les clés du haut à gauche sont jouées par le pouce gauche, celles du bas à gauche par le pouce droit. Le demi-trou est dessiné à moitié plein.'},
+  {id:'bsn',fam:'Bois',t:'Basson',kind:'ww',data:'bsn',clef:'bass',tr:0,info:"En clé de fa, au son réel, d'après le tableau de David Wells. À gauche du trait : les clés des pouces ; à droite : les trous et les clés des doigts. Main gauche en haut, main droite en bas. Le demi-trou est dessiné à moitié plein et les clés de « flick » sont en orange."},
   {id:'clar',fam:'Bois',t:'Clarinette en si♭',kind:'ww',data:'clar',clef:'treble',tr:-2,info:'Notes écrites. Le son réel est un ton plus bas.'},
   {id:'asax',fam:'Bois',t:'Saxophone alto',kind:'ww',data:'asax',clef:'treble',tr:-9,info:'En mi♭ : notes écrites. Le son réel est une sixte majeure plus bas.'},
   {id:'tpt',fam:'Cuivres',t:'Trompette en si♭',kind:'tpt',data:'tpt',clef:'treble',tr:-2,info:'Notes écrites. Le son réel est un ton plus bas. 0 = aucun piston.'},
@@ -100,16 +100,40 @@ const DG_LAYOUT={
     ['rCs','e',36,110,3,2.2],
     ['rEb','d','M22,116.5 c0,-3.6 4,-5.4 8,-4.6 c3,.6 5,2.3 7,4 c2,.1 4,.4 6,1.2 c-4,1.4 -8,1.8 -12,2 c-5,.3 -9,.2 -9,-2.6 Z']],
     labels:[]},
-  bsn:{vb:'4 150 156 312',
-    deco:[['M59,203 V235 H70 V280 H61 V316','dgbsl'],['M14,274 H124','dgbsd']],
+  bsn:{vb:'-45 -56 81 124',
+    /* disposition du tableau de David Wells (schémas de Bret Pimentel) : pouces à gauche du trait, doigts à droite,
+       main gauche au-dessus du trait horizontal ; mi aigu, mi♭ aigu et trille de do♯ n'apparaissent que quand on s'en sert */
+    sil:[],seps:[[0,-46.8,0,44.2],[-21.6,0,21.4,0]],
+    opt:{hE:['hE'],hEb:['hEb'],Cst:['Cst'],L1h:['L1h']},
     items:()=>[
-    ['tB','e',29,184,4.2,10],['tBb','e',39,184,4.2,10],['tC','e',19,188,6.2,7.6],['fA','e',55,186,5.4,8.6,-8],['lTop','e',121,170,3.4,5.4],
-    ['L1','o',114,188,6],['L1h','h',114,188,6],['tX','d','M27.5,198.5 h9 v10 h-9 Z'],['fC','e',62,202,12,4.4],['lX','e',117,205,8,3],
-    ['tD','e',22,212,5.6,17,-8],['tCs','e',54,216,6.4,5],['W','e',48,228,6,4],['L2','o',113,226,6],['L3','o',114,257,7.4],
-    ['lEb','e',139,268,8,4.4,-25],['lCs','e',144,280,8,4.4,-25],
-    ['rBb','e',55,329,13,7,-10],['rE','o',54,347,11],['rFs','e',62,366,11,6.8,-25],['rAb','e',71,379,11,6.8,-25],
-    ['R1','o',114,339,6],['R2','o',116,380,8.6],['R3Bb','e',115,400,9,4],['R3','e',110,413,14,6.4],
-    ['pF','e',81,421,8,7,-35],['pFs','e',98,434,8,11,-35],['pAb','e',77,438,10,8]],
+    ['tC','d','M-37.6,-38.4 L-39.8,-37 L-42.4,-34.2 L-43.2,-32.2 L-43,-29.6 L-41.4,-27.6 L-39.8,-26.8 L-38,-26.4 L-33.2,-26.4 L-33.6,-29.8 L-35,-34.6 L-36.6,-38.2 Z'],
+    ['tB','d','M-34.6,-43.6 L-34.6,-38.8 L-32.4,-33.2 L-31.4,-28.6 L-30.2,-27.4 L-27.8,-27.6 L-27.2,-28.2 L-27,-30 L-28,-33 L-31.8,-40 L-32.6,-42.2 L-32.6,-43.6 Z'],
+    ['tBb','d','M-28.8,-44 L-28.8,-39.2 L-26.8,-34.4 L-25.4,-28.6 L-24.6,-27.8 L-22.2,-27.8 L-21.2,-28.6 L-21.2,-30.8 L-22,-33 L-26.2,-41 L-26.6,-42.2 L-26.6,-44 Z'],
+    ['tHD','d','M-12.8,-46.2 L-14.8,-46.2 L-15.4,-43.6 L-19.4,-38.2 L-19.4,-35.2 L-17.4,-33.4 L-14.6,-33.2 L-13.8,-33.8 L-13.2,-35 L-12.8,-37 Z'],
+    ['tHC','d','M-9,-38.8 L-10.8,-38.8 L-10.8,-34.6 L-11.2,-33.4 L-12.4,-32.2 L-16.2,-30.8 L-16.6,-30.2 L-16.6,-27.8 L-15.8,-26.4 L-14.4,-25.6 L-11.2,-25.8 L-9.4,-27.6 L-9,-29 Z'],
+    ['tD','d','M-37.8,-24.8 L-39,-24.2 L-40.2,-22.6 L-40.6,-21 L-40.4,-18.6 L-37,-9.8 L-35,-2.6 L-32.8,-2.4 L-32.8,-22.8 L-34,-24.2 L-34.8,-24.6 Z'],
+    ['tA','d','M-18.6,-22.2 L-18.6,-19.2 L-17.6,-18.4 L-15.8,-18 L-6.8,-18 L-4.4,-18.6 L-2.4,-20 L-2.4,-21.6 L-3,-22.2 L-5.4,-23.2 L-7.4,-23.6 L-15.2,-23.6 L-17.8,-23 Z'],
+    ['tCs','d','M-20.2,-14.8 L-21,-13.6 L-20.8,-11.6 L-18.4,-10.2 L-15.2,-9.6 L-12.2,-9.6 L-11.2,-9.2 L-10.4,-8 L-10.4,-2.8 L-8.6,-2.8 L-8.6,-12 L-9.6,-14 L-11.8,-15.4 L-14.4,-16 L-18,-15.8 Z'],
+    ['W','d','M-22.4,-5.8 L-22.2,-3.6 L-21.4,-2.8 L-19.4,-2 L-15.8,-2.2 L-14.6,-2.8 L-13.6,-4 L-13.6,-5.8 L-14,-6.6 L-16.2,-7.8 L-19.8,-7.8 L-21.8,-6.8 Z'],
+    ['rBb','d','M-8.6,4.6 L-9.8,3.2 L-12.6,2.2 L-16.4,2.2 L-19.2,3 L-21.4,4.4 L-23.6,6.8 L-25,9.4 L-25.6,11.8 L-24.2,11.8 L-23.2,9.8 L-21.8,8.4 L-20.2,7.6 L-18.4,7.2 L-9.8,7.2 L-8.8,6.6 Z'],
+    ['rE','o',-16.2,15,6.4],
+    ['rFs','d','M-8.2,22.2 L-9.6,21.4 L-11.8,21.4 L-13.4,21.8 L-15.2,22.8 L-17.4,25.2 L-18.4,27.6 L-18.6,29.6 L-17.2,29.6 L-16.4,27.2 L-14.6,25.6 L-9,25.2 L-8.2,24 Z'],
+    ['rAb','d','M-4.2,27.2 L-5,26.6 L-7.4,26.4 L-9.2,26.8 L-11.4,28 L-13.8,31 L-14.6,34.6 L-13.2,34.6 L-12.2,32 L-10.4,30.6 L-5.4,30.4 L-4.6,30 L-4.2,29.2 Z'],
+    ['hE','d','M23.8,-53.6 L20.4,-53.4 L15.6,-52.4 L12,-51 L11.8,-49.8 L14.2,-49.6 L18.8,-50.6 L23.8,-52.8 Z'],
+    ['L1','o',10.6,-42.6,5.2],
+    ['L1h','d','M5.4,-42.6 A5.2,5.2 0 0 0 15.8,-42.6 Z'],
+    ['hEb','d','M23.6,-37.6 L20.2,-37.4 L14.8,-36.2 L12,-35 L11.8,-33.8 L14,-33.6 L18,-34.4 L22.8,-36.2 L23.6,-36.8 Z'],
+    ['L2','o',10.6,-27.4,5.2],
+    ['L3','o',10.6,-12.2,5.2],
+    ['lEb','d','M18.6,-11.8 L18.6,-10.2 L30.4,-10.4 L30.2,-12 L29.6,-13.2 L28.4,-14.2 L25.6,-15.2 L21.6,-14.8 L20.4,-14.2 L19.2,-13 Z'],
+    ['lCs','d','M18.6,-8.6 L18.6,-7 L19,-6 L20.4,-4.6 L23,-3.6 L25.8,-3.6 L28.2,-4.4 L29.6,-5.6 L30.4,-7.6 L30.2,-8.6 Z'],
+    ['R1','o',10.6,11.2,5.2],
+    ['Cst','d','M15.2,3.8 L15.2,5.4 L16.2,5.4 L17.8,4.4 L19.2,4.2 L21,5.6 L21.2,6.2 L20.2,7.4 L20.2,9.2 L20.8,10 L23.4,10.2 L24,9.6 L24.2,7.4 L23.6,5.4 L21.4,3.2 L20.2,2.8 L18,2.8 Z'],
+    ['R2','o',10.6,26.6,5.2],
+    ['R3','d','M3.2,41.6 L3.4,43.4 L4.4,44.4 L5.4,45 L8.4,45.8 L13,45.8 L14.8,45.4 L17,44.4 L18,43.2 L18,41.2 L17.2,40.2 L15.4,39.2 L12.8,38.6 L8.6,38.6 L6.6,39 L4.4,40 Z'],
+    ['pF','d','M19.6,47 L18.6,47.8 L16.8,51 L16.8,53 L17.2,53.6 L20.8,55.6 L22.8,55.6 L25.2,51.8 L25.4,50 L24.6,49 L21,47 Z'],
+    ['pFs','d','M26.8,52.2 L24.4,56 L24.4,58 L25.2,58.8 L30.2,61.8 L32.8,61.8 L33.4,60.8 L33.4,58.2 L32.2,55.8 L28.8,52 Z'],
+    ['pAb','d','M14.6,55 L13.8,55.8 L12,59 L12.2,61.2 L19.4,65.4 L21.4,65.4 L22.2,64.6 L23.8,61.8 L24,59.6 L23,58.6 L16.6,55 Z']],
     labels:[]},
   asax:{vb:'12 -8 58 116',
     /* disposition des tableaux de méthode (Essential Elements) : clé d'octave entre deux barres, colonne des trous ;
@@ -134,14 +158,14 @@ const DG_LAYOUT={
     labels:[]},
 };
 function dgWindSvg(inst,keys,size){
-  const L=DG_LAYOUT[inst],on=new Set(keys),NS='http://www.w3.org/2000/svg';
+  const L=DG_LAYOUT[inst],fl=new Set(keys.filter(k=>k[0]==='~').map(k=>k.slice(1))),on=new Set(keys.map(k=>k.replace('~',''))),NS='http://www.w3.org/2000/svg';
   const svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox',L.vb);svg.setAttribute('class','dgsvg '+inst+(size?' '+size:''));svg.setAttribute('aria-hidden','true');
   const mk=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);svg.append(e);return e;};
   {const g=mk('g',{class:'dgsilg'});const sp=(d,c)=>{const e=document.createElementNS(NS,'path');e.setAttribute('d',d);e.setAttribute('class',c);g.append(e);};
    (L.sil||[]).forEach(d=>sp(d,'dgsilf'));(L.silS||[]).forEach(d=>sp(d,'dgsils'));(L.silF||[]).forEach(d=>sp(d,'dgsilf'));}
   for(const[x1,y1,x2,y2]of(L.seps||[]))mk('line',{x1,y1,x2,y2,class:'dgsep'});
   for(const[d,c]of(L.deco||[]))mk('path',{d,class:c});
-  for(const it of L.items()){const[id,tp,x,y]=it,cls='dgk '+(on.has(id)?'on':'off');
+  for(const it of L.items()){const[id,tp,x,y]=it,cls='dgk '+(on.has(id)?'on':'off')+(fl.has(id)?' flick':'');
     if(L.opt&&L.opt[id]&&!L.opt[id].some(k=>on.has(k)))continue; /* clé dessinée seulement quand elle sert (comme les tableaux) */
     if(tp==='d'){mk('path',{d:it[2],class:cls+' small'});continue;}
     if(tp==='h'){if(on.has(id)){const r=it[4];mk('path',{d:`M${x},${y-r} A${r},${r} 0 0 0 ${x},${y+r} Z`,class:'dgk on half'});}continue;}
@@ -186,12 +210,12 @@ function dgKeyNames(inst){const pg=T('Auriculaire gauche'),pd=T('Auriculaire dro
   clar:{Reg:T('Clé de registre'),A:T('Clé de la'),Gs:T('Clé de sol♯'),EbBb:T('Clé mi♭/si♭ (palette)'),CsGs:`${pg} : ${nl('do♯','sol♯')}`,lFs:`${pg} : ${nl('fa♯','do♯')}`,lE:`${pg} : ${nl('mi','si')}`,lF:`${pg} : ${nl('fa','do')}`,
     S1:T('Clé latérale')+' 1',S2:T('Clé latérale')+' 2',S3:T('Clé latérale')+' 3',S4:T('Clé latérale')+' 4',rAb:`${pd} : ${nl('la♭','mi♭')}`,rFs:`${pd} : ${nl('fa♯','do♯')}`,rE:`${pd} : ${nl('mi','si')}`,rF:`${pd} : ${nl('fa','do')}`,BFs:T('Clé de si/fa♯ (main droite)')},
   oboe:{Oct1:T('Clé d\'octave (pouce)'),Oct2:T('2e clé d\'octave'),L1h:T('Demi-trou (index gauche)'),Gs:T('Clé de sol♯'),lEb:`${pg} : ${nl('mi♭')}`,lB:`${pg} : ${nl('si')}`,lBb:`${pg} : ${nl('si♭')}`,Fk:T('Clé de fa'),rC:`${pd} : ${nl('do')}`,rCs:`${pd} : ${nl('do♯')}`,rEb:`${pd} : ${nl('mi♭')}`},
-  bsn:{W:T('Clé de pianissimo (pouce gauche)'),fA:T('Clé de flick : la aigu'),fC:T('Clé de flick : do aigu'),tD:T('Pouce gauche')+' : '+nl('ré'),tC:T('Pouce gauche')+' : '+nl('do'),tB:T('Pouce gauche')+' : '+nl('si'),tBb:T('Pouce gauche')+' : '+nl('si♭'),tCs:T('Pouce gauche')+' : '+nl('do♯'),
-    L1h:T('Demi-trou (index gauche)'),lEb:T('Clé de mi♭'),lCs:T('Clé de do♯ grave'),rBb:T('Pouce droit')+' : '+nl('si♭'),rE:T('Pouce droit')+' : '+nl('mi'),rFs:T('Pouce droit')+' : '+nl('fa♯'),rAb:T('Pouce droit')+' : '+nl('la♭'),
-    pF:`${pd} : ${nl('fa')}`,pFs:`${pd} : ${nl('fa♯')}`,pAb:`${pd} : ${nl('la♭')}`,R3Bb:T('Clé de si♭ (annulaire droit)')},
+  bsn:{W:T('Clé de pianissimo (pouce gauche)'),tA:T('Clé de la'),tHC:T('Clé de do aigu'),tHD:T('Clé de ré aigu'),tD:T('Pouce gauche')+' : '+nl('ré'),tC:T('Pouce gauche')+' : '+nl('do'),tB:T('Pouce gauche')+' : '+nl('si'),tBb:T('Pouce gauche')+' : '+nl('si♭'),tCs:T('Pouce gauche')+' : '+nl('do♯'),
+    L1h:T('Demi-trou (index gauche)'),hE:T('Clé de mi aigu'),hEb:T('Clé de mi♭ aigu'),lEb:T('Clé de mi♭'),lCs:T('Clé de do♯ grave'),rBb:T('Pouce droit')+' : '+nl('si♭'),rE:T('Pouce droit')+' : '+nl('mi'),rFs:T('Pouce droit')+' : '+nl('fa♯'),rAb:T('Pouce droit')+' : '+nl('la♭'),
+    pF:`${pd} : ${nl('fa')}`,pFs:`${pd} : ${nl('fa♯')}`,pAb:`${pd} : ${nl('la♭')}`,Cst:T('Clé de trille de do♯')},
   asax:{Oct:T('Clé d\'octave'),PD:T('Clé de paume')+' '+T('ré'),PEb:T('Clé de paume')+' '+T('mi♭'),PF:T('Clé de paume')+' '+T('fa'),FF:T('Fa avant'),Bis:T('Clé bis'),Gs:T('Clé de sol♯'),LCs:`${pg} : ${nl('do♯')}`,LB:`${pg} : ${nl('si')}`,LBb:`${pg} : ${nl('si♭')}`,
     SE:T('Clé latérale')+' '+T('mi'),SC:T('Clé latérale')+' '+T('do'),SBb:T('Clé latérale')+' '+T('si♭'),SFs:T('Clé de fa♯ aigu'),AFs:T('Clé de fa♯ auxiliaire'),REb:`${pd} : ${nl('mi♭')}`,RC:`${pd} : ${nl('do')}`}})[inst]||{};}
-function dgLegend(inst,keys){const N=dgKeyNames(inst),l=keys.filter(k=>N[k]).map(k=>N[k]);return l.length?el('p',{class:'dgleg'},el('span',{class:'fl'},'Clés à presser'),...l.map(x=>el('span',{class:'dgkey','data-notr':''},x))):null;}
+function dgLegend(inst,keys){const N=dgKeyNames(inst),l=keys.filter(k=>N[k.replace('~','')]).map(k=>k[0]==='~'?N[k.slice(1)]+' ('+T('flick')+')':N[k]);return l.length?el('p',{class:'dgleg'},el('span',{class:'fl'},'Clés à presser'),...l.map(x=>el('span',{class:'dgkey','data-notr':''},x))):null;}
 
 /* ---------- vue ---------- */
 function dgInst(){return DG_INST.find(i=>i.id===DG.inst)||null;}
