@@ -334,5 +334,25 @@
 "Sans pouce ni auriculaire droit. Avec une patte de si : ajouter la clé « gizmo ».": {
 "en": "No thumb and no right pinky. With a B foot: add the “gizmo” key.",
 "es": "Sin pulgar ni meñique derecho. Con pata de si: añadir la llave «gizmo»."
+},
+"Auriculaire droit sur le rouleau de do grave (il ferme aussi la clé de do♯).": {
+"en": "Right pinky on the low C roller (it also closes the C♯ key).",
+"es": "Meñique derecho en el rodillo de do grave (también cierra la llave de do♯)."
+},
+"« 1 et 1 » (index gauche + index droit). Aussi : si♭ du pouce, pratique dans les tonalités en bémols, ou levier de si♭ de la main droite.": {
+"en": "\"1 and 1\" (left index + right index). Also: thumb B♭, handy in flat keys, or the right-hand B♭ lever.",
+"es": "«1 y 1» (índice izquierdo + índice derecho). También: si♭ del pulgar, práctico en tonalidades con bemoles, o la palanca de si♭ de la mano derecha."
+},
+"Pouce, index droit et 1re clé de trille, avec l'auriculaire droit sur la clé de mi♭.": {
+"en": "Thumb, right index and 1st trill key, with the right pinky on the E♭ key.",
+"es": "Pulgar, índice derecho y 1.ª llave de trino, con el meñique derecho en la llave de mi♭."
+},
+"Comme fa♯6, mais la 2e clé de trille remplace l'annulaire droit.": {
+"en": "Like F♯6, but the 2nd trill key replaces the right ring finger.",
+"es": "Como fa♯6, pero la 2.ª llave de trino sustituye al anular derecho."
+},
+"Levier de si♭": {
+"en": "B♭ lever",
+"es": "Palanca de si♭"
 }
 }

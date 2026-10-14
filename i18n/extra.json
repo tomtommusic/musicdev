@@ -303,6 +303,11 @@
 "Do♯ auriculaire gauche": "C♯ left pinky",
 "Les deux auriculaires (L+R)": "Both pinkies (L+R)",
 "Sans pouce ni auriculaire droit. Avec une patte de si : ajouter la clé « gizmo ».": "No thumb and no right pinky. With a B foot: add the “gizmo” key.",
+"Auriculaire droit sur le rouleau de do grave (il ferme aussi la clé de do♯).": "Right pinky on the low C roller (it also closes the C♯ key).",
+"« 1 et 1 » (index gauche + index droit). Aussi : si♭ du pouce, pratique dans les tonalités en bémols, ou levier de si♭ de la main droite.": "\"1 and 1\" (left index + right index). Also: thumb B♭, handy in flat keys, or the right-hand B♭ lever.",
+"Pouce, index droit et 1re clé de trille, avec l'auriculaire droit sur la clé de mi♭.": "Thumb, right index and 1st trill key, with the right pinky on the E♭ key.",
+"Comme fa♯6, mais la 2e clé de trille remplace l'annulaire droit.": "Like F♯6, but the 2nd trill key replaces the right ring finger.",
+"Levier de si♭": "B♭ lever",
 "Clé de si (pouce)": "B key (thumb)",
 "Levier de si♭ (pouce)": "B♭ lever (thumb)",
 "Clé de sol♯": "G♯ key",
@@ -651,7 +656,10 @@
 "Assidu": "Dedicated",
 "Utilise l'app 5 jours différents.": "Use the app on 5 different days.",
 "Une semaine de suite": "A week in a row",
-"Utilise l'app 7 jours consécutifs.": "Use the app 7 days in a row."
+"Utilise l'app 7 jours consécutifs.": "Use the app 7 days in a row.",
+"Levier de si♭ (main droite)": "B♭ lever (right hand)",
+"Rouleau de si grave": "Low B roller",
+"Clé « gizmo »": "“Gizmo” key"
 },
 "es": {
 "Modules": "Módulos",
@@ -957,6 +965,11 @@
 "Do♯ auriculaire gauche": "Do♯ meñique izquierdo",
 "Les deux auriculaires (L+R)": "Ambos meñiques (L+R)",
 "Sans pouce ni auriculaire droit. Avec une patte de si : ajouter la clé « gizmo ».": "Sin pulgar ni meñique derecho. Con pata de si: añadir la llave «gizmo».",
+"Auriculaire droit sur le rouleau de do grave (il ferme aussi la clé de do♯).": "Meñique derecho en el rodillo de do grave (también cierra la llave de do♯).",
+"« 1 et 1 » (index gauche + index droit). Aussi : si♭ du pouce, pratique dans les tonalités en bémols, ou levier de si♭ de la main droite.": "«1 y 1» (índice izquierdo + índice derecho). También: si♭ del pulgar, práctico en tonalidades con bemoles, o la palanca de si♭ de la mano derecha.",
+"Pouce, index droit et 1re clé de trille, avec l'auriculaire droit sur la clé de mi♭.": "Pulgar, índice derecho y 1.ª llave de trino, con el meñique derecho en la llave de mi♭.",
+"Comme fa♯6, mais la 2e clé de trille remplace l'annulaire droit.": "Como fa♯6, pero la 2.ª llave de trino sustituye al anular derecho.",
+"Levier de si♭": "Palanca de si♭",
 "Clé de si (pouce)": "Llave de si (pulgar)",
 "Levier de si♭ (pouce)": "Palanca de si♭ (pulgar)",
 "Clé de sol♯": "Llave de sol♯",
@@ -1305,6 +1318,9 @@
 "Assidu": "Constante",
 "Utilise l'app 5 jours différents.": "Usa la app 5 días distintos.",
 "Une semaine de suite": "Una semana seguida",
-"Utilise l'app 7 jours consécutifs.": "Usa la app 7 días seguidos."
+"Utilise l'app 7 jours consécutifs.": "Usa la app 7 días seguidos.",
+"Levier de si♭ (main droite)": "Palanca de si♭ (mano derecha)",
+"Rouleau de si grave": "Rodillo de si grave",
+"Clé « gizmo »": "Llave «gizmo»"
 }
 }

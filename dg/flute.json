@@ -13,9 +13,10 @@
     "R1",
     "R2",
     "R3",
-    "C"
+    "C",
+    "Cs"
    ],
-   "comment": "Auriculaire droit sur la clé (rouleau) de do grave.",
+   "comment": "Auriculaire droit sur le rouleau de do grave (il ferme aussi la clé de do♯).",
    "sources": [
     "https://www.wfg.woodwind.org/flute/fl_bas_1.html",
     "https://www.lee.k12.al.us/cms/lib/AL02210054/Centricity/Domain/305/fingering.chart.flute.piccolo.basic.pdf"
@@ -198,9 +199,18 @@
       "Ds"
      ],
      "label": "Si♭ du pouce"
+    },
+    {
+     "keys": [
+      "thB",
+      "L1",
+      "Bbl",
+      "Ds"
+     ],
+     "label": "Levier de si♭"
     }
    ],
-   "comment": "Le tableau donne d'abord « 1 et 1 » (index gauche + index droit) ; le si♭ du pouce est pratique dans les tonalités en bémols.",
+   "comment": "« 1 et 1 » (index gauche + index droit). Aussi : si♭ du pouce, pratique dans les tonalités en bémols, ou levier de si♭ de la main droite.",
    "sources": [
     "https://www.wfg.woodwind.org/flute/fl_bas_1.html",
     "https://www.lee.k12.al.us/cms/lib/AL02210054/Centricity/Domain/305/fingering.chart.flute.piccolo.basic.pdf"
@@ -408,9 +418,18 @@
       "Ds"
      ],
      "label": "Si♭ du pouce"
+    },
+    {
+     "keys": [
+      "thB",
+      "L1",
+      "Bbl",
+      "Ds"
+     ],
+     "label": "Levier de si♭"
     }
    ],
-   "comment": "Le tableau donne d'abord « 1 et 1 » (index gauche + index droit) ; le si♭ du pouce est pratique dans les tonalités en bémols.",
+   "comment": "« 1 et 1 » (index gauche + index droit). Aussi : si♭ du pouce, pratique dans les tonalités en bémols, ou levier de si♭ de la main droite.",
    "sources": [
     "https://www.wfg.woodwind.org/flute/fl_bas_2.html",
     "https://www.lee.k12.al.us/cms/lib/AL02210054/Centricity/Domain/305/fingering.chart.flute.piccolo.basic.pdf"
@@ -600,9 +619,10 @@
    "keys": [
     "thB",
     "R1",
-    "Tr1"
+    "Tr1",
+    "Ds"
    ],
-   "comment": "Index droit + 1re clé de trille ; aucune clé d'auriculaire.",
+   "comment": "Pouce, index droit et 1re clé de trille, avec l'auriculaire droit sur la clé de mi♭.",
    "sources": [
     "https://www.wfg.woodwind.org/flute/fl_bas_3.html",
     "https://www.lee.k12.al.us/cms/lib/AL02210054/Centricity/Domain/305/fingering.chart.flute.piccolo.basic.pdf",
@@ -617,9 +637,10 @@
     "thB",
     "L1",
     "L3",
-    "Tr2"
+    "Tr2",
+    "Ds"
    ],
-   "comment": "Comme fa♯6 mais 2e clé de trille au lieu de l'annulaire droit ; auriculaire droit facultatif (stabilité).",
+   "comment": "Comme fa♯6, mais la 2e clé de trille remplace l'annulaire droit.",
    "sources": [
     "https://www.wfg.woodwind.org/flute/fl_bas_3.html",
     "https://jennifercluff.blogspot.com/2016/02/high-b-and-how-to-get-it-to-speak.html",

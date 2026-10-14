@@ -4,19 +4,21 @@
    sil : silhouette discrète de l'instrument, dessinée derrière les clés */
 const nl=(...n)=>n.map(x=>dgCap(T(x))).join('/');
 const DG_LAYOUT={
-  flute:{vb:'-6 2 296 104',
-    /* vue du dessus, embouchure à gauche : les clés d'auriculaire et du pouce sont du côté du joueur (en bas),
-       les clés de trille de l'autre côté (en haut) */
-    sil:['M2,29 H236 V47 H2 Z','M238,30 H282 a2,2 0 0 1 2,2 V44 a2,2 0 0 1 -2,2 H238 Z','M-4,30 a6,8 0 0 1 12,0 v16 a6,8 0 0 1 -12,0 Z'],
-    seps:[[116,20,116,56]],
+  flute:{vb:'4 0 262 90',
+    /* comme les tableaux de méthode (vue de face, embouchure à gauche) : clé de sol♯ en drapeau au-dessus,
+       pouce, levier de si♭, clés de trille et clé de mi♭ en dessous, rouleaux de la patte au bout */
+    sil:['M8,31 H236 V45 H8 Z','M238,31 H262 V45 H238 Z'],
+    seps:[],
     items:()=>[
-    ['thB','d','M14,70 Q26,60 42,62 L42,78 Q26,80 14,70 Z'],['thBb','d','M45,63 h13 a3,3 0 0 1 3,3 v8 a3,3 0 0 1 -3,3 h-13 z'],
-    ['L1','o',28,38,11],['L2','o',56,38,11],['L3','o',84,38,11],
-    ['Gs','d','M93,55 h14 a5,5 0 0 1 0,10 h-14 a5,5 0 0 1 0,-10 Z'],
-    ['R1','o',140,38,11],['Tr1','e',155,18,5,3.6],['R2','o',170,38,11],['Tr2','e',185,18,5,3.6],['R3','o',200,38,11],
-    ['Ds','d','M212,54 h14 a5,5 0 0 1 0,10 h-14 a5,5 0 0 1 0,-10 Z'],
-    ['Cs','d','M249,54 h14 a5,5 0 0 1 0,10 h-14 a5,5 0 0 1 0,-10 Z'],['C','d','M249,68 h24 a5,5 0 0 1 0,10 h-24 a5,5 0 0 1 0,-10 Z']],
-    labels:[[56,15,'Main gauche'],[170,8,'Main droite'],[37,96,'Pouce'],[100,80,'Auriculaire'],[244,94,'Auriculaire']]},
+    ['thBb','d','M14,52 h30 v4 h-26 v13 a2,2 0 0 1 -4,0 Z'],['thB','d','M46,54 h28 a14,12 0 0 1 -28,0 Z'],
+    ['L1','o',30,38,9],['L2','o',58,38,12],['L3','o',86,38,12],
+    ['Gs','d','M93,10 h14 v32 h-4 v-27 h-10 Z'],
+    ['Bbl','d','M104,58 h11 a5,5 0 1 1 0,6 h-11 a3,3 0 0 1 0,-6 Z'],
+    ['R1','o',132,38,12],['Tr1','e',146,55,3.6,5],['R2','o',160,38,12],['Tr2','e',174,55,3.6,5],['R3','o',188,38,12],
+    ['Ds','d','M212,22 h4 v38 h-11 a7,9 0 0 1 0,-18 h7 Z'],
+    ['Bft','d','M226,25 h20 v5 h-20 Z'],['C','d','M226,33 h20 v5 h-20 Z'],['Cs','d','M226,41 h20 v3 a10,8 0 0 1 -20,0 Z'],
+    ['Gz','e',252,38,2.8,4.5]],
+    labels:[[58,16,'Main gauche'],[160,16,'Main droite'],[44,84,'Pouce'],[226,72,'Auriculaire']]},
   clar:{vb:'0 -46 92 262',
     sil:['M44,-44 h8 l3,22 h-14 Z','M41,-22 h14 v14 h-14 Z','M43,-8 h10 V178 h-10 Z','M43,176 h10 C54,190 62,204 72,214 H24 C34,204 42,190 43,176 Z'],
     seps:[],
@@ -113,7 +115,7 @@ function dgSlideSvg(p,alts,size){
 
 /* noms des clés (hors trous de doigts) pour la légende sous le schéma */
 function dgKeyNames(inst){const pg=T('Auriculaire gauche'),pd=T('Auriculaire droit');return({
-  flute:{thB:T('Clé de si (pouce)'),thBb:T('Levier de si♭ (pouce)'),Gs:T('Clé de sol♯'),Ds:T('Clé de mi♭'),Cs:T('Clé de do♯'),C:T('Clé de do grave'),Tr1:T('Clé de trille 1'),Tr2:T('Clé de trille 2')},
+  flute:{thB:T('Clé de si (pouce)'),thBb:T('Levier de si♭ (pouce)'),Gs:T('Clé de sol♯'),Ds:T('Clé de mi♭'),Cs:T('Clé de do♯'),C:T('Clé de do grave'),Tr1:T('Clé de trille 1'),Tr2:T('Clé de trille 2'),Bbl:T('Levier de si♭ (main droite)'),Bft:T('Rouleau de si grave'),Gz:T('Clé « gizmo »')},
   clar:{Reg:T('Clé de registre'),A:T('Clé de la'),Gs:T('Clé de sol♯'),EbBb:T('Clé mi♭/si♭ (palette)'),CsGs:`${pg} : ${nl('do♯','sol♯')}`,lFs:`${pg} : ${nl('fa♯','do♯')}`,lE:`${pg} : ${nl('mi','si')}`,lF:`${pg} : ${nl('fa','do')}`,
     S1:T('Clé latérale')+' 1',S2:T('Clé latérale')+' 2',S3:T('Clé latérale')+' 3',S4:T('Clé latérale')+' 4',rAb:`${pd} : ${nl('la♭','mi♭')}`,rFs:`${pd} : ${nl('fa♯','do♯')}`,rE:`${pd} : ${nl('mi','si')}`,rF:`${pd} : ${nl('fa','do')}`,BFs:T('Clé de si/fa♯ (main droite)')},
   oboe:{Oct1:T('Clé d\'octave (pouce)'),Oct2:T('2e clé d\'octave'),L1h:T('Demi-trou (index gauche)'),Gs:T('Clé de sol♯')+' (4)',lEb:`${pg} : ${nl('mi♭')}`,lB:`${pg} : ${nl('si')}`,lBb:`${pg} : ${nl('si♭')}`,Fk:T('Clé de fa')+' (8)',rC:`${pd} : ${nl('do')}`,rCs:`${pd} : ${nl('do♯')}`,rEb:`${pd} : ${nl('mi♭')}`},
