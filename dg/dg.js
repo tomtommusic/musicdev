@@ -49,21 +49,22 @@ const DG_FAMS=['Bois','Cuivres','Cordes frottées','Cordes pincées','Percussion
    sil : silhouette discrète de l'instrument, dessinée derrière les clés */
 const nl=(...n)=>n.map(x=>dgCap(T(x))).join('/');
 const DG_LAYOUT={
-  flute:{vb:'4 0 262 90',
-    /* comme les tableaux de méthode (vue de face, embouchure à gauche) : clé de sol♯ en drapeau au-dessus,
-       pouce, levier de si♭, clés de trille et clé de mi♭ en dessous, rouleaux de la patte au bout */
-    sil:['M8,31 H236 V45 H8 Z','M238,31 H262 V45 H238 Z'],
-    seps:[],
+  flute:{vb:'4 6 304 100',
+    /* disposition des tableaux de méthode (ex. Quality Music Gear) : pouce en bas à gauche, sol♯ en drapeau au-dessus,
+       levier de si♭ et clés de trille sous la main droite, mi♭ en « d », rouleaux de la patte empilés, clé gizmo */
+    sil:[],seps:[],
     items:()=>[
-    ['thBb','d','M14,52 h30 v4 h-26 v13 a2,2 0 0 1 -4,0 Z'],['thB','d','M46,54 h28 a14,12 0 0 1 -28,0 Z'],
-    ['L1','o',30,38,9],['L2','o',58,38,12],['L3','o',86,38,12],
-    ['Gs','d','M93,10 h14 v32 h-4 v-27 h-10 Z'],
-    ['Bbl','d','M104,58 h11 a5,5 0 1 1 0,6 h-11 a3,3 0 0 1 0,-6 Z'],
-    ['R1','o',132,38,12],['Tr1','e',146,55,3.6,5],['R2','o',160,38,12],['Tr2','e',174,55,3.6,5],['R3','o',188,38,12],
-    ['Ds','d','M212,22 h4 v38 h-11 a7,9 0 0 1 0,-18 h7 Z'],
-    ['Bft','d','M226,25 h20 v5 h-20 Z'],['C','d','M226,33 h20 v5 h-20 Z'],['Cs','d','M226,41 h20 v3 a10,8 0 0 1 -20,0 Z'],
-    ['Gz','e',252,38,2.8,4.5]],
-    labels:[[58,16,'Main gauche'],[160,16,'Main droite'],[44,84,'Pouce'],[226,72,'Auriculaire']]},
+    ['thBb','d','M12,74 a4,4 0 0 1 4,-4 h50 v6 h-38 v18 a6,6 0 0 1 -6,6 h-4 a6,6 0 0 1 -6,-6 Z'],
+    ['thB','d','M40,82 h36 a18,18 0 0 1 -36,0 Z'],
+    ['L1','o',30,50,10],['L2','o',66,50,14],['L3','o',100,50,14],
+    ['Gs','d','M104,17 a3,3 0 0 1 3,-3 h18 a3,3 0 0 1 3,3 v35 h-6 v-32 h-15 a3,3 0 0 1 -3,-3 Z'],
+    ['Bbl','d','M116,76 a2,2 0 0 1 2,-2 h14 a7,6 0 0 1 14,0 v4 a2,2 0 0 1 -2,2 h-26 a2,2 0 0 1 -2,-2 Z'],
+    ['R1','o',160,50,14],['Tr1','e',178,72,4.5,7],['R2','o',196,50,14],['Tr2','e',214,72,4.5,7],['R3','o',232,50,14],
+    ['Ds','d','M254,50 h6 v44 h-16 v-12 C244,74 247,70 254,70 Z'],
+    ['Bft','d','M270,46 h22 a3,3 0 0 1 0,6 h-22 a3,3 0 0 1 0,-6 Z'],['C','d','M270,56 h22 a3,3 0 0 1 0,6 h-22 a3,3 0 0 1 0,-6 Z'],
+    ['Cs','d','M268,68 h26 v3 a13,11 0 0 1 -26,0 Z'],
+    ['Gz','d','M302,52 c3,4 4,7 4,9 a4,4 0 0 1 -8,0 c0,-2 1,-5 4,-9 Z']],
+    labels:[]},
   clar:{vb:'0 -46 92 262',
     sil:['M44,-44 h8 l3,22 h-14 Z','M41,-22 h14 v14 h-14 Z','M43,-8 h10 V178 h-10 Z','M43,176 h10 C54,190 62,204 72,214 H24 C34,204 42,190 43,176 Z'],
     seps:[],
