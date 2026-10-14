@@ -55,10 +55,11 @@ function lyView(u){
   const size=d=>mk(d>0?'A+':'A−',()=>{const r=u.lybox.scrollTop/Math.max(1,u.lybox.scrollHeight);LY.size=Math.max(16,Math.min(56,LY.size+d));lySave();lyPaint();u.lybox.scrollTop=r*u.lybox.scrollHeight;},'lystep',d>0?'Texte plus gros':'Texte plus petit');
   u.lfgo=el('button',{type:'button',class:'lfgo',onclick:()=>RS.on||RS.arming?recStop():recStart()},'●');
   u.lfclock=el('b',{class:'lfclock'},'0:00');
+  u.lfretry=el('button',{type:'button',class:'lfretry',title:T('Efface la prise et recommence tout de suite'),onclick:()=>recRetry()},'↺');u.lfretry.setAttribute('aria-label',T('Reprendre'));
   const full=mk('⛶ Plein écran',()=>lyFull(true),'lyfs');
   const close=mk('✕',()=>lyFull(false),'quiet lyclose','Quitter le plein écran');
   u.ly=el('section',{class:'mtsec lysec'},
-    el('div',{class:'lyhead'},el('h3',{},'Paroles',betaTag()),el('div',{class:'lyfullbar'},u.lfgo,u.lfclock,close)),
+    el('div',{class:'lyhead'},el('h3',{},'Paroles',betaTag()),el('div',{class:'lyfullbar'},u.lfretry,u.lfgo,u.lfclock,close)),
     el('div',{class:'lyedit'},u.lyarea,el('div',{class:'qzbtns'},done)),
     el('div',{class:'lyshow'},
       u.lybox,

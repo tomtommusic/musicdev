@@ -386,5 +386,8 @@ a("Retirer le post-traitement","Remove post-processing","Quitar el posprocesamie
 a("✓ Post-traitement appliqué","✓ Post-processing applied","✓ Posprocesamiento aplicado")
 a("✨ Appliquer le post-traitement","✨ Apply post-processing","✨ Aplicar posprocesamiento")
 a("Analyse ta prise, puis la peaufine : égalisation adaptée à ta voix ou ton instrument, « s » adoucis, compression douce et volume ajusté, sans saturer. Les nuances de ton interprétation sont gardées.","Analyzes your take, then polishes it: EQ adapted to your voice or instrument, softer “s” sounds, gentle compression and adjusted volume, without distortion. The dynamics of your performance are kept.","Analiza tu toma y la pule: ecualización adaptada a tu voz o instrumento, «s» suavizadas, compresión suave y volumen ajustado, sin saturar. Se conservan los matices de tu interpretación.")
+a("↺ Reprendre","↺ Retake","↺ Repetir")
+a("Reprendre","Retake","Repetir")
+a("Efface la prise et recommence tout de suite","Erase the take and start again right away","Borra la toma y vuelve a empezar enseguida")
 json.dump({'en':E,'es':S},open('extra.json','w'),ensure_ascii=False,indent=0)
 print(len(E))

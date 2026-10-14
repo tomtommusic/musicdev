@@ -598,7 +598,10 @@
 "Retirer le post-traitement": "Remove post-processing",
 "✓ Post-traitement appliqué": "✓ Post-processing applied",
 "✨ Appliquer le post-traitement": "✨ Apply post-processing",
-"Analyse ta prise, puis la peaufine : égalisation adaptée à ta voix ou ton instrument, « s » adoucis, compression douce et volume ajusté, sans saturer. Les nuances de ton interprétation sont gardées.": "Analyzes your take, then polishes it: EQ adapted to your voice or instrument, softer “s” sounds, gentle compression and adjusted volume, without distortion. The dynamics of your performance are kept."
+"Analyse ta prise, puis la peaufine : égalisation adaptée à ta voix ou ton instrument, « s » adoucis, compression douce et volume ajusté, sans saturer. Les nuances de ton interprétation sont gardées.": "Analyzes your take, then polishes it: EQ adapted to your voice or instrument, softer “s” sounds, gentle compression and adjusted volume, without distortion. The dynamics of your performance are kept.",
+"↺ Reprendre": "↺ Retake",
+"Reprendre": "Retake",
+"Efface la prise et recommence tout de suite": "Erase the take and start again right away"
 },
 "es": {
 "Modules": "Módulos",
@@ -1199,6 +1202,9 @@
 "Retirer le post-traitement": "Quitar el posprocesamiento",
 "✓ Post-traitement appliqué": "✓ Posprocesamiento aplicado",
 "✨ Appliquer le post-traitement": "✨ Aplicar posprocesamiento",
-"Analyse ta prise, puis la peaufine : égalisation adaptée à ta voix ou ton instrument, « s » adoucis, compression douce et volume ajusté, sans saturer. Les nuances de ton interprétation sont gardées.": "Analiza tu toma y la pule: ecualización adaptada a tu voz o instrumento, «s» suavizadas, compresión suave y volumen ajustado, sin saturar. Se conservan los matices de tu interpretación."
+"Analyse ta prise, puis la peaufine : égalisation adaptée à ta voix ou ton instrument, « s » adoucis, compression douce et volume ajusté, sans saturer. Les nuances de ton interprétation sont gardées.": "Analiza tu toma y la pule: ecualización adaptada a tu voz o instrumento, «s» suavizadas, compresión suave y volumen ajustado, sin saturar. Se conservan los matices de tu interpretación.",
+"↺ Reprendre": "↺ Repetir",
+"Reprendre": "Repetir",
+"Efface la prise et recommence tout de suite": "Borra la toma y vuelve a empezar enseguida"
 }
 }

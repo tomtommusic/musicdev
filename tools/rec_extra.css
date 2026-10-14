@@ -42,3 +42,10 @@ html.lyfull,html.lyfull body{overflow:hidden}
 /* étiquette Bêta */
 .beta{display:inline-block;vertical-align:middle;margin-left:8px;padding:2px 8px;border-radius:999px;border:1px solid var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);font:700 .62rem/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;cursor:help}
 .fl .beta{margin-left:6px;font-size:.58rem;padding:1px 6px}
+
+/* reprise rapide */
+.rcpanel .rcretry{display:block;margin:12px auto 0;min-width:160px;background:rgb(255 255 255/.08);color:#CDE9DD;border:1px solid rgb(255 255 255/.18);box-shadow:none}
+.rcpanel .rcretry:hover{background:rgb(255 255 255/.14)}
+.rcpanel .rcretry[hidden]{display:none}
+.lfretry{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:1.3rem;line-height:1;cursor:pointer}
+.lfretry[hidden]{display:none}

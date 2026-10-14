@@ -1,0 +1,15 @@
+from playwright.sync_api import sync_playwright
+with sync_playwright() as p:
+    b=p.chromium.launch(args=['--use-fake-ui-for-media-stream','--use-fake-device-for-media-stream','--autoplay-policy=no-user-gesture-required'])
+    pg=b.new_page(viewport={'width':390,'height':850});errs=[];pg.on('pageerror',lambda e:errs.append(str(e)))
+    pg.goto('http://localhost:8790/');pg.wait_for_timeout(500);pg.evaluate("openModule('en')");pg.wait_for_timeout(400)
+    st=lambda: pg.evaluate("[RS.on,RS.arming,!!RS.last,document.querySelector('.rcretry').hidden,document.querySelector('.lfretry').hidden]")
+    print('départ',st())
+    pg.evaluate("RC.count=false;LY.text='a\\nb\\nc';lyPaint()");pg.evaluate("recStart()");pg.wait_for_timeout(2000);print('enreg',st())
+    pg.locator('.rcpanel').screenshot(path='retry_panel.png')
+    pg.click('.rcretry');pg.wait_for_timeout(2500);print('après reprise pendant',st(),pg.evaluate("Math.round((performance.now()-RS.t0)/100)/10"))
+    pg.evaluate("recStop()");pg.wait_for_timeout(2500);print('arrêt',st())
+    pg.click('text=⛶ Plein écran');pg.wait_for_timeout(300);pg.click('.lfretry');pg.wait_for_timeout(1500);print('reprise plein écran',st())
+    pg.screenshot(path='retry_full.png')
+    pg.evaluate("recStop()");pg.wait_for_timeout(2500);pg.keyboard.press('r');pg.wait_for_timeout(1500);print('touche r',st());pg.evaluate("recStop()");pg.wait_for_timeout(1500)
+    print(errs);b.close()

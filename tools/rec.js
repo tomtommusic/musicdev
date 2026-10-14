@@ -59,6 +59,13 @@ async function recStart(){
   RS.timer=setInterval(()=>{const s=(performance.now()-RS.t0)/1000;if(RS.ui){RS.ui.clock.textContent=recClock(s);if(RS.ui.lfclock)RS.ui.lfclock.textContent=recClock(s);}if(s>=RC.max*60)recStop();},250);
   recUi();
 }
+/* reprise rapide : efface la prise (en cours ou terminée) et relance tout de suite, décompte compris */
+async function recRetry(){
+  if(RS.arming){recStop();RS.confirmNew=true;recStart();return;}
+  if(RS.on){RS.discard=true;recStop();return;}
+  if(RS.last)await recDelete(true);
+  RS.confirmNew=true;if(RS.ui)RS.ui.after.replaceChildren();recStart();
+}
 function recStop(){
   if(RS.arming){RS.arming=false;clearTimeout(RS.cdTimer);clearTimeout(RS.cdTimer2);RS.cdNodes.forEach(o=>{try{o.stop();}catch(e){}});RS.cdNodes=[];recRelease();recUi();return;}
   if(!RS.on)return;RS.on=false;clearInterval(RS.timer);RS.timer=0;if(typeof lyGo==='function')lyGo(false);
@@ -103,6 +110,7 @@ async function recLevel(blob){
   return new Blob([ab],{type:'audio/wav'});
 }
 async function recFinish(){
+  if(RS.discard){RS.discard=false;RS.chunks=[];RS.rec=null;RS.confirmNew=true;recStart();return;} /* reprise rapide : on jette la prise et on recommence */
   const type=(RS.rec&&RS.rec.mimeType)||(RS.chunks[0]&&RS.chunks[0].type)||'audio/mp4';
   const blob=new Blob(RS.chunks,{type:type.split(';')[0]});RS.chunks=[];RS.rec=null;
   if(!blob.size){feedback('Rien n\'a été enregistré. Vérifie le micro et réessaie.','bad');recUi();return;}
@@ -158,6 +166,7 @@ function recUi(){
   const u=RS.ui;if(!u)return;
   u.go.textContent=RS.on||RS.arming?'■ Arrêter':'● Enregistrer';u.go.classList.toggle('on',RS.on||RS.arming);
   u.panel.classList.toggle('live',RS.on);
+  if(u.retry)u.retry.hidden=!(RS.on||RS.arming||RS.last);if(u.lfretry)u.lfretry.hidden=!(RS.on||RS.arming||RS.last);
   if(RS.on)u.state.textContent='Enregistrement…';
   else if(RS.arming){if(!RC.count)u.state.textContent='Préparation…';}
   else u.state.textContent=RS.last?'Enregistrement prêt':'Prêt';
@@ -199,7 +208,8 @@ function recView(){
   u.click=toggle('click','rcclick',MET_SVG,'Métronome pendant l\'enregistrement');
   u.panel=el('div',{class:'mtpanel rcpanel'},
     el('div',{class:'mtscreen'},el('div',{class:'rcread'},el('span',{class:'rcdot','aria-hidden':'true'}),u.clock,u.state),u.meter),
-    el('div',{class:'mtrow mtmain rcmain'},u.count,u.go,u.click));
+    el('div',{class:'mtrow mtmain rcmain'},u.count,u.go,u.click),
+    u.retry=el('button',{type:'button',class:'btn rcretry',title:'Efface la prise et recommence tout de suite',onclick:()=>recRetry()},'↺ Reprendre'));
   u.max=sel('rc_max',[[5,'5 min'],[10,'10 min'],[15,'15 min'],[20,'20 min']],RC.max,v=>{RC.max=+v;rcSave();});
   u.take=el('div',{class:'rctake'});u.after=el('div',{class:'rcafter'});
   const bpm=el("span",{class:"rcbpm"},`(♩ = ${MT.bpm})`);
@@ -226,6 +236,6 @@ function recView(){
       el('p',{class:'hint'},'Ce tempo est aussi celui du ',el('a',{href:'#mt',onclick:e=>{e.preventDefault();openModule('mt');}},'métronome'),'.'),
       el('label',{class:'qzfield'},el('span',{class:'fl'},'Durée maximale'),u.max),
       el('p',{class:'hint'},'Garde l\'écran allumé pendant l\'enregistrement : s\'il se verrouille, l\'appareil coupe le micro. Un seul enregistrement est gardé à la fois, le temps de le partager.')));
-  S.keyHandler=e=>{if(e.code==='Space'&&!(e.target&&/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))){RS.on||RS.arming?recStop():recStart();return true;}};
+  S.keyHandler=e=>{if(e.target&&/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;if(e.code==='Space'){RS.on||RS.arming?recStop():recStart();return true;}if(e.key==='r'||e.key==='R'){recRetry();return true;}};
   return out;
 }
