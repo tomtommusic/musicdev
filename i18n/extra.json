@@ -308,6 +308,8 @@
 "Pouce, index droit et 1re clé de trille, avec l'auriculaire droit sur la clé de mi♭.": "Thumb, right index and 1st trill key, with the right pinky on the E♭ key.",
 "Comme fa♯6, mais la 2e clé de trille remplace l'annulaire droit.": "Like F♯6, but the 2nd trill key replaces the right ring finger.",
 "Levier de si♭": "B♭ lever",
+"2e clé d'octave (sur le côté, touchée par l'index gauche) ; la clé d'octave du pouce est relâchée.": "2nd octave key (on the side, touched by the left index); the thumb octave key is released.",
+"Fa « régulier » : l'annulaire droit appuie sur la clé de fa (le trait sous le majeur). Ou fa fourchu : index et annulaire droits, avec la clé de mi♭.": "\"Regular\" F: the right ring finger presses the F key (the bar under the middle finger). Or forked F: right index and ring fingers, with the E♭ key.",
 "Clé de si (pouce)": "B key (thumb)",
 "Levier de si♭ (pouce)": "B♭ lever (thumb)",
 "Clé de sol♯": "G♯ key",
@@ -659,7 +661,8 @@
 "Utilise l'app 7 jours consécutifs.": "Use the app 7 days in a row.",
 "Levier de si♭ (main droite)": "B♭ lever (right hand)",
 "Rouleau de si grave": "Low B roller",
-"Clé « gizmo »": "“Gizmo” key"
+"Clé « gizmo »": "“Gizmo” key",
+"En do : on lit les notes réelles. Demi-trou : l'index gauche est levé et seul le petit point sous le trou est noir.": "In C: you read concert pitch. Half-hole: the left index is lifted and only the small dot under the hole is black."
 },
 "es": {
 "Modules": "Módulos",
@@ -970,6 +973,8 @@
 "Pouce, index droit et 1re clé de trille, avec l'auriculaire droit sur la clé de mi♭.": "Pulgar, índice derecho y 1.ª llave de trino, con el meñique derecho en la llave de mi♭.",
 "Comme fa♯6, mais la 2e clé de trille remplace l'annulaire droit.": "Como fa♯6, pero la 2.ª llave de trino sustituye al anular derecho.",
 "Levier de si♭": "Palanca de si♭",
+"2e clé d'octave (sur le côté, touchée par l'index gauche) ; la clé d'octave du pouce est relâchée.": "2.ª llave de octava (en el lateral, tocada por el índice izquierdo); la llave de octava del pulgar se suelta.",
+"Fa « régulier » : l'annulaire droit appuie sur la clé de fa (le trait sous le majeur). Ou fa fourchu : index et annulaire droits, avec la clé de mi♭.": "Fa «regular»: el anular derecho pulsa la llave de fa (la barra bajo el dedo medio). O fa de horquilla: índice y anular derechos, con la llave de mi♭.",
 "Clé de si (pouce)": "Llave de si (pulgar)",
 "Levier de si♭ (pouce)": "Palanca de si♭ (pulgar)",
 "Clé de sol♯": "Llave de sol♯",
@@ -1321,6 +1326,7 @@
 "Utilise l'app 7 jours consécutifs.": "Usa la app 7 días seguidos.",
 "Levier de si♭ (main droite)": "Palanca de si♭ (mano derecha)",
 "Rouleau de si grave": "Rodillo de si grave",
-"Clé « gizmo »": "Llave «gizmo»"
+"Clé « gizmo »": "Llave «gizmo»",
+"En do : on lit les notes réelles. Demi-trou : l'index gauche est levé et seul le petit point sous le trou est noir.": "En do: se leen las notas reales. Medio agujero: el índice izquierdo está levantado y solo el puntito bajo el agujero está en negro."
 }
 }

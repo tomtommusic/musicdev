@@ -143,7 +143,7 @@
      "label": ""
     }
    ],
-   "comment": "Fa « régulier » : l'annulaire droit appuie sur la clé de fa (8). Ou fa fourchu : index et annulaire droits."
+   "comment": "Fa « régulier » : l'annulaire droit appuie sur la clé de fa (le trait sous le majeur). Ou fa fourchu : index et annulaire droits, avec la clé de mi♭."
   },
   {
    "note": "F#4",
@@ -360,19 +360,17 @@
    "note": "A5",
    "midi": 81,
    "keys": [
-    "Oct1",
     "Oct2",
     "L1",
     "L2"
    ],
    "alt": [],
-   "comment": "2e clé d'octave (2) : l'index gauche la touche sur le côté."
+   "comment": "2e clé d'octave (sur le côté, touchée par l'index gauche) ; la clé d'octave du pouce est relâchée."
   },
   {
    "note": "A#5",
    "midi": 82,
    "keys": [
-    "Oct1",
     "Oct2",
     "L1",
     "L2",
@@ -385,7 +383,6 @@
    "note": "B5",
    "midi": 83,
    "keys": [
-    "Oct1",
     "Oct2",
     "L1"
    ],
@@ -396,7 +393,6 @@
    "note": "C6",
    "midi": 84,
    "keys": [
-    "Oct1",
     "Oct2",
     "L1",
     "R1"

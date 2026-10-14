@@ -25,7 +25,7 @@ function dgPlay(m,timbre){try{const c=A.init();if(typeof qzUnmute==='function')q
 /* ---------- instruments ---------- */
 const DG_INST=[
   {id:'flute',fam:'Bois',t:'Flûte traversière',kind:'ww',data:'flute',clef:'treble',tr:0,timbre:'flute',info:'En do : on lit les notes réelles.'},
-  {id:'oboe',fam:'Bois',t:'Hautbois',kind:'ww',data:'oboe',clef:'treble',tr:0,info:'En do : on lit les notes réelles. Le demi-trou (index gauche à moitié ouvert) est dessiné à moitié plein.'},
+  {id:'oboe',fam:'Bois',t:'Hautbois',kind:'ww',data:'oboe',clef:'treble',tr:0,info:'En do : on lit les notes réelles. Demi-trou : l\'index gauche est levé et seul le petit point sous le trou est noir.'},
   {id:'bsn',fam:'Bois',t:'Basson',kind:'ww',data:'bsn',clef:'bass',tr:0,info:'En clé de fa, au son réel. Les clés du haut à gauche sont jouées par le pouce gauche, celles du bas à gauche par le pouce droit. Le demi-trou est dessiné à moitié plein.'},
   {id:'clar',fam:'Bois',t:'Clarinette en si♭',kind:'ww',data:'clar',clef:'treble',tr:-2,info:'Notes écrites. Le son réel est un ton plus bas.'},
   {id:'asax',fam:'Bois',t:'Saxophone alto',kind:'ww',data:'asax',clef:'treble',tr:-9,info:'En mi♭ : notes écrites. Le son réel est une sixte majeure plus bas.'},
