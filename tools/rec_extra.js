@@ -99,11 +99,11 @@ function mstView(au){
   const pick=(opts,key)=>el('div',{class:'mstseg',role:'group'},...opts.map(([v,lab])=>{const b=el('button',{type:'button',class:'btn quiet mstopt','aria-pressed':String(MST[key]===v)},lab);
     b.addEventListener('click',()=>{MST[key]=v;tlSave('atelier-mst',MST);b.parentNode.querySelectorAll('.mstopt').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));});return b;}));
   const state=el('p',{class:'hint mststate'});
-  const run=btn(L.orig?'Refaire le mastering':'✨ Appliquer le mastering',async()=>{
-    run.disabled=true;state.textContent=T('Mastering en cours… (quelques secondes)');
-    try{const w=await mstProcess(L.orig||L.blob,MST.style,MST.int,{room:!!MST.room,onStep:t=>{state.textContent=T('Mastering en cours…')+' '+T(t);}});if(!L.orig){L.orig=L.blob;L.origType=L.type;L.origExt=L.ext;}
+  const run=btn(L.orig?'Refaire le post-traitement':'✨ Appliquer le post-traitement',async()=>{
+    run.disabled=true;state.textContent=T('Post-traitement en cours… (quelques secondes)');
+    try{const w=await mstProcess(L.orig||L.blob,MST.style,MST.int,{room:!!MST.room,onStep:t=>{state.textContent=T('Post-traitement en cours…')+' '+T(t);}});if(!L.orig){L.orig=L.blob;L.origType=L.type;L.origExt=L.ext;}
       Object.assign(L,{blob:w,type:'audio/wav',ext:'wav',mst:{style:MST.style,int:MST.int,room:!!MST.room,before:MS2.before,after:MS2.after},useOrig:false});await recStore(L);recShow();}
-    catch(e){state.textContent='Le mastering n\'a pas fonctionné sur cet appareil.';run.disabled=false;}},'primary');
+    catch(e){state.textContent='Le post-traitement n\'a pas fonctionné sur cet appareil.';run.disabled=false;}},'primary');
   const room=el('input',{type:'checkbox'});room.checked=!!MST.room;room.addEventListener('change',()=>{MST.room=room.checked;tlSave('atelier-mst',MST);});
   const parts=[el('div',{class:'mstrow'},el('span',{class:'fl'},'Style'),pick(MST_STYLES,'style')),el('div',{class:'mstrow'},el('span',{class:'fl'},'Intensité'),pick(MST_INT,'int')),
     el('label',{class:'chk mstroom'},room,'Ajouter une légère ambiance de salle (utile pour une voix enregistrée de près)'),el('div',{class:'qzbtns'},run)];
@@ -113,18 +113,18 @@ function mstView(au){
       au.addEventListener('loadedmetadata',()=>{try{au.currentTime=t;}catch(e){}if(pl)au.play().catch(()=>{});},{once:true});
       bo.setAttribute('aria-pressed',String(useOrig));bm.setAttribute('aria-pressed',String(!useOrig));};
     const bo=el('button',{type:'button',class:'btn quiet mstopt','aria-pressed':'false',onclick:()=>ab(true)},'Original');
-    const bm=el('button',{type:'button',class:'btn quiet mstopt','aria-pressed':'true',onclick:()=>ab(false)},'Avec mastering');
-    const undo=btn('Retirer le mastering',async()=>{Object.assign(L,{blob:L.orig,type:L.origType,ext:L.origExt,orig:null,mst:null});await recStore(L);recShow();},'quiet');
+    const bm=el('button',{type:'button',class:'btn quiet mstopt','aria-pressed':'true',onclick:()=>ab(false)},'Avec post-traitement');
+    const undo=btn('Retirer le post-traitement',async()=>{Object.assign(L,{blob:L.orig,type:L.origType,ext:L.origExt,orig:null,mst:null});await recStore(L);recShow();},'quiet');
     const sn=MST_STYLES.find(x=>x[0]===L.mst.style),inn=MST_INT.find(x=>x[0]===L.mst.int);
     const lu=v=>(v==null||!isFinite(v))?'–':(Math.round(v*10)/10).toString().replace('.',I18N.lang==='en'?'.':',')+' LUFS';
-    parts.unshift(el('p',{class:'mstdone'},el('b',{},'✓ Mastering appliqué'),' ',el('span',{},`${T(sn?sn[1]:'')} · ${T(inn?inn[1]:'').toLowerCase()}${L.mst.room?' · '+T('ambiance'):''}`)),
+    parts.unshift(el('p',{class:'mstdone'},el('b',{},'✓ Post-traitement appliqué'),' ',el('span',{},`${T(sn?sn[1]:'')} · ${T(inn?inn[1]:'').toLowerCase()}${L.mst.room?' · '+T('ambiance'):''}`)),
       L.mst.before!=null?el('p',{class:'hint mstlu'},T('Volume'),' : ',el('b',{'data-notr':''},lu(L.mst.before)),' → ',el('b',{'data-notr':''},lu(L.mst.after))):null,
       el('div',{class:'mstrow'},el('span',{class:'fl'},'Écouter'),el('div',{class:'mstseg'},bo,bm)));
     parts.push(el('div',{class:'qzbtns'},undo));
-    state.textContent='Le fichier partagé ou téléchargé est la version avec mastering.';
+    state.textContent='Le fichier partagé ou téléchargé est la version avec post-traitement.';
   }
-  box.append(el('h4',{},'Mastering automatique',betaTag()),
-    el('p',{class:'hint'},'Analyse ta prise, puis corrige ce qui manque : égalisation adaptée à ta voix ou ton instrument, souffle atténué entre les phrases, « s » adoucis, compression sur 3 bandes et volume ajusté, sans saturer.'),
+  box.append(el('h4',{},'Post-traitement',betaTag()),
+    el('p',{class:'hint'},'Analyse ta prise, puis la peaufine : égalisation adaptée à ta voix ou ton instrument, « s » adoucis, compression douce et volume ajusté, sans saturer. Les nuances de ton interprétation sont gardées.'),
     ...parts,state);
   return box;
 }

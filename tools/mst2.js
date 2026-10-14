@@ -5,7 +5,7 @@
    3. égalisation adaptative : on compare le spectre de la prise à une courbe cible selon le style
       et on corrige seulement ce qui s'en écarte (comme les services en ligne)
    4. dé-esseur (sons « s » trop piquants)
-   5. compression 3 bandes (graves, médiums, aigus) puis compression « colle » légère
+   5. compression douce et lente (une bande)
    6. ambiance de salle facultative
    7. volume visé en LUFS, limiteur avec anticipation, plafond -1 dB */
 const MS2={};
@@ -43,8 +43,8 @@ function mstSpectrum(x,sr,act){
   return MST_BANDS.map(fc=>{const lo=fc/Math.SQRT2,hi=Math.min(fc*Math.SQRT2,sr/2*.95);let e=0,m=0;for(let k=Math.ceil(lo*N/sr);k<=Math.floor(hi*N/sr);k++){e+=P[k];m++;}return m&&frames.length?10*Math.log10(e/m/frames.length+1e-20):null;});
 }
 /* compresseur (détecteur RMS, genou doux) ; renvoie le signal compressé */
-function mstComp(x,sr,thrDb,ratio,attMs,relMs,knee){
-  const at=Math.exp(-1/(sr*attMs/1000)),rl=Math.exp(-1/(sr*relMs/1000)),dt=Math.exp(-1/(sr*.005));let e=0,g=0;knee=knee||6;
+function mstComp(x,sr,thrDb,ratio,attMs,relMs,knee,detMs){
+  const at=Math.exp(-1/(sr*attMs/1000)),rl=Math.exp(-1/(sr*relMs/1000)),dt=Math.exp(-1/(sr*(detMs||5)/1000));let e=0,g=0;knee=knee||6;
   for(let i=0;i<x.length;i++){e=dt*e+(1-dt)*x[i]*x[i];const lv=10*Math.log10(e+1e-12),o=lv-thrDb;
     let gr=0;if(o>knee/2)gr=o*(1/ratio-1);else if(o>-knee/2){const t=o+knee/2;gr=(1/ratio-1)*t*t/(2*knee);}
     g=gr<g?at*g+(1-at)*gr:rl*g+(1-rl)*gr;x[i]*=Math.pow(10,g/20);}
@@ -72,10 +72,11 @@ async function mstProcess(blob,style,intensity,opt={}){
   const hp=bqC('hp',style==='brillant'?55:style==='chaud'?32:40,sr,.7071);for(const d of ch){bq(d,hp);bq(d,hp);}
   /* 2) souffle entre les phrases : expandeur doux (seulement si l'écart bruit/jeu est net) */
   say('Nettoyage…');await mstYield();
-  if(body-floor>18){
-    const thr=floor+(body-floor)*.35,gf=new Float32Array(nf);
-    for(let f=0;f<nf;f++){const o=fr[f]-thr;gf[f]=o>=0?0:Math.max(-14*k,o*.8);}
-    for(let f=1;f<nf;f++)gf[f]=Math.max(gf[f],gf[f-1]-1.2);for(let f=nf-2;f>=0;f--)gf[f]=Math.max(gf[f],gf[f+1]-4); /* ouverture rapide, fermeture lente */
+  /* très doux (max -6 dB) et lent : un expandeur trop actif fait « respirer » le fond, effet sous l'eau */
+  if(body-floor>25){
+    const thr=floor+(body-floor)*.25,gf=new Float32Array(nf);
+    for(let f=0;f<nf;f++){const o=fr[f]-thr;gf[f]=o>=0?0:Math.max(-6*k,o*.5);}
+    for(let f=1;f<nf;f++)gf[f]=Math.max(gf[f],gf[f-1]-.25);for(let f=nf-2;f>=0;f--)gf[f]=Math.max(gf[f],gf[f+1]-2); /* ouverture rapide, fermeture lente */
     for(const d of ch)for(let i=0;i<n;i++){const t=i/F-.5,a=Math.max(0,Math.min(nf-1,Math.floor(t))),b=Math.min(nf-1,a+1),u=Math.max(0,Math.min(1,t-a));d[i]*=Math.pow(10,(gf[a]*(1-u)+gf[b]*u)/20);}
   }
   /* 3) égalisation adaptative */
@@ -87,9 +88,9 @@ async function mstProcess(blob,style,intensity,opt={}){
   let corr=MST_BANDS.map((f,i)=>spec[i]==null?0:(off+tgt(i))-spec[i]);
   corr=corr.map((c,i)=>{const a=corr[i-1]??c,b=corr[i+1]??c;return(a+2*c+b)/4;}); /* lissage */
   const eq=[];MS2.eq=[];
-  corr.forEach((c,i)=>{const f=MST_BANDS[i];if(f>sr*.45)return;let g=c*.5*k;
+  corr.forEach((c,i)=>{const f=MST_BANDS[i];if(f>sr*.45)return;let g=c*.35*k;
     if(f<=63)g=Math.min(g,1);                 /* jamais beaucoup de graves en plus : ça gronde */
-    g=Math.max(-6,Math.min(f>=8000?3:3.5,g));if(Math.abs(g)<.4)return;eq.push(bqC('pk',f,sr,1.1,g));MS2.eq.push([f,+g.toFixed(1)]);});
+    g=Math.max(-4,Math.min(f>=8000?2.5:3,g));if(Math.abs(g)<.4)return;eq.push(bqC('pk',f,sr,1.1,g));MS2.eq.push([f,+g.toFixed(1)]);});
   for(const c of({chaud:[bqC('ls',160,sr,.7,1.2*k)],equilibre:[],brillant:[bqC('hs',11000,sr,.7,1.5*k)]}[style]||[]))eq.push(c);
   for(const d of ch)for(const c of eq)bq(d,c);
   /* 4) dé-esseur : seulement la bande 5-10 kHz, quand elle domine */
@@ -98,16 +99,9 @@ async function mstProcess(blob,style,intensity,opt={}){
     for(const d of ch){const hb=bq(bq(d,bqC('hp',5500,sr,.7071),new Float32Array(n)),bqC('hp',5500,sr,.7071));
       const a=Math.exp(-1/(sr*.002)),r=Math.exp(-1/(sr*.06));let eh=0,ef=0,g=1;
       for(let i=0;i<n;i++){eh=Math.max(Math.abs(hb[i]),eh*r);ef=Math.max(Math.abs(d[i]),ef*r);
-        const want=eh>dsT*ef&&eh>.02?Math.max(.4,dsT*ef/eh):1;g=want<g?a*g+(1-a)*want:r*g+(1-r)*want;d[i]-=hb[i]*(1-g);}}}
-  /* 5) compression 3 bandes (filtres Linkwitz-Riley 4e ordre à 200 Hz et 3 kHz) puis « colle » */
-  const lr=(x,t,f)=>{const c=bqC(t,f,sr,.7071);return bq(bq(x,c,new Float32Array(n)),c);};
-  const lrIn=(x,t,f)=>{const c=bqC(t,f,sr,.7071);bq(x,c);return bq(x,c);};
-  for(let c=0;c<ch.length;c++){const d=ch[c],lo=lr(d,'lp',200),rest=lrIn(d,'hp',200),mid=lr(rest,'lp',3000),hi=lrIn(rest,'hp',3000); /* 3 tableaux seulement : économise la mémoire du téléphone */
-    const R=[1.8+.9*k,1.6+.7*k,1.8+.8*k];
-    mstComp(lo,sr,mstRmsDb(lo,act)+3,R[0],30,220);mstComp(mid,sr,mstRmsDb(mid,act)+3,R[1],12,140);mstComp(hi,sr,mstRmsDb(hi,act)+2,R[2],4,80);
-    for(let i=0;i<n;i++)d[i]=lo[i]+mid[i]+d[i];
-    await mstYield();}
-  {const t=mstRmsDb(ch[0],act)+4;for(const d of ch)mstComp(d,sr,t,1.4+.3*k,25,300,8);}
+        const want=eh>dsT*ef&&eh>.02?Math.max(.6,dsT*ef/eh):1;g=want<g?a*g+(1-a)*want:r*g+(1-r)*want;d[i]-=hb[i]*(1-g);}}}
+  /* 5) compression douce, une seule bande, lente : contrôle les écarts sans faire « pomper » le son */
+  {const t=mstRmsDb(ch[0],act)+3;for(const d of ch){mstComp(d,sr,t,1.6+.5*k,25,350,10,30);await mstYield();}}
   /* 6) ambiance (salle courte), donne une sortie stéréo */
   if(opt.room){say('Ambiance…');await mstYield();
     const OC=window.OfflineAudioContext||window.webkitOfflineAudioContext,oc=new OC(2,n,sr),b=oc.createBuffer(ch.length,n,sr);ch.forEach((d,i)=>b.copyToChannel?b.copyToChannel(d,i):b.getChannelData(i).set(d));

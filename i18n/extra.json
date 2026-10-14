@@ -587,7 +587,18 @@
 "Tous droits réservés.": "All rights reserved.",
 "Contact": "Contact",
 "Confidentialité": "Privacy",
-"✎ Paroles": "✎ Lyrics"
+"✎ Paroles": "✎ Lyrics",
+"Post-traitement": "Post-processing",
+"Avec post-traitement": "With post-processing",
+"Le fichier partagé ou téléchargé est la version avec post-traitement.": "The shared or downloaded file is the post-processed version.",
+"Le post-traitement n'a pas fonctionné sur cet appareil.": "Post-processing did not work on this device.",
+"Post-traitement en cours… (quelques secondes)": "Post-processing… (a few seconds)",
+"Post-traitement en cours…": "Post-processing…",
+"Refaire le post-traitement": "Redo post-processing",
+"Retirer le post-traitement": "Remove post-processing",
+"✓ Post-traitement appliqué": "✓ Post-processing applied",
+"✨ Appliquer le post-traitement": "✨ Apply post-processing",
+"Analyse ta prise, puis la peaufine : égalisation adaptée à ta voix ou ton instrument, « s » adoucis, compression douce et volume ajusté, sans saturer. Les nuances de ton interprétation sont gardées.": "Analyzes your take, then polishes it: EQ adapted to your voice or instrument, softer “s” sounds, gentle compression and adjusted volume, without distortion. The dynamics of your performance are kept."
 },
 "es": {
 "Modules": "Módulos",
@@ -1177,6 +1188,17 @@
 "Tous droits réservés.": "Todos los derechos reservados.",
 "Contact": "Contacto",
 "Confidentialité": "Privacidad",
-"✎ Paroles": "✎ Letra"
+"✎ Paroles": "✎ Letra",
+"Post-traitement": "Posprocesamiento",
+"Avec post-traitement": "Con posprocesamiento",
+"Le fichier partagé ou téléchargé est la version avec post-traitement.": "El archivo compartido o descargado es la versión con posprocesamiento.",
+"Le post-traitement n'a pas fonctionné sur cet appareil.": "El posprocesamiento no funcionó en este dispositivo.",
+"Post-traitement en cours… (quelques secondes)": "Posprocesando… (unos segundos)",
+"Post-traitement en cours…": "Posprocesando…",
+"Refaire le post-traitement": "Rehacer el posprocesamiento",
+"Retirer le post-traitement": "Quitar el posprocesamiento",
+"✓ Post-traitement appliqué": "✓ Posprocesamiento aplicado",
+"✨ Appliquer le post-traitement": "✨ Aplicar posprocesamiento",
+"Analyse ta prise, puis la peaufine : égalisation adaptée à ta voix ou ton instrument, « s » adoucis, compression douce et volume ajusté, sans saturer. Les nuances de ton interprétation sont gardées.": "Analiza tu toma y la pule: ecualización adaptada a tu voz o instrumento, «s» suavizadas, compresión suave y volumen ajustado, sin saturar. Se conservan los matices de tu interpretación."
 }
 }

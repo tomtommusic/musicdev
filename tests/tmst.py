@@ -10,9 +10,9 @@ with sync_playwright() as p:
         out[st+'/'+it]=[mstLoud(d,buf.sampleRate).toFixed(1),(20*Math.log10(pk)).toFixed(2),Math.round(performance.now()-t0)+'ms'];}
       return out;}""")
     for k,v in r.items():print(k,v)
-    pg.click('text=Appliquer le mastering');pg.wait_for_timeout(2500)
+    pg.click('text=Appliquer le post-traitement');pg.wait_for_timeout(2500)
     print(pg.evaluate("[!!RS.last.orig,RS.last.mst&&RS.last.mst.style,document.querySelector('.mstdone')?.innerText]"))
     pg.click('text=Original');pg.wait_for_timeout(300);print('A/B',pg.evaluate("RS.last.useOrig"))
     pg.locator('.rctake').screenshot(path='mst_390.png')
-    pg.click('text=Retirer le mastering');pg.wait_for_timeout(500);print('retiré',pg.evaluate("[!!RS.last.orig,RS.last.ext]"),errs)
+    pg.click('text=Retirer le post-traitement');pg.wait_for_timeout(500);print('retiré',pg.evaluate("[!!RS.last.orig,RS.last.ext]"),errs)
     b.close()
