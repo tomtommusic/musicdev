@@ -1,0 +1,15 @@
+
+/* ===== À propos ===== */
+.ap{display:flex;flex-direction:column;gap:16px;max-width:760px}
+.apnav{display:flex;flex-wrap:wrap;gap:8px}
+.apnav a{text-decoration:none;color:var(--ink)}
+.apsec>p{margin:6px 0}
+.apsec{scroll-margin-top:16px}
+.apblock{margin:12px 0}
+.apblock h4{margin:0 0 4px;font:700 .98rem/1.3 var(--f-display)}
+.apblock p{margin:0;line-height:1.5}
+.aplic{display:inline-block;margin-left:6px;padding:1px 7px;border:1px solid var(--line);border-radius:999px;font:600 .7rem/1.4 var(--f-mono);color:var(--muted);vertical-align:middle}
+.aplist{margin:6px 0;padding-left:18px;font-size:.88rem;line-height:1.5}
+.aptext{white-space:pre-wrap;font:400 .74rem/1.45 var(--f-mono);background:var(--sunk);border-radius:10px;padding:12px;max-height:340px;overflow:auto}
+.ap details summary{cursor:pointer;font-weight:600;margin-top:6px}
+.apver{font:600 .85rem/1 var(--f-mono);color:var(--muted)}

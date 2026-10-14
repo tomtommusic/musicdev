@@ -12,7 +12,7 @@ Cette branche `sources` contient tout ce qui sert à le fabriquer. Point de sauv
    remplacer ces chemins par les nouveaux (`grep -rl scratchpad .` pour les trouver).
 3. Construire : `bash build.sh` → copie `index-before-quiz.html` dans `main/index.html`, puis applique dans l'ordre
    `quiz/integrate.py`, `method.py`, `tools/integrate_tools.py`, `features2.py` (accueil + accords de guitare), `unmute.py`, `micbleed.py`, `i18n/integrate_i18n.py`.
-4. Publier : augmenter `VERSION` dans `sw.js` (actuellement `musicdev-1.18.2`), commit, push sur `main`
+4. Publier : augmenter `VERSION` dans `sw.js` (actuellement `musicdev-1.19.0`), commit, push sur `main`
    (GitHub Pages se met à jour en ~30 s). Pousser aussi les sources modifiées sur cette branche.
 
 ## Repères
@@ -34,3 +34,4 @@ Cette branche `sources` contient tout ce qui sert à le fabriquer. Point de sauv
 - 1.18.0 : `tools/rec_extra.js` + `rec_extra.css` (paroles qui défilent, mastering automatique), ajoutés après rec.js par integrate_tools.py.
 - 1.18.1 : `betaTag()` (dans rec_extra.js) : étiquette « Bêta » à mettre sur toute nouvelle fonction. Classe CSS `.beta`.
 - 1.18.2 : `tools/mst2.js` remplace mstProcess (mastering v2), ajouté après rec_extra.js.
+- 1.19.0 : `about/` (module À propos ; about.py lit la version dans sw.js : augmenter sw.js AVANT build.sh). `about/mkpriv.py` régénère privacy.html (racine de main). Traductions dans about/tr.py.
