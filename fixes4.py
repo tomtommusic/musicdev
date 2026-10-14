@@ -34,4 +34,6 @@ rep("['Sujets',`${c.topics.length} notion${c.topics.length>1?'s':''}`],['Formats
 s=s.replace("</style>","@media (max-width:600px){main[data-kind=\"quiz\"] .meta>:nth-child(4){grid-column:1/4}}\n</style>",1)
 rep("{id:'la',kind:'mel',t:'Lecture appliquée',s:'Voir → jouer',d:'Joue la mélodie note par note sur le clavier à l\\'écran ou avec ton clavier d\\'ordinateur.'}",
  "{id:'la',kind:'mel',t:'Lecture mélodique',s:'Voir → jouer note par note',d:'Joue la mélodie note par note, sans tempo : sur le clavier à l\\'écran, avec ton clavier d\\'ordinateur ou sur ton instrument avec le micro.'}")
+# iPad à la verticale (601 à 860 px) : même menu déroulant des modules que sur mobile
+rep("/* ===== mobile : menu déroulant des modules ===== */\n.modpick{display:none}\n@media (max-width:600px){","/* ===== mobile et tablette : menu déroulant des modules ===== */\n.modpick{display:none}\n@media (max-width:860px){")
 open(p,'w',encoding='utf-8').write(s)
