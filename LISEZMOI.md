@@ -36,3 +36,4 @@ Cette branche `sources` contient tout ce qui sert à le fabriquer. Point de sauv
 - 1.18.2 : `tools/mst2.js` remplace mstProcess (mastering v2), ajouté après rec_extra.js.
 - 1.19.0 : `about/` (module À propos ; about.py lit la version dans sw.js : augmenter sw.js AVANT build.sh). `about/mkpriv.py` régénère privacy.html (racine de main). Traductions dans about/tr.py.
 - 1.19.3 : recLevel par phrase (gain constant dans une phrase, correction en racine carrée) ; post-traitement : compression une bande lente, expandeur max -6 dB. Test : tests/twave.py (wobble ≈ 0 dB, nuances gardées).
+- App Windows sans installation : branche `telechargement` (un seul fichier MusicDEV-Windows.zip, < 100 Mo : locales fr/en/es seulement, sans SwiftShader). Lien : https://github.com/tomtommusic/musicdev/raw/telechargement/MusicDEV-Windows.zip — remplacer par un commit orphelin forcé à chaque version. Construction : /tmp/ea (Electron 33.2.1 win32-x64 + app3/main.js).
