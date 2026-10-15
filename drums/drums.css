@@ -1,0 +1,14 @@
+/* lecture batterie : pads disposés comme une batterie */
+.drkit{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:10px;margin:12px 0 8px;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.drpad{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:78px;padding:10px 8px;border:1.5px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink);font:inherit;cursor:pointer;transition:transform .06s,background .06s,border-color .06s}
+.drpad b{font-size:.95rem;font-weight:700;text-align:center;line-height:1.15}
+.drpad kbd{font:600 .74rem/1 var(--f-mono);color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:3px 6px;background:var(--sunk)}
+.drpad.dr-crash,.drpad.dr-ride,.drpad.dr-hh,.drpad.dr-hhp{border-radius:999px}
+.drpad.dr-kick{grid-column:span 2;min-height:86px}
+.drkit.live .drpad{border-color:var(--accent)}
+.drpad.hit{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);transform:scale(.96)}
+.drpad.hit kbd{color:var(--accent-ink);background:transparent;border-color:currentColor}
+.drlegw{margin:6px 0 0;font-size:.85rem;color:var(--muted)}
+.drlegw summary{cursor:pointer;font-weight:600}
+.drleg{max-width:min(100%,430px);color:var(--ink);overflow:hidden}
+@media (max-width:600px){.drkit{grid-template-columns:repeat(3,1fr);gap:8px}.drpad{min-height:70px}.drpad.dr-kick{grid-column:span 3}}
