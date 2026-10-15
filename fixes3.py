@@ -72,6 +72,8 @@ s=s.replace("</style>","""#vbeat{position:absolute;right:16px;bottom:14px;displa
 #vbeat i.on{color:var(--accent-ink);background:var(--accent);border-color:var(--accent);transform:scale(1.18)}
 #vbeat i.on.strong{transform:scale(1.32)}
 @media (max-width:600px){#vbeat{right:10px;bottom:10px;gap:4px}#vbeat i{width:22px;height:22px;font-size:.7rem}}
+/* ordinateur et tablette : métronome visuel centré sous la partition, dans le champ de vision */
+@media (min-width:601px){#vbeat{right:auto;left:50%;transform:translateX(-50%);bottom:12px;gap:10px}#vbeat i{width:32px;height:32px;font-size:.9rem;border-width:2px}}
 .stand{position:relative}
 </style>""",1)
 open(p,'w',encoding='utf-8').write(s);print('fixes3 ok')
