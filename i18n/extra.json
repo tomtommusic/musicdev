@@ -672,7 +672,8 @@
 "Clé de ré aigu": "High D key",
 "Clé de mi aigu": "High E key",
 "Clé de mi♭ aigu": "High E♭ key",
-"Clé de trille de do♯": "C♯ trill key"
+"Clé de trille de do♯": "C♯ trill key",
+"Dans l'ordre de la gamme : la tonique est toujours la note la plus grave": "In scale order: the tonic is always the lowest note"
 },
 "es": {
 "Modules": "Módulos",
@@ -1347,6 +1348,7 @@
 "Clé de ré aigu": "Llave de re agudo",
 "Clé de mi aigu": "Llave de mi agudo",
 "Clé de mi♭ aigu": "Llave de mi♭ agudo",
-"Clé de trille de do♯": "Llave de trino de do♯"
+"Clé de trille de do♯": "Llave de trino de do♯",
+"Dans l'ordre de la gamme : la tonique est toujours la note la plus grave": "En el orden de la escala: la tónica es siempre la nota más grave"
 }
 }

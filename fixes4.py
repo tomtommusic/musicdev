@@ -44,7 +44,9 @@ rep("note(m,t,d,v,dest){const k=S.inst;if(k==='guitare')","note(m,t,d,v,dest){co
 rep("  vcache:{},\n  voiceBuf(",open('/tmp/claude-0/-home-claude-musicdev/4258b5e8-eacb-5999-9d1d-cfd4cbd81d51/scratchpad/bassjs.txt').read()+"  vcache:{},\n  voiceBuf(")
 # basse dans l'ordre de la gamme : la tonique (I) est toujours la note la plus grave, les autres degrés au-dessus
 rep("function voiceChord(tones,inv,prevUpper,id){\n  const bassT=tones[inv],bass=atOct(bassT.pc,40);",
- "function voiceChord(tones,inv,prevUpper,id,key){\n  const bassT=tones[inv],ton=key?scaleNote(key,0).pc:null,bass=ton==null?atOct(bassT.pc,40):atOct(ton,38)+((bassT.pc-ton+12)%12);")
-rep("const v=voiceChord(tones,inv,prevUp,id);","const v=voiceChord(tones,inv,prevUp,id,key);")
+ "function voiceChord(tones,inv,prevUpper,id,key,prevBass){\n  const bassT=tones[inv],ton=key?scaleNote(key,0).pc:null;let bass;\n  if(ton!=null)bass=atOct(ton,38)+((bassT.pc-ton+12)%12);\n  else if(prevBass!=null){const lo=atOct(bassT.pc,prevBass-6);bass=lo<38?lo+12:lo>57?lo-12:lo;} /* basse libre : chemin le plus court */\n  else bass=atOct(bassT.pc,40);")
+rep("let prevUp=null;\n    const chords=ids.map((id,i)=>{","let prevUp=null,prevB=null;const ord=cfg.bassOrd!==false;\n    const chords=ids.map((id,i)=>{")
+rep("const v=voiceChord(tones,inv,prevUp,id);if(v.upper)prevUp=v.upper.map(x=>x.m);","const v=voiceChord(tones,inv,prevUp,id,ord?key:null,prevB);prevB=v.bass.m;if(v.upper)prevUp=v.upper.map(x=>x.m);")
+rep("      field('Renversements',chk('s_pcinv',","      field(['Basse',typeof betaTag==='function'?betaTag():null].filter(Boolean),chk('s_pcbo','Dans l\\'ordre de la gamme : la tonique est toujours la note la plus grave',c.bassOrd!==false,v=>{c.bassOrd=v;ch();})),\n      field('Renversements',chk('s_pcinv',")
 rep("v=voiceChord(tones,inv,prev,id);","v=voiceChord(tones,inv,prev,id,key);")
 open(p,'w',encoding='utf-8').write(s)
