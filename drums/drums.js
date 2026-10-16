@@ -62,22 +62,30 @@ function genDrums(cfg){
   const pickFill=()=>{const maxB=B===4?(cfg.dbl?4:2):1;let c=DR_FILLS.filter(f=>f.b<=maxB&&f.t<=tmax+1&&(cfg.dbl||f.sub===2)&&(f.b<4||R()<.15));if(!c.length)c=[DR_FILLS[0]];return pick(c);};
   const drumOf=ch=>{const want={S:['snare'],H:['htom','mtom','ftom'],M:['mtom','htom','ftom'],F:['ftom','mtom','htom']}[ch];return want.find(has)||(has('snare')?'snare':toms[0]);};
   let crashNext=has('crash')&&R()<.8;
+  /* rythme de la main qui garde le temps, choisi pour toute une phrase de 4 mesures (comme dans une chanson) :
+     q = noires (débutant), e = croches (rock), s = doubles croches (pop/funk, niveau 5) ; la ride se joue en noires ou en croches */
+  const tkPick=t=>{const o=t==='ride'?[['q',2],['e',3]]:cfg.dbl?[['q',1.5],['e',5],['s',3.5]]:[['q',3],['e',7]];return wpick(o.map(x=>x[0]),o.map(x=>x[1]));};
+  let tkCur=tk,tkPat=tkPick(tk);
   for(let m=0;m<nM;m++){
+    if(m>0&&m%4===0){ /* nouvelle phrase : on peut passer du charleston à la ride (refrain) ou changer de rythme */
+      if(has('hh')&&has('ride')&&R()<.6)tkCur=tkCur==='hh'?'ride':'hh';if(R()<.5)tkPat=tkPick(tkCur);else if(tkCur==='ride'&&tkPat==='s')tkPat='e';}
     const fill=fillAt(m)?pickFill():null,fb=fill?fill.b:0;
     const pat=(!fill&&(m%4===1||m%4===3)&&R()<.3)?pickK(main):main;   /* variante occasionnelle, sinon le même groove */
-    const kick=new Set(pat.k),sn=new Set(G.sn);
+    const kick=new Set(pat.k),sn=new Set(G.sn),per=tkPat==='s'?4:2,sd=bu/per;
     for(let b=0;b<B;b++){
       if(fill&&b>=B-fb){
         const n=bu/fill.sub,off=(b-(B-fb))*n;
         for(let k=0;k<n;k++)events.push({m,pos:b*bu+k*fill.sub,dur:fill.sub,rest:false,hits:[drumOf(fill.d[off+k]||'S')],fi,fill:true});
         fi++;continue;}
-      for(let s=0;s<2;s++){
-        const x=b*2+s,hits=[];
-        if(x===0&&crashNext){hits.push('crash');crashNext=false;}else hits.push(tk);
-        if(kick.has(x))hits.push('kick');
-        if(sn.has(x))hits.push('snare');
-        if(tk==='ride'&&sn.has(x))hits.push('hhp');
-        events.push({m,pos:b*bu+s*2,dur:2,rest:false,hits:[...new Set(hits.filter(has))],fi});}
+      for(let s2=0;s2<per;s2++){
+        const onE=per===2||s2%2===0,x=b*2+(per===2?s2:s2/2),hits=[];   /* x : position en croches (grosse caisse et caisse claire) */
+        const tkHere=tkPat!=='q'||s2===0;
+        if(x===0&&s2===0&&crashNext){hits.push('crash');crashNext=false;}else if(tkHere)hits.push(tkCur);
+        if(onE&&kick.has(x))hits.push('kick');
+        if(onE&&sn.has(x))hits.push('snare');
+        if(onE&&tkCur==='ride'&&sn.has(x))hits.push('hhp');
+        const h=[...new Set(hits.filter(has))];
+        events.push({m,pos:b*bu+s2*sd,dur:sd,rest:!h.length,hits:h,fi});}
       fi++;}
     if(fill&&has('crash'))crashNext=true;
   }
@@ -116,7 +124,7 @@ function abcDrums(ex,o={}){
           buf+=nt(x.hs)+D(end-x.pos);map.push([v,m,k++,x.i]);p=end;}
         toks.push(buf);}
       /* en 4/4, les croches des cymbales sont groupées par 4 (demi-mesure), comme dans les partitions de batterie */
-      if(v===0&&meter.beats===4&&toks.length===4){const fb=b=>evs.some(([e])=>e.fill&&Math.floor(e.pos/bu)===b),g=(a,b)=>!fb(a)&&!fb(b)&&!/^x/.test(toks[a])&&!/^x/.test(toks[b]);
+      if(v===0&&meter.beats===4&&toks.length===4){const fb=b=>evs.some(([e])=>e.fill&&Math.floor(e.pos/bu)===b),sx=b=>evs.some(([e])=>e.dur<2&&Math.floor(e.pos/bu)===b),g=(a,b)=>!fb(a)&&!fb(b)&&!sx(a)&&!sx(b)&&!/^x/.test(toks[a])&&!/^x/.test(toks[b]);
         meas[v].push([g(0,1)?toks[0]+toks[1]:toks[0]+' '+toks[1],g(2,3)?toks[2]+toks[3]:toks[2]+' '+toks[3]].join(' '));}
       else meas[v].push(toks.join(' '));
     }
