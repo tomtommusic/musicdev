@@ -42,7 +42,7 @@ function genDrums(cfg){
       const hits=[h];if(has('crash')&&e.m===0&&e.pos===0&&h==='kick')hits.push('crash');
       events.push(Object.assign({},e,{hits}));prevB=b;}
     if(!events.some(e=>e.hits.includes('snare'))&&has('snare')){const x=events.find(e=>e.hits.length&&!(e.m===0&&e.pos===0));if(x)x.hits=['snare'];}
-    return{kind:'drum',meter,events,tempo:cfg.tempo,measures:nM};
+    return{kind:'drum',meter,events,tempo:cfg.tempo,measures:nM,line:true};
   }
   /* groove : timekeeping en croches, grosse caisse et caisse claire, roulement de toms en fin de phrase */
   const fillAt=m=>(toms.length||has('snare'))&&nM>=2&&(toms.length?R()<.85:R()<.4)&&(m===nM-1||(nM>=8&&m===3));
@@ -55,7 +55,7 @@ function genDrums(cfg){
         const sub=cfg.dbl&&R()<.7?1:2,n=meter.bu/sub,pool=['snare',...toms].filter(has),fbIdx=b-(B-fb);
         for(let k=0;k<n;k++){
           const step=(fbIdx*n+k)/(fb*n);const d=pool[Math.min(pool.length-1,Math.floor(step*pool.length))];
-          events.push({m,pos:b*meter.bu+k*sub,dur:sub,rest:false,hits:[d],fi});}
+          events.push({m,pos:b*meter.bu+k*sub,dur:sub,rest:false,hits:[d],fi,fill:true});}
         fi++;continue;}
       for(let s=0;s<2;s++){
         const hits=[];const on=s===0;
@@ -71,20 +71,48 @@ function genDrums(cfg){
   }
   return{kind:'drum',meter,events,tempo:cfg.tempo,measures:nM};
 }
+/* notation à deux voix, comme les partitions de batterie : cymbales (et roulements) hampes en haut,
+   grosse caisse, caisse claire et charleston au pied hampes en bas. map : [voix, mesure, rang de la note, événement] */
+const DR_UP=new Set(['hh','ride','crash','htom','mtom','ftom']);
 function abcDrums(ex,o={}){
-  const {meter}=ex,per=o.perLine||4,nM=ex.measures;
-  let out=`X:1\nM:${meter.label}\nL:1/16\nK:C clef=perc\nV:1 stem=up\n`,line='';
-  const tok=e=>{const d=e.dur===1?'':String(e.dur);if(!e.hits.length)return 'z'+d;
-    const ns=e.hits.slice().sort((a,b)=>DR_IDS.indexOf(a)-DR_IDS.indexOf(b)).map(h=>(DRK[h].x?'!style=x!':'')+DRK[h].n);
-    return(ns.length>1?'['+ns.join('')+']':ns[0])+d;};
+  const {meter}=ex,per=o.perLine||4,nM=ex.measures,bu=meter.bu,map=[];
+  const nt=hs=>{const ns=hs.slice().sort((a,b)=>DR_IDS.indexOf(a)-DR_IDS.indexOf(b)).map(h=>(DRK[h].x?'!style=x!':'')+DRK[h].n);return ns.length>1?'['+ns.join('')+']':ns[0];};
+  const D=d=>d===1?'':String(d);
+  const voiceOf=(e,h)=>ex.line?1:(DR_UP.has(h)||(h==='snare'&&e.fill))?0:1;
+  const meas=[[],[]];
   for(let m=0;m<nM;m++){
-    const parts=[];let cur=null,buf='';
-    for(const e of ex.events.filter(e=>e.m===m)){const t=tok(e);if(e.fi!==cur){if(buf)parts.push(buf);buf=t;cur=e.fi;}else buf+=t;}
-    if(buf)parts.push(buf);
-    line+=parts.join(' ')+(m===nM-1?' |]':' |');
-    if((m+1)%per===0||m===nM-1){out+=line+'\n';line='';}
+    const evs=ex.events.map((e,i)=>[e,i]).filter(([e])=>e.m===m);
+    for(const v of[0,1]){
+      let toks=[],k=0;
+      if(ex.line){
+        if(v===0){meas[0].push('x'+D(bu*meter.beats));continue;}
+        /* ligne unique : les figures du générateur rythmique, groupées par temps */
+        let cur=null,buf='';const parts=[];
+        for(const[e,i]of evs){const t=e.hits.length?nt(e.hits)+D(e.dur):'z'+D(e.dur);map.push([1,m,k++,i]);
+          if(e.fi!==cur){if(buf)parts.push(buf);buf=t;cur=e.fi;}else buf+=t;}
+        if(buf)parts.push(buf);meas[1].push(parts.join(' '));continue;}
+      for(let b=0;b<meter.beats;b++){
+        const inB=evs.filter(([e])=>Math.floor(e.pos/bu)===b),other=1-v;
+        const slots=inB.map(([e,i])=>({pos:e.pos-b*bu,dur:e.dur,i,hs:e.hits.filter(h=>voiceOf(e,h)===v)}));
+        const otherHas=inB.some(([e])=>e.hits.some(h=>voiceOf(e,h)===other));
+        if(!slots.some(x=>x.hs.length)){toks.push((v===1&&!inB.some(([e])=>e.fill)?'z':'x')+D(bu));if(v===1&&!inB.some(([e])=>e.fill))k++;continue;}
+        /* une note dure jusqu'à la suivante (dans le temps) ; les vides du début du temps sont des silences */
+        let buf='',p=0;
+        for(let s2=0;s2<slots.length;s2++){const x=slots[s2];if(!x.hs.length)continue;
+          if(x.pos>p){buf+='z'+D(x.pos-p);k++;}
+          let end=bu;for(let t=s2+1;t<slots.length;t++)if(slots[t].hs.length){end=slots[t].pos;break;}
+          buf+=nt(x.hs)+D(end-x.pos);map.push([v,m,k++,x.i]);p=end;}
+        toks.push(buf);}
+      /* en 4/4, les croches des cymbales sont groupées par 4 (demi-mesure), comme dans les partitions de batterie */
+      if(v===0&&meter.beats===4&&toks.length===4){const fb=b=>evs.some(([e])=>e.fill&&Math.floor(e.pos/bu)===b),g=(a,b)=>!fb(a)&&!fb(b)&&!/^x/.test(toks[a])&&!/^x/.test(toks[b]);
+        meas[v].push([g(0,1)?toks[0]+toks[1]:toks[0]+' '+toks[1],g(2,3)?toks[2]+toks[3]:toks[2]+' '+toks[3]].join(' '));}
+      else meas[v].push(toks.join(' '));
+    }
   }
-  return out;
+  let out=`X:1\nM:${meter.label}\nL:1/16\n%%score (1 2)\nK:C clef=perc\nV:1 stem=up clef=perc\nV:2 stem=down clef=perc\n`;
+  for(let m0=0;m0<nM;m0+=per){const r=[];for(let m=m0;m<Math.min(nM,m0+per);m++)r.push(m);
+    for(const v of[0,1])out+=`[V:${v+1}] `+r.map(m=>meas[v][m]+(m===nM-1?' |]':' |')).join(' ')+'\n';}
+  return{abc:out,map};
 }
 /* sons de batterie (synthèse) à un moment donné */
 function drHit(id,t,out,v=1){try{const c=A.init();out=out||A.out||c.destination;
@@ -121,10 +149,11 @@ MOD.lb.buildKit=function(){
 };
 MOD.lb.fresh=function(){Object.assign(S.st,{ins:[],live:false,res:null});this.ch.textContent=`Le métronome joue d'abord ${countText(S.ex.meter)}. Joue ensuite la partition avec les pads ou les touches du clavier indiquées (plusieurs touches en même temps pour les coups simultanés).`;this.buildKit();this.redraw();this.beat(-1);};
 MOD.lb.clear=function(){S.st.res=null;this.redraw();feedback('');};
-MOD.lb.redraw=function(){const M=this,ex=S.ex;if(!ex)return;$('#score').classList.remove('single');
-  M.els=draw($('#score'),abcDrums(ex,{perLine:perLine()}));if(M.els.length!==ex.events.length)M.els=ex.events.map((e,i)=>M.els[i]||null);
-  if(S.st.res)S.st.res.forEach(([i,c])=>M.els[i]&&M.els[i].classList.add(c));};
-MOD.lb.now=function(i){(this.els||[]).forEach(e=>e&&e.classList.remove('is-now'));if(i>=0&&this.els[i])this.els[i].classList.add('is-now');};
+MOD.lb.redraw=function(){const M=this,ex=S.ex;if(!ex)return;const sc=$('#score');sc.classList.remove('single');
+  const r=abcDrums(ex,{perLine:perLine()});draw(sc,r.abc);M.els=ex.events.map(()=>[]);
+  for(const[v,m,k,i]of r.map){const e=sc.querySelector(`.abcjs-v${v}.abcjs-mm${m}.abcjs-n${k}`);if(e)M.els[i].push(e);}
+  if(S.st.res)S.st.res.forEach(([i,c])=>(M.els[i]||[]).forEach(e=>e.classList.add(c)));};
+MOD.lb.now=function(i){(this.els||[]).forEach(a=>a.forEach(e=>e.classList.remove('is-now')));if(i>=0&&this.els[i])this.els[i].forEach(e=>e.classList.add('is-now'));};
 MOD.lb.beat=function(b){const n=S.ex.meter.beats;this.dots.replaceChildren(...Array.from({length:n},(_,k)=>el('i',{class:k===b?'on':''})));};
 MOD.lb.flash=function(id){const p=this.pads&&this.pads[id];if(!p)return;p.classList.add('hit');setTimeout(()=>p.classList.remove('hit'),110);};
 MOD.lb.model=function(){
