@@ -66,10 +66,10 @@ const DR_STYLES=[
    q noire, e 2 croches, s 4 doubles, ed croche + 2 doubles, de 2 doubles + croche, g croche pointée + double, o contretemps seul */
 const DR_CELL={q:[0],e:[0,2],s:[0,1,2,3],ed:[0,2,3],de:[0,1,2],g:[0,3],o:[2]};
 const DR_TKMIX={
-  4:[[['e','e','e','ed'],2],[['e','e','e','de'],2],[['e','de','e','de'],2],[['e','e','e','s'],2],[['q','e','q','e'],2],[['o','o','o','o'],2],[['e','e','ed','e'],2],
+  4:[[['e','e','e','ed'],2],[['e','e','e','de'],2],[['e','de','e','de'],2],[['e','e','e','s'],2],[['q','e','q','e'],2],[['o','o','o','o'],2],[['e','q','e','q'],2],[['q','q','e','e'],2],[['e','e','e','q'],2],[['e','e','q','e'],2],[['e','e','ed','e'],2],
      [['ed','ed','ed','ed'],3],[['de','de','de','de'],3],[['e','s','e','s'],3],[['s','e','s','e'],3],[['de','ed','de','ed'],3],[['g','g','g','g'],3],[['e','ed','e','s'],3]],
-  3:[[['e','e','ed'],2],[['q','e','e'],2],[['e','e','de'],2],[['o','o','o'],2],[['ed','ed','ed'],3],[['e','s','e'],3]],
-  2:[[['e','ed'],2],[['e','de'],2],[['o','o'],2],[['ed','ed'],3],[['s','e'],3]]};
+  3:[[['e','e','ed'],2],[['q','e','e'],2],[['e','q','e'],2],[['e','e','q'],2],[['e','e','de'],2],[['o','o','o'],2],[['ed','ed','ed'],3],[['e','s','e'],3]],
+  2:[[['e','ed'],2],[['e','de'],2],[['o','o'],2],[['e','q'],2],[['q','e'],2],[['ed','ed'],3],[['s','e'],3]]};
 /* roulements : S = caisse claire, H = tom aigu, M = tom médium, F = tom basse ; chaque tambour reçoit 2 ou 4 coups (main droite, main gauche) */
 const DR_FILLS=[
   {b:1,sub:2,d:'SS',t:1},{b:1,sub:2,d:'SF',t:1},{b:1,sub:2,d:'HF',t:1},
@@ -99,9 +99,9 @@ function genDrums(cfg){
   const okStyle=st=>st.m===B&&st.t<=tmax&&(!st.hh||canHH)&&(!st.xs||has('snare'));
   const pool=DR_STYLES.filter(okStyle);if(!pool.length)pool.push(DR_STYLES[0]);
   const pickStyle=ex=>{const c=pool.filter(x=>x!==ex);const L=c.length?c:pool;return wpick(L,L.map(x=>x.w||1));};
-  const pickTk=st=>{const mixes=(DR_TKMIX[B]||[]).filter(x=>x[1]<=tmax);const o=(st.tk||['e']).filter(x=>(x!=='s'||cfg.dbl)&&(x!=='mix'||mixes.length));const sub=pick(o.length?o:['e']);const cells=sub==='mix'?pick(mixes)[0]:null;
+  const pickTk=st=>{const mixes=(DR_TKMIX[B]||[]).filter(x=>x[1]<=tmax&&(cfg.dbl||x[0].every(c=>c==='q'||c==='e'||c==='o')));const o=(st.tk||['e']).filter(x=>(x!=='s'||cfg.dbl)&&(x!=='mix'||mixes.length));const sub=pick(o.length?o:['e']);const cells=sub==='mix'?pick(mixes)[0]:null;
     const inst=st.hh||!canRide?(canHH?'hh':'ride'):!canHH?'ride':(st.ride&&R()<.45?'ride':R()<.25?'ride':'hh');return{sub,inst,cells};};
-  const pickK=(st,ex)=>{const c=st.k.filter(x=>(x[1]||1)<=tmax&&x!==ex);return c.length?pick(c):st.k[0];};
+  const pickK=(st,ex)=>{const c=st.k.filter(x=>(x[1]||1)<=tmax&&x!==ex&&(cfg.dbl||x[0].every(p=>p%2===0)));return c.length?pick(c):st.k[0];};
   let st=pickStyle(null),tkc=pickTk(st),main=pickK(st,null),crashNext=has('crash')&&R()<.8;
   const fillAt=m=>toms.length>0&&nM>=2&&((m%4===3)||(nM<4&&m===nM-1&&R()<.75));
   const pickFill=()=>{const maxB=B===4?(cfg.dbl?4:2):1;let c=DR_FILLS.filter(f=>f.b<=maxB&&f.t<=tmax+1&&(cfg.dbl||f.sub===2)&&(f.b<4||R()<.15));if(!c.length)c=[DR_FILLS[0]];return pick(c);};
