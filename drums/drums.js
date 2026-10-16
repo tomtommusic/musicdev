@@ -10,6 +10,9 @@ const DRK={
   snare:{a:'C.C.',t:'Caisse claire',s:'Caisse claire',n:'c',code:'KeyF',k:'F'},
   ftom:{a:'Tom B.',t:'Tom basse',s:'Tom basse',n:'A',code:'KeyO',k:'O'},
   kick:{a:'G.C.',t:'Grosse caisse',s:'Grosse caisse',n:'F',code:'Space',k:'Espace'},
+  hho:{a:'Charl.',t:'Charleston ouvert',s:'Charleston',n:'g',x:1,deco:'!open!'},
+  sna:{a:'C.C.',t:'Caisse claire accentuée',s:'Caisse claire',n:'c',deco:'!>!'},
+  xs:{a:'C.C.',t:'Cross-stick',s:'Cross-stick',n:'c',x:1},
   hhp:{a:'Ch.pied',t:'Charleston au pied',s:'Charl. pied',n:'D',x:1,code:'KeyV',k:'V'}};
 const DR_IDS=['kick','snare','hh','crash','htom','mtom','ftom','ride','hhp'];
 const DR_ORDER=['crash','htom','mtom','ride','hh','snare','ftom','hhp','kick']; /* disposition des pads, comme une batterie vue de face */
@@ -31,6 +34,34 @@ const DR_GROOVES={
   4:{sn:[2,6],k:[{k:[0,4],t:1,w:6},{k:[0,4,5],t:2,w:2},{k:[0,1,4],t:2,w:2},{k:[0,2,4,6],t:2,w:1},{k:[0,4,7],t:3,w:1},{k:[0,1,4,5],t:3,w:1},{k:[0,3,4],t:3,w:1},{k:[0,5],t:3,w:1}]},
   3:{sn:[4],k:[{k:[0],t:1,w:4},{k:[0,1],t:2,w:2},{k:[0,3],t:2,w:1},{k:[0,2],t:3,w:1}]},
   2:{sn:[2],k:[{k:[0],t:1,w:4},{k:[0,1],t:2,w:2},{k:[0,3],t:3,w:1}]}};
+/* bibliothèque de grooves (méthodes de batterie, styles courants). Positions en doubles croches dans la mesure :
+   0 = 1, 1 = 1e, 2 = 1&, 3 = 1a, 4 = 2, 6 = 2&, 8 = 3, 10 = 3&, 12 = 4, 14 = 4&.
+   tk : subdivisions possibles de la main qui garde le temps (q noires, e croches, s doubles croches) ;
+   k : variantes de grosse caisse [positions, difficulté] ; sn : caisse claire ; bars : caisse claire sur 2 mesures ;
+   open : charleston ouvert ; hhp : charleston au pied ; hh : demande le charleston ; xs : cross-stick ; t : difficulté (1 à 3) */
+const DR_STYLES=[
+  {n:'Rock',m:4,t:1,w:5,tk:['q','e','e','s'],sn:[4,12],k:[[[0,8],1],[[0,8,10],2],[[0,2,8],2],[[0,10],2],[[0,2,8,10],2],[[0,6,8],3],[[0,8,14],3],[[0,3,8],3]]},
+  {n:'Pop',m:4,t:2,w:2,tk:['e','s'],ride:1,sn:[4,12],k:[[[0,10],2],[[0,6,10],2],[[0,10,14],3],[[0,8,11],3]]},
+  {n:'Four on the floor',m:4,t:2,w:2,tk:['e'],sn:[4,12],k:[[[0,4,8,12],2]]},
+  {n:'Disco',m:4,t:2,w:1.5,hh:1,tk:['e'],open:[2,6,10,14],sn:[4,12],k:[[[0,4,8,12],2]]},
+  {n:'Half-time',m:4,t:2,w:1.5,tk:['e','q'],sn:[8],k:[[[0],2],[[0,6],2],[[0,14],2],[[0,3,14],3]]},
+  {n:'Motown',m:4,t:2,w:1,tk:['e'],ride:1,sn:[0,4,8,12],k:[[[0,8],2],[[0,8,10],2]]},
+  {n:'Punk',m:4,t:2,w:1,tk:['q'],sn:[2,6,10,14],k:[[[0,4,8,12],2]]},
+  {n:'Rock ouvert',m:4,t:3,w:1,hh:1,tk:['e'],open:[14],sn:[4,12],k:[[[0,8],1],[[0,8,10],2]]},
+  {n:'Pop en doubles croches',m:4,t:3,w:1.5,tk:['s'],sn:[4,12],k:[[[0,8],1],[[0,8,10],2],[[0,10],2],[[0,3,8],3]]},
+  {n:'Funk',m:4,t:3,w:2,tk:['e','s'],sn:[4,12],k:[[[0,3,10],3],[[0,2,7,10],3],[[0,6,9],3],[[0,8,11],3],[[0,3,6,10],3]]},
+  {n:'Funk syncopé',m:4,t:3,w:1,tk:['e'],sn:[4,12,15],k:[[[0,3,10],3],[[0,6,10],3]]},
+  {n:'Funk à deux mains',m:4,t:3,w:1,tk:['s'],alt16:1,sn:[4,12],k:[[[0,6,10],3],[[0,3,8,11],3]]},
+  {n:'Hip-hop',m:4,t:3,w:1,tk:['e','s'],sn:[4,12],k:[[[0,7,10],3],[[0,3,8,14],3],[[0,10,11],3]]},
+  {n:'Reggae one drop',m:4,t:3,w:1,tk:['e'],xs:1,sn:[8],k:[[[8],3]]},
+  {n:'Bossa-nova',m:4,t:3,w:1,tk:['e'],xs:1,bars:[[0,6,12],[4,10]],k:[[[0,3,4,8,11,12],3]],hhp:[4,12]},
+  {n:'Train beat',m:4,t:3,w:.8,noTk:1,acc:[4,12],sn:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],k:[[[0,8],3]],hhp:[4,12]},
+  {n:'Valse',m:3,t:1,w:3,tk:['q','e'],sn:[4,8],k:[[[0],1]]},
+  {n:'Rock en 3/4',m:3,t:1,w:3,tk:['e','q'],sn:[8],k:[[[0],1],[[0,6],2],[[0,2],2],[[0,4],2]]},
+  {n:'Ballade en 3/4',m:3,t:2,w:1.5,tk:['e','s'],ride:1,sn:[8],k:[[[0,10],2],[[0,3],3]]},
+  {n:'Marche',m:2,t:1,w:2,tk:['q','e'],sn:[4],k:[[[0],1],[[0,6],2]]},
+  {n:'Polka',m:2,t:1,w:2,tk:['q'],sn:[2,6],k:[[[0,4],1]]},
+  {n:'Rock en 2/4',m:2,t:2,w:1.5,tk:['e','s'],sn:[4],k:[[[0,2],2],[[0,6],2]]}];
 /* roulements : S = caisse claire, H = tom aigu, M = tom médium, F = tom basse ; chaque tambour reçoit 2 ou 4 coups (main droite, main gauche) */
 const DR_FILLS=[
   {b:1,sub:2,d:'SS',t:1},{b:1,sub:2,d:'SF',t:1},{b:1,sub:2,d:'HF',t:1},
@@ -55,48 +86,55 @@ function genDrums(cfg){
       events.push(Object.assign({},e,{hits:[...new Set(hits)]}));}
     return{kind:'drum',meter,events,tempo:cfg.tempo,measures:nM,line:true};
   }
-  const tmax=cfg.dbl?3:2;
-  const pickK=(excl)=>{const c=G.k.filter(x=>x.t<=tmax&&x!==excl);return wpick(c,c.map(x=>x.w*(tmax===2&&x.t===2&&!toms.length?.5:1)));};
-  const main=pickK(null);
+  /* ---- groove tiré de la bibliothèque de styles (DR_STYLES) ---- */
+  const tmax=cfg.dbl?3:2,canHH=has('hh'),canRide=has('ride');
+  const okStyle=st=>st.m===B&&st.t<=tmax&&(!st.hh||canHH)&&(!st.xs||has('snare'));
+  const pool=DR_STYLES.filter(okStyle);if(!pool.length)pool.push(DR_STYLES[0]);
+  const pickStyle=ex=>{const c=pool.filter(x=>x!==ex);const L=c.length?c:pool;return wpick(L,L.map(x=>x.w||1));};
+  const pickTk=st=>{const o=(st.tk||['e']).filter(x=>x!=='s'||cfg.dbl);const sub=pick(o.length?o:['e']);
+    const inst=st.hh||!canRide?(canHH?'hh':'ride'):!canHH?'ride':(st.ride&&R()<.45?'ride':R()<.25?'ride':'hh');return{sub,inst};};
+  const pickK=(st,ex)=>{const c=st.k.filter(x=>(x[1]||1)<=tmax&&x!==ex);return c.length?pick(c):st.k[0];};
+  let st=pickStyle(null),tkc=pickTk(st),main=pickK(st,null),crashNext=has('crash')&&R()<.8;
   const fillAt=m=>toms.length>0&&nM>=2&&((m%4===3)||(nM<4&&m===nM-1&&R()<.75));
   const pickFill=()=>{const maxB=B===4?(cfg.dbl?4:2):1;let c=DR_FILLS.filter(f=>f.b<=maxB&&f.t<=tmax+1&&(cfg.dbl||f.sub===2)&&(f.b<4||R()<.15));if(!c.length)c=[DR_FILLS[0]];return pick(c);};
   const drumOf=ch=>{const want={S:['snare'],H:['htom','mtom','ftom'],M:['mtom','htom','ftom'],F:['ftom','mtom','htom']}[ch];return want.find(has)||(has('snare')?'snare':toms[0]);};
-  let crashNext=has('crash')&&R()<.8;
-  /* rythme de la main qui garde le temps, choisi pour toute une phrase de 4 mesures (comme dans une chanson) :
-     q = noires (débutant), e = croches (rock), s = doubles croches (pop/funk, niveau 5) ; la ride se joue en noires ou en croches */
-  const tkPick=t=>{const o=t==='ride'?[['q',2],['e',3]]:cfg.dbl?[['q',1.5],['e',5],['s',3.5]]:[['q',3],['e',7]];return wpick(o.map(x=>x[0]),o.map(x=>x[1]));};
-  let tkCur=tk,tkPat=tkPick(tk);
+  const styles=new Set([st.n]);
   for(let m=0;m<nM;m++){
-    if(m>0&&m%4===0){ /* nouvelle phrase : on peut passer du charleston à la ride (refrain) ou changer de rythme */
-      if(has('hh')&&has('ride')&&R()<.6)tkCur=tkCur==='hh'?'ride':'hh';if(R()<.5)tkPat=tkPick(tkCur);else if(tkCur==='ride'&&tkPat==='s')tkPat='e';}
+    if(m>0&&m%4===0){ /* nouvelle phrase (couplet → refrain) : autre style, ou même style avec la ride / une autre subdivision */
+      const r2=R();if(r2<.35){st=pickStyle(st);main=pickK(st,null);tkc=pickTk(st);styles.add(st.n);}
+      else if(r2<.75){const t2=pickTk(st);if(canHH&&canRide&&!st.hh)t2.inst=tkc.inst==='hh'?'ride':'hh';tkc=t2;}}
     const fill=fillAt(m)?pickFill():null,fb=fill?fill.b:0;
-    const pat=(!fill&&(m%4===1||m%4===3)&&R()<.3)?pickK(main):main;   /* variante occasionnelle, sinon le même groove */
-    const kick=new Set(pat.k),sn=new Set(G.sn),per=tkPat==='s'?4:2,sd=bu/per;
-    for(let b=0;b<B;b++){
-      if(fill&&b>=B-fb){
-        const n=bu/fill.sub,off=(b-(B-fb))*n;
-        for(let k=0;k<n;k++)events.push({m,pos:b*bu+k*fill.sub,dur:fill.sub,rest:false,hits:[drumOf(fill.d[off+k]||'S')],fi,fill:true});
-        fi++;continue;}
-      for(let s2=0;s2<per;s2++){
-        const onE=per===2||s2%2===0,x=b*2+(per===2?s2:s2/2),hits=[];   /* x : position en croches (grosse caisse et caisse claire) */
-        const tkHere=tkPat!=='q'||s2===0;
-        if(x===0&&s2===0&&crashNext){hits.push('crash');crashNext=false;}else if(tkHere)hits.push(tkCur);
-        if(onE&&kick.has(x))hits.push('kick');
-        if(onE&&sn.has(x))hits.push('snare');
-        if(onE&&tkCur==='ride'&&sn.has(x))hits.push('hhp');
-        const h=[...new Set(hits.filter(has))];
-        events.push({m,pos:b*bu+s2*sd,dur:sd,rest:!h.length,hits:h,fi});}
-      fi++;}
+    const kp=(!fill&&(m%4===1||m%4===3)&&R()<.3)?pickK(st,main):main;   /* variante occasionnelle de grosse caisse */
+    const bar=m%2,P=new Map(),add=(pos,h)=>{if(!has(h==='hho'?'hh':h==='xs'||h==='sna'?'snare':h))return;if(!P.has(pos))P.set(pos,new Set());P.get(pos).add(h);};
+    const fillFrom=fill?(B-fb)*bu:1e9;
+    /* main qui garde le temps */
+    if(!st.noTk){const step={q:4,e:2,s:1}[tkc.sub];
+      for(let x=0;x<B*bu&&x<fillFrom;x+=step){
+        if(x===0&&crashNext)continue;
+        if(st.alt16&&tkc.sub==='s'&&(st.sn||[]).includes(x))continue;   /* doubles croches à deux mains : la main droite va à la caisse claire */
+        add(x,tkc.inst==='hh'&&(st.open||[]).includes(x)?'hho':tkc.inst);}}
+    if(crashNext){add(0,'crash');crashNext=false;}
+    const snB=st.bars?st.bars[bar]:st.sn||[];
+    for(const x of snB)if(x<fillFrom)add(x,st.xs?'xs':(st.acc||[]).includes(x)?'sna':'snare');
+    for(const x of kp[0])if(x<fillFrom)add(x,'kick');
+    const hp=st.hhp||(tkc.inst==='ride'&&!st.noTk?(B===4?[4,12]:B===3?[4,8]:[4]):[]);for(const x of hp)if(x<fillFrom)add(x,'hhp');
+    const keys=[...P.keys()].sort((a,b)=>a-b);
+    keys.forEach((x,k)=>{const b=Math.floor(x/bu),nx=k+1<keys.length&&Math.floor(keys[k+1]/bu)===b?keys[k+1]:(b+1)*bu;
+      events.push({m,pos:x,dur:nx-x,rest:false,hits:[...P.get(x)],fi:fi+b});});
+    if(fill)for(let b=B-fb;b<B;b++){const n=bu/fill.sub,off=(b-(B-fb))*n;
+      for(let k=0;k<n;k++)events.push({m,pos:b*bu+k*fill.sub,dur:fill.sub,rest:false,hits:[drumOf(fill.d[off+k]||'S')],fi:fi+b,fill:true});}
+    fi+=B;
     if(fill&&has('crash'))crashNext=true;
   }
-  return{kind:'drum',meter,events,tempo:cfg.tempo,measures:nM};
+  events.sort((a,b)=>a.m-b.m||a.pos-b.pos);
+  return{kind:'drum',meter,events,tempo:cfg.tempo,measures:nM,style:[...styles].join(' → ')};
 }
 /* notation à deux voix, comme les partitions de batterie : cymbales (et roulements) hampes en haut,
    grosse caisse, caisse claire et charleston au pied hampes en bas. map : [voix, mesure, rang de la note, événement] */
-const DR_UP=new Set(['hh','ride','crash','htom','mtom','ftom']);
+const DR_UP=new Set(['hh','hho','ride','crash','htom','mtom','ftom']);
 function abcDrums(ex,o={}){
   const {meter}=ex,per=o.perLine||4,nM=ex.measures,bu=meter.bu,map=[];
-  const nt=hs=>{const ns=hs.slice().sort((a,b)=>DR_IDS.indexOf(a)-DR_IDS.indexOf(b)).map(h=>(DRK[h].x?'!style=x!':'')+DRK[h].n);return ns.length>1?'['+ns.join('')+']':ns[0];};
+  const nt=hs=>{const dc=hs.map(h=>DRK[h].deco||'').join(''),ns=hs.slice().sort((a,b)=>DR_IDS.indexOf(a)-DR_IDS.indexOf(b)).map(h=>(DRK[h].x?'!style=x!':'')+DRK[h].n);return dc+(ns.length>1?'['+ns.join('')+']':ns[0]);};
   const D=d=>d===1?'':String(d);
   const voiceOf=(e,h)=>ex.line?1:(DR_UP.has(h)||(h==='snare'&&e.fill))?0:1;
   const meas=[[],[]];
@@ -141,9 +179,10 @@ function drHit(id,t,out,v=1){try{const c=A.init();out=out||A.out||c.destination;
   const tone=(f0,f1,d,a)=>{const o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.setValueAtTime(f0,t);o.frequency.exponentialRampToValueAtTime(f1,t+d*.8);env(g,a,d);o.connect(g);g.connect(out);o.start(t);o.stop(t+d+.05);};
   const hiss=(type,f,q,d,a)=>{const s=noise(d+.05),fl=c.createBiquadFilter(),g=c.createGain();fl.type=type;fl.frequency.value=f;fl.Q.value=q;env(g,a,d);s.connect(fl);fl.connect(g);g.connect(out);s.start(t);s.stop(t+d+.05);};
   if(id==='kick')tone(140,42,.35,.9);
-  else if(id==='snare'){tone(190,150,.12,.35);hiss('highpass',1800,.7,.18,.45);}
+  else if(id==='snare'||id==='sna'){const a=id==='sna'?1.35:1;tone(190,150,.12,.35*a);hiss('highpass',1800,.7,.18,.45*a);}
   else if(id==='ftom')tone(110,80,.45,.7);else if(id==='mtom')tone(165,120,.38,.65);else if(id==='htom')tone(220,165,.32,.6);
-  else if(id==='hh')hiss('highpass',7500,.8,.06,.3);else if(id==='hhp')hiss('highpass',6000,.8,.09,.22);
+  else if(id==='hh')hiss('highpass',7500,.8,.06,.3);else if(id==='hho')hiss('highpass',6500,.7,.38,.3);
+  else if(id==='xs'){tone(1400,900,.05,.3);hiss('bandpass',2600,2,.04,.25);}else if(id==='hhp')hiss('highpass',6000,.8,.09,.22);
   else if(id==='ride'){hiss('bandpass',5200,1.2,.9,.2);tone(3100,3000,.7,.04);}
   else if(id==='crash')hiss('highpass',4200,.6,1.6,.36);
 }catch(e){}}

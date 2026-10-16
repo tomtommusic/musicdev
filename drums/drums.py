@@ -33,6 +33,7 @@ rep("  if(M.kind==='mel'){\n    fs.push(sec('Hauteurs'","""  if(M.kind==='drum')
   if(M.kind==='mel'){
     fs.push(sec('Hauteurs'""")
 rep("lr:'pulsation',","lr:'pulsation',lb:'pulsation',")
+rep("bits.push(['Tempo',`${beat} = ${ex.tempo}`]);","bits.push(['Tempo',`${beat} = ${ex.tempo}`]);if(ex.style)bits.push(['Style',ex.style.split(' → ').map(x=>T(x)).join(' → ')]);")
 code=open(D+'/drums.js',encoding='utf-8').read()
 rep("/* ========== MODULE : solfège ========== */",code+"\n/* ========== MODULE : solfège ========== */")
 css=open(D+'/drums.css',encoding='utf-8').read()

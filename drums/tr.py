@@ -29,4 +29,8 @@ T=[
 ("Comment ça s'est passé ? Évalue-toi ci-dessous, ou écoute le modèle pour comparer.","How did it go? Rate yourself below, or listen to the model to compare.","¿Cómo te fue? Evalúate abajo o escucha el modelo para comparar."),
 ("Noté. Passe à une nouvelle lecture quand tu es prêt.","Noted. Move on to a new reading when you're ready.","Anotado. Pasa a una nueva lectura cuando estés listo."),
 ("Noté. Écoute le modèle, baisse le tempo au besoin, puis recommence.","Noted. Listen to the model, lower the tempo if needed, then try again.","Anotado. Escucha el modelo, baja el tempo si hace falta y vuelve a empezar."),
+("Style","Style","Estilo"),("Rock ouvert","Rock with open hi-hat","Rock con charles abierto"),("Pop en doubles croches","16th-note pop","Pop en semicorcheas"),
+("Funk syncopé","Syncopated funk","Funk sincopado"),("Funk à deux mains","Two-handed funk","Funk a dos manos"),("Valse","Waltz","Vals"),("Rock en 3/4","Rock in 3/4","Rock en 3/4"),
+("Ballade en 3/4","Ballad in 3/4","Balada en 3/4"),("Marche","March","Marcha"),("Rock en 2/4","Rock in 2/4","Rock en 2/4"),("Charleston ouvert","Open hi-hat","Charles abierto"),
+("Caisse claire accentuée","Accented snare","Caja acentuada"),("Bossa-nova","Bossa nova","Bossa nova"),
 ]
