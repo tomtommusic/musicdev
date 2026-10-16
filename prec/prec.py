@@ -19,14 +19,15 @@ function precLine(offs){if(!offs.length)return'';const ms=offs.map(x=>x*1000),ab
   const tr=Math.abs(avg)<20?T('bien centré'):avg<0?T('plutôt en avance'):T('plutôt en retard');return ' '+T('Écart moyen : {0} ms').replace('{0}',abs)+' ('+tr+').';}
 /* justesse : écart toléré (cents) entre la hauteur chantée/jouée et la note écrite */
 const PITCH_OPTS=[['hi','Élevée : à ±25 cents de la note'],['vhi','Très élevée : à ±15 cents de la note'],['std','Souple : la bonne note suffit (±50 cents)']];
-function pitchMode(){try{const v=localStorage.getItem('atelier-pitch');return v==='vhi'||v==='std'?v:'hi'}catch(e){return 'hi'}}
-const pitchTol=()=>({hi:25,vhi:15,std:50})[pitchMode()];
+/* réglage propre à chaque module : la voix (solfège) part de ±50 cents, critère des études sur le chant juste ; l'instrument (lecture à vue) de ±25 */
+function pitchMode(mod){mod=mod||S.mod;try{const v=localStorage.getItem('atelier-pitch-'+mod);if(v==='vhi'||v==='std'||v==='hi')return v;}catch(e){}return mod==='so'?'std':'hi';}
+const pitchTol=mod=>({hi:25,vhi:15,std:50})[pitchMode(mod)];
 /* écart médian (cents) pendant le cœur de la note, octave libre ; null si le micro n'a rien capté */
 function pitchDev(it,us,smp,target){if(!smp||!smp.length)return null;const a=it.t+it.d*us*.25,b=it.t+it.d*us*.9,v=smp.filter(x=>x.t>=a&&x.t<=b).map(x=>((x.mf-target)%12+18)%12-6).sort((p,q)=>p-q);
   return v.length>=2?v[v.length>>1]*100:null;}
 function pitchLine(devs){if(!devs.length)return'';const abs=Math.round(devs.reduce((a,b)=>a+Math.abs(b),0)/devs.length),avg=devs.reduce((a,b)=>a+b,0)/devs.length;
   const tr=Math.abs(avg)<8?T('bien centré'):avg<0?T('plutôt bas'):T('plutôt haut');return ' '+T('Justesse : écart moyen de {0} cents').replace('{0}',abs)+' ('+tr+').';}
-function pitchField(){return field(['Justesse attendue',typeof betaTag==='function'?betaTag():null].filter(Boolean),el('div',{class:'field'},sel('s_pitch',PITCH_OPTS,pitchMode(),v=>{try{localStorage.setItem('atelier-pitch',v)}catch(e){}}),el('span',{class:'hint'},'Vérifiée au micro. Un cent = un centième de demi-ton. Réglage commun à Lecture à vue et Solfège.')));}
+function pitchField(){return field(['Justesse attendue',typeof betaTag==='function'?betaTag():null].filter(Boolean),el('div',{class:'field'},sel('s_pitch',PITCH_OPTS,pitchMode(),v=>{try{localStorage.setItem('atelier-pitch-'+S.mod,v)}catch(e){}}),el('span',{class:'hint'},S.mod==='so'?'Vérifiée au micro. Un cent = un centième de demi-ton. Les études sur le chant juste comptent une note comme juste à ±50 cents.':'Vérifiée au micro. Un cent = un centième de demi-ton.')));}
 function precField(){return field(['Précision rythmique',typeof betaTag==='function'?betaTag():null].filter(Boolean),el('div',{class:'field'},sel('s_prec',PREC_OPTS,precMode(),v=>{try{localStorage.setItem('atelier-prec',v)}catch(e){}}),el('span',{class:'hint'},'Réglage commun à Lecture à vue, Lecture rythmique et Solfège, gardé sur cet appareil.')));}
 '''
 rep("function feedback(msg,kind){",HELP+"function feedback(msg,kind){")
@@ -61,7 +62,7 @@ s=s[:i]+r'''MOD.lm.evaluate=function(plan){
     const x=inp[best];used.add(best);
     if(!right(x,e)){wrong++;res.push([it.i,'is-bad']);continue;}
     offs.push(x.t-it.t);
-    if(x.L==null){const dv=pitchDev(it,plan.us,S.st.smp,e.midi+TR);if(dv!=null){devs.push(dv);if(Math.abs(dv)>pitchTol()){offp++;res.push([it.i,'is-bad']);continue;}}}
+    if(x.L==null){const dv=pitchDev(it,plan.us,S.st.smp,e.midi+TR);if(dv!=null){devs.push(dv);if(Math.abs(dv)>pitchTol('lm')){offp++;res.push([it.i,'is-bad']);continue;}}}
     if(bd<=tol){ok++;res.push([it.i,'is-ok']);}
     else{late++;res.push([it.i,'is-late']);}}
   const extra=inp.length-used.size,N=exp.length,all=precPass(ok,late,N,wrong+missed+offp,extra);
@@ -88,26 +89,29 @@ rep("...micControls({mode:'pitch',onLive:(info,chip)=>{if(!info||info.midi==null
 rep("  if(MIC.on)MIC.samples=[];\n  run(plan,{sound:'none',onStep:it=>M.now(it.i),","  if(MIC.on)MIC.samples=[];S.st.ons=[];\n  run(plan,{sound:'none',onStep:it=>M.now(it.i),")
 i=s.index("MOD.so.judge=function(plan,smp){");j=s.index("\n};\n",i)+4
 s=s[:i]+r"""MOD.so.judge=function(plan,smp){
-  /* chaque note : une attaque captée au bon moment (rythme), sur la bonne note (octave libre), assez juste (cents) */
-  const M=this,exp=plan.items.filter(it=>!it.rest),inp=(S.st.ons||[]).slice(),used=new Set(),offs=[],devs=[];S.st.ons=null;
-  if(!inp.length&&!smp.length){feedback("Le micro n'a capté aucune note. Rapproche-toi du micro ou chante plus fort.",'bad');return;}
+  /* la voix ne fait pas d'attaques nettes (consonnes, legato, notes répétées) : on juge chaque note sur le cœur de sa durée.
+     présente et sur la bonne hauteur pendant une bonne partie de la note = à temps ; hauteur médiane comparée à la justesse demandée */
+  const exp=plan.items.filter(it=>!it.rest),devs=[],offs=[];S.st.ons=null;
+  if(!smp||!smp.length){feedback("Le micro n'a capté aucune note. Rapproche-toi du micro ou chante plus fort.",'bad');return;}
   let minI=1e9;for(let k=1;k<plan.items.length;k++)minI=Math.min(minI,plan.items[k].t-plan.items[k-1].t);
-  const tol=precTol(minI,'lm'),LW=precLate(tol,minI);let ok=0,late=0,wrong=0,missed=0,offp=0;
+  const tolC=pitchTol('so'),cov=precMode()==='int'?.7:.5,FR=.033,tolT=precTol(minI,'lm');let ok=0,late=0,lateT=0,wrong=0,missed=0,offp=0;
+  const dvOf=(x,m)=>(((x.mf-m)%12+18)%12-6)*100;
   (this.els||[]).forEach(e=>e&&e.classList.remove('is-ok','is-bad','is-late'));
-  for(const it of exp){const e=S.ex.events[it.i],el2=this.els&&this.els[it.i];let best=-1,bd=1e9;
-    inp.forEach((x,j)=>{if(used.has(j))return;const d=Math.abs(x.t-it.t);if(d<bd){bd=d;best=j;}});
-    const mark=c=>{if(el2)el2.classList.add(c);};
-    if(best<0||bd>LW*tol){missed++;mark('is-bad');continue;}
-    const x=inp[best];used.add(best);
-    if(((x.midi-it.midi)%12+12)%12!==0){wrong++;mark('is-bad');continue;}
-    offs.push(x.t-it.t);
-    const dv=pitchDev(it,plan.us,smp,it.midi);if(dv!=null){devs.push(dv);if(Math.abs(dv)>pitchTol()){offp++;mark('is-bad');continue;}}
-    if(bd<=tol){ok++;mark('is-ok');}else{late++;mark('is-late');}}
-  const extra=inp.length-used.size,N=exp.length,all=precPass(ok,late,N,wrong+missed+offp,extra);
+  exp.forEach((it,n)=>{const el2=this.els&&this.els[it.i],mark=c=>{if(el2)el2.classList.add(c);},d=it.d*plan.us,a=it.t+d*.15,b=it.t+d*.85;
+    const fr=smp.filter(x=>x.t>=a&&x.t<=b),exN=Math.max(1,(b-a)/FR);
+    if(fr.length<Math.max(2,exN*.25)){missed++;mark('is-bad');return;}
+    const v=fr.map(x=>dvOf(x,it.midi)).sort((p,q)=>p-q),med=v[v.length>>1];
+    if(Math.abs(med)>60){wrong++;mark('is-bad');return;}
+    devs.push(med);
+    if(Math.abs(med)>tolC){offp++;mark('is-bad');return;}
+    const prev=exp[n-1];if(!prev||(prev.midi-it.midi)%12!==0){const w=smp.find(x=>x.t>=it.t-Math.min(.3,d*.5)&&x.t<=it.t+d*.5&&Math.abs(dvOf(x,it.midi))<=60);if(w)offs.push(w.t-it.t);var att=w?w.t-it.t:null;}else var att=null;
+    const good=fr.filter(x=>Math.abs(dvOf(x,it.midi))<=Math.max(60,tolC+25)).length/exN;
+    if(good>=cov&&(att==null||Math.abs(att)<=tolT)){ok++;mark('is-ok');}else{late++;lateT+=(good>=cov)?1:0;mark('is-late');}});
+  const N=exp.length,all=precPass(ok,late,N,wrong+missed+offp,0);
   if(!S.st.counted){tally(all);S.st.counted=true;}const z=n=>n>1?'s':'';
   const parts=[`${ok} note${z(ok)} juste${z(ok)} et à temps sur ${N}`];
-  if(late)parts.push(`· ${late} bonne${z(late)} note${z(late)} un peu décalée${z(late)}`);if(offp)parts.push(`· ${offp} note${z(offp)} pas assez juste${z(offp)}`);
-  if(wrong)parts.push(`· ${wrong} fausse${z(wrong)} note${z(wrong)}`);if(missed)parts.push(`· ${missed} note${z(missed)} oubliée${z(missed)}`);if(extra)parts.push(`· ${extra} entrée${z(extra)} de trop`);
+  const lh=late-lateT;if(lateT)parts.push(`· ${lateT} bonne${z(lateT)} note${z(lateT)} un peu décalée${z(lateT)}`);if(lh)parts.push(`· ${lh} bonne${z(lh)} note${z(lh)} pas tenue${z(lh)} assez longtemps`);if(offp)parts.push(`· ${offp} note${z(offp)} pas assez juste${z(offp)}`);
+  if(wrong)parts.push(`· ${wrong} fausse${z(wrong)} note${z(wrong)}`);if(missed)parts.push(`· ${missed} note${z(missed)} non captée${z(missed)}`);
   feedback(parts.map(x=>T(x)).join(' ')+'.'+precLine(offs)+pitchLine(devs),all?'ok':'bad');
 };
 """+s[j:]

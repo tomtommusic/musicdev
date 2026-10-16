@@ -1,0 +1,17 @@
+T=[
+("Calibré : {0} ms","Calibrated: {0} ms","Calibrado: {0} ms"),
+("Automatique : {0} ms (valeur annoncée par l'appareil)","Automatic: {0} ms (value reported by the device)","Automático: {0} ms (valor indicado por el dispositivo)"),
+("Calibrer","Calibrate","Calibrar"),("Automatique","Automatic","Automático"),
+("Synchronisation son et image","Sound and picture sync","Sincronización de sonido e imagen"),
+("Avec des écouteurs Bluetooth ou un haut-parleur sans fil, le son arrive en retard : l'affichage et la correction se décalent. Clique « Calibrer », écoute 4 clics, puis frappe la barre d'espace (ou ce bouton) sur chacun des 8 clics suivants. Réglage gardé sur cet appareil.","With Bluetooth headphones or a wireless speaker, the sound arrives late, so the display and the scoring drift. Click “Calibrate”, listen to 4 clicks, then tap the space bar (or this button) on each of the next 8 clicks. Saved on this device.","Con auriculares Bluetooth o un altavoz inalámbrico, el sonido llega con retraso y la pantalla y la corrección se desfasan. Haz clic en «Calibrar», escucha 4 clics y luego pulsa la barra espaciadora (o este botón) en cada uno de los 8 clics siguientes. Se guarda en este dispositivo."),
+("Frappe ici","Tap here","Toca aquí"),
+("Écoute 4 clics, puis frappe sur les 8 suivants…","Listen to 4 clicks, then tap on the next 8…","Escucha 4 clics y luego toca en los 8 siguientes…"),
+("Pas assez de frappes captées. Recommence en frappant sur chaque clic.","Not enough taps captured. Try again, tapping on every click.","No se captaron suficientes toques. Vuelve a empezar tocando en cada clic."),
+("Décalage mesuré : {0} ms. L'affichage et la correction en tiennent compte.","Measured delay: {0} ms. The display and the scoring now take it into account.","Desfase medido: {0} ms. La pantalla y la corrección lo tienen en cuenta."),
+("▶ Métronome","▶ Metronome","▶ Metrónomo"),("■ Arrêter le métronome","■ Stop the metronome","■ Detener el metrónomo"),
+("Plus lent","Slower","Más lento"),("Plus rapide","Faster","Más rápido"),
+("· {0} bonne{1} note{2} pas tenue{3} assez longtemps","· {0} right note{1} not held long enough","· {0} nota{1} correcta{2} no sostenida{3} lo suficiente"),
+("· {0} note{1} non captée{2}","· {0} note{1} not picked up","· {0} nota{1} no captada{2}"),
+("Vérifiée au micro. Un cent = un centième de demi-ton. Les études sur le chant juste comptent une note comme juste à ±50 cents.","Checked with the microphone. One cent = one hundredth of a semitone. Singing-accuracy studies count a note as in tune within ±50 cents.","Se comprueba con el micrófono. Un cent = una centésima de semitono. Los estudios sobre canto afinado cuentan una nota como afinada a ±50 cents."),
+("Vérifiée au micro. Un cent = un centième de demi-ton.","Checked with the microphone. One cent = one hundredth of a semitone.","Se comprueba con el micrófono. Un cent = una centésima de semitono."),
+]

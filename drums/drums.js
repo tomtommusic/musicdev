@@ -146,11 +146,33 @@ MOD.lb.mount=function(){
   M.dots=el('div',{class:'beatdots'});M.kit=el('div',{class:'drkit'});M.leg=el('div',{class:'drleg'});
   /* on joue sur sa vraie batterie : l'app donne le décompte, le métronome et suit la partition ; l'élève s'évalue ensuite */
   $('#answer').replaceChildren(el('div',{class:'ahead'},el('h2',{},'Joue la partition',typeof betaTag==='function'?betaTag():null),(M.ch=el('p',{class:'hint'}))),
-    el('details',{class:'drlegw',open:''},el('summary',{},'Légende de la portée'),M.leg),M.dots,
+    el('details',{class:'drlegw',open:''},el('summary',{},'Légende de la portée'),M.leg),M.metroBox(),M.dots,
     el('div',{class:'selfeval'},btn('Réussi',()=>M.self(true)),btn('À retravailler',()=>M.self(false))));
   S.keyHandler=null;
   S.midiHandler=null;
 };
+/* petit métronome pour répéter le groove à son rythme ; son tempo est celui de la partition */
+MOD.lb.metroBox=function(){
+  const M=this,c=()=>S.cfg.lb;
+  const lab=el('b',{class:'lbmtv'}),sl=el('input',{type:'range',min:40,max:200,step:1,'aria-label':'Tempo'}),go=btn('▶ Métronome',()=>M.mts?M.mtStop():M.mtStart(),'');
+  const set=v=>{v=Math.max(40,Math.min(200,Math.round(v)));c().tempo=v;if(S.ex){S.ex.tempo=v;metaLine(S.ex);}cfgChanged('lb');M.mtUpd();};
+  sl.addEventListener('input',()=>set(+sl.value));
+  M.mtUpd=()=>{const v=c().tempo;lab.textContent=`♩ = ${v}`;sl.value=v;go.textContent=M.mts?T('■ Arrêter le métronome'):T('▶ Métronome');go.classList.toggle('on',!!M.mts);};
+  M.mtUpd();
+  return el('div',{class:'lbmt'},go,el('button',{type:'button',class:'btn quiet sq','aria-label':'Plus lent',onclick:()=>set(c().tempo-2)},'−'),lab,
+    el('button',{type:'button',class:'btn quiet sq','aria-label':'Plus rapide',onclick:()=>set(c().tempo+2)},'+'),sl);
+};
+MOD.lb.mtStart=function(){
+  const M=this,c=A.init();if(typeof qzUnmute==='function')qzUnmute();stop();
+  const g=c.createGain();g.connect(A.out);const st={g,next:c.currentTime+.1,beat:0,timer:0};M.mts=st;
+  const tick=()=>{if(M.mts!==st)return;if(S.mod!=='lb'){M.mtStop();return;}
+    const us=60/S.cfg.lb.tempo,B=S.ex?S.ex.meter.beats:4;
+    while(st.next<c.currentTime+.12){const b=st.beat%B,t=st.next;A.click(t,b===0,g);
+      setTimeout(()=>{if(M.mts===st)M.beat(b);},Math.max(0,(t+(typeof audioLag==='function'?audioLag():0)-c.currentTime)*1000));st.next+=us;st.beat++;}};
+  tick();st.timer=setInterval(tick,25);M.mtUpd();
+};
+MOD.lb.mtStop=function(){const M=this,st=M.mts;if(!st)return;M.mts=null;clearInterval(st.timer);
+  try{st.g.gain.setTargetAtTime(0,A.ctx.currentTime,.01);setTimeout(()=>st.g.disconnect(),200);}catch(e){}M.beat(-1);M.mtUpd&&M.mtUpd();};
 MOD.lb.buildKit=function(){
   const M=this,els=S.cfg.lb.els;M.on=new Set(els);M.pads={};
   if(M.kit)M.kit.replaceChildren(...DR_ORDER.filter(id=>M.on.has(id)).map(id=>{
@@ -171,14 +193,14 @@ MOD.lb.now=function(i){(this.els||[]).forEach(a=>a.forEach(e=>e.classList.remove
 MOD.lb.beat=function(b){const n=S.ex.meter.beats;this.dots.replaceChildren(...Array.from({length:n},(_,k)=>el('i',{class:k===b?'on':''})));};
 MOD.lb.flash=function(id){const p=this.pads&&this.pads[id];if(!p)return;p.classList.add('hit');setTimeout(()=>p.classList.remove('hit'),110);};
 MOD.lb.model=function(){
-  const M=this;M.clear();A.init();if(typeof qzUnmute==='function')qzUnmute();
+  const M=this;M.mtStop();M.clear();A.init();if(typeof qzUnmute==='function')qzUnmute();
   const plan=planOf(S.ex,{countIn:true});const s=run(plan,{sound:'none',onStep:it=>{M.now(it.i);const e=S.ex.events[it.i];if(e)e.hits.forEach(h=>M.flash(h));},onEnd:()=>M.now(-1)});
   for(const it of plan.items){const e=S.ex.events[it.i];if(e)for(const h of e.hits)drHit(h,it.t,s.g,.9);}
 };
 MOD.lb.start=async function(){
   A.init();if(A.ctx.state!=='running'){try{await A.ctx.resume();}catch(e){}}
   if(typeof qzUnmute==='function')qzUnmute();
-  const M=this,c=S.cfg.lb;M.clear();S.st.ins=[];
+  const M=this,c=S.cfg.lb;M.mtStop();M.clear();S.st.ins=[];
   const plan=planOf(S.ex,{countIn:true,metro:c.metro!==false});
   run(plan,{sound:'none',onBeat:k=>M.beat(k.b),onStep:it=>M.now(it.i),onEnd:()=>{M.now(-1);M.beat(-1);feedback(T('Comment ça s\'est passé ? Évalue-toi ci-dessous, ou écoute le modèle pour comparer.'));}});
 };

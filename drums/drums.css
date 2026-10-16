@@ -12,3 +12,8 @@
 .drlegw summary{cursor:pointer;font-weight:600}
 .drleg{max-width:100%;color:var(--ink);overflow:hidden}
 @media (max-width:600px){.drkit{grid-template-columns:repeat(3,1fr);gap:8px}.drpad{min-height:70px}.drpad.dr-kick{grid-column:span 3}}
+.lbmt{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0 4px;padding:10px 12px;border:1px solid var(--line);border-radius:14px;background:var(--sunk)}
+.lbmt .lbmtv{font:700 .95rem/1 var(--f-mono);min-width:64px;text-align:center}
+.lbmt input[type=range]{flex:1 1 140px;min-width:120px}
+.lbmt .btn.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+@media (max-width:600px){.lbmt>.btn:first-child{flex:1 1 100%}.lbmt input[type=range]{flex:1 1 60px;min-width:60px}.lbmt .lbmtv{min-width:56px}}
