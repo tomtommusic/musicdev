@@ -1,0 +1,17 @@
+T=[
+("Précision rythmique","Rhythmic accuracy","Precisión rítmica"),
+("Débutant : fenêtre large, une note un peu décalée compte comme réussie","Beginner: wide window, a slightly off note still counts","Principiante: margen amplio, una nota un poco desfasada cuenta como lograda"),
+("Intermédiaire : fenêtre serrée, chaque note doit être à temps","Intermediate: tight window, every note must be on time","Intermedio: margen estrecho, cada nota debe estar a tiempo"),
+("Réglage commun aux modules de lecture en rythme, gardé sur cet appareil.","Shared by the rhythm-reading modules, saved on this device.","Ajuste común a los módulos de lectura con ritmo, guardado en este dispositivo."),
+("Écart moyen : {0} ms","Average deviation: {0} ms","Desvío medio: {0} ms"),
+("bien centré","well centered","bien centrado"),("plutôt en avance","a bit early","algo adelantado"),("plutôt en retard","a bit late","algo atrasado"),
+("{0} note{1} à temps sur {2}","{0} of {2} note{1} on time","{0} de {2} nota{1} a tiempo"),
+("· {0} note{1} un peu décalée{2}","· {0} note{1} slightly off time","· {0} nota{1} un poco desfasada{2}"),
+("· {0} note{1} manquée{2}","· {0} missed note{1}","· {0} nota{1} fallada{2}"),
+("· {0} frappe{1} de trop","· {0} extra tap{1}","· {0} golpe{1} de más"),
+("{0} note{1} juste{2} et à temps sur {3}","{0} of {3} note{1} correct and on time","{0} de {3} nota{1} correcta{2} y a tiempo"),
+("· {0} bonne{1} note{2} un peu décalée{3}","· {0} right note{1} slightly off time","· {0} nota{1} correcta{2} un poco desfasada{3}"),
+("· {0} fausse{1} note{2}","· {0} wrong note{1}","· {0} nota{1} falsa{2}"),
+("· {0} note{1} oubliée{2}","· {0} missed note{1}","· {0} nota{1} olvidada{2}"),
+("· {0} entrée{1} de trop","· {0} extra input{1}","· {0} entrada{1} de más"),
+]
