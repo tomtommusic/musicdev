@@ -40,28 +40,36 @@ const DR_GROOVES={
    k : variantes de grosse caisse [positions, difficulté] ; sn : caisse claire ; bars : caisse claire sur 2 mesures ;
    open : charleston ouvert ; hhp : charleston au pied ; hh : demande le charleston ; xs : cross-stick ; t : difficulté (1 à 3) */
 const DR_STYLES=[
-  {n:'Rock',m:4,t:1,w:5,tk:['q','e','e','s'],sn:[4,12],k:[[[0,8],1],[[0,8,10],2],[[0,2,8],2],[[0,10],2],[[0,2,8,10],2],[[0,6,8],3],[[0,8,14],3],[[0,3,8],3]]},
-  {n:'Pop',m:4,t:2,w:2,tk:['e','s'],ride:1,sn:[4,12],k:[[[0,10],2],[[0,6,10],2],[[0,10,14],3],[[0,8,11],3]]},
+  {n:'Rock',m:4,t:1,w:5,tk:['q','e','e','s','mix','mix'],sn:[4,12],k:[[[0,8],1],[[0,8,10],2],[[0,2,8],2],[[0,10],2],[[0,2,8,10],2],[[0,6,8],3],[[0,8,14],3],[[0,3,8],3]]},
+  {n:'Pop',m:4,t:2,w:2,tk:['e','s','mix','mix'],ride:1,sn:[4,12],k:[[[0,10],2],[[0,6,10],2],[[0,10,14],3],[[0,8,11],3]]},
   {n:'Four on the floor',m:4,t:2,w:2,tk:['e'],sn:[4,12],k:[[[0,4,8,12],2]]},
   {n:'Disco',m:4,t:2,w:1.5,hh:1,tk:['e'],open:[2,6,10,14],sn:[4,12],k:[[[0,4,8,12],2]]},
-  {n:'Half-time',m:4,t:2,w:1.5,tk:['e','q'],sn:[8],k:[[[0],2],[[0,6],2],[[0,14],2],[[0,3,14],3]]},
+  {n:'Half-time',m:4,t:2,w:1.5,tk:['e','q','mix'],sn:[8],k:[[[0],2],[[0,6],2],[[0,14],2],[[0,3,14],3]]},
   {n:'Motown',m:4,t:2,w:1,tk:['e'],ride:1,sn:[0,4,8,12],k:[[[0,8],2],[[0,8,10],2]]},
   {n:'Punk',m:4,t:2,w:1,tk:['q'],sn:[2,6,10,14],k:[[[0,4,8,12],2]]},
   {n:'Rock ouvert',m:4,t:3,w:1,hh:1,tk:['e'],open:[14],sn:[4,12],k:[[[0,8],1],[[0,8,10],2]]},
   {n:'Pop en doubles croches',m:4,t:3,w:1.5,tk:['s'],sn:[4,12],k:[[[0,8],1],[[0,8,10],2],[[0,10],2],[[0,3,8],3]]},
-  {n:'Funk',m:4,t:3,w:2,tk:['e','s'],sn:[4,12],k:[[[0,3,10],3],[[0,2,7,10],3],[[0,6,9],3],[[0,8,11],3],[[0,3,6,10],3]]},
+  {n:'Funk',m:4,t:3,w:2,tk:['e','s','mix','mix'],sn:[4,12],k:[[[0,3,10],3],[[0,2,7,10],3],[[0,6,9],3],[[0,8,11],3],[[0,3,6,10],3]]},
   {n:'Funk syncopé',m:4,t:3,w:1,tk:['e'],sn:[4,12,15],k:[[[0,3,10],3],[[0,6,10],3]]},
   {n:'Funk à deux mains',m:4,t:3,w:1,tk:['s'],alt16:1,sn:[4,12],k:[[[0,6,10],3],[[0,3,8,11],3]]},
-  {n:'Hip-hop',m:4,t:3,w:1,tk:['e','s'],sn:[4,12],k:[[[0,7,10],3],[[0,3,8,14],3],[[0,10,11],3]]},
+  {n:'Hip-hop',m:4,t:3,w:1,tk:['e','s','mix'],sn:[4,12],k:[[[0,7,10],3],[[0,3,8,14],3],[[0,10,11],3]]},
   {n:'Reggae one drop',m:4,t:3,w:1,tk:['e'],xs:1,sn:[8],k:[[[8],3]]},
   {n:'Bossa-nova',m:4,t:3,w:1,tk:['e'],xs:1,bars:[[0,6,12],[4,10]],k:[[[0,3,4,8,11,12],3]],hhp:[4,12]},
   {n:'Train beat',m:4,t:3,w:.8,noTk:1,acc:[4,12],sn:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],k:[[[0,8],3]],hhp:[4,12]},
   {n:'Valse',m:3,t:1,w:3,tk:['q','e'],sn:[4,8],k:[[[0],1]]},
-  {n:'Rock en 3/4',m:3,t:1,w:3,tk:['e','q'],sn:[8],k:[[[0],1],[[0,6],2],[[0,2],2],[[0,4],2]]},
-  {n:'Ballade en 3/4',m:3,t:2,w:1.5,tk:['e','s'],ride:1,sn:[8],k:[[[0,10],2],[[0,3],3]]},
-  {n:'Marche',m:2,t:1,w:2,tk:['q','e'],sn:[4],k:[[[0],1],[[0,6],2]]},
+  {n:'Rock en 3/4',m:3,t:1,w:3,tk:['e','q','mix'],sn:[8],k:[[[0],1],[[0,6],2],[[0,2],2],[[0,4],2]]},
+  {n:'Ballade en 3/4',m:3,t:2,w:1.5,tk:['e','s','mix'],ride:1,sn:[8],k:[[[0,10],2],[[0,3],3]]},
+  {n:'Marche',m:2,t:1,w:2,tk:['q','e','mix'],sn:[4],k:[[[0],1],[[0,6],2]]},
   {n:'Polka',m:2,t:1,w:2,tk:['q'],sn:[2,6],k:[[[0,4],1]]},
-  {n:'Rock en 2/4',m:2,t:2,w:1.5,tk:['e','s'],sn:[4],k:[[[0,2],2],[[0,6],2]]}];
+  {n:'Rock en 2/4',m:2,t:2,w:1.5,tk:['e','s','mix'],sn:[4],k:[[[0,2],2],[[0,6],2]]}];
+/* combinaisons rythmiques de la main qui garde le temps, une cellule par temps (positions en doubles croches dans le temps) :
+   q noire, e 2 croches, s 4 doubles, ed croche + 2 doubles, de 2 doubles + croche, g croche pointée + double, o contretemps seul */
+const DR_CELL={q:[0],e:[0,2],s:[0,1,2,3],ed:[0,2,3],de:[0,1,2],g:[0,3],o:[2]};
+const DR_TKMIX={
+  4:[[['e','e','e','ed'],2],[['e','e','e','de'],2],[['e','de','e','de'],2],[['e','e','e','s'],2],[['q','e','q','e'],2],[['o','o','o','o'],2],[['e','e','ed','e'],2],
+     [['ed','ed','ed','ed'],3],[['de','de','de','de'],3],[['e','s','e','s'],3],[['s','e','s','e'],3],[['de','ed','de','ed'],3],[['g','g','g','g'],3],[['e','ed','e','s'],3]],
+  3:[[['e','e','ed'],2],[['q','e','e'],2],[['e','e','de'],2],[['o','o','o'],2],[['ed','ed','ed'],3],[['e','s','e'],3]],
+  2:[[['e','ed'],2],[['e','de'],2],[['o','o'],2],[['ed','ed'],3],[['s','e'],3]]};
 /* roulements : S = caisse claire, H = tom aigu, M = tom médium, F = tom basse ; chaque tambour reçoit 2 ou 4 coups (main droite, main gauche) */
 const DR_FILLS=[
   {b:1,sub:2,d:'SS',t:1},{b:1,sub:2,d:'SF',t:1},{b:1,sub:2,d:'HF',t:1},
@@ -91,8 +99,8 @@ function genDrums(cfg){
   const okStyle=st=>st.m===B&&st.t<=tmax&&(!st.hh||canHH)&&(!st.xs||has('snare'));
   const pool=DR_STYLES.filter(okStyle);if(!pool.length)pool.push(DR_STYLES[0]);
   const pickStyle=ex=>{const c=pool.filter(x=>x!==ex);const L=c.length?c:pool;return wpick(L,L.map(x=>x.w||1));};
-  const pickTk=st=>{const o=(st.tk||['e']).filter(x=>x!=='s'||cfg.dbl);const sub=pick(o.length?o:['e']);
-    const inst=st.hh||!canRide?(canHH?'hh':'ride'):!canHH?'ride':(st.ride&&R()<.45?'ride':R()<.25?'ride':'hh');return{sub,inst};};
+  const pickTk=st=>{const mixes=(DR_TKMIX[B]||[]).filter(x=>x[1]<=tmax);const o=(st.tk||['e']).filter(x=>(x!=='s'||cfg.dbl)&&(x!=='mix'||mixes.length));const sub=pick(o.length?o:['e']);const cells=sub==='mix'?pick(mixes)[0]:null;
+    const inst=st.hh||!canRide?(canHH?'hh':'ride'):!canHH?'ride':(st.ride&&R()<.45?'ride':R()<.25?'ride':'hh');return{sub,inst,cells};};
   const pickK=(st,ex)=>{const c=st.k.filter(x=>(x[1]||1)<=tmax&&x!==ex);return c.length?pick(c):st.k[0];};
   let st=pickStyle(null),tkc=pickTk(st),main=pickK(st,null),crashNext=has('crash')&&R()<.8;
   const fillAt=m=>toms.length>0&&nM>=2&&((m%4===3)||(nM<4&&m===nM-1&&R()<.75));
@@ -108,8 +116,9 @@ function genDrums(cfg){
     const bar=m%2,P=new Map(),add=(pos,h)=>{if(!has(h==='hho'?'hh':h==='xs'||h==='sna'?'snare':h))return;if(!P.has(pos))P.set(pos,new Set());P.get(pos).add(h);};
     const fillFrom=fill?(B-fb)*bu:1e9;
     /* main qui garde le temps */
-    if(!st.noTk){const step={q:4,e:2,s:1}[tkc.sub];
-      for(let x=0;x<B*bu&&x<fillFrom;x+=step){
+    if(!st.noTk){const step={q:4,e:2,s:1}[tkc.sub]||1;
+      const tkPos=tkc.cells?tkc.cells.flatMap((c,b)=>DR_CELL[c].map(o=>b*bu+o)):null;
+      for(let x=0;x<B*bu&&x<fillFrom;x+=step){if(tkPos&&!tkPos.includes(x))continue;
         if(x===0&&crashNext)continue;
         if(st.alt16&&tkc.sub==='s'&&(st.sn||[]).includes(x))continue;   /* doubles croches à deux mains : la main droite va à la caisse claire */
         add(x,tkc.inst==='hh'&&(st.open||[]).includes(x)?'hho':tkc.inst);}}
@@ -153,7 +162,7 @@ function abcDrums(ex,o={}){
         const inB=evs.filter(([e])=>Math.floor(e.pos/bu)===b),other=1-v;
         const slots=inB.map(([e,i])=>({pos:e.pos-b*bu,dur:e.dur,i,hs:e.hits.filter(h=>voiceOf(e,h)===v)}));
         const otherHas=inB.some(([e])=>e.hits.some(h=>voiceOf(e,h)===other));
-        if(!slots.some(x=>x.hs.length)){toks.push((v===1&&!inB.some(([e])=>e.fill)?'z':'x')+D(bu));if(v===1&&!inB.some(([e])=>e.fill))k++;continue;}
+        if(!slots.some(x=>x.hs.length)){toks.push((v===1&&!inB.some(([e])=>e.fill)?'z':'x')+D(bu));k++;continue;}   /* abcjs numérote aussi les silences invisibles */
         /* une note dure jusqu'à la suivante (dans le temps) ; les vides du début du temps sont des silences */
         let buf='',p=0;
         for(let s2=0;s2<slots.length;s2++){const x=slots[s2];if(!x.hs.length)continue;
