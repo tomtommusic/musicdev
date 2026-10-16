@@ -10,5 +10,5 @@
 .drpad.hit kbd{color:var(--accent-ink);background:transparent;border-color:currentColor}
 .drlegw{margin:6px 0 0;font-size:.85rem;color:var(--muted)}
 .drlegw summary{cursor:pointer;font-weight:600}
-.drleg{max-width:min(100%,430px);color:var(--ink);overflow:hidden}
+.drleg{max-width:100%;color:var(--ink);overflow:hidden}
 @media (max-width:600px){.drkit{grid-template-columns:repeat(3,1fr);gap:8px}.drpad{min-height:70px}.drpad.dr-kick{grid-column:span 3}}

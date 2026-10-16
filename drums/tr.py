@@ -24,4 +24,9 @@ T=[
 ("· {0} coup{1} sur le mauvais élément","· {0} hit{1} on the wrong drum","· {0} golpe{1} en el elemento equivocado"),
 ("· {0} coup{1} manqué{2}","· {0} missed hit{1}","· {0} golpe{1} fallado{2}"),
 ("· {0} coup{1} de trop","· {0} extra hit{1}","· {0} golpe{1} de más"),
+("Lis une partition de batterie et joue-la sur ta batterie avec le décompte et le métronome ; la note en cours est surlignée. Écoute le modèle pour comparer.","Read a drum score and play it on your kit with the count-in and the metronome; the current note is highlighted. Listen to the model to compare.","Lee una partitura de batería y tócala en tu batería con la cuenta previa y el metrónomo; la nota en curso se resalta. Escucha el modelo para comparar."),
+("Joue sur ta batterie : clique « Commencer », écoute le décompte ({0}), puis joue la partition avec le métronome. La note en cours est surlignée. Évalue-toi ensuite.","Play on your kit: click “Start”, listen to the count-in ({0}), then play the score with the metronome. The current note is highlighted. Then rate yourself.","Toca en tu batería: haz clic en «Empezar», escucha la cuenta previa ({0}) y toca la partitura con el metrónomo. La nota en curso se resalta. Luego evalúate."),
+("Comment ça s'est passé ? Évalue-toi ci-dessous, ou écoute le modèle pour comparer.","How did it go? Rate yourself below, or listen to the model to compare.","¿Cómo te fue? Evalúate abajo o escucha el modelo para comparar."),
+("Noté. Passe à une nouvelle lecture quand tu es prêt.","Noted. Move on to a new reading when you're ready.","Anotado. Pasa a una nueva lectura cuando estés listo."),
+("Noté. Écoute le modèle, baisse le tempo au besoin, puis recommence.","Noted. Listen to the model, lower the tempo if needed, then try again.","Anotado. Escucha el modelo, baja el tempo si hace falta y vuelve a empezar."),
 ]

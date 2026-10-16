@@ -19,7 +19,7 @@ const DR_LV=[
   ['Niveau 3 : + charleston (rythme rock)',{els:['kick','snare','hh'],meters:['4/4'],measures:2,tempo:72,figs:['noire','croches'],dbl:false}],
   ['Niveau 4 : + crash et toms (roulements)',{els:['kick','snare','hh','crash','htom','mtom','ftom'],meters:['4/4'],measures:4,tempo:76,figs:['noire','croches'],dbl:false}],
   ['Niveau 5 : tout le kit, doubles croches',{els:DR_IDS.slice(),meters:['3/4','4/4'],measures:4,tempo:80,figs:['noire','croches'],dbl:true}]];
-const drPreset=()=>structuredClone(DR_LV[0][1]);
+const drPreset=()=>({els:['kick','snare','hh','ride'],meters:['4/4'],measures:4,tempo:72,figs:['noire','croches'],dbl:false});
 function drSanitize(c,o){
   const a=Array.isArray(c.els)?c.els.filter(x=>DR_IDS.includes(x)):null;if(a&&a.length)o.els=a;
   o.meters=(o.meters||[]).filter(m=>!METERS[m].comp);if(!o.meters.length)o.meters=['4/4'];o.dbl=!!c.dbl;return o;}
@@ -144,22 +144,24 @@ MOD.lb.mount=function(){
   $('#toolbar').replaceChildren(btn('Nouvelle lecture',newEx,'primary'),(M.sb=btn('● Commencer',()=>M.start(),'primary')),
     btn('▶ Écouter le modèle',()=>M.model()),el('span',{class:'sep'}),stopBtn());
   M.dots=el('div',{class:'beatdots'});M.kit=el('div',{class:'drkit'});M.leg=el('div',{class:'drleg'});
+  /* on joue sur sa vraie batterie : l'app donne le décompte, le métronome et suit la partition ; l'élève s'évalue ensuite */
   $('#answer').replaceChildren(el('div',{class:'ahead'},el('h2',{},'Joue la partition',typeof betaTag==='function'?betaTag():null),(M.ch=el('p',{class:'hint'}))),
-    el('details',{class:'drlegw',open:''},el('summary',{},'Légende de la portée'),M.leg),M.kit,M.dots);
-  S.keyHandler=e=>{const id=Object.keys(DRK).find(k=>DRK[k].code===e.code);if(id&&M.on.has(id)){M.hit(id);return true;}return false;};
+    el('details',{class:'drlegw',open:''},el('summary',{},'Légende de la portée'),M.leg),M.dots,
+    el('div',{class:'selfeval'},btn('Réussi',()=>M.self(true)),btn('À retravailler',()=>M.self(false))));
+  S.keyHandler=null;
   S.midiHandler=null;
 };
 MOD.lb.buildKit=function(){
   const M=this,els=S.cfg.lb.els;M.on=new Set(els);M.pads={};
-  M.kit.replaceChildren(...DR_ORDER.filter(id=>M.on.has(id)).map(id=>{
+  if(M.kit)M.kit.replaceChildren(...DR_ORDER.filter(id=>M.on.has(id)).map(id=>{
     const p=el('button',{type:'button',class:'drpad dr-'+id,'aria-label':T(DRK[id].t)+' ('+DRK[id].k+')'},el('b',{},DRK[id].s),el('kbd',{},DRK[id].k));
     p.addEventListener('pointerdown',e=>{e.preventDefault();M.hit(id);});M.pads[id]=p;return p;}));
   /* légende : chaque élément à sa place sur la portée */
   const ids=DR_IDS.filter(x=>M.on.has(x)).sort((a,b)=>DR_IDS.indexOf(a)-DR_IDS.indexOf(b));
   const abc=`X:1\nL:1/4\nK:C clef=perc\nV:1 stem=up\n`+ids.map(h=>(DRK[h].x?'!style=x!':'')+DRK[h].n).join(' ')+' |]\nw: '+ids.map(h=>T(DRK[h].a).replace(/ /g,'~')).join(' ')+'\n';
-  if(HAS_ABC())ABCJS.renderAbc(M.leg,abc,{add_classes:true,staffwidth:Math.max(200,ids.length*62),paddingtop:0,paddingbottom:0,responsive:'resize',foregroundColor:'currentColor'});
+  if(HAS_ABC()){const av=(M.leg.clientWidth||$('#answer').clientWidth||320)-10;ABCJS.renderAbc(M.leg,abc,{add_classes:true,staffwidth:Math.max(160,Math.min(ids.length*72,av)),paddingtop:0,paddingbottom:0,foregroundColor:'currentColor'});}
 };
-MOD.lb.fresh=function(){Object.assign(S.st,{ins:[],live:false,res:null});this.ch.textContent=`Le métronome joue d'abord ${countText(S.ex.meter)}. Joue ensuite la partition avec les pads ou les touches du clavier indiquées (plusieurs touches en même temps pour les coups simultanés).`;this.buildKit();this.redraw();this.beat(-1);};
+MOD.lb.fresh=function(){Object.assign(S.st,{ins:[],live:false,res:null,counted:false});this.ch.textContent=`Joue sur ta batterie : clique « Commencer », écoute le décompte (${countText(S.ex.meter)}), puis joue la partition avec le métronome. La note en cours est surlignée. Évalue-toi ensuite.`;this.buildKit();this.redraw();this.beat(-1);};
 MOD.lb.clear=function(){S.st.res=null;this.redraw();feedback('');};
 MOD.lb.redraw=function(){const M=this,ex=S.ex;if(!ex)return;const sc=$('#score');sc.classList.remove('single');
   const r=abcDrums(ex,{perLine:perLine()});draw(sc,r.abc);M.els=ex.events.map(()=>[]);
@@ -177,9 +179,10 @@ MOD.lb.start=async function(){
   A.init();if(A.ctx.state!=='running'){try{await A.ctx.resume();}catch(e){}}
   if(typeof qzUnmute==='function')qzUnmute();
   const M=this,c=S.cfg.lb;M.clear();S.st.ins=[];
-  const plan=planOf(S.ex,{countIn:true,metro:c.metro!==false});S.st.live=true;M.kit.classList.add('live');
-  run(plan,{sound:'none',onBeat:k=>M.beat(k.b),onEnd:stopped=>{S.st.live=false;M.kit.classList.remove('live');M.beat(-1);if(!stopped)M.evaluate(plan);}});
+  const plan=planOf(S.ex,{countIn:true,metro:c.metro!==false});
+  run(plan,{sound:'none',onBeat:k=>M.beat(k.b),onStep:it=>M.now(it.i),onEnd:()=>{M.now(-1);M.beat(-1);feedback(T('Comment ça s\'est passé ? Évalue-toi ci-dessous, ou écoute le modèle pour comparer.'));}});
 };
+MOD.lb.self=function(ok){if(!S.st.counted){tally(ok);S.st.counted=true;}feedback(ok?'Noté. Passe à une nouvelle lecture quand tu es prêt.':'Noté. Écoute le modèle, baisse le tempo au besoin, puis recommence.',ok?'ok':'');};
 MOD.lb.hit=function(id){
   const M=this;A.init();M.flash(id);
   drHit(id,A.ctx.currentTime+.003,(S.st.live&&P.sess)?P.sess.g:null,.9);

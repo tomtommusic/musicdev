@@ -2,7 +2,7 @@ T=[
 ("Précision rythmique","Rhythmic accuracy","Precisión rítmica"),
 ("Débutant : fenêtre large, une note un peu décalée compte comme réussie","Beginner: wide window, a slightly off note still counts","Principiante: margen amplio, una nota un poco desfasada cuenta como lograda"),
 ("Intermédiaire : fenêtre serrée, chaque note doit être à temps","Intermediate: tight window, every note must be on time","Intermedio: margen estrecho, cada nota debe estar a tiempo"),
-("Réglage commun aux modules de lecture en rythme, gardé sur cet appareil.","Shared by the rhythm-reading modules, saved on this device.","Ajuste común a los módulos de lectura con ritmo, guardado en este dispositivo."),
+("Réglage commun à Lecture à vue et Lecture rythmique, gardé sur cet appareil.","Shared by Sight-reading and Rhythm reading, saved on this device.","Ajuste común a Lectura a primera vista y Lectura rítmica, guardado en este dispositivo."),
 ("Écart moyen : {0} ms","Average deviation: {0} ms","Desvío medio: {0} ms"),
 ("bien centré","well centered","bien centrado"),("plutôt en avance","a bit early","algo adelantado"),("plutôt en retard","a bit late","algo atrasado"),
 ("{0} note{1} à temps sur {2}","{0} of {2} note{1} on time","{0} de {2} nota{1} a tiempo"),

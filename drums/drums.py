@@ -7,7 +7,7 @@ def rep(a,b,n=1):
     global s
     assert s.count(a)==n,('introuvable',a[:80],s.count(a));s=s.replace(a,b)
 i=s.index("  {id:'lr',kind:'rhy'");j=s.index("\n",i)+1
-s=s[:j]+"  {id:'lb',kind:'drum',t:'Lecture batterie',s:'Voir → jouer à la batterie',d:'Lis une partition de batterie et joue-la en rythme avec les pads à l\\'écran ou les touches du clavier : chaque coup est vérifié (bon élément, bon moment).'},\n"+s[j:]
+s=s[:j]+"  {id:'lb',kind:'drum',t:'Lecture batterie',s:'Voir → jouer à la batterie',d:'Lis une partition de batterie et joue-la sur ta batterie avec le décompte et le métronome ; la note en cours est surlignée. Écoute le modèle pour comparer.'},\n"+s[j:]
 rep("  if(id==='lm')return{keys:['C']","  if(id==='lb')return drPreset();\n  if(id==='lm')return{keys:['C']")
 rep("  if('chords'in b){","  if('els'in b){num('measures',1,8);num('tempo',40,160);o.metro=c.metro!==false;return drSanitize(c,o);}\n  if('chords'in b){")
 rep("S.ex=M.kind==='notes'?genNotes(c):","S.ex=M.kind==='drum'?genDrums(c):M.kind==='notes'?genNotes(c):")
@@ -32,7 +32,6 @@ rep("  if(M.kind==='mel'){\n    fs.push(sec('Hauteurs'","""  if(M.kind==='drum')
   }
   if(M.kind==='mel'){
     fs.push(sec('Hauteurs'""")
-rep(" so:`<ol><li><b>Donne-toi la tonalité</b>"," lb:`<ol><li><b>Repère les éléments</b> avec la légende : têtes en x = cymbales et charleston ; grosse caisse tout en bas, caisse claire au milieu, toms 1 et 2 au-dessus, tom basse en dessous.</li>\n<li><b>Commence lentement</b> : baisse le tempo dans les Réglages, puis remonte-le quand tout est vert.</li>\n<li><b>Pense par couches</b> : d'abord la main qui garde le temps (charleston ou ride), puis la grosse caisse et la caisse claire par-dessus.</li>\n<li><b>Les coups superposés</b> se jouent ensemble : appuie sur les deux touches en même temps (ex. J + F pour charleston et caisse claire).</li>\n<li>Si un passage bloque, <b>écoute le modèle</b>, puis recommence sans lui.</li></ol>`,\n so:`<ol><li><b>Donne-toi la tonalité</b>")
 rep("lr:'pulsation',","lr:'pulsation',lb:'pulsation',")
 code=open(D+'/drums.js',encoding='utf-8').read()
 rep("/* ========== MODULE : solfège ========== */",code+"\n/* ========== MODULE : solfège ========== */")

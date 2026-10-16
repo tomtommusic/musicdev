@@ -16,7 +16,7 @@ function precPass(ok,late,N,bad,extra){return precMode()==='int'?(ok===N&&bad===
 /* écart moyen entre les coups joués et les coups attendus */
 function precLine(offs){if(!offs.length)return'';const ms=offs.map(x=>x*1000),abs=Math.round(ms.reduce((a,b)=>a+Math.abs(b),0)/ms.length),avg=ms.reduce((a,b)=>a+b,0)/ms.length;
   const tr=Math.abs(avg)<20?T('bien centré'):avg<0?T('plutôt en avance'):T('plutôt en retard');return ' '+T('Écart moyen : {0} ms').replace('{0}',abs)+' ('+tr+').';}
-function precField(){return field(['Précision rythmique',typeof betaTag==='function'?betaTag():null].filter(Boolean),el('div',{class:'field'},sel('s_prec',PREC_OPTS,precMode(),v=>{try{localStorage.setItem('atelier-prec',v)}catch(e){}}),el('span',{class:'hint'},'Réglage commun aux modules de lecture en rythme, gardé sur cet appareil.')));}
+function precField(){return field(['Précision rythmique',typeof betaTag==='function'?betaTag():null].filter(Boolean),el('div',{class:'field'},sel('s_prec',PREC_OPTS,precMode(),v=>{try{localStorage.setItem('atelier-prec',v)}catch(e){}}),el('span',{class:'hint'},'Réglage commun à Lecture à vue et Lecture rythmique, gardé sur cet appareil.')));}
 '''
 rep("function feedback(msg,kind){",HELP+"function feedback(msg,kind){")
 # --- lecture rythmique
@@ -68,5 +68,4 @@ rep("extra=ins.filter((x,j)=>!used.has(j)&&x.t>firstT-tol).length,all=ok===N&&ex
 rep("  feedback(parts.map(x=>T(x)).join(' ')+'.',all?'ok':'bad');\n};","  feedback(parts.map(x=>T(x)).join(' ')+'.'+precLine(offs),all?'ok':'bad');\n};")
 # --- réglages
 rep("  if(id==='lr'){const i=el('input',{type:'checkbox',id:'s_metro'})","  if(id==='lm'||id==='lr')opts.push(precField());\n  if(id==='lr'){const i=el('input',{type:'checkbox',id:'s_metro'})")
-rep("fs.push(sec('Options : lecture batterie'),field('Métronome'","fs.push(sec('Options : lecture batterie'),precField(),field('Métronome'")
 open(p,'w',encoding='utf-8').write(s);print('precision ok')
