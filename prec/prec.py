@@ -9,11 +9,11 @@ HELP=r'''/* ---------- précision rythmique : débutant (souple, par défaut) ou
 const PREC_OPTS=[['deb','Débutant : fenêtre large, une note un peu décalée compte comme réussie'],['int','Intermédiaire : fenêtre serrée, chaque note doit être à temps']];
 function precMode(){try{return localStorage.getItem('atelier-prec')==='int'?'int':'deb'}catch(e){return 'deb'}}
 /* fenêtre « à temps » (s) selon l'intervalle le plus court entre deux notes ; au-delà et jusqu'à precLate()×tol : décalé (orange) */
-function precTol(minI,kind){const lm=kind==='lm';return precMode()==='int'?(lm?Math.max(.09,Math.min(.2,.5*minI)):Math.max(.06,Math.min(.15,.45*minI))):Math.max(lm?.12:.1,Math.min(lm?.25:.22,.55*minI));}
+function precTol(minI,kind){const lm=kind==='lm';return precMode()==='int'?(lm?Math.max(.09,Math.min(.2,.5*minI)):Math.max(.06,Math.min(.15,.45*minI))):Math.max(lm?.15:.12,Math.min(lm?.3:.26,.6*minI));}
 /* fenêtre « décalé » : jusqu'à 2 ou 2,5 fois la fenêtre « à temps », sans dépasser la moitié de l'intervalle le plus court (sinon on confondrait avec la note suivante) */
-const precLate=(tol,minI)=>Math.max(1.25,Math.min(precMode()==='int'?2:2.5,(minI||1e9)*.5/(tol||1)));
+const precLate=(tol,minI)=>Math.max(1.25,Math.min(precMode()==='int'?2:3,(minI||1e9)*.5/(tol||1)));
 /* réussi ? en débutant, les notes décalées comptent et une petite marge d'entrées de trop est tolérée (bruits du micro) */
-function precPass(ok,late,N,bad,extra){return precMode()==='int'?(ok===N&&bad===0&&extra===0):(ok+late===N&&bad===0&&extra<=Math.max(1,Math.round(N*.1)));}
+function precPass(ok,late,N,bad,extra){return precMode()==='int'?(ok===N&&bad===0&&extra===0):(ok+late===N&&bad===0&&extra<=Math.max(2,Math.round(N*.15)));}
 /* écart moyen entre les coups joués et les coups attendus */
 function precLine(offs){if(!offs.length)return'';const ms=offs.map(x=>x*1000),abs=Math.round(ms.reduce((a,b)=>a+Math.abs(b),0)/ms.length),avg=ms.reduce((a,b)=>a+b,0)/ms.length;
   const tr=Math.abs(avg)<20?T('bien centré'):avg<0?T('plutôt en avance'):T('plutôt en retard');return ' '+T('Écart moyen : {0} ms').replace('{0}',abs)+' ('+tr+').';}
@@ -94,14 +94,14 @@ s=s[:i]+r"""MOD.so.judge=function(plan,smp){
   const exp=plan.items.filter(it=>!it.rest),devs=[],offs=[];S.st.ons=null;
   if(!smp||!smp.length){feedback("Le micro n'a capté aucune note. Rapproche-toi du micro ou chante plus fort.",'bad');return;}
   let minI=1e9;for(let k=1;k<plan.items.length;k++)minI=Math.min(minI,plan.items[k].t-plan.items[k-1].t);
-  const tolC=pitchTol('so'),cov=precMode()==='int'?.7:.5,FR=.033,tolT=precTol(minI,'lm');let ok=0,late=0,lateT=0,wrong=0,missed=0,offp=0;
+  const tolC=pitchTol('so'),cov=precMode()==='int'?.6:.4,FR=.033,tolT=precTol(minI,'lm');let ok=0,late=0,lateT=0,wrong=0,missed=0,offp=0;
   const dvOf=(x,m)=>(((x.mf-m)%12+18)%12-6)*100;
   (this.els||[]).forEach(e=>e&&e.classList.remove('is-ok','is-bad','is-late'));
   exp.forEach((it,n)=>{const el2=this.els&&this.els[it.i],mark=c=>{if(el2)el2.classList.add(c);},d=it.d*plan.us,a=it.t+d*.15,b=it.t+d*.85;
     const fr=smp.filter(x=>x.t>=a&&x.t<=b),exN=Math.max(1,(b-a)/FR);
-    if(fr.length<Math.max(2,exN*.25)){missed++;mark('is-bad');return;}
+    if(fr.length<Math.max(2,exN*.15)){missed++;mark('is-bad');return;}
     const v=fr.map(x=>dvOf(x,it.midi)).sort((p,q)=>p-q),med=v[v.length>>1];
-    if(Math.abs(med)>60){wrong++;mark('is-bad');return;}
+    if(Math.abs(med)>65){wrong++;mark('is-bad');return;}
     devs.push(med);
     if(Math.abs(med)>tolC){offp++;mark('is-bad');return;}
     const prev=exp[n-1];if(!prev||(prev.midi-it.midi)%12!==0){const w=smp.find(x=>x.t>=it.t-Math.min(.3,d*.5)&&x.t<=it.t+d*.5&&Math.abs(dvOf(x,it.midi))<=60);if(w)offs.push(w.t-it.t);var att=w?w.t-it.t:null;}else var att=null;
