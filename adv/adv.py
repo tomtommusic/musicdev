@@ -97,4 +97,6 @@ rep("function feedback(msg,kind){",HELP+"function feedback(msg,kind){")
 rep("genMelody=function(cfg){","genMelody=function(cfg){const _r=_genMelAcc(cfg);return ACC_MODS.includes(S.mod)?accAlter(_r,cfg.acc2):_r;};\nconst _genMelAcc=function(cfg){")
 rep("  if(id==='lm'||id==='la')opts.push(field('Instrument de l\\'élève (micro)'","  if(ACC_MODS.includes(id))opts.push(accField());\n  if(id==='lm'||id==='la')opts.push(field('Instrument de l\\'élève (micro)'")
 rep("  if('clef'in b&&['treble','bass','alt'].includes(c.clef))o.clef=c.clef;","  if('clef'in b&&['treble','bass','alt'].includes(c.clef))o.clef=c.clef;\n  if('clef'in b&&['s','d'].includes(c.acc2))o.acc2=c.acc2;")
+# accordeur : la guitare (et les autres cordes) captent aussi les notes graves d'une basse
+rep("function tnRange(){const s=tnStrings();if(!s)return[27,4200];const lo=Math.min(...s.notes),hi=Math.max(...s.notes);return[midiHz(lo)*.7,","function tnRange(){const s=tnStrings();if(!s)return[27,4200];const lo=Math.min(...s.notes),hi=Math.max(...s.notes);return[Math.min(midiHz(lo)*.7,29),")
 open(p,'w',encoding='utf-8').write(s);print('adv ok')

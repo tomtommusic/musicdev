@@ -1,0 +1,18 @@
+/* rudiments et études */
+.rudbar,.etbar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.rudpick{display:flex;gap:8px;align-items:center;margin-bottom:12px}.rudpick select{flex:1;min-width:0}
+.rudhead,.ethead{display:flex;gap:12px;align-items:center;margin:4px 0 8px}
+.rudhead h2,.ethead h2{margin:0;font-size:1.25rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.rudhead p,.ethead p{margin:2px 0 0}
+.rudnum{flex:0 0 auto;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font:700 1rem/1 var(--f-mono)}
+.rudstaff,.etstaff{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:8px 6px;margin:8px 0;color:var(--ink);overflow:hidden}
+.rudtip,.ettip{font-size:.95rem;line-height:1.45;margin:8px 0}
+.rudctl,.etctl{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:flex-end;margin:10px 0}
+.rudctl .qzfield,.etctl .qzfield{display:flex;flex-direction:column;gap:6px;min-width:150px}
+.rudctl input[type=range],.etctl input[type=range]{min-width:130px}
+.rudleg{margin-top:10px}.rudleg summary{cursor:pointer;font-weight:600;font-size:.9rem;color:var(--muted)}
+.etlab{font-family:var(--f-mono)}
+.etfing{display:flex;justify-content:center;margin:6px 0}.etfbox{display:flex;flex-direction:column;align-items:center;gap:6px}
+.etfn{font-size:1.1rem}
+.etstaff .abcjs-note.is-sel{fill:var(--accent);color:var(--accent)}
+@media (max-width:600px){.rudctl .qzfield,.etctl .qzfield{min-width:0;flex:1 1 45%}}
+.etfing svg{max-width:150px;height:auto}
