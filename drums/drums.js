@@ -209,7 +209,13 @@ function drHit(id,t,out,v=1){try{const c=A.init();out=out||A.out||c.destination;
     case'hhp':metal(40,.28,.05,9500,7000);nz('bandpass',1800,2,.08,.02);send(.1);break;
     case'xs':osc('triangle',1750,1350,.02,.45,.028);osc('sine',520,480,.03,.25,.05);nz('bandpass',2600,3,.28,.022);send(.25);break;
     case'ride':metal(58,.16,1.1,8200,4800,.002);osc('sine',2350,2350,0,.05,.6);nz('bandpass',6200,2,.2,.035);send(.3);break;
-    case'crash':metal(46,.26,1.5,7000,3800,.006);nz('highpass',5000,.6,.3,1.6,.006);send(.35);break;
+    case'crash':{/* crash : souffle de bruit qui « s'ouvre » puis s'assombrit en s'éteignant, avec un léger scintillement métallique */
+      const lp=c.createBiquadFilter();lp.type='lowpass';lp.Q.value=.3;lp.frequency.setValueAtTime(15000,t);lp.frequency.exponentialRampToValueAtTime(5500,t+1.6);lp.connect(bus);
+      const lay=(type,f,q,a,dec,att)=>{const s=c.createBufferSource(),fl=c.createBiquadFilter(),g=c.createGain();s.buffer=drHit.nb;s.loop=true;fl.type=type;fl.frequency.value=f;fl.Q.value=q;const e=env(g,a,dec,att);s.connect(fl);fl.connect(g);g.connect(lp);s.start(t,Math.random()*1.5);s.stop(e);};
+      lay('highpass',2200,.5,.28,.025,.001);lay('highpass',4200,.5,.34,1.9,.012);lay('bandpass',7800,.7,.22,1.3,.01);lay('bandpass',1700,.9,.1,.35,.006);
+      const hp=c.createBiquadFilter();hp.type='highpass';hp.frequency.value=3000;hp.connect(lp);
+      for(const f of[3170,4285,5390,6655,8125,9770,11320]){const o=c.createOscillator(),g=c.createGain();o.frequency.value=f*(1+(Math.random()-.5)*.01);const e=env(g,.018,1.5,.015);o.connect(g);g.connect(hp);o.start(t);o.stop(e);}
+      send(.35);break;}
   }
 }catch(e){}}
 MOD.lb.mount=function(){
