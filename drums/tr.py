@@ -33,4 +33,5 @@ T=[
 ("Funk syncopé","Syncopated funk","Funk sincopado"),("Funk à deux mains","Two-handed funk","Funk a dos manos"),("Valse","Waltz","Vals"),("Rock en 3/4","Rock in 3/4","Rock en 3/4"),
 ("Ballade en 3/4","Ballad in 3/4","Balada en 3/4"),("Marche","March","Marcha"),("Rock en 2/4","Rock in 2/4","Rock en 2/4"),("Charleston ouvert","Open hi-hat","Charles abierto"),
 ("Caisse claire accentuée","Accented snare","Caja acentuada"),("Bossa-nova","Bossa nova","Bossa nova"),
+("Rock and roll","Rock and roll","Rock and roll"),("Ballade","Ballad","Balada"),("Pop syncopé","Syncopated pop","Pop sincopado"),("Ska","Ska","Ska"),("Dance-punk","Dance-punk","Dance-punk"),("Reggae rockers","Reggae rockers","Reggae rockers"),("Cha-cha","Cha-cha","Chachachá"),("Valse pop","Pop waltz","Vals pop"),("Galop","Galop","Galop"),("Hard rock","Hard rock","Hard rock"),
 ]
