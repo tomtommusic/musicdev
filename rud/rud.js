@@ -79,7 +79,7 @@ function rudEvents(r){
   return{ev:out,len:u};
 }
 function rudPlay(withClick){
-  stop();const r=RUD.find(x=>x.n===RUD_S.n)||RUD[0],{ev,len}=rudEvents(r),c=A.init();if(typeof qzUnmute==='function')qzUnmute();
+  MOD.rd.mtStop();stop();const r=RUD.find(x=>x.n===RUD_S.n)||RUD[0],{ev,len}=rudEvents(r),c=A.init();if(typeof qzUnmute==='function')qzUnmute();
   const [bn,bd]=r.m.split('/').map(Number),beat32=32/bd*(bd===8?3:1),us=60/RUD_S.tempo/beat32,reps=RUD_S.rep;
   const ci=withClick?(bd===8?bn/3:bn)*beat32:0;
   const items=[],clicks=[];
@@ -93,7 +93,7 @@ function rudPlay(withClick){
     else drHit('snare',t,s.g,v);}
 }
 MOD.rd.mount=function(){
-  const M=this;M.bar=el('div',{class:'qzbtns rudbar'},btn('▶ Écouter',()=>rudPlay(false),'primary'),btn('● Jouer avec le métronome',()=>rudPlay(true)),btn('Rudiment au hasard',()=>{RUD_S.n=pick(RUD).n;tlSave('atelier-rud',RUD_S);M.fresh();}),stopBtn());
+  const M=this;M.bar=el('div',{class:'qzbtns rudbar'},btn('▶ Écouter',()=>rudPlay(false),'primary'),btn('● Écouter avec le métronome',()=>rudPlay(true)),M.mtBtn=btn('▶ Métronome seul',()=>M.mts?M.mtStop():M.mtStart()),btn('Rudiment au hasard',()=>{RUD_S.n=pick(RUD).n;tlSave('atelier-rud',RUD_S);M.fresh();}),stopBtn());
   M.root=el('div',{class:'tl rudw'});$('#answer').replaceChildren(M.root);
 };
 MOD.rd.fresh=function(){
@@ -119,3 +119,17 @@ MOD.rd.draw=function(){const M=this,r=RUD.find(x=>x.n===RUD_S.n)||RUD[0];if(!HAS
   M.els=[...M.stand.querySelectorAll('.abcjs-note')];};
 MOD.rd.now=function(i){(this.els||[]).forEach(e=>e.classList.remove('is-now'));if(i>=0&&this.els&&this.els[i])this.els[i].classList.add('is-now');};
 MOD.rd.redraw=function(){this.draw();};
+/* métronome seul : bat la pulsation au tempo choisi pour s'exercer sans le modèle */
+MOD.rd.mtStart=function(){
+  const M=this,c=A.init();if(typeof qzUnmute==='function')qzUnmute();stop();
+  const g=c.createGain();g.connect(A.out);const st={g,next:c.currentTime+.1,beat:0,timer:0};M.mts=st;
+  const tick=()=>{if(M.mts!==st)return;if(S.mod!=='rd'){M.mtStop();return;}
+    const r=RUD.find(x=>x.n===RUD_S.n)||RUD[0],[bn,bd]=r.m.split('/').map(Number),B=bd===8?bn/3:bn,us=60/RUD_S.tempo;
+    while(st.next<c.currentTime+.12){const b=st.beat%B,t=st.next;A.click(t,b===0,g);
+      setTimeout(()=>{if(M.mts===st&&M.mtBtn){M.mtBtn.classList.remove('pulse');void M.mtBtn.offsetWidth;M.mtBtn.classList.add('pulse');}},Math.max(0,(t+(typeof audioLag==='function'?audioLag():0)-c.currentTime)*1000));
+      st.next+=us;st.beat++;}};
+  tick();st.timer=setInterval(tick,25);M.mtUpd();
+};
+MOD.rd.mtStop=function(){const M=this,st=M.mts;if(!st)return;M.mts=null;clearInterval(st.timer);
+  try{st.g.gain.setTargetAtTime(0,A.ctx.currentTime,.01);setTimeout(()=>st.g.disconnect(),200);}catch(e){}M.mtUpd();};
+MOD.rd.mtUpd=function(){const b=this.mtBtn;if(!b)return;b.textContent=this.mts?T('■ Arrêter le métronome'):T('▶ Métronome seul');b.classList.toggle('on',!!this.mts);if(!this.mts)b.classList.remove('pulse');};

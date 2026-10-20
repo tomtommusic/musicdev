@@ -16,3 +16,7 @@
 .etstaff .abcjs-note.is-sel{fill:var(--accent);color:var(--accent)}
 @media (max-width:600px){.rudctl .qzfield,.etctl .qzfield{min-width:0;flex:1 1 45%}}
 .etfing svg{max-width:150px;height:auto}
+
+.rudbar .btn.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.rudbar .btn.pulse{animation:rdpulse .18s ease-out}
+@keyframes rdpulse{0%{transform:scale(1.07)}100%{transform:scale(1)}}
