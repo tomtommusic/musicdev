@@ -181,19 +181,36 @@ function abcDrums(ex,o={}){
     for(const v of[0,1])out+=`[V:${v+1}] `+r.map(m=>meas[v][m]+(m===nM-1?' |]':' |')).join(' ')+'\n';}
   return{abc:out,map};
 }
-/* sons de batterie (synthèse) à un moment donné */
+/* sons de batterie (synthèse) à un moment donné
+   grosse caisse : coup de batte + corps qui descend en hauteur ; caisse claire : deux modes de la peau + timbre (bruit filtré) ;
+   cymbales : six oscillateurs carrés à rapports inharmoniques (méthode classique des boîtes à rythmes) filtrés vers l'aigu ;
+   le tout passe dans une petite réverbération de pièce */
+const DR_RAT=[2,3,4.16,5.43,6.79,8.21];
 function drHit(id,t,out,v=1){try{const c=A.init();out=out||A.out||c.destination;
-  const env=(g,a,d)=>{g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(a*v,t+.004);g.gain.exponentialRampToValueAtTime(.0001,t+d);};
-  const noise=d=>{const b=c.createBuffer(1,Math.ceil(c.sampleRate*d),c.sampleRate),x=b.getChannelData(0);for(let i=0;i<x.length;i++)x[i]=Math.random()*2-1;const s=c.createBufferSource();s.buffer=b;return s;};
-  const tone=(f0,f1,d,a)=>{const o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.setValueAtTime(f0,t);o.frequency.exponentialRampToValueAtTime(f1,t+d*.8);env(g,a,d);o.connect(g);g.connect(out);o.start(t);o.stop(t+d+.05);};
-  const hiss=(type,f,q,d,a)=>{const s=noise(d+.05),fl=c.createBiquadFilter(),g=c.createGain();fl.type=type;fl.frequency.value=f;fl.Q.value=q;env(g,a,d);s.connect(fl);fl.connect(g);g.connect(out);s.start(t);s.stop(t+d+.05);};
-  if(id==='kick')tone(140,42,.35,.9);
-  else if(id==='snare'||id==='sna'){const a=id==='sna'?1.35:1;tone(190,150,.12,.35*a);hiss('highpass',1800,.7,.18,.45*a);}
-  else if(id==='ftom')tone(110,80,.45,.7);else if(id==='mtom')tone(165,120,.38,.65);else if(id==='htom')tone(220,165,.32,.6);
-  else if(id==='hh')hiss('highpass',7500,.8,.06,.3);else if(id==='hho')hiss('highpass',6500,.7,.38,.3);
-  else if(id==='xs'){tone(1400,900,.05,.3);hiss('bandpass',2600,2,.04,.25);}else if(id==='hhp')hiss('highpass',6000,.8,.09,.22);
-  else if(id==='ride'){hiss('bandpass',5200,1.2,.9,.2);tone(3100,3000,.7,.04);}
-  else if(id==='crash')hiss('highpass',4200,.6,1.6,.36);
+  if(drHit.c!==c){drHit.c=c;const n=c.sampleRate*2,b=c.createBuffer(1,n,c.sampleRate),x=b.getChannelData(0);for(let i=0;i<n;i++)x[i]=Math.random()*2-1;drHit.nb=b;
+    const L=Math.ceil(c.sampleRate*.6),ir=c.createBuffer(2,L,c.sampleRate),pre=Math.ceil(c.sampleRate*.006);
+    for(let ch=0;ch<2;ch++){const y=ir.getChannelData(ch);for(let i=pre;i<L;i++)y[i]=(Math.random()*2-1)*Math.pow(1-i/L,4);}drHit.ir=ir;drHit.rv=new WeakMap();}
+  let rv=drHit.rv.get(out);if(!rv){rv=c.createConvolver();rv.buffer=drHit.ir;const rg=c.createGain();rg.gain.value=.22;rv.connect(rg);rg.connect(out);drHit.rv.set(out,rv);}
+  const bus=c.createGain();bus.gain.value=.8;bus.connect(out);const send=r=>{const g=c.createGain();g.gain.value=r;bus.connect(g);g.connect(rv);};
+  const env=(g,a,dec,att=.002)=>{g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(a*v,t+att);g.gain.setTargetAtTime(0,t+att,dec/3);return t+att+dec*2.2;};
+  const osc=(type,f0,f1,sw,a,dec)=>{const o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.setValueAtTime(f0,t);if(f1!==f0)o.frequency.exponentialRampToValueAtTime(f1,t+sw);const e=env(g,a,dec);o.connect(g);g.connect(bus);o.start(t);o.stop(e);};
+  const nz=(type,f,q,a,dec,att)=>{const s=c.createBufferSource(),fl=c.createBiquadFilter(),g=c.createGain();s.buffer=drHit.nb;fl.type=type;fl.frequency.value=f;fl.Q.value=q;const e=env(g,a,dec,att);s.connect(fl);fl.connect(g);g.connect(bus);s.start(t,Math.random()*1.2);s.stop(e);};
+  const metal=(base,a,dec,bp,hp,att)=>{const g=c.createGain(),f1=c.createBiquadFilter(),f2=c.createBiquadFilter();f1.type='bandpass';f1.frequency.value=bp;f1.Q.value=.6;f2.type='highpass';f2.frequency.value=hp;
+    const e=env(g,a,dec,att);for(const r of DR_RAT){const o=c.createOscillator();o.type='square';o.frequency.value=base*r*(1+(Math.random()-.5)*.004);o.connect(f1);o.start(t);o.stop(e);}f1.connect(f2);f2.connect(g);g.connect(bus);};
+  const tom=f=>{osc('sine',f*1.35,f,.09,.6,.42*110/f+.12);osc('triangle',f*2.1,f*1.9,.06,.12,.12);nz('lowpass',f*6,.7,.18,.03);send(.28);};
+  switch(id){
+    case'kick':osc('sine',160,46,.07,.8,.34);osc('sine',62,52,.12,.28,.22);nz('bandpass',3200,1.2,.32,.009);osc('triangle',900,300,.012,.18,.012);send(.06);break;
+    case'snare':case'sna':{const k=id==='sna'?1.3:1,d=id==='sna'?1.15:1;
+      osc('triangle',205,182,.03,.85*k,.08);osc('sine',335,325,.02,.38*k,.06);
+      nz('bandpass',3000,.6,.8*k,.17*d);nz('highpass',6500,.7,.2*k,.08*d);nz('lowpass',1200,.8,.32*k,.03);send(.3);break;}
+    case'ftom':tom(92);break;case'mtom':tom(135);break;case'htom':tom(185);break;
+    case'hh':metal(40,.5,.045,10500,7200);nz('highpass',9000,.7,.12,.03);send(.12);break;
+    case'hho':metal(40,.34,.42,10000,6800,.004);nz('highpass',8500,.7,.1,.3,.004);send(.2);break;
+    case'hhp':metal(40,.28,.05,9500,7000);nz('bandpass',1800,2,.08,.02);send(.1);break;
+    case'xs':osc('triangle',1750,1350,.02,.45,.028);osc('sine',520,480,.03,.25,.05);nz('bandpass',2600,3,.28,.022);send(.25);break;
+    case'ride':metal(58,.16,1.1,8200,4800,.002);osc('sine',2350,2350,0,.05,.6);nz('bandpass',6200,2,.2,.035);send(.3);break;
+    case'crash':metal(46,.26,1.5,7000,3800,.006);nz('highpass',5000,.6,.3,1.6,.006);send(.35);break;
+  }
 }catch(e){}}
 MOD.lb.mount=function(){
   const M=this;
