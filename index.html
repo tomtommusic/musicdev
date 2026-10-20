@@ -1590,6 +1590,10 @@ main[data-mod="ho"] #helpbtn{box-shadow:0 0 0 3px color-mix(in srgb,var(--accent
 .etstaff .abcjs-note.is-sel{fill:var(--accent);color:var(--accent)}
 @media (max-width:600px){.rudctl .qzfield,.etctl .qzfield{min-width:0;flex:1 1 45%}}
 .etfing svg{max-width:150px;height:auto}
+
+.rudbar .btn.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.rudbar .btn.pulse{animation:rdpulse .18s ease-out}
+@keyframes rdpulse{0%{transform:scale(1.07)}100%{transform:scale(1)}}
 </style>
 
 <div class="app">
@@ -7201,7 +7205,7 @@ matchMedia('(max-width:600px)').addEventListener?.('change',()=>{if(S.mod==='ho'
 document.addEventListener('click',e=>{if(S.mod!=='ho'||!e.target.closest||!e.target.closest('#helpbtn'))return;
   e.stopImmediatePropagation();e.preventDefault();openModule('ln');setTimeout(()=>{if(typeof helpSet==='function')helpSet(true);},250);},true);
 
-const AP_VERSION='1.27.1';
+const AP_VERSION='1.27.2';
 const AP_MIT="Copyright (c) 2009-2026 Paul Rosen and Gregory Dyke\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.";
 const AP_OFL="-----------------------------------------------------------\nSIL OPEN FONT LICENSE Version 1.1 - 26 February 2007\n-----------------------------------------------------------\n\nPREAMBLE\nThe goals of the Open Font License (OFL) are to stimulate worldwide\ndevelopment of collaborative font projects, to support the font creation\nefforts of academic and linguistic communities, and to provide a free and\nopen framework in which fonts may be shared and improved in partnership\nwith others.\n\nThe OFL allows the licensed fonts to be used, studied, modified and\nredistributed freely as long as they are not sold by themselves. The\nfonts, including any derivative works, can be bundled, embedded, \nredistributed and/or sold with any software provided that any reserved\nnames are not used by derivative works. The fonts and derivatives,\nhowever, cannot be released under any other type of license. The\nrequirement for fonts to remain under this license does not apply\nto any document created using the fonts or their derivatives.\n\nDEFINITIONS\n\"Font Software\" refers to the set of files released by the Copyright\nHolder(s) under this license and clearly marked as such. This may\ninclude source files, build scripts and documentation.\n\n\"Reserved Font Name\" refers to any names specified as such after the\ncopyright statement(s).\n\n\"Original Version\" refers to the collection of Font Software components as\ndistributed by the Copyright Holder(s).\n\n\"Modified Version\" refers to any derivative made by adding to, deleting,\nor substituting -- in part or in whole -- any of the components of the\nOriginal Version, by changing formats or by porting the Font Software to a\nnew environment.\n\n\"Author\" refers to any designer, engineer, programmer, technical\nwriter or other person who contributed to the Font Software.\n\nPERMISSION & CONDITIONS\nPermission is hereby granted, free of charge, to any person obtaining\na copy of the Font Software, to use, study, copy, merge, embed, modify,\nredistribute, and sell modified and unmodified copies of the Font\nSoftware, subject to the following conditions:\n\n1) Neither the Font Software nor any of its individual components,\nin Original or Modified Versions, may be sold by itself.\n\n2) Original or Modified Versions of the Font Software may be bundled,\nredistributed and/or sold with any software, provided that each copy\ncontains the above copyright notice and this license. These can be\nincluded either as stand-alone text files, human-readable headers or\nin the appropriate machine-readable metadata fields within text or\nbinary files as long as those fields can be easily viewed by the user.\n\n3) No Modified Version of the Font Software may use the Reserved Font\nName(s) unless explicit written permission is granted by the corresponding\nCopyright Holder. This restriction only applies to the primary font name as\npresented to the users.\n\n4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font\nSoftware shall not be used to promote, endorse or advertise any\nModified Version, except to acknowledge the contribution(s) of the\nCopyright Holder(s) and the Author(s) or with their explicit written\npermission.\n\n5) The Font Software, modified or unmodified, in part or in whole,\nmust be distributed entirely under this license, and must not be\ndistributed under any other license. The requirement for fonts to\nremain under this license does not apply to any document created\nusing the Font Software.\n\nTERMINATION\nThis license becomes null and void if any of the above conditions are\nnot met.\n\nDISCLAIMER\nTHE FONT SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\nOF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE\nCOPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nINCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL\nDAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM\nOTHER DEALINGS IN THE FONT SOFTWARE.";
 /* ========== MODULE : À propos (confidentialité, licences, crédits) ========== */
@@ -7396,7 +7400,7 @@ function rudEvents(r){
   return{ev:out,len:u};
 }
 function rudPlay(withClick){
-  stop();const r=RUD.find(x=>x.n===RUD_S.n)||RUD[0],{ev,len}=rudEvents(r),c=A.init();if(typeof qzUnmute==='function')qzUnmute();
+  MOD.rd.mtStop();stop();const r=RUD.find(x=>x.n===RUD_S.n)||RUD[0],{ev,len}=rudEvents(r),c=A.init();if(typeof qzUnmute==='function')qzUnmute();
   const [bn,bd]=r.m.split('/').map(Number),beat32=32/bd*(bd===8?3:1),us=60/RUD_S.tempo/beat32,reps=RUD_S.rep;
   const ci=withClick?(bd===8?bn/3:bn)*beat32:0;
   const items=[],clicks=[];
@@ -7410,7 +7414,7 @@ function rudPlay(withClick){
     else drHit('snare',t,s.g,v);}
 }
 MOD.rd.mount=function(){
-  const M=this;M.bar=el('div',{class:'qzbtns rudbar'},btn('▶ Écouter',()=>rudPlay(false),'primary'),btn('● Jouer avec le métronome',()=>rudPlay(true)),btn('Rudiment au hasard',()=>{RUD_S.n=pick(RUD).n;tlSave('atelier-rud',RUD_S);M.fresh();}),stopBtn());
+  const M=this;M.bar=el('div',{class:'qzbtns rudbar'},btn('▶ Écouter',()=>rudPlay(false),'primary'),btn('● Écouter avec le métronome',()=>rudPlay(true)),M.mtBtn=btn('▶ Métronome seul',()=>M.mts?M.mtStop():M.mtStart()),btn('Rudiment au hasard',()=>{RUD_S.n=pick(RUD).n;tlSave('atelier-rud',RUD_S);M.fresh();}),stopBtn());
   M.root=el('div',{class:'tl rudw'});$('#answer').replaceChildren(M.root);
 };
 MOD.rd.fresh=function(){
@@ -7436,6 +7440,20 @@ MOD.rd.draw=function(){const M=this,r=RUD.find(x=>x.n===RUD_S.n)||RUD[0];if(!HAS
   M.els=[...M.stand.querySelectorAll('.abcjs-note')];};
 MOD.rd.now=function(i){(this.els||[]).forEach(e=>e.classList.remove('is-now'));if(i>=0&&this.els&&this.els[i])this.els[i].classList.add('is-now');};
 MOD.rd.redraw=function(){this.draw();};
+/* métronome seul : bat la pulsation au tempo choisi pour s'exercer sans le modèle */
+MOD.rd.mtStart=function(){
+  const M=this,c=A.init();if(typeof qzUnmute==='function')qzUnmute();stop();
+  const g=c.createGain();g.connect(A.out);const st={g,next:c.currentTime+.1,beat:0,timer:0};M.mts=st;
+  const tick=()=>{if(M.mts!==st)return;if(S.mod!=='rd'){M.mtStop();return;}
+    const r=RUD.find(x=>x.n===RUD_S.n)||RUD[0],[bn,bd]=r.m.split('/').map(Number),B=bd===8?bn/3:bn,us=60/RUD_S.tempo;
+    while(st.next<c.currentTime+.12){const b=st.beat%B,t=st.next;A.click(t,b===0,g);
+      setTimeout(()=>{if(M.mts===st&&M.mtBtn){M.mtBtn.classList.remove('pulse');void M.mtBtn.offsetWidth;M.mtBtn.classList.add('pulse');}},Math.max(0,(t+(typeof audioLag==='function'?audioLag():0)-c.currentTime)*1000));
+      st.next+=us;st.beat++;}};
+  tick();st.timer=setInterval(tick,25);M.mtUpd();
+};
+MOD.rd.mtStop=function(){const M=this,st=M.mts;if(!st)return;M.mts=null;clearInterval(st.timer);
+  try{st.g.gain.setTargetAtTime(0,A.ctx.currentTime,.01);setTimeout(()=>st.g.disconnect(),200);}catch(e){}M.mtUpd();};
+MOD.rd.mtUpd=function(){const b=this.mtBtn;if(!b)return;b.textContent=this.mts?T('■ Arrêter le métronome'):T('▶ Métronome seul');b.classList.toggle('on',!!this.mts);if(!this.mts)b.classList.remove('pulse');};
 
 /* ========== MODULE : Études techniques (gammes, arpèges, notes longues, liaisons…) ==========
    Exercices générés pour chaque instrument du module Doigtés, en notes écrites, dans un registre confortable.
