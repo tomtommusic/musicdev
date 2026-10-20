@@ -45,7 +45,11 @@ const RUD=[
  {n:39,c:'drag',t:'Ratamacue double (double ratamacue)',m:'2/4',p:'dR8 / (3 dR16 L16 R16 / >L8 r8 | dL8 / (3 dL16 R16 L16 / >R8 r8',tip:'Un ra de plus avant le ratamacue.'},
  {n:40,c:'drag',t:'Ratamacue triple (triple ratamacue)',m:'2/4',p:'dR8 dR8 / (3 dR16 L16 R16 >L8 | dL8 dL8 / (3 dL16 R16 L16 >R8',tip:'Deux ras de plus avant le ratamacue.'}];
 const RUD_CAT=[['roll','Roulements'],['diddle','Diddles (paradiddles)'],['flam','Flas'],['drag','Ras']];
-const RUD_S=tlLoad('atelier-rud',{n:1,tempo:70,rep:4});
+const RUD_S=tlLoad('atelier-rud',{n:1,tempo:70,rep:4});if(RUD_S.sub==null)RUD_S.sub=0;
+/* subdivision du métronome : petit clic doux entre les temps (0 = aucune, 2 = croches, 4 = doubles croches) */
+function rudSubN(bd){const b32=32/bd*(bd===8?3:1);return RUD_S.sub?b32/(RUD_S.sub===2?4:2):1;}
+function rudTick(t,g){const c=A.ctx,o=c.createOscillator(),e=c.createGain(),hp=c.createBiquadFilter();o.type='square';o.frequency.value=900;hp.type='highpass';hp.frequency.value=600;
+  e.gain.setValueAtTime(.0001,t);e.gain.exponentialRampToValueAtTime(.07,t+.002);e.gain.exponentialRampToValueAtTime(.0001,t+.03);o.connect(hp);hp.connect(e);e.connect(g);o.start(t);o.stop(t+.04);}
 /* lecture du motif → notes {dur (en 32es), st, acc, gr:0/1/2, buzz, rest, trip} groupées par ligatures et mesures */
 function rudParse(p){
   const bars=[];let bar=[],grp=[],trip=0;
@@ -86,6 +90,7 @@ function rudPlay(withClick){
   for(let k=0;k<reps;k++)for(const e of ev)items.push({u:ci+k*len+e.u,d:e.d,rest:false,i:e.i,e});
   if(withClick){const per=bd===8?bn/3:bn;for(let b=0;b<per;b++)clicks.push({u:b*beat32,strong:b===0,b,ci:true});for(let u=ci;u<ci+reps*len-1e-6;u+=beat32)clicks.push({u,strong:((u-ci)%len)<1e-6,b:Math.round((u-ci)/beat32)%per});}
   const M=MOD.rd;const s=run({items,clicks,us,endU:ci+reps*len,ci,meter:withClick?{beats:bd===8?bn/3:bn,label:r.m}:null},{sound:'none',onStep:it=>M.now(it.i),onEnd:()=>M.now(-1)});
+  if(withClick){const n=rudSubN(bd);if(n>1)for(let u=0;u<ci+reps*len-1e-6;u+=beat32)for(let k=1;k<n;k++)rudTick(s.t0+(u+k*beat32/n)*us,s.g);}
   for(const it of items){const e=it.e,t=it.t,v=e.acc?1:.6,dur=it.d*us;
     if(e.gr===1)drHit('snare',t-.03,s.g,.28);
     if(e.gr===2){drHit('snare',t-.07,s.g,.25);drHit('snare',t-.035,s.g,.25);}
@@ -103,13 +108,14 @@ MOD.rd.fresh=function(){
   const nav=d=>{const i=RUD.findIndex(x=>x.n===r.n);RUD_S.n=RUD[(i+d+RUD.length)%RUD.length].n;tlSave('atelier-rud',RUD_S);M.fresh();};
   const tl=el('b',{},`♩ = ${RUD_S.tempo}`),tr=el('input',{type:'range',min:40,max:200,step:2,value:RUD_S.tempo,'aria-label':'Tempo'});
   tr.addEventListener('input',()=>{RUD_S.tempo=+tr.value;tl.textContent=`♩ = ${RUD_S.tempo}`;tlSave('atelier-rud',RUD_S);});
+  const sb=sel2('rd_sub',[[0,'Aucune'],[2,'Croches'],[4,'Doubles croches']],RUD_S.sub,v=>{RUD_S.sub=+v;tlSave('atelier-rud',RUD_S);});
   const rp=sel2('rd_rep',[[2,'2 fois'],[4,'4 fois'],[8,'8 fois'],[16,'16 fois']],RUD_S.rep,v=>{RUD_S.rep=+v;tlSave('atelier-rud',RUD_S);});
   M.stand=el('div',{class:'rudstaff'});
   M.root.replaceChildren(M.bar,
     el('div',{class:'rudpick'},el('button',{type:'button',class:'btn quiet sq','aria-label':'Rudiment précédent',onclick:()=>nav(-1)},'‹'),sel,el('button',{type:'button',class:'btn quiet sq','aria-label':'Rudiment suivant',onclick:()=>nav(1)},'›')),
     el('div',{class:'rudhead'},el('span',{class:'rudnum'},String(r.n)),el('div',{},el('h2',{},T(r.t),typeof betaTag==='function'?betaTag():null),el('p',{class:'hint'},T(RUD_CAT.find(x=>x[0]===r.c)[1])+' · '+r.m))),
     M.stand,el('p',{class:'rudtip'},T(r.tip)),
-    el('div',{class:'rudctl'},el('label',{class:'qzfield'},el('span',{class:'fl'},'Tempo'),el('div',{class:'row2'},tr,tl)),el('label',{class:'qzfield'},el('span',{class:'fl'},'Répéter'),rp)),
+    el('div',{class:'rudctl'},el('label',{class:'qzfield'},el('span',{class:'fl'},'Tempo'),el('div',{class:'row2'},tr,tl)),el('label',{class:'qzfield'},el('span',{class:'fl'},'Répéter'),rp),el('label',{class:'qzfield'},el('span',{class:'fl'},'Subdivision du métronome'),sb)),
     el('details',{class:'rudleg'},el('summary',{},'Comment lire'),el('p',{class:'hint'},'R = main droite, L = main gauche (sous chaque note). Petite note barrée = fla (une appoggiature), deux petites notes = ra (deux appoggiatures), > = accent, z = roulement écrasé. Les barres de reprise indiquent de répéter le motif.')));
   M.draw();
 };
@@ -125,7 +131,7 @@ MOD.rd.mtStart=function(){
   const g=c.createGain();g.connect(A.out);const st={g,next:c.currentTime+.1,beat:0,timer:0};M.mts=st;
   const tick=()=>{if(M.mts!==st)return;if(S.mod!=='rd'){M.mtStop();return;}
     const r=RUD.find(x=>x.n===RUD_S.n)||RUD[0],[bn,bd]=r.m.split('/').map(Number),B=bd===8?bn/3:bn,us=60/RUD_S.tempo;
-    while(st.next<c.currentTime+.12){const b=st.beat%B,t=st.next;A.click(t,b===0,g);
+    while(st.next<c.currentTime+.12){const b=st.beat%B,t=st.next;A.click(t,b===0,g);{const n=rudSubN(bd);for(let k=1;k<n;k++)rudTick(t+k*us/n,g);}
       setTimeout(()=>{if(M.mts===st&&M.mtBtn){M.mtBtn.classList.remove('pulse');void M.mtBtn.offsetWidth;M.mtBtn.classList.add('pulse');}},Math.max(0,(t+(typeof audioLag==='function'?audioLag():0)-c.currentTime)*1000));
       st.next+=us;st.beat++;}};
   tick();st.timer=setInterval(tick,25);M.mtUpd();
