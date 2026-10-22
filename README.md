@@ -1,4 +1,4 @@
-# MusicDEV
+# MusiDev
 
 Développement de l'oreille musicale : dictées mélodiques et rythmiques, intervalles, progressions d'accords,
 lecture de notes, lecture à vue, lecture rythmique, solfège, lecture appliquée et bibliothèque théorique.
