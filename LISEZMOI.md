@@ -1,4 +1,4 @@
-# MusicDEV : sources de construction
+# MusiDev : sources de construction
 
 L'application publiée (https://tomtommusic.github.io/musicdev/) est le fichier `index.html` de la branche `main`.
 Cette branche `sources` contient tout ce qui sert à le fabriquer. Point de sauvegarde figé : branches
@@ -12,7 +12,7 @@ Cette branche `sources` contient tout ce qui sert à le fabriquer. Point de sauv
    remplacer ces chemins par les nouveaux (`grep -rl scratchpad .` pour les trouver).
 3. Construire : `bash build.sh` → copie `index-before-quiz.html` dans `main/index.html`, puis applique dans l'ordre
    `quiz/integrate.py`, `method.py`, `tools/integrate_tools.py`, `features2.py` (accueil + accords de guitare), `unmute.py`, `micbleed.py`, `i18n/integrate_i18n.py`.
-4. Publier : augmenter `VERSION` dans `sw.js` (actuellement `musicdev-1.27.8`), commit, push sur `main`
+4. Publier : augmenter `VERSION` dans `sw.js` (actuellement `musicdev-1.28.0`), commit, push sur `main`
    (GitHub Pages se met à jour en ~30 s). Pousser aussi les sources modifiées sur cette branche.
 
 ## Repères
@@ -36,5 +36,5 @@ Cette branche `sources` contient tout ce qui sert à le fabriquer. Point de sauv
 - 1.18.2 : `tools/mst2.js` remplace mstProcess (mastering v2), ajouté après rec_extra.js.
 - 1.19.0 : `about/` (module À propos ; about.py lit la version dans sw.js : augmenter sw.js AVANT build.sh). `about/mkpriv.py` régénère privacy.html (racine de main). Traductions dans about/tr.py.
 - 1.19.3 : recLevel par phrase (gain constant dans une phrase, correction en racine carrée) ; post-traitement : compression une bande lente, expandeur max -6 dB. Test : tests/twave.py (wobble ≈ 0 dB, nuances gardées).
-- App Windows sans installation : branche `telechargement` (un seul fichier MusicDEV-Windows.zip, < 100 Mo : locales fr/en/es seulement, sans SwiftShader). Lien : https://github.com/tomtommusic/musicdev/raw/telechargement/MusicDEV-Windows.zip — remplacer par un commit orphelin forcé à chaque version. Construction : /tmp/ea (Electron 33.2.1 win32-x64 + app3/main.js).
+- App Windows sans installation : branche `telechargement` (un seul fichier MusiDev-Windows.zip, < 100 Mo : locales fr/en/es seulement, sans SwiftShader). Lien : https://github.com/tomtommusic/musicdev/raw/telechargement/MusiDev-Windows.zip — remplacer par un commit orphelin forcé à chaque version. Construction : /tmp/ea (Electron 33.2.1 win32-x64 + app3/main.js).
 - 1.20.0 : `badges/` (badges.py après about.py ; compteurs dans localStorage 'atelier-badges' ; liste BADGES dans badges.js ; traductions badges/tr.py).

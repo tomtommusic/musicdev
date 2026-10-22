@@ -157,8 +157,8 @@ function makeQzPad(q,resp,onChange){
   const accBtns=[[1,'♯','Dièse'],[-1,'♭','Bémol'],[0,'♮','Bécarre']].map(([a,g,n])=>el('button',{class:'edbtn edtog edacc',type:'button','data-a':a,title:`${n} pour la prochaine note`,onclick:()=>{acc=acc===a?null:a;paint();}},el('b',{},g),el('small',{},n)));
   const info=el('p',{class:'edinfo'});
   const paint=()=>{accBtns.forEach(b=>b.setAttribute('aria-pressed',String(acc===+b.dataset.a)));
-    info.textContent=P.mode==='chord'?`Touche la portée pour ajouter une note (toutes empilées). Touche une note posée pour l'enlever.${notes.length?' Notes : '+notes.slice().sort((a,b)=>dia(a)-dia(b)).map(nn).join(' – '):''}`
-      :P.mode==='seq'?`Touche la portée pour ajouter les notes de gauche à droite (${notes.length}/${P.max||8}).`:'Pose le doigt sur la portée et glisse jusqu\'à la bonne note (son nom s\'affiche), puis lève le doigt. ▲ ▼ ajustent ensuite la note. Choisis d\'abord ♯ ou ♭ si elle est altérée.';};
+    info.textContent=P.mode==='chord'?`Touche la portée pour ajouter une note (toutes empilées). Touche une note posée pour l'enlever.`
+      :P.mode==='seq'?`Touche la portée pour ajouter les notes de gauche à droite (${notes.length}/${P.max||8}).`:'Pose le doigt sur la portée et glisse jusqu\'à la bonne ligne ou au bon interligne (une note grise te guide), puis lève le doigt. ▲ ▼ ajustent ensuite la note. Choisis d\'abord ♯ ou ♭ si elle est altérée.';};
   /* portée agrandie : une portée courte qu'on étire sur toute la largeur (2× plus haute sur téléphone) */
   const touch=matchMedia('(pointer:coarse)').matches;
   let svg=null;const render=()=>{const w=staff.clientWidth||600;draw(staff,P.build(notes).replace('X:1\n','X:1\n%%stretchlast 1\n'),{paddingtop:16,paddingbottom:16,staffwidth:Math.max(120,Math.min(420,w/(touch?(P.mode==='seq'?1.6:2.8):1.5)))});svg=staff.querySelector('svg');};
@@ -170,7 +170,7 @@ function makeQzPad(q,resp,onChange){
   /* aperçu : note fantôme + nom de la note, affiché au-dessus du doigt */
   function ghost(e,h){let g=svg&&svg.querySelector('.edghost');
     if(!h){tag.hidden=true;if(g)g.remove();return;}
-    const n=fromDia(h.d,acc==null?0:acc),wr=wrap.getBoundingClientRect();tag.hidden=false;tag.textContent=nn(n);
+    const wr=wrap.getBoundingClientRect();tag.hidden=true;
     tag.style.left=(e.clientX-wr.left+(e.pointerType==='touch'?-18:14))+'px';tag.style.top=(h.y-wr.top-(e.pointerType==='touch'?58:12))+'px';
     const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=h.y;const ctm=svg.getScreenCTM();if(!ctm)return;const p=pt.matrixTransform(ctm.inverse()),sc=ctm.a||1;
     if(!g){g=document.createElementNS('http://www.w3.org/2000/svg','ellipse');g.setAttribute('class','edghost');svg.append(g);}
