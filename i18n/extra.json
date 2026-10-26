@@ -980,7 +980,8 @@
 "Clique sur une note de la partition pour voir son doigté.": "Click a note in the score to see its fingering.",
 "Cette étude ne tient pas dans le registre choisi : essaie le registre étendu ou une autre tonalité.": "This étude does not fit the chosen range: try the extended range or another key.",
 "Positions": "Positions",
-"Pose le doigt sur la portée et glisse jusqu'à la bonne ligne ou au bon interligne (une note grise te guide), puis lève le doigt. ▲ ▼ ajustent ensuite la note. Choisis d'abord ♯ ou ♭ si elle est altérée.": "Put your finger on the staff and slide to the right line or space (a grey note guides you), then lift your finger. ▲ ▼ then adjust the note. Choose ♯ or ♭ first if it has an accidental."
+"Pose le doigt sur la portée et glisse jusqu'à la bonne ligne ou au bon interligne (une note grise te guide), puis lève le doigt. ▲ ▼ ajustent ensuite la note. Choisis d'abord ♯ ou ♭ si elle est altérée.": "Put your finger on the staff and slide to the right line or space (a grey note guides you), then lift your finger. ▲ ▼ then adjust the note. Choose ♯ or ♭ first if it has an accidental.",
+"± 5 cents (souple)": "± 5 cents (relaxed)"
 },
 "es": {
 "Modules": "Módulos",
@@ -1963,6 +1964,7 @@
 "Clique sur une note de la partition pour voir son doigté.": "Haz clic en una nota de la partitura para ver su digitación.",
 "Cette étude ne tient pas dans le registre choisi : essaie le registre étendu ou une autre tonalité.": "Este estudio no cabe en el registro elegido: prueba el registro amplio u otra tonalidad.",
 "Positions": "Posiciones",
-"Pose le doigt sur la portée et glisse jusqu'à la bonne ligne ou au bon interligne (une note grise te guide), puis lève le doigt. ▲ ▼ ajustent ensuite la note. Choisis d'abord ♯ ou ♭ si elle est altérée.": "Pon el dedo en el pentagrama y deslízalo hasta la línea o el espacio correctos (una nota gris te guía), luego levanta el dedo. ▲ ▼ ajustan después la nota. Elige primero ♯ o ♭ si tiene alteración."
+"Pose le doigt sur la portée et glisse jusqu'à la bonne ligne ou au bon interligne (une note grise te guide), puis lève le doigt. ▲ ▼ ajustent ensuite la note. Choisis d'abord ♯ ou ♭ si elle est altérée.": "Pon el dedo en el pentagrama y deslízalo hasta la línea o el espacio correctos (una nota gris te guía), luego levanta el dedo. ▲ ▼ ajustan después la nota. Elige primero ♯ o ♭ si tiene alteración.",
+"± 5 cents (souple)": "± 5 cents (flexible)"
 }
 }

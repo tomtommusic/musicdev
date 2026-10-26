@@ -417,5 +417,7 @@ exec(open('/tmp/claude-0/-home-claude-musicdev/4258b5e8-eacb-5999-9d1d-cfd4cbd81
 for _f,_e,_s in T:a(_f,_e,_s)
 exec(open('/tmp/claude-0/-home-claude-musicdev/4258b5e8-eacb-5999-9d1d-cfd4cbd81d51/scratchpad/rud/tr.py').read())
 for _f,_e,_s in T:a(_f,_e,_s)
+exec(open('/tmp/claude-0/-home-claude-musicdev/4258b5e8-eacb-5999-9d1d-cfd4cbd81d51/scratchpad/v129/tr.py').read())
+for _f,_e,_s in T:a(_f,_e,_s)
 json.dump({'en':E,'es':S},open('extra.json','w'),ensure_ascii=False,indent=0)
 print(len(E))
