@@ -65,11 +65,11 @@ function baVoice(c,prev){
   return[...new Set(out)].sort((a,b)=>a-b);
 }
 function baBassNote(c,deg,next){
-  const r=((c.root+BA_S.tr)%12+12)%12;let base=r<5?r+40:r+28;   /* fondamentale entre mi1 (28) et ré♯2 */
-  if(c.bass!=null&&deg==='R'){const b=((c.bass+BA_S.tr)%12+12)%12;base=b<5?b+40:b+28;}
+  const r=((c.root+BA_S.tr)%12+12)%12;let base=r<4?r+48:r+36;   /* note écrite (A.bass sonne une octave plus bas) : fondamentale entendue entre mi1 et ré♯2 */
+  if(c.bass!=null&&deg==='R'){const b=((c.bass+BA_S.tr)%12+12)%12;base=b<4?b+48:b+36;}
   const third=c.iv.includes(3)?3:4,fifth=c.iv.includes(6)?6:c.iv.includes(8)?8:7;
   switch(deg){case'5':return base+fifth;case'8':return base+12;case'3':return base+third;case'6':return base+(c.iv.includes(10)&&c.iv.length>3&&c.iv[3]===10?10:9);
-    case'A':{if(!next)return base+fifth;const n=((next.root+BA_S.tr)%12+12)%12,nb=n<5?n+40:n+28;return nb+(nb>base?-1:1);}
+    case'A':{if(!next)return base+fifth;const n=((next.root+BA_S.tr)%12+12)%12,nb=n<4?n+48:n+36;return nb+(nb>base?-1:1);}
     default:return base;}
 }
 function baStop(){const s=BA.sess;if(!s)return;BA.sess=null;clearInterval(s.timer);s.timers.forEach(clearTimeout);
@@ -106,16 +106,16 @@ function baPlay(){
         /* basse */
         if(BA_S.bs)for(const[pos,deg,len]of st.bs){if(pos!==s.step)continue;
           let m;if(deg==='W'){ /* basse qui marche : fondamentale, 3ce ou 5te, 5te ou 6te, approche chromatique */
-            const beat=Math.round(pos/st.sub);m=beat===0?baBassNote(ch,'R'):beat===1?baBassNote(ch,ch.iv.includes(3)?'3':'5'):beat===2?baBassNote(ch,'5'):baBassNote(ch,'A',nextCh);}
+            const beat=Math.round(pos/st.sub);m=beat===0?baBassNote(ch,'R'):beat===1?baBassNote(ch,'3'):beat===2?baBassNote(ch,'5'):baBassNote(ch,'A',nextCh);}
           else m=baBassNote(ch,deg,nextCh);
           A.bass(m,t,len*sd*.92,.75*vel+.1,g);}
         /* piano */
         if(BA_S.pn){
           if(st.ar){for(const[pos,deg]of st.ar){if(pos!==s.step)continue;const v=baVoice(ch);const r=v[0];
-            const m=deg==='R'?baBassNote(ch,'R')+24:deg==='5'?r+(ch.iv.includes(6)?6:7):deg==='3'?r+(ch.iv.includes(3)?3:4)+12:baBassNote(ch,'R')+36;
+            const m=deg==='R'?baBassNote(ch,'R')+12:deg==='5'?r+(ch.iv.includes(6)?6:7):deg==='3'?r+(ch.iv.includes(3)?3:4)+12:baBassNote(ch,'R')+24;
             A.piano(Math.min(84,m),t,sd*4,.32*vel+.08,g);}}
           else for(const[pos,len,v]of st.cp){if(pos!==s.step)continue;
-            let notes=baVoice(ch);if(st.shell){const r=((ch.root+BA_S.tr)%12+12)%12;const th=ch.iv.includes(3)?3:4,sv=ch.iv.includes(11)?11:ch.iv.includes(10)?10:ch.iv.includes(9)?9:7;notes=[52+((r+th)%12),52+((r+sv)%12)].map(x=>x<55?x+12:x).sort((a,b)=>a-b);}
+            let notes=baVoice(ch);if(st.shell){const r=((ch.root+BA_S.tr)%12+12)%12;const th=ch.iv.includes(3)?3:4,sv=ch.iv.includes(11)?11:ch.iv.includes(10)?10:ch.iv.includes(9)?9:7;notes=[48+((r+th)%12),48+((r+sv)%12)].map(x=>x<55?x+12:x).sort((a,b)=>a-b);}
             if(st.pw){const r=((ch.root+BA_S.tr)%12+12)%12;const b=48+r>=55?36+r:48+r;notes=[b,b+7,b+12];}
             notes.forEach(m=>A.piano(m,t,len*sd*.9,v*vel+.05,g));}
         }
