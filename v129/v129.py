@@ -73,3 +73,18 @@ rep("...micControls({mode:'pitch',onEvent:ev=>{if(S.st.ons)S.st.ons.push(ev);}",
 rep("const c=A.ctx;return c?(c.outputLatency||c.baseLatency||0):0;}",
     "const n=window.NATIVE_LAT;if(typeof n==='number'&&n>=0&&n<.6)return n;const c=A.ctx;return c?Math.min(.25,c.outputLatency||c.baseLatency||0):0;}")
 open(p,'w',encoding='utf-8').write(s)
+# ---------- 1.29.1 : micro repris au retour dans l'app, accordeur plus sensible ----------
+s=open(p,encoding='utf-8').read()
+rep("TS.gate=Math.max(.0005,Math.min(.0025,(TS.floor||.001)*2.2));","TS.gate=Math.max(.00025,Math.min(.0015,(TS.floor||.0008)*1.8));")
+rep("TS.on=true;TS.hist=[];TS.timer=setInterval(tunerTick,80);",
+    "TS.on=true;TS.hist=[];TS.timer=setInterval(tunerTick,80);{const tr=stream.getAudioTracks()[0];if(tr)tr.addEventListener('ended',()=>{if(TS.stream!==stream)return;tunerStop();if(!document.hidden&&S.mod==='ac'&&!TS.userOff)setTimeout(()=>{if(!TS.on)tunerStart();},400);});}")
+rep("function tunerTick(){\n  if(!TS.on||!TS.an)return;","function tunerTick(){\n  if(!TS.on||!TS.an)return;if(A.ctx&&A.ctx.state!=='running'){try{A.ctx.resume();}catch(e){}}")
+rep("MOD.ac.mount=function(){","""/* quand on quitte l'app (ou l'onglet) puis qu'on revient, iOS coupe le micro : on le relance */
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){if(TS.on){TS.resume=true;tunerStop();}if(typeof MIC!=='undefined'&&MIC.on){try{micStop();}catch(e){}}return;}
+  try{if(A.ctx&&A.ctx.state!=='running')A.ctx.resume();}catch(e){}
+  if(S.mod==='ac'&&!TS.userOff&&(TS.resume||!TS.on)){TS.resume=false;setTimeout(()=>{if(!TS.on&&!document.hidden)tunerStart();},350);}
+});
+window.addEventListener('pageshow',()=>{if(S.mod==='ac'&&!TS.userOff&&!TS.on)setTimeout(()=>{if(!TS.on)tunerStart();},350);});
+MOD.ac.mount=function(){""")
+open(p,'w',encoding='utf-8').write(s)
