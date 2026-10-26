@@ -5,7 +5,7 @@ a=s.index("  {id:'ho',kind:'tools'");b=s.index("\n",s.index("  {id:'ap',g:'Infos
 lines=s[a:b].splitlines(keepends=True)
 by={re.match(r"  \{id:'(\w+)'",l).group(1):l for l in lines}
 assert len(by)==len(lines),'deja'
-order=['ho','bd','mt','ba','ac','en','dm','dr','iv','pc','ln','la','lm','lr','so','vo','lb','rd','bt','tq','dg','et','gc','ap']
+order=['ho','bd','mt','ac','en','gc','ba','dm','dr','iv','pc','ln','la','lm','lr','so','vo','lb','rd','bt','tq','dg','et','ap']
 assert set(order)==set(by),(set(by)^set(order))
 s=s[:a]+''.join(by[k] for k in order)+s[b:]
 open(p,'w').write(s)

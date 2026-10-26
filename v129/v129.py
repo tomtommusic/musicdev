@@ -120,3 +120,16 @@ rep("  if(S.mod==='ac'&&!TS.userOff&&(TS.resume||!TS.on)){TS.resume=false;setTim
 rep("window.addEventListener('pageshow',()=>{if(S.mod==='ac'&&!TS.userOff&&!TS.on)setTimeout(()=>{if(!TS.on)tunerStart();},350);});",
     "window.addEventListener('pageshow',()=>{if(S.mod==='ac'&&!TS.userOff&&!TS.on)tnRevive(false);});\nwindow.addEventListener('nativeresume',()=>{if(S.mod==='ac'&&!TS.userOff)tnRevive(true);});\nwindow.addEventListener('nativepause',()=>{if(TS.on){TS.resume=true;tunerStop();}});")
 open(p,'w',encoding='utf-8').write(s)
+# ---------- 1.30.2 : accueil, la bulle « Les modules » pointe vers le bouton du menu (téléphone) ----------
+s=open(p,encoding='utf-8').read()
+rep("  if(mobile)mp.after(hoTip('up','Les modules','Touche ici pour choisir ce que tu veux travailler.'));",
+    "  if(mobile)mp.after(hoTip('up menu','Les modules','Touche le menu ☰ pour choisir ce que tu veux travailler.'));")
+css2="""
+.hotip.up.menu{align-self:flex-end!important;margin-left:auto!important;margin-right:4px;text-align:left}
+.hotip.up.menu::before{left:auto!important;right:18px!important}
+main[data-mod="ho"] .modpick .mp-ic{animation:hopulse 1.6s ease-out infinite;border-radius:12px}
+@keyframes hopulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 55%,transparent)}70%{box-shadow:0 0 0 12px color-mix(in srgb,var(--accent) 0%,transparent)}100%{box-shadow:0 0 0 0 transparent}}
+@media (prefers-reduced-motion:reduce){main[data-mod="ho"] .modpick .mp-ic{animation:none}}
+"""
+i=s.rindex("</style>");s=s[:i]+css2+s[i:]
+open(p,'w',encoding='utf-8').write(s)
