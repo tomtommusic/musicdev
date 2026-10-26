@@ -38,3 +38,17 @@
 .vowarn summary{cursor:pointer;line-height:1.4}
 .vowarn ul{margin:8px 0 6px;padding-left:1.2em}.vowarn li{margin:4px 0}
 .vowarn .hint{margin:6px 0 2px}
+
+.babuild{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:10px 0;background:var(--sunk,transparent)}
+.bbrow{margin:6px 0}.bbrow > .fl{display:block;margin-bottom:4px}
+.bakeys{display:flex;flex-wrap:wrap;gap:5px}
+.bakey{min-width:42px;padding:6px 9px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--ink);font:700 .92rem/1 var(--f-mono,monospace);cursor:pointer}
+.bakey.baq{font:600 .82rem/1 var(--f-ui,inherit);min-width:0}
+.bakey[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.bbline{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;justify-content:space-between}
+.bbadd{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.baprev{font:700 1.3rem/1 var(--f-mono,monospace);min-width:4.5em;text-align:center;padding:6px 10px;border:1px dashed var(--line);border-radius:10px}
+.bbtools{display:flex;flex-wrap:wrap;gap:6px}
+.bbtools .btn{flex:1 1 calc(50% - 6px);min-height:36px;padding:6px 8px;font-size:.85rem}
+.bbrow > .fl{font:500 .7rem/1.2 var(--f-mono,monospace);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+@media (min-width:601px){.bbtools .btn{flex:0 0 auto}}
