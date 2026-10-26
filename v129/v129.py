@@ -96,3 +96,27 @@ rep("function tnUi(){const u=TS.ui;if(!u)return;u.mic.textContent=TS.on?'■ Cou
 rep("    tunerStop();const n=e&&e.name;","    TS.fail=true;tunerStop();const n=e&&e.name;")
 rep("TS.on=true;TS.hist=[];TS.timer=setInterval(tunerTick,80);{","TS.on=true;TS.fail=false;TS.hist=[];TS.timer=setInterval(tunerTick,80);{")
 open(p,'w',encoding='utf-8').write(s)
+# ---------- 1.29.3 : relance robuste du micro de l'accordeur (iOS) ----------
+# Au retour dans l'app, iOS peut laisser le contexte audio figé ou le micro muet : on surveille le signal
+# (horloge audio arrêtée ou silence numérique parfait) et on reconstruit contexte + micro.
+s=open(p,encoding='utf-8').read()
+rep("function tunerTick(){\n  if(!TS.on||!TS.an)return;if(A.ctx&&A.ctx.state!=='running'){try{A.ctx.resume();}catch(e){}}",
+"""function tnRevive(hard){
+  if(S.mod!=='ac'||TS.userOff||document.hidden||TS.reviving)return;TS.reviving=true;
+  tunerStop();
+  if(hard||!A.ctx||A.ctx.state!=='running'){try{A.ctx&&A.ctx.close();}catch(e){}A.ctx=null;}
+  setTimeout(async()=>{const ok=await tunerStart();TS.reviving=false;TS.wd={t:0,ct:-1,z:0};
+    if(!ok&&!TS.retried){TS.retried=true;setTimeout(()=>tnRevive(true),1500);}else TS.retried=false;},450);
+}
+function tunerTick(){
+  if(!TS.on||!TS.an)return;if(A.ctx&&A.ctx.state!=='running'){try{A.ctx.resume();}catch(e){}}
+  {const w=TS.wd||(TS.wd={t:0,ct:-1,z:0}),now=performance.now(),ct=A.ctx?A.ctx.currentTime:0;
+   const noGesture=navigator.userActivation&&!navigator.userActivation.hasBeenActive;
+   if(ct!==w.ct){w.ct=ct;w.t=now;}else if(now-w.t>1200&&!noGesture&&now-(TS.lastRev||0)>4000){TS.wd=null;TS.lastRev=now;tnRevive(true);return;}}""")
+rep("  const r=tnDetect(TS.buf.subarray(TS.buf.length-need),sr,fmin,fmax);\n  /* bruit ambiant",
+    "  const r=tnDetect(TS.buf.subarray(TS.buf.length-need),sr,fmin,fmax);\n  if(TS.wd){if(!(r.rms>1e-7))TS.wd.z++;else TS.wd.z=0;if(TS.wd.z>25&&performance.now()-(TS.lastRev||0)>4000){TS.wd=null;TS.lastRev=performance.now();tnRevive(true);return;}}\n  /* bruit ambiant")
+rep("  if(S.mod==='ac'&&!TS.userOff&&(TS.resume||!TS.on)){TS.resume=false;setTimeout(()=>{if(!TS.on&&!document.hidden)tunerStart();},350);}",
+    "  if(S.mod==='ac'&&!TS.userOff&&(TS.resume||!TS.on)){TS.resume=false;tnRevive(true);}")
+rep("window.addEventListener('pageshow',()=>{if(S.mod==='ac'&&!TS.userOff&&!TS.on)setTimeout(()=>{if(!TS.on)tunerStart();},350);});",
+    "window.addEventListener('pageshow',()=>{if(S.mod==='ac'&&!TS.userOff&&!TS.on)tnRevive(false);});\nwindow.addEventListener('nativeresume',()=>{if(S.mod==='ac'&&!TS.userOff)tnRevive(true);});\nwindow.addEventListener('nativepause',()=>{if(TS.on){TS.resume=true;tunerStop();}});")
+open(p,'w',encoding='utf-8').write(s)
