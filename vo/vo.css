@@ -1,0 +1,35 @@
+/* Vocalises */
+.vocats{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.vochip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 12px;font:600 .85rem/1.1 var(--f-ui,inherit);cursor:pointer}
+.vochip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.volist{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;margin-bottom:14px}
+.voitem{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:9px 12px;cursor:pointer}
+.voitem b{font-size:.95rem}.voitem small{color:var(--muted);font-size:.78rem}
+.voitem.on{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.vocard{border:1px solid var(--line);border-radius:16px;background:var(--card);padding:14px 16px;margin-bottom:14px}
+.vohead h2{margin:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.vowhy{margin:6px 0 10px}
+.vostaff{background:var(--paper,#fff);border:1px solid var(--line);border-radius:12px;padding:6px 4px;overflow:hidden}
+.vostaff .is-now,.vostaff .is-now *{fill:var(--accent)!important;color:var(--accent)}
+.vokey{font:700 .95rem/1.3 var(--f-mono,monospace);margin:8px 0}
+.vobar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0 10px}
+.vobar .btn.on{background:var(--accent);color:var(--accent-ink)}
+.vohow ol{margin:6px 0 0;padding-left:1.3em}.vohow li{margin:4px 0}
+/* Accompagnateur */
+.bahead h2{margin:0 0 4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.bapanel{border:1px solid var(--line);border-radius:16px;background:var(--card);padding:14px 16px;margin:10px 0 14px}
+.babar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:8px}
+.babar .batv{font:700 1rem/1 var(--f-mono,monospace);min-width:74px;text-align:center}
+.babar .btn.on{background:var(--accent);color:var(--accent-ink)}
+.bacount{font:700 1.4rem/1 var(--f-mono,monospace);min-width:1.2em;color:var(--accent)}
+.bapanel input[type=range]{width:100%;margin:4px 0 12px}
+.bacells{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.bacell{position:relative;border:1px solid var(--line);border-radius:10px;padding:16px 8px 10px;text-align:center;font:700 1.05rem/1.2 var(--f-mono,monospace);background:var(--paper,#fff);min-height:28px;white-space:pre-wrap}
+.bacell small{position:absolute;top:3px;left:7px;font:600 .68rem/1 var(--f-ui,inherit);color:var(--muted)}
+.bacell.is-now{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.bacell.is-now small{color:var(--accent-ink)}
+.bagrid{width:100%;box-sizing:border-box;font:600 1rem/1.4 var(--f-mono,monospace);margin:8px 0}
+.baerr{color:#B3261E}
+.bachk{gap:6px 16px}
+.batr{min-width:3em;text-align:center}
+@media (max-width:600px){.bacells{grid-template-columns:repeat(2,1fr)}.bacell{font-size:.95rem}}
