@@ -1,4 +1,4 @@
-// MusicDEV — application iOS
+// MusiDev — application iOS
 // Enveloppe native (WKWebView) autour de la même app web que le site et les versions Mac/Windows.
 // Les fichiers web sont copiés dans l'app au moment de la compilation (voir la phase « Copier l'app web »).
 
@@ -60,8 +60,26 @@ final class LocalFileHandler: NSObject, WKURLSchemeHandler {
     func webView(_ webView: WKWebView, stop task: WKURLSchemeTask) {}
 }
 
+/// Comportement d'app plutôt que de page web : pas de zoom (double toucher, pincement), pas de sélection de texte
+/// ni de menu « copier » sur les boutons, pas de reflet gris au toucher.
+private let nativeFeelJS = """
+(function(){
+  var m=document.querySelector('meta[name=viewport]');
+  if(!m){m=document.createElement('meta');m.name='viewport';document.head.appendChild(m);}
+  m.content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover';
+  var st=document.createElement('style');
+  st.textContent='html{-webkit-text-size-adjust:100%;touch-action:manipulation}*{-webkit-tap-highlight-color:transparent}'+
+    'body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}'+
+    'input,textarea,select,[contenteditable],[contenteditable] *{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}';
+  document.head.appendChild(st);
+  document.documentElement.classList.add('native-app');
+  document.addEventListener('gesturestart',function(e){e.preventDefault();},{passive:false});
+})();
+"""
+
 final class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     private var webView: WKWebView!
+    private var latTimer: Timer?
     private let paper = UIColor(red: 244.0/255.0, green: 239.0/255.0, blue: 232.0/255.0, alpha: 1)
 
     override func loadView() {
@@ -72,6 +90,7 @@ final class WebViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         config.allowsInlineMediaPlayback = true
         config.mediaTypesRequiringUserActionForPlayback = []
         config.websiteDataStore = .default()   // sauvegardes (réglages, réussites) conservées
+        config.userContentController.addUserScript(WKUserScript(source: nativeFeelJS, injectionTime: .atDocumentEnd, forMainFrameOnly: true))
 
         webView = WKWebView(frame: .zero, configuration: config)
         webView.uiDelegate = self
@@ -80,6 +99,7 @@ final class WebViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         webView.backgroundColor = paper
         webView.scrollView.backgroundColor = paper
         webView.allowsBackForwardNavigationGestures = false
+        webView.allowsLinkPreview = false
         if #available(iOS 16.4, *) { webView.isInspectable = true }
         view = webView
     }
@@ -87,6 +107,18 @@ final class WebViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         webView.load(URLRequest(url: URL(string: "\(LocalFileHandler.scheme)://localhost/index.html")!))
+        // Latence réelle de la sortie audio (haut-parleur, écouteurs Bluetooth…), transmise à l'app web
+        // pour aligner l'affichage (curseur, métronome visuel) sur le son entendu.
+        latTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in self?.pushLatency() }
+        NotificationCenter.default.addObserver(forName: AVAudioSession.routeChangeNotification, object: nil, queue: .main) { [weak self] _ in
+            self?.pushLatency()
+        }
+    }
+
+    private func pushLatency() {
+        let s = AVAudioSession.sharedInstance()
+        let lat = max(0, min(0.5, s.outputLatency + s.ioBufferDuration))
+        webView?.evaluateJavaScript("window.NATIVE_LAT=\(lat);", completionHandler: nil)
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle { .darkContent }
