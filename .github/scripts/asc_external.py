@@ -33,6 +33,10 @@ st,j=call('GET',f'/v1/builds?filter[app]={app}&sort=-uploadedDate&limit=1&includ
 b=j['data'][0];bid=b['id'];a=b['attributes']
 ver=(j.get('included') or [{}])[0].get('attributes',{}).get('version','?')
 note(f'Dernier build : {ver} ({a["version"]}), état {a["processingState"]}')
+if os.environ.get('MODE')=='status':
+    st,jj=call('GET',f'/v1/builds/{bid}/buildBetaDetail')
+    ebs=jj.get('data',{}).get('attributes',{}).get('externalBuildState','?')
+    note(f'ETAT_EXTERNE={ebs}');sys.exit(0)
 if a['processingState']!='VALID':err('Le build est encore en traitement chez Apple : réessaie dans quelques minutes.');sys.exit(1)
 if a.get('usesNonExemptEncryption') is None:
     call('PATCH',f'/v1/builds/{bid}',{'data':{'type':'builds','id':bid,'attributes':{'usesNonExemptEncryption':False}}})

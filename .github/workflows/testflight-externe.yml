@@ -7,6 +7,10 @@ on:
         description: "Courriel pour les commentaires des testeurs"
         required: false
         default: ""
+      mode:
+        description: "status = seulement lire l'état de la révision"
+        required: false
+        default: ""
       testers:
         description: "Courriels des testeurs à ajouter (séparés par des virgules)"
         required: false
@@ -29,4 +33,5 @@ jobs:
           FEEDBACK_EMAIL: ${{ github.event.inputs.feedback_email }}
           WHAT_TO_TEST: ${{ github.event.inputs.what_to_test }}
           ADD_TESTERS: ${{ github.event.inputs.testers }}
+          MODE: ${{ github.event.inputs.mode }}
         run: python3 .github/scripts/asc_external.py
