@@ -12,9 +12,15 @@ on:
         description: "Numéro de version affiché (vide = celui du projet)"
         required: false
         default: ""
+      runner:
+        description: "Mac de GitHub (changer si l'envoi reste en file d'attente)"
+        required: false
+        default: macos-15
+        type: choice
+        options: [macos-15, macos-14, macos-15-intel, macos-26]
 jobs:
   upload:
-    runs-on: macos-15
+    runs-on: ${{ github.event.inputs.runner || 'macos-15' }}
     timeout-minutes: 60
     env:
       APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
