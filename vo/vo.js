@@ -158,11 +158,13 @@ MOD.vo.fresh=function(){
   const M=this,ex=voEx(),v=voVoice();
   const save=()=>tlSave('atelier-vo',VO_S);
   const re=()=>{save();if(VO.sess)voStop();M.fresh();};
-  /* filtres par objectif */
-  const chips=el('div',{class:'vocats',role:'group','aria-label':'Objectif'},
-    [['','Tous'],...VO_CATS].map(([k,l])=>el('button',{type:'button',class:'vochip','aria-pressed':String(VO_S.cat===k),onclick:()=>{VO_S.cat=k;save();M.fresh();}},T(l))));
-  const list=el('div',{class:'volist'},VO_EX.filter(x=>!VO_S.cat||x.c===VO_S.cat).map(x=>el('button',{type:'button',class:'voitem'+(x.id===ex.id?' on':''),'aria-pressed':String(x.id===ex.id),
-    onclick:()=>{VO_S.ex=x.id;VO_S.from=null;VO_S.to=null;VO_S.tempo=0;re();}},el('b',{},T(x.t)),el('small',{},T(VO_CATS.find(c=>c[0]===x.c)[1])))));
+  /* menu déroulant groupé par objectif, avec précédent / suivant (comme les rudiments) */
+  const pickEx=id=>{VO_S.ex=id;VO_S.from=null;VO_S.to=null;VO_S.tempo=0;re();};
+  const exSel=el('select',{id:'vo_sel','aria-label':'Vocalise'},...VO_CATS.map(([c,l])=>{const g=el('optgroup',{label:T(l)});
+    VO_EX.filter(x=>x.c===c).forEach(x=>{const o=el('option',{value:x.id},T(x.t));if(x.id===ex.id)o.selected=true;g.append(o);});return g;}));
+  exSel.addEventListener('change',()=>pickEx(exSel.value));
+  const nav=d=>{const i=VO_EX.findIndex(x=>x.id===ex.id);pickEx(VO_EX[(i+d+VO_EX.length)%VO_EX.length].id);};
+  const picker=el('div',{class:'rudpick vopick'},el('button',{type:'button',class:'btn quiet sq','aria-label':'Vocalise précédente',onclick:()=>nav(-1)},'‹'),exSel,el('button',{type:'button',class:'btn quiet sq','aria-label':'Vocalise suivante',onclick:()=>nav(1)},'›'));
   const[a,b]=voRange();const keyOpts=[];for(let k=a;k<=b;k++)keyOpts.push([k,voKeyName(k)]);
   const from=VO_S.from==null?a:Math.max(a,Math.min(b,VO_S.from)),to=VO_S.to==null?Math.min(b,from+7):Math.max(a,Math.min(b,VO_S.to));
   const voiceSel=sel('vo_voice',VO_VOICES.map(x=>[x[0],x[0]==='alt'?((typeof I18N!=='undefined'&&I18N.lang==='es')?'Contralto':'Alto'):T(x[1])]),VO_S.voice,x=>{VO_S.voice=x;VO_S.from=null;VO_S.to=null;re();});
@@ -180,7 +182,7 @@ MOD.vo.fresh=function(){
   M.ui=()=>{M.play.textContent=VO.sess?T('■ Arrêter'):T('▶ Commencer');M.play.classList.toggle('on',!!VO.sess);};
   const keys=voKeys();
   M.root.replaceChildren(
-    chips,list,
+    picker,
     el('div',{class:'vocard'},
       el('div',{class:'vohead'},el('div',{},el('h2',{},T(ex.t),typeof betaTag==='function'?betaTag():null),el('p',{class:'hint'},T(VO_CATS.find(c=>c[0]===ex.c)[1])+' · '+T(ex.src))),),
       el('p',{class:'vowhy'},T(ex.why)),
@@ -203,7 +205,7 @@ MOD.vo.fresh=function(){
 };
 MOD.vo.draw=function(){const M=this;if(!HAS_ABC()||!M.stand)return;const ex=voEx(),v=voVoice();
   const w=(M.stand.clientWidth||600)-16,sc=w<520?1:1.2;
-  ABCJS.renderAbc(M.stand,voAbc(ex,M.tonic,v[4]),{add_classes:true,staffwidth:Math.max(240,Math.min(760,w/sc-10)),scale:sc,paddingtop:8,paddingbottom:4,foregroundColor:'currentColor'});
+  ABCJS.renderAbc(M.stand,voAbc(ex,M.tonic,v[4]),{add_classes:true,staffwidth:Math.max(240,Math.min(760,w/sc-10)),scale:sc,paddingtop:8,paddingbottom:4,responsive:'resize',foregroundColor:'currentColor'});
   M.els=[...M.stand.querySelectorAll('.abcjs-note,.abcjs-rest')];};
 MOD.vo.now=function(i,u){const M=this;
   if(u&&u.key!==M.tonic){M.tonic=u.key;M.draw();}
