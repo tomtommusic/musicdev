@@ -200,6 +200,15 @@ MOD.vo.fresh=function(){
   M.ui=()=>{M.play.textContent=VO.sess?T('■ Arrêter'):T('▶ Commencer');M.play.classList.toggle('on',!!VO.sess);};
   const keys=voKeys();
   M.root.replaceChildren(
+    el('details',{class:'vowarn'},
+      el('summary',{},el('b',{},'⚠ Prends soin de ta voix'),' ',el('span',{},'Arrête dès qu\'il y a douleur ou gêne, bois de l\'eau et ne force jamais.')),
+      el('ul',{},
+        el('li',{},'Échauffe-toi doucement et commence dans une zone confortable de ta voix.'),
+        el('li',{},'Arrête immédiatement en cas de douleur, de brûlure, de gêne dans la gorge ou d\'enrouement. Ne force jamais pour atteindre une note.'),
+        el('li',{},'Bois de l\'eau régulièrement et fais des pauses (quelques minutes toutes les 15 à 20 minutes).'),
+        el('li',{},'Évite de chanter si tu es malade, enroué ou si ta voix est fatiguée.'),
+        el('li',{},'Si un enrouement dure plus de deux semaines ou si une douleur persiste, consulte un médecin ou un orthophoniste.')),
+      el('p',{class:'hint'},'Ces exercices sont offerts à titre éducatif seulement. Ils ne remplacent pas l\'enseignement d\'un professeur de chant qualifié ni l\'avis d\'un professionnel de la santé. Tu les pratiques à ton rythme et sous ta responsabilité. Les élèves mineurs devraient les pratiquer avec l\'accord et l\'encadrement d\'un parent ou d\'un enseignant.')),
     picker,
     el('div',{class:'vocard'},
       el('div',{class:'vohead'},el('div',{},el('h2',{},T(ex.t),typeof betaTag==='function'?betaTag():null),el('p',{class:'hint'},T(VO_CATS.find(c=>c[0]===ex.c)[1])+' · '+T(ex.src))),),
