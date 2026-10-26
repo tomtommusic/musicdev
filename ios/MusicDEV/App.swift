@@ -113,6 +113,11 @@ final class WebViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         NotificationCenter.default.addObserver(forName: AVAudioSession.routeChangeNotification, object: nil, queue: .main) { [weak self] _ in
             self?.pushLatency()
         }
+        // Retour dans l'app : on réactive la session audio (le micro et le son reprennent).
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: .main) { [weak self] _ in
+            try? AVAudioSession.sharedInstance().setActive(true)
+            self?.pushLatency()
+        }
     }
 
     private func pushLatency() {
