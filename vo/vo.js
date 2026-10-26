@@ -156,13 +156,13 @@ function voPlay(){
     tab.forEach(([d,len],ni)=>{
       const tt=t+u*e8,dur=len*e8;
       if(d!=null){
-        if(VO_S.guide&&!(ex.gl&&ni>0&&ni<tab.length-1))s.ev.push({t:tt,f:()=>A.piano(k+d,tt,Math.min(dur*.95,e8*8),.42,g)});
+        if(VO_S.guide&&!(ex.gl&&ni>0&&ni<tab.length-1))s.ev.push({t:tt,f:()=>A.piano(k+d,tt,Math.min(dur*.95,e8*8),.5,g)});
       }
       s.ev.push({t:tt,ui:{key:k,ki,n:keys.length,note:ni}});
       u+=len;});
     t+=u*e8+e8*(ex.gl?2:1);
   });
-  s.end=t;
+  s.end=t;s.ev.sort((x,y)=>x.t-y.t);   /* accords et mélodie mêlés : dans l'ordre du temps */
   const tick=()=>{if(VO.sess!==s)return;if(S.mod!=='vo'){voStop();return;}const now=c.currentTime;
     while(s.i<s.ev.length&&s.ev[s.i].t<now+.25){const e=s.ev[s.i++];if(e.f)e.f();
       if(e.ui){const u=e.ui;s.timers.push(setTimeout(()=>{if(VO.sess===s)MOD.vo.now(u.note,u);},Math.max(0,(e.t+lag-now)*1000)));}}
