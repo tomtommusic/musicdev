@@ -88,3 +88,11 @@ document.addEventListener('visibilitychange',()=>{
 window.addEventListener('pageshow',()=>{if(S.mod==='ac'&&!TS.userOff&&!TS.on)setTimeout(()=>{if(!TS.on)tunerStart();},350);});
 MOD.ac.mount=function(){""")
 open(p,'w',encoding='utf-8').write(s)
+# ---------- 1.29.2 : plus de bouton « Couper le micro » (le micro reste actif dans l'accordeur) ;
+#            le bouton n'apparaît que si le micro n'a pas pu démarrer, pour réessayer ----------
+s=open(p,encoding='utf-8').read()
+rep("function tnUi(){const u=TS.ui;if(!u)return;u.mic.textContent=TS.on?'■ Couper le micro':'🎤 Activer le micro';u.mic.classList.toggle('primary',!TS.on);if(!TS.on)tnShow(null,0);}",
+    "function tnUi(){const u=TS.ui;if(!u)return;u.mic.textContent='🎤 Activer le micro';u.mic.hidden=TS.on||!TS.fail;if(!TS.on)tnShow(null,0);}")
+rep("    tunerStop();const n=e&&e.name;","    TS.fail=true;tunerStop();const n=e&&e.name;")
+rep("TS.on=true;TS.hist=[];TS.timer=setInterval(tunerTick,80);{","TS.on=true;TS.fail=false;TS.hist=[];TS.timer=setInterval(tunerTick,80);{")
+open(p,'w',encoding='utf-8').write(s)
