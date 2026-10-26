@@ -123,6 +123,23 @@ function voStop(){const s=VO.sess;if(!s)return;VO.sess=null;clearInterval(s.time
   MOD.vo.now(-1,null);MOD.vo.ui&&MOD.vo.ui();}
 /* accord du piano (main gauche + accord) pour une tonique : I, ou V7 pour la transition */
 function voChord(tonic){const pc=((tonic%12)+12)%12,b=36+pc,r=55+pc;return[b,r,r+4,r+7];}
+/* harmonisation simple du motif : par tranche d'une blanche, l'accord (I, IV, V7, ii, vi) qui contient le plus de notes de la mélodie ;
+   la dernière tranche revient toujours à I. Degrés en demi-tons à partir de la tonique. */
+const VO_HARM=[['I',0,[0,4,7]],['V',7,[7,11,2,5]],['IV',5,[5,9,0]],['vi',9,[9,0,4]],['ii',2,[2,5,9]]];
+function voHarm(ex){
+  const segs=[];let u=0;const tot=ex.p.reduce((a,x)=>a+x[1],0),L=tot<=8?Math.min(4,tot):4;
+  for(let s0=0;s0<tot;s0+=L){const w={};let uu=0;
+    for(const[d,len]of ex.p){const a=Math.max(uu,s0),b=Math.min(uu+len,s0+L);if(d!=null&&b>a){const r=((d%12)+12)%12;w[r]=(w[r]||0)+(b-a)*(uu>=s0?1.5:1);}uu+=len;}
+    let best=VO_HARM[0],bs=-1;
+    const prev=segs.length?segs[segs.length-1].h:null;
+    VO_HARM.forEach(([n,root,tones],i)=>{let sc=0;for(const r in w)if(tones.includes(+r))sc+=w[r];else sc-=w[r]*.6;sc-=i*.05;if(s0===0&&i===0)sc+=.3;else if(prev&&VO_HARM[i]===prev)sc-=.15;if(sc>bs){bs=sc;best=VO_HARM[i];}});
+    if(s0+L>=tot)best=VO_HARM[0];
+    if(segs.length&&segs[segs.length-1].h===best)segs[segs.length-1].len+=Math.min(L,tot-s0);else segs.push({u0:s0,len:Math.min(L,tot-s0),h:best});}
+  return segs;
+}
+/* voicing près de sol3–ré4, basse à la fondamentale */
+function voVoicing(k,h){const root=k+h[1],pc=((root%12)+12)%12,bass=36+pc;
+  const notes=h[2].slice(0,3).map(x=>{const q=((k+x)%12+12)%12;let m=55+((q-55)%12+12)%12;return m;}).sort((a,b)=>a-b);return[bass,...notes];}
 function voPlay(){
   voStop();const c=A.init();if(typeof qzUnmute==='function')qzUnmute();if(typeof stop==='function')stop();
   const ex=voEx(),keys=voKeys(),bpm=VO_S.tempo||ex.tempo,e8=30/bpm;
@@ -131,14 +148,15 @@ function voPlay(){
   /* on prépare la liste d'événements : accord de départ (2 temps), motif, et ainsi de suite pour chaque tonique */
   let t=s.t0;const lag=typeof audioLag==='function'?audioLag():0;
   keys.forEach((k,ki)=>{
-    s.ev.push({t,f:()=>{voChord(k).forEach((m,j)=>A.piano(m,t,e8*3.6,j?.35:.45,g));A.piano(k,t,e8*3.6,.5,g);},ui:{key:k,ki,n:keys.length,note:-1}});
+    const first=ex.p.find(x=>x[0]!=null)[0];
+    s.ev.push({t,f:()=>{voChord(k).forEach((m,j)=>A.piano(m,t,e8*3.6,j?.32:.42,g));A.piano(k+first,t,e8*3.6,.5,g);},ui:{key:k,ki,n:keys.length,note:-1}});
+    for(const sg of voHarm(ex)){const tt=t+e8*4+sg.u0*e8,dur=sg.len*e8;s.ev.push({t:tt,f:()=>voVoicing(k,sg.h).forEach((m,j)=>A.piano(m,tt,dur*.95,j?.2:.3,g))});}
     t+=e8*4;
     let u=0;const tab=ex.p;
     tab.forEach(([d,len],ni)=>{
       const tt=t+u*e8,dur=len*e8;
       if(d!=null){
         if(VO_S.guide&&!(ex.gl&&ni>0&&ni<tab.length-1))s.ev.push({t:tt,f:()=>A.piano(k+d,tt,Math.min(dur*.95,e8*8),.42,g)});
-        if(u%4===0)s.ev.push({t:tt,f:()=>voChord(k).slice(1).forEach(m=>A.piano(m,tt,Math.min(e8*4,dur+e8*2)*.95,.22,g))});
       }
       s.ev.push({t:tt,ui:{key:k,ki,n:keys.length,note:ni}});
       u+=len;});
