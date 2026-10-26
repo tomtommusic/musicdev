@@ -7,6 +7,10 @@ on:
         description: "Courriel pour les commentaires des testeurs"
         required: false
         default: ""
+      testers:
+        description: "Courriels des testeurs à ajouter (séparés par des virgules)"
+        required: false
+        default: ""
       what_to_test:
         description: "Quoi tester (texte montré aux testeurs)"
         required: false
@@ -24,4 +28,5 @@ jobs:
           ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
           FEEDBACK_EMAIL: ${{ github.event.inputs.feedback_email }}
           WHAT_TO_TEST: ${{ github.event.inputs.what_to_test }}
+          ADD_TESTERS: ${{ github.event.inputs.testers }}
         run: python3 .github/scripts/asc_external.py

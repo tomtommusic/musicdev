@@ -76,6 +76,19 @@ gid=g['id']
 st,jj=call('POST',f'/v1/betaGroups/{gid}/relationships/builds',{'data':[{'type':'builds','id':bid}]})
 note('Build ajouté au groupe.' if st<300 else f'Ajout du build au groupe : {errs(jj)}')
 
+# testeurs à ajouter au groupe (courriels séparés par des virgules)
+for em in [x.strip() for x in os.environ.get('ADD_TESTERS','').split(',') if x.strip()]:
+    st,jj=call('POST','/v1/betaTesters',{'data':{'type':'betaTesters','attributes':{'email':em},'relationships':{'betaGroups':{'data':[{'type':'betaGroups','id':gid}]}}}})
+    if st<300:note(f'Testeur ajouté au groupe : {em}')
+    elif st==409:
+        st2,j2=call('GET',f'/v1/betaTesters?filter[email]={em}')
+        tid=(j2.get('data') or [{}])[0].get('id')
+        if tid:
+            st3,j3=call('POST',f'/v1/betaGroups/{gid}/relationships/betaTesters',{'data':[{'type':'betaTesters','id':tid}]})
+            note(f'Testeur déjà connu, ajouté au groupe : {em}' if st3<300 else f'Testeur {em} : {errs(j3)}')
+        else:note(f'Testeur {em} : {errs(jj)}')
+    else:note(f'Testeur {em} non ajouté : {errs(jj)}')
+
 # coordonnées pour le réviseur
 st,j=call('GET',f'/v1/apps/{app}/betaAppReviewDetail')
 d=j.get('data',{});da=d.get('attributes',{})
