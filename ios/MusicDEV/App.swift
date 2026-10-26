@@ -13,8 +13,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Le son joue même quand l'iPhone est en mode silencieux (comme une app de musique).
-        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers])
+        // Le son joue même quand l'iPhone est en mode silencieux (comme une app de musique),
+        // et la session permet aussi le micro (accordeur, lecture au micro) : sortie sur le haut-parleur
+        // ou des écouteurs Bluetooth, sans passer par l'écouteur du téléphone.
+        try? AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default,
+                                                         options: [.defaultToSpeaker, .allowBluetoothA2DP, .mixWithOthers])
         try? AVAudioSession.sharedInstance().setActive(true)
 
         let window = UIWindow(frame: UIScreen.main.bounds)
@@ -117,6 +120,19 @@ final class WebViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: .main) { [weak self] _ in
             try? AVAudioSession.sharedInstance().setActive(true)
             self?.pushLatency()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self?.webView?.evaluateJavaScript("window.dispatchEvent(new Event('nativeresume'))", completionHandler: nil)
+            }
+        }
+        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: .main) { [weak self] _ in
+            self?.webView?.evaluateJavaScript("window.dispatchEvent(new Event('nativepause'))", completionHandler: nil)
+        }
+        // Interruption audio (appel, Siri, autre app) terminée : on relance aussi.
+        NotificationCenter.default.addObserver(forName: AVAudioSession.interruptionNotification, object: nil, queue: .main) { [weak self] n in
+            guard let raw = n.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt,
+                  AVAudioSession.InterruptionType(rawValue: raw) == .ended else { return }
+            try? AVAudioSession.sharedInstance().setActive(true)
+            self?.webView?.evaluateJavaScript("window.dispatchEvent(new Event('nativeresume'))", completionHandler: nil)
         }
     }
 
