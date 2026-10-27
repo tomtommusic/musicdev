@@ -24,7 +24,7 @@ const BA_STYLES={
   funk:{n:'Funk',v:{'4/4':{m:4,sub:4,dr:{kick:[0,3,10],snare:[4,12],ghost:[7,9,15],hh:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]},bs:[[0,'R',2],[3,'8',1],[6,'R',1],[8,'R',2],[10,'5',1],[11,'8',1],[14,'A',2]],cp:[[2,1,.45],[6,1,.4],[11,1,.45],[14,1,.4]]}}},
   swing:{n:'Swing (jazz)',v:{
     '4/4':{m:4,sub:3,dr:{ride:[0,3,5,6,9,11],hhp:[3,9],kick:[0,3,6,9]},dv:{kick:.22,ride:{0:.42,3:.55,5:.3,6:.42,9:.55,11:.3}},bs:[[0,'W',3],[3,'W',3],[6,'W',3],[9,'W',3]],cp:[[0,2,.4],[5,2,.42]],shell:true},
-    '3/4':{m:3,sub:3,dr:{ride:[0,3,5,6],hhp:[3,6],kick:[0]},dv:{kick:.22,ride:{0:.5,3:.42,5:.3,6:.42}},bs:[[0,'R',3],[3,'5',3],[6,'A',3]],cp:[[3,2,.38],[6,2,.36]],shell:true}}},
+    '3/4':{m:3,sub:3,dr:{ride:[0,3,5,6],hhp:[3,6],kick:[0]},dv:{kick:.22,ride:{0:.5,3:.42,5:.3,6:.42}},bs:[[0,'W',3],[3,'W',3],[6,'W',3]],cp:[[3,2,.38],[6,2,.36]],shell:true}}},
   shuffle:{n:'Blues shuffle',v:{
     '4/4':{m:4,sub:3,dr:{hh:[0,2,3,5,6,8,9,11],kick:[0,6],snare:[3,9]},dv:{hh:{0:.5,2:.3,3:.5,5:.3,6:.5,8:.3,9:.5,11:.3}},bs:[[0,'R',2],[2,'R',1],[3,'3',2],[5,'3',1],[6,'5',2],[8,'5',1],[9,'6',2],[11,'6',1]],cp:[[2,1,.38],[5,1,.4],[8,1,.38],[11,1,.4]]},
     '12/8':{m:4,sub:3,dr:{hh:[0,2,3,5,6,8,9,11],kick:[0,6],snare:[3,9]},dv:{hh:{0:.5,2:.3,3:.5,5:.3,6:.5,8:.3,9:.5,11:.3}},bs:[[0,'R',2],[2,'R',1],[3,'3',2],[5,'3',1],[6,'5',2],[8,'5',1],[9,'6',2],[11,'6',1]],cp:[[2,1,.38],[5,1,.4],[8,1,.38],[11,1,.4]]}}},
@@ -99,6 +99,43 @@ function baBassNote(c,deg,next){
     case'A':{if(!next)return base+fifth;const n=((next.root+BA_S.tr)%12+12)%12,nb=n<4?n+60:n+48;return nb+(nb>base?-1:1);}
     default:return base;}
 }
+/* ---- basse qui marche (walking bass) ----
+   Une noire par temps. Temps 1 : fondamentale (ou, si l'accord se répète, une autre note de l'accord pour relancer la ligne).
+   Dernier temps avant le changement : note d'approche (demi-ton au-dessus ou au-dessous de la fondamentale suivante,
+   parfois sa quinte : approche « dominante »). Entre les deux : la ligne avance vers la cible, notes de l'accord sur les temps forts,
+   notes de la gamme de l'accord (mode) sur les temps faibles, sans répéter la même note. Hauteurs entendues : mi2 à sol3. */
+const BA_LO=40,BA_HI=55,BA_TOP=59;
+function baScale(c){const q=c.q,iv=c.iv;
+  if(/m7b5|m7♭5|ø/.test(q))return[0,1,3,5,6,8,10];
+  if(/dim|°/.test(q))return[0,2,3,5,6,8,9,11];
+  if(/aug|\+/.test(q))return[0,2,4,6,8,10];
+  if(/sus/.test(q))return[0,2,5,7,9,10];
+  const minor=iv.includes(3),dom=iv.includes(10)&&!minor,maj7=iv.includes(11);
+  return minor?[0,2,3,5,7,9,10]:dom?[0,2,4,5,7,9,10]:maj7?[0,2,4,5,7,9,11]:[0,2,4,5,7,9,11];}
+const baPc=c=>((c.root+BA_S.tr)%12+12)%12;
+function baNear(pc,ref,lo=BA_LO,hi=BA_TOP){let best=null;for(let m=lo;m<=hi;m++)if((m-pc+1200)%12===0&&(best==null||Math.abs(m-ref)<Math.abs(best-ref)))best=m;return best;}
+function baWalk(ch,nx,beats,prev,sameAsPrev){
+  const r=baPc(ch),ref=prev==null?47:prev,R=Math.random;
+  const tones=ch.iv.map(x=>(r+x)%12),scale=baScale(ch).map(x=>(r+x)%12);
+  /* départ */
+  let first=baNear(r,ref,BA_LO,BA_HI);
+  if(sameAsPrev&&prev!=null){const cand=[...new Set(tones)].filter(pc=>pc!==r).map(pc=>baNear(pc,prev)).filter(m=>m!==prev);if(cand.length)first=cand.sort((a,b)=>Math.abs(a-prev)-Math.abs(b-prev))[0];}
+  const line=[first];if(beats===1)return line;
+  /* cible : fondamentale suivante ; si c'est le même accord, on vise l'octave ou la quinte pour faire avancer la ligne */
+  const nr=nx?baPc(nx):r;let target=baNear(nr,first);
+  if(nx&&nr===r){target=first+12<=BA_TOP?first+12:first-12>=BA_LO?first-12:first+7;}
+  /* note d'approche du dernier temps */
+  const approach=last=>{const opts=[target-1,target+1];if(R()<.2)opts.push(target+7>BA_TOP?target-5:target+7);
+    const ok=opts.filter(m=>m>=BA_LO-2&&m<=BA_TOP&&m!==last);ok.sort((a,b)=>Math.abs(a-last)-Math.abs(b-last)+(R()-.5)*1.5);return ok[0]??target-1;};
+  for(let k=1;k<beats-1;k++){
+    const prevN=line[k-1],goal=first+(target-first)*k/(beats-1),strong=k%2===0;
+    const pool=[];for(let m=BA_LO-2;m<=BA_TOP;m++){const pc=m%12;if(m===prevN)continue;if(strong?tones.includes(pc):scale.includes(pc))pool.push(m);}
+    if(!pool.length)for(let m=BA_LO;m<=BA_TOP;m++)if(scale.includes(m%12)&&m!==prevN)pool.push(m);
+    pool.sort((a,b)=>(Math.abs(a-goal)+Math.abs(a-prevN)*.35+R()*.8)-(Math.abs(b-goal)+Math.abs(b-prevN)*.35+R()*.8));
+    line.push(pool[0]);}
+  line.push(approach(line[line.length-1]));
+  return line;
+}
 function baStop(){const s=BA.sess;if(!s)return;BA.sess=null;clearInterval(s.timer);s.timers.forEach(clearTimeout);
   try{s.g.gain.setTargetAtTime(0,A.ctx.currentTime,.05);setTimeout(()=>s.g.disconnect(),400);}catch(e){}
   MOD.ba.now(-1);MOD.ba.ui&&MOD.ba.ui();}
@@ -132,8 +169,9 @@ function baPlay(){
             drHit(hid,t,g,v*vel);}}
         /* basse */
         if(BA_S.bs)for(const[pos,deg,len]of st.bs){if(pos!==s.step)continue;
-          let m;if(deg==='W'){ /* basse qui marche : fondamentale, 3ce ou 5te, 5te ou 6te, approche chromatique */
-            const beat=Math.round(pos/st.sub);m=beat===0?baBassNote(ch,'R'):beat===1?baBassNote(ch,'3'):beat===2?baBassNote(ch,'5'):baBassNote(ch,'A',nextCh);}
+          let m;if(deg==='W'){ /* basse qui marche : ligne calculée au début de chaque accord */
+            if(chStart||!s.wl){const same=s.wch&&s.wch.root===ch.root&&s.wch.q===ch.q;s.wl=baWalk(ch,nextCh,Math.max(1,Math.round(per/st.sub)),s.wprev,same);s.wch=ch;}
+            const k=Math.floor((s.step%per)/st.sub);m=(s.wl[Math.min(k,s.wl.length-1)])+12;s.wprev=m-12;}
           else m=baBassNote(ch,st.alt&&deg==='R'&&s.bar%2===1?'5':deg,nextCh);
           A.bass(m,t,len*sd*.92,.75*vel+.1,g);}
         /* piano */
