@@ -1172,6 +1172,9 @@
 "Afro-cubain": "Afro-Cuban",
 "Valse jazz : ii – V – I": "Jazz waltz: ii – V – I",
 "Ballade en 12/8 : I – vi – IV – V": "12/8 ballad: I – vi – IV – V",
+"coupé": "muted",
+"Baisse un instrument à zéro pour jouer sa partie toi-même.": "Turn an instrument down to zero to play its part yourself.",
+"Tout se change pendant que ça joue : tempo, style, grille, transposition et instruments. Baisse un instrument à zéro pour jouer sa partie toi-même.": "Everything can be changed while it plays: tempo, style, chart, transposition and instruments. Turn an instrument down to zero to play its part yourself.",
 "± 5 cents (souple)": "± 5 cents (relaxed)",
 "Touche le menu ☰ pour choisir ce que tu veux travailler.": "Tap the ☰ menu to choose what you want to practise."
 },
@@ -2348,6 +2351,9 @@
 "Afro-cubain": "Afrocubano",
 "Valse jazz : ii – V – I": "Vals jazz: ii – V – I",
 "Ballade en 12/8 : I – vi – IV – V": "Balada en 12/8: I – vi – IV – V",
+"coupé": "silenciado",
+"Baisse un instrument à zéro pour jouer sa partie toi-même.": "Baja un instrumento a cero para tocar tú su parte.",
+"Tout se change pendant que ça joue : tempo, style, grille, transposition et instruments. Baisse un instrument à zéro pour jouer sa partie toi-même.": "Todo se puede cambiar mientras suena: tempo, estilo, cifrado, transposición e instrumentos. Baja un instrumento a cero para tocar tú su parte.",
 "± 5 cents (souple)": "± 5 cents (flexible)",
 "Touche le menu ☰ pour choisir ce que tu veux travailler.": "Toca el menú ☰ para elegir qué quieres practicar."
 }

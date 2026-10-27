@@ -52,3 +52,8 @@
 .bbtools .btn{flex:1 1 calc(50% - 6px);min-height:36px;padding:6px 8px;font-size:.85rem}
 .bbrow > .fl{font:500 .7rem/1.2 var(--f-mono,monospace);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 @media (min-width:601px){.bbtools .btn{flex:0 0 auto}}
+
+.bafaders{display:grid;grid-template-columns:1fr;gap:6px;margin:6px 0 10px}
+.bafader{display:grid;grid-template-columns:6.5em 1fr 4em;align-items:center;gap:10px}
+.bafader .fl{margin:0}.bafader input[type=range]{width:100%}
+.bavv{font:600 .85rem/1 var(--f-mono,monospace);text-align:right;color:var(--muted)}

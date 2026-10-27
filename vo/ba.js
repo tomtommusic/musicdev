@@ -53,7 +53,10 @@ const BA_PRESETS=[
   ['Reggae : I – IV','G | C | G | C','reggae'],
   ['Country : I – IV – V','G | G | C | C | D | D | G | G','country'],
   ['Cadence andalouse','Am | G | F | E7','afro']];
-const BA_S=tlLoad('atelier-ba',{grid:'C | G | Am | F',style:'pop',tempo:96,tr:0,dr:true,bs:true,pn:true,int:2,loop:true,ci:true,meter:''});
+const BA_S=tlLoad('atelier-ba',{grid:'C | G | Am | F',style:'pop',tempo:96,tr:0,dr:true,bs:true,pn:true,int:2,loop:true,ci:true,meter:''});if(!BA_S.vol)BA_S.vol={dr:.8,bs:.8,pn:.8};
+const BA_BASE={dr:1.25,bs:.2,pn:1.1};   /* équilibre de départ : la basse de synthèse est naturellement forte, le piano plus doux */
+const BA_MIX={swing:{dr:2.4},ballad:{dr:1.3},bossa:{dr:1.3}};   /* certains grooves sont joués plus légèrement : on les remonte */
+const baGain=k=>BA_BASE[k]*((BA_MIX[BA_S.style]||{})[k]||1)*BA_S.vol[k]*1.25;
 const BA={sess:null};
 /* chiffre indicateur : seulement ceux que le style connaît */
 function baMeters(){return Object.keys((BA_STYLES[BA_S.style]||BA_STYLES.pop).v);}
@@ -142,8 +145,9 @@ function baStop(){const s=BA.sess;if(!s)return;BA.sess=null;clearInterval(s.time
 function baPlay(){
   baStop();const{bars}=baGrid(BA_S.grid);if(!bars.length){feedback('Écris au moins un accord dans la grille.','bad');return;}
   const c=A.init();if(typeof qzUnmute==='function')qzUnmute();if(typeof stop==='function')stop();
-  const g=c.createGain();g.gain.value=1;g.connect(A.out);
-  const s={g,timers:[],timer:0,bar:BA_S.ci?-1:0,step:0,next:c.currentTime+.12,pass:0,prevV:null,ending:false};BA.sess=s;
+  const g=c.createGain();g.gain.value=1.3;g.connect(A.out);
+  const bus=k=>{const x=c.createGain();x.gain.value=baGain(k);x.connect(g);return x;};
+  const s={g,gD:bus('dr'),gB:bus('bs'),gP:bus('pn'),timers:[],timer:0,bar:BA_S.ci?-1:0,step:0,next:c.currentTime+.12,pass:0,prevV:null,ending:false};BA.sess=s;
   const lag=typeof audioLag==='function'?audioLag():0;
   const tick=()=>{if(BA.sess!==s)return;if(S.mod!=='ba'){baStop();return;}const now=c.currentTime;
     while(s.next<now+.2){
@@ -159,30 +163,30 @@ function baPlay(){
         const vel=[0,.55,.8,1][I];
         /* batterie */
         if(BA_S.dr){const D=st.dr;
-          if(s.step===0&&(s.bar===0||(s.bar%4===0&&I>=2))&&!s.ending)drHit('crash',t,g,.6*vel);
-          if(fill){const k=s.step-(spb-st.sub);drHit(k<st.sub/2?'snare':(k%2?'mtom':'ftom'),t,g,.75*vel);}
+          if(s.step===0&&(s.bar===0||(s.bar%4===0&&I>=2))&&!s.ending)drHit('crash',t,s.gD,.6*vel);
+          if(fill){const k=s.step-(spb-st.sub);drHit(k<st.sub/2?'snare':(k%2?'mtom':'ftom'),t,s.gD,.75*vel);}
           else for(const[id,pos]of Object.entries(D)){
             const P=Array.isArray(pos[0])?pos[s.bar%pos.length]:pos;if(!P.includes(s.step))continue;
             const dvv=(st.dv||{})[id];let v=dvv==null?(id==='ghost'?.22:id==='kick'?.9:id==='snare'?.85:id==='hh'?(s.step%st.sub===0?.55:.38):id==='ride'?.5:.7):(typeof dvv==='number'?dvv:(dvv[s.step]??.4));
             let hid=id==='ghost'?'snare':id==='bell'?'ride':id;if(I===3&&id==='hh'&&s.step%(st.sub*2)===st.sub)hid='hho';if(I===1&&id==='hh')v*=.7;
             if(I===1&&id==='kick'&&s.step%st.sub!==0)continue;
-            drHit(hid,t,g,v*vel);}}
+            drHit(hid,t,s.gD,v*vel);}}
         /* basse */
         if(BA_S.bs)for(const[pos,deg,len]of st.bs){if(pos!==s.step)continue;
           let m;if(deg==='W'){ /* basse qui marche : ligne calculée au début de chaque accord */
             if(chStart||!s.wl){const same=s.wch&&s.wch.root===ch.root&&s.wch.q===ch.q;s.wl=baWalk(ch,nextCh,Math.max(1,Math.round(per/st.sub)),s.wprev,same);s.wch=ch;}
             const k=Math.floor((s.step%per)/st.sub);m=(s.wl[Math.min(k,s.wl.length-1)])+12;s.wprev=m-12;}
           else m=baBassNote(ch,st.alt&&deg==='R'&&s.bar%2===1?'5':deg,nextCh);
-          A.bass(m,t,len*sd*.92,.75*vel+.1,g);}
+          A.bass(m,t,len*sd*.92,.75*vel+.1,s.gB);}
         /* piano */
         if(BA_S.pn){
           if(st.ar){for(const[pos,deg]of st.ar){if(pos!==s.step)continue;            const R0=48+((ch.root+BA_S.tr)%12+12)%12,f5=ch.iv.includes(6)?6:ch.iv.includes(8)?8:7,th=ch.iv.includes(3)?3:4;
             const m=deg==='R'?R0:deg==='5'?R0+f5:deg==='8'?R0+12:R0+12+th;
-            A.piano(Math.min(84,m),t,sd*4,.32*vel+.08,g);}}
+            A.piano(Math.min(84,m),t,sd*4,.32*vel+.08,s.gP);}}
           else for(const[pos,len,v]of st.cp){if(pos!==s.step)continue;
             let notes=baVoice(ch);if(st.shell){const r=((ch.root+BA_S.tr)%12+12)%12;const th=ch.iv.includes(3)?3:4,sv=ch.iv.includes(11)?11:ch.iv.includes(10)?10:ch.iv.includes(9)?9:7;notes=[48+((r+th)%12),48+((r+sv)%12)].map(x=>x<55?x+12:x).sort((a,b)=>a-b);}
             if(st.pw){const r=((ch.root+BA_S.tr)%12+12)%12;const b=48+r>=55?36+r:48+r;notes=[b,b+7,b+12];}
-            notes.forEach(m=>A.piano(m,t,len*sd*.9,v*vel+.05,g));}
+            notes.forEach(m=>A.piano(m,t,len*sd*.9,v*vel+.05,s.gP));}
         }
       }
       s.next+=sd;s.step++;
@@ -191,7 +195,7 @@ function baPlay(){
         const L=baGrid(BA_S.grid).bars.length;
         if(s.bar>0&&s.bar%L===0&&!BA_S.loop){ /* fin : accord final tenu */
           const bars2=baGrid(BA_S.grid).bars,last=bars2[0][0],t2=s.next;
-          if(BA_S.pn)baVoice(last).forEach(m=>A.piano(m,t2,2.5,.5,g));if(BA_S.bs)A.bass(baBassNote(last,'R'),t2,2.5,.8,g);if(BA_S.dr){drHit('crash',t2,g,.7);drHit('kick',t2,g,.9);}
+          if(BA_S.pn)baVoice(last).forEach(m=>A.piano(m,t2,2.5,.5,s.gP));if(BA_S.bs)A.bass(baBassNote(last,'R'),t2,2.5,.8,s.gB);if(BA_S.dr){drHit('crash',t2,s.gD,.7);drHit('kick',t2,s.gD,.9);}
           s.timers.push(setTimeout(()=>{if(BA.sess===s)baStop();},Math.max(0,(t2+2.6-now)*1000)));s.next=1e12;break;}}
     }};
   tick();s.timer=setInterval(tick,25);MOD.ba.ui&&MOD.ba.ui();
@@ -199,7 +203,7 @@ function baPlay(){
 MOD.ba.mount=function(){const M=this;M.root=el('div',{class:'tl baw'});$('#answer').replaceChildren(M.root);};
 MOD.ba.fresh=function(){
   const M=this,save=()=>tlSave('atelier-ba',BA_S);
-  const styleSel=sel('ba_style',Object.entries(BA_STYLES).map(([k,v])=>[k,T(v.n)]),BA_S.style,v=>{BA_S.style=v;baEff();save();fillMeters();M.paint();});
+  const styleSel=sel('ba_style',Object.entries(BA_STYLES).map(([k,v])=>[k,T(v.n)]),BA_S.style,v=>{BA_S.style=v;baEff();save();fillMeters();M.paint();const se=BA.sess;if(se){se.gD.gain.value=baGain('dr');se.gB.gain.value=baGain('bs');se.gP.gain.value=baGain('pn');}});
   const preSel=sel('ba_pre',[['',T('Choisir une grille…')],...BA_PRESETS.map((p,i)=>[i,T(p[0])])],'',v=>{if(v==='')return;const p=BA_PRESETS[+v];BA_S.grid=p[1];BA_S.style=p[2];BA_S.meter=p[3]||'';baEff();styleSel.value=p[2];area.value=p[1];save();fillMeters();M.paint();preSel.value='';});
   const area=el('textarea',{id:'ba_grid',class:'qzin bagrid',rows:'3',spellcheck:'false',autocapitalize:'off',autocomplete:'off','aria-label':'Grille d\'accords'});area.value=BA_S.grid;
   area.addEventListener('input',()=>{BA_S.grid=area.value;save();M.paint();});
@@ -234,6 +238,10 @@ MOD.ba.fresh=function(){
   tr.addEventListener('input',()=>setT(+tr.value));
   const taps=[];const tap=()=>{const n=performance.now();if(taps.length&&n-taps[taps.length-1]>2000)taps.length=0;taps.push(n);if(taps.length>6)taps.shift();if(taps.length>=2)setT(60000/((taps[taps.length-1]-taps[0])/(taps.length-1)));};
   const trLab=el('b',{class:'batr'});const setTr=d=>{BA_S.tr=((BA_S.tr+d+17)%12)-5;save();M.paint();};
+  const fader=(k,lab)=>{const r=el('input',{type:'range',min:0,max:100,step:1,value:Math.round(BA_S.vol[k]*100),'aria-label':lab}),v=el('span',{class:'bavv'});
+    const upd=()=>{BA_S.vol[k]=+r.value/100;BA_S[k]=BA_S.vol[k]>0;v.textContent=r.value==='0'?T('coupé'):r.value+' %';const se=BA.sess,gn=se&&{dr:se.gD,bs:se.gB,pn:se.gP}[k];if(gn)gn.gain.setTargetAtTime(baGain(k),A.ctx.currentTime,.03);save();};
+    r.addEventListener('input',upd);v.textContent=Math.round(BA_S.vol[k]*100)+' %';if(!BA_S[k]){r.value=0;v.textContent=T('coupé');}
+    return el('label',{class:'bafader'},el('span',{class:'fl'},lab),r,v);};
   const tog=(k,lab)=>{const i=el('input',{type:'checkbox'});i.checked=!!BA_S[k];i.addEventListener('change',()=>{BA_S[k]=i.checked;save();});return el('label',{class:'chk'},i,lab);};
   const intSel=sel('ba_int',[[1,T('Doux')],[2,T('Normal')],[3,T('Intense')]],BA_S.int,v=>{BA_S.int=+v;save();});
   M.play=btn('▶ Jouer',()=>BA.sess?baStop():baPlay(),'primary');
@@ -259,8 +267,9 @@ MOD.ba.fresh=function(){
     el('section',{class:'mtsec'},el('h3',{},'Le groupe'),
       el('div',{class:'mtline'},el('label',{class:'qzfield'},el('span',{class:'fl'},'Style'),styleSel),el('label',{class:'qzfield'},el('span',{class:'fl'},'Intensité'),intSel),
         el('div',{class:'qzfield'},el('span',{class:'fl'},'Transposer'),el('div',{class:'row2'},el('button',{type:'button',class:'btn quiet sq','aria-label':'Un demi-ton plus bas',onclick:()=>setTr(-1)},'♭'),trLab,el('button',{type:'button',class:'btn quiet sq','aria-label':'Un demi-ton plus haut',onclick:()=>setTr(1)},'♯')))),
-      el('div',{class:'mtline bachk'},tog('dr','Batterie'),tog('bs','Basse'),tog('pn','Piano'),tog('loop','En boucle'),tog('ci','Décompte d\'une mesure')),
-      el('p',{class:'hint'},'Tout se change pendant que ça joue : tempo, style, grille, transposition et instruments. Coupe un instrument pour jouer sa partie toi-même.')));
+      el('div',{class:'bafaders'},fader('dr','Batterie'),fader('bs','Basse'),fader('pn','Piano')),
+      el('div',{class:'mtline bachk'},tog('loop','En boucle'),tog('ci','Décompte d\'une mesure')),
+      el('p',{class:'hint'},'Tout se change pendant que ça joue : tempo, style, grille, transposition et instruments. Baisse un instrument à zéro pour jouer sa partie toi-même.')));
   fillMeters();setT(BA_S.tempo);M.paint();M.ui();paintB();
   S.keyHandler=e=>{if(e.code==='Space'&&document.activeElement!==area){e.preventDefault();BA.sess?baStop():baPlay();return true;}};
 };

@@ -225,7 +225,13 @@ function drHit(id,t,out,v=1){try{const c=A.init();out=out||A.out||c.destination;
     case'hho':nz('highpass',6500,.7,.24,.34,.003);nz('bandpass',9000,1,.15,.28,.003);metal(40,.05,.3,10000,7000,.004);send(.18);break;
     case'hhp':nz('highpass',6000,.7,.15,.04,.001);nz('bandpass',1500,1.5,.1,.025,.001);send(.08);break;
     case'xs':osc('triangle',1750,1350,.02,.45,.028);osc('sine',520,480,.03,.25,.05);nz('bandpass',2600,3,.28,.022);send(.25);break;
-    case'ride':metal(58,.16,1.1,8200,4800,.002);osc('sine',2350,2350,0,.05,.6);nz('bandpass',6200,2,.2,.035);send(.3);break;
+    case'ride':{/* ride : « ping » de la baguette (quelques partiels inharmoniques) + lavis de bruit doux qui s'éteint en s'assombrissant */
+      const lp=c.createBiquadFilter();lp.type='lowpass';lp.Q.value=.3;lp.frequency.setValueAtTime(12000,t);lp.frequency.exponentialRampToValueAtTime(6000,t+.8);lp.connect(bus);
+      const lay=(type,f,q,a,dec,att)=>{const s=c.createBufferSource(),fl=c.createBiquadFilter(),g=c.createGain();s.buffer=drHit.nb;s.loop=true;fl.type=type;fl.frequency.value=f;fl.Q.value=q;const e=env(g,a,dec,att);s.connect(fl);fl.connect(g);g.connect(lp);s.start(t,Math.random()*1.5);s.stop(e);};
+      lay('bandpass',9500,1.5,.16,.018,.001);lay('bandpass',6200,1.1,.13,.55,.002);lay('highpass',4000,.6,.07,.9,.002);
+      const hp=c.createBiquadFilter();hp.type='highpass';hp.frequency.value=2500;hp.connect(lp);
+      for(const[f,a]of[[2960,.035],[4410,.03],[5690,.024],[7330,.018]]){const o=c.createOscillator(),g=c.createGain();o.frequency.value=f*(1+(Math.random()-.5)*.006);const e=env(g,a,.55,.002);o.connect(g);g.connect(hp);o.start(t);o.stop(e);}
+      send(.22);break;}
     case'crash':{/* crash : souffle de bruit qui « s'ouvre » puis s'assombrit en s'éteignant, avec un léger scintillement métallique */
       const lp=c.createBiquadFilter();lp.type='lowpass';lp.Q.value=.3;lp.frequency.setValueAtTime(15000,t);lp.frequency.exponentialRampToValueAtTime(5500,t+1.6);lp.connect(bus);
       const lay=(type,f,q,a,dec,att)=>{const s=c.createBufferSource(),fl=c.createBiquadFilter(),g=c.createGain();s.buffer=drHit.nb;s.loop=true;fl.type=type;fl.frequency.value=f;fl.Q.value=q;const e=env(g,a,dec,att);s.connect(fl);fl.connect(g);g.connect(lp);s.start(t,Math.random()*1.5);s.stop(e);};
