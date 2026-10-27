@@ -133,3 +133,12 @@ main[data-mod="ho"] .modpick .mp-ic{animation:hopulse 1.6s ease-out infinite;bor
 """
 i=s.rindex("</style>");s=s[:i]+css2+s[i:]
 open(p,'w',encoding='utf-8').write(s)
+# ---------- 1.31.2 : mode apprenti — l'accordeur suit la corde pendant qu'on tourne la cheville ----------
+# Avant, une mesure à plus de 40 cents de la mémoire était rejetée : en tournant la cheville, l'affichage restait figé.
+# Maintenant, comme en chromatique : deux mesures de suite qui concordent = nouvelle hauteur, tout de suite ; maintien court.
+s=open(p,encoding='utf-8').read()
+rep("    if(!(TN.learner&&tnStrings())){if(TS.jump&&Math.abs(1200*Math.log2(r.f/TS.jump))<40){TS.hist=[TS.jump,r.f];f=r.f;TS.jump=null;}else TS.jump=r.f;}}",
+    "    if(TS.jump&&Math.abs(1200*Math.log2(r.f/TS.jump))<40){TS.hist=[TS.jump,r.f];f=r.f;TS.jump=null;}else TS.jump=r.f;}")
+rep("    if(TS.lastF&&performance.now()-TS.lastT<(TN.learner&&tnStrings()?1600:600)){tnShow(TS.lastF,r.rms);return;}",
+    "    if(TS.lastF&&performance.now()-TS.lastT<600){tnShow(TS.lastF,r.rms);return;}")
+open(p,'w',encoding='utf-8').write(s)
