@@ -51,11 +51,13 @@ jobs:
         run: |
           set -o pipefail
           DEST='generic/platform=iOS'; [ "${{ github.event.inputs.platform }}" = mac ] && DEST='generic/platform=macOS,variant=Mac Catalyst'
+          # iOS : archive non signée. Mac : signature ad hoc qui porte les droits (bac à sable, micro) ; la vraie signature se fait à l'envoi.
+          if [ "${{ github.event.inputs.platform }}" = mac ]; then SIGN='CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY=- PROVISIONING_PROFILE_SPECIFIER= CODE_SIGNING_ALLOWED=YES'; else SIGN='CODE_SIGN_STYLE=Automatic CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY='; fi
           V="${{ github.event.inputs.version }}"; EXTRA=""; [ -n "$V" ] && EXTRA="MARKETING_VERSION=$V"
           xcodebuild -project ios/MusicDEV.xcodeproj -scheme MusicDEV -configuration Release \
             -destination "$DEST" -archivePath "$RUNNER_TEMP/MusicDEV.xcarchive" \
             -allowProvisioningUpdates -authenticationKeyPath "$KEY" -authenticationKeyID "$ASC_KEY_ID" -authenticationKeyIssuerID "$ASC_ISSUER_ID" \
-            DEVELOPMENT_TEAM="$APPLE_TEAM_ID" CODE_SIGN_STYLE=Automatic CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" CURRENT_PROJECT_VERSION="${{ github.run_number }}" $EXTRA \
+            DEVELOPMENT_TEAM="$APPLE_TEAM_ID" $SIGN CURRENT_PROJECT_VERSION="${{ github.run_number }}" $EXTRA \
             archive > "$RUNNER_TEMP/archive.log" 2>&1 || { grep -E "error:|error -|Error|No Account|No profiles|Provisioning|requires a provisioning|Signing" "$RUNNER_TEMP/archive.log" | sort -u | head -15 | while IFS= read -r l; do echo "::error::$l"; done; tail -60 "$RUNNER_TEMP/archive.log"; exit 1; }
           tail -15 "$RUNNER_TEMP/archive.log"
       - name: Envoyer à App Store Connect (TestFlight)
