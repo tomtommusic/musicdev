@@ -29,7 +29,8 @@ st,j=call('GET',f'/v1/apps?filter[bundleId]={BUNDLE}')
 if st!=200 or not j.get('data'):err(f'App introuvable ({st}) : {errs(j)}');sys.exit(1)
 app=j['data'][0]['id'];note(f'App trouvée : {j["data"][0]["attributes"]["name"]}')
 
-st,j=call('GET',f'/v1/builds?filter[app]={app}&sort=-uploadedDate&limit=1&include=preReleaseVersion')
+PLAT=os.environ.get('PLATFORM','IOS')
+st,j=call('GET',f'/v1/builds?filter[app]={app}&filter[preReleaseVersion.platform]={PLAT}&sort=-uploadedDate&limit=1&include=preReleaseVersion')
 b=j['data'][0];bid=b['id'];a=b['attributes']
 ver=(j.get('included') or [{}])[0].get('attributes',{}).get('version','?')
 note(f'Dernier build : {ver} ({a["version"]}), état {a["processingState"]}')
