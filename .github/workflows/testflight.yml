@@ -12,6 +12,12 @@ on:
         description: "Numéro de version affiché (vide = celui du projet)"
         required: false
         default: ""
+      platform:
+        description: "Plateforme : ios (iPhone/iPad) ou mac (Mac Catalyst)"
+        required: false
+        default: ios
+        type: choice
+        options: [ios, mac]
       runner:
         description: "Mac de GitHub (changer si l'envoi reste en file d'attente)"
         required: false
@@ -44,9 +50,10 @@ jobs:
       - name: Archiver (sans signature ; la signature se fait à l'envoi, avec un certificat géré par Apple)
         run: |
           set -o pipefail
+          DEST='generic/platform=iOS'; [ "${{ github.event.inputs.platform }}" = mac ] && DEST='generic/platform=macOS,variant=Mac Catalyst'
           V="${{ github.event.inputs.version }}"; EXTRA=""; [ -n "$V" ] && EXTRA="MARKETING_VERSION=$V"
           xcodebuild -project ios/MusicDEV.xcodeproj -scheme MusicDEV -configuration Release \
-            -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/MusicDEV.xcarchive" \
+            -destination "$DEST" -archivePath "$RUNNER_TEMP/MusicDEV.xcarchive" \
             -allowProvisioningUpdates -authenticationKeyPath "$KEY" -authenticationKeyID "$ASC_KEY_ID" -authenticationKeyIssuerID "$ASC_ISSUER_ID" \
             DEVELOPMENT_TEAM="$APPLE_TEAM_ID" CODE_SIGN_STYLE=Automatic CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" CURRENT_PROJECT_VERSION="${{ github.run_number }}" $EXTRA \
             archive > "$RUNNER_TEMP/archive.log" 2>&1 || { grep -E "error:|error -|Error|No Account|No profiles|Provisioning|requires a provisioning|Signing" "$RUNNER_TEMP/archive.log" | sort -u | head -15 | while IFS= read -r l; do echo "::error::$l"; done; tail -60 "$RUNNER_TEMP/archive.log"; exit 1; }
