@@ -110,6 +110,12 @@ final class WebViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         webView.load(URLRequest(url: URL(string: "\(LocalFileHandler.scheme)://localhost/index.html")!))
+        #if targetEnvironment(macCatalyst)
+        // Sur Mac, on demande l'accès au micro dès le premier lancement (la fenêtre du système apparaît une seule fois).
+        if AVCaptureDevice.authorizationStatus(for: .audio) == .notDetermined {
+            AVCaptureDevice.requestAccess(for: .audio) { _ in }
+        }
+        #endif
         // Latence réelle de la sortie audio (haut-parleur, écouteurs Bluetooth…), transmise à l'app web
         // pour aligner l'affichage (curseur, métronome visuel) sur le son entendu.
         latTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in self?.pushLatency() }
@@ -151,7 +157,35 @@ final class WebViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
                  initiatedByFrame frame: WKFrameInfo,
                  type: WKMediaCaptureType,
                  decisionHandler: @escaping (WKPermissionDecision) -> Void) {
-        decisionHandler(origin.host == "localhost" ? .grant : .prompt)
+        guard origin.host == "localhost" else { decisionHandler(.prompt); return }
+        // Le système doit d'abord autoriser l'app elle-même (indispensable sur Mac, utile sur iPhone).
+        switch AVCaptureDevice.authorizationStatus(for: .audio) {
+        case .authorized:
+            decisionHandler(.grant)
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .audio) { ok in
+                DispatchQueue.main.async { decisionHandler(ok ? .grant : .deny) }
+            }
+        default:
+            decisionHandler(.deny)
+            DispatchQueue.main.async { [weak self] in self?.micDeniedAlert() }
+        }
+    }
+
+    /// Micro refusé dans les réglages : on explique où l'autoriser et on propose d'y aller.
+    private func micDeniedAlert() {
+        #if targetEnvironment(macCatalyst)
+        let msg = "Pour utiliser l'accordeur et la lecture au micro, autorise MusiDev dans Réglages Système › Confidentialité et sécurité › Microphone, puis relance l'app."
+        let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Microphone")
+        #else
+        let msg = "Pour utiliser l'accordeur et la lecture au micro, autorise MusiDev dans Réglages › MusiDev › Micro."
+        let url = URL(string: UIApplication.openSettingsURLString)
+        #endif
+        guard presentedViewController == nil else { return }
+        let a = UIAlertController(title: "Micro désactivé", message: msg, preferredStyle: .alert)
+        a.addAction(UIAlertAction(title: "Plus tard", style: .cancel))
+        if let url = url { a.addAction(UIAlertAction(title: "Ouvrir les réglages", style: .default) { _ in UIApplication.shared.open(url) }) }
+        present(a, animated: true)
     }
 
     // Les liens vers l'extérieur s'ouvrent dans Safari.
