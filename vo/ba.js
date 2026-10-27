@@ -7,8 +7,17 @@
    bs : basse [[pas, degré, durée en pas]] (R fondamentale, 3, 5, 6, b7, 8, A approche chromatique vers l'accord suivant, W basse qui marche) ;
    cp : piano en accords [[pas, durée, vélocité]] ; ar : piano en arpège [[pas, degré]] ; shell : 3ce et 7e seulement (jazz) ; pw : quinte à vide (rock) */
 const BA_STYLES={
-  pop:{n:'Pop',v:{'4/4':{m:4,sub:4,dr:{kick:[0,8,10],snare:[4,12],hh:[0,2,4,6,8,10,12,14]},bs:[[0,'R',3],[6,'R',2],[8,'R',3],[14,'5',2]],cp:[[0,4,.5],[6,2,.4],[8,4,.45],[14,2,.4]]}}},
-  rock:{n:'Rock',v:{'4/4':{m:4,sub:4,dr:{kick:[0,8,10],snare:[4,12],hh:[0,2,4,6,8,10,12,14]},bs:[[0,'R',2],[2,'R',2],[4,'R',2],[6,'R',2],[8,'R',2],[10,'R',2],[12,'R',2],[14,'R',2]],cp:[[0,6,.55],[8,6,.5]],pw:true}}},
+  pop:{n:'Pop',v:{'4/4':{m:4,sub:4,dr:{kick:[0,8,10],snare:[4,12],hh:[0,2,4,6,8,10,12,14]},bs:[[0,'R',3],[6,'R',2],[8,'R',3],[14,'5',2]],cp:[[0,4,.5],[6,2,.4],[8,4,.45],[14,2,.4]]},
+    '3/4':{m:3,sub:4,dr:{kick:[0,6],snare:[8],hh:[0,2,4,6,8,10]},bs:[[0,'R',4],[6,'5',2],[8,'R',4]],cp:[[0,4,.48],[4,4,.4],[8,4,.42]]},
+    '6/8':{m:2,sub:3,dr:{kick:[0,5],snare:[3],hh:[0,1,2,3,4,5]},dv:{hh:.35},bs:[[0,'R',3],[3,'5',2],[5,'R',1]],cp:[[0,3,.45],[3,3,.42]]},
+    '12/8':{m:4,sub:3,dr:{kick:[0,5,6],snare:[3,9],hh:[0,1,2,3,4,5,6,7,8,9,10,11]},dv:{hh:.33},bs:[[0,'R',5],[5,'R',1],[6,'5',5],[11,'A',1]],cp:[[0,3,.45],[3,3,.4],[6,3,.42],[9,3,.4]]},
+    '5/4':{m:5,sub:4,dr:{kick:[0,6,12],snare:[8,16],hh:[0,2,4,6,8,10,12,14,16,18]},bs:[[0,'R',6],[6,'R',2],[12,'5',6],[18,'A',2]],cp:[[0,6,.48],[8,4,.4],[12,6,.45],[16,4,.4]]}}},
+  rock:{n:'Rock',v:{'4/4':{m:4,sub:4,dr:{kick:[0,8,10],snare:[4,12],hh:[0,2,4,6,8,10,12,14]},bs:[[0,'R',2],[2,'R',2],[4,'R',2],[6,'R',2],[8,'R',2],[10,'R',2],[12,'R',2],[14,'R',2]],cp:[[0,6,.55],[8,6,.5]],pw:true},
+    '3/4':{m:3,sub:4,dr:{kick:[0,6],snare:[8],hh:[0,2,4,6,8,10]},bs:[[0,'R',2],[2,'R',2],[4,'R',2],[6,'R',2],[8,'R',2],[10,'5',2]],cp:[[0,8,.55],[8,4,.5]],pw:true},
+    '6/8':{m:2,sub:3,dr:{kick:[0,5],snare:[3],hh:[0,1,2,3,4,5]},dv:{hh:.4},bs:[[0,'R',1],[1,'R',1],[2,'R',1],[3,'R',1],[4,'R',1],[5,'5',1]],cp:[[0,3,.55],[3,3,.5]],pw:true},
+    '12/8':{m:4,sub:3,dr:{kick:[0,6,8],snare:[3,9],hh:[0,1,2,3,4,5,6,7,8,9,10,11]},dv:{hh:.38},bs:[[0,'R',3],[3,'R',3],[6,'R',3],[9,'5',3]],cp:[[0,6,.55],[6,6,.5]],pw:true},
+    '5/4':{m:5,sub:4,dr:{kick:[0,10,12],snare:[8,16],hh:[0,2,4,6,8,10,12,14,16,18]},bs:[[0,'R',2],[2,'R',2],[4,'R',2],[6,'R',2],[8,'R',2],[10,'R',2],[12,'R',2],[14,'R',2],[16,'R',2],[18,'5',2]],cp:[[0,8,.55],[12,8,.5]],pw:true},
+    '7/8':{m:7,sub:2,dr:{kick:[0,8],snare:[4,10],hh:[0,2,4,6,8,10,12]},bs:[[0,'R',2],[2,'R',2],[4,'R',2],[6,'R',2],[8,'R',2],[10,'R',2],[12,'5',2]],cp:[[0,4,.55],[4,4,.5],[8,6,.5]],pw:true}}},
   ballad:{n:'Ballade',v:{
     '4/4':{m:4,sub:4,dr:{kick:[0,10],xs:[4,12],hh:[0,2,4,6,8,10,12,14]},dv:{hh:.3},bs:[[0,'R',8],[8,'5',6],[14,'A',2]],ar:[[0,'R'],[2,'5'],[4,'8'],[6,'3'],[8,'8'],[10,'5'],[12,'3'],[14,'5']]},
     '12/8':{m:4,sub:3,dr:{kick:[0,8],snare:[3,9],hh:[0,1,2,3,4,5,6,7,8,9,10,11]},dv:{hh:.3},bs:[[0,'R',6],[6,'5',5],[11,'A',1]],ar:[[0,'R'],[1,'5'],[2,'8'],[3,'3'],[4,'8'],[5,'5'],[6,'R'],[7,'5'],[8,'8'],[9,'3'],[10,'8'],[11,'5']]}}},
@@ -23,7 +32,8 @@ const BA_STYLES={
   reggae:{n:'Reggae (one drop)',v:{'4/4':{m:4,sub:4,dr:{kick:[8],xs:[8],hh:[0,2,4,6,8,10,12,14]},dv:{hh:.35},bs:[[0,'R',3],[4,'5',2],[8,'R',3],[11,'3',2],[14,'5',2]],cp:[[4,1,.45],[12,1,.45]]}}},
   country:{n:'Country',v:{
     '4/4':{m:4,sub:4,dr:{kick:[0,8],snare:[4,12],hh:[0,2,4,6,8,10,12,14]},bs:[[0,'R',4],[8,'5',4]],cp:[[4,2,.45],[12,2,.45]]},
-    '2/4':{m:2,sub:4,dr:{kick:[0],snare:[4],hh:[0,2,4,6]},bs:[[0,'R',4]],cp:[[4,2,.45]],alt:true}}},
+    '2/4':{m:2,sub:4,dr:{kick:[0],snare:[4],hh:[0,2,4,6]},bs:[[0,'R',4]],cp:[[4,2,.45]],alt:true},
+    '3/4':{m:3,sub:4,dr:{kick:[0],snare:[4,8],hh:[0,2,4,6,8,10]},dv:{snare:.4,hh:.35},bs:[[0,'R',4]],cp:[[4,3,.42],[8,3,.42]],alt:true}}},
   waltz:{n:'Valse',v:{'3/4':{m:3,sub:4,dr:{kick:[0],hh:[4,8],snare:[4,8]},dv:{snare:.3,hh:.4},bs:[[0,'R',4]],cp:[[4,3,.4],[8,3,.4]],alt:true}}},
   afro:{n:'Afro-cubain',v:{
     '12/8':{m:4,sub:3,dr:{bell:[0,2,4,5,7,9,11],kick:[0,6],xs:[3,9],hhp:[3,9]},dv:{bell:.45,kick:.7},bs:[[0,'R',3],[5,'5',1],[6,'R',3],[11,'5',1]],cp:[[2,1,.36],[5,1,.38],[8,1,.36],[11,1,.38]]},
@@ -182,7 +192,7 @@ MOD.ba.fresh=function(){
       el('div',{class:'bbadd'},prev,btn('▶',hear,'quiet sq'),btn('+ Ajouter l\'accord',addChord,'primary'))),
     el('div',{class:'bbrow bbtools'},btn('| Barre de mesure',addBar,'quiet'),btn('% Répéter la mesure',addRepeat,'quiet'),btn('⌫ Retirer le dernier',undo,'quiet'),btn('Effacer la grille',()=>setGrid(''),'quiet')));
   const tl=el('b',{class:'batv'}),tr=el('input',{type:'range',min:40,max:240,step:1,'aria-label':'Tempo'});
-  const setT=v=>{BA_S.tempo=Math.max(40,Math.min(240,Math.round(v)));tl.textContent=`${BA_S.meter==='12/8'||BA_S.meter==='6/8'?'♩.':'♩'} = ${BA_S.tempo}`;tr.value=BA_S.tempo;save();};
+  const setT=v=>{BA_S.tempo=Math.max(40,Math.min(240,Math.round(v)));tl.textContent=`${BA_S.meter==='12/8'||BA_S.meter==='6/8'?'♩.':BA_S.meter==='7/8'?'♪':'♩'} = ${BA_S.tempo}`;tr.value=BA_S.tempo;save();};
   tr.addEventListener('input',()=>setT(+tr.value));
   const taps=[];const tap=()=>{const n=performance.now();if(taps.length&&n-taps[taps.length-1]>2000)taps.length=0;taps.push(n);if(taps.length>6)taps.shift();if(taps.length>=2)setT(60000/((taps[taps.length-1]-taps[0])/(taps.length-1)));};
   const trLab=el('b',{class:'batr'});const setTr=d=>{BA_S.tr=((BA_S.tr+d+17)%12)-5;save();M.paint();};
