@@ -80,7 +80,84 @@ private let nativeFeelJS = """
 })();
 """
 
+/// Micro natif (surtout pour Mac) : dans la vue web de Mac Catalyst, navigator.mediaDevices n'existe pas.
+/// L'app capte le son avec AVAudioEngine et l'envoie à la page, qui s'en sert comme d'un micro ordinaire (voir micBridgeJS).
+final class NativeMic: NSObject, WKScriptMessageHandler {
+    weak var webView: WKWebView?
+    private let engine = AVAudioEngine()
+    private var running = false
+    private var rate: Double = 48000
+
+    func userContentController(_ uc: WKUserContentController, didReceive message: WKScriptMessage) {
+        guard let cmd = message.body as? String else { return }
+        if cmd == "start" { start() } else if cmd == "stop" { stop() }
+    }
+    private func js(_ code: String) {
+        DispatchQueue.main.async { self.webView?.evaluateJavaScript(code, completionHandler: nil) }
+    }
+    private func fail(_ name: String) { js("window.__nativeMicReady&&__nativeMicReady(false,'\(name)')") }
+    private func start() {
+        switch AVCaptureDevice.authorizationStatus(for: .audio) {
+        case .authorized: DispatchQueue.main.async { self.begin() }
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .audio) { ok in DispatchQueue.main.async { ok ? self.begin() : self.fail("NotAllowedError") } }
+        default: fail("NotAllowedError")
+        }
+    }
+    private func begin() {
+        if running { js("window.__nativeMicReady&&__nativeMicReady(true,\(rate))"); return }
+        let input = engine.inputNode
+        let fmt = input.outputFormat(forBus: 0)
+        guard fmt.sampleRate > 0, fmt.channelCount > 0 else { fail("NotFoundError"); return }
+        rate = fmt.sampleRate
+        input.removeTap(onBus: 0)
+        input.installTap(onBus: 0, bufferSize: 2048, format: fmt) { [weak self] buf, _ in
+            guard let self = self, let ch = buf.floatChannelData else { return }
+            let n = Int(buf.frameLength)
+            let b64 = Data(bytes: ch[0], count: n * MemoryLayout<Float>.size).base64EncodedString()
+            self.js("window.__nativeMic&&__nativeMic('\(b64)')")
+        }
+        do { engine.prepare(); try engine.start(); running = true; js("window.__nativeMicReady&&__nativeMicReady(true,\(rate))") }
+        catch { input.removeTap(onBus: 0); fail("NotReadableError") }
+    }
+    private func stop() {
+        guard running else { return }
+        engine.inputNode.removeTap(onBus: 0); engine.stop(); running = false
+    }
+}
+
+/// Côté page : si navigator.mediaDevices manque (Mac), on le remplace par le micro natif.
+/// getUserMedia rend un « flux » factice ; createMediaStreamSource le transforme en nœud audio qui joue les échantillons reçus.
+private let micBridgeJS = """
+(function(){
+  if(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia)return;
+  if(!(window.webkit&&webkit.messageHandlers&&webkit.messageHandlers.micbridge))return;
+  var L=96000*2,R=new Float32Array(L),NM={sr:48000,wa:0,users:0,pending:null};
+  window.__nativeMic=function(b64){var s=atob(b64),n=s.length,u=new Uint8Array(n);for(var i=0;i<n;i++)u[i]=s.charCodeAt(i);
+    var f=new Float32Array(u.buffer,0,n>>2);for(var k=0;k<f.length;k++){R[NM.wa%L]=f[k];NM.wa++;}};
+  window.__nativeMicReady=function(ok,x){var p=NM.pending;NM.pending=null;if(!p)return;
+    if(ok){NM.sr=x||48000;NM.users++;p.res(mk());}else{var e=new Error('micro');e.name=x||'NotAllowedError';p.rej(e);}};
+  function mk(){var tr={kind:'audio',enabled:true,muted:false,readyState:'live',
+      stop:function(){if(tr.readyState==='ended')return;tr.readyState='ended';NM.users--;if(NM.users<=0){NM.users=0;webkit.messageHandlers.micbridge.postMessage('stop');}},
+      getSettings:function(){return{sampleRate:NM.sr};},addEventListener:function(){},removeEventListener:function(){}};
+    return{__native:true,getTracks:function(){return[tr];},getAudioTracks:function(){return[tr];}};}
+  var md=navigator.mediaDevices||{};
+  md.getUserMedia=function(){return new Promise(function(res,rej){NM.pending={res:res,rej:rej};webkit.messageHandlers.micbridge.postMessage('start');});};
+  md.enumerateDevices=md.enumerateDevices||function(){return Promise.resolve([{kind:'audioinput',deviceId:'native',label:'Micro'}]);};
+  try{Object.defineProperty(navigator,'mediaDevices',{value:md,configurable:true});}catch(e){navigator.mediaDevices=md;}
+  var AC=window.AudioContext||window.webkitAudioContext,orig=AC.prototype.createMediaStreamSource;
+  AC.prototype.createMediaStreamSource=function(st){
+    if(!st||!st.__native)return orig.call(this,st);
+    var ctx=this,sp=ctx.createScriptProcessor(1024,1,1),z=ctx.createGain(),ra=NM.wa;z.gain.value=0;sp.connect(z);z.connect(ctx.destination);
+    sp.onaudioprocess=function(e){var out=e.outputBuffer.getChannelData(0),ratio=NM.sr/ctx.sampleRate;
+      if(NM.wa-ra>NM.sr*0.25||ra>NM.wa)ra=NM.wa-NM.sr*0.03;
+      for(var i=0;i<out.length;i++){if(ra+1>=NM.wa){out[i]=0;continue;}out[i]=R[Math.floor(ra)%L];ra+=ratio;}};
+    return sp;};
+})();
+"""
+
 final class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
+    private let nativeMic = NativeMic()
     private var webView: WKWebView!
     private var latTimer: Timer?
     private let paper = UIColor(red: 244.0/255.0, green: 239.0/255.0, blue: 232.0/255.0, alpha: 1)
@@ -94,9 +171,12 @@ final class WebViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         config.mediaTypesRequiringUserActionForPlayback = []
         config.websiteDataStore = .default()   // sauvegardes (réglages, réussites) conservées
         config.userContentController.addUserScript(WKUserScript(source: nativeFeelJS, injectionTime: .atDocumentEnd, forMainFrameOnly: true))
+        config.userContentController.add(nativeMic, name: "micbridge")
+        config.userContentController.addUserScript(WKUserScript(source: micBridgeJS, injectionTime: .atDocumentStart, forMainFrameOnly: true))
 
         webView = WKWebView(frame: .zero, configuration: config)
         webView.uiDelegate = self
+        nativeMic.webView = webView
         webView.navigationDelegate = self
         webView.isOpaque = false
         webView.backgroundColor = paper
