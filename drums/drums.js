@@ -220,9 +220,10 @@ function drHit(id,t,out,v=1){try{const c=A.init();out=out||A.out||c.destination;
       osc('triangle',205,182,.03,.85*k,.08);osc('sine',335,325,.02,.38*k,.06);
       nz('bandpass',3000,.6,.8*k,.17*d);nz('highpass',6500,.7,.2*k,.08*d);nz('lowpass',1200,.8,.32*k,.03);send(.3);break;}
     case'ftom':tom(92);break;case'mtom':tom(135);break;case'htom':tom(185);break;
-    case'hh':metal(40,.5,.045,10500,7200);nz('highpass',9000,.7,.12,.03);send(.12);break;
-    case'hho':metal(40,.34,.42,10000,6800,.004);nz('highpass',8500,.7,.1,.3,.004);send(.2);break;
-    case'hhp':metal(40,.28,.05,9500,7000);nz('bandpass',1800,2,.08,.02);send(.1);break;
+    /* charleston : surtout du souffle filtré (le grésillement des deux cymbales), un soupçon de métal, très court */
+    case'hh':nz('highpass',7000,.7,.26,.045,.001);nz('bandpass',10500,1.4,.18,.03,.001);metal(40,.05,.03,11000,8000);send(.1);break;
+    case'hho':nz('highpass',6500,.7,.24,.34,.003);nz('bandpass',9000,1,.15,.28,.003);metal(40,.05,.3,10000,7000,.004);send(.18);break;
+    case'hhp':nz('highpass',6000,.7,.15,.04,.001);nz('bandpass',1500,1.5,.1,.025,.001);send(.08);break;
     case'xs':osc('triangle',1750,1350,.02,.45,.028);osc('sine',520,480,.03,.25,.05);nz('bandpass',2600,3,.28,.022);send(.25);break;
     case'ride':metal(58,.16,1.1,8200,4800,.002);osc('sine',2350,2350,0,.05,.6);nz('bandpass',6200,2,.2,.035);send(.3);break;
     case'crash':{/* crash : souffle de bruit qui « s'ouvre » puis s'assombrit en s'éteignant, avec un léger scintillement métallique */

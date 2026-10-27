@@ -142,3 +142,9 @@ rep("    if(!(TN.learner&&tnStrings())){if(TS.jump&&Math.abs(1200*Math.log2(r.f/
 rep("    if(TS.lastF&&performance.now()-TS.lastT<(TN.learner&&tnStrings()?1600:600)){tnShow(TS.lastF,r.rms);return;}",
     "    if(TS.lastF&&performance.now()-TS.lastT<600){tnShow(TS.lastF,r.rms);return;}")
 open(p,'w',encoding='utf-8').write(s)
+# ---------- 1.31.3 : basse sans « tic » en fin de note ----------
+# L'enveloppe tendait vers 55 % du pic puis sautait à une valeur calculée comme si elle tendait vers 0 : petite marche = clic à chaque note.
+s=open(p,encoding='utf-8').read()
+rep("const pk=v*1.25;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(pk,t+.006);g.gain.setTargetAtTime(pk*.55,t+.01,.35);\n    g.gain.setValueAtTime(pk*.55*Math.exp(-Math.max(0,end-t-.01)/.35)+.0001,end);g.gain.setTargetAtTime(0,end,.06);",
+    "const pk=v*1.25,tau=.8;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(pk,t+.006);g.gain.setTargetAtTime(0,t+.006,tau);\n    g.gain.setValueAtTime(pk*Math.exp(-Math.max(0,end-t-.006)/tau)+.00001,end);g.gain.setTargetAtTime(0,end,.05);")
+open(p,'w',encoding='utf-8').write(s)
