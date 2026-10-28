@@ -7367,7 +7367,7 @@ matchMedia('(max-width:600px)').addEventListener?.('change',()=>{if(S.mod==='ho'
 document.addEventListener('click',e=>{if(S.mod!=='ho'||!e.target.closest||!e.target.closest('#helpbtn'))return;
   e.stopImmediatePropagation();e.preventDefault();openModule('ln');setTimeout(()=>{if(typeof helpSet==='function')helpSet(true);},250);},true);
 
-const AP_VERSION='1.34.2';
+const AP_VERSION='1.34.3';
 const AP_MIT_BODY="Permission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.";
 const AP_SMP="MuseScore General / MS Basic\nFluidR3 (original version) by Frank Wen Copyright (c) 2000-02, 2008\nMono conversion (FluidR3Mono) by Michael Cowgill Copyright (c) 2014-17\nAdaptation for MuseScore_General.sf2 by S. Christian Collins Copyright (c) 2018-19\n\n"+AP_MIT_BODY;
 const AP_MIT="Copyright (c) 2009-2026 Paul Rosen and Gregory Dyke\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.";
@@ -8203,7 +8203,7 @@ MOD.ba.mount=function(){const M=this;M.root=el('div',{class:'tl baw'});$('#answe
 MOD.ba.fresh=function(){
   const M=this,save=()=>tlSave('atelier-ba',BA_S);
   const styleSel=sel('ba_style',Object.entries(BA_STYLES).map(([k,v])=>[k,T(v.n)]),BA_S.style,v=>{BA_S.style=v;baEff();save();fillMeters();M.paint();const se=BA.sess;if(se){se.gD.gain.value=baGain('dr');se.gB.gain.value=baGain('bs');se.gP.gain.value=baGain('pn');}});
-  const preSel=sel('ba_pre',[['',T('Choisir une grille…')],...BA_PRESETS.map((p,i)=>[i,T(p[0])])],'',v=>{if(v==='')return;const p=BA_PRESETS[+v];BA_S.grid=p[1];BA_S.style=p[2];BA_S.meter=p[3]||'';baEff();styleSel.value=p[2];area.value=p[1];save();fillMeters();M.paint();preSel.value='';});
+  const preSel=sel('ba_pre',[['',T('Choisir une grille…')],...BA_PRESETS.map((p,i)=>[i,T(p[0])])],'',v=>{if(v==='')return;const p=BA_PRESETS[+v];BA_S.grid=p[1];BA_S.style=p[2];BA_S.meter=p[3]||'';baEff();styleSel.value=p[2];area.value=p[1];save();fillMeters();M.paint();});
   const area=el('textarea',{id:'ba_grid',class:'qzin bagrid',rows:'3',spellcheck:'false',autocapitalize:'off',autocomplete:'off','aria-label':'Grille d\'accords'});area.value=BA_S.grid;
   area.addEventListener('input',()=>{BA_S.grid=area.value;save();M.paint();});
   /* constructeur d'accords : fondamentale + type (+ basse), puis ajout dans la grille */
@@ -8247,7 +8247,9 @@ MOD.ba.fresh=function(){
   M.cnt=el('span',{class:'bacount','aria-live':'polite'});
   M.cells=el('div',{class:'bacells'});M.err=el('p',{class:'hint baerr',hidden:true});
   M.ui=()=>{M.play.textContent=BA.sess?T('■ Arrêter'):T('▶ Jouer');M.play.classList.toggle('on',!!BA.sess);};
-  M.paint=()=>{const{bars,bad}=baGrid(BA_S.grid),st=baEff();
+  /* la grille toute prête reste affichée tant que la grille et le style n'ont pas été modifiés */
+  const syncPre=()=>{const i=BA_PRESETS.findIndex(p=>p[1].trim()===String(BA_S.grid).trim()&&p[2]===BA_S.style);preSel.value=i<0?'':String(i);};
+  M.paint=()=>{syncPre();const{bars,bad}=baGrid(BA_S.grid),st=baEff();
     M.cells.style.setProperty('--per',st.m===3?3:4);
     M.cells.replaceChildren(...bars.map((b,i)=>el('div',{class:'bacell','data-i':i},el('small',{},String(i+1)),el('span',{},b.map(baName).join('  ')))));
     M.err.hidden=!bad.length;M.err.textContent=bad.length?T('Accords non reconnus : {0}').replace('{0}',bad.join(', ')):'';
