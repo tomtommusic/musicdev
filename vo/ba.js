@@ -95,13 +95,15 @@ function baVoice(c,prev){
   for(const pc of pcs){let best=null;for(let m=52;m<=72;m++)if((m-pc)%12===0&&(best==null||Math.abs(m-62)<Math.abs(best-62)))best=m;out.push(best);}
   return[...new Set(out)].sort((a,b)=>a-b);
 }
+const baTh=c=>c.iv.includes(3)?3:c.iv.includes(4)?4:c.iv.includes(5)?5:c.iv.includes(2)?2:7;   /* « tierce » : la 4te d'un sus4, la 2de d'un sus2, la quinte d'un power chord */
+const baF5=c=>c.iv.includes(6)?6:c.iv.includes(8)?8:7;
 function baBassNote(c,deg,next){
   /* note écrite (A.bass sonne une octave plus bas) : fondamentale entendue entre la1 et sol♯2, le vrai registre de la basse */
   const reg=pc=>pc<9?pc+48:pc+36;
   const r=((c.root+BA_S.tr)%12+12)%12;let base=reg(r);
   if(c.bass!=null&&deg==='R'){const b=((c.bass+BA_S.tr)%12+12)%12;base=reg(b);}
-  const third=c.iv.includes(3)?3:4,fifth=c.iv.includes(6)?6:c.iv.includes(8)?8:7;
-  switch(deg){case'5':return base+fifth;case'8':return base+12;case'b7':return base+(c.iv.includes(11)?11:10);case'3':return base+third;case'6':return base+(c.iv.includes(10)&&c.iv.length>3&&c.iv[3]===10?10:9);
+  const third=baTh(c),fifth=baF5(c);
+  switch(deg){case'5':return base+fifth;case'8':return base+12;case'b7':return base+(c.iv.includes(11)?11:10);case'3':return base+third;case'6':return base+((c.iv.includes(10)&&c.iv.length>3&&c.iv[3]===10)||(c.iv.includes(3)&&!c.iv.includes(9))?10:9);   /* sur un accord mineur : 7e mineure (la 6te majeure sonne faux en mineur naturel) */
     case'A':{if(!next)return base+fifth;const n=((next.root+BA_S.tr)%12+12)%12,nb=reg(n);
       /* note de passage vers l'accord suivant : on préfère une note de la gamme de l'accord en cours (ex. G7 → C : si, pas do♯) */
       const sc=baScale(c).map(x=>(r+x)%12),ok=[nb-1,nb+1,nb+2,nb-2].filter(m=>sc.includes(((m%12)+12)%12));
@@ -118,9 +120,13 @@ function baScale(c){const q=c.q,iv=c.iv;
   if(/m7b5|m7♭5|ø/.test(q))return[0,1,3,5,6,8,10];
   if(/dim|°/.test(q))return[0,2,3,5,6,8,9,11];
   if(/aug|\+/.test(q))return[0,2,4,6,8,10];
-  if(/sus/.test(q))return[0,2,5,7,9,10];
+  if(/sus/.test(q))return iv.includes(10)?[0,2,5,7,10]:[0,2,5,7];
+  if(!iv.includes(3)&&!iv.includes(4))return[0,2,7];   /* power chord */
   const minor=iv.includes(3),dom=iv.includes(10)&&!minor,maj7=iv.includes(11);
-  return minor?[0,2,3,5,7,9,10]:dom?[0,2,4,5,7,9,10]:maj7?[0,2,4,5,7,9,11]:[0,2,4,5,7,9,11];}
+  /* notes « sûres » quelle que soit la tonalité : pas de 6te sur un accord mineur (dorien ou éolien ?),
+     pas de 4te sur un accord majeur (ionien ou lydien ?) */
+  if(minor)return iv.includes(9)?[0,2,3,5,7,9]:[0,3,5,7,10];   /* ni 2de (phrygien ?) ni 6te */
+  return dom?[0,2,4,5,7,9,10]:maj7?[0,2,4,7,9,11]:[0,2,4,7,9];}
 const baPc=c=>((c.root+BA_S.tr)%12+12)%12;
 function baNear(pc,ref,lo=BA_LO,hi=BA_TOP){let best=null;for(let m=lo;m<=hi;m++)if((m-pc+1200)%12===0&&(best==null||Math.abs(m-ref)<Math.abs(best-ref)))best=m;return best;}
 function baWalk(ch,nx,beats,prev,sameAsPrev){
@@ -138,7 +144,8 @@ function baWalk(ch,nx,beats,prev,sameAsPrev){
     let ok=opts.filter(m=>m>=BA_LO-2&&m<=BA_TOP&&m!==last);
     /* approche : demi-ton dans la gamme de l'accord en cours si possible (pas de do♯ sur G7 avant C) */
     let inSc=ok.filter(m=>scale.includes(m%12));
-    if(!inSc.length)inSc=[target+2,target-2,target-5,target+7].filter(m=>m>=BA_LO-2&&m<=BA_TOP&&m!==last&&scale.includes(m%12));   /* sinon : un ton au-dessus/au-dessous, ou la quinte */
+    if(!inSc.length)inSc=[target+2,target-2,target-5,target+7,target+3,target-3,target+4,target-4].filter(m=>m>=BA_LO-2&&m<=BA_TOP&&m!==last&&scale.includes(m%12));   /* sinon : un ton au-dessus/au-dessous, ou la quinte */
+    if(!inSc.length){for(let m=BA_LO-2;m<=BA_TOP;m++)if(m!==last&&scale.includes(m%12))inSc.push(m);inSc.sort((x,y)=>Math.abs(x-target)-Math.abs(y-target));inSc=inSc.slice(0,1);}
     if(inSc.length)ok=inSc;ok.sort((a,b)=>Math.abs(a-last)-Math.abs(b-last)+(R()-.5)*1.5);return ok[0]??target-1;};
   for(let k=1;k<beats-1;k++){
     const prevN=line[k-1],goal=first+(target-first)*k/(beats-1),strong=k%2===0;
@@ -190,12 +197,12 @@ function baPlay(){
           A.bass(m,t,len*sd*.92,.75*vel+.1,s.gB,BA_AB[BA_S.style]?'ab':'eb');}
         /* piano */
         if(BA_S.pn){
-          if(st.ar){for(const[pos,deg]of st.ar){if(pos!==s.step)continue;            const R0=48+((ch.root+BA_S.tr)%12+12)%12,f5=ch.iv.includes(6)?6:ch.iv.includes(8)?8:7,th=ch.iv.includes(3)?3:4;
+          if(st.ar){for(const[pos,deg]of st.ar){if(pos!==s.step)continue;            const R0=48+((ch.root+BA_S.tr)%12+12)%12,f5=baF5(ch),th=baTh(ch);
             const m=deg==='R'?R0:deg==='5'?R0+f5:deg==='8'?R0+12:R0+12+th;
             A.piano(Math.min(84,m),t,sd*4,.32*vel+.08,s.gP);}}
           else for(const[pos,len,v]of st.cp){if(pos!==s.step)continue;
-            let notes=baVoice(ch);if(st.shell){const r=((ch.root+BA_S.tr)%12+12)%12;const th=ch.iv.includes(3)?3:4,sv=ch.iv.includes(11)?11:ch.iv.includes(10)?10:ch.iv.includes(9)?9:7;notes=[48+((r+th)%12),48+((r+sv)%12)].map(x=>x<55?x+12:x).sort((a,b)=>a-b);}
-            if(st.pw){const r=((ch.root+BA_S.tr)%12+12)%12;const b=48+r>=55?36+r:48+r;notes=[b,b+7,b+12];}
+            let notes=baVoice(ch);if(st.shell){const r=((ch.root+BA_S.tr)%12+12)%12;const th=baTh(ch),sv=ch.iv.includes(11)?11:ch.iv.includes(10)?10:ch.iv.includes(9)?9:7;notes=[48+((r+th)%12),48+((r+sv)%12)].map(x=>x<55?x+12:x).sort((a,b)=>a-b);}
+            if(st.pw){const r=((ch.root+BA_S.tr)%12+12)%12;const b=48+r>=55?36+r:48+r;notes=[b,b+baF5(ch),b+12];}
             notes.forEach(m=>A.piano(m,t,len*sd*.9,v*vel+.05,s.gP));}
         }
       }
