@@ -54,6 +54,7 @@ const BA_PRESETS=[
   ['Country : I – IV – V','G | G | C | C | D | D | G | G','country'],
   ['Cadence andalouse','Am | G | F | E7','afro']];
 const BA_S=tlLoad('atelier-ba',{grid:'C | G | Am | F',style:'pop',tempo:96,tr:0,dr:true,bs:true,pn:true,int:2,loop:true,ci:true,meter:''});if(!BA_S.vol)BA_S.vol={dr:.8,bs:.8,pn:.8};
+const BA_AB={swing:1,bossa:1};   /* contrebasse (sinon basse électrique aux doigts) */
 const BA_BASE={dr:1.25,bs:.2,pn:1.1};   /* équilibre de départ : la basse de synthèse est naturellement forte, le piano plus doux */
 const BA_MIX={swing:{dr:2.4},ballad:{dr:1.3},bossa:{dr:1.3}};   /* certains grooves sont joués plus légèrement : on les remonte */
 const baGain=k=>BA_BASE[k]*((BA_MIX[BA_S.style]||{})[k]||1)*BA_S.vol[k]*1.25;
@@ -95,19 +96,21 @@ function baVoice(c,prev){
   return[...new Set(out)].sort((a,b)=>a-b);
 }
 function baBassNote(c,deg,next){
-  const r=((c.root+BA_S.tr)%12+12)%12;let base=r<4?r+60:r+48;   /* note écrite (A.bass sonne une octave plus bas) : fondamentale entendue entre mi2 et ré♯3, audible même sur un haut-parleur de téléphone */
-  if(c.bass!=null&&deg==='R'){const b=((c.bass+BA_S.tr)%12+12)%12;base=b<4?b+60:b+48;}
+  /* note écrite (A.bass sonne une octave plus bas) : fondamentale entendue entre la1 et sol♯2, le vrai registre de la basse */
+  const reg=pc=>pc<9?pc+48:pc+36;
+  const r=((c.root+BA_S.tr)%12+12)%12;let base=reg(r);
+  if(c.bass!=null&&deg==='R'){const b=((c.bass+BA_S.tr)%12+12)%12;base=reg(b);}
   const third=c.iv.includes(3)?3:4,fifth=c.iv.includes(6)?6:c.iv.includes(8)?8:7;
   switch(deg){case'5':return base+fifth;case'8':return base+12;case'b7':return base+(c.iv.includes(11)?11:10);case'3':return base+third;case'6':return base+(c.iv.includes(10)&&c.iv.length>3&&c.iv[3]===10?10:9);
-    case'A':{if(!next)return base+fifth;const n=((next.root+BA_S.tr)%12+12)%12,nb=n<4?n+60:n+48;return nb+(nb>base?-1:1);}
+    case'A':{if(!next)return base+fifth;const n=((next.root+BA_S.tr)%12+12)%12,nb=reg(n);return nb+(nb>base?-1:1);}
     default:return base;}
 }
 /* ---- basse qui marche (walking bass) ----
    Une noire par temps. Temps 1 : fondamentale (ou, si l'accord se répète, une autre note de l'accord pour relancer la ligne).
    Dernier temps avant le changement : note d'approche (demi-ton au-dessus ou au-dessous de la fondamentale suivante,
    parfois sa quinte : approche « dominante »). Entre les deux : la ligne avance vers la cible, notes de l'accord sur les temps forts,
-   notes de la gamme de l'accord (mode) sur les temps faibles, sans répéter la même note. Hauteurs entendues : mi2 à sol3. */
-const BA_LO=40,BA_HI=55,BA_TOP=59;
+   notes de la gamme de l'accord (mode) sur les temps faibles, sans répéter la même note. Hauteurs entendues : la1 à ré3. */
+const BA_LO=33,BA_HI=45,BA_TOP=50;
 function baScale(c){const q=c.q,iv=c.iv;
   if(/m7b5|m7♭5|ø/.test(q))return[0,1,3,5,6,8,10];
   if(/dim|°/.test(q))return[0,2,3,5,6,8,9,11];
@@ -118,7 +121,7 @@ function baScale(c){const q=c.q,iv=c.iv;
 const baPc=c=>((c.root+BA_S.tr)%12+12)%12;
 function baNear(pc,ref,lo=BA_LO,hi=BA_TOP){let best=null;for(let m=lo;m<=hi;m++)if((m-pc+1200)%12===0&&(best==null||Math.abs(m-ref)<Math.abs(best-ref)))best=m;return best;}
 function baWalk(ch,nx,beats,prev,sameAsPrev){
-  const r=baPc(ch),ref=prev==null?47:prev,R=Math.random;
+  const r=baPc(ch),ref=prev==null?40:prev,R=Math.random;
   const tones=ch.iv.map(x=>(r+x)%12),scale=baScale(ch).map(x=>(r+x)%12);
   /* départ */
   let first=baNear(r,ref,BA_LO,BA_HI);
@@ -177,7 +180,7 @@ function baPlay(){
             if(chStart||!s.wl){const same=s.wch&&s.wch.root===ch.root&&s.wch.q===ch.q;s.wl=baWalk(ch,nextCh,Math.max(1,Math.round(per/st.sub)),s.wprev,same);s.wch=ch;}
             const k=Math.floor((s.step%per)/st.sub);m=(s.wl[Math.min(k,s.wl.length-1)])+12;s.wprev=m-12;}
           else m=baBassNote(ch,st.alt&&deg==='R'&&s.bar%2===1?'5':deg,nextCh);
-          A.bass(m,t,len*sd*.92,.75*vel+.1,s.gB);}
+          A.bass(m,t,len*sd*.92,.75*vel+.1,s.gB,BA_AB[BA_S.style]?'ab':'eb');}
         /* piano */
         if(BA_S.pn){
           if(st.ar){for(const[pos,deg]of st.ar){if(pos!==s.step)continue;            const R0=48+((ch.root+BA_S.tr)%12+12)%12,f5=ch.iv.includes(6)?6:ch.iv.includes(8)?8:7,th=ch.iv.includes(3)?3:4;
@@ -195,7 +198,7 @@ function baPlay(){
         const L=baGrid(BA_S.grid).bars.length;
         if(s.bar>0&&s.bar%L===0&&!BA_S.loop){ /* fin : accord final tenu */
           const bars2=baGrid(BA_S.grid).bars,last=bars2[0][0],t2=s.next;
-          if(BA_S.pn)baVoice(last).forEach(m=>A.piano(m,t2,2.5,.5,s.gP));if(BA_S.bs)A.bass(baBassNote(last,'R'),t2,2.5,.8,s.gB);if(BA_S.dr){drHit('crash',t2,s.gD,.7);drHit('kick',t2,s.gD,.9);}
+          if(BA_S.pn)baVoice(last).forEach(m=>A.piano(m,t2,2.5,.5,s.gP));if(BA_S.bs)A.bass(baBassNote(last,'R'),t2,2.5,.8,s.gB,BA_AB[BA_S.style]?'ab':'eb');if(BA_S.dr){drHit('crash',t2,s.gD,.7);drHit('kick',t2,s.gD,.9);}
           s.timers.push(setTimeout(()=>{if(BA.sess===s)baStop();},Math.max(0,(t2+2.6-now)*1000)));s.next=1e12;break;}}
     }};
   tick();s.timer=setInterval(tick,25);MOD.ba.ui&&MOD.ba.ui();

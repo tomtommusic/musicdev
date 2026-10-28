@@ -1,0 +1,2 @@
+T=[("Sons de batterie et de basse ","Drum and bass sounds ","Sonidos de batería y bajo "),
+("Enregistrements tirés de MuseScore General (FluidR3 de Frank Wen, FluidR3Mono de Michael Cowgill, adaptation de S. Christian Collins).","Recordings taken from MuseScore General (FluidR3 by Frank Wen, FluidR3Mono by Michael Cowgill, adapted by S. Christian Collins).","Grabaciones tomadas de MuseScore General (FluidR3 de Frank Wen, FluidR3Mono de Michael Cowgill, adaptación de S. Christian Collins).")]

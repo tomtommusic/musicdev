@@ -1176,7 +1176,9 @@
 "Baisse un instrument à zéro pour jouer sa partie toi-même.": "Turn an instrument down to zero to play its part yourself.",
 "Tout se change pendant que ça joue : tempo, style, grille, transposition et instruments. Baisse un instrument à zéro pour jouer sa partie toi-même.": "Everything can be changed while it plays: tempo, style, chart, transposition and instruments. Turn an instrument down to zero to play its part yourself.",
 "± 5 cents (souple)": "± 5 cents (relaxed)",
-"Touche le menu ☰ pour choisir ce que tu veux travailler.": "Tap the ☰ menu to choose what you want to practise."
+"Touche le menu ☰ pour choisir ce que tu veux travailler.": "Tap the ☰ menu to choose what you want to practise.",
+"Sons de batterie et de basse ": "Drum and bass sounds ",
+"Enregistrements tirés de MuseScore General (FluidR3 de Frank Wen, FluidR3Mono de Michael Cowgill, adaptation de S. Christian Collins).": "Recordings taken from MuseScore General (FluidR3 by Frank Wen, FluidR3Mono by Michael Cowgill, adapted by S. Christian Collins)."
 },
 "es": {
 "Modules": "Módulos",
@@ -2355,6 +2357,8 @@
 "Baisse un instrument à zéro pour jouer sa partie toi-même.": "Baja un instrumento a cero para tocar tú su parte.",
 "Tout se change pendant que ça joue : tempo, style, grille, transposition et instruments. Baisse un instrument à zéro pour jouer sa partie toi-même.": "Todo se puede cambiar mientras suena: tempo, estilo, cifrado, transposición e instrumentos. Baja un instrumento a cero para tocar tú su parte.",
 "± 5 cents (souple)": "± 5 cents (flexible)",
-"Touche le menu ☰ pour choisir ce que tu veux travailler.": "Toca el menú ☰ para elegir qué quieres practicar."
+"Touche le menu ☰ pour choisir ce que tu veux travailler.": "Toca el menú ☰ para elegir qué quieres practicar.",
+"Sons de batterie et de basse ": "Sonidos de batería y bajo ",
+"Enregistrements tirés de MuseScore General (FluidR3 de Frank Wen, FluidR3Mono de Michael Cowgill, adaptation de S. Christian Collins).": "Grabaciones tomadas de MuseScore General (FluidR3 de Frank Wen, FluidR3Mono de Michael Cowgill, adaptación de S. Christian Collins)."
 }
 }
