@@ -11,6 +11,10 @@ on:
         description: "status = seulement lire l'état de la révision"
         required: false
         default: ""
+      platform:
+        description: "IOS ou MAC_OS"
+        required: false
+        default: "IOS"
       testers:
         description: "Courriels des testeurs à ajouter (séparés par des virgules)"
         required: false
@@ -34,4 +38,5 @@ jobs:
           WHAT_TO_TEST: ${{ github.event.inputs.what_to_test }}
           ADD_TESTERS: ${{ github.event.inputs.testers }}
           MODE: ${{ github.event.inputs.mode }}
+          PLATFORM: ${{ github.event.inputs.platform || 'IOS' }}
         run: python3 .github/scripts/asc_external.py
