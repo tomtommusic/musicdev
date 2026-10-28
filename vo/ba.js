@@ -128,6 +128,38 @@ function baGenProg(style){
     return NM[((key+semi)%12+12)%12]+suf;};
   return tpl.split('|').map(b=>b.trim().split(/\s+/).map(chord).join(' ')).join(' | ');
 }
+/* ---- intensité : change l'arrangement, pas seulement le volume ----
+   Doux : grosse caisse et charleston sur les temps, cross-stick au lieu de la caisse claire, basse et piano sur les temps seulement, pas de roulement.
+   Intense : ride au lieu du charleston (pop, rock, country, ballade), grosse caisse plus chargée, basse en croches (pop, rock, country),
+   piano qui réattaque les accords longs, crash et roulement toutes les deux mesures. */
+const BA_ARR=new Map();
+function baArr(st,I,style){
+  if(I===2)return st;const key=style+'|'+BA_S.meter+'|'+I;if(BA_ARR.has(key))return BA_ARR.get(key);
+  const sub=st.sub,spb=st.m*sub,beat=p=>p%sub===0,o={...st,dr:{},dv:{...(st.dv||{})}};
+  const mapPos=(pos,f)=>Array.isArray(pos[0])?pos.map(f):f(pos);
+  if(I===1){
+    for(const[id,pos]of Object.entries(st.dr)){
+      if(id==='ghost')continue;
+      if(id==='kick'||id==='hh'){o.dr[id]=mapPos(pos,P=>{const q=P.filter(beat);return q.length?q:P.slice(0,1);});continue;}
+      if(id==='snare'&&!/swing|waltz/.test(style)){o.dr.xs=pos;o.dv.xs=.55;continue;}
+      o.dr[id]=pos;}
+    const thin=L=>{const k=L.filter(e=>beat(e[0]));return k.length?k:L.slice(0,1);};
+    const b=thin(st.bs);o.bs=b.map((e,i)=>{const nx=i+1<b.length?b[i+1][0]:spb;return[e[0],e[1],e[1]==='W'?e[2]:Math.max(e[2],nx-e[0])];});
+    if(st.cp)o.cp=thin(st.cp).map(e=>[e[0],Math.max(e[1],sub),e[2]]);
+    if(st.ar)o.ar=thin(st.ar);
+  }else{
+    const rideStyles=/pop|rock|country|ballad/.test(style);
+    for(const[id,pos]of Object.entries(st.dr)){
+      if(id==='hh'&&rideStyles){o.dr.ride=pos;o.dv.ride=.6;continue;}
+      o.dr[id]=pos;}
+    if(o.dr.kick&&!Array.isArray(o.dr.kick[0])&&sub%2===0&&st.m>=3){const k=new Set(o.dr.kick);k.add(sub+sub/2);if(st.m>=4)k.add(3*sub-sub/2);o.dr.kick=[...k].sort((a,b)=>a-b);}
+    if(style==='swing'){o.dr.snare=[spb-1];o.dv.snare=.3;}
+    if(/pop|rock|country/.test(style)){const e=sub===4?2:1,nb=[];
+      st.bs.forEach(([p,d,l])=>{for(let k=0;k<l;k+=e)nb.push([p+k,k===0?d:(d==='A'?d:'R'),Math.min(e,l-k)]);});o.bs=nb;}
+    if(st.cp){const nc=[];st.cp.forEach(([p,l,v])=>{if(l>=sub*2){const h=Math.floor(l/2/sub)*sub||sub;nc.push([p,h,v],[p+h,l-h,v*.85]);}else nc.push([p,l,v]);});o.cp=nc;}
+  }
+  BA_ARR.set(key,o);return o;
+}
 function baBassNote(c,deg,next){
   /* note écrite (A.bass sonne une octave plus bas) : fondamentale entendue entre la1 et sol♯2, le vrai registre de la basse */
   const reg=pc=>pc<9?pc+48:pc+36;
@@ -199,7 +231,7 @@ function baPlay(){
   const lag=typeof audioLag==='function'?audioLag():0;
   const tick=()=>{if(BA.sess!==s)return;if(S.mod!=='ba'){baStop();return;}const now=c.currentTime;
     while(s.next<now+.2){
-      const st=baEff(),spb=st.m*st.sub,sd=60/BA_S.tempo/st.sub,t=s.next,I=BA_S.int;
+      const I=BA_S.int,st=baArr(baEff(),I,BA_S.style),spb=st.m*st.sub,sd=60/BA_S.tempo/st.sub,t=s.next;
       if(s.bar<0){ /* décompte : un clic par temps */
         if(s.step%st.sub===0){A.click(t,s.step===0,g);const b=s.step/st.sub;s.timers.push(setTimeout(()=>{if(BA.sess===s)MOD.ba.count(b+1);},Math.max(0,(t+lag-now)*1000)));}
       }else{
@@ -207,17 +239,16 @@ function baPlay(){
         const bi=s.bar%bars2.length,bar=bars2[bi],n=bar.length,per=Math.max(1,Math.round(spb/n)),ci=Math.min(n-1,Math.floor(s.step/per)),ch=bar[ci];
         const nextCh=ci+1<n?bar[ci+1]:bars2[(bi+1)%bars2.length][0],chStart=s.step%per===0;
         if(s.step===0){const b=bi;s.timers.push(setTimeout(()=>{if(BA.sess===s)MOD.ba.now(b);},Math.max(0,(t+lag-now)*1000)));}
-        const fill=BA_S.dr&&I>=2&&(bi===bars2.length-1||s.bar%4===3)&&s.step>=spb-st.sub;   /* petit roulement sur le dernier temps */
-        const vel=[0,.55,.8,1][I];
+        const fill=BA_S.dr&&I>=2&&(bi===bars2.length-1||s.bar%(I===3?2:4)===(I===3?1:3))&&s.step>=spb-st.sub;   /* petit roulement sur le dernier temps */
+        const vel=[0,.7,.85,1][I];
         /* batterie */
         if(BA_S.dr){const D=st.dr;
-          if(s.step===0&&(s.bar===0||(s.bar%4===0&&I>=2))&&!s.ending)drHit('crash',t,s.gD,.6*vel);
+          if(s.step===0&&(s.bar===0||(s.bar%(I===3?2:4)===0&&I>=2))&&!s.ending)drHit('crash',t,s.gD,.6*vel);
           if(fill){const k=s.step-(spb-st.sub);drHit(k<st.sub/2?'snare':(k%2?'mtom':'ftom'),t,s.gD,.75*vel);}
           else for(const[id,pos]of Object.entries(D)){
             const P=Array.isArray(pos[0])?pos[s.bar%pos.length]:pos;if(!P.includes(s.step))continue;
             const dvv=(st.dv||{})[id];let v=dvv==null?(id==='ghost'?.22:id==='kick'?.9:id==='snare'?.85:id==='hh'?(s.step%st.sub===0?.55:.38):id==='ride'?.5:.7):(typeof dvv==='number'?dvv:(dvv[s.step]??.4));
-            let hid=id==='ghost'?'snare':id==='bell'?'ride':id;if(I===3&&id==='hh'&&s.step%(st.sub*2)===st.sub)hid='hho';if(I===1&&id==='hh')v*=.7;
-            if(I===1&&id==='kick'&&s.step%st.sub!==0)continue;
+            let hid=id==='ghost'?'snare':id;if(I===3&&id==='hh'&&s.step%(st.sub*2)===st.sub)hid='hho';if(I===1&&id==='hh')v*=.8;
             drHit(hid,t,s.gD,v*vel);}}
         /* basse */
         if(BA_S.bs)for(const[pos,deg,len]of st.bs){if(pos!==s.step)continue;
