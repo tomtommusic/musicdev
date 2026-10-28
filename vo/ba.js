@@ -241,6 +241,7 @@ function baPlay(){
         if(s.step===0){const b=bi;s.timers.push(setTimeout(()=>{if(BA.sess===s)MOD.ba.now(b);},Math.max(0,(t+lag-now)*1000)));}
         const fill=BA_S.dr&&I>=2&&(bi===bars2.length-1||s.bar%(I===3?2:4)===(I===3?1:3))&&s.step>=spb-st.sub;   /* petit roulement sur le dernier temps */
         const vel=[0,.7,.85,1][I];
+        if(BA_S.metro&&s.step%st.sub===0)A.click(t,s.step===0,g);   /* métronome : un clic par temps, accent sur le 1 */
         /* batterie */
         if(BA_S.dr){const D=st.dr;
           if(s.step===0&&(s.bar===0||(s.bar%(I===3?2:4)===0&&I>=2))&&!s.ending)drHit('crash',t,s.gD,.6*vel);
@@ -349,7 +350,7 @@ MOD.ba.fresh=function(){
       el('div',{class:'mtline'},el('label',{class:'qzfield'},el('span',{class:'fl'},'Style'),styleSel),el('label',{class:'qzfield'},el('span',{class:'fl'},'Intensité'),intSel),
         el('div',{class:'qzfield'},el('span',{class:'fl'},'Transposer'),el('div',{class:'row2'},el('button',{type:'button',class:'btn quiet sq','aria-label':'Un demi-ton plus bas',onclick:()=>setTr(-1)},'♭'),trLab,el('button',{type:'button',class:'btn quiet sq','aria-label':'Un demi-ton plus haut',onclick:()=>setTr(1)},'♯')))),
       el('div',{class:'bafaders'},fader('dr','Batterie'),fader('bs','Basse'),fader('pn','Piano')),
-      el('div',{class:'mtline bachk'},tog('loop','En boucle'),tog('ci','Décompte d\'une mesure')),
+      el('div',{class:'mtline bachk'},tog('metro','Métronome'),tog('loop','En boucle'),tog('ci','Décompte d\'une mesure')),
       el('p',{class:'hint'},'Tout se change pendant que ça joue : tempo, style, grille, transposition et instruments. Baisse un instrument à zéro pour jouer sa partie toi-même.')));
   fillMeters();setT(BA_S.tempo);M.paint();M.ui();paintB();
   S.keyHandler=e=>{if(e.code==='Space'&&document.activeElement!==area){e.preventDefault();BA.sess?baStop():baPlay();return true;}};
