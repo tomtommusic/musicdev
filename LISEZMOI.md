@@ -12,7 +12,7 @@ Cette branche `sources` contient tout ce qui sert à le fabriquer. Point de sauv
    remplacer ces chemins par les nouveaux (`grep -rl scratchpad .` pour les trouver).
 3. Construire : `bash build.sh` → copie `index-before-quiz.html` dans `main/index.html`, puis applique dans l'ordre
    `quiz/integrate.py`, `method.py`, `tools/integrate_tools.py`, `features2.py` (accueil + accords de guitare), `unmute.py`, `micbleed.py`, `i18n/integrate_i18n.py`.
-4. Publier : augmenter `VERSION` dans `sw.js` (actuellement `musicdev-1.33.0`), commit, push sur `main`
+4. Publier : augmenter `VERSION` dans `sw.js` (actuellement `musicdev-1.34.0`), commit, push sur `main`
    (GitHub Pages se met à jour en ~30 s). Pousser aussi les sources modifiées sur cette branche.
 
 ## Repères
@@ -40,3 +40,4 @@ Cette branche `sources` contient tout ce qui sert à le fabriquer. Point de sauv
 - 1.20.0 : `badges/` (badges.py après about.py ; compteurs dans localStorage 'atelier-badges' ; liste BADGES dans badges.js ; traductions badges/tr.py).
 - Batterie et basse échantillonnées : `smp/` (MP3 tirés de la banque MS Basic de MuseScore, licence MIT, voir
   `smp/LICENSE-MS-Basic.md`; extraction : `take.py` avec `sf.py`/`ex.py`). `smp/smp.py` les insère en base64 après `v129.py`.
+- `rel/rel.py` : version complète (plus de Bêta, Vocalises et Accompagnateur visibles dans l'app iOS/Mac).
