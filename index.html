@@ -2449,7 +2449,7 @@ const MODS=[
 ];
 const MOD=Object.fromEntries(MODS.map(m=>[m.id,m]));
 /* modules en essai : offerts sur le site, pas encore dans l'app iOS */
-if(location.protocol==='app:')['vo','ba'].forEach(id=>{const i=MODS.findIndex(m=>m.id===id);if(i>=0)MODS.splice(i,1);});
+if(false)['vo','ba'].forEach(id=>{const i=MODS.findIndex(m=>m.id===id);if(i>=0)MODS.splice(i,1);});
 const S={micMetro:(()=>{try{return localStorage.getItem('atelier-micmetro')==='1'}catch(e){return false}})(),mic:(()=>{try{return !!localStorage.getItem('atelier-mic')}catch(e){return false}})(),transp:(()=>{try{return localStorage.getItem('atelier-transp')||'ut'}catch(e){return 'ut'}})(),perc:(()=>{try{return localStorage.getItem('atelier-perc')||'piano'}catch(e){return 'piano'}})(),slot:{},rev:(()=>{try{return localStorage.getItem('atelier-rev')||'1'}catch(e){return '1'}})(),inst:(()=>{try{const v=localStorage.getItem('atelier-inst')||'piano';return v==='glock'?'flute':v==='choeur'||v==='pianosynth'?(v==='choeur'?'voix':'piano'):v}catch(e){return 'piano'}})(),auto:{},lastEx:{},mod:'dm',cfg:{},level:{},stats:{},ex:null,st:{},keyHandler:null,midiHandler:null};
 
 /* ---------- précision rythmique : débutant (souple, par défaut) ou intermédiaire (exigeant) ---------- */
@@ -6463,7 +6463,7 @@ function recView(){
 /* ========== ENREGISTREUR : paroles qui défilent + mastering automatique ========== */
 
 /* étiquette « Bêta » : fonction nouvelle, en phase de test */
-function betaTag(){return el('span',{class:'beta',title:T('Fonction nouvelle, en phase de test : tes commentaires sont les bienvenus.')},T('Bêta'));}
+function betaTag(){return null;return el('span',{class:'beta',title:T('Fonction nouvelle, en phase de test : tes commentaires sont les bienvenus.')},T('Bêta'));}
 /* ---------- paroles (téléprompteur) ---------- */
 const LY_DEF={text:'',speed:20,size:26,open:false};
 const LY=tlLoad('atelier-lyr',LY_DEF);
@@ -7367,7 +7367,7 @@ matchMedia('(max-width:600px)').addEventListener?.('change',()=>{if(S.mod==='ho'
 document.addEventListener('click',e=>{if(S.mod!=='ho'||!e.target.closest||!e.target.closest('#helpbtn'))return;
   e.stopImmediatePropagation();e.preventDefault();openModule('ln');setTimeout(()=>{if(typeof helpSet==='function')helpSet(true);},250);},true);
 
-const AP_VERSION='1.33.0';
+const AP_VERSION='1.34.0';
 const AP_MIT_BODY="Permission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.";
 const AP_SMP="MuseScore General / MS Basic\nFluidR3 (original version) by Frank Wen Copyright (c) 2000-02, 2008\nMono conversion (FluidR3Mono) by Michael Cowgill Copyright (c) 2014-17\nAdaptation for MuseScore_General.sf2 by S. Christian Collins Copyright (c) 2018-19\n\n"+AP_MIT_BODY;
 const AP_MIT="Copyright (c) 2009-2026 Paul Rosen and Gregory Dyke\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.";
