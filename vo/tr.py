@@ -109,3 +109,5 @@ T=[
 ("Swing (jazz)","Swing (jazz)","Swing (jazz)"),("Reggae (one drop)","Reggae (one drop)","Reggae (one drop)"),("Afro-cubain","Afro-Cuban","Afrocubano"),("Valse jazz : ii – V – I","Jazz waltz: ii – V – I","Vals jazz: ii – V – I"),("Ballade en 12/8 : I – vi – IV – V","12/8 ballad: I – vi – IV – V","Balada en 12/8: I – vi – IV – V"),
 ("coupé","muted","silenciado"),("Baisse un instrument à zéro pour jouer sa partie toi-même.","Turn an instrument down to zero to play its part yourself.","Baja un instrumento a cero para tocar tú su parte."),("Tout se change pendant que ça joue : tempo, style, grille, transposition et instruments. Baisse un instrument à zéro pour jouer sa partie toi-même.","Everything can be changed while it plays: tempo, style, chart, transposition and instruments. Turn an instrument down to zero to play its part yourself.","Todo se puede cambiar mientras suena: tempo, estilo, cifrado, transposición e instrumentos. Baja un instrumento a cero para tocar tú su parte."),
 ]
+
+T+=[("🎲 Nouvelle progression","🎲 New progression","🎲 Nueva progresión"),("Au hasard","Random","Al azar")]

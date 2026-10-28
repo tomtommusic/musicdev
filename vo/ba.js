@@ -97,6 +97,37 @@ function baVoice(c,prev){
 }
 const baTh=c=>c.iv.includes(3)?3:c.iv.includes(4)?4:c.iv.includes(5)?5:c.iv.includes(2)?2:7;   /* « tierce » : la 4te d'un sus4, la 2de d'un sus2, la quinte d'un power chord */
 const baF5=c=>c.iv.includes(6)?6:c.iv.includes(8)?8:7;
+/* ---- « Nouvelle progression » : grilles typiques de chaque style, dans une tonalité au hasard ----
+   Chiffrage en degrés : majuscule = accord majeur, minuscule = mineur, b = abaissé d'un demi-ton ; « m: » = tonalité mineure. */
+const BA_GEN={
+  pop:['I | V | vi | IV','vi | IV | I | V','I | vi | IV | V','I | IV | vi | V','IV | I | V | vi','I | V | IV | V','I | iii | IV | V','vi | V | IV | V','I | V | vi | iii | IV | I | IV | V','I | IV | I | V','m: i | bVI | bIII | bVII'],
+  rock:['I | bVII | IV | I','I | IV | V | IV','I | V | IV | IV','vi | IV | I | V','I | bIII | IV | I','m: i | bVI | bVII | i','m: i | bVII | bVI | bVII','I | IV | bVII | IV','I | I | IV | V'],
+  ballad:['Imaj7 | vi7 | IVmaj7 | V','I | V | vi | IV','IV | V | iii | vi','I | iii | IV | V','I | vi | ii7 | V7','Iadd9 | V | vi7 | IVmaj7','I | IV | vi | V | I | IV | V | V','m: i | bVI | bIII | bVII'],
+  funk:['I7 | I7 | I7 | I7','m: i7 | IV7 | i7 | IV7','m: i7 | i7 | iv7 | i7','ii7 | V7 | ii7 | V7','I9 | I9 | IV9 | I9','m: i7 | bVII | i7 | bVII'],
+  swing:['ii7 | V7 | Imaj7 | Imaj7','Imaj7 vi7 | ii7 V7 | Imaj7 vi7 | ii7 V7','iii7 | VI7 | ii7 | V7','Imaj7 | VI7 | ii7 | V7','I7 | IV7 | I7 | I7 | IV7 | IV7 | I7 | VI7 | ii7 | V7 | I7 VI7 | ii7 V7','m: iiø7 | V7 | i7 | i7','Imaj7 | IVmaj7 | iii7 VI7 | ii7 V7','ii7 | V7 | iii7 | VI7 | ii7 | V7 | Imaj7 | Imaj7'],
+  shuffle:['I7 | I7 | I7 | I7 | IV7 | IV7 | I7 | I7 | V7 | IV7 | I7 | V7','I7 | IV7 | I7 | I7 | IV7 | IV7 | I7 | I7 | V7 | IV7 | I7 | V7','I7 | IV7 | I7 | V7','I7 | I7 | IV7 | I7 | V7 | IV7 | I7 | V7'],
+  bossa:['Imaj7 | Imaj7 | II7 | II7 | ii7 | V7 | Imaj7 | Imaj7','ii7 | V7 | Imaj7 | VI7','Imaj7 | vi7 | ii7 | V7','m: i7 | iv7 | V7 | i7','iii7 | VI7 | ii7 | V7','Imaj7 | IVmaj7 | ii7 | V7'],
+  reggae:['I | IV | I | IV','I | V | vi | IV','m: i | iv | i | iv','m: i | bVII | i | bVII','I | IV | V | IV','vi | IV | I | V'],
+  country:['I | I | IV | IV | V | V | I | I','I | IV | I | V','I | IV | V | I','I | I | IV | I | V | IV | I | I','I | V | IV | I'],
+  waltz:['I | IV | V7 | I','I | vi | ii | V7','I | I | IV | V7','I | V7 | V7 | I','Imaj7 | vi7 | ii7 | V7','m: i | iv | V7 | i'],
+  afro:['m: i | bVII | bVI | V7','m: i | iv | i | iv','m: i7 | bVII | i7 | bVII','m: i | bVI | bVII | i','I | IV | I | V']};
+const BA_ROM={i:0,ii:2,iii:4,iv:5,v:7,vi:9,vii:11};
+function baGenProg(style){
+  const list=BA_GEN[style]||BA_GEN.pop;let tpl=list[Math.floor(Math.random()*list.length)];
+  const minor=tpl.startsWith('m:');tpl=tpl.replace(/^m:\s*/,'');
+  const keys=minor?[9,4,2,7,0,11,6]:/swing|bossa/.test(style)?[0,5,10,3,7]:[0,7,2,9,4,5,10,3];
+  let key;do key=keys[Math.floor(Math.random()*keys.length)];while(keys.length>1&&key===baGenProg.last);baGenProg.last=key;
+  const flat=minor?[2,7,0,5].includes(key):[5,10,3,8,1].includes(key);
+  const NM=flat?['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B']:['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+  const base=minor?[0,2,3,5,7,8,10]:[0,2,4,5,7,9,11];
+  const chord=tok=>{const m=tok.match(/^(b?)([ivIV]+)(.*)$/);if(!m)return tok;
+    const rn=m[2].toLowerCase(),low=m[2]===m[2].toLowerCase()&&m[2]!==m[2].toUpperCase();let suf=m[3];
+    const deg=['i','ii','iii','iv','v','vi','vii'].indexOf(rn);let semi=(minor?base[deg]:BA_ROM[rn])-(m[1]?1:0);
+    if(minor&&m[1])semi=BA_ROM[rn]-1;   /* en mineur, bIII / bVI / bVII = degrés de la gamme majeure abaissés */
+    if(low&&!/^ø|^°/.test(suf))suf=suf==='7'?'m7':'m'+suf;
+    return NM[((key+semi)%12+12)%12]+suf;};
+  return tpl.split('|').map(b=>b.trim().split(/\s+/).map(chord).join(' ')).join(' | ');
+}
 function baBassNote(c,deg,next){
   /* note écrite (A.bass sonne une octave plus bas) : fondamentale entendue entre la1 et sol♯2, le vrai registre de la basse */
   const reg=pc=>pc<9?pc+48:pc+36;
@@ -279,7 +310,7 @@ MOD.ba.fresh=function(){
       el('div',{class:'babar'},M.play,M.cnt,el('button',{type:'button',class:'btn quiet sq','aria-label':'Plus lent',onclick:()=>setT(BA_S.tempo-4)},'−'),tl,el('button',{type:'button',class:'btn quiet sq','aria-label':'Plus rapide',onclick:()=>setT(BA_S.tempo+4)},'+'),btn('Tap',tap,'quiet')),
       tr,M.cells,M.err),
     el('section',{class:'mtsec'},el('h3',{},'Grille d\'accords'),
-      el('div',{class:'mtline'},el('label',{class:'qzfield'},el('span',{class:'fl'},'Grilles toutes prêtes'),preSel),el('label',{class:'qzfield'},el('span',{class:'fl'},'Chiffre indicateur'),meterSel)),
+      el('div',{class:'mtline'},el('label',{class:'qzfield'},el('span',{class:'fl'},'Grilles toutes prêtes'),preSel),el('div',{class:'qzfield'},el('span',{class:'fl'},'Au hasard'),btn('🎲 Nouvelle progression',()=>setGrid(baGenProg(BA_S.style)),'quiet')),el('label',{class:'qzfield'},el('span',{class:'fl'},'Chiffre indicateur'),meterSel)),
       builder,
       area,
       el('p',{class:'hint'},'Sépare les mesures par « | » et les accords d\'une même mesure par une espace. Exemples : C, Am, F♯m7, B♭maj7, G7/B, Dsus4, Edim, ou en français : Do, Rém, Sol7. « % » répète la mesure précédente.')),
