@@ -221,7 +221,7 @@ MOD.ba.mount=function(){const M=this;M.root=el('div',{class:'tl baw'});$('#answe
 MOD.ba.fresh=function(){
   const M=this,save=()=>tlSave('atelier-ba',BA_S);
   const styleSel=sel('ba_style',Object.entries(BA_STYLES).map(([k,v])=>[k,T(v.n)]),BA_S.style,v=>{BA_S.style=v;baEff();save();fillMeters();M.paint();const se=BA.sess;if(se){se.gD.gain.value=baGain('dr');se.gB.gain.value=baGain('bs');se.gP.gain.value=baGain('pn');}});
-  const preSel=sel('ba_pre',[['',T('Choisir une grille…')],...BA_PRESETS.map((p,i)=>[i,T(p[0])])],'',v=>{if(v==='')return;const p=BA_PRESETS[+v];BA_S.grid=p[1];BA_S.style=p[2];BA_S.meter=p[3]||'';baEff();styleSel.value=p[2];area.value=p[1];save();fillMeters();M.paint();preSel.value='';});
+  const preSel=sel('ba_pre',[['',T('Choisir une grille…')],...BA_PRESETS.map((p,i)=>[i,T(p[0])])],'',v=>{if(v==='')return;const p=BA_PRESETS[+v];BA_S.grid=p[1];BA_S.style=p[2];BA_S.meter=p[3]||'';baEff();styleSel.value=p[2];area.value=p[1];save();fillMeters();M.paint();});
   const area=el('textarea',{id:'ba_grid',class:'qzin bagrid',rows:'3',spellcheck:'false',autocapitalize:'off',autocomplete:'off','aria-label':'Grille d\'accords'});area.value=BA_S.grid;
   area.addEventListener('input',()=>{BA_S.grid=area.value;save();M.paint();});
   /* constructeur d'accords : fondamentale + type (+ basse), puis ajout dans la grille */
@@ -265,7 +265,9 @@ MOD.ba.fresh=function(){
   M.cnt=el('span',{class:'bacount','aria-live':'polite'});
   M.cells=el('div',{class:'bacells'});M.err=el('p',{class:'hint baerr',hidden:true});
   M.ui=()=>{M.play.textContent=BA.sess?T('■ Arrêter'):T('▶ Jouer');M.play.classList.toggle('on',!!BA.sess);};
-  M.paint=()=>{const{bars,bad}=baGrid(BA_S.grid),st=baEff();
+  /* la grille toute prête reste affichée tant que la grille et le style n'ont pas été modifiés */
+  const syncPre=()=>{const i=BA_PRESETS.findIndex(p=>p[1].trim()===String(BA_S.grid).trim()&&p[2]===BA_S.style);preSel.value=i<0?'':String(i);};
+  M.paint=()=>{syncPre();const{bars,bad}=baGrid(BA_S.grid),st=baEff();
     M.cells.style.setProperty('--per',st.m===3?3:4);
     M.cells.replaceChildren(...bars.map((b,i)=>el('div',{class:'bacell','data-i':i},el('small',{},String(i+1)),el('span',{},b.map(baName).join('  ')))));
     M.err.hidden=!bad.length;M.err.textContent=bad.length?T('Accords non reconnus : {0}').replace('{0}',bad.join(', ')):'';
