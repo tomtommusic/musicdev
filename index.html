@@ -7367,7 +7367,7 @@ matchMedia('(max-width:600px)').addEventListener?.('change',()=>{if(S.mod==='ho'
 document.addEventListener('click',e=>{if(S.mod!=='ho'||!e.target.closest||!e.target.closest('#helpbtn'))return;
   e.stopImmediatePropagation();e.preventDefault();openModule('ln');setTimeout(()=>{if(typeof helpSet==='function')helpSet(true);},250);},true);
 
-const AP_VERSION='1.34.0';
+const AP_VERSION='1.34.1';
 const AP_MIT_BODY="Permission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.";
 const AP_SMP="MuseScore General / MS Basic\nFluidR3 (original version) by Frank Wen Copyright (c) 2000-02, 2008\nMono conversion (FluidR3Mono) by Michael Cowgill Copyright (c) 2014-17\nAdaptation for MuseScore_General.sf2 by S. Christian Collins Copyright (c) 2018-19\n\n"+AP_MIT_BODY;
 const AP_MIT="Copyright (c) 2009-2026 Paul Rosen and Gregory Dyke\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.";
@@ -8084,7 +8084,10 @@ function baBassNote(c,deg,next){
   if(c.bass!=null&&deg==='R'){const b=((c.bass+BA_S.tr)%12+12)%12;base=reg(b);}
   const third=c.iv.includes(3)?3:4,fifth=c.iv.includes(6)?6:c.iv.includes(8)?8:7;
   switch(deg){case'5':return base+fifth;case'8':return base+12;case'b7':return base+(c.iv.includes(11)?11:10);case'3':return base+third;case'6':return base+(c.iv.includes(10)&&c.iv.length>3&&c.iv[3]===10?10:9);
-    case'A':{if(!next)return base+fifth;const n=((next.root+BA_S.tr)%12+12)%12,nb=reg(n);return nb+(nb>base?-1:1);}
+    case'A':{if(!next)return base+fifth;const n=((next.root+BA_S.tr)%12+12)%12,nb=reg(n);
+      /* note de passage vers l'accord suivant : on préfère une note de la gamme de l'accord en cours (ex. G7 → C : si, pas do♯) */
+      const sc=baScale(c).map(x=>(r+x)%12),ok=[nb-1,nb+1,nb+2,nb-2].filter(m=>sc.includes(((m%12)+12)%12));
+      return ok.length?ok[0]:nb-1;}
     default:return base;}
 }
 /* ---- basse qui marche (walking bass) ----
@@ -8114,7 +8117,11 @@ function baWalk(ch,nx,beats,prev,sameAsPrev){
   if(nx&&nr===r){target=first+12<=BA_TOP?first+12:first-12>=BA_LO?first-12:first+7;}
   /* note d'approche du dernier temps */
   const approach=last=>{const opts=[target-1,target+1];if(R()<.2)opts.push(target+7>BA_TOP?target-5:target+7);
-    const ok=opts.filter(m=>m>=BA_LO-2&&m<=BA_TOP&&m!==last);ok.sort((a,b)=>Math.abs(a-last)-Math.abs(b-last)+(R()-.5)*1.5);return ok[0]??target-1;};
+    let ok=opts.filter(m=>m>=BA_LO-2&&m<=BA_TOP&&m!==last);
+    /* approche : demi-ton dans la gamme de l'accord en cours si possible (pas de do♯ sur G7 avant C) */
+    let inSc=ok.filter(m=>scale.includes(m%12));
+    if(!inSc.length)inSc=[target+2,target-2,target-5,target+7].filter(m=>m>=BA_LO-2&&m<=BA_TOP&&m!==last&&scale.includes(m%12));   /* sinon : un ton au-dessus/au-dessous, ou la quinte */
+    if(inSc.length)ok=inSc;ok.sort((a,b)=>Math.abs(a-last)-Math.abs(b-last)+(R()-.5)*1.5);return ok[0]??target-1;};
   for(let k=1;k<beats-1;k++){
     const prevN=line[k-1],goal=first+(target-first)*k/(beats-1),strong=k%2===0;
     const pool=[];for(let m=BA_LO-2;m<=BA_TOP;m++){const pc=m%12;if(m===prevN)continue;if(strong?tones.includes(pc):scale.includes(pc))pool.push(m);}
