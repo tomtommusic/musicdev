@@ -102,7 +102,10 @@ function baBassNote(c,deg,next){
   if(c.bass!=null&&deg==='R'){const b=((c.bass+BA_S.tr)%12+12)%12;base=reg(b);}
   const third=c.iv.includes(3)?3:4,fifth=c.iv.includes(6)?6:c.iv.includes(8)?8:7;
   switch(deg){case'5':return base+fifth;case'8':return base+12;case'b7':return base+(c.iv.includes(11)?11:10);case'3':return base+third;case'6':return base+(c.iv.includes(10)&&c.iv.length>3&&c.iv[3]===10?10:9);
-    case'A':{if(!next)return base+fifth;const n=((next.root+BA_S.tr)%12+12)%12,nb=reg(n);return nb+(nb>base?-1:1);}
+    case'A':{if(!next)return base+fifth;const n=((next.root+BA_S.tr)%12+12)%12,nb=reg(n);
+      /* note de passage vers l'accord suivant : on préfère une note de la gamme de l'accord en cours (ex. G7 → C : si, pas do♯) */
+      const sc=baScale(c).map(x=>(r+x)%12),ok=[nb-1,nb+1,nb+2,nb-2].filter(m=>sc.includes(((m%12)+12)%12));
+      return ok.length?ok[0]:nb-1;}
     default:return base;}
 }
 /* ---- basse qui marche (walking bass) ----
@@ -132,7 +135,11 @@ function baWalk(ch,nx,beats,prev,sameAsPrev){
   if(nx&&nr===r){target=first+12<=BA_TOP?first+12:first-12>=BA_LO?first-12:first+7;}
   /* note d'approche du dernier temps */
   const approach=last=>{const opts=[target-1,target+1];if(R()<.2)opts.push(target+7>BA_TOP?target-5:target+7);
-    const ok=opts.filter(m=>m>=BA_LO-2&&m<=BA_TOP&&m!==last);ok.sort((a,b)=>Math.abs(a-last)-Math.abs(b-last)+(R()-.5)*1.5);return ok[0]??target-1;};
+    let ok=opts.filter(m=>m>=BA_LO-2&&m<=BA_TOP&&m!==last);
+    /* approche : demi-ton dans la gamme de l'accord en cours si possible (pas de do♯ sur G7 avant C) */
+    let inSc=ok.filter(m=>scale.includes(m%12));
+    if(!inSc.length)inSc=[target+2,target-2,target-5,target+7].filter(m=>m>=BA_LO-2&&m<=BA_TOP&&m!==last&&scale.includes(m%12));   /* sinon : un ton au-dessus/au-dessous, ou la quinte */
+    if(inSc.length)ok=inSc;ok.sort((a,b)=>Math.abs(a-last)-Math.abs(b-last)+(R()-.5)*1.5);return ok[0]??target-1;};
   for(let k=1;k<beats-1;k++){
     const prevN=line[k-1],goal=first+(target-first)*k/(beats-1),strong=k%2===0;
     const pool=[];for(let m=BA_LO-2;m<=BA_TOP;m++){const pc=m%12;if(m===prevN)continue;if(strong?tones.includes(pc):scale.includes(pc))pool.push(m);}
