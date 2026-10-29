@@ -8,6 +8,8 @@ on:
         description: "Numéro de version affiché"
         required: false
         default: "1.0"
+permissions:
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -54,3 +56,10 @@ jobs:
         with:
           name: MusiDev-android-captures
           path: shots/
+      - name: Publier les captures sur la branche android-captures
+        if: always()
+        run: |
+          [ -d shots ] || exit 0
+          cd shots && git init -q -b android-captures && git add -A
+          git -c user.name=ci -c user.email=ci@example.com commit -q -m "captures ${{ github.run_number }}"
+          git push -f -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" android-captures
