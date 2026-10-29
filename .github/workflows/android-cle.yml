@@ -1,0 +1,27 @@
+name: Android - créer la clé de téléversement
+# À lancer UNE SEULE FOIS. Crée la clé qui signe l'app avant l'envoi à Google Play.
+# La clé est protégée par le mot de passe du secret ANDROID_KEY_PASSWORD (que toi seul connais).
+# Résultat : un fichier « cle-android » à télécharger (gardé 1 jour), dont le contenu va dans le secret ANDROID_KEYSTORE_B64.
+on: workflow_dispatch
+jobs:
+  cle:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Vérifier le mot de passe
+        env:
+          PW: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          if [ ${#PW} -lt 12 ]; then echo "::error::Crée d'abord le secret ANDROID_KEY_PASSWORD (au moins 12 caractères)."; exit 1; fi
+      - name: Créer la clé
+        env:
+          PW: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          keytool -genkeypair -v -storetype PKCS12 -keystore upload.p12 -alias musidev -keyalg RSA -keysize 4096 -validity 10000 \
+            -storepass "$PW" -keypass "$PW" -dname "CN=MusiDev, O=Tom Tom Music, C=CA"
+          mkdir out && base64 -w0 upload.p12 > out/cle-android.txt
+          echo "Copie TOUT le texte de ce fichier dans un nouveau secret GitHub nommé ANDROID_KEYSTORE_B64, puis supprime ce fichier." > out/LISEZ-MOI.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cle-android
+          path: out/
+          retention-days: 1

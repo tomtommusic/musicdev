@@ -8,6 +8,10 @@ on:
         description: "Numéro de version affiché"
         required: false
         default: "1.0"
+      playstore:
+        description: "oui = construire aussi le paquet signé pour Google Play (.aab)"
+        required: false
+        default: "non"
 permissions:
   contents: write
 jobs:
@@ -32,6 +36,29 @@ jobs:
           gradle --no-daemon assembleDebug 2>&1 | tee build.log; st=${PIPESTATUS[0]}
           if [ $st -ne 0 ]; then msg=$(grep -E "error:|What went wrong|e: |> |Could not|FAILED" -A2 build.log | head -40 | sed ':a;N;$!ba;s/%/%25/g;s/\r//g;s/\n/%0A/g'); echo "::error title=Gradle::$msg"; fi
           exit $st
+      - name: Paquet signé pour Google Play
+        if: github.event.inputs.playstore == 'oui'
+        working-directory: android
+        env:
+          VERSION_NAME: ${{ github.event.inputs.version }}
+          VERSION_CODE: ${{ github.run_number }}
+          KS_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          ANDROID_KEY_ALIAS: musidev
+        run: |
+          if [ -z "$KS_B64" ]; then echo "::error::Secret ANDROID_KEYSTORE_B64 manquant (lance d'abord « Android - créer la clé »)."; exit 1; fi
+          echo "$KS_B64" | base64 -d > "$RUNNER_TEMP/upload.p12"
+          export ANDROID_KEYSTORE_PATH="$RUNNER_TEMP/upload.p12"
+          gradle --no-daemon bundleRelease
+          mkdir -p ../aab && cp app/build/outputs/bundle/release/app-release.aab "../aab/MusiDev-${{ github.event.inputs.version }}-${{ github.run_number }}.aab"
+          rm -f "$RUNNER_TEMP/upload.p12"
+      - name: Publier le .aab sur la branche android-aab
+        if: github.event.inputs.playstore == 'oui'
+        run: |
+          cd aab && git init -q -b android-aab && git add -A
+          git -c user.name=ci -c user.email=ci@example.com commit -q -m "aab ${{ github.run_number }}"
+          git push -f -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" android-aab
       - name: Copier l'APK
         run: cp android/app/build/outputs/apk/debug/app-debug.apk MusiDev-test.apk
       - uses: actions/upload-artifact@v4
