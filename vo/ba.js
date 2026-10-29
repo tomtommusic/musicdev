@@ -363,7 +363,7 @@ MOD.ba.fresh=function(){
     const b=el('button',{type:'button',class:'bafold','aria-expanded':'true'},el('span',{class:'bafoldt'},h.textContent),el('span',{class:'bafoldi','aria-hidden':'true'},'▾'));
     h.replaceChildren(b);
     const set=open=>{sec.classList.toggle('closed',!open);b.setAttribute('aria-expanded',String(open));};
-    set(!BA_S.fold[key]);
+    set(BA_S.fold[key]===false);   /* fermés par défaut */
     b.addEventListener('click',()=>{const open=sec.classList.contains('closed');set(open);BA_S.fold[key]=!open;save();if(open&&key==='scale'&&M.scPaint)M.scPaint();});});
   fillMeters();setT(BA_S.tempo);M.paint();M.ui();paintB();
   S.keyHandler=e=>{if(e.code==='Space'&&document.activeElement!==area){e.preventDefault();BA.sess?baStop():baPlay();return true;}};
