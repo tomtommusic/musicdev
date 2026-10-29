@@ -238,6 +238,7 @@ function baPlay(){
         const bars2=baGrid(BA_S.grid).bars;if(!bars2.length){baStop();return;}
         const bi=s.bar%bars2.length,bar=bars2[bi],n=bar.length,per=Math.max(1,Math.round(spb/n)),ci=Math.min(n-1,Math.floor(s.step/per)),ch=bar[ci];
         const nextCh=ci+1<n?bar[ci+1]:bars2[(bi+1)%bars2.length][0],chStart=s.step%per===0;
+        if(chStart&&ci>0){const c2=ch;s.timers.push(setTimeout(()=>{if(BA.sess===s&&MOD.ba.scChord)MOD.ba.scChord(c2);},Math.max(0,(t+lag-now)*1000)));}
         if(s.step===0){const b=bi;s.timers.push(setTimeout(()=>{if(BA.sess===s)MOD.ba.now(b);},Math.max(0,(t+lag-now)*1000)));}
         const fill=BA_S.dr&&I>=2&&(bi===bars2.length-1||s.bar%(I===3?2:4)===(I===3?1:3))&&s.step>=spb-st.sub;   /* petit roulement sur le dernier temps */
         const vel=[0,.7,.85,1][I];
@@ -330,17 +331,20 @@ MOD.ba.fresh=function(){
   M.ui=()=>{M.play.textContent=BA.sess?T('■ Arrêter'):T('▶ Jouer');M.play.classList.toggle('on',!!BA.sess);};
   /* la grille toute prête reste affichée tant que la grille et le style n'ont pas été modifiés */
   const syncPre=()=>{const i=BA_PRESETS.findIndex(p=>p[1].trim()===String(BA_S.grid).trim()&&p[2]===BA_S.style);preSel.value=i<0?'':String(i);};
-  M.paint=()=>{syncPre();const{bars,bad}=baGrid(BA_S.grid),st=baEff();
+  const scSec=baScSection(M,save);
+  M.paint=()=>{syncPre();M.scCh=null;const{bars,bad}=baGrid(BA_S.grid),st=baEff();
     M.cells.style.setProperty('--per',st.m===3?3:4);
     M.cells.replaceChildren(...bars.map((b,i)=>el('div',{class:'bacell','data-i':i},el('small',{},String(i+1)),el('span',{},b.map(baName).join('  ')))));
     M.err.hidden=!bad.length;M.err.textContent=bad.length?T('Accords non reconnus : {0}').replace('{0}',bad.join(', ')):'';
     setT(BA_S.tempo);
-    trLab.textContent=BA_S.tr?(BA_S.tr>0?'+':'')+BA_S.tr+' ½':'0';};
+    trLab.textContent=BA_S.tr?(BA_S.tr>0?'+':'')+BA_S.tr+' ½':'0';
+    M.scPaint();};
   M.root.replaceChildren(
     el('div',{class:'bahead'},el('h2',{},'Accompagnateur',typeof betaTag==='function'?betaTag():null),el('p',{class:'hint'},'Écris une grille d\'accords, choisis un style : batterie, basse et piano t\'accompagnent en boucle.')),
     el('div',{class:'bapanel'},
       el('div',{class:'babar'},M.play,M.cnt,el('button',{type:'button',class:'btn quiet sq','aria-label':'Plus lent',onclick:()=>setT(BA_S.tempo-4)},'−'),tl,el('button',{type:'button',class:'btn quiet sq','aria-label':'Plus rapide',onclick:()=>setT(BA_S.tempo+4)},'+'),btn('Tap',tap,'quiet')),
       tr,M.cells,M.err),
+    scSec,
     el('section',{class:'mtsec'},el('h3',{},'Grille d\'accords'),
       el('div',{class:'mtline'},el('label',{class:'qzfield'},el('span',{class:'fl'},'Grilles toutes prêtes'),preSel),el('div',{class:'qzfield'},el('span',{class:'fl'},'Au hasard'),btn('🎲 Nouvelle progression',()=>setGrid(baGenProg(BA_S.style)),'quiet')),el('label',{class:'qzfield'},el('span',{class:'fl'},'Chiffre indicateur'),meterSel)),
       builder,
@@ -355,5 +359,5 @@ MOD.ba.fresh=function(){
   fillMeters();setT(BA_S.tempo);M.paint();M.ui();paintB();
   S.keyHandler=e=>{if(e.code==='Space'&&document.activeElement!==area){e.preventDefault();BA.sess?baStop():baPlay();return true;}};
 };
-MOD.ba.now=function(i){const M=this;if(!M.cells)return;M.cnt.textContent='';M.cells.querySelectorAll('.bacell').forEach(c=>c.classList.toggle('is-now',+c.dataset.i===i));};
+MOD.ba.now=function(i){const M=this;if(!M.cells)return;if(M.scChord){const bs=baGrid(BA_S.grid).bars;if(i>=0&&bs[i])M.scChord(bs[i][0]);else if(i<0&&M.scCh){M.scCh=null;M.scPaint();}}M.cnt.textContent='';M.cells.querySelectorAll('.bacell').forEach(c=>c.classList.toggle('is-now',+c.dataset.i===i));};
 MOD.ba.count=function(b){if(this.cnt)this.cnt.textContent=String(b);};

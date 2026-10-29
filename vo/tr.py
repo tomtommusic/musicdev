@@ -111,3 +111,18 @@ T=[
 ]
 
 T+=[("🎲 Nouvelle progression","🎲 New progression","🎲 Nueva progresión"),("Au hasard","Random","Al azar")]
+T+=[("Gammes et modes pour improviser","Scales and modes for improvising","Escalas y modos para improvisar"),
+("Afficher","Show","Mostrar"),("Gamme","Scale","Escala"),("Étiquettes","Labels","Etiquetas"),
+("Rien","Nothing","Nada"),("Portée","Staff","Pentagrama"),("Manche de guitare","Guitar fretboard","Mástil de guitarra"),("Manche de basse","Bass fretboard","Mástil de bajo"),
+("Tonalité de la grille (automatique)","Key of the progression (automatic)","Tonalidad de la progresión (automática)"),
+("Mode de chaque accord","Mode of each chord","Modo de cada acorde"),("Choisir une gamme…","Choose a scale…","Elegir una escala…"),
+("Noms des notes","Note names","Nombres de las notas"),("Degrés","Degrees","Grados"),("Tonique","Tonic","Tónica"),("Gamme ou mode","Scale or mode","Escala o modo"),
+("Manche","Fretboard","Mástil"),("Accord","Chord","Acorde"),("tonique","tonic","tónica"),
+("notes de l'accord joué","notes of the current chord","notas del acorde que suena"),("autres notes de la gamme","other scale notes","otras notas de la escala"),
+("glisse le manche pour voir les cases suivantes","swipe the fretboard to see the higher frets","desliza el mástil para ver los trastes siguientes"),
+("● au-dessus d'une note = note de l'accord joué. Sous la portée : les degrés de la gamme.","● above a note = note of the current chord. Below the staff: the scale degrees.","● encima de una nota = nota del acorde que suena. Debajo del pentagrama: los grados de la escala."),
+("Pendant la lecture, les notes de l'accord joué s'allument. Commence par viser ces notes sur les temps forts, puis relie-les avec les autres notes de la gamme. Voir la Bibliothèque théorique › Modes et improvisation.","During playback, the notes of the current chord light up. Start by aiming for these notes on the strong beats, then connect them with the other scale notes. See the Theory library › Modes and improvisation.","Durante la reproducción se iluminan las notas del acorde que suena. Empieza apuntando a esas notas en los tiempos fuertes y luego únelas con las demás notas de la escala. Ver la Biblioteca teórica › Modos e improvisación."),
+("Ionien (majeur)","Ionian (major)","Jónico (mayor)"),("Dorien","Dorian","Dórico"),("Phrygien","Phrygian","Frigio"),("Lydien","Lydian","Lidio"),("Mixolydien","Mixolydian","Mixolidio"),
+("Éolien (mineur naturel)","Aeolian (natural minor)","Eólico (menor natural)"),("Locrien","Locrian","Locrio"),("Mineur harmonique","Harmonic minor","Menor armónica"),
+("Phrygien dominant","Phrygian dominant","Frigio dominante"),("Mineur mélodique","Melodic minor","Menor melódica"),("Pentatonique majeure","Major pentatonic","Pentatónica mayor"),
+("Pentatonique mineure","Minor pentatonic","Pentatónica menor"),("Blues","Blues","Blues"),("Par tons","Whole tone","Por tonos"),("Diminuée (ton – demi-ton)","Diminished (whole–half)","Disminuida (tono–semitono)")]

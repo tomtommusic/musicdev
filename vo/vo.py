@@ -15,7 +15,7 @@ rep("(dm|dr|iv|pc|ln|lm|lr|lb|rd|so|la|tq|mt|ac|en|dg|et|gc|ho|ap|bd)","(dm|dr|i
 rep("const MOD=Object.fromEntries(MODS.map(m=>[m.id,m]));","""const MOD=Object.fromEntries(MODS.map(m=>[m.id,m]));
 /* modules en essai : offerts sur le site, pas encore dans l'app iOS */
 if(location.protocol==='app:')['vo','ba'].forEach(id=>{const i=MODS.findIndex(m=>m.id===id);if(i>=0)MODS.splice(i,1);});""")
-code=open(D+'/vo.js',encoding='utf-8').read()+open(D+'/ba.js',encoding='utf-8').read()
+code=open(D+'/vo.js',encoding='utf-8').read()+open(D+'/ba.js',encoding='utf-8').read()+open(D+'/basc.js',encoding='utf-8').read()
 rep("/* ---------- démarrage ---------- */",code+"\n/* ---------- démarrage ---------- */")
 css=open(D+'/vo.css',encoding='utf-8').read()
 k=s.rfind('</style>',0,s.find('<div class="app">'));s=s[:k]+css+s[k:]

@@ -57,3 +57,26 @@
 .bafader{display:grid;grid-template-columns:6.5em 1fr 4em;align-items:center;gap:10px}
 .bafader .fl{margin:0}.bafader input[type=range]{width:100%}
 .bavv{font:600 .85rem/1 var(--f-mono,monospace);text-align:right;color:var(--muted)}
+
+/* gammes et modes */
+.bascinfo{margin:8px 0 6px;font-size:.95rem}
+.bascfb{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:4px 0;margin:0 -4px}
+.bafb{display:block;max-width:none}
+.bafb .fbfret{stroke:var(--line);stroke-width:1.5}
+.bafb .fbnut{stroke:var(--ink);stroke-width:4}
+.bafb .fbstr{stroke:var(--muted)}
+.bafb .fbdot{fill:var(--line)}
+.bafb .fbnum{fill:var(--muted);font:600 10px var(--f-mono,monospace);text-anchor:middle}
+.bafb .fbn text{font:700 9px var(--f-mono,monospace);text-anchor:middle}
+.bafb .fbn.scale circle{fill:var(--surface,#fff);stroke:var(--muted);stroke-width:1.2}
+.bafb .fbn.scale text{fill:var(--ink)}
+.bafb .fbn.chord circle{fill:color-mix(in srgb,var(--accent) 55%,var(--paper));stroke:var(--ink);stroke-width:2.5}
+.bafb .fbn.chord text{fill:var(--ink)}
+.bafb .fbn.root rect{fill:var(--ink);stroke:var(--ink);stroke-width:2}
+.bafb .fbn.root text{fill:var(--paper,#fff)}
+.basclegend .lg{font-weight:700}
+.basclegend .lg.root{color:var(--ink)}
+.basclegend .lg.chord{color:var(--ink);opacity:.7}
+.basclegend .lg.scale{color:var(--muted)}
+.bascstaff{max-width:600px}
+.bafb .fbn.chord.out circle{stroke-dasharray:3 2}
