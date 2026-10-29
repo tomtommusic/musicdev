@@ -23,6 +23,10 @@ def cat(L):
 a=s.index(" {id:'modes',t:'Les modes'");b=s.index(" {id:'autres-gammes'",a);s=s[:a]+s[b:]
 js='const LIB3=['+json.dumps(cat('fr'),ensure_ascii=False).replace('</','<\\/')+'];\n'
 rep("const LIB=[...LIB1,...LIB2];",js+"const LIB=[...LIB1,...LIB2,...LIB3];")
+# Tester mes connaissances : sujet « Modes et improvisation » + écoute des modes (offerts en option, pas dans les réglages par défaut)
+rep("['e_cad','Cadences'],['e_rhy','Rythmes']]},","['e_cad','Cadences'],['e_rhy','Rythmes'],['e_mde','Reconnaître un mode']]},")
+rep(" {id:'eco',t:'Écoute',listen:true,"," {id:'mod',t:'Modes et improvisation',subs:[['m_for','Formules des modes'],['m_not','Notes d\\'un mode'],['m_acc','Quel mode sur quel accord'],['m_pen','Pentatoniques et blues'],['m_imp','Notions d\\'improvisation']]},\n {id:'eco',t:'Écoute',listen:true,")
+rep("/* ---------- tirage d'un questionnaire ---------- */",open(D+'/qz_modes.js',encoding='utf-8').read()+"\n/* ---------- tirage d'un questionnaire ---------- */")
 open(p,'w',encoding='utf-8').write(s)
 # traductions : la catégorie doit être la 7e (même position que dans l'app)
 for L in ('en','es'):
