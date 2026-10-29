@@ -225,8 +225,10 @@ public class MainActivity extends ComponentActivity {
         });
 
         if (BuildConfig.DEBUG && getIntent() != null) testJs = getIntent().getStringExtra("js");
-        if (savedInstanceState != null) web.restoreState(savedInstanceState);
-        else web.loadUrl(START);
+        if (savedInstanceState == null || web.restoreState(savedInstanceState) == null) web.loadUrl(START);
+        Log.i(TAG, "lancement");
+        // Filet de sécurité : si la page n'a pas démarré (premier lancement très lent), on la recharge.
+        web.postDelayed(this::ensureLoaded, 4000);
     }
 
     /** Version de test seulement : « adb shell am start … --es js "openModule('ba')" » exécute du code dans la page
@@ -289,11 +291,17 @@ public class MainActivity extends ComponentActivity {
             .show();
     }
 
+    void ensureLoaded() {
+        String u = web.getUrl();
+        if (u == null || u.isEmpty() || u.startsWith("about:")) { Log.w(TAG, "page absente, rechargement"); web.loadUrl(START); }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         web.onResume();
         web.resumeTimers();
+        ensureLoaded();
         // Retour dans l'app : la page relance le micro et le son (même événement que sur iPhone).
         if (resumedOnce) web.postDelayed(() -> web.evaluateJavascript("window.dispatchEvent(new Event('nativeresume'))", null), 300);
         resumedOnce = true;
