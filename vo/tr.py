@@ -126,3 +126,4 @@ T+=[("Gammes et modes pour improviser","Scales and modes for improvising","Escal
 ("Éolien (mineur naturel)","Aeolian (natural minor)","Eólico (menor natural)"),("Locrien","Locrian","Locrio"),("Mineur harmonique","Harmonic minor","Menor armónica"),
 ("Phrygien dominant","Phrygian dominant","Frigio dominante"),("Mineur mélodique","Melodic minor","Menor melódica"),("Pentatonique majeure","Major pentatonic","Pentatónica mayor"),
 ("Pentatonique mineure","Minor pentatonic","Pentatónica menor"),("Blues","Blues","Blues"),("Par tons","Whole tone","Por tonos"),("Diminuée (ton – demi-ton)","Diminished (whole–half)","Disminuida (tono–semitono)")]
+T+=[("Noms des notes (C D E)","Note names (C D E)","Nombres de las notas (C D E)"),("Noms français (do ré mi)","Solfège names (do re mi)","Nombres en solfeo (do re mi)")]

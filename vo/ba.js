@@ -344,12 +344,12 @@ MOD.ba.fresh=function(){
     el('div',{class:'bapanel'},
       el('div',{class:'babar'},M.play,M.cnt,el('button',{type:'button',class:'btn quiet sq','aria-label':'Plus lent',onclick:()=>setT(BA_S.tempo-4)},'−'),tl,el('button',{type:'button',class:'btn quiet sq','aria-label':'Plus rapide',onclick:()=>setT(BA_S.tempo+4)},'+'),btn('Tap',tap,'quiet')),
       tr,M.cells,M.err),
-    scSec,
     el('section',{class:'mtsec'},el('h3',{},'Grille d\'accords'),
       el('div',{class:'mtline'},el('label',{class:'qzfield'},el('span',{class:'fl'},'Grilles toutes prêtes'),preSel),el('div',{class:'qzfield'},el('span',{class:'fl'},'Au hasard'),btn('🎲 Nouvelle progression',()=>setGrid(baGenProg(BA_S.style)),'quiet')),el('label',{class:'qzfield'},el('span',{class:'fl'},'Chiffre indicateur'),meterSel)),
       builder,
       area,
       el('p',{class:'hint'},'Sépare les mesures par « | » et les accords d\'une même mesure par une espace. Exemples : C, Am, F♯m7, B♭maj7, G7/B, Dsus4, Edim, ou en français : Do, Rém, Sol7. « % » répète la mesure précédente.')),
+    scSec,
     el('section',{class:'mtsec'},el('h3',{},'Le groupe'),
       el('div',{class:'mtline'},el('label',{class:'qzfield'},el('span',{class:'fl'},'Style'),styleSel),el('label',{class:'qzfield'},el('span',{class:'fl'},'Intensité'),intSel),
         el('div',{class:'qzfield'},el('span',{class:'fl'},'Transposer'),el('div',{class:'row2'},el('button',{type:'button',class:'btn quiet sq','aria-label':'Un demi-ton plus bas',onclick:()=>setTr(-1)},'♭'),trLab,el('button',{type:'button',class:'btn quiet sq','aria-label':'Un demi-ton plus haut',onclick:()=>setTr(1)},'♯')))),
@@ -359,7 +359,7 @@ MOD.ba.fresh=function(){
   /* panneaux ouvrables et fermables (sauf la barre de lecture) ; l'état est mémorisé */
   if(!BA_S.fold)BA_S.fold={};
   M.root.querySelectorAll('section.mtsec').forEach((sec,i)=>{const h=sec.querySelector('h3');if(!h)return;
-    const key=sec.classList.contains('bascsec')?'scale':['scale','grille','groupe'][i]||('p'+i);
+    const key=sec.classList.contains('bascsec')?'scale':['grille','scale','groupe'][i]||('p'+i);
     const b=el('button',{type:'button',class:'bafold','aria-expanded':'true'},el('span',{class:'bafoldt'},h.textContent),el('span',{class:'bafoldi','aria-hidden':'true'},'▾'));
     h.replaceChildren(b);
     const set=open=>{sec.classList.toggle('closed',!open);b.setAttribute('aria-expanded',String(open));};
