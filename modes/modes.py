@@ -4,6 +4,8 @@
 import sys,os,json
 D=os.path.dirname(os.path.abspath(__file__))
 exec(open(D+'/impro_lib.py',encoding='utf-8').read())
+exec(open(D+'/merged.py',encoding='utf-8').read())
+for L in ('fr','en','es'):TOPICS[L]['topics'].insert(0,MERGED[L])
 p=sys.argv[1];s=open(p,encoding='utf-8').read()
 def rep(a,b):
     global s
@@ -17,6 +19,8 @@ def cat(L):
         if L=='fr':x['see']=fr['see']
         out['topics'].append(x)
     return out
+# l'ancienne fiche « Les modes » (onglet Gammes) est fusionnée dans la nouvelle catégorie
+a=s.index(" {id:'modes',t:'Les modes'");b=s.index(" {id:'autres-gammes'",a);s=s[:a]+s[b:]
 js='const LIB3=['+json.dumps(cat('fr'),ensure_ascii=False).replace('</','<\\/')+'];\n'
 rep("const LIB=[...LIB1,...LIB2];",js+"const LIB=[...LIB1,...LIB2,...LIB3];")
 open(p,'w',encoding='utf-8').write(s)
@@ -24,4 +28,6 @@ open(p,'w',encoding='utf-8').write(s)
 for L in ('en','es'):
     f=os.path.join(D,'..','i18n',f'lib_{L}.json');d=json.load(open(f,encoding='utf-8'))
     d=[c for c in d if c['id']!='impro']+[cat(L)]
+    for c in d:
+        if c['id']=='gammes':c['topics']=[t for t in c['topics'] if t['id']!='modes']
     json.dump(d,open(f,'w',encoding='utf-8'),ensure_ascii=False,indent=1)

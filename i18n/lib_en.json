@@ -395,23 +395,6 @@
     ]
    },
    {
-    "id": "modes",
-    "t": "Modes",
-    "title": null,
-    "k": "modes ionian dorian phrygian lydian mixolydian aeolian locrian",
-    "html": "<p>A <b>mode</b> is a 7-note scale defined by where its half steps fall. By playing the white keys of the piano starting from each note, you get the 7 modes:</p>\n<table class=\"lt\"><tr><th>Mode</th><th>On the white keys</th><th>Color</th></tr>\n<tr><td>Ionian</td><td>C to C</td><td>= major</td></tr>\n<tr><td>Dorian</td><td>D to D</td><td>minor with a major 6<sup>th</sup></td></tr>\n<tr><td>Phrygian</td><td>E to E</td><td>minor with a minor 2<sup>nd</sup></td></tr>\n<tr><td>Lydian</td><td>F to F</td><td>major with an augmented 4<sup>th</sup></td></tr>\n<tr><td>Mixolydian</td><td>G to G</td><td>major with a minor 7<sup>th</sup></td></tr>\n<tr><td>Aeolian</td><td>A to A</td><td>= natural minor</td></tr>\n<tr><td>Locrian</td><td>B to B</td><td>minor 2<sup>nd</sup> and diminished 5<sup>th</sup></td></tr></table>\n<p>You can hear them in Gregorian chant, folk music, jazz, rock and film music.</p>",
-    "ex": [
-     {
-      "abc": "X:1\nL:1/4\nK:C\nD E F G A B c d |]\nw: D E F G A B C D",
-      "cap": "Mode on D (Dorian)."
-     },
-     {
-      "abc": "X:1\nL:1/4\nK:C\nG A B c d e f g |]\nw: G A B C D E F G",
-      "cap": "Mode on G (Mixolydian): the 7th is an F natural."
-     }
-    ]
-   },
-   {
     "id": "autres-gammes",
     "t": "Other scales",
     "title": null,
@@ -689,11 +672,15 @@
   "t": "Modes and improvisation",
   "topics": [
    {
-    "id": "modes-formules",
-    "t": "Modes as formulas",
-    "k": "modes formula degrees ionian dorian phrygian lydian mixolydian aeolian locrian parallel bright dark",
-    "html": "<p>There are two ways to look at the modes. The first one, on the white keys (D to D, G to G…), is explained in <a href=\"#\" data-go=\"modes\">Modes</a>. The second one, more useful for improvising, compares each mode with the <b>major scale on the same tonic</b>: you always start from the same note and note what changes.</p>\n<table class=\"lt\"><tr><th>Mode</th><th>Formula</th><th>Characteristic note</th></tr>\n<tr><td>Lydian</td><td>1 2 3 <b>♯4</b> 5 6 7</td><td>♯4</td></tr>\n<tr><td>Ionian (major)</td><td>1 2 3 4 5 6 7</td><td>—</td></tr>\n<tr><td>Mixolydian</td><td>1 2 3 4 5 6 <b>♭7</b></td><td>♭7</td></tr>\n<tr><td>Dorian</td><td>1 2 ♭3 4 5 <b>6</b> ♭7</td><td>6 (major)</td></tr>\n<tr><td>Aeolian (natural minor)</td><td>1 2 ♭3 4 5 ♭6 ♭7</td><td>♭6</td></tr>\n<tr><td>Phrygian</td><td>1 <b>♭2</b> ♭3 4 5 ♭6 ♭7</td><td>♭2</td></tr>\n<tr><td>Locrian</td><td>1 ♭2 ♭3 4 <b>♭5</b> ♭6 ♭7</td><td>♭5</td></tr></table>\n<p>The table goes from the <b>brightest</b> mode (Lydian) to the <b>darkest</b> (Locrian): each row lowers one more note. The first three are <b>major</b> (major 3rd), the next four <b>minor</b> (minor 3rd); Locrian also has a diminished 5th.</p>\n<p><b>Tip</b>: to play a mode, think of its basic scale (major or minor) and change only the characteristic note.</p>",
+    "id": "modes",
+    "t": "Modes",
+    "k": "modes ionian dorian phrygian lydian mixolydian aeolian locrian formula degrees white keys parallel relative bright dark",
+    "html": "<p>A <b>mode</b> is a 7-note scale defined by the order of its whole steps and half steps. The major scale follows the pattern <b>W W H W W W H</b> (W = whole step, H = half step). If you keep the same notes but change the starting note (the <b>tonic</b>), the half steps no longer fall in the same places: you get a different colour. That is a mode.</p>\n<h4>1. The modes on the white keys</h4>\n<p>Play only the white keys of the piano, but start and end on a different note: you get the 7 modes. They all have the same notes (those of C major), but not the same tonic.</p>\n<table class=\"lt\"><tr><th>Mode</th><th>White keys</th><th>Starting degree</th><th>Pattern</th></tr>\n<tr><td>Ionian</td><td>C to C</td><td>I</td><td>W W H W W W H</td></tr>\n<tr><td>Dorian</td><td>D to D</td><td>II</td><td>W H W W W H W</td></tr>\n<tr><td>Phrygian</td><td>E to E</td><td>III</td><td>H W W W H W W</td></tr>\n<tr><td>Lydian</td><td>F to F</td><td>IV</td><td>W W W H W W H</td></tr>\n<tr><td>Mixolydian</td><td>G to G</td><td>V</td><td>W W H W W H W</td></tr>\n<tr><td>Aeolian</td><td>A to A</td><td>VI</td><td>W H W W H W W</td></tr>\n<tr><td>Locrian</td><td>B to B</td><td>VII</td><td>H W W H W W W</td></tr></table>\n<p>Ionian is the major scale, and Aeolian is the natural minor scale. The others are \"cousins\" of these two scales.</p>\n<h4>2. Comparing each mode with a familiar scale</h4>\n<p>For improvising, it is more useful to keep the <b>same tonic</b> and see what changes compared with the major or minor scale. Each mode is written with the <b>degrees</b> of the major scale (1 2 3 4 5 6 7): a <b>♭</b> before a number means that degree is <b>lowered by a half step</b>, a <b>♯</b> that it is <b>raised by a half step</b>. For example, in C, \"♭7\" is B♭ (instead of B) and \"♯4\" is F♯ (instead of F).</p>\n<p><b>The major modes</b> (with a major 3rd): start from the major scale and change just one note.</p>\n<ul><li><b>Ionian</b> = the major scale, unchanged.</li>\n<li><b>Mixolydian</b> = major with a <b>lowered 7th</b> (♭7). In C: B♭ instead of B. The mode becomes more relaxed, less \"final\".</li>\n<li><b>Lydian</b> = major with a <b>raised 4th</b> (♯4). In C: F♯ instead of F. This augmented 4th, a half step below the 5th, sounds bright, almost magical.</li></ul>\n<p><b>The minor modes</b> (with a minor 3rd): start from the natural minor scale (Aeolian) and change one note.</p>\n<ul><li><b>Aeolian</b> = the natural minor scale: 1 2 ♭3 4 5 ♭6 ♭7.</li>\n<li><b>Dorian</b> = minor with a <b>raised 6th</b> (major 6 instead of ♭6). Brighter than natural minor.</li>\n<li><b>Phrygian</b> = minor with a <b>lowered 2nd</b> (♭2). Darker, with a Spanish flavour.</li>\n<li><b>Locrian</b> = Phrygian with a <b>lowered 5th</b> as well (♭5). Unstable, because it has no perfect 5th.</li></ul>\n<table class=\"lt\"><tr><th>Mode</th><th>Formula</th><th>Compared with…</th></tr>\n<tr><td>Lydian</td><td>1 2 3 <b>♯4</b> 5 6 7</td><td>major, raised 4th</td></tr>\n<tr><td>Ionian</td><td>1 2 3 4 5 6 7</td><td>= major</td></tr>\n<tr><td>Mixolydian</td><td>1 2 3 4 5 6 <b>♭7</b></td><td>major, lowered 7th</td></tr>\n<tr><td>Dorian</td><td>1 2 ♭3 4 5 <b>6</b> ♭7</td><td>minor, raised 6th</td></tr>\n<tr><td>Aeolian</td><td>1 2 ♭3 4 5 ♭6 ♭7</td><td>= natural minor</td></tr>\n<tr><td>Phrygian</td><td>1 <b>♭2</b> ♭3 4 5 ♭6 ♭7</td><td>minor, lowered 2nd</td></tr>\n<tr><td>Locrian</td><td>1 ♭2 ♭3 4 <b>♭5</b> ♭6 ♭7</td><td>Phrygian, lowered 5th</td></tr></table>\n<p>In this table, the modes go from the <b>brightest</b> (Lydian) to the <b>darkest</b> (Locrian): from one row to the next, one more note is lowered.</p>\n<h4>3. Finding a mode on any note</h4>\n<p>Two methods that give the same result:</p>\n<ul><li><b>Through the \"parent\" major scale</b>: Dorian starts on the 2nd degree, Lydian on the 4th, and so on (see the table in point 1). D Dorian = the notes of C major starting on D. E Lydian: E is the 4th degree of B major, so E Lydian has the notes of B major (5 sharps).</li>\n<li><b>Through the formula</b>: E Lydian = E major (F♯ G♯ C♯ D♯) + the raised 4th (A♯). You get the same 5 sharps.</li></ul>\n<p><b>Tip</b>: the first method helps you find the notes; the second helps you <b>hear</b> the colour, because you always compare with a scale you know well.</p>",
     "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\nD E F G A B c d |]\nw: D E F G A B C D",
+      "cap": "D Dorian on the white keys: the notes of C major, starting on D."
+     },
      {
       "abc": "X:1\nL:1/4\nK:C\nC D E ^F G A B c |]\nw: 1 2 3 ♯4 5 6 7 1",
       "cap": "C Lydian: the raised 4th (F♯) gives the colour."

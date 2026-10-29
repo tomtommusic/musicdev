@@ -395,23 +395,6 @@
     ]
    },
    {
-    "id": "modes",
-    "t": "Los modos",
-    "title": null,
-    "k": "modos jonico dorico frigio lidio mixolidio eolico locrio",
-    "html": "<p>Un <b>modo</b> es una escala de 7 notas definida por la posición de sus semitonos. Tocando las teclas blancas del piano a partir de cada nota, se obtienen los 7 modos:</p>\n<table class=\"lt\"><tr><th>Modo</th><th>En las teclas blancas</th><th>Color</th></tr>\n<tr><td>Jónico</td><td>de do a do</td><td>= mayor</td></tr>\n<tr><td>Dórico</td><td>de re a re</td><td>menor con 6.<sup>a</sup> mayor</td></tr>\n<tr><td>Frigio</td><td>de mi a mi</td><td>menor con 2.<sup>a</sup> menor</td></tr>\n<tr><td>Lidio</td><td>de fa a fa</td><td>mayor con 4.<sup>a</sup> aumentada</td></tr>\n<tr><td>Mixolidio</td><td>de sol a sol</td><td>mayor con 7.<sup>a</sup> menor</td></tr>\n<tr><td>Eólico</td><td>de la a la</td><td>= menor natural</td></tr>\n<tr><td>Locrio</td><td>de si a si</td><td>2.<sup>a</sup> menor y 5.<sup>a</sup> disminuida</td></tr></table>\n<p>Se oyen en el canto gregoriano, la música tradicional, el jazz, el rock y las bandas sonoras.</p>",
-    "ex": [
-     {
-      "abc": "X:1\nL:1/4\nK:C\nD E F G A B c d |]\nw: re mi fa sol la si do re",
-      "cap": "Modo de re (dórico)."
-     },
-     {
-      "abc": "X:1\nL:1/4\nK:C\nG A B c d e f g |]\nw: sol la si do re mi fa sol",
-      "cap": "Modo de sol (mixolidio): la 7.ª es un fa natural."
-     }
-    ]
-   },
-   {
     "id": "autres-gammes",
     "t": "Otras escalas",
     "title": null,
@@ -689,11 +672,15 @@
   "t": "Modos e improvisación",
   "topics": [
    {
-    "id": "modes-formules",
-    "t": "Los modos en fórmulas",
-    "k": "modos formula grados jonico dorico frigio lidio mixolidio eolico locrio paralelo claro oscuro",
-    "html": "<p>Hay dos maneras de ver los modos. La primera, en las teclas blancas (de re a re, de sol a sol…), se explica en <a href=\"#\" data-go=\"modes\">Los modos</a>. La segunda, más útil para improvisar, compara cada modo con la <b>escala mayor de la misma tónica</b>: se parte siempre de la misma nota y se anota lo que cambia.</p>\n<table class=\"lt\"><tr><th>Modo</th><th>Fórmula</th><th>Nota característica</th></tr>\n<tr><td>Lidio</td><td>1 2 3 <b>♯4</b> 5 6 7</td><td>♯4</td></tr>\n<tr><td>Jónico (mayor)</td><td>1 2 3 4 5 6 7</td><td>—</td></tr>\n<tr><td>Mixolidio</td><td>1 2 3 4 5 6 <b>♭7</b></td><td>♭7</td></tr>\n<tr><td>Dórico</td><td>1 2 ♭3 4 5 <b>6</b> ♭7</td><td>6 (mayor)</td></tr>\n<tr><td>Eólico (menor natural)</td><td>1 2 ♭3 4 5 ♭6 ♭7</td><td>♭6</td></tr>\n<tr><td>Frigio</td><td>1 <b>♭2</b> ♭3 4 5 ♭6 ♭7</td><td>♭2</td></tr>\n<tr><td>Locrio</td><td>1 ♭2 ♭3 4 <b>♭5</b> ♭6 ♭7</td><td>♭5</td></tr></table>\n<p>La tabla va del modo más <b>luminoso</b> (lidio) al más <b>oscuro</b> (locrio): cada fila baja una nota más. Los tres primeros son <b>mayores</b> (3.ª mayor) y los cuatro siguientes <b>menores</b> (3.ª menor); el locrio además tiene la quinta disminuida.</p>\n<p><b>Truco</b>: para tocar un modo, piensa en su escala de base (mayor o menor) y cambia solo la nota característica.</p>",
+    "id": "modes",
+    "t": "Los modos",
+    "k": "modos jonico dorico frigio lidio mixolidio eolico locrio formula grados teclas blancas paralelo relativo claro oscuro",
+    "html": "<p>Un <b>modo</b> es una escala de 7 notas definida por el orden de sus tonos y semitonos. La escala mayor sigue el modelo <b>T T ½ T T T ½</b> (T = tono, ½ = semitono). Si se conservan las mismas notas pero se cambia la nota de partida (la <b>tónica</b>), los semitonos ya no caen en los mismos lugares: se obtiene otro color. Eso es un modo.</p>\n<h4>1. Los modos en las teclas blancas</h4>\n<p>Toca solo las teclas blancas del piano, pero empieza y termina en otra nota: obtienes los 7 modos. Todos tienen las mismas notas (las de do mayor), pero no la misma tónica.</p>\n<table class=\"lt\"><tr><th>Modo</th><th>Teclas blancas</th><th>Grado de partida</th><th>Modelo</th></tr>\n<tr><td>Jónico</td><td>de do a do</td><td>I</td><td>T T ½ T T T ½</td></tr>\n<tr><td>Dórico</td><td>de re a re</td><td>II</td><td>T ½ T T T ½ T</td></tr>\n<tr><td>Frigio</td><td>de mi a mi</td><td>III</td><td>½ T T T ½ T T</td></tr>\n<tr><td>Lidio</td><td>de fa a fa</td><td>IV</td><td>T T T ½ T T ½</td></tr>\n<tr><td>Mixolidio</td><td>de sol a sol</td><td>V</td><td>T T ½ T T ½ T</td></tr>\n<tr><td>Eólico</td><td>de la a la</td><td>VI</td><td>T ½ T T ½ T T</td></tr>\n<tr><td>Locrio</td><td>de si a si</td><td>VII</td><td>½ T T ½ T T T</td></tr></table>\n<p>El jónico es la escala mayor y el eólico es la escala menor natural. Los demás son «primos» de estas dos escalas.</p>\n<h4>2. Comparar cada modo con una escala conocida</h4>\n<p>Para improvisar es más útil conservar la <b>misma tónica</b> y ver qué cambia respecto a la escala mayor o menor. Cada modo se escribe con los <b>grados</b> de la escala mayor (1 2 3 4 5 6 7): un <b>♭</b> delante de un número significa que ese grado está <b>bajado un semitono</b>, un <b>♯</b> que está <b>subido un semitono</b>. Por ejemplo, en do, «♭7» es si♭ (en lugar de si) y «♯4» es fa♯ (en lugar de fa).</p>\n<p><b>Los modos mayores</b> (con 3.ª mayor): se parte de la escala mayor y se cambia una sola nota.</p>\n<ul><li><b>Jónico</b> = la escala mayor, sin cambios.</li>\n<li><b>Mixolidio</b> = mayor con la <b>7.ª bajada</b> (♭7). En do: si♭ en lugar de si. El modo se vuelve más relajado, menos «conclusivo».</li>\n<li><b>Lidio</b> = mayor con la <b>4.ª subida</b> (♯4). En do: fa♯ en lugar de fa. Esta cuarta aumentada, a un semitono de la quinta, suena luminosa, casi mágica.</li></ul>\n<p><b>Los modos menores</b> (con 3.ª menor): se parte de la escala menor natural (eólico) y se cambia una nota.</p>\n<ul><li><b>Eólico</b> = la escala menor natural: 1 2 ♭3 4 5 ♭6 ♭7.</li>\n<li><b>Dórico</b> = menor con la <b>6.ª subida</b> (6 mayor en lugar de ♭6). Más claro que el menor natural.</li>\n<li><b>Frigio</b> = menor con la <b>2.ª bajada</b> (♭2). Más oscuro, con sabor español.</li>\n<li><b>Locrio</b> = frigio con además la <b>5.ª bajada</b> (♭5). Inestable, porque no tiene quinta justa.</li></ul>\n<table class=\"lt\"><tr><th>Modo</th><th>Fórmula</th><th>Comparado con…</th></tr>\n<tr><td>Lidio</td><td>1 2 3 <b>♯4</b> 5 6 7</td><td>mayor, 4.ª subida</td></tr>\n<tr><td>Jónico</td><td>1 2 3 4 5 6 7</td><td>= mayor</td></tr>\n<tr><td>Mixolidio</td><td>1 2 3 4 5 6 <b>♭7</b></td><td>mayor, 7.ª bajada</td></tr>\n<tr><td>Dórico</td><td>1 2 ♭3 4 5 <b>6</b> ♭7</td><td>menor, 6.ª subida</td></tr>\n<tr><td>Eólico</td><td>1 2 ♭3 4 5 ♭6 ♭7</td><td>= menor natural</td></tr>\n<tr><td>Frigio</td><td>1 <b>♭2</b> ♭3 4 5 ♭6 ♭7</td><td>menor, 2.ª bajada</td></tr>\n<tr><td>Locrio</td><td>1 ♭2 ♭3 4 <b>♭5</b> ♭6 ♭7</td><td>frigio, 5.ª bajada</td></tr></table>\n<p>En esta tabla, los modos van del más <b>luminoso</b> (lidio) al más <b>oscuro</b> (locrio): de una fila a otra, se baja una nota más.</p>\n<h4>3. Encontrar un modo sobre cualquier nota</h4>\n<p>Dos métodos que dan el mismo resultado:</p>\n<ul><li><b>Por la escala mayor «madre»</b>: el dórico empieza en el 2.º grado, el lidio en el 4.º, etc. (ver la tabla del punto 1). Re dórico = las notas de do mayor a partir de re. Mi lidio: mi es el 4.º grado de si mayor, así que mi lidio tiene las notas de si mayor (5 sostenidos).</li>\n<li><b>Por la fórmula</b>: mi lidio = mi mayor (fa♯ sol♯ do♯ re♯) + la 4.ª subida (la♯). Se obtienen los mismos 5 sostenidos.</li></ul>\n<p><b>Truco</b>: el primer método ayuda a encontrar las notas; el segundo ayuda a <b>oír</b> el color, porque siempre comparas con una escala que conoces bien.</p>",
     "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C\nD E F G A B c d |]\nw: D E F G A B C D",
+      "cap": "Re dórico en las teclas blancas: las notas de do mayor, a partir de re."
+     },
      {
       "abc": "X:1\nL:1/4\nK:C\nC D E ^F G A B c |]\nw: 1 2 3 ♯4 5 6 7 1",
       "cap": "Do lidio: la 4.ª aumentada (fa♯) da el color."

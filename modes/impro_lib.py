@@ -4,6 +4,7 @@ def go(i, t): return f'<a href="#" data-go="{i}">{t}</a>'
 
 EX = {
  'formules': [
+  {'abc': 'X:1\nL:1/4\nK:C\nD E F G A B c d |]\nw: D E F G A B C D', 'cap': {'fr': 'Ré dorien sur les touches blanches : les notes de do majeur, à partir de ré.', 'en': 'D Dorian on the white keys: the notes of C major, starting on D.', 'es': 'Re dórico en las teclas blancas: las notas de do mayor, a partir de re.'}},
   {'abc': 'X:1\nL:1/4\nK:C\nC D E ^F G A B c |]\nw: 1 2 3 ♯4 5 6 7 1', 'cap': {'fr': 'Do lydien : la 4te augmentée (fa♯) donne la couleur.', 'en': 'C Lydian: the raised 4th (F♯) gives the colour.', 'es': 'Do lidio: la 4.ª aumentada (fa♯) da el color.'}},
   {'abc': 'X:1\nL:1/4\nK:C\nC D E F G A _B c |]\nw: 1 2 3 4 5 6 ♭7 1', 'cap': {'fr': 'Do mixolydien : majeur avec 7e mineure (si♭).', 'en': 'C Mixolydian: major with a flat 7th (B♭).', 'es': 'Do mixolidio: mayor con 7.ª menor (si♭).'}},
   {'abc': 'X:1\nL:1/4\nK:C\nC D _E F G A _B c |]\nw: 1 2 ♭3 4 5 6 ♭7 1', 'cap': {'fr': 'Do dorien : mineur avec 6te majeure (la naturel).', 'en': 'C Dorian: minor with a major 6th (A natural).', 'es': 'Do dórico: menor con 6.ª mayor (la natural).'}},
@@ -22,19 +23,6 @@ EX = {
 
 TOPICS = {
 'fr': {'cat': 'Modes et improvisation', 'topics': [
- {'id': 'modes-formules', 'x': 'formules', 't': 'Les modes en formules', 'k': 'modes formule degres ionien dorien phrygien lydien mixolydien eolien locrien parallele clair sombre',
-  'html': f'''<p>On peut voir les modes de deux façons. La première, sur les touches blanches (ré à ré, sol à sol…), est expliquée dans {go('modes','Les modes')}. La seconde, plus utile pour improviser, compare chaque mode à la <b>gamme majeure de même tonique</b> : on part toujours de la même note et on note ce qui change.</p>
-<table class="lt"><tr><th>Mode</th><th>Formule</th><th>Note caractéristique</th></tr>
-<tr><td>Lydien</td><td>1 2 3 <b>♯4</b> 5 6 7</td><td>♯4</td></tr>
-<tr><td>Ionien (majeur)</td><td>1 2 3 4 5 6 7</td><td>—</td></tr>
-<tr><td>Mixolydien</td><td>1 2 3 4 5 6 <b>♭7</b></td><td>♭7</td></tr>
-<tr><td>Dorien</td><td>1 2 ♭3 4 5 <b>6</b> ♭7</td><td>6 (majeure)</td></tr>
-<tr><td>Éolien (mineur naturel)</td><td>1 2 ♭3 4 5 ♭6 ♭7</td><td>♭6</td></tr>
-<tr><td>Phrygien</td><td>1 <b>♭2</b> ♭3 4 5 ♭6 ♭7</td><td>♭2</td></tr>
-<tr><td>Locrien</td><td>1 ♭2 ♭3 4 <b>♭5</b> ♭6 ♭7</td><td>♭5</td></tr></table>
-<p>Le tableau va du mode le plus <b>lumineux</b> (lydien) au plus <b>sombre</b> (locrien) : chaque ligne abaisse une note de plus. Les trois premiers sont <b>majeurs</b> (3ce majeure), les quatre suivants <b>mineurs</b> (3ce mineure) ; le locrien a en plus une quinte diminuée.</p>
-<p><b>Truc</b> : pour jouer un mode, pense à sa gamme de base (majeure ou mineure) et change seulement la note caractéristique.</p>''',
-  'see': ['modes', 'modes-couleurs', 'modes-accords']},
  {'id': 'modes-couleurs', 't': 'Reconnaître la couleur d\'un mode', 'k': 'couleur mode caracteristique bourdon ambiance dorien mixolydien lydien phrygien chanson',
   'html': f'''<p>Chaque mode a une couleur, qu'on entend surtout grâce à sa <b>note caractéristique</b> jouée au-dessus d'une note tenue (un bourdon) ou de l'accord de la tonique.</p>
 <ul><li><b>Lydien</b> : rêveur, flottant, « musique de film ». La ♯4 donne une impression d'envol.</li>
@@ -45,7 +33,7 @@ TOPICS = {
 <li><b>Phrygien</b> : sombre et tendu, avec un parfum espagnol ou métal (la ♭2 juste au-dessus de la tonique).</li>
 <li><b>Locrien</b> : instable, rarement utilisé seul ; on le rencontre surtout sur l'accord m7♭5.</li></ul>
 <p><b>Pour t'exercer</b> : dans l'Accompagnateur, écris une grille d'un seul accord (par exemple « Dm7 | Dm7 »), choisis « Choisir une gamme… » puis ré dorien, et improvise en insistant sur la note caractéristique (si). Change ensuite pour ré éolien (si♭) et compare.</p>''',
-  'see': ['modes-formules', 'modes-accords', 'impro-bases']},
+  'see': ['modes', 'modes-accords', 'impro-bases']},
  {'id': 'modes-accords', 'x': 'accords', 't': 'Quel mode sur quel accord ?', 'k': 'mode accord degre diatonique ii V I dominant mineur harmonique phrygien dominant chord scale',
   'html': f'''<p>Les 7 accords d'une gamme majeure utilisent tous les mêmes 7 notes. Mais en partant de la fondamentale de chaque accord, ces notes forment un mode différent. C'est le principe de la relation <b>accord–gamme</b>.</p>
 <table class="lt"><tr><th>Degré</th><th>Accord (en do)</th><th>Mode</th></tr>
@@ -59,7 +47,7 @@ TOPICS = {
 <p>Quand la grille reste dans la tonalité, une seule gamme suffit (do majeur ici) : penser en modes sert surtout à <b>viser les bonnes notes</b> de chaque accord. Les modes deviennent indispensables quand un accord sort de la tonalité.</p>
 <p><b>En mineur</b> : l'accord de dominante est souvent majeur (E7 en la mineur). On utilise alors le mode de la 5te de la gamme mineure harmonique, le <b>phrygien dominant</b> : mi fa sol♯ la si do ré.</p>
 <p><b>Repères rapides</b> : maj7 → ionien (ou lydien) ; m7 → dorien ; 7 → mixolydien ; m7♭5 → locrien.</p>''',
-  'see': ['modes-formules', 'impro-grille', 'gammes-mineures']},
+  'see': ['modes', 'impro-grille', 'gammes-mineures']},
  {'id': 'impro-bases', 'x': 'bases', 't': 'Improviser : par où commencer ?', 'k': 'improviser improvisation commencer motif question reponse rythme silence note cible eviter',
   'html': '''<p>Improviser, c'est inventer une mélodie sur le moment, avec des règles qu'on choisit. Quelques étapes simples :</p>
 <ol><li><b>Écoute la grille</b> plusieurs fois et trouve la tonalité (la note « maison »).</li>
@@ -92,19 +80,6 @@ TOPICS = {
   'see': ['modes-accords', 'impro-bases', 'impro-penta-blues']}]},
 
 'en': {'cat': 'Modes and improvisation', 'topics': [
- {'id': 'modes-formules', 't': 'Modes as formulas', 'k': 'modes formula degrees ionian dorian phrygian lydian mixolydian aeolian locrian parallel bright dark',
-  'html': f'''<p>There are two ways to look at the modes. The first one, on the white keys (D to D, G to G…), is explained in {go('modes','Modes')}. The second one, more useful for improvising, compares each mode with the <b>major scale on the same tonic</b>: you always start from the same note and note what changes.</p>
-<table class="lt"><tr><th>Mode</th><th>Formula</th><th>Characteristic note</th></tr>
-<tr><td>Lydian</td><td>1 2 3 <b>♯4</b> 5 6 7</td><td>♯4</td></tr>
-<tr><td>Ionian (major)</td><td>1 2 3 4 5 6 7</td><td>—</td></tr>
-<tr><td>Mixolydian</td><td>1 2 3 4 5 6 <b>♭7</b></td><td>♭7</td></tr>
-<tr><td>Dorian</td><td>1 2 ♭3 4 5 <b>6</b> ♭7</td><td>6 (major)</td></tr>
-<tr><td>Aeolian (natural minor)</td><td>1 2 ♭3 4 5 ♭6 ♭7</td><td>♭6</td></tr>
-<tr><td>Phrygian</td><td>1 <b>♭2</b> ♭3 4 5 ♭6 ♭7</td><td>♭2</td></tr>
-<tr><td>Locrian</td><td>1 ♭2 ♭3 4 <b>♭5</b> ♭6 ♭7</td><td>♭5</td></tr></table>
-<p>The table goes from the <b>brightest</b> mode (Lydian) to the <b>darkest</b> (Locrian): each row lowers one more note. The first three are <b>major</b> (major 3rd), the next four <b>minor</b> (minor 3rd); Locrian also has a diminished 5th.</p>
-<p><b>Tip</b>: to play a mode, think of its basic scale (major or minor) and change only the characteristic note.</p>''',
-  'see': ['modes', 'modes-couleurs', 'modes-accords']},
  {'id': 'modes-couleurs', 't': 'Recognising the colour of a mode', 'k': 'colour mode characteristic drone mood dorian mixolydian lydian phrygian song',
   'html': '''<p>Each mode has a colour, which you mostly hear through its <b>characteristic note</b> played over a held note (a drone) or over the tonic chord.</p>
 <ul><li><b>Lydian</b>: dreamy, floating, "film music". The ♯4 gives a feeling of lift-off.</li>
@@ -115,7 +90,7 @@ TOPICS = {
 <li><b>Phrygian</b>: dark and tense, with a Spanish or metal flavour (the ♭2 right above the tonic).</li>
 <li><b>Locrian</b>: unstable, rarely used on its own; you mostly meet it over the m7♭5 chord.</li></ul>
 <p><b>Practice</b>: in the Backing band, write a one-chord progression (for example "Dm7 | Dm7"), choose "Choose a scale…" then D Dorian, and improvise while stressing the characteristic note (B). Then switch to D Aeolian (B♭) and compare.</p>''',
-  'see': ['modes-formules', 'modes-accords', 'impro-bases']},
+  'see': ['modes', 'modes-accords', 'impro-bases']},
  {'id': 'modes-accords', 't': 'Which mode over which chord?', 'k': 'mode chord degree diatonic ii V I dominant harmonic minor phrygian dominant chord scale',
   'html': f'''<p>The 7 chords of a major scale all use the same 7 notes. But starting from the root of each chord, these notes form a different mode. This is the <b>chord–scale</b> relationship.</p>
 <table class="lt"><tr><th>Degree</th><th>Chord (in C)</th><th>Mode</th></tr>
@@ -129,7 +104,7 @@ TOPICS = {
 <p>When the progression stays in the key, one scale is enough (C major here): thinking in modes mainly helps you <b>aim for the right notes</b> of each chord. Modes become essential when a chord leaves the key.</p>
 <p><b>In minor</b>: the dominant chord is often major (E7 in A minor). You then use the mode built on the 5th degree of the harmonic minor scale, <b>Phrygian dominant</b>: E F G♯ A B C D.</p>
 <p><b>Quick guide</b>: maj7 → Ionian (or Lydian); m7 → Dorian; 7 → Mixolydian; m7♭5 → Locrian.</p>''',
-  'see': ['modes-formules', 'impro-grille', 'gammes-mineures']},
+  'see': ['modes', 'impro-grille', 'gammes-mineures']},
  {'id': 'impro-bases', 't': 'Improvising: where to start?', 'k': 'improvise improvisation start motif question answer rhythm silence target note avoid',
   'html': '''<p>Improvising means making up a melody on the spot, with rules you choose. A few simple steps:</p>
 <ol><li><b>Listen to the progression</b> several times and find the key (the "home" note).</li>
@@ -162,19 +137,6 @@ TOPICS = {
   'see': ['modes-accords', 'impro-bases', 'impro-penta-blues']}]},
 
 'es': {'cat': 'Modos e improvisación', 'topics': [
- {'id': 'modes-formules', 't': 'Los modos en fórmulas', 'k': 'modos formula grados jonico dorico frigio lidio mixolidio eolico locrio paralelo claro oscuro',
-  'html': f'''<p>Hay dos maneras de ver los modos. La primera, en las teclas blancas (de re a re, de sol a sol…), se explica en {go('modes','Los modos')}. La segunda, más útil para improvisar, compara cada modo con la <b>escala mayor de la misma tónica</b>: se parte siempre de la misma nota y se anota lo que cambia.</p>
-<table class="lt"><tr><th>Modo</th><th>Fórmula</th><th>Nota característica</th></tr>
-<tr><td>Lidio</td><td>1 2 3 <b>♯4</b> 5 6 7</td><td>♯4</td></tr>
-<tr><td>Jónico (mayor)</td><td>1 2 3 4 5 6 7</td><td>—</td></tr>
-<tr><td>Mixolidio</td><td>1 2 3 4 5 6 <b>♭7</b></td><td>♭7</td></tr>
-<tr><td>Dórico</td><td>1 2 ♭3 4 5 <b>6</b> ♭7</td><td>6 (mayor)</td></tr>
-<tr><td>Eólico (menor natural)</td><td>1 2 ♭3 4 5 ♭6 ♭7</td><td>♭6</td></tr>
-<tr><td>Frigio</td><td>1 <b>♭2</b> ♭3 4 5 ♭6 ♭7</td><td>♭2</td></tr>
-<tr><td>Locrio</td><td>1 ♭2 ♭3 4 <b>♭5</b> ♭6 ♭7</td><td>♭5</td></tr></table>
-<p>La tabla va del modo más <b>luminoso</b> (lidio) al más <b>oscuro</b> (locrio): cada fila baja una nota más. Los tres primeros son <b>mayores</b> (3.ª mayor) y los cuatro siguientes <b>menores</b> (3.ª menor); el locrio además tiene la quinta disminuida.</p>
-<p><b>Truco</b>: para tocar un modo, piensa en su escala de base (mayor o menor) y cambia solo la nota característica.</p>''',
-  'see': ['modes', 'modes-couleurs', 'modes-accords']},
  {'id': 'modes-couleurs', 't': 'Reconocer el color de un modo', 'k': 'color modo caracteristica bordon ambiente dorico mixolidio lidio frigio cancion',
   'html': '''<p>Cada modo tiene un color, que se oye sobre todo gracias a su <b>nota característica</b> tocada sobre una nota tenida (un bordón) o sobre el acorde de tónica.</p>
 <ul><li><b>Lidio</b>: soñador, flotante, «música de película». El ♯4 da una sensación de despegue.</li>
@@ -185,7 +147,7 @@ TOPICS = {
 <li><b>Frigio</b>: oscuro y tenso, con sabor español o metal (el ♭2 justo encima de la tónica).</li>
 <li><b>Locrio</b>: inestable, poco usado solo; aparece sobre todo sobre el acorde m7♭5.</li></ul>
 <p><b>Para practicar</b>: en el Acompañante, escribe una progresión de un solo acorde (por ejemplo «Dm7 | Dm7»), elige «Elegir una escala…» y luego re dórico, e improvisa insistiendo en la nota característica (si). Después cambia a re eólico (si♭) y compara.</p>''',
-  'see': ['modes-formules', 'modes-accords', 'impro-bases']},
+  'see': ['modes', 'modes-accords', 'impro-bases']},
  {'id': 'modes-accords', 't': '¿Qué modo sobre qué acorde?', 'k': 'modo acorde grado diatonico ii V I dominante menor armonica frigio dominante acorde escala',
   'html': f'''<p>Los 7 acordes de una escala mayor usan las mismas 7 notas. Pero partiendo de la fundamental de cada acorde, esas notas forman un modo distinto. Es la relación <b>acorde–escala</b>.</p>
 <table class="lt"><tr><th>Grado</th><th>Acorde (en do)</th><th>Modo</th></tr>
@@ -199,7 +161,7 @@ TOPICS = {
 <p>Cuando la progresión se queda en la tonalidad, basta una sola escala (do mayor aquí): pensar en modos sirve sobre todo para <b>apuntar a las notas correctas</b> de cada acorde. Los modos se vuelven imprescindibles cuando un acorde sale de la tonalidad.</p>
 <p><b>En menor</b>: el acorde de dominante suele ser mayor (E7 en la menor). Se usa entonces el modo del 5.º grado de la escala menor armónica, el <b>frigio dominante</b>: mi fa sol♯ la si do re.</p>
 <p><b>Guía rápida</b>: maj7 → jónico (o lidio); m7 → dórico; 7 → mixolidio; m7♭5 → locrio.</p>''',
-  'see': ['modes-formules', 'impro-grille', 'gammes-mineures']},
+  'see': ['modes', 'impro-grille', 'gammes-mineures']},
  {'id': 'impro-bases', 't': 'Improvisar: ¿por dónde empezar?', 'k': 'improvisar improvisacion empezar motivo pregunta respuesta ritmo silencio nota objetivo evitar',
   'html': '''<p>Improvisar es inventar una melodía en el momento, con reglas que uno elige. Algunos pasos sencillos:</p>
 <ol><li><b>Escucha la progresión</b> varias veces y encuentra la tonalidad (la nota «casa»).</li>
