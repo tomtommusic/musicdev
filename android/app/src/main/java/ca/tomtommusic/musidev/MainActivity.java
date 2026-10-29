@@ -156,6 +156,12 @@ public class MainActivity extends ComponentActivity {
                 return r;
             }
             @Override
+            public void onReceivedError(WebView view, WebResourceRequest req, android.webkit.WebResourceError err) {
+                Log.w(TAG, "erreur " + err.getErrorCode() + " " + err.getDescription() + " " + req.getUrl());
+            }
+            @Override
+            public void onPageStarted(WebView view, String url, android.graphics.Bitmap icon) { Log.i(TAG, "début " + url); }
+            @Override
             public void onReceivedHttpError(WebView view, WebResourceRequest req, WebResourceResponse resp) {
                 Log.w(TAG, "http " + resp.getStatusCode() + " " + req.getUrl());
             }
@@ -169,6 +175,7 @@ public class MainActivity extends ComponentActivity {
             }
             @Override
             public void onPageFinished(WebView view, String url) {
+                Log.i(TAG, "fin " + url);
                 view.evaluateJavascript(NATIVE_JS, null);
                 runTestJs();
             }
