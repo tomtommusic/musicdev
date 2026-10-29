@@ -6125,7 +6125,12 @@ function tnPitch(x,sr,fmin,fmax){
 /* détection en deux temps (rapide sur téléphone) :
    1) recherche grossière sur un signal sous-échantillonné (beaucoup moins de calcul, même pour une basse) ;
    2) affinage à pleine résolution, en mesurant plusieurs périodes d'un coup autour de la période trouvée. */
-function tnDecim(x,f){const z=new Float32Array(Math.floor(x.length/f));for(let i=0;i<z.length;i++){let s=0;for(let j=0;j<f;j++)s+=x[i*f+j];z[i]=s/f;}return z;}
+function tnDecim(x,f){
+  /* passe-bas de Butterworth d'ordre 4 (deux biquads) à 0,4 × la nouvelle fréquence de Nyquist, puis on garde un échantillon sur f */
+  const w=2*Math.PI*(.2/f),cw=Math.cos(w),sw=Math.sin(w),y=Float32Array.from(x);
+  for(const Q of[.5412,1.3066]){const al=sw/(2*Q),a0=1+al,b0=(1-cw)/2/a0,b1=(1-cw)/a0,a1=-2*cw/a0,a2=(1-al)/a0;let x1=0,x2=0,y1=0,y2=0;
+    for(let i=0;i<y.length;i++){const v=y[i],o=b0*v+b1*x1+b0*x2-a1*y1-a2*y2;x2=x1;x1=v;y2=y1;y1=o;y[i]=o;}}
+  const z=new Float32Array(Math.floor(y.length/f));for(let i=0;i<z.length;i++)z[i]=y[i*f];return z;}
 function tnDetect(x,sr,fmin,fmax){
   let rms=0;for(let i=0;i<x.length;i++)rms+=x[i]*x[i];rms=Math.sqrt(rms/x.length);if(rms<(TS.gate||.0025))return{rms};
   const fc=Math.min(fmax,1600);let f=1;while(sr/(f*2)>=fc*5&&x.length/(f*2)>=768)f*=2;
@@ -6133,6 +6138,9 @@ function tnDetect(x,sr,fmin,fmax){
   /* notes très aiguës (piccolo…) : vérification rapide à pleine résolution dans l'aigu */
   if(fmax>fc){const h=tnPitch(x.subarray(0,Math.min(x.length,2048)),sr,fc*.75,fmax);if(h.f&&h.clarity>.85&&(!r.f||(h.f>r.f*1.5&&h.clarity>=r.clarity-.08)))return{f:h.f,clarity:h.clarity,rms};}
   if(!r.f)return{rms};
+  if(f>1){const per=L=>{const W=Math.min(2400,x.length-L-4);if(W<200)return 9;let best=9;for(let l=L-2;l<=L+2;l++){if(l<2)continue;let d=0,e=0;for(let i=0;i<W;i++){const a=x[i],b=x[i+l];d+=(a-b)*(a-b);e+=a*a+b*b;}if(e>0)best=Math.min(best,d/e);}return best;};
+    const T0=sr/r.f,base=per(Math.round(T0));
+    for(const k of[3,2]){if(r.f*k>fmax*1.05)continue;const v=per(Math.round(T0/k));if(v<.2&&v<=base+.05){r.f*=k;break;}}}
   if(f===1)return{f:r.f,clarity:r.clarity,rms};
   /* affinage plein débit : on cherche le meilleur multiple de période autour de n×T */
   const T=sr/r.f,n=Math.max(1,Math.min(12,Math.floor((x.length*.5-4)/T))),L0=Math.round(n*T),W=Math.min(2400,x.length-L0-4);
@@ -6155,7 +6163,7 @@ async function tunerStart(){
   }
 }
 function tunerStop(){if(TS.on)qzSessionForMic(false);clearInterval(TS.timer);TS.timer=0;if(TS.stream)TS.stream.getTracks().forEach(t=>t.stop());try{TS.src&&TS.src.disconnect();}catch(e){}Object.assign(TS,{on:false,stream:null,src:null,an:null,hist:[]});tnRefStop();tnUi();}
-function tnRange(){const s=tnStrings();if(!s)return[27,4200];const lo=Math.min(...s.notes),hi=Math.max(...s.notes);return[Math.min(midiHz(lo)*.7,29),Math.max(midiHz(hi)*1.6,midiHz(lo)*4.5)];}
+function tnRange(){const s=tnStrings();if(!s)return[27,4200];const lo=Math.min(...s.notes),hi=Math.max(...s.notes);return[Math.min(midiHz(lo)*.7,29),Math.max(midiHz(hi)*1.9,midiHz(lo)*4.5)];}
 function tnRevive(hard){
   if(S.mod!=='ac'||TS.userOff||document.hidden||TS.reviving)return;TS.reviving=true;
   tunerStop();
@@ -6195,7 +6203,7 @@ function tnTarget(f){
   if(!s||!TN.learner){const n=Math.round(m);return{midi:n,cents:100*(m-n),k:-1};}
   const k=TS.lock==null?0:Math.min(TS.lock,s.notes.length-1);let c=100*(m-s.notes[k]);
   /* micro de téléphone : il entend parfois l'harmonique (une octave plus haut) au lieu de la fondamentale */
-  if(Math.abs(c)>900)c-=1200*Math.round(c/1200);
+  if(Math.abs(c)>1050)c-=1200*Math.round(c/1200);
   return{midi:s.notes[k],cents:c,k};
 }
 function tnShow(f,rms){
@@ -7488,7 +7496,7 @@ matchMedia('(max-width:600px)').addEventListener?.('change',()=>{if(S.mod==='ho'
 document.addEventListener('click',e=>{if(S.mod!=='ho'||!e.target.closest||!e.target.closest('#helpbtn'))return;
   e.stopImmediatePropagation();e.preventDefault();openModule('ln');setTimeout(()=>{if(typeof helpSet==='function')helpSet(true);},250);},true);
 
-const AP_VERSION='1.38.0';
+const AP_VERSION='1.38.1';
 const AP_MIT_BODY="Permission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.";
 const AP_SMP="MuseScore General / MS Basic\nFluidR3 (original version) by Frank Wen Copyright (c) 2000-02, 2008\nMono conversion (FluidR3Mono) by Michael Cowgill Copyright (c) 2014-17\nAdaptation for MuseScore_General.sf2 by S. Christian Collins Copyright (c) 2018-19\n\n"+AP_MIT_BODY;
 const AP_MIT="Copyright (c) 2009-2026 Paul Rosen and Gregory Dyke\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.";
