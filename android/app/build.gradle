@@ -49,6 +49,7 @@ tasks.register('copyWeb', Copy) {
 preBuild.dependsOn copyWeb
 
 dependencies {
+    implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.22')   // évite deux versions de la bibliothèque Kotlin
     implementation 'androidx.activity:activity:1.9.3'
     implementation 'androidx.core:core:1.13.1'
     implementation 'androidx.webkit:webkit:1.12.1'
