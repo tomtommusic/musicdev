@@ -22,6 +22,8 @@ go "openModule('ho')"; shot 07-accueil-sombre 5
 adb shell cmd uimode night no
 # bouton Retour depuis un module
 go "openModule('iv')"; sleep 3; adb shell input keyevent KEYCODE_BACK; shot 08-apres-retour 3
+adb shell input keyevent KEYCODE_BACK; shot 08b-retour-depuis-accueil 3
+adb shell am start -n $P/.MainActivity; sleep 4
 # rotation
 adb shell settings put system accelerometer_rotation 0; adb shell settings put system user_rotation 1; shot 09-paysage 4
 adb shell settings put system user_rotation 0

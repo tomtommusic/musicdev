@@ -219,7 +219,7 @@ public class MainActivity extends ComponentActivity {
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override public void handleOnBackPressed() {
                 web.evaluateJavascript("(function(){try{var d=document.querySelector('dialog[open],.modal.open');if(d&&d.close){d.close();return true;}" +
-                    "if(window.S&&S.mod&&S.mod!=='ho'&&typeof openModule==='function'){openModule('ho');scrollTo(0,0);return true;}}catch(e){}return false;})()",
+                    "if(typeof S!=='undefined'&&S.mod&&S.mod!=='ho'&&typeof openModule==='function'){openModule('ho');scrollTo(0,0);return true;}}catch(e){}return false;})()",
                     r -> { if (!"true".equals(r)) { setEnabled(false); getOnBackPressedDispatcher().onBackPressed(); setEnabled(true); } });
             }
         });
