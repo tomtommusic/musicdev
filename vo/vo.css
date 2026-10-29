@@ -80,3 +80,12 @@
 .basclegend .lg.scale{color:var(--muted)}
 .bascstaff{max-width:600px}
 .bafb .fbn.chord.out circle{stroke-dasharray:3 2}
+
+/* panneaux repliables de l'Accompagnateur */
+.baw .mtsec>h3{margin:0}
+.baw .bafold{all:unset;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;cursor:pointer;font:inherit;color:inherit;padding:2px 0}
+.baw .bafold:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:6px}
+.baw .bafoldi{font-size:1.1rem;transition:transform .15s;color:var(--muted)}
+.baw .mtsec.closed .bafoldi{transform:rotate(-90deg)}
+.baw .mtsec.closed>:not(h3){display:none}
+.baw .mtsec>h3+*{margin-top:10px}

@@ -356,6 +356,15 @@ MOD.ba.fresh=function(){
       el('div',{class:'bafaders'},fader('dr','Batterie'),fader('bs','Basse'),fader('pn','Piano')),
       el('div',{class:'mtline bachk'},tog('metro','Métronome'),tog('loop','En boucle'),tog('ci','Décompte d\'une mesure')),
       el('p',{class:'hint'},'Tout se change pendant que ça joue : tempo, style, grille, transposition et instruments. Baisse un instrument à zéro pour jouer sa partie toi-même.')));
+  /* panneaux ouvrables et fermables (sauf la barre de lecture) ; l'état est mémorisé */
+  if(!BA_S.fold)BA_S.fold={};
+  M.root.querySelectorAll('section.mtsec').forEach((sec,i)=>{const h=sec.querySelector('h3');if(!h)return;
+    const key=sec.classList.contains('bascsec')?'scale':['scale','grille','groupe'][i]||('p'+i);
+    const b=el('button',{type:'button',class:'bafold','aria-expanded':'true'},el('span',{class:'bafoldt'},h.textContent),el('span',{class:'bafoldi','aria-hidden':'true'},'▾'));
+    h.replaceChildren(b);
+    const set=open=>{sec.classList.toggle('closed',!open);b.setAttribute('aria-expanded',String(open));};
+    set(!BA_S.fold[key]);
+    b.addEventListener('click',()=>{const open=sec.classList.contains('closed');set(open);BA_S.fold[key]=!open;save();if(open&&key==='scale'&&M.scPaint)M.scPaint();});});
   fillMeters();setT(BA_S.tempo);M.paint();M.ui();paintB();
   S.keyHandler=e=>{if(e.code==='Space'&&document.activeElement!==area){e.preventDefault();BA.sess?baStop():baPlay();return true;}};
 };
