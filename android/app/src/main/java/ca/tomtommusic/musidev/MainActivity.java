@@ -151,7 +151,13 @@ public class MainActivity extends ComponentActivity {
             public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest req) {
                 Uri u = req.getUrl();
                 if (HOST.equals(u.getHost()) && u.getPath() != null && u.getPath().endsWith("/sw.js")) return notFound();
-                return loader.shouldInterceptRequest(u);
+                WebResourceResponse r = loader.shouldInterceptRequest(u);
+                if (BuildConfig.DEBUG) Log.i(TAG, "req " + u + " -> " + (r == null ? "null" : r.getStatusCode() + " " + r.getMimeType()));
+                return r;
+            }
+            @Override
+            public void onReceivedHttpError(WebView view, WebResourceRequest req, WebResourceResponse resp) {
+                Log.w(TAG, "http " + resp.getStatusCode() + " " + req.getUrl());
             }
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest req) {

@@ -10,6 +10,7 @@ shot(){ sleep "$2"; adb exec-out screencap -p > "shots/$1.png"; }
 go(){ adb shell am start -n $P/.MainActivity --es js "\"$1\"" >/dev/null; }
 adb shell am start -n $P/.MainActivity
 shot 01-accueil 12
+go "document.title+'|'+document.body.innerHTML.length+'|'+location.href"; sleep 3
 go "openModule('ba')"; shot 02-accompagnateur 4
 go "openModule('dm')"; shot 03-boite-a-rythmes 4
 go "openModule('ac')"; shot 04-accordeur 5
