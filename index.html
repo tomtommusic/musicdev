@@ -1677,6 +1677,15 @@ main[data-mod="ho"] #helpbtn{box-shadow:0 0 0 3px color-mix(in srgb,var(--accent
 .bascstaff{max-width:600px}
 .bafb .fbn.chord.out circle{stroke-dasharray:3 2}
 
+/* panneaux repliables de l'Accompagnateur */
+.baw .mtsec>h3{margin:0}
+.baw .bafold{all:unset;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;cursor:pointer;font:inherit;color:inherit;padding:2px 0}
+.baw .bafold:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:6px}
+.baw .bafoldi{font-size:1.1rem;transition:transform .15s;color:var(--muted)}
+.baw .mtsec.closed .bafoldi{transform:rotate(-90deg)}
+.baw .mtsec.closed>:not(h3){display:none}
+.baw .mtsec>h3+*{margin-top:10px}
+
 .rcpanel .rcact{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:12px}
 .rcpanel .rcact .rcretry{display:inline-flex;justify-content:center;margin:0;min-width:0;flex:1 1 0;max-width:190px}
 .rcpanel .rcact .rcretry[hidden]{display:none}
@@ -7377,7 +7386,7 @@ matchMedia('(max-width:600px)').addEventListener?.('change',()=>{if(S.mod==='ho'
 document.addEventListener('click',e=>{if(S.mod!=='ho'||!e.target.closest||!e.target.closest('#helpbtn'))return;
   e.stopImmediatePropagation();e.preventDefault();openModule('ln');setTimeout(()=>{if(typeof helpSet==='function')helpSet(true);},250);},true);
 
-const AP_VERSION='1.36.1';
+const AP_VERSION='1.36.2';
 const AP_MIT_BODY="Permission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.";
 const AP_SMP="MuseScore General / MS Basic\nFluidR3 (original version) by Frank Wen Copyright (c) 2000-02, 2008\nMono conversion (FluidR3Mono) by Michael Cowgill Copyright (c) 2014-17\nAdaptation for MuseScore_General.sf2 by S. Christian Collins Copyright (c) 2018-19\n\n"+AP_MIT_BODY;
 const AP_MIT="Copyright (c) 2009-2026 Paul Rosen and Gregory Dyke\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.";
@@ -8348,6 +8357,15 @@ MOD.ba.fresh=function(){
       el('div',{class:'bafaders'},fader('dr','Batterie'),fader('bs','Basse'),fader('pn','Piano')),
       el('div',{class:'mtline bachk'},tog('metro','Métronome'),tog('loop','En boucle'),tog('ci','Décompte d\'une mesure')),
       el('p',{class:'hint'},'Tout se change pendant que ça joue : tempo, style, grille, transposition et instruments. Baisse un instrument à zéro pour jouer sa partie toi-même.')));
+  /* panneaux ouvrables et fermables (sauf la barre de lecture) ; l'état est mémorisé */
+  if(!BA_S.fold)BA_S.fold={};
+  M.root.querySelectorAll('section.mtsec').forEach((sec,i)=>{const h=sec.querySelector('h3');if(!h)return;
+    const key=sec.classList.contains('bascsec')?'scale':['scale','grille','groupe'][i]||('p'+i);
+    const b=el('button',{type:'button',class:'bafold','aria-expanded':'true'},el('span',{class:'bafoldt'},h.textContent),el('span',{class:'bafoldi','aria-hidden':'true'},'▾'));
+    h.replaceChildren(b);
+    const set=open=>{sec.classList.toggle('closed',!open);b.setAttribute('aria-expanded',String(open));};
+    set(!BA_S.fold[key]);
+    b.addEventListener('click',()=>{const open=sec.classList.contains('closed');set(open);BA_S.fold[key]=!open;save();if(open&&key==='scale'&&M.scPaint)M.scPaint();});});
   fillMeters();setT(BA_S.tempo);M.paint();M.ui();paintB();
   S.keyHandler=e=>{if(e.code==='Space'&&document.activeElement!==area){e.preventDefault();BA.sess?baStop():baPlay();return true;}};
 };
