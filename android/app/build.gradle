@@ -1,0 +1,55 @@
+plugins { id 'com.android.application' }
+
+// Numéro de version : VERSION_NAME / VERSION_CODE fournis par le workflow GitHub (sinon valeurs par défaut)
+def vName = System.getenv('VERSION_NAME') ?: '1.0'
+def vCode = (System.getenv('VERSION_CODE') ?: '1') as Integer
+
+android {
+    namespace 'ca.tomtommusic.musidev'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'ca.tomtommusic.musidev'
+        minSdk 26
+        targetSdk 35
+        versionCode vCode
+        versionName vName
+    }
+    signingConfigs {
+        // clé de téléversement Google Play : fournie par les secrets GitHub (jamais dans le dépôt)
+        upload {
+            def ks = System.getenv('ANDROID_KEYSTORE_PATH')
+            if (ks) {
+                storeFile file(ks)
+                storePassword System.getenv('ANDROID_KEYSTORE_PASSWORD')
+                keyAlias System.getenv('ANDROID_KEY_ALIAS')
+                keyPassword System.getenv('ANDROID_KEY_PASSWORD')
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            if (System.getenv('ANDROID_KEYSTORE_PATH')) signingConfig signingConfigs.upload
+        }
+    }
+    buildFeatures { buildConfig true }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    sourceSets { main { assets.srcDirs += ["$buildDir/webassets"] } }
+}
+
+// Copie de l'app web (la même que le site) dans l'app
+tasks.register('copyWeb', Copy) {
+    def src = rootProject.file('..')
+    from(src) { include 'index.html', 'abcjs-basic-min.js', 'manifest.webmanifest', 'fonts/**', 'icons/**' }
+    into "$buildDir/webassets"
+}
+preBuild.dependsOn copyWeb
+
+dependencies {
+    implementation 'androidx.activity:activity:1.9.3'
+    implementation 'androidx.core:core:1.13.1'
+    implementation 'androidx.webkit:webkit:1.12.1'
+}
