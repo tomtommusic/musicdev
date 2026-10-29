@@ -12,7 +12,7 @@ Cette branche `sources` contient tout ce qui sert à le fabriquer. Point de sauv
    remplacer ces chemins par les nouveaux (`grep -rl scratchpad .` pour les trouver).
 3. Construire : `bash build.sh` → copie `index-before-quiz.html` dans `main/index.html`, puis applique dans l'ordre
    `quiz/integrate.py`, `method.py`, `tools/integrate_tools.py`, `features2.py` (accueil + accords de guitare), `unmute.py`, `micbleed.py`, `i18n/integrate_i18n.py`.
-4. Publier : augmenter `VERSION` dans `sw.js` (actuellement `musicdev-1.37.0`), commit, push sur `main`
+4. Publier : augmenter `VERSION` dans `sw.js` (actuellement `musicdev-1.38.0`), commit, push sur `main`
    (GitHub Pages se met à jour en ~30 s). Pousser aussi les sources modifiées sur cette branche.
 
 ## Repères
@@ -43,3 +43,4 @@ Cette branche `sources` contient tout ce qui sert à le fabriquer. Point de sauv
 - `rel/rel.py` : version complète (plus de Bêta, Vocalises et Accompagnateur visibles dans l'app iOS/Mac).
 - Gammes et modes (Accompagnateur) : `vo/basc.js`. Bibliothèque « Modes et improvisation » : `modes/impro_lib.py` (FR/EN/ES), insérée par `modes/modes.py` (met aussi à jour `i18n/lib_en.json` et `lib_es.json`).
 - Questions « Modes et improvisation » : `modes/qz_modes.js` (insérées par `modes/modes.py`), traductions `modes/tr.py`.
+- Fiches tablatures et batterie (onglet Lecture) : `lect/lect_lib.py` (FR/EN/ES), insérées par `lect/lect.py` (ajoute aussi la tablature sous les exemples avec `tab`).

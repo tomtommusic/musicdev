@@ -121,6 +121,57 @@
     "k": "b flat e flat f clarinet trumpet saxophone horn transposition transposing",
     "html": "<p>Some instruments read one note but make another one sound: these are <b>transposing instruments</b>. An instrument is said to be “in B♭” when its written C sounds as B♭.</p>\n<table class=\"lt\"><tr><th>Instrument</th><th>Written C sounds…</th></tr>\n<tr><td>B♭ clarinet, B♭ trumpet, soprano sax</td><td>B♭: a <b>major second lower</b></td></tr>\n<tr><td>Tenor sax (B♭)</td><td>a <b>major ninth lower</b> (octave + second)</td></tr>\n<tr><td>Alto sax (E♭)</td><td>E♭: a <b>major sixth lower</b></td></tr>\n<tr><td>Baritone sax (E♭)</td><td>an octave + a major sixth lower</td></tr>\n<tr><td>Horn in F</td><td>F: a <b>perfect fifth lower</b></td></tr></table>\n<p>To play together, each musician gets a part that's already transposed. In MusicDEV, the <b>Student instrument (mic)</b> setting takes this transposition into account: you read the written note for your instrument and the mic compares it with the real sound.</p>",
     "ex": []
+   },
+   {
+    "id": "tablature",
+    "t": "Reading tablature (guitar, bass)",
+    "k": "tablature tab guitar bass strings frets open string chord read",
+    "html": "<p><b>Tablature</b> (or \"tab\") is a way of writing music for fretted string instruments (guitar, bass, ukulele). Instead of telling you <i>which note</i> to play, it tells you <b>where to put your fingers</b>.</p>\n<ul><li><b>Each line is a string.</b> On guitar there are 6 lines. <b>The top line is the highest string</b> (high E, e) and the bottom line the lowest (low E): the opposite of what you see when you look down at the guitar.</li>\n<li><b>Each number is a fret</b>: 3 = press at the 3rd fret. <b>0 = open string</b> (played without pressing).</li>\n<li>You read <b>from left to right</b>, like a sentence. Numbers <b>stacked vertically</b> are played <b>at the same time</b> (a chord).</li>\n<li>An <b>x</b> means: muted or unplayed string.</li></ul>\n<p>Standard guitar tuning, from the lowest to the highest string: <b>E A D G B e</b>. The bass has 4 strings: <b>E A D G</b>.</p>\n<pre class=\"tabtxt\">e|-------------------------|\nB|-------------------------|\nG|-------------------------|\nD|----------2---3---2------|\nA|------3-------------3----|\nE|--0----------------------|</pre>\n<p>Here: open low E string, then 3rd fret of the A string, 2nd and 3rd frets of the D string…</p>\n<pre class=\"tabtxt\">   G          C     \ne|---3---------0-----|\nB|---0---------1-----|\nG|---0---------0-----|\nD|---0---------2-----|\nA|---2---------3-----|\nE|---3---------x-----|</pre>\n<p>Two chords: each column of numbers is strummed in one go.</p>\n<pre class=\"tabtxt\">G|-----------------|\nD|-----------------|\nA|-----0---3---5---|\nE|--3--------------|</pre>\n<p>On bass: same principle, with 4 lines.</p>\n<p><b>Careful</b>: tab on its own does not show the <b>rhythm</b> (how long the notes last). So it is often found <b>under a staff</b>, which gives the rhythm. It does not tell you which finger to use either: you choose the most comfortable fingering.</p>\n<p><b>Practice</b>: in Melodic reading or Sight-reading, turn on the \"Tablature\" option (guitar or bass) in the settings. See also <a href=\"#\" data-go=\"tablature-signes\">Tablature symbols</a>.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/8\nK:C\nE2 G2 A2 B2 | c2 B2 A2 G2 |]",
+      "cap": "The same melody on the staff (top) and in tablature (bottom): the staff gives the rhythm, the tab tells you where to put your fingers."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:C clef=bass\nG,, C, D, E, | F, E, D, C, |]",
+      "cap": "A bass line with its 4-string tab."
+     }
+    ]
+   },
+   {
+    "id": "tablature-signes",
+    "t": "Tablature symbols",
+    "k": "tablature symbols hammer on pull off slide bend vibrato muted palm mute harmonic",
+    "html": "<p>Tabs use letters and symbols for playing techniques. The most common ones:</p>\n<table class=\"lt\"><tr><th>Symbol</th><th>Name</th><th>How to play it</th></tr>\n<tr><td>5h7</td><td>Hammer-on</td><td>Play fret 5, then hammer fret 7 with a left-hand finger, without picking again.</td></tr>\n<tr><td>7p5</td><td>Pull-off</td><td>Play fret 7, then pull the finger off, \"plucking\" the string so fret 5 sounds.</td></tr>\n<tr><td>5/7 &nbsp; 7\\5</td><td>Slide</td><td>Slide the finger from one fret to the other while keeping the pressure.</td></tr>\n<tr><td>7b9</td><td>Bend</td><td>Push the string up to raise the note (here, up to the sound of fret 9).</td></tr>\n<tr><td>7b9r7</td><td>Bend and release</td><td>Bend the string, then bring it back.</td></tr>\n<tr><td>7~</td><td>Vibrato</td><td>Make the note waver slightly by moving the string.</td></tr>\n<tr><td>x</td><td>Muted note</td><td>Rest the finger on the string without pressing: you hear a percussive sound.</td></tr>\n<tr><td>P.M.</td><td>Palm mute</td><td>Rest the edge of your picking hand on the strings near the bridge: muted sound.</td></tr>\n<tr><td>(7)</td><td>Ghost or tied note</td><td>Very soft note, or a held note (not picked again).</td></tr>\n<tr><td>&lt;12&gt;</td><td>Natural harmonic</td><td>Lightly touch the string right above fret 12, without pressing.</td></tr></table>\n<p>Above the tab you sometimes see strumming arrows: <b>↓</b> (down) and <b>↑</b> (up).</p>",
+    "ex": []
+   },
+   {
+    "id": "batterie-portee",
+    "t": "The drum staff",
+    "k": "drums staff percussion clef bass drum snare hi-hat ride crash tom x notehead",
+    "html": "<p>Drums are written on a 5-line staff with a <b>percussion clef</b> (two short vertical bars). Here the lines and spaces do not give pitches: <b>each position stands for one part of the kit</b>.</p>\n<table class=\"lt\"><tr><th>Part</th><th>Position on the staff</th><th>Notehead</th></tr>\n<tr><td>Crash cymbal</td><td>ledger line above</td><td>x</td></tr>\n<tr><td>Hi-hat</td><td>above the staff</td><td>x</td></tr>\n<tr><td>Ride</td><td>5th (top) line</td><td>x</td></tr>\n<tr><td>High tom (tom 1)</td><td>4th space</td><td>round</td></tr>\n<tr><td>Mid tom (tom 2)</td><td>4th line</td><td>round</td></tr>\n<tr><td>Snare drum</td><td>3rd space</td><td>round</td></tr>\n<tr><td>Floor tom</td><td>2nd space</td><td>round</td></tr>\n<tr><td>Bass drum</td><td>1st space</td><td>round</td></tr>\n<tr><td>Hi-hat pedal</td><td>below the staff</td><td>x</td></tr></table>\n<ul><li><b>x noteheads</b> for cymbals, <b>round noteheads</b> for drums.</li>\n<li>The lower the instrument, the lower it sits: bass drum at the bottom, cymbals at the top.</li>\n<li>Drums are often written in <b>two voices</b>: the hands (cymbals, toms) with stems <b>up</b>, the feet (bass drum, hi-hat pedal) with stems <b>down</b>. The snare can be on either side depending on the score.</li>\n<li>Useful signs: <b>&gt;</b> accent; <b>o</b> open hi-hat; <b>+</b> closed hi-hat; a note in brackets = <b>ghost note</b> (very soft).</li></ul>\n<p>Careful: the exact placement can vary a little between publishers. A good score gives a <b>legend</b> at the beginning.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C clef=perc\n!style=x!a !style=x!g !style=x!f e d c A F !style=x!D |]\nw: Crash Charl. Ride Tom~1 Tom~2 C.C. Tom~B. G.C. Ch.~pied",
+      "cap": "Where each part of the kit goes on the drum staff (as in the Drum reading module)."
+     }
+    ]
+   },
+   {
+    "id": "batterie-lire",
+    "t": "Reading a drum beat",
+    "k": "drums read rhythm groove beat rock count fill bar repeat",
+    "html": "<p>To read drum music, you read <b>from left to right</b> as usual, but also <b>from top to bottom</b>: notes lined up vertically are played <b>at the same time</b>, with different limbs.</p>\n<ol><li><b>Find the time signature</b> and count the beats out loud: \"1 and 2 and 3 and 4 and\". See <a href=\"#\" data-go=\"figures-notes\">Note values</a>.</li>\n<li><b>Read one voice first</b>: for example the hi-hat (often steady, in eighth notes).</li>\n<li><b>Add the bass drum and the snare</b>: find which count they fall on (in a rock beat, bass drum on 1 and 3, snare on 2 and 4).</li>\n<li><b>Play slowly</b>, with the metronome, then speed up.</li></ol>\n<p><b>Landmarks</b>:</p>\n<ul><li>The <b>groove</b> (or \"beat\") is the pattern that repeats. It is often written once, then repeated with the <b>%</b> sign (repeat the previous bar).</li>\n<li>A <b>fill</b> is a busier passage, often on the toms, that leads into a new section.</li>\n<li><b>Accents (&gt;)</b> are played louder; <b>ghost notes</b> (in brackets), very softly.</li></ul>\n<p><b>Practice</b>: the Drum reading module has you read and play scores of increasing difficulty, and the Rudiments module works on snare technique.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/8\nM:4/4\n%%score (1 2)\nK:C clef=perc\nV:1 stem=up\nV:2 stem=down\n[V:1] !style=x!g!style=x!g !style=x!g!style=x!g !style=x!g!style=x!g !style=x!g!style=x!g |]\n[V:2] F2 c2 FF c2 |]",
+      "cap": "The basic rock beat: hi-hat in eighth notes (top), bass drum on 1 and 3, snare on 2 and 4 (bottom)."
+     },
+     {
+      "abc": "X:1\nL:1/8\nM:4/4\n%%score (1 2)\nK:C clef=perc\nV:1 stem=up\nV:2 stem=down\n[V:1] !style=x!g!style=x!g !style=x!g!style=x!g !style=x!g!style=x!g !open!!style=x!g!style=x!g | !style=x!g!style=x!g !style=x!g!style=x!g ee dd |]\n[V:2] F2 c2 zF c2 | F2 c2 AA AA |]",
+      "cap": "Variation: bass drum on the \"and\" of 3, open hi-hat (o), then a short tom fill."
+     }
+    ]
    }
   ]
  },

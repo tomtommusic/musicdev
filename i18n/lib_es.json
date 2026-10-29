@@ -121,6 +121,57 @@
     "k": "si bemol mi bemol fa clarinete trompeta saxofon trompa transposicion",
     "html": "<p>Algunos instrumentos leen una nota pero hacen sonar otra: son los <b>instrumentos transpositores</b>. Se dice que un instrumento está «en si♭» cuando el do escrito suena si♭.</p>\n<table class=\"lt\"><tr><th>Instrumento</th><th>El do escrito suena…</th></tr>\n<tr><td>Clarinete en si♭, trompeta en si♭, saxo soprano</td><td>si♭: una <b>segunda mayor más abajo</b></td></tr>\n<tr><td>Saxo tenor (si♭)</td><td>una <b>novena mayor más abajo</b> (octava + segunda)</td></tr>\n<tr><td>Saxo alto (mi♭)</td><td>mi♭: una <b>sexta mayor más abajo</b></td></tr>\n<tr><td>Saxo barítono (mi♭)</td><td>una octava + una sexta mayor más abajo</td></tr>\n<tr><td>Trompa en fa</td><td>fa: una <b>quinta justa más abajo</b></td></tr></table>\n<p>Para tocar juntos, cada músico tiene su parte ya transportada. En MusicDEV, el ajuste <b>Instrumento del alumno (micrófono)</b> tiene en cuenta esta transposición: lees la nota escrita para tu instrumento y el micrófono la compara con el sonido real.</p>",
     "ex": []
+   },
+   {
+    "id": "tablature",
+    "t": "Leer una tablatura (guitarra, bajo)",
+    "k": "tablatura tab guitarra bajo cuerdas trastes cuerda al aire acorde leer",
+    "html": "<p>La <b>tablatura</b> (o «tab») es una manera de escribir música para instrumentos de cuerda con trastes (guitarra, bajo, ukelele). En lugar de decir <i>qué nota</i> tocar, dice <b>dónde poner los dedos</b>.</p>\n<ul><li><b>Cada línea es una cuerda.</b> En la guitarra hay 6 líneas. <b>La línea de arriba es la cuerda más aguda</b> (mi agudo, e) y la de abajo la más grave (mi grave, E): lo contrario de lo que se ve al mirar la guitarra.</li>\n<li><b>Cada número es un traste</b>: 3 = pisa en el 3.er traste. <b>0 = cuerda al aire</b> (se toca sin pisar).</li>\n<li>Se lee <b>de izquierda a derecha</b>, como una frase. Los números <b>apilados verticalmente</b> se tocan <b>a la vez</b> (un acorde).</li>\n<li>Una <b>x</b> significa: cuerda apagada o que no se toca.</li></ul>\n<p>Afinación estándar de la guitarra, de la cuerda grave a la aguda: <b>mi la re sol si mi</b> (E A D G B e). El bajo tiene 4 cuerdas: <b>mi la re sol</b> (E A D G).</p>\n<pre class=\"tabtxt\">e|-------------------------|\nB|-------------------------|\nG|-------------------------|\nD|----------2---3---2------|\nA|------3-------------3----|\nE|--0----------------------|</pre>\n<p>Aquí: cuerda de mi grave al aire, luego 3.er traste de la cuerda de la, 2.º y 3.er trastes de la cuerda de re…</p>\n<pre class=\"tabtxt\">   Sol (G)    Do (C)\ne|---3---------0-----|\nB|---0---------1-----|\nG|---0---------0-----|\nD|---0---------2-----|\nA|---2---------3-----|\nE|---3---------x-----|</pre>\n<p>Dos acordes: cada columna de números se rasguea de una sola vez.</p>\n<pre class=\"tabtxt\">G|-----------------|\nD|-----------------|\nA|-----0---3---5---|\nE|--3--------------|</pre>\n<p>En el bajo: el mismo principio, con 4 líneas.</p>\n<p><b>Atención</b>: una tablatura sola no muestra el <b>ritmo</b> (la duración de las notas). Por eso suele aparecer <b>debajo de un pentagrama</b>, que da el ritmo. Tampoco dice qué dedo usar: tú eliges la digitación más cómoda.</p>\n<p><b>Para practicar</b>: en Lectura melódica o Lectura a primera vista, activa la opción «Tablatura» (guitarra o bajo) en los ajustes. Ver también <a href=\"#\" data-go=\"tablature-signes\">Los signos de la tablatura</a>.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/8\nK:C\nE2 G2 A2 B2 | c2 B2 A2 G2 |]",
+      "cap": "La misma melodía en el pentagrama (arriba) y en tablatura (abajo): el pentagrama da el ritmo, la tablatura dice dónde poner los dedos."
+     },
+     {
+      "abc": "X:1\nL:1/4\nK:C clef=bass\nG,, C, D, E, | F, E, D, C, |]",
+      "cap": "Una línea de bajo con su tablatura de 4 cuerdas."
+     }
+    ]
+   },
+   {
+    "id": "tablature-signes",
+    "t": "Los signos de la tablatura",
+    "k": "tablatura signos hammer on pull off ligado slide bend vibrato apagada palm mute armonico",
+    "html": "<p>Las tablaturas usan letras y símbolos para las técnicas de interpretación. Los más comunes:</p>\n<table class=\"lt\"><tr><th>Signo</th><th>Nombre</th><th>Cómo tocarlo</th></tr>\n<tr><td>5h7</td><td>Hammer-on (ligado ascendente)</td><td>Toca el traste 5 y luego golpea el traste 7 con un dedo de la mano izquierda, sin volver a pulsar.</td></tr>\n<tr><td>7p5</td><td>Pull-off (ligado descendente)</td><td>Toca el traste 7 y luego retira el dedo «enganchando» la cuerda para que suene el traste 5.</td></tr>\n<tr><td>5/7 &nbsp; 7\\5</td><td>Deslizamiento (slide)</td><td>Desliza el dedo de un traste a otro manteniendo la presión.</td></tr>\n<tr><td>7b9</td><td>Bend (estirado)</td><td>Empuja la cuerda hacia arriba para subir la nota (aquí, hasta el sonido del traste 9).</td></tr>\n<tr><td>7b9r7</td><td>Bend y soltar</td><td>Estira la cuerda y luego devuélvela a su sitio.</td></tr>\n<tr><td>7~</td><td>Vibrato</td><td>Haz oscilar ligeramente la nota moviendo la cuerda.</td></tr>\n<tr><td>x</td><td>Nota apagada</td><td>Apoya el dedo en la cuerda sin pisar: se oye un sonido percusivo.</td></tr>\n<tr><td>P.M.</td><td>Palm mute</td><td>Apoya el canto de la mano derecha sobre las cuerdas, cerca del puente: sonido apagado.</td></tr>\n<tr><td>(7)</td><td>Nota fantasma o ligada</td><td>Nota muy suave, o nota mantenida (sin volver a pulsar).</td></tr>\n<tr><td>&lt;12&gt;</td><td>Armónico natural</td><td>Roza la cuerda justo encima del traste 12, sin pisar.</td></tr></table>\n<p>Encima de la tablatura a veces hay flechas para el sentido del rasgueo: <b>↓</b> (hacia abajo) y <b>↑</b> (hacia arriba).</p>",
+    "ex": []
+   },
+   {
+    "id": "batterie-portee",
+    "t": "El pentagrama de batería",
+    "k": "bateria pentagrama percusion clave bombo caja charles ride crash tom cabeza x",
+    "html": "<p>La batería se escribe en un pentagrama de 5 líneas con una <b>clave de percusión</b> (dos pequeñas barras verticales). Aquí las líneas y los espacios no indican alturas: <b>cada posición corresponde a un elemento de la batería</b>.</p>\n<table class=\"lt\"><tr><th>Elemento</th><th>Posición en el pentagrama</th><th>Cabeza de nota</th></tr>\n<tr><td>Plato crash</td><td>línea adicional encima</td><td>x</td></tr>\n<tr><td>Charles (hi-hat)</td><td>encima del pentagrama</td><td>x</td></tr>\n<tr><td>Ride</td><td>5.ª línea (arriba)</td><td>x</td></tr>\n<tr><td>Tom agudo (tom 1)</td><td>4.º espacio</td><td>redonda</td></tr>\n<tr><td>Tom medio (tom 2)</td><td>4.ª línea</td><td>redonda</td></tr>\n<tr><td>Caja</td><td>3.er espacio</td><td>redonda</td></tr>\n<tr><td>Tom de piso</td><td>2.º espacio</td><td>redonda</td></tr>\n<tr><td>Bombo</td><td>1.er espacio</td><td>redonda</td></tr>\n<tr><td>Charles con el pie</td><td>debajo del pentagrama</td><td>x</td></tr></table>\n<ul><li><b>Cabezas en x</b> para los platos, <b>cabezas redondas</b> para los tambores.</li>\n<li>Cuanto más grave el instrumento, más abajo se coloca: bombo abajo, platos arriba.</li>\n<li>A menudo se escriben <b>dos voces</b>: las manos (platos, toms) con plicas hacia <b>arriba</b> y los pies (bombo, charles con el pie) con plicas hacia <b>abajo</b>. La caja puede estar de un lado o del otro según la partitura.</li>\n<li>Signos útiles: <b>&gt;</b> acento; <b>o</b> charles abierto; <b>+</b> charles cerrado; una nota entre paréntesis = <b>ghost note</b> (muy suave).</li></ul>\n<p>Atención: la ubicación exacta puede variar un poco según la editorial. Una buena partitura da una <b>leyenda</b> al principio.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/4\nK:C clef=perc\n!style=x!a !style=x!g !style=x!f e d c A F !style=x!D |]\nw: Crash Charl. Ride Tom~1 Tom~2 C.C. Tom~B. G.C. Ch.~pied",
+      "cap": "El lugar de cada elemento en el pentagrama de batería (como en el módulo Lectura de batería)."
+     }
+    ]
+   },
+   {
+    "id": "batterie-lire",
+    "t": "Leer un ritmo de batería",
+    "k": "bateria leer ritmo groove rock contar redoble fill compas repetir",
+    "html": "<p>Para leer una partitura de batería se lee <b>de izquierda a derecha</b>, como siempre, pero también <b>de arriba abajo</b>: las notas alineadas verticalmente se tocan <b>a la vez</b>, con miembros distintos.</p>\n<ol><li><b>Busca el compás</b> y cuenta los tiempos en voz alta: «1 y 2 y 3 y 4 y». Ver <a href=\"#\" data-go=\"figures-notes\">Figuras de nota</a>.</li>\n<li><b>Lee primero una sola voz</b>: por ejemplo el charles (a menudo regular, en corcheas).</li>\n<li><b>Añade el bombo y la caja</b>: fíjate en qué conteo caen (en un ritmo de rock, bombo en 1 y 3, caja en 2 y 4).</li>\n<li><b>Toca despacio</b>, con el metrónomo, y luego acelera.</li></ol>\n<p><b>Referencias</b>:</p>\n<ul><li>El <b>groove</b> (o «beat») es el patrón que se repite. A menudo se escribe una vez y luego se repite con el signo <b>%</b> (repetir el compás anterior).</li>\n<li>El <b>redoble</b> (o «fill») es un pasaje más cargado, a menudo en los toms, que anuncia una nueva sección.</li>\n<li>Los <b>acentos (&gt;)</b> se tocan más fuerte; las <b>ghost notes</b> (entre paréntesis), muy suave.</li></ul>\n<p><b>Para practicar</b>: el módulo Lectura de batería te hace leer y tocar partituras de dificultad progresiva, y el módulo Rudimentos trabaja la técnica de la caja.</p>",
+    "ex": [
+     {
+      "abc": "X:1\nL:1/8\nM:4/4\n%%score (1 2)\nK:C clef=perc\nV:1 stem=up\nV:2 stem=down\n[V:1] !style=x!g!style=x!g !style=x!g!style=x!g !style=x!g!style=x!g !style=x!g!style=x!g |]\n[V:2] F2 c2 FF c2 |]",
+      "cap": "El ritmo de rock básico: charles en corcheas (arriba), bombo en 1 y 3, caja en 2 y 4 (abajo)."
+     },
+     {
+      "abc": "X:1\nL:1/8\nM:4/4\n%%score (1 2)\nK:C clef=perc\nV:1 stem=up\nV:2 stem=down\n[V:1] !style=x!g!style=x!g !style=x!g!style=x!g !style=x!g!style=x!g !open!!style=x!g!style=x!g | !style=x!g!style=x!g !style=x!g!style=x!g ee dd |]\n[V:2] F2 c2 zF c2 | F2 c2 AA AA |]",
+      "cap": "Variante: bombo en el «y» del 3, charles abierto (o) y luego un breve redoble de toms."
+     }
+    ]
    }
   ]
  },
