@@ -1711,7 +1711,7 @@ main[data-mod="iv"] #answer .ahead .hint,main[data-mod="pc"] #answer .ahead .hin
 main[data-mod="ho"] .modpick .mp-ic{animation:hopulse 1.6s ease-out infinite;border-radius:12px}
 @keyframes hopulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 55%,transparent)}70%{box-shadow:0 0 0 12px color-mix(in srgb,var(--accent) 0%,transparent)}100%{box-shadow:0 0 0 0 transparent}}
 @media (prefers-reduced-motion:reduce){main[data-mod="ho"] .modpick .mp-ic{animation:none}}
-.clefone{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%}.clefsel{font:inherit;padding:6px 10px;border:1px solid var(--line);border-radius:10px;background:var(--surface,#fff);color:inherit;max-width:100%}.clefname{font:700 1rem/1.25 var(--f-sans,inherit);text-align:center;margin-top:4px}.clefstaff{display:flex;justify-content:center}
+.clefgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;width:100%}@media (max-width:560px){.clefgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}.clefcell{border:1px solid var(--line);border-radius:12px;background:var(--surface,#fff);padding:8px 6px 4px;display:flex;flex-direction:column;align-items:center}.clefname{font:700 .82rem/1.25 var(--f-sans,inherit);text-align:center;min-height:2.4em;display:flex;align-items:center}.clefstaff{width:100%;display:flex;justify-content:center}
 pre.tabtxt{font:600 .85rem/1.35 var(--f-mono,monospace);background:var(--sunk,rgba(0,0,0,.04));border:1px solid var(--line);border-radius:10px;padding:10px 12px;overflow-x:auto;white-space:pre;margin:.6em 0}
 </style>
 
@@ -4498,12 +4498,12 @@ function libAnnotate(svg,x){
 /* exemple « une clé par case » : chaque clé dans sa propre petite portée, avec son nom au-dessus */
 function libClefGrid(tgt,abc){const hdr=(abc.match(/K:C clef=(\w+)/)||[])[1]||'treble',body=abc.split('\n').slice(3).join(' ').replace(/\|\]/,'');
   const cells=body.split('|').map((seg,i)=>{const clef=i===0?hdr:((seg.match(/clef=(\w+)/)||[])[1]||hdr),title=(seg.match(/"\^([^"]*)"/)||[])[1]||'',note=seg.replace(/\[K:[^\]]*\]/g,'').replace(/"[^"]*"/g,'').trim();return{clef,title,note};});
-  /* une seule portée, et un menu pour choisir la clé */
-  const wrap=el('div',{class:'clefone'}),st=el('div',{class:'clefstaff'}),name=el('div',{class:'clefname','data-notr':''});
-  const sel=el('select',{class:'clefsel','aria-label':'Clé'},...cells.map((c,i)=>el('option',{value:String(i),'data-notr':''},c.title)));
-  const draw=i=>{const c=cells[i];try{ABCJS.renderAbc(st,`X:1\nL:1/4\nK:C clef=${c.clef}\n${c.note} |]`,{staffwidth:150,paddingleft:0,paddingright:0,paddingtop:6,paddingbottom:2,foregroundColor:'currentColor',scale:1.25});}catch(e){}};
-  sel.addEventListener('change',()=>draw(+sel.value));
-  wrap.append(sel,st);tgt.replaceChildren(wrap);draw(0);}
+  const grid=el('div',{class:'clefgrid'});tgt.replaceChildren(grid);
+  cells.forEach(c=>{const box=el('div',{class:'clefcell'}),st=el('div',{class:'clefstaff'});box.append(el('div',{class:'clefname','data-notr':''},c.title),st);grid.append(box);
+    try{ABCJS.renderAbc(st,`X:1\nL:1/4\nK:C clef=${c.clef}\n${c.note} |]`,{add_classes:true,staffwidth:96,paddingleft:0,paddingright:0,paddingtop:4,paddingbottom:0,foregroundColor:'currentColor',scale:1});}catch(e){}});
+  /* aligne les cinq lignes des quatre portées à la même hauteur */
+  requestAnimationFrame(()=>{const sts=[...grid.querySelectorAll('.clefstaff')],tops=sts.map(st=>{const l=st.querySelector('.abcjs-staff');return l?l.getBoundingClientRect().top-st.getBoundingClientRect().top:0;}),mx=Math.max(...tops);
+    sts.forEach((st,i)=>{st.style.marginTop=(mx-tops[i])+'px';});});}
 function libDrawExample(box,x){
   if(x.arrow)box.append(el('div',{class:'lxarrow'},el('span',{class:'lxarrow-ic','aria-hidden':'true'},'↓'),el('span',{class:'lxarrow-t',html:x.arrow})));
   if(x.step)box.append(el('p',{class:'lxstep',html:x.step}));
@@ -7512,7 +7512,7 @@ matchMedia('(max-width:600px)').addEventListener?.('change',()=>{if(S.mod==='ho'
 document.addEventListener('click',e=>{if(S.mod!=='ho'||!e.target.closest||!e.target.closest('#helpbtn'))return;
   e.stopImmediatePropagation();e.preventDefault();openModule('ln');setTimeout(()=>{if(typeof helpSet==='function')helpSet(true);},250);},true);
 
-const AP_VERSION='1.38.5';
+const AP_VERSION='1.38.6';
 const AP_MIT_BODY="Permission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.";
 const AP_SMP="MuseScore General / MS Basic\nFluidR3 (original version) by Frank Wen Copyright (c) 2000-02, 2008\nMono conversion (FluidR3Mono) by Michael Cowgill Copyright (c) 2014-17\nAdaptation for MuseScore_General.sf2 by S. Christian Collins Copyright (c) 2018-19\n\n"+AP_MIT_BODY;
 const AP_MIT="Copyright (c) 2009-2026 Paul Rosen and Gregory Dyke\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.";
