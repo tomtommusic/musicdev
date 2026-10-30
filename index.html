@@ -1711,6 +1711,7 @@ main[data-mod="iv"] #answer .ahead .hint,main[data-mod="pc"] #answer .ahead .hin
 main[data-mod="ho"] .modpick .mp-ic{animation:hopulse 1.6s ease-out infinite;border-radius:12px}
 @keyframes hopulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 55%,transparent)}70%{box-shadow:0 0 0 12px color-mix(in srgb,var(--accent) 0%,transparent)}100%{box-shadow:0 0 0 0 transparent}}
 @media (prefers-reduced-motion:reduce){main[data-mod="ho"] .modpick .mp-ic{animation:none}}
+.clefgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;width:100%}@media (max-width:560px){.clefgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}.clefcell{border:1px solid var(--line);border-radius:12px;background:var(--surface,#fff);padding:8px 6px 4px;display:flex;flex-direction:column;align-items:center}.clefname{font:700 .82rem/1.25 var(--f-sans,inherit);text-align:center;min-height:2.4em;display:flex;align-items:center}.clefstaff{width:100%;display:flex;justify-content:center}
 pre.tabtxt{font:600 .85rem/1.35 var(--f-mono,monospace);background:var(--sunk,rgba(0,0,0,.04));border:1px solid var(--line);border-radius:10px;padding:10px 12px;overflow-x:auto;white-space:pre;margin:.6em 0}
 </style>
 
@@ -4188,7 +4189,7 @@ const LIB_LECT=[{"id": "tablature", "t": "Lire une tablature (guitare, basse)", 
 LIB.find(c=>c.id==='lecture').topics.push(...LIB_LECT);
 (()=>{const lec=LIB.find(c=>c.id==='lecture');if(!lec)return;const ts=lec.topics,P=ts.find(t=>t.id==='portee'),C=ts.find(t=>t.id==='cles');if(!P||!C)return;
   P.t="La portée et les clés";P.k+=' '+C.k;P.html=P.html.replace(/<a href="#" data-go="cles">([^<]*)<\/a>/,'<b>$1</b> (voir plus bas)')+'\n<h4>'+C.t+'</h4>\n'+C.html;
-  if(C.ex&&C.ex[0])C.ex[0].abc="X:1\nL:1/4\nK:C clef=treble\n\"^Clé de sol\"C4 | [K:clef=bass] \"^Clé de fa\"C4 | [K:clef=alto] \"^Clé d'ut 3e ligne\"C4 | [K:clef=tenor] \"^Clé d'ut 4e ligne\"C4 |]";P.ex=(P.ex||[]).concat(C.ex||[]);ts.splice(ts.indexOf(C),1);
+  if(C.ex&&C.ex[0]){C.ex[0].abc="X:1\nL:1/4\nK:C clef=treble\n\"^Clé de sol\"C4 | [K:clef=bass] \"^Clé de fa\"C4 | [K:clef=alto] \"^Clé d'ut 3e ligne\"C4 | [K:clef=tenor] \"^Clé d'ut 4e ligne\"C4 |]";C.ex[0].clefgrid=true;C.ex[0].cap='Le même do central (le do du milieu du piano) écrit dans chacune des quatre clés.';}P.ex=(P.ex||[]).concat(C.ex||[]);ts.splice(ts.indexOf(C),1);
   LIB.forEach(c=>c.topics.forEach(t=>{t.html=t.html.replace(/data-go="cles"/g,'data-go="portee"');if(t.see)t.see=[...new Set(t.see.map(s=>s==='cles'?'portee':s))].filter(s=>s!==t.id);}));})();
 
 
@@ -4494,6 +4495,15 @@ function libAnnotate(svg,x){
     pth.setAttribute('d',`M${x1} ${top+6} V${top} H${x2} V${top+6}`);pth.setAttribute('class','lx-span');svg.append(pth);
     const t=document.createElementNS(NS,'text');t.setAttribute('x',(x1+x2)/2);t.setAttribute('y',top-4);t.setAttribute('text-anchor','middle');t.setAttribute('class','lx-spantext');t.textContent=T(label);svg.append(t);});
 }
+/* exemple « une clé par case » : chaque clé dans sa propre petite portée, avec son nom au-dessus */
+function libClefGrid(tgt,abc){const hdr=(abc.match(/K:C clef=(\w+)/)||[])[1]||'treble',body=abc.split('\n').slice(3).join(' ').replace(/\|\]/,'');
+  const cells=body.split('|').map((seg,i)=>{const clef=i===0?hdr:((seg.match(/clef=(\w+)/)||[])[1]||hdr),title=(seg.match(/"\^([^"]*)"/)||[])[1]||'',note=seg.replace(/\[K:[^\]]*\]/g,'').replace(/"[^"]*"/g,'').trim();return{clef,title,note};});
+  const grid=el('div',{class:'clefgrid'});tgt.replaceChildren(grid);
+  cells.forEach(c=>{const box=el('div',{class:'clefcell'}),st=el('div',{class:'clefstaff'});box.append(el('div',{class:'clefname','data-notr':''},c.title),st);grid.append(box);
+    try{ABCJS.renderAbc(st,`X:1\nL:1/4\nK:C clef=${c.clef}\n${c.note} |]`,{add_classes:true,staffwidth:96,paddingleft:0,paddingright:0,paddingtop:4,paddingbottom:0,foregroundColor:'currentColor',scale:1});}catch(e){}});
+  /* aligne les cinq lignes des quatre portées à la même hauteur */
+  requestAnimationFrame(()=>{const sts=[...grid.querySelectorAll('.clefstaff')],tops=sts.map(st=>{const l=st.querySelector('.abcjs-staff');return l?l.getBoundingClientRect().top-st.getBoundingClientRect().top:0;}),mx=Math.max(...tops);
+    sts.forEach((st,i)=>{st.style.marginTop=(mx-tops[i])+'px';});});}
 function libDrawExample(box,x){
   if(x.arrow)box.append(el('div',{class:'lxarrow'},el('span',{class:'lxarrow-ic','aria-hidden':'true'},'↓'),el('span',{class:'lxarrow-t',html:x.arrow})));
   if(x.step)box.append(el('p',{class:'lxstep',html:x.step}));
@@ -4502,6 +4512,7 @@ function libDrawExample(box,x){
   if(!HAS_ABC()){tgt.append(el('div',{class:'nolib'},'Notation indisponible (bibliothèque non chargée).'));return;}
   requestAnimationFrame(()=>{
     const w=Math.min(tgt.clientWidth||600,x.w||900);
+    if(x.clefgrid){const hid=el('div',{hidden:true});box.append(hid);const tune=ABCJS.renderAbc(hid,x.abc,{})[0];libClefGrid(tgt,x.abc);if(x.play!==false){row.append(btn('▶ Écouter',()=>libPlay(tune,96)),stopBtn());setPlaying(!!P.sess);}return;}
     const tune=ABCJS.renderAbc(tgt,x.abc,{add_classes:true,paddingleft:4,paddingright:4,paddingtop:x.span?24:6,staffwidth:Math.max(200,w-24),paddingbottom:4,foregroundColor:'currentColor',responsive:x.fixed?undefined:'resize',scale:x.scale||1,tablature:x.tab&&typeof TAB_DEF!=='undefined'&&TAB_DEF[x.tab]?[TAB_DEF[x.tab]()]:undefined})[0];
     const svg=tgt.querySelector('svg');if(svg&&(x.circle||x.color||x.span))try{libAnnotate(svg,x);}catch(e){}
     if(x.play!==false){row.append(btn('▶ Écouter',()=>libPlay(tune,x.bpm||(/\nQ:/.test(x.abc)?null:96))),stopBtn());setPlaying(!!P.sess);}
@@ -7501,7 +7512,7 @@ matchMedia('(max-width:600px)').addEventListener?.('change',()=>{if(S.mod==='ho'
 document.addEventListener('click',e=>{if(S.mod!=='ho'||!e.target.closest||!e.target.closest('#helpbtn'))return;
   e.stopImmediatePropagation();e.preventDefault();openModule('ln');setTimeout(()=>{if(typeof helpSet==='function')helpSet(true);},250);},true);
 
-const AP_VERSION='1.38.3';
+const AP_VERSION='1.38.4';
 const AP_MIT_BODY="Permission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.";
 const AP_SMP="MuseScore General / MS Basic\nFluidR3 (original version) by Frank Wen Copyright (c) 2000-02, 2008\nMono conversion (FluidR3Mono) by Michael Cowgill Copyright (c) 2014-17\nAdaptation for MuseScore_General.sf2 by S. Christian Collins Copyright (c) 2018-19\n\n"+AP_MIT_BODY;
 const AP_MIT="Copyright (c) 2009-2026 Paul Rosen and Gregory Dyke\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.";
