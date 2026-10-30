@@ -8,7 +8,7 @@
     "t": "Leer una partitura",
     "title": "Leer una partitura: visión de conjunto",
     "k": "simbolos partitura pentagrama lectura vision conjunto",
-    "html": "<p>Una partitura se lee como un texto: de izquierda a derecha, línea tras línea. Antes de tocar la primera nota, tómate unos segundos para localizar la información que aparece al principio.</p>\n<ol>\n<li><b>El pentagrama</b>: las 5 líneas sobre las que se escriben las notas (<a href=\"#\" data-go=\"portee\">El pentagrama</a>).</li>\n<li><b>La clave</b>, justo al principio: fija el nombre de las notas (<a href=\"#\" data-go=\"cles\">Las claves</a>).</li>\n<li><b>La armadura</b>, justo después de la clave: los sostenidos o bemoles que valen para toda la pieza. Indica la tonalidad (<a href=\"#\" data-go=\"armures\">Las armaduras</a>).</li>\n<li><b>La indicación de compás</b>: cuántos tiempos hay en cada compás y qué figura vale un tiempo (<a href=\"#\" data-go=\"mesures-simples\">Compases simples</a>).</li>\n<li><b>La indicación de tempo</b>, encima del pentagrama: la velocidad (<a href=\"#\" data-go=\"tempo\">El tempo</a>).</li>\n<li><b>Los matices</b>, debajo del pentagrama: el volumen (<a href=\"#\" data-go=\"nuances\">Los matices</a>).</li>\n<li><b>Las notas y los silencios</b>: su posición indica la altura y su forma, la duración (<a href=\"#\" data-go=\"figures-notes\">Figuras de nota</a>, <a href=\"#\" data-go=\"silences\">Figuras de silencio</a>).</li>\n<li><b>Las barras de compás</b>, las ligaduras, las articulaciones y los signos de repetición (<a href=\"#\" data-go=\"barres\">Barras de compás</a>, <a href=\"#\" data-go=\"reprises\">Repeticiones</a>).</li>\n</ol>\n<p><b>Consejo de lectura a primera vista</b>: antes de empezar, localiza la tonalidad, el compás, el ritmo más difícil y los saltos importantes. Cuenta un compás en vacío para asentar el pulso y luego ya no te detengas: los errores se corrigen en la siguiente lectura.</p>",
+    "html": "<p>Una partitura se lee como un texto: de izquierda a derecha, línea tras línea. Antes de tocar la primera nota, tómate unos segundos para localizar la información que aparece al principio.</p>\n<ol>\n<li><b>El pentagrama</b>: las 5 líneas sobre las que se escriben las notas (<a href=\"#\" data-go=\"portee\">El pentagrama</a>).</li>\n<li><b>La clave</b>, justo al principio: fija el nombre de las notas (<a href=\"#\" data-go=\"portee\">Las claves</a>).</li>\n<li><b>La armadura</b>, justo después de la clave: los sostenidos o bemoles que valen para toda la pieza. Indica la tonalidad (<a href=\"#\" data-go=\"armures\">Las armaduras</a>).</li>\n<li><b>La indicación de compás</b>: cuántos tiempos hay en cada compás y qué figura vale un tiempo (<a href=\"#\" data-go=\"mesures-simples\">Compases simples</a>).</li>\n<li><b>La indicación de tempo</b>, encima del pentagrama: la velocidad (<a href=\"#\" data-go=\"tempo\">El tempo</a>).</li>\n<li><b>Los matices</b>, debajo del pentagrama: el volumen (<a href=\"#\" data-go=\"nuances\">Los matices</a>).</li>\n<li><b>Las notas y los silencios</b>: su posición indica la altura y su forma, la duración (<a href=\"#\" data-go=\"figures-notes\">Figuras de nota</a>, <a href=\"#\" data-go=\"silences\">Figuras de silencio</a>).</li>\n<li><b>Las barras de compás</b>, las ligaduras, las articulaciones y los signos de repetición (<a href=\"#\" data-go=\"barres\">Barras de compás</a>, <a href=\"#\" data-go=\"reprises\">Repeticiones</a>).</li>\n</ol>\n<p><b>Consejo de lectura a primera vista</b>: antes de empezar, localiza la tonalidad, el compás, el ritmo más difícil y los saltos importantes. Cuenta un compás en vacío para asentar el pulso y luego ya no te detengas: los errores se corrigen en la siguiente lectura.</p>",
     "ex": [
      {
       "abc": "X:1\nT:Pequeña pieza\nM:3/4\nL:1/8\nQ:\"Moderato\" 1/4=100\nK:G\n!mp! G2 B2 d2 | (c2 B2) A2 | B4 z2 |: !f! d3 c B2 | .A2 .G2 .F2 | G6 :|",
@@ -18,10 +18,10 @@
    },
    {
     "id": "portee",
-    "t": "El pentagrama",
+    "t": "El pentagrama y las claves",
     "title": null,
-    "k": "lineas espacios",
-    "html": "<p>El <b>pentagrama</b> está formado por <b>5 líneas</b> horizontales y <b>4 espacios</b> (los huecos entre las líneas). Siempre se cuentan <b>de abajo arriba</b>: la 1.<sup>a</sup> línea es la más baja.</p>\n<p>Cuanto más arriba está una nota en el pentagrama, más aguda es. Una nota puede estar <b>en una línea</b> (la línea la atraviesa) o <b>en un espacio</b>. Para ir más arriba o más abajo del pentagrama, se añaden pequeñas <a href=\"#\" data-go=\"lignes-sup\">líneas adicionales</a>.</p>\n<p>El pentagrama por sí solo no dice qué notas están escritas: es la <a href=\"#\" data-go=\"cles\">clave</a> la que da el nombre de las líneas.</p>",
+    "k": "lineas espacios clave de sol fa do contralto viola tenor",
+    "html": "<p>El <b>pentagrama</b> está formado por <b>5 líneas</b> horizontales y <b>4 espacios</b> (los huecos entre las líneas). Siempre se cuentan <b>de abajo arriba</b>: la 1.<sup>a</sup> línea es la más baja.</p>\n<p>Cuanto más arriba está una nota en el pentagrama, más aguda es. Una nota puede estar <b>en una línea</b> (la línea la atraviesa) o <b>en un espacio</b>. Para ir más arriba o más abajo del pentagrama, se añaden pequeñas <a href=\"#\" data-go=\"lignes-sup\">líneas adicionales</a>.</p>\n<p>El pentagrama por sí solo no dice qué notas están escritas: es la <b>clave</b> (ver más abajo) la que da el nombre de las líneas.</p>\n<h4>Las claves</h4>\n<p>La <b>clave</b> da el nombre de una línea; todas las demás notas se deducen a partir de ella.</p>\n<ul>\n<li><b>Clave de sol</b> (2.<sup>a</sup> línea): la nota de la 2.<sup>a</sup> línea es el <b>sol</b> por encima del do central. Para las voces agudas, la flauta, el violín, la trompeta, la mano derecha del piano…</li>\n<li><b>Clave de fa</b> (4.<sup>a</sup> línea): la nota de la 4.<sup>a</sup> línea es el <b>fa</b> por debajo del do central. Para las voces graves, el contrabajo, el fagot, el trombón, la mano izquierda del piano…</li>\n<li><b>Clave de do en 3.<sup>a</sup> línea</b> (clave de contralto): la 3.<sup>a</sup> línea es el <b>do central</b>. La usa sobre todo la viola.</li>\n<li><b>Clave de do en 4.<sup>a</sup> línea</b> (clave de tenor): la 4.<sup>a</sup> línea es el do central. Para los pasajes agudos del violonchelo, el fagot y el trombón.</li>\n</ul>\n<p>Truco para la clave de fa: las líneas se leen <b>sol, si, re, fa, la</b> y los espacios <b>la, do, mi, sol</b>.</p>",
     "ex": [
      {
       "abc": "X:1\nL:1/4\nK:C\nE G B d f |]\nw: 1.ª 2.ª 3.ª 4.ª 5.ª",
@@ -30,18 +30,9 @@
      {
       "abc": "X:1\nL:1/4\nK:C\nF A c e |]\nw: 1.º 2.º 3.º 4.º",
       "cap": "Los 4 espacios: fa, la, do, mi."
-     }
-    ]
-   },
-   {
-    "id": "cles",
-    "t": "Las claves",
-    "title": null,
-    "k": "clave de sol fa do contralto viola tenor",
-    "html": "<p>La <b>clave</b> da el nombre de una línea; todas las demás notas se deducen a partir de ella.</p>\n<ul>\n<li><b>Clave de sol</b> (2.<sup>a</sup> línea): la nota de la 2.<sup>a</sup> línea es el <b>sol</b> por encima del do central. Para las voces agudas, la flauta, el violín, la trompeta, la mano derecha del piano…</li>\n<li><b>Clave de fa</b> (4.<sup>a</sup> línea): la nota de la 4.<sup>a</sup> línea es el <b>fa</b> por debajo del do central. Para las voces graves, el contrabajo, el fagot, el trombón, la mano izquierda del piano…</li>\n<li><b>Clave de do en 3.<sup>a</sup> línea</b> (clave de contralto): la 3.<sup>a</sup> línea es el <b>do central</b>. La usa sobre todo la viola.</li>\n<li><b>Clave de do en 4.<sup>a</sup> línea</b> (clave de tenor): la 4.<sup>a</sup> línea es el do central. Para los pasajes agudos del violonchelo, el fagot y el trombón.</li>\n</ul>\n<p>Truco para la clave de fa: las líneas se leen <b>sol, si, re, fa, la</b> y los espacios <b>la, do, mi, sol</b>.</p>",
-    "ex": [
+     },
      {
-      "abc": "X:1\nL:1/4\nK:C clef=treble\nC4 | [K:clef=bass] C4 | [K:clef=alto] C4 | [K:clef=tenor] C4 |]\nw: sol fa do~3.ª do~4.ª",
+      "abc": "X:1\nL:1/4\nK:C clef=treble\n\"^Clave de sol\"C4 | [K:clef=bass] \"^Clave de fa\"C4 | [K:clef=alto] \"^Clave de do en 3.ª\"C4 | [K:clef=tenor] \"^Clave de do en 4.ª\"C4 |]",
       "cap": "El mismo do central escrito en las cuatro claves."
      },
      {

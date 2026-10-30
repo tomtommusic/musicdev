@@ -51,7 +51,7 @@ TOPICS = {
 <p>À la basse : même principe, avec 4 lignes.</p>
 <p><b>Attention</b> : une tablature seule ne montre pas le <b>rythme</b> (la durée des notes). On la trouve donc souvent <b>sous une portée</b>, qui donne le rythme. Elle ne dit pas non plus quel doigt utiliser : c'est à toi de choisir le doigté le plus confortable.</p>
 <p><b>Pour t'exercer</b> : dans Lecture mélodique ou Lecture à vue, active l'option « Tablature » (guitare ou basse) dans les réglages. Voir aussi {go('tablature-signes','Les signes de la tablature')}.</p>''',
-  'see': ['tablature-signes', 'portee', 'cles']},
+  'see': ['tablature-signes', 'portee']},
  {'id': 'tablature-signes', 't': 'Les signes de la tablature', 'k': 'tablature signes hammer on pull off glisse slide bend tire vibrato etouffe palm mute harmonique',
   'html': '''<p>Les tablatures utilisent des lettres et des symboles pour les techniques de jeu. Les plus courants :</p>
 <table class="lt"><tr><th>Signe</th><th>Nom</th><th>Comment le jouer</th></tr>
@@ -113,7 +113,7 @@ TOPICS = {
 <p>On bass: same principle, with 4 lines.</p>
 <p><b>Careful</b>: tab on its own does not show the <b>rhythm</b> (how long the notes last). So it is often found <b>under a staff</b>, which gives the rhythm. It does not tell you which finger to use either: you choose the most comfortable fingering.</p>
 <p><b>Practice</b>: in Melodic reading or Sight-reading, turn on the "Tablature" option (guitar or bass) in the settings. See also {go('tablature-signes','Tablature symbols')}.</p>''',
-  'see': ['tablature-signes', 'portee', 'cles']},
+  'see': ['tablature-signes', 'portee']},
  {'id': 'tablature-signes', 't': 'Tablature symbols', 'k': 'tablature symbols hammer on pull off slide bend vibrato muted palm mute harmonic',
   'html': '''<p>Tabs use letters and symbols for playing techniques. The most common ones:</p>
 <table class="lt"><tr><th>Symbol</th><th>Name</th><th>How to play it</th></tr>
@@ -175,7 +175,7 @@ TOPICS = {
 <p>En el bajo: el mismo principio, con 4 líneas.</p>
 <p><b>Atención</b>: una tablatura sola no muestra el <b>ritmo</b> (la duración de las notas). Por eso suele aparecer <b>debajo de un pentagrama</b>, que da el ritmo. Tampoco dice qué dedo usar: tú eliges la digitación más cómoda.</p>
 <p><b>Para practicar</b>: en Lectura melódica o Lectura a primera vista, activa la opción «Tablatura» (guitarra o bajo) en los ajustes. Ver también {go('tablature-signes','Los signos de la tablatura')}.</p>''',
-  'see': ['tablature-signes', 'portee', 'cles']},
+  'see': ['tablature-signes', 'portee']},
  {'id': 'tablature-signes', 't': 'Los signos de la tablatura', 'k': 'tablatura signos hammer on pull off ligado slide bend vibrato apagada palm mute armonico',
   'html': '''<p>Las tablaturas usan letras y símbolos para las técnicas de interpretación. Los más comunes:</p>
 <table class="lt"><tr><th>Signo</th><th>Nombre</th><th>Cómo tocarlo</th></tr>

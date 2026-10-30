@@ -8,7 +8,7 @@
     "t": "Reading a score",
     "title": "Reading a score: overview",
     "k": "symbols score sheet music staff reading overview",
-    "html": "<p>You read a score like a text: left to right, line after line. Before you play the first note, take a few seconds to spot the information placed at the beginning.</p>\n<ol>\n<li><b>The staff</b>: the 5 lines the notes are written on (<a href=\"#\" data-go=\"portee\">The staff</a>).</li>\n<li><b>The clef</b>, at the very beginning: it sets the names of the notes (<a href=\"#\" data-go=\"cles\">Clefs</a>).</li>\n<li><b>The key signature</b>, right after the clef: the sharps or flats that apply to the whole piece. It tells you the key (<a href=\"#\" data-go=\"armures\">Key signatures</a>).</li>\n<li><b>The time signature</b>: how many beats per measure and which note value gets one beat (<a href=\"#\" data-go=\"mesures-simples\">Simple meters</a>).</li>\n<li><b>The tempo marking</b>, above the staff: the speed (<a href=\"#\" data-go=\"tempo\">Tempo</a>).</li>\n<li><b>The dynamics</b>, below the staff: the volume (<a href=\"#\" data-go=\"nuances\">Dynamics</a>).</li>\n<li><b>The notes and rests</b>: their position gives the pitch, their shape gives the duration (<a href=\"#\" data-go=\"figures-notes\">Note values</a>, <a href=\"#\" data-go=\"silences\">Rest values</a>).</li>\n<li><b>The bar lines</b>, slurs and ties, articulations and repeat signs (<a href=\"#\" data-go=\"barres\">Bar lines</a>, <a href=\"#\" data-go=\"reprises\">Repeats</a>).</li>\n</ol>\n<p><b>Sight-reading tip</b>: before you start, find the key, the time signature, the hardest rhythm and the big leaps. Count one empty measure to set the pulse, then don't stop: you fix mistakes on the next read-through.</p>",
+    "html": "<p>You read a score like a text: left to right, line after line. Before you play the first note, take a few seconds to spot the information placed at the beginning.</p>\n<ol>\n<li><b>The staff</b>: the 5 lines the notes are written on (<a href=\"#\" data-go=\"portee\">The staff</a>).</li>\n<li><b>The clef</b>, at the very beginning: it sets the names of the notes (<a href=\"#\" data-go=\"portee\">Clefs</a>).</li>\n<li><b>The key signature</b>, right after the clef: the sharps or flats that apply to the whole piece. It tells you the key (<a href=\"#\" data-go=\"armures\">Key signatures</a>).</li>\n<li><b>The time signature</b>: how many beats per measure and which note value gets one beat (<a href=\"#\" data-go=\"mesures-simples\">Simple meters</a>).</li>\n<li><b>The tempo marking</b>, above the staff: the speed (<a href=\"#\" data-go=\"tempo\">Tempo</a>).</li>\n<li><b>The dynamics</b>, below the staff: the volume (<a href=\"#\" data-go=\"nuances\">Dynamics</a>).</li>\n<li><b>The notes and rests</b>: their position gives the pitch, their shape gives the duration (<a href=\"#\" data-go=\"figures-notes\">Note values</a>, <a href=\"#\" data-go=\"silences\">Rest values</a>).</li>\n<li><b>The bar lines</b>, slurs and ties, articulations and repeat signs (<a href=\"#\" data-go=\"barres\">Bar lines</a>, <a href=\"#\" data-go=\"reprises\">Repeats</a>).</li>\n</ol>\n<p><b>Sight-reading tip</b>: before you start, find the key, the time signature, the hardest rhythm and the big leaps. Count one empty measure to set the pulse, then don't stop: you fix mistakes on the next read-through.</p>",
     "ex": [
      {
       "abc": "X:1\nT:Little Piece\nM:3/4\nL:1/8\nQ:\"Moderato\" 1/4=100\nK:G\n!mp! G2 B2 d2 | (c2 B2) A2 | B4 z2 |: !f! d3 c B2 | .A2 .G2 .F2 | G6 :|",
@@ -18,10 +18,10 @@
    },
    {
     "id": "portee",
-    "t": "The staff",
+    "t": "The staff and clefs",
     "title": null,
-    "k": "staff lines spaces",
-    "html": "<p>The <b>staff</b> is made of <b>5 horizontal lines</b> and <b>4 spaces</b> (the gaps between the lines). They are always counted <b>from bottom to top</b>: the 1<sup>st</sup> line is the lowest.</p>\n<p>The higher a note sits on the staff, the higher it sounds. A note can be <b>on a line</b> (the line goes through it) or <b>in a space</b>. To go higher or lower than the staff, you add small <a href=\"#\" data-go=\"lignes-sup\">ledger lines</a>.</p>\n<p>The staff alone doesn't tell you which notes are written: the <a href=\"#\" data-go=\"cles\">clef</a> gives the names of the lines.</p>",
+    "k": "staff lines spaces clef treble bass c clef alto tenor",
+    "html": "<p>The <b>staff</b> is made of <b>5 horizontal lines</b> and <b>4 spaces</b> (the gaps between the lines). They are always counted <b>from bottom to top</b>: the 1<sup>st</sup> line is the lowest.</p>\n<p>The higher a note sits on the staff, the higher it sounds. A note can be <b>on a line</b> (the line goes through it) or <b>in a space</b>. To go higher or lower than the staff, you add small <a href=\"#\" data-go=\"lignes-sup\">ledger lines</a>.</p>\n<p>The staff alone doesn't tell you which notes are written: the <b>clef</b> (see below) gives the names of the lines.</p>\n<h4>Clefs</h4>\n<p>The <b>clef</b> gives the name of one line; all the other notes are worked out from it.</p>\n<ul>\n<li><b>Treble clef</b> (G clef, 2<sup>nd</sup> line): the note on the 2<sup>nd</sup> line is the <b>G</b> above middle C. Used for high voices, flute, violin, trumpet, the piano's right hand…</li>\n<li><b>Bass clef</b> (F clef, 4<sup>th</sup> line): the note on the 4<sup>th</sup> line is the <b>F</b> below middle C. Used for low voices, double bass, bassoon, trombone, the piano's left hand…</li>\n<li><b>C clef on the 3<sup>rd</sup> line</b> (alto clef): the 3<sup>rd</sup> line is <b>middle C</b>. Used mostly by the viola.</li>\n<li><b>C clef on the 4<sup>th</sup> line</b> (tenor clef): the 4<sup>th</sup> line is middle C. Used for high passages on cello, bassoon and trombone.</li>\n</ul>\n<p>Tip for bass clef: the lines read <b>G, B, D, F, A</b> (“Good Boys Do Fine Always”) and the spaces <b>A, C, E, G</b> (“All Cows Eat Grass”).</p>",
     "ex": [
      {
       "abc": "X:1\nL:1/4\nK:C\nE G B d f |]\nw: 1st 2nd 3rd 4th 5th",
@@ -30,18 +30,9 @@
      {
       "abc": "X:1\nL:1/4\nK:C\nF A c e |]\nw: 1st 2nd 3rd 4th",
       "cap": "The 4 spaces: F, A, C, E."
-     }
-    ]
-   },
-   {
-    "id": "cles",
-    "t": "Clefs",
-    "title": null,
-    "k": "clef treble bass c clef alto tenor",
-    "html": "<p>The <b>clef</b> gives the name of one line; all the other notes are worked out from it.</p>\n<ul>\n<li><b>Treble clef</b> (G clef, 2<sup>nd</sup> line): the note on the 2<sup>nd</sup> line is the <b>G</b> above middle C. Used for high voices, flute, violin, trumpet, the piano's right hand…</li>\n<li><b>Bass clef</b> (F clef, 4<sup>th</sup> line): the note on the 4<sup>th</sup> line is the <b>F</b> below middle C. Used for low voices, double bass, bassoon, trombone, the piano's left hand…</li>\n<li><b>C clef on the 3<sup>rd</sup> line</b> (alto clef): the 3<sup>rd</sup> line is <b>middle C</b>. Used mostly by the viola.</li>\n<li><b>C clef on the 4<sup>th</sup> line</b> (tenor clef): the 4<sup>th</sup> line is middle C. Used for high passages on cello, bassoon and trombone.</li>\n</ul>\n<p>Tip for bass clef: the lines read <b>G, B, D, F, A</b> (“Good Boys Do Fine Always”) and the spaces <b>A, C, E, G</b> (“All Cows Eat Grass”).</p>",
-    "ex": [
+     },
      {
-      "abc": "X:1\nL:1/4\nK:C clef=treble\nC4 | [K:clef=bass] C4 | [K:clef=alto] C4 | [K:clef=tenor] C4 |]\nw: treble bass alto tenor",
+      "abc": "X:1\nL:1/4\nK:C clef=treble\n\"^Treble clef\"C4 | [K:clef=bass] \"^Bass clef\"C4 | [K:clef=alto] \"^Alto clef (C, 3rd line)\"C4 | [K:clef=tenor] \"^Tenor clef (C, 4th line)\"C4 |]",
       "cap": "The same middle C written in all four clefs."
      },
      {
