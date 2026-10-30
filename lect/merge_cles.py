@@ -23,12 +23,12 @@ def merge_json(d,L):
 JS_GRID=r'''/* exemple « une clé par case » : chaque clé dans sa propre petite portée, avec son nom au-dessus */
 function libClefGrid(tgt,abc){const hdr=(abc.match(/K:C clef=(\w+)/)||[])[1]||'treble',body=abc.split('\n').slice(3).join(' ').replace(/\|\]/,'');
   const cells=body.split('|').map((seg,i)=>{const clef=i===0?hdr:((seg.match(/clef=(\w+)/)||[])[1]||hdr),title=(seg.match(/"\^([^"]*)"/)||[])[1]||'',note=seg.replace(/\[K:[^\]]*\]/g,'').replace(/"[^"]*"/g,'').trim();return{clef,title,note};});
-  /* une seule portée, et un menu pour choisir la clé */
-  const wrap=el('div',{class:'clefone'}),st=el('div',{class:'clefstaff'}),name=el('div',{class:'clefname','data-notr':''});
-  const sel=el('select',{class:'clefsel','aria-label':'Clé'},...cells.map((c,i)=>el('option',{value:String(i),'data-notr':''},c.title)));
-  const draw=i=>{const c=cells[i];try{ABCJS.renderAbc(st,`X:1\nL:1/4\nK:C clef=${c.clef}\n${c.note} |]`,{staffwidth:150,paddingleft:0,paddingright:0,paddingtop:6,paddingbottom:2,foregroundColor:'currentColor',scale:1.25});}catch(e){}};
-  sel.addEventListener('change',()=>draw(+sel.value));
-  wrap.append(sel,st);tgt.replaceChildren(wrap);draw(0);}
+  const grid=el('div',{class:'clefgrid'});tgt.replaceChildren(grid);
+  cells.forEach(c=>{const box=el('div',{class:'clefcell'}),st=el('div',{class:'clefstaff'});box.append(el('div',{class:'clefname','data-notr':''},c.title),st);grid.append(box);
+    try{ABCJS.renderAbc(st,`X:1\nL:1/4\nK:C clef=${c.clef}\n${c.note} |]`,{add_classes:true,staffwidth:96,paddingleft:0,paddingright:0,paddingtop:4,paddingbottom:0,foregroundColor:'currentColor',scale:1});}catch(e){}});
+  /* aligne les cinq lignes des quatre portées à la même hauteur */
+  requestAnimationFrame(()=>{const sts=[...grid.querySelectorAll('.clefstaff')],tops=sts.map(st=>{const l=st.querySelector('.abcjs-staff');return l?l.getBoundingClientRect().top-st.getBoundingClientRect().top:0;}),mx=Math.max(...tops);
+    sts.forEach((st,i)=>{st.style.marginTop=(mx-tops[i])+'px';});});}
 '''
 JS_MERGE=r'''(()=>{const lec=LIB.find(c=>c.id==='lecture');if(!lec)return;const ts=lec.topics,P=ts.find(t=>t.id==='portee'),C=ts.find(t=>t.id==='cles');if(!P||!C)return;
   P.t=%s;P.k+=' '+C.k;P.html=P.html.replace(/<a href="#" data-go="cles">([^<]*)<\/a>/,'<b>$1</b> (voir plus bas)')+'\n<h4>'+C.t+'</h4>\n'+C.html;
