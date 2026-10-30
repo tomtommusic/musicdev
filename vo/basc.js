@@ -89,7 +89,7 @@ function baFretboard(kind,notes,root,chordPcs,lab,narrow,cs){
 }
 function baStaff(box,notes,chordPcs,bass){
   const used={};let oct=bass?2:4,prevLi=-1;const parts=[];
-  [...notes,notes[0]].forEach((n,i)=>{if(i>0&&n.li<=prevLi)oct++;prevLi=n.li;
+  [...notes,notes[0]].forEach((n,i)=>{if(i>0&&(n.li<prevLi||(n.li===prevLi&&i===notes.length)))oct++;   /* même lettre (la♭ puis la) = même octave ; seule la tonique finale monte */prevLi=n.li;
     const L=BA_LETN[n.li],acc=n.acc>0?'^'.repeat(n.acc):n.acc<0?'_'.repeat(-n.acc):(used[L]?'=':'');used[L]=n.acc!==0;
     const name=oct>=5?L.toLowerCase()+"'".repeat(oct-5):L+','.repeat(Math.max(0,4-oct));
     parts.push((chordPcs.includes(n.pc)?'"^●"':'')+acc+name);});
