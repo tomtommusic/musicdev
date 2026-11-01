@@ -28,13 +28,13 @@ if on('info'):
 if on('age'):
     st,j=call('GET',f'/v1/appInfos/{iid}/ageRatingDeclaration');rid=j['data']['id'];cur=j['data']['attributes']
     skip={'kidsAgeBand','ageRatingOverride','ageRatingOverrideV2','koreaAgeRatingOverride','gracRatingClassificationNumber','developerAgeRatingInfoUrl'}
-    for k in cur:
-        if k in skip:continue
-        done=False
-        for v in (False,'NONE'):
-            st,jj=call('PATCH',f'/v1/ageRatingDeclarations/{rid}',{'data':{'type':'ageRatingDeclarations','id':rid,'attributes':{k:v}}})
-            if st<300:done=True;break
-        log(('ok' if done else 'ERREUR'),'âge',k,'' if done else errs(jj))
+    BOOL={'advertising','gambling','healthOrWellnessTopics','lootBox','messagingAndChat','parentalControls','ageAssurance','socialMedia','socialMediaAgeRestricted','unrestrictedWebAccess','userGeneratedContent'}
+    att={k:(False if k in BOOL else 'NONE') for k in cur if k not in skip}
+    st,jj=call('PATCH',f'/v1/ageRatingDeclarations/{rid}',{'data':{'type':'ageRatingDeclarations','id':rid,'attributes':att}})
+    if st>=300:
+        log('essai sans socialMediaAgeRestricted :',errs(jj));att.pop('socialMediaAgeRestricted',None)
+        st,jj=call('PATCH',f'/v1/ageRatingDeclarations/{rid}',{'data':{'type':'ageRatingDeclarations','id':rid,'attributes':att}})
+    ok(st,jj,'classification d\'âge (tout à « aucun »)')
 
 if on('text'):
     st,j=call('GET',f'/v1/apps/{aid}/appStoreVersions?filter[appStoreState]=PREPARE_FOR_SUBMISSION,DEVELOPER_REJECTED,REJECTED,METADATA_REJECTED')
@@ -82,8 +82,13 @@ if on('shots'):
                 ok(*call('PATCH',f'/v1/appScreenshots/{sh}',{'data':{'type':'appScreenshots','id':sh,'attributes':{'uploaded':True,'sourceFileChecksum':hashlib.md5(b).hexdigest()}}}),'capture '+f)
 
 if on('price'):
-    st,j=call('GET',f'/v1/apps/{aid}/appPricePoints?filter[territory]=CAN&limit=900')
-    pts=[p for p in j.get('data',[]) if p['attributes']['customerPrice']==PRICE]
+    allp=[];path=f'/v1/apps/{aid}/appPricePoints?filter[territory]=CAN&limit=200'
+    while path:
+        st,j=call('GET',path)
+        if st>=300:break
+        allp+=j.get('data',[]);nx=j.get('links',{}).get('next');path=nx.replace(API,'') if nx else None
+    j={'data':allp}
+    pts=[p for p in allp if p['attributes']['customerPrice'] in (PRICE,PRICE.rstrip('0'))]
     if not pts:log('ERREUR prix introuvable',PRICE,st,errs(j) if st>=300 else sorted({p['attributes']['customerPrice'] for p in j['data']})[:40])
     else:
         pp=pts[0]['id']
