@@ -3,9 +3,13 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "status = lecture seule"
+        description: "status = lecture seule ; fill = remplir le dossier"
         required: false
         default: "status"
+      steps:
+        description: "fill : all ou info,age,text,shots,price,dispo"
+        required: false
+        default: "all"
 permissions:
   contents: write
 jobs:
@@ -19,7 +23,15 @@ jobs:
           ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
           ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
-        run: python3 .github/scripts/asc_store.py
+          MODE: ${{ github.event.inputs.mode }}
+          STEPS: ${{ github.event.inputs.steps }}
+          RV_FIRST: ${{ secrets.RV_FIRST }}
+          RV_LAST: ${{ secrets.RV_LAST }}
+          RV_EMAIL: ${{ secrets.RV_EMAIL }}
+          RV_PHONE: ${{ secrets.RV_PHONE }}
+        run: |
+          if [ "$MODE" = fill ]; then python3 .github/scripts/asc_fill.py || true; fi
+          python3 .github/scripts/asc_store.py
       - name: Publier le resultat
         if: always()
         run: |
