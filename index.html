@@ -13,6 +13,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="MusiDev">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
+<script>try{var t=localStorage.getItem('atelier-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}main[data-kind="quiz"] #score,main[data-kind="tools"] #score{display:none!important}
 .methbody a.methl{color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:2px}
 #score.paused{opacity:.25;filter:blur(1px);pointer-events:none}
@@ -1713,6 +1714,13 @@ main[data-mod="ho"] .modpick .mp-ic{animation:hopulse 1.6s ease-out infinite;bor
 @media (prefers-reduced-motion:reduce){main[data-mod="ho"] .modpick .mp-ic{animation:none}}
 .clefgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;width:100%}@media (max-width:560px){.clefgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}.clefcell{border:1px solid var(--line);border-radius:12px;background:var(--surface,#fff);padding:8px 6px 4px;display:flex;flex-direction:column;align-items:center}.clefname{font:700 .82rem/1.25 var(--f-sans,inherit);text-align:center;min-height:2.4em;display:flex;align-items:center}.clefstaff{width:100%;display:flex;justify-content:center}
 pre.tabtxt{font:600 .85rem/1.35 var(--f-mono,monospace);background:var(--sunk,rgba(0,0,0,.04));border:1px solid var(--line);border-radius:10px;padding:10px 12px;overflow-x:auto;white-space:pre;margin:.6em 0}
+.themesw{display:inline-flex;border:1px solid var(--btn-edge);border-radius:999px;overflow:hidden;background:var(--btn);box-shadow:var(--shadow-sm);margin-top:8px}
+.themesw[hidden]{display:none}
+.rail .themesw{align-self:flex-start;margin-top:0}
+.themesw button{border:0;background:transparent;color:var(--muted);font:700 .78rem/1 var(--f-mono);letter-spacing:.04em;padding:8px 11px;cursor:pointer;min-height:36px}
+.themesw button+button{border-left:1px solid var(--line)}
+.themesw button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.themesw button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 </style>
 
 <div class="app">
@@ -7512,7 +7520,7 @@ matchMedia('(max-width:600px)').addEventListener?.('change',()=>{if(S.mod==='ho'
 document.addEventListener('click',e=>{if(S.mod!=='ho'||!e.target.closest||!e.target.closest('#helpbtn'))return;
   e.stopImmediatePropagation();e.preventDefault();openModule('ln');setTimeout(()=>{if(typeof helpSet==='function')helpSet(true);},250);},true);
 
-const AP_VERSION='1.38.6';
+const AP_VERSION='1.38.7';
 const AP_MIT_BODY="Permission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.";
 const AP_SMP="MuseScore General / MS Basic\nFluidR3 (original version) by Frank Wen Copyright (c) 2000-02, 2008\nMono conversion (FluidR3Mono) by Michael Cowgill Copyright (c) 2014-17\nAdaptation for MuseScore_General.sf2 by S. Christian Collins Copyright (c) 2018-19\n\n"+AP_MIT_BODY;
 const AP_MIT="Copyright (c) 2009-2026 Paul Rosen and Gregory Dyke\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.";
@@ -8802,6 +8810,24 @@ const SMP={b:{},c:null,
 /* langue : sélecteur dans l'en-tête, puis traduction de la page */
 (()=>{const br=document.querySelector('.rail .brand');if(br)br.after(langSwitch());
   document.documentElement.lang=I18N.lang==='fr'?'fr-CA':I18N.lang;trStart();if(I18N.lang!=='fr')trTree(document.body);})();
+</script>
+<script>
+/* thème : Auto (réglage de l'appareil) / Clair / Sombre, affiché sous les langues sur l'accueil */
+(()=>{const LAB={fr:{auto:'Auto',light:'☀ Clair',dark:'☾ Sombre',g:'Thème'},en:{auto:'Auto',light:'☀ Light',dark:'☾ Dark',g:'Theme'},es:{auto:'Auto',light:'☀ Claro',dark:'☾ Oscuro',g:'Tema'}};
+  const cur=()=>{try{return localStorage.getItem('atelier-theme')||'auto';}catch(e){return 'auto';}};
+  const box=document.createElement('div');box.className='themesw';box.setAttribute('role','group');box.dataset.notr='';
+  const btns=['auto','light','dark'].map(k=>{const b=document.createElement('button');b.type='button';b.dataset.t=k;
+    b.addEventListener('click',()=>{try{localStorage.setItem('atelier-theme',k);}catch(e){}
+      if(k==='auto')document.documentElement.removeAttribute('data-theme');else document.documentElement.setAttribute('data-theme',k);paint();});box.append(b);return b;});
+  function paint(){const L=LAB[(typeof I18N!=='undefined'&&I18N.lang)||'fr']||LAB.fr,c=cur();box.setAttribute('aria-label',L.g);
+    btns.forEach(b=>{b.textContent=L[b.dataset.t];b.setAttribute('aria-pressed',String(b.dataset.t===c));});}
+  const ls=document.querySelector('.rail .langsw');
+  function vis(){box.hidden=!(typeof S!=='undefined'&&S&&S.mod==='ho');
+    if(ls){let a=ls;while(a.nextElementSibling&&a.nextElementSibling!==box&&a.nextElementSibling.classList.contains('hotip')&&a.nextElementSibling.classList.contains('lang'))a=a.nextElementSibling;if(a.nextElementSibling!==box)a.after(box);box.style.order=getComputedStyle(ls).order;}}
+  paint();vis();addEventListener('resize',vis);
+  if(typeof setLang==='function'){const o=setLang;setLang=function(L){const r=o.apply(this,arguments);paint();return r;};}
+  if(typeof openModule==='function'){const o=openModule;openModule=function(){const r=o.apply(this,arguments);vis();return r;};}
+})();
 </script>
 </body>
 </html>
