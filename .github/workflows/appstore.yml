@@ -1,0 +1,29 @@
+name: App Store dossier
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "status = lecture seule"
+        required: false
+        default: "status"
+permissions:
+  contents: write
+jobs:
+  store:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install --quiet pyjwt cryptography
+      - name: Etat du dossier
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+        run: python3 .github/scripts/asc_store.py
+      - name: Publier le resultat
+        if: always()
+        run: |
+          mkdir -p res && cp out/*.json res/ 2>/dev/null || echo none > res/none.txt
+          cd res && git init -q -b asc-status && git add -A
+          git -c user.name=ci -c user.email=ci@example.com commit -q -m "asc ${{ github.run_number }}"
+          git push -f -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" asc-status
