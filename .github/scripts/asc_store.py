@@ -23,7 +23,8 @@ for v in vs.get('data',[]):
     for l in g(f'/v1/appStoreVersions/{v["id"]}/appStoreVersionLocalizations').get('data',[]):
         sets=g(f'/v1/appStoreVersionLocalizations/{l["id"]}/appScreenshotSets').get('data',[])
         d['loc'].append({'attr':l['attributes'],'sets':[(s['attributes']['screenshotDisplayType'],len(g(f'/v1/appScreenshotSets/{s["id"]}/appScreenshots').get('data',[]))) for s in sets]})
-    d['review']=g(f'/v1/appStoreVersions/{v["id"]}/appStoreReviewDetail')
+    rv=g(f'/v1/appStoreVersions/{v["id"]}/appStoreReviewDetail').get('data') or {}
+    d['review']={k:bool(x) for k,x in (rv.get('attributes') or {}).items()}  # présence seulement : rien de personnel dans la branche publique
     d['build']=g(f'/v1/appStoreVersions/{v["id"]}/build').get('data')
     R['versions'].append(d)
 R['price']=g(f'/v1/apps/{aid}/appPriceSchedule?include=manualPrices')
