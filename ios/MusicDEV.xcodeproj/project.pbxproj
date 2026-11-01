@@ -203,7 +203,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.tomtommusic.musicdev;
 				PRODUCT_NAME = MusicDEV;
 				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = "MusicDEV/MusicDEV-mac.entitlements";
@@ -230,7 +230,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.tomtommusic.musicdev;
 				PRODUCT_NAME = MusicDEV;
 				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = "MusicDEV/MusicDEV-mac.entitlements";

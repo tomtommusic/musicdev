@@ -10,6 +10,10 @@ on:
         description: "fill : all ou info,age,text,shots,price,dispo"
         required: false
         default: "all"
+      newver:
+        description: "steps=version : nouveau numéro de version"
+        required: false
+        default: ""
 permissions:
   contents: write
 jobs:
@@ -25,6 +29,7 @@ jobs:
           ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
           MODE: ${{ github.event.inputs.mode }}
           STEPS: ${{ github.event.inputs.steps }}
+          NEWVER: ${{ github.event.inputs.newver }}
           RV_FIRST: ${{ secrets.RV_FIRST }}
           RV_LAST: ${{ secrets.RV_LAST }}
           RV_EMAIL: ${{ secrets.RV_EMAIL }}

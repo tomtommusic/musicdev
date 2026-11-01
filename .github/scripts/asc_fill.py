@@ -102,6 +102,11 @@ if on('dispo'):
         'included':[{'type':'territoryAvailabilities','id':'${'+t+'}','attributes':{'available':True},'relationships':{'territory':{'data':{'type':'territories','id':t}}}} for t in ter]}
     ok(*call('POST','/v2/appAvailabilities',body),f'disponibilité {len(ter)} pays')
 
+if 'version' in ST and os.environ.get('NEWVER'):
+    st,j=call('GET',f'/v1/apps/{aid}/appStoreVersions?filter[appStoreState]=PREPARE_FOR_SUBMISSION,DEVELOPER_REJECTED,REJECTED,METADATA_REJECTED')
+    for v in j['data']:
+        ok(*call('PATCH',f'/v1/appStoreVersions/{v["id"]}',{'data':{'type':'appStoreVersions','id':v['id'],'attributes':{'versionString':os.environ['NEWVER']}}}),v['attributes']['platform']+' version '+os.environ['NEWVER'])
+
 if on('build'):
     st,j=call('GET',f'/v1/apps/{aid}/appStoreVersions?filter[appStoreState]=PREPARE_FOR_SUBMISSION,DEVELOPER_REJECTED,REJECTED,METADATA_REJECTED')
     for v in j['data']:
