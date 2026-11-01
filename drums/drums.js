@@ -154,14 +154,14 @@ function genDrums(cfg){
   events.sort((a,b)=>a.m-b.m||a.pos-b.pos);
   return{kind:'drum',meter,events,tempo:cfg.tempo,measures:nM,style:[...styles].join(' → ')};
 }
-/* notation à deux voix, comme les partitions de batterie : cymbales (et roulements) hampes en haut,
-   grosse caisse, caisse claire et charleston au pied hampes en bas. map : [voix, mesure, rang de la note, événement] */
+/* notation à deux voix, comme les partitions de batterie : les mains (cymbales, caisse claire, toms) hampes en haut,
+   les pieds (grosse caisse, charleston au pied) hampes en bas. map : [voix, mesure, rang de la note, événement] */
 const DR_UP=new Set(['hh','hho','ride','crash','htom','mtom','ftom']);
 function abcDrums(ex,o={}){
   const {meter}=ex,per=o.perLine||4,nM=ex.measures,bu=meter.bu,map=[];
   const nt=hs=>{const dc=hs.map(h=>DRK[h].deco||'').join(''),ns=hs.slice().sort((a,b)=>DR_IDS.indexOf(a)-DR_IDS.indexOf(b)).map(h=>(DRK[h].x?'!style=x!':'')+DRK[h].n);return dc+(ns.length>1?'['+ns.join('')+']':ns[0]);};
   const D=d=>d===1?'':String(d);
-  const voiceOf=(e,h)=>ex.line?1:(DR_UP.has(h)||(h==='snare'&&e.fill))?0:1;
+  const voiceOf=(e,h)=>ex.line?1:(h==='kick'||h==='hhp')?1:0;   /* mains (cymbales, caisse claire, toms) : hampes en haut ; pieds (grosse caisse, charleston au pied) : hampes en bas */
   const meas=[[],[]];
   for(let m=0;m<nM;m++){
     const evs=ex.events.map((e,i)=>[e,i]).filter(([e])=>e.m===m);

@@ -17,22 +17,32 @@ const BA_SC={
   pentamaj:{n:'Pentatonique majeure',s:[0,2,4,7,9],d:[1,2,3,5,6]},
   pentamin:{n:'Pentatonique mineure',s:[0,3,5,7,10],d:[1,3,4,5,7]},
   blues:{n:'Blues',s:[0,3,5,6,7,10],d:[1,3,4,5,5,7]},
-  wholetone:{n:'Par tons',s:[0,2,4,6,8,10],d:[1,2,3,4,5,7]},
-  dimwh:{n:'Diminuée (ton – demi-ton)',s:[0,2,3,5,6,8,9,11],d:[1,2,3,4,5,6,6,7]}};
+  wholetone:{n:'Par tons',s:[0,2,4,6,8,10],d:[1,2,3,4,5,7],alt:[[1,2,3,5,6,7]]},
+  dimwh:{n:'Diminuée (ton – demi-ton)',s:[0,2,3,5,6,8,9,11],d:[1,2,3,4,5,6,6,7],alt:[[1,2,3,4,4,5,6,7]]}};
 const BA_MODES=['ionian','dorian','phrygian','lydian','mixolydian','aeolian','locrian'];
 const BA_LETN=['C','D','E','F','G','A','B'],BA_LPC=[0,2,4,5,7,9,11],BA_MAJ=[0,2,4,5,7,9,11];
 const BA_FRSH=['do','do♯','ré','mi♭','mi','fa','fa♯','sol','la♭','la','si♭','si'];
 const BA_FRN=['do','ré','mi','fa','sol','la','si'];
 const baAcc=a=>a===0?'':a===1?'♯':a===-1?'♭':a===2?'𝄪':'𝄫';
 /* orthographe : chaque degré garde sa lettre (do ré mi… dans l'ordre) ; on choisit la tonique qui donne le moins d'altérations */
-function baSpell(rootPc,type){
-  const sc=BA_SC[type],deg=sc.d||sc.s.map((_,i)=>i+1);let best=null;
+function baSpell(rootPc,type,prefLi){
+  const sc=BA_SC[type];let best=null,pref=null;
+  for(const deg of[sc.d||sc.s.map((_,i)=>i+1),...(sc.alt||[])])
   for(let L=0;L<7;L++){const a=((rootPc-BA_LPC[L])+18)%12-6;if(Math.abs(a)>1)continue;
     const notes=sc.s.map((st,i)=>{const li=(L+deg[i]-1)%7,acc=(((rootPc+st)%12-BA_LPC[li])+18)%12-6;return{li,acc,pc:(rootPc+st)%12};});
-    const cost=notes.reduce((c,n)=>c+Math.abs(n.acc)*(Math.abs(n.acc)>1?5:1),0)+(a===1?.1:0);
-    if(!best||cost<best.cost)best={cost,notes};}
-  return best.notes.map((n,i)=>({pc:n.pc,li:n.li,acc:n.acc,name:BA_LETN[n.li]+baAcc(n.acc),fr:BA_FRN[n.li]+baAcc(n.acc),
+    const cost=notes.reduce((c,n)=>c+Math.abs(n.acc)*(Math.abs(n.acc)>1?5:1),0)+(a===1?.1:0),o={cost,notes,deg};
+    if(!best||cost<best.cost)best=o;
+    if(L===prefLi&&notes.filter(n=>Math.abs(n.acc)>1).length<2&&(!pref||cost<pref.cost))pref=o;}
+  /* lettre imposée (celle de l'accord écrit : C♯7 reste C♯, pas D♭), sauf si elle oblige à plus d'une double altération */
+  const r=pref||best,deg=r.deg;
+  return r.notes.map((n,i)=>({pc:n.pc,li:n.li,acc:n.acc,name:BA_LETN[n.li]+baAcc(n.acc),fr:BA_FRN[n.li]+baAcc(n.acc),
     deg:(()=>{const st=sc.s[i],d=deg[i],x=((st-BA_MAJ[d-1])+18)%12-6;return(x<0?'♭':x>0?'♯':'')+d;})()}));
+}
+/* lettre de la fondamentale d'un accord : celle qui est écrite (sans transposition), sinon celle de la gamme de la grille */
+function baRootLi(ch,key){
+  if(BA_S.tr===0&&ch.li!=null&&ch.li>=0)return ch.li;
+  if(key){const n=baSpell(key.root,key.type,key.li).find(x=>x.pc===baPc(ch));if(n)return n.li;}
+  return null;
 }
 /* tonalité de la grille : la gamme majeure ou mineure qui contient le mieux les accords (le premier et le dernier accord départagent) */
 function baKey(bars){
@@ -42,6 +52,8 @@ function baKey(bars){
     const f=chs[0],l=chs[chs.length-1],minor=c=>c.iv.includes(3);
     if(baPc(f)===r)sc+=minor(f)===(type==='aeolian')?.8:.2;if(baPc(l)===r)sc+=minor(l)===(type==='aeolian')?.5:.1;
     if(!best||sc>best.sc+1e-9)best={sc,root:r,type};}
+  /* orthographe de la tonique : celle du premier accord écrit sur cette note (G♭ ou F♯) */
+  const w=BA_S.tr===0&&chs.find(c=>baPc(c)===best.root&&c.li!=null&&c.li>=0);best.li=w?w.li:null;
   return best;
 }
 /* mode d'un accord : dans la tonalité de la grille si l'accord en fait partie, sinon d'après sa qualité */
@@ -60,7 +72,7 @@ function baChordMode(ch,key){
   return{root:p,type:'ionian'};
 }
 /* orthographe des notes d'un accord (pour celles qui sont hors de la gamme : sol♯ de E7, pas la♭) */
-function baChordSpell(ch){const p=baPc(ch);return baSpell(p,baChordMode(ch,null).type).filter(n=>ch.iv.some(x=>(p+x)%12===n.pc));}
+function baChordSpell(ch,key){const p=baPc(ch);return baSpell(p,baChordMode(ch,null).type,baRootLi(ch,key)).filter(n=>ch.iv.some(x=>(p+x)%12===n.pc));}
 /* ---- dessin ---- */
 const BA_TUN={gtr:[64,59,55,50,45,40],bass:[43,38,33,28]};   /* cordes, de l'aiguë à la grave (mi4 si3 sol3 ré3 la2 mi2) */
 function baFretboard(kind,notes,root,chordPcs,lab,narrow,cs){
@@ -100,7 +112,7 @@ function baStaff(box,notes,chordPcs,bass){
 function baScSection(M,save){
   if(!BA_S.sc)BA_S.sc={show:'gtr',src:'grid',root:0,type:'ionian',lab:'name'};const C=BA_S.sc;
   const disp=el('div',{class:'bascdisp'}),info=el('p',{class:'bascinfo'}),leg=el('p',{class:'hint basclegend'});
-  const NAMES=BA_NAMES_SH.map((n,i)=>[i,n]);
+  const NAMES=['C','C♯ / D♭','D','E♭ / D♯','E','F','F♯ / G♭','G','A♭ / G♯','A','B♭ / A♯','B'].map((n,i)=>[i,n]);
   const rootSel=sel('ba_scroot',NAMES,C.root,v=>{C.root=+v;save();M.scPaint();});
   const typeSel=sel('ba_sctype',Object.entries(BA_SC).map(([k,v])=>[k,T(v.n)]),C.type,v=>{C.type=v;save();M.scPaint();});
   const fixedRow=el('div',{class:'mtline'},el('label',{class:'qzfield'},el('span',{class:'fl'},'Tonique'),rootSel),el('label',{class:'qzfield'},el('span',{class:'fl'},'Gamme ou mode'),typeSel));
@@ -114,10 +126,11 @@ function baScSection(M,save){
     const bars=baGrid(BA_S.grid).bars;if(!bars.length){disp.replaceChildren();info.textContent='';return;}
     const ch=M.scCh||bars[0][0],key=baKey(bars);
     const sc=C.src==='fixed'?{root:C.root,type:C.type}:C.src==='chord'?baChordMode(ch,key):key;
-    const notes=baSpell(sc.root,sc.type),chordPcs=ch.iv.map(x=>(baPc(ch)+x)%12);
-    const N=n=>C.lab==='fr'?n.fr:n.name,cs=baChordSpell(ch);
+    const sli=C.src==='fixed'?null:C.src==='chord'?baRootLi(ch,key):key.li;
+    const notes=baSpell(sc.root,sc.type,sli),chordPcs=ch.iv.map(x=>(baPc(ch)+x)%12);
+    const N=n=>C.lab==='fr'?n.fr:n.name,cs=baChordSpell(ch,key);
     const nm=N(notes[0])+' '+T(BA_SC[sc.type].n).toLowerCase();
-    info.replaceChildren(el('b',{},nm),' : '+notes.map(N).join(' ')+'   ·   ',T('Accord')+' '+baName(ch)+' : ',
+    info.replaceChildren(el('b',{},nm),' : '+notes.map(N).join(' ')+'   ·   ',T('Accord')+' '+baName(ch,key)+' : ',
       el('b',{},chordPcs.map(pc=>{const n=notes.find(x=>x.pc===pc);const c=cs.find(x=>x.pc===pc);return n?N(n):c?N(c):(C.lab==='fr'?BA_FRSH[pc]:BA_NAMES_SH[pc]);}).join(' ')));
     if(C.show==='staff'){const b=el('div',{class:'bascstaff'});disp.replaceChildren(b);baStaff(b,notes,chordPcs,false);leg.textContent=T('● au-dessus d\'une note = note de l\'accord joué. Sous la portée : les degrés de la gamme.');}
     else{disp.replaceChildren(el('div',{class:'bascfb'},baFretboard(C.show,notes,sc.root,chordPcs,C.lab,(disp.clientWidth||600)<520,cs)));

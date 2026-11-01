@@ -21,8 +21,9 @@ E|--3--------------|'''
 
 DRUM_LEG = f'X:1\nL:1/4\nK:C clef=perc\n{X}a {X}g {X}f e d c A F {X}D |]\nw: Crash Charl. Ride Tom~1 Tom~2 C.C. Tom~B. G.C. Ch.~pied'
 H8 = lambda n: ' '.join([f'{X}g{X}g']*n)
-DRUM_ROCK = f'X:1\nL:1/8\nM:4/4\n%%score (1 2)\nK:C clef=perc\nV:1 stem=up\nV:2 stem=down\n[V:1] {H8(4)} |]\n[V:2] F2 c2 FF c2 |]'
-DRUM_VAR = f'X:1\nL:1/8\nM:4/4\n%%score (1 2)\nK:C clef=perc\nV:1 stem=up\nV:2 stem=down\n[V:1] {H8(3)} !open!{X}g{X}g | {H8(2)} ee dd |]\n[V:2] F2 c2 zF c2 | F2 c2 AA AA |]'
+SN = f'[c{X}g]{X}g'   # caisse claire + charleston (mains, hampes en haut)
+DRUM_ROCK = f'X:1\nL:1/8\nM:4/4\n%%score (1 2)\nK:C clef=perc\nV:1 stem=up\nV:2 stem=down\n[V:1] {H8(1)} {SN} {H8(1)} {SN} |]\n[V:2] F2 z2 F2 z2 |]'
+DRUM_VAR = f'X:1\nL:1/8\nM:4/4\n%%score (1 2)\nK:C clef=perc\nV:1 stem=up\nV:2 stem=down\n[V:1] {H8(1)} {SN} {H8(1)} !open![c{X}g]{X}g | {H8(1)} {SN} ee dA |]\n[V:2] F2 z2 zF z2 | F2 z2 F2 z2 |]'
 
 EX = {
  'tab': [
@@ -31,7 +32,7 @@ EX = {
  'drumleg': [
   {'abc': DRUM_LEG, 'play': False, 'cap': {'fr': 'La place de chaque élément sur la portée de batterie (comme dans le module Lecture batterie).', 'en': 'Where each part of the kit goes on the drum staff (as in the Drum reading module).', 'es': 'El lugar de cada elemento en el pentagrama de batería (como en el módulo Lectura de batería).'}}],
  'drumread': [
-  {'abc': DRUM_ROCK, 'play': False, 'cap': {'fr': 'Le rythme rock de base : charleston en croches (en haut), grosse caisse sur 1 et 3, caisse claire sur 2 et 4 (en bas).', 'en': 'The basic rock beat: hi-hat in eighth notes (top), bass drum on 1 and 3, snare on 2 and 4 (bottom).', 'es': 'El ritmo de rock básico: charles en corcheas (arriba), bombo en 1 y 3, caja en 2 y 4 (abajo).'}},
+  {'abc': DRUM_ROCK, 'play': False, 'cap': {'fr': 'Le rythme rock de base : charleston en croches (en haut), grosse caisse sur 1 et 3, caisse claire sur 2 et 4 (les mains en haut, le pied en bas).', 'en': 'The basic rock beat: hi-hat in eighth notes (top), bass drum on 1 and 3, snare on 2 and 4 (hands on top, foot below).', 'es': 'El ritmo de rock básico: charles en corcheas (arriba), bombo en 1 y 3, caja en 2 y 4 (las manos arriba, el pie abajo).'}},
   {'abc': DRUM_VAR, 'play': False, 'cap': {'fr': 'Variante : grosse caisse sur le « et » de 3, charleston ouvert (o), puis un petit roulement de toms.', 'en': 'Variation: bass drum on the "and" of 3, open hi-hat (o), then a short tom fill.', 'es': 'Variante: bombo en el «y» del 3, charles abierto (o) y luego un breve redoble de toms.'}}]}
 
 TOPICS = {
@@ -81,7 +82,7 @@ TOPICS = {
 <tr><td>Charleston au pied</td><td>sous la portée</td><td>x</td></tr></table>
 <ul><li><b>Têtes en x</b> pour les cymbales, <b>têtes rondes</b> pour les fûts (tambours).</li>
 <li>Plus l'instrument est grave, plus il est placé bas : grosse caisse en bas, cymbales en haut.</li>
-<li>Souvent, on écrit <b>deux voix</b> : les mains (cymbales, toms) hampes vers le <b>haut</b>, les pieds (grosse caisse, charleston au pied) hampes vers le <b>bas</b>. La caisse claire est d'un côté ou de l'autre selon la partition.</li>
+<li>On écrit la batterie en <b>deux voix</b> : tout ce qui se joue avec les <b>mains</b> (cymbales, caisse claire, toms) a les hampes vers le <b>haut</b>, et tout ce qui se joue avec les <b>pieds</b> (grosse caisse, charleston au pied) a les hampes vers le <b>bas</b>. C'est la norme la plus répandue (celle de la Percussive Arts Society). Certaines méthodes pour débutants mettent la caisse claire en bas avec la grosse caisse : le rythme joué est le même, seule l'écriture change.</li>
 <li>Signes utiles : <b>&gt;</b> accent ; <b>o</b> charleston ouvert ; <b>+</b> charleston fermé ; une note entre parenthèses = <b>ghost note</b> (très douce).</li></ul>
 <p>Attention : l'emplacement exact peut varier un peu d'un éditeur à l'autre. Une bonne partition donne une <b>légende</b> au début.</p>''',
   'see': ['batterie-lire', 'portee', 'figures-notes']},
@@ -143,7 +144,7 @@ TOPICS = {
 <tr><td>Hi-hat pedal</td><td>below the staff</td><td>x</td></tr></table>
 <ul><li><b>x noteheads</b> for cymbals, <b>round noteheads</b> for drums.</li>
 <li>The lower the instrument, the lower it sits: bass drum at the bottom, cymbals at the top.</li>
-<li>Drums are often written in <b>two voices</b>: the hands (cymbals, toms) with stems <b>up</b>, the feet (bass drum, hi-hat pedal) with stems <b>down</b>. The snare can be on either side depending on the score.</li>
+<li>Drums are written in <b>two voices</b>: everything played with the <b>hands</b> (cymbals, snare, toms) has stems <b>up</b>, and everything played with the <b>feet</b> (bass drum, hi-hat pedal) has stems <b>down</b>. This is the most widely used standard (the Percussive Arts Society's). Some beginner methods put the snare down with the bass drum: the rhythm played is the same, only the notation changes.</li>
 <li>Useful signs: <b>&gt;</b> accent; <b>o</b> open hi-hat; <b>+</b> closed hi-hat; a note in brackets = <b>ghost note</b> (very soft).</li></ul>
 <p>Careful: the exact placement can vary a little between publishers. A good score gives a <b>legend</b> at the beginning.</p>''',
   'see': ['batterie-lire', 'portee', 'figures-notes']},
@@ -205,7 +206,7 @@ TOPICS = {
 <tr><td>Charles con el pie</td><td>debajo del pentagrama</td><td>x</td></tr></table>
 <ul><li><b>Cabezas en x</b> para los platos, <b>cabezas redondas</b> para los tambores.</li>
 <li>Cuanto más grave el instrumento, más abajo se coloca: bombo abajo, platos arriba.</li>
-<li>A menudo se escriben <b>dos voces</b>: las manos (platos, toms) con plicas hacia <b>arriba</b> y los pies (bombo, charles con el pie) con plicas hacia <b>abajo</b>. La caja puede estar de un lado o del otro según la partitura.</li>
+<li>La batería se escribe en <b>dos voces</b>: todo lo que se toca con las <b>manos</b> (platos, caja, toms) lleva las plicas hacia <b>arriba</b>, y todo lo que se toca con los <b>pies</b> (bombo, charles con el pie) lleva las plicas hacia <b>abajo</b>. Es la norma más extendida (la de la Percussive Arts Society). Algunos métodos para principiantes ponen la caja abajo con el bombo: el ritmo es el mismo, solo cambia la escritura.</li>
 <li>Signos útiles: <b>&gt;</b> acento; <b>o</b> charles abierto; <b>+</b> charles cerrado; una nota entre paréntesis = <b>ghost note</b> (muy suave).</li></ul>
 <p>Atención: la ubicación exacta puede variar un poco según la editorial. Una buena partitura da una <b>leyenda</b> al principio.</p>''',
   'see': ['batterie-lire', 'portee', 'figures-notes']},

@@ -73,11 +73,12 @@ function baParse(tok){
   let s=tok.trim();if(!s||s==='%'||s==='/')return null;let root=null,i=0;
   for(const[fr,pc]of BA_FR)if(s.startsWith(fr)){root=pc;i=fr.length;break;}
   if(root==null){const L=s[0].toUpperCase();if(!(L in BA_LET))return{bad:tok};root=BA_LET[L];i=1;}
+  const li=[0,2,4,5,7,9,11].indexOf(root);   /* lettre écrite (do=0 … si=6), pour garder l'orthographe de l'accord (D♭ reste D♭) */
   if(s[i]==='#'||s[i]==='♯'){root++;i++;}else if(s[i]==='b'||s[i]==='♭'){root--;i++;}
   let rest=s.slice(i),bass=null;const sl=rest.indexOf('/');
-  if(sl>=0){const b=baParse(rest.slice(sl+1));rest=rest.slice(0,sl);if(b&&!b.bad)bass=b.root;}
+  let bli=null;if(sl>=0){const b=baParse(rest.slice(sl+1));rest=rest.slice(0,sl);if(b&&!b.bad){bass=b.root;bli=b.li;}}
   const q=BA_Q.find(([k])=>rest===k)||BA_Q.find(([k])=>k&&rest.startsWith(k));if(!q)return{bad:tok};
-  return{root:((root%12)+12)%12,iv:q[1],q:q[0],bass,tok};
+  return{root:((root%12)+12)%12,iv:q[1],q:q[0],bass,tok,li,bli};
 }
 /* grille : mesures séparées par « | », 1 à 4 accords par mesure (espaces) ; « % » répète la mesure précédente */
 function baGrid(txt){
@@ -88,7 +89,10 @@ function baGrid(txt){
     const ok=ch.filter(x=>!x.bad);if(ok.length){bars.push(ok);prev=ok;}}
   return{bars,bad};
 }
-const baName=c=>BA_NAMES_SH[(c.root+BA_S.tr+120)%12]+(c.q==='m'||c.q==='-'||c.q==='min'?'m':c.q==='M7'||c.q==='Δ'||c.q==='Δ7'?'maj7':c.q)+(c.bass!=null?'/'+BA_NAMES_SH[(c.bass+BA_S.tr+120)%12]:'');
+/* nom d'une note avec la lettre voulue (null = nom par défaut) */
+const baNoteNm=(pc,li)=>{if(li==null||li<0)return BA_NAMES_SH[pc];const a=((pc-[0,2,4,5,7,9,11][li])+18)%12-6;return Math.abs(a)>1?BA_NAMES_SH[pc]:'CDEFGAB'[li]+(a===1?'♯':a===-1?'♭':'');};
+const baName=(c,key)=>{const pc=baPc(c),li=typeof baRootLi==='function'?baRootLi(c,key):null;
+  return baNoteNm(pc,li)+(c.q==='m'||c.q==='-'||c.q==='min'?'m':c.q==='M7'||c.q==='Δ'||c.q==='Δ7'?'maj7':c.q)+(c.bass!=null?'/'+baNoteNm((c.bass+BA_S.tr+120)%12,BA_S.tr===0?c.bli:null):'');};
 /* voicing du piano : chaque note de l'accord placée près de do4, sans la doubler */
 function baVoice(c,prev){
   const pcs=c.iv.slice(0,4).map(x=>(c.root+BA_S.tr+x)%12);const out=[];
