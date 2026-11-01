@@ -218,7 +218,7 @@ public class MainActivity extends ComponentActivity {
         // Bouton Retour : revenir à l'accueil ; depuis l'accueil, quitter.
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override public void handleOnBackPressed() {
-                web.evaluateJavascript("(function(){try{var d=document.querySelector('dialog[open],.modal.open');if(d&&d.close){d.close();return true;}" +
+                web.evaluateJavascript("(function(){try{if(window.mpSheetOpen&&mpSheetOpen()){mpSheetClose();return true;}var d=document.querySelector('dialog[open],.modal.open');if(d&&d.close){d.close();return true;}" +
                     "if(typeof S!=='undefined'&&S.mod&&S.mod!=='ho'&&typeof openModule==='function'){openModule('ho');scrollTo(0,0);return true;}}catch(e){}return false;})()",
                     r -> { if (!"true".equals(r)) { setEnabled(false); getOnBackPressedDispatcher().onBackPressed(); setEnabled(true); } });
             }
