@@ -102,4 +102,14 @@ if on('dispo'):
         'included':[{'type':'territoryAvailabilities','id':'${'+t+'}','attributes':{'available':True},'relationships':{'territory':{'data':{'type':'territories','id':t}}}} for t in ter]}
     ok(*call('POST','/v2/appAvailabilities',body),f'disponibilité {len(ter)} pays')
 
+if on('build'):
+    st,j=call('GET',f'/v1/apps/{aid}/appStoreVersions?filter[appStoreState]=PREPARE_FOR_SUBMISSION,DEVELOPER_REJECTED,REJECTED,METADATA_REJECTED')
+    for v in j['data']:
+        P=v['attributes']['platform'];VS=v['attributes']['versionString']
+        st,jb=call('GET',f'/v1/builds?filter[app]={aid}&filter[preReleaseVersion.platform]={P}&filter[preReleaseVersion.version]={VS}&filter[processingState]=VALID&sort=-uploadedDate&limit=1')
+        if not jb.get('data'):log('ERREUR aucune build',P,VS);continue
+        bid=jb['data'][0]['id'];bn=jb['data'][0]['attributes']['version']
+        call('PATCH',f'/v1/builds/{bid}',{'data':{'type':'builds','id':bid,'attributes':{'usesNonExemptEncryption':False}}})
+        ok(*call('PATCH',f'/v1/appStoreVersions/{v["id"]}/relationships/build',{'data':{'type':'builds','id':bid}}),f'{P} {VS} : build {bn} rattachée')
+
 os.makedirs('out',exist_ok=True);json.dump(LOG,open('out/asc_fill.json','w'),indent=1,ensure_ascii=False)
