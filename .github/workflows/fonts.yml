@@ -1,0 +1,16 @@
+name: Polices du site
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  fonts:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          mkdir f && cd f
+          B=https://github.com/google/fonts/raw/main/ofl
+          for p in ultra/Ultra-Regular.ttf ultra/OFL.txt oswald/Oswald%5Bwght%5D.ttf yellowtail/Yellowtail-Regular.ttf courierprime/CourierPrime-Regular.ttf courierprime/CourierPrime-Bold.ttf; do
+            n=$(echo $p | tr '/' '-' | sed 's/%5B/_/;s/%5D//'); curl -fsSL -o "$n" "$B/$p"; done
+          ls -la
+          git init -q -b site-fonts && git add -A && git -c user.name=ci -c user.email=ci@example.com commit -qm fonts
+          git push -f -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" site-fonts
