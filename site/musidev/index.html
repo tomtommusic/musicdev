@@ -26,7 +26,10 @@
 .winwarn p{margin:.6em 0}
 .winwarn ol{margin:.3em 0 .4em;padding-left:1.3em}
 .phone{justify-self:center;width:min(280px,100%);aspect-ratio:9/16.6;border-radius:38px;padding:10px;background:#1B1F24;box-shadow:0 30px 60px rgb(42 32 25/.28),inset 0 0 0 2px #3A4048;transform:rotate(3deg)}
-.phone img{width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:29px}
+.splash{width:100%;height:100%;border-radius:29px;background:radial-gradient(120% 80% at 50% 30%,#2B4A57 0%,#17222A 60%,#10171D 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#F4EFE6;text-align:center;padding:24px}
+.splash img{width:46%;max-width:140px;height:auto;border-radius:24%;box-shadow:0 12px 30px rgb(0 0 0/.45)}
+.splash b{font:600 clamp(1.7rem,4vw,2.2rem)/1 Lora,serif;margin-top:6px}
+.splash span{font-size:.95rem;color:#8FD3C1;letter-spacing:.02em}
 @media (max-width:760px){.hero2{grid-template-columns:1fr;gap:40px}.phone{width:220px;transform:none}.staffbg{display:none}}
 .feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px 32px}
 .feats h3{font-size:1.15rem;margin-bottom:.3em}
@@ -72,7 +75,11 @@
       <p class="tag"><span lang="fr">Achat unique · Sans abonnement · Sans publicité</span><span lang="en">One-time purchase · No subscription · No ads</span><span lang="es">Pago único · Sin suscripción · Sin anuncios</span></p>
       <p class="soon"><span lang="fr">iPhone, iPad, Mac, Android et Windows.</span><span lang="en">iPhone, iPad, Mac, Android and Windows.</span><span lang="es">iPhone, iPad, Mac, Android y Windows.</span></p>
     </div>
-    <div class="phone" aria-hidden="true"><img lang="fr" src="img/hero_fr.jpg" alt=""><img lang="en" src="img/hero_en.jpg" alt=""><img lang="es" src="img/hero_es.jpg" alt=""></div>
+    <div class="phone"><div class="splash">
+      <img src="../img/musidev-icon.png" alt="" width="140" height="140">
+      <b>MusiDev</b>
+      <span lang="fr">Aussi disponible sur mobile</span><span lang="en">Also available on mobile</span><span lang="es">También disponible en móvil</span>
+    </div></div>
   </div>
 </section>
 
