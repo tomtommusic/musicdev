@@ -93,3 +93,8 @@ footer .links a{color:var(--ink);font-weight:400}
 .media.vids{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
 .media.vids video{aspect-ratio:9/16}
 @media (max-width:820px){.media.vids{grid-template-columns:1fr 1fr}.media.vids video:last-child{grid-column:1/-1;aspect-ratio:16/10}}
+
+/* galerie « En scène » : 8 tuiles de même format, 4 par rangée (2 sur téléphone) */
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gallery video,.gallery img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:12px;background:#111}
+@media (max-width:720px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
