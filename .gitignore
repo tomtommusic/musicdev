@@ -3,3 +3,6 @@ xcuserdata/
 *.xcuserstate
 DerivedData/
 .DS_Store
+desktop/resources/
+desktop/bin/
+desktop/dist/

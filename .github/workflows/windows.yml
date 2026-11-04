@@ -1,0 +1,30 @@
+name: Windows portable
+# Lancement manuel. Fabrique MusiDev.exe (Windows, sans installation) avec Neutralinojs
+# et le dépose dans site/musidev/telecharger/ pour le bouton de téléchargement du site.
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - name: Préparer l'app
+        run: |
+          npm i -g @neutralinojs/neu
+          cd desktop && rm -rf resources bin dist && mkdir resources
+          cp ../index.html ../manifest.webmanifest ../abcjs-basic-min.js ../abcjs-basic-min.js.LICENSE resources/
+          cp -r ../icons ../fonts resources/
+          neu update
+          neu build --release --embed-resources
+          ls -la dist/MusiDev
+      - name: Déposer l'exécutable sur le site
+        run: |
+          mkdir -p site/musidev/telecharger
+          cp desktop/dist/MusiDev/MusiDev-win_x64.exe site/musidev/telecharger/MusiDev-Windows.exe
+          ls -la site/musidev/telecharger
+          git config user.name ci && git config user.email ci@example.com
+          git add site/musidev/telecharger/MusiDev-Windows.exe
+          git commit -m "MusiDev pour Windows (portable) ${{ github.run_number }}" && git push
