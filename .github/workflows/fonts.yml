@@ -8,9 +8,10 @@ jobs:
     steps:
       - run: |
           mkdir f && cd f
-          B=https://github.com/google/fonts/raw/main/ofl
-          for p in ultra/Ultra-Regular.ttf ultra/OFL.txt oswald/Oswald%5Bwght%5D.ttf yellowtail/Yellowtail-Regular.ttf courierprime/CourierPrime-Regular.ttf courierprime/CourierPrime-Bold.ttf; do
-            n=$(echo $p | tr '/' '-' | sed 's/%5B/_/;s/%5D//'); curl -fsSL -o "$n" "$B/$p"; done
+          for p in ultra/Ultra-Regular.ttf oswald/Oswald%5Bwght%5D.ttf yellowtail/Yellowtail-Regular.ttf courierprime/CourierPrime-Regular.ttf courierprime/CourierPrime-Bold.ttf ultra/LICENSE.txt yellowtail/LICENSE.txt oswald/OFL.txt courierprime/OFL.txt; do
+            n=$(echo $p | tr '/' '-' | sed 's/%5B/_/;s/%5D//')
+            for L in ofl apache ufl; do curl -fsSL -o "$n" "https://github.com/google/fonts/raw/main/$L/$p" && { echo "ok $L $p"; break; }; done || true
+          done
           ls -la
           git init -q -b site-fonts && git add -A && git -c user.name=ci -c user.email=ci@example.com commit -qm fonts
           git push -f -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" site-fonts
