@@ -21,7 +21,10 @@
 .soon{color:var(--muted);font-size:.95rem;margin:0}
 .btn.win{background:var(--ink);color:var(--paper)}
 .btn.win:hover{background:#000}
-.winnote{font-size:.85rem;color:var(--muted);margin:.9em 0 0;max-width:52ch}
+.winwarn{margin:1em 0 0;max-width:54ch;background:#FFF6E8;border:1px solid #E7C89A;border-radius:12px;padding:10px 14px;font-size:.9rem}
+.winwarn summary{cursor:pointer;font-weight:700;color:#7A3E12}
+.winwarn p{margin:.6em 0}
+.winwarn ol{margin:.3em 0 .4em;padding-left:1.3em}
 .phone{justify-self:center;width:min(280px,100%);aspect-ratio:9/16.6;border-radius:38px;padding:10px;background:#1B1F24;box-shadow:0 30px 60px rgb(42 32 25/.28),inset 0 0 0 2px #3A4048;transform:rotate(3deg)}
 .phone img{width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:29px}
 @media (max-width:760px){.hero2{grid-template-columns:1fr;gap:40px}.phone{width:220px;transform:none}.staffbg{display:none}}
@@ -57,7 +60,15 @@
         <a class="btn" href="https://apps.apple.com/app/id6827199318"><span lang="fr">Télécharger sur l'App Store</span><span lang="en">Download on the App Store</span><span lang="es">Descargar en el App Store</span></a>
         <a class="btn" href="https://play.google.com/store/apps/details?id=ca.tomtommusic.musidev"><span lang="fr">Télécharger sur Google Play</span><span lang="en">Get it on Google Play</span><span lang="es">Disponible en Google Play</span></a>
       </div>
-      <p class="winnote"><span lang="fr">Windows : un fichier ZIP (3 Mo), sans installation. Clic droit sur le ZIP &gt; Extraire tout, puis double-clique sur MusiDev.exe. Si Windows affiche « Windows a protégé votre ordinateur », clique sur « Informations complémentaires », puis « Exécuter quand même ».</span><span lang="en">Windows: a ZIP file (3 MB), no installation. Right-click the ZIP &gt; Extract All, then double-click MusiDev.exe. If Windows shows “Windows protected your PC”, click “More info”, then “Run anyway”.</span><span lang="es">Windows: un archivo ZIP (3 MB), sin instalación. Clic derecho en el ZIP &gt; Extraer todo y luego doble clic en MusiDev.exe. Si Windows muestra «Windows protegió su PC», haz clic en «Más información» y luego en «Ejecutar de todas formas».</span></p>
+      <details class="winwarn">
+        <summary><span lang="fr">⚠ Windows affiche un avertissement ? C'est normal.</span><span lang="en">⚠ Windows shows a warning? That's normal.</span><span lang="es">⚠ ¿Windows muestra una advertencia? Es normal.</span></summary>
+        <div lang="fr"><p>MusiDev est créé par un développeur indépendant et n'est pas encore « signé » numériquement (un certificat coûte plusieurs centaines de dollars par année). Windows avertit donc pour tout programme qu'il ne connaît pas encore. Le fichier provient directement de ce site, et l'app ne contient ni publicité ni pistage.</p>
+        <ol><li>Clic droit sur le ZIP &gt; <b>Extraire tout</b>.</li><li>Double-clique sur <b>MusiDev.exe</b>.</li><li>Si « Windows a protégé votre ordinateur » s'affiche : <b>Informations complémentaires</b> &gt; <b>Exécuter quand même</b>.</li></ol></div>
+        <div lang="en"><p>MusiDev is made by an independent developer and isn't digitally “signed” yet (a certificate costs several hundred dollars a year). Windows therefore warns about any program it doesn't know yet. The file comes straight from this site, and the app has no ads and no tracking.</p>
+        <ol><li>Right-click the ZIP &gt; <b>Extract All</b>.</li><li>Double-click <b>MusiDev.exe</b>.</li><li>If “Windows protected your PC” appears: <b>More info</b> &gt; <b>Run anyway</b>.</li></ol></div>
+        <div lang="es"><p>MusiDev es obra de un desarrollador independiente y todavía no está «firmado» digitalmente (un certificado cuesta varios cientos de dólares al año). Por eso Windows advierte sobre cualquier programa que aún no conoce. El archivo viene directamente de este sitio y la app no tiene anuncios ni rastreo.</p>
+        <ol><li>Clic derecho en el ZIP &gt; <b>Extraer todo</b>.</li><li>Doble clic en <b>MusiDev.exe</b>.</li><li>Si aparece «Windows protegió su PC»: <b>Más información</b> &gt; <b>Ejecutar de todas formas</b>.</li></ol></div>
+      </details>
       <p class="tag"><span lang="fr">Achat unique · Sans abonnement · Sans publicité</span><span lang="en">One-time purchase · No subscription · No ads</span><span lang="es">Pago único · Sin suscripción · Sin anuncios</span></p>
       <p class="soon"><span lang="fr">iPhone, iPad, Mac, Android et Windows.</span><span lang="en">iPhone, iPad, Mac, Android and Windows.</span><span lang="es">iPhone, iPad, Mac, Android y Windows.</span></p>
     </div>
