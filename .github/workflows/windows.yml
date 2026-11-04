@@ -1,6 +1,6 @@
 name: Windows portable
 # Lancement manuel. Fabrique MusiDev.exe (Windows, sans installation) avec Neutralinojs
-# et le dépose dans site/musidev/telecharger/ pour le bouton de téléchargement du site.
+# et publie MusiDev-Windows.zip sur la branche windows-build (à copier dans le dépôt tommusic-site).
 on: workflow_dispatch
 permissions:
   contents: write
@@ -20,12 +20,10 @@ jobs:
           neu update
           neu build --release --embed-resources
           ls -la dist/MusiDev
-      - name: Déposer l'exécutable sur le site
+      - name: Publier le ZIP sur la branche windows-build
         run: |
-          mkdir -p site/musidev/telecharger
-          mkdir -p z/MusiDev && cp desktop/dist/MusiDev/MusiDev-win_x64.exe z/MusiDev/MusiDev.exe && cp desktop/LISEZ-MOI.txt z/MusiDev/
-          (cd z && zip -qr -9 ../site/musidev/telecharger/MusiDev-Windows.zip MusiDev)
-          ls -la site/musidev/telecharger
-          git config user.name ci && git config user.email ci@example.com
-          git add site/musidev/telecharger/MusiDev-Windows.zip
-          git commit -m "MusiDev pour Windows (portable) ${{ github.run_number }}" && git push
+          mkdir -p z/MusiDev out && cp desktop/dist/MusiDev/MusiDev-win_x64.exe z/MusiDev/MusiDev.exe && cp desktop/LISEZ-MOI.txt z/MusiDev/
+          (cd z && zip -qr -9 ../out/MusiDev-Windows.zip MusiDev)
+          cd out && git init -q -b windows-build && git add -A
+          git -c user.name=ci -c user.email=ci@example.com commit -q -m "windows ${{ github.run_number }}"
+          git push -f -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" windows-build
