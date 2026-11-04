@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fr-CA" data-lang="fr" data-title-fr="MusiDev · Formation auditive et théorie musicale" data-title-en="MusiDev · Ear training and music theory">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MusiDev · Formation auditive et théorie musicale</title>
+<meta name="description" content="MusiDev : dictées, lecture, accordeur, accompagnateur et théorie, avec des exercices générés au hasard. Achat unique, aucun abonnement, aucune publicité.">
+<link rel="icon" href="../img/favicon-32.png">
+<link rel="stylesheet" href="../style.css">
+<script src="../lang.js"></script>
+<style>
+.mdhero{padding:72px 0 56px}
+.mdhero .wrap{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center}
+.mdhero img{width:120px;height:120px;border-radius:28px}
+.mdhero h1{font-size:clamp(2.6rem,8vw,3.6rem);margin:0 0 .2em}
+.mdhero p{font-size:1.15rem;color:var(--muted);margin:0 0 1.4em;max-width:46ch}
+.tag{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0 0 .6em}
+@media (max-width:620px){.mdhero .wrap{grid-template-columns:1fr;gap:20px}.mdhero img{width:88px;height:88px;border-radius:20px}}
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px 32px}
+.feats h3{font-size:1.15rem;margin-bottom:.3em}
+.feats p{margin:0;color:var(--muted)}
+.shots{display:flex;gap:14px;overflow-x:auto;padding:4px 2px 14px;margin-top:40px;scroll-snap-type:x mandatory}
+.shots img{width:210px;flex:none;border-radius:16px;scroll-snap-align:start}
+.soon{color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="logo" href="../">TOM</a>
+  <nav class="nav" aria-label="Sections">
+    <a href="#fonctions" class="hide-sm"><span lang="fr">Fonctions</span><span lang="en">Features</span></a>
+    <a href="soutien.html"><span lang="fr">Soutien</span><span lang="en">Support</span></a>
+    <button class="langbtn" type="button">EN</button>
+  </nav>
+</div></header>
+<main>
+<section class="mdhero">
+  <div class="wrap">
+    <img src="../img/musidev-icon.png" alt="Icône MusiDev" width="120" height="120">
+    <div>
+      <p class="tag"><span lang="fr">Achat unique · Sans abonnement · Sans publicité</span><span lang="en">One-time purchase · No subscription · No ads</span></p>
+      <h1>MusiDev</h1>
+      <p lang="fr">Développe ton oreille, apprends à lire la musique et pratique ton instrument, avec des exercices générés au hasard : tu n'apprends jamais les réponses par cœur.</p>
+      <p lang="en">Train your ear, learn to read music and practise your instrument with randomly generated exercises: you never just memorise the answers.</p>
+      <a class="btn" href="app/"><span lang="fr">Essayer en ligne</span><span lang="en">Try it online</span></a>
+      <p class="soon" style="font-size:.95rem;margin-top:1.2em"><span lang="fr">Bientôt sur l'App Store et Google Play.</span><span lang="en">Coming soon to the App Store and Google Play.</span></p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+<section id="fonctions">
+  <div class="wrap">
+    <div class="feats">
+      <div><h3><span lang="fr">Entendre</span><span lang="en">Hear</span></h3>
+        <p lang="fr">Dictées mélodiques et rythmiques, intervalles, progressions d'accords.</p>
+        <p lang="en">Melodic and rhythmic dictation, intervals, chord progressions.</p></div>
+      <div><h3><span lang="fr">Lire et jouer</span><span lang="en">Read and play</span></h3>
+        <p lang="fr">Lecture de notes, lecture à vue vérifiée au micro, rythme, solfège, batterie.</p>
+        <p lang="en">Note reading, sight reading checked by the microphone, rhythm, solfège, drums.</p></div>
+      <div><h3><span lang="fr">Outils</span><span lang="en">Tools</span></h3>
+        <p lang="fr">Accordeur, métronome, accompagnateur avec gammes et modes, dictionnaire d'accords.</p>
+        <p lang="en">Tuner, metronome, backing band with scales and modes, chord dictionary.</p></div>
+      <div><h3><span lang="fr">Comprendre</span><span lang="en">Understand</span></h3>
+        <p lang="fr">Une bibliothèque théorique complète et des questionnaires selon ton niveau.</p>
+        <p lang="en">A complete theory library and quizzes at your level.</p></div>
+    </div>
+    <div class="shots" aria-label="Captures">
+      <img src="img/2_dictee.jpg" alt="Dictée mélodique" loading="lazy"><img src="img/3_accordeur.jpg" alt="Accordeur" loading="lazy"><img src="img/4_accomp.jpg" alt="Accompagnateur" loading="lazy"><img src="img/8_batterie.jpg" alt="Lecture batterie" loading="lazy"><img src="img/9_progressions.jpg" alt="Progressions d'accords" loading="lazy"><img src="img/6_biblio.jpg" alt="Bibliothèque théorique" loading="lazy">
+    </div>
+  </div>
+</section>
+</main>
+<footer><div class="wrap">
+  <span><span lang="fr">Aucun compte, aucun pistage.</span><span lang="en">No account, no tracking.</span> <a href="confidentialite.html"><span lang="fr">Confidentialité</span><span lang="en">Privacy</span></a> · <a href="soutien.html"><span lang="fr">Soutien</span><span lang="en">Support</span></a></span>
+  <span>© 2026 <a href="../" style="color:inherit">Tom Tom Music</a></span>
+</div></footer>
+</body>
+</html>
