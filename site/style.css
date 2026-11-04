@@ -13,7 +13,7 @@ h1,h2,h3{font-family:Lora,Georgia,serif;line-height:1.15;font-weight:600;margin:
 h2{font-size:clamp(1.6rem,3.6vw,2.1rem)}
 
 /* langue : on affiche seulement la langue choisie */
-html[data-lang="fr"] [lang="en"],html[data-lang="en"] [lang="fr"]{display:none!important}
+html[data-lang="fr"] [lang="en"],html[data-lang="fr"] [lang="es"],html[data-lang="en"] [lang="fr"],html[data-lang="en"] [lang="es"],html[data-lang="es"] [lang="fr"],html[data-lang="es"] [lang="en"]{display:none!important}
 
 /* en-tête */
 .top{position:sticky;top:0;z-index:10;background:rgb(250 246 239/.94);backdrop-filter:blur(8px)}
@@ -24,6 +24,10 @@ html[data-lang="fr"] [lang="en"],html[data-lang="en"] [lang="fr"]{display:none!i
 .nav a:hover{background:var(--line)}
 .langbtn{margin-left:6px;border:1px solid var(--ink);background:transparent;color:var(--ink);font:700 .8rem/1 Atkinson,sans-serif;letter-spacing:.08em;padding:8px 11px;border-radius:999px;cursor:pointer}
 .langbtn:hover{background:var(--ink);color:var(--paper)}
+.langpick{display:inline-flex;margin-left:6px;border:1px solid var(--ink);border-radius:999px;overflow:hidden}
+.langpick button{border:0;background:transparent;color:var(--ink);font:700 .78rem/1 Atkinson,sans-serif;letter-spacing:.06em;padding:8px 10px;cursor:pointer}
+.langpick button+button{border-left:1px solid var(--line)}
+.langpick button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
 @media (max-width:560px){.nav a.hide-sm{display:none}}
 
 /* bannière */
