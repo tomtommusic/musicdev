@@ -1,0 +1,13 @@
+MusiDev pour Windows - sans installation
+
+1. Clic droit sur le fichier ZIP > Propriétés > coche « Débloquer » > OK (si la case est présente).
+2. Clic droit > Extraire tout.
+3. Double-clique sur MusiDev.exe.
+   Si Windows affiche « Windows a protégé votre ordinateur » : Informations complémentaires > Exécuter quand même.
+
+MusiDev for Windows - no installation
+1. Right-click the ZIP > Properties > tick "Unblock" > OK (if shown).
+2. Right-click > Extract All.
+3. Double-click MusiDev.exe. If you see "Windows protected your PC": More info > Run anyway.
+
+(c) 2026 Tom Tom Music

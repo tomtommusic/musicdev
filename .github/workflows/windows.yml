@@ -23,8 +23,9 @@ jobs:
       - name: Déposer l'exécutable sur le site
         run: |
           mkdir -p site/musidev/telecharger
-          cp desktop/dist/MusiDev/MusiDev-win_x64.exe site/musidev/telecharger/MusiDev-Windows.exe
+          mkdir -p z/MusiDev && cp desktop/dist/MusiDev/MusiDev-win_x64.exe z/MusiDev/MusiDev.exe && cp desktop/LISEZ-MOI.txt z/MusiDev/
+          (cd z && zip -qr -9 ../site/musidev/telecharger/MusiDev-Windows.zip MusiDev)
           ls -la site/musidev/telecharger
           git config user.name ci && git config user.email ci@example.com
-          git add site/musidev/telecharger/MusiDev-Windows.exe
+          git add site/musidev/telecharger/MusiDev-Windows.zip
           git commit -m "MusiDev pour Windows (portable) ${{ github.run_number }}" && git push
