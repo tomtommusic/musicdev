@@ -9,20 +9,24 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../lang.js"></script>
 <style>
-.mdhero{padding:72px 0 56px}
-.mdhero .wrap{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center}
-.mdhero img{width:120px;height:120px;border-radius:28px}
-.mdhero h1{font-size:clamp(2.6rem,8vw,3.6rem);margin:0 0 .2em}
-.mdhero p{font-size:1.15rem;color:var(--muted);margin:0 0 1.4em;max-width:46ch}
-.tag{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0 0 .6em}
-@media (max-width:620px){.mdhero .wrap{grid-template-columns:1fr;gap:20px}.mdhero img{width:88px;height:88px;border-radius:20px}}
+.mdhero{position:relative;overflow:hidden;padding:64px 0 72px;background:linear-gradient(180deg,#F3ECE1,var(--paper))}
+.staffbg{position:absolute;left:0;right:0;top:40px;width:100%;height:360px;color:#D9C9B2;opacity:.7}
+.hero2{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;align-items:center}
+.brand{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+.brand img{width:64px;height:64px;border-radius:16px}
+.brand h1{font-size:clamp(2.6rem,7vw,3.6rem);margin:0}
+.lead{font-size:1.18rem;margin:0 0 1.5em;max-width:44ch}
+.stores{display:flex;flex-wrap:wrap;gap:10px}
+.tag{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:1.6em 0 .3em}
+.soon{color:var(--muted);font-size:.95rem;margin:0}
+.phone{justify-self:center;width:min(280px,100%);aspect-ratio:9/16.6;border-radius:38px;padding:10px;background:#1B1F24;box-shadow:0 30px 60px rgb(42 32 25/.28),inset 0 0 0 2px #3A4048;transform:rotate(3deg)}
+.phone img{width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:29px}
+@media (max-width:760px){.hero2{grid-template-columns:1fr;gap:40px}.phone{width:220px;transform:none}.staffbg{display:none}}
 .feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px 32px}
 .feats h3{font-size:1.15rem;margin-bottom:.3em}
 .feats p{margin:0;color:var(--muted)}
 .shots{display:flex;gap:14px;overflow-x:auto;padding:4px 2px 14px;margin-top:40px;scroll-snap-type:x mandatory}
 .shots img{width:210px;flex:none;border-radius:16px;scroll-snap-align:start}
-.soon{color:var(--muted)}
-.stores{display:flex;flex-wrap:wrap;gap:10px}
 </style>
 </head>
 <body>
@@ -36,20 +40,23 @@
 </div></header>
 <main>
 <section class="mdhero">
-  <div class="wrap">
-    <img src="../img/musidev-icon.png" alt="Icône MusiDev" width="120" height="120">
+  <svg class="staffbg" viewBox="0 0 1200 400" preserveAspectRatio="none" aria-hidden="true"><g stroke="currentColor" stroke-width="2" fill="none">
+    <path d="M0 120 C300 80 600 170 1200 110"/><path d="M0 145 C300 105 600 195 1200 135"/><path d="M0 170 C300 130 600 220 1200 160"/><path d="M0 195 C300 155 600 245 1200 185"/><path d="M0 220 C300 180 600 270 1200 210"/></g>
+    <g fill="currentColor"><ellipse cx="180" cy="128" rx="13" ry="9" transform="rotate(-20 180 128)"/><ellipse cx="330" cy="160" rx="13" ry="9" transform="rotate(-20 330 160)"/><ellipse cx="900" cy="150" rx="13" ry="9" transform="rotate(-20 900 150)"/><ellipse cx="1040" cy="118" rx="13" ry="9" transform="rotate(-20 1040 118)"/></g></svg>
+  <div class="wrap hero2">
     <div>
-      <p class="tag"><span lang="fr">Achat unique · Sans abonnement · Sans publicité</span><span lang="en">One-time purchase · No subscription · No ads</span><span lang="es">Pago único · Sin suscripción · Sin anuncios</span></p>
-      <h1>MusiDev</h1>
-      <p lang="fr">Développe ton oreille, apprends à lire la musique et pratique ton instrument, avec des exercices générés au hasard : tu n'apprends jamais les réponses par cœur.</p>
-      <p lang="en">Train your ear, learn to read music and practise your instrument with randomly generated exercises: you never just memorise the answers.</p>
-      <p lang="es">Desarrolla tu oído, aprende a leer música y practica tu instrumento con ejercicios generados al azar: nunca memorizas las respuestas.</p>
+      <div class="brand"><img src="../img/musidev-icon.png" alt="" width="64" height="64"><h1>MusiDev</h1></div>
+      <p class="lead" lang="fr">Développe ton oreille, apprends à lire la musique et pratique ton instrument, avec des exercices générés au hasard : tu n'apprends jamais les réponses par cœur.</p>
+      <p class="lead" lang="en">Train your ear, learn to read music and practise your instrument with randomly generated exercises: you never just memorise the answers.</p>
+      <p class="lead" lang="es">Desarrolla tu oído, aprende a leer música y practica tu instrumento con ejercicios generados al azar: nunca memorizas las respuestas.</p>
       <div class="stores">
         <a class="btn" href="https://apps.apple.com/app/id6827199318"><span lang="fr">Télécharger sur l'App Store</span><span lang="en">Download on the App Store</span><span lang="es">Descargar en el App Store</span></a>
         <a class="btn" href="https://play.google.com/store/apps/details?id=ca.tomtommusic.musidev"><span lang="fr">Télécharger sur Google Play</span><span lang="en">Get it on Google Play</span><span lang="es">Disponible en Google Play</span></a>
       </div>
-      <p class="soon" style="font-size:.95rem;margin-top:1em"><span lang="fr">iPhone, iPad, Mac et Android.</span><span lang="en">iPhone, iPad, Mac and Android.</span><span lang="es">iPhone, iPad, Mac y Android.</span></p>
+      <p class="tag"><span lang="fr">Achat unique · Sans abonnement · Sans publicité</span><span lang="en">One-time purchase · No subscription · No ads</span><span lang="es">Pago único · Sin suscripción · Sin anuncios</span></p>
+      <p class="soon"><span lang="fr">iPhone, iPad, Mac et Android.</span><span lang="en">iPhone, iPad, Mac and Android.</span><span lang="es">iPhone, iPad, Mac y Android.</span></p>
     </div>
+    <div class="phone" aria-hidden="true"><img lang="fr" src="img/hero_fr.jpg" alt=""><img lang="en" src="img/hero_en.jpg" alt=""><img lang="es" src="img/hero_es.jpg" alt=""></div>
   </div>
 </section>
 
