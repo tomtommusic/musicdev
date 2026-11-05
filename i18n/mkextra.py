@@ -216,6 +216,7 @@ a("Dans un exercice, touche « Explications », puis l'élément à comprendre
 a("Mandoline","Mandolin","Mandolina")
 a("Banjo 5 cordes","5-string banjo","Banjo de 5 cuerdas")
 a("Accordage","Tuning","Afinación")
+a("Mandoline : 8 cordes en 4 paires. Les deux cordes d'une paire s'accordent sur la même note : accorde-les une à la fois, puis joue-les ensemble pour vérifier qu'elles sonnent comme une seule.","Mandolin: 8 strings in 4 pairs. Both strings of a pair are tuned to the same note: tune them one at a time, then play them together to check that they sound like one.","Mandolina: 8 cuerdas en 4 pares. Las dos cuerdas de un par se afinan en la misma nota: afínalas una a la vez y luego tócalas juntas para comprobar que suenan como una sola.")
 a("Cordes à vide","Open strings","Cuerdas al aire")
 a("Standard","Standard","Estándar")
 a("½ ton plus bas","Half step down","Medio tono abajo")

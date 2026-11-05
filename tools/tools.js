@@ -294,17 +294,20 @@ function tnStringsMark(k,ok,state){const u=TS.ui;if(!u||!u.head)return;
 function tnHead(s){
   const NS='http://www.w3.org/2000/svg',mk=(t,a,...k)=>{const e=document.createElementNS(NS,t);for(const[x,v]of Object.entries(a))e.setAttribute(x,v);k.forEach(c=>e.append(c));return e;};
   const notes=s.notes,n=notes.length,banjo=TN.inst==='banjo',hs=banjo?[1,2,3,4]:notes.map((_,i)=>i),m=hs.length,Lc=Math.ceil(m/2);
+  const mando=TN.inst==='mando'&&n===4;   /* mandoline : 4 paires de cordes (8 cordes, 8 chevilles) */
   /* vue de face : les cordes extérieures (mi grave, mi aigu) vont aux chevilles près du sillet, les cordes du centre (ré, sol) aux chevilles du haut */
   const left=hs.slice(0,Lc).reverse(),right=hs.slice(Lc),rows=Math.max(left.length,right.length);
   const W=320,top=18,nut=rows===2?178:228,H=nut+86,svg=mk('svg',{viewBox:`0 0 ${W} ${H}`,class:'tnheadsvg',role:'img','aria-label':'Tête de l\'instrument : touche une cheville pour viser cette corde'});
-  const sp=Math.min(17,96/Math.max(1,n-1)),nx=i=>W/2-(n-1)/2*sp+i*sp,nutL=nx(0)-12,nutR=nx(n-1)+12;
+  const sp=Math.min(17,96/Math.max(1,n-1)),nx0=i=>W/2-(n-1)/2*sp+i*sp,csp=24;
+  /* x d'une corde : pour la mandoline, deux cordes serrées par paire (d = -1 ou +1) */
+  const nx=(i,d)=>mando?W/2-1.5*csp+i*csp+(d||0)*3.6:nx0(i),nutL=(mando?nx(0,-1):nx(0))-12,nutR=(mando?nx(n-1,1):nx(n-1))+12;
   const rowY=r=>top+30+r*((nut-top-50)/Math.max(1,rows-1||1));
   svg.append(mk('path',{d:`M${nutL-4} ${nut} L${W/2-78} ${top+8} Q${W/2} ${top-10} ${W/2+78} ${top+8} L${nutR+4} ${nut} Z`,class:'tnhs'}));
   svg.append(mk('rect',{x:nutL,y:nut,width:nutR-nutL,height:H-nut,class:'tnneck'}));
   svg.append(mk('rect',{x:nutL-2,y:nut-3,width:nutR-nutL+4,height:6,rx:2,class:'tnnut'}));
-  const peg=(i,px,py,post)=>{const num=n-i,name=tnName(notes[i],s.flat);
+  const peg=(i,px,py,post,d)=>{const num=n-i,name=tnName(notes[i],s.flat),sx=nx(i,d);
     const g=mk('g',{'data-k':i,class:'tnpeg',tabindex:'0',role:'button','aria-label':`Corde ${num}, ${name}`});
-    const below=post[1]>nut;g.append(mk('line',{x1:post[0],y1:post[1],x2:nx(i),y2:below?post[1]:nut,class:'tnstrg'}),mk('line',{x1:nx(i),y1:below?post[1]:nut,x2:nx(i),y2:H,class:'tnstrg'}),
+    const below=post[1]>nut;g.append(mk('line',{x1:post[0],y1:post[1],x2:sx,y2:below?post[1]:nut,class:'tnstrg'}),mk('line',{x1:sx,y1:below?post[1]:nut,x2:sx,y2:H,class:'tnstrg'}),
       mk('line',{x1:px,y1:py,x2:post[0],y2:post[1],class:'tnshaft'}),mk('circle',{cx:post[0],cy:post[1],r:4,class:'tnpost'}),
       mk('circle',{cx:px,cy:py,r:21,class:'tnknob'}),
       mk('text',{x:px,y:py+2,class:'tnpegn'},document.createTextNode(name)),mk('text',{x:px,y:py+15,class:'tnpegs'},document.createTextNode(String(num))),
@@ -312,6 +315,12 @@ function tnHead(s){
     g.addEventListener('click',()=>{if(!TN.learner){tnRef(notes[i]);return;}TS.lock=i;TS.hist=[];TS.okSince=0;tnStringsMark(-1,false);tnGuide(null,false,true);});
     return g;};
   const off=()=>40;
+  if(mando){
+    /* gauche (de haut en bas) : ré, ré, sol, sol ; droite : la, la, mi, mi — chaque paire a deux chevilles pour la même note */
+    const LM=[[1,1],[1,-1],[0,1],[0,-1]],RM=[[2,-1],[2,1],[3,-1],[3,1]],my=r=>top+26+r*((nut-top-44)/3);
+    LM.forEach(([i,d],r)=>svg.append(peg(i,40,my(r),[W/2-off(r),my(r)],d)));
+    RM.forEach(([i,d],r)=>svg.append(peg(i,W-40,my(r),[W/2+off(r),my(r)],d)));
+    return el('div',{},el('div',{class:'tnhead'},svg),el('p',{class:'hint tnpairs',style:'text-align:center;max-width:44ch;margin:8px auto 0'},'Mandoline : 8 cordes en 4 paires. Les deux cordes d\'une paire s\'accordent sur la même note : accorde-les une à la fois, puis joue-les ensemble pour vérifier qu\'elles sonnent comme une seule.'));}
   left.forEach((i,r)=>svg.append(peg(i,40,rowY(r),[W/2-off(r),rowY(r)])));
   right.forEach((i,r)=>svg.append(peg(i,W-40,rowY(r),[W/2+off(r),rowY(r)])));
   if(banjo){const y=nut+58;svg.append(peg(0,40,y,[nx(0),y]));}
