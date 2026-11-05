@@ -1,0 +1,665 @@
+{
+ "app": {
+  "accessibilityUrl": null,
+  "name": "MusiDev",
+  "bundleId": "ca.tomtommusic.musicdev",
+  "sku": "musidev",
+  "primaryLocale": "en-CA",
+  "isOrEverWasMadeForKids": false,
+  "subscriptionStatusUrl": null,
+  "subscriptionStatusUrlVersion": null,
+  "subscriptionStatusUrlForSandbox": null,
+  "subscriptionStatusUrlVersionForSandbox": null,
+  "contentRightsDeclaration": null,
+  "streamlinedPurchasingEnabled": true
+ },
+ "appInfos": [
+  {
+   "id": "6b6b0d93-4d93-4871-83ae-4f2307f006bd",
+   "attr": {
+    "brazilAgeRating": "L",
+    "brazilAgeRatingV2": "SELF_RATED_L",
+    "koreaAgeRating": null,
+    "appStoreState": "PREPARE_FOR_SUBMISSION",
+    "appStoreAgeRating": "FOUR_PLUS",
+    "state": "PREPARE_FOR_SUBMISSION",
+    "australiaAgeRating": null,
+    "franceAgeRating": null
+   },
+   "rel": {
+    "secondaryCategory": {
+     "type": "appCategories",
+     "id": "MUSIC"
+    },
+    "primaryCategory": {
+     "type": "appCategories",
+     "id": "EDUCATION"
+    },
+    "ageRatingDeclaration": {
+     "type": "ageRatingDeclarations",
+     "id": "6b6b0d93-4d93-4871-83ae-4f2307f006bd"
+    }
+   }
+  }
+ ],
+ "included": [
+  {
+   "type": "appCategories",
+   "id": "EDUCATION",
+   "attributes": {
+    "platforms": [
+     "IOS",
+     "MAC_OS",
+     "TV_OS",
+     "VISION_OS"
+    ]
+   },
+   "relationships": {
+    "subcategories": {
+     "links": {
+      "self": "https://api.appstoreconnect.apple.com/v1/appCategories/EDUCATION/relationships/subcategories",
+      "related": "https://api.appstoreconnect.apple.com/v1/appCategories/EDUCATION/subcategories"
+     }
+    },
+    "parent": {
+     "links": {
+      "self": "https://api.appstoreconnect.apple.com/v1/appCategories/EDUCATION/relationships/parent",
+      "related": "https://api.appstoreconnect.apple.com/v1/appCategories/EDUCATION/parent"
+     }
+    }
+   },
+   "links": {
+    "self": "https://api.appstoreconnect.apple.com/v1/appCategories/EDUCATION"
+   }
+  },
+  {
+   "type": "appCategories",
+   "id": "MUSIC",
+   "attributes": {
+    "platforms": [
+     "IOS",
+     "MAC_OS",
+     "TV_OS",
+     "VISION_OS"
+    ]
+   },
+   "relationships": {
+    "subcategories": {
+     "links": {
+      "self": "https://api.appstoreconnect.apple.com/v1/appCategories/MUSIC/relationships/subcategories",
+      "related": "https://api.appstoreconnect.apple.com/v1/appCategories/MUSIC/subcategories"
+     }
+    },
+    "parent": {
+     "links": {
+      "self": "https://api.appstoreconnect.apple.com/v1/appCategories/MUSIC/relationships/parent",
+      "related": "https://api.appstoreconnect.apple.com/v1/appCategories/MUSIC/parent"
+     }
+    }
+   },
+   "links": {
+    "self": "https://api.appstoreconnect.apple.com/v1/appCategories/MUSIC"
+   }
+  },
+  {
+   "type": "ageRatingDeclarations",
+   "id": "6b6b0d93-4d93-4871-83ae-4f2307f006bd",
+   "attributes": {
+    "messagingAndChat": false,
+    "sexualContentGraphicAndNudity": "NONE",
+    "gambling": false,
+    "horrorOrFearThemes": "NONE",
+    "parentalControls": false,
+    "advertising": false,
+    "ageRatingOverride": "NONE",
+    "ageRatingOverrideV2": "NONE",
+    "violenceRealisticProlongedGraphicOrSadistic": "NONE",
+    "matureOrSuggestiveThemes": "NONE",
+    "healthOrWellnessTopics": false,
+    "unrestrictedWebAccess": false,
+    "violenceCartoonOrFantasy": "NONE",
+    "kidsAgeBand": null,
+    "medicalOrTreatmentInformation": "NONE",
+    "lootBox": false,
+    "alcoholTobaccoOrDrugUseOrReferences": "NONE",
+    "gamblingSimulated": "NONE",
+    "violenceRealistic": "NONE",
+    "profanityOrCrudeHumor": "NONE",
+    "socialMedia": false,
+    "contests": "NONE",
+    "koreaAgeRatingOverride": "NONE",
+    "ageAssurance": false,
+    "userGeneratedContent": false,
+    "gunsOrOtherWeapons": "NONE",
+    "socialMediaAgeRestricted": false,
+    "gracRatingClassificationNumber": null,
+    "developerAgeRatingInfoUrl": null,
+    "sexualContentOrNudity": "NONE"
+   },
+   "links": {
+    "self": "https://api.appstoreconnect.apple.com/v1/ageRatingDeclarations/6b6b0d93-4d93-4871-83ae-4f2307f006bd"
+   }
+  }
+ ],
+ "infoLoc": {
+  "6b6b0d93-4d93-4871-83ae-4f2307f006bd": [
+   {
+    "locale": "en-CA",
+    "name": "MusiDev",
+    "subtitle": "Ear training and music theory",
+    "privacyPolicyUrl": "https://tommusic.ca/musidev/confidentialite.html",
+    "privacyChoicesUrl": null,
+    "privacyPolicyText": null
+   },
+   {
+    "locale": "es-MX",
+    "name": "MusiDev",
+    "subtitle": "Oído musical y teoría",
+    "privacyPolicyUrl": "https://tommusic.ca/musidev/confidentialite.html",
+    "privacyChoicesUrl": null,
+    "privacyPolicyText": null
+   },
+   {
+    "locale": "fr-CA",
+    "name": "MusiDev",
+    "subtitle": "Formation auditive et théorie",
+    "privacyPolicyUrl": "https://tommusic.ca/musidev/confidentialite.html",
+    "privacyChoicesUrl": null,
+    "privacyPolicyText": null
+   }
+  ]
+ },
+ "ageRating": {
+  "6b6b0d93-4d93-4871-83ae-4f2307f006bd": {
+   "advertising": false,
+   "alcoholTobaccoOrDrugUseOrReferences": "NONE",
+   "contests": "NONE",
+   "gambling": false,
+   "gamblingSimulated": "NONE",
+   "gunsOrOtherWeapons": "NONE",
+   "healthOrWellnessTopics": false,
+   "kidsAgeBand": null,
+   "lootBox": false,
+   "medicalOrTreatmentInformation": "NONE",
+   "messagingAndChat": false,
+   "parentalControls": false,
+   "profanityOrCrudeHumor": "NONE",
+   "ageAssurance": false,
+   "sexualContentGraphicAndNudity": "NONE",
+   "sexualContentOrNudity": "NONE",
+   "socialMedia": false,
+   "socialMediaAgeRestricted": false,
+   "horrorOrFearThemes": "NONE",
+   "matureOrSuggestiveThemes": "NONE",
+   "unrestrictedWebAccess": false,
+   "userGeneratedContent": false,
+   "violenceCartoonOrFantasy": "NONE",
+   "violenceRealisticProlongedGraphicOrSadistic": "NONE",
+   "violenceRealistic": "NONE",
+   "ageRatingOverride": "NONE",
+   "ageRatingOverrideV2": "NONE",
+   "koreaAgeRatingOverride": "NONE",
+   "gracRatingClassificationNumber": null,
+   "developerAgeRatingInfoUrl": null
+  }
+ },
+ "versions": [
+  {
+   "id": "14073cbd-adfc-47dd-9942-82afaaf75456",
+   "attr": {
+    "platform": "MAC_OS",
+    "versionString": "1.5",
+    "appStoreState": "PREPARE_FOR_SUBMISSION",
+    "appVersionState": "PREPARE_FOR_SUBMISSION",
+    "copyright": "2026 Tom Tom Music",
+    "reviewType": "APP_STORE",
+    "releaseType": "AFTER_APPROVAL",
+    "earliestReleaseDate": null,
+    "usesIdfa": null,
+    "downloadable": true,
+    "createdDate": "2026-10-27T06:19:29-07:00"
+   },
+   "loc": [
+    {
+     "attr": {
+      "description": "MusiDev brings together everything you need to train your ear, learn to read music and practise your instrument. Designed by a high school music teacher, it works for students, hobby musicians and teachers who want a simple tool for the classroom or at home.\n\nHEAR\n• Melodic and rhythmic dictation: listen, then write straight onto the staff.\n• Intervals: ascending, descending or harmonic.\n• Chord progressions: recognise them by ear.\n\nREAD AND PLAY\n• Note reading in treble, bass and alto clef, against the clock.\n• Melodic reading and sight reading: the microphone checks every note you play or sing.\n• Rhythm reading: tap the rhythm after the count-in.\n• Sung solfège with pitch checking.\n• Drum reading and the 40 snare drum rudiments.\n\nTOOLS\n• Chromatic tuner with presets for guitar, bass, ukulele, violin and more.\n• Metronome with subdivisions.\n• Backing band: write a chord chart, pick a style, and drums, bass and piano play along. Scales and modes on the staff or on the fretboard.\n• Chord dictionary for guitar, ukulele and piano.\n• Recorder to listen back and share your takes.\n• Fingering charts for wind and string instruments, technical studies and vocal warm-ups.\n\nUNDERSTAND\n• A complete theory library: staff and clefs, rhythm, scales and keys, intervals, chords, cadences, modes, improvisation, tablature and drum notation, with audio examples.\n• Test my knowledge: quizzes at the level you choose.\n• Badges to stay motivated.\n\nYOUR PRIVACY\nNo account, no ads, no tracking. Your results and recordings stay on your device.\n\nAvailable in French, English and Spanish.",
+      "locale": "en-CA",
+      "keywords": "ear training,solfege,dictation,theory,tuner,metronome,sight reading,rhythm,intervals,chords",
+      "marketingUrl": "https://tommusic.ca/musidev/",
+      "promotionalText": "Dictations, note reading, tuner, metronome and a backing band: everything to learn music, made by a Quebec music teacher. No ads, no account.",
+      "supportUrl": "https://tommusic.ca/musidev/soutien.html",
+      "whatsNew": null
+     },
+     "sets": [
+      [
+       "APP_DESKTOP",
+       6
+      ]
+     ]
+    },
+    {
+     "attr": {
+      "description": "MusiDev reúne en una sola app todo lo necesario para desarrollar el oído, aprender a leer música y practicar tu instrumento. Creada por un profesor de música de secundaria, sirve para estudiantes, músicos aficionados y docentes que buscan una herramienta sencilla para el aula o la casa.\n\nESCUCHAR\n• Dictado melódico y rítmico: escucha y escribe directamente en el pentagrama.\n• Intervalos: ascendentes, descendentes o armónicos.\n• Progresiones de acordes: reconócelas de oído.\n\nLEER Y TOCAR\n• Lectura de notas en clave de sol, fa y do, contra reloj.\n• Lectura melódica y a primera vista: el micrófono verifica cada nota que tocas o cantas.\n• Lectura rítmica: marca el ritmo después de la cuenta.\n• Solfeo cantado con verificación de la afinación.\n• Lectura de batería y los 40 rudimentos de caja.\n\nHERRAMIENTAS\n• Afinador cromático con ajustes para guitarra, bajo, ukelele, violín y más.\n• Metrónomo con subdivisiones.\n• Acompañamiento: escribe una progresión, elige un estilo, y batería, bajo y piano te acompañan. Escalas y modos en el pentagrama o en el mástil.\n• Diccionario de acordes para guitarra, ukelele y piano.\n• Grabadora para escucharte y compartir tus tomas.\n• Digitaciones de instrumentos de viento y cuerda, estudios técnicos y vocalizaciones.\n\nCOMPRENDER\n• Biblioteca teórica completa: pentagrama y claves, ritmo, escalas y tonalidades, intervalos, acordes, cadencias, modos, improvisación, tablaturas y partituras de batería, con ejemplos sonoros.\n• Pon a prueba tus conocimientos: cuestionarios según el nivel elegido.\n• Insignias para mantener la motivación.\n\nTU PRIVACIDAD\nSin cuenta, sin anuncios, sin rastreo. Tus resultados y grabaciones se quedan en tu dispositivo.\n\nDisponible en francés, inglés y español.",
+      "locale": "es-MX",
+      "keywords": "solfeo,dictado,oído,teoría,afinador,metrónomo,lectura,ritmo,intervalos,acordes,escala",
+      "marketingUrl": "https://tommusic.ca/musidev/",
+      "promotionalText": "Dictados, lectura de notas, afinador, metrónomo y acompañamiento: todo para aprender música, creado por un profesor de Quebec. Sin anuncios ni cuenta.",
+      "supportUrl": "https://tommusic.ca/musidev/soutien.html",
+      "whatsNew": null
+     },
+     "sets": []
+    },
+    {
+     "attr": {
+      "description": "MusiDev réunit dans une seule app tout ce qu'il faut pour développer l'oreille, apprendre à lire la musique et pratiquer son instrument. Conçue par un enseignant de musique au secondaire, elle convient aux élèves, aux musiciens amateurs et aux enseignants qui veulent un outil simple à utiliser en classe ou à la maison.\n\nENTENDRE\n• Dictée mélodique et dictée rythmique : écoute, puis écris directement sur la portée.\n• Intervalles : montants, descendants ou harmoniques.\n• Progressions d'accords : reconnais les enchaînements à l'oreille.\n\nLIRE ET JOUER\n• Lecture de notes en clé de sol, de fa et d'ut, contre la montre.\n• Lecture mélodique et lecture à vue : le micro vérifie chaque note que tu joues ou chantes.\n• Lecture rythmique : frappe le rythme après le décompte.\n• Solfège chanté avec vérification de la justesse.\n• Lecture batterie et les 40 rudiments de caisse claire.\n\nOUTILS\n• Accordeur chromatique avec préréglages pour guitare, basse, ukulélé, violon et plus.\n• Métronome avec subdivisions.\n• Accompagnateur : écris une grille d'accords, choisis un style, et batterie, basse et piano t'accompagnent. Gammes et modes sur portée ou sur manche.\n• Dictionnaire d'accords pour guitare, ukulélé et piano.\n• Enregistreur pour t'écouter et partager tes prises.\n• Doigtés d'instruments à vent et à cordes, études techniques et vocalises.\n\nCOMPRENDRE\n• Bibliothèque théorique complète : portée et clés, rythme, gammes et tonalités, intervalles, accords, cadences, modes, improvisation, tablatures et partitions de batterie, avec exemples sonores.\n• Tester mes connaissances : des questionnaires selon le niveau choisi.\n• Badges pour garder la motivation.\n\nRESPECT DE TA VIE PRIVÉE\nAucun compte, aucune publicité, aucun pistage. Tes résultats et tes enregistrements restent sur ton appareil.\n\nOfferte en français, en anglais et en espagnol.",
+      "locale": "fr-CA",
+      "keywords": "solfège,dictée,oreille,théorie,accordeur,métronome,lecture,rythme,intervalles,accords,gamme",
+      "marketingUrl": "https://tommusic.ca/musidev/",
+      "promotionalText": "Dictées, lecture de notes, accordeur, métronome et accompagnateur : tout pour apprendre la musique, conçu par un enseignant du Québec. Sans pub ni compte.",
+      "supportUrl": "https://tommusic.ca/musidev/soutien.html",
+      "whatsNew": null
+     },
+     "sets": [
+      [
+       "APP_DESKTOP",
+       6
+      ]
+     ]
+    }
+   ],
+   "review": {
+    "contactFirstName": false,
+    "contactLastName": false,
+    "contactPhone": false,
+    "contactEmail": false,
+    "demoAccountName": false,
+    "demoAccountPassword": false,
+    "demoAccountRequired": false,
+    "notes": true
+   },
+   "build": {
+    "type": "builds",
+    "id": "cf11ced6-d150-47c0-b131-076b4ba75644",
+    "attributes": {
+     "version": "33",
+     "uploadedDate": "2026-11-04T18:56:16-08:00",
+     "expirationDate": "2027-02-02T18:56:16-08:00",
+     "expired": false,
+     "minOsVersion": "12.0",
+     "lsMinimumSystemVersion": "12.0",
+     "computedMinMacOsVersion": null,
+     "computedMinVisionOsVersion": null,
+     "iconAssetToken": {
+      "templateUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/65/5d/cc/655dcc30-f67f-a154-a1f2-2143bd311873/AppIcon.icns/{w}x{h}bb.{f}",
+      "width": 256,
+      "height": 256
+     },
+     "processingState": "VALID",
+     "buildAudienceType": "APP_STORE_ELIGIBLE",
+     "usesNonExemptEncryption": false
+    },
+    "relationships": {
+     "preReleaseVersion": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/relationships/preReleaseVersion",
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/preReleaseVersion"
+      }
+     },
+     "individualTesters": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/relationships/individualTesters",
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/individualTesters"
+      }
+     },
+     "betaGroups": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/relationships/betaGroups"
+      }
+     },
+     "betaBuildLocalizations": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/relationships/betaBuildLocalizations",
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/betaBuildLocalizations"
+      }
+     },
+     "appEncryptionDeclaration": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/relationships/appEncryptionDeclaration",
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/appEncryptionDeclaration"
+      }
+     },
+     "betaAppReviewSubmission": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/relationships/betaAppReviewSubmission",
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/betaAppReviewSubmission"
+      }
+     },
+     "app": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/relationships/app",
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/app"
+      }
+     },
+     "buildBetaDetail": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/relationships/buildBetaDetail",
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/buildBetaDetail"
+      }
+     },
+     "appStoreVersion": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/relationships/appStoreVersion",
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/appStoreVersion"
+      }
+     },
+     "icons": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/relationships/icons",
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/icons"
+      }
+     },
+     "perfPowerMetrics": {
+      "links": {
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/perfPowerMetrics"
+      }
+     },
+     "diagnosticSignatures": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/relationships/diagnosticSignatures",
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644/diagnosticSignatures"
+      }
+     }
+    },
+    "links": {
+     "self": "https://api.appstoreconnect.apple.com/v1/builds/cf11ced6-d150-47c0-b131-076b4ba75644"
+    }
+   }
+  },
+  {
+   "id": "70c9204d-2d36-4a3f-bfc5-e696f59cc3c9",
+   "attr": {
+    "platform": "IOS",
+    "versionString": "1.5",
+    "appStoreState": "PREPARE_FOR_SUBMISSION",
+    "appVersionState": "PREPARE_FOR_SUBMISSION",
+    "copyright": "2026 Tom Tom Music",
+    "reviewType": "APP_STORE",
+    "releaseType": "AFTER_APPROVAL",
+    "earliestReleaseDate": null,
+    "usesIdfa": null,
+    "downloadable": true,
+    "createdDate": "2026-10-26T08:44:06-07:00"
+   },
+   "loc": [
+    {
+     "attr": {
+      "description": "MusiDev brings together everything you need to train your ear, learn to read music and practise your instrument. Designed by a high school music teacher, it works for students, hobby musicians and teachers who want a simple tool for the classroom or at home.\n\nHEAR\n• Melodic and rhythmic dictation: listen, then write straight onto the staff.\n• Intervals: ascending, descending or harmonic.\n• Chord progressions: recognise them by ear.\n\nREAD AND PLAY\n• Note reading in treble, bass and alto clef, against the clock.\n• Melodic reading and sight reading: the microphone checks every note you play or sing.\n• Rhythm reading: tap the rhythm after the count-in.\n• Sung solfège with pitch checking.\n• Drum reading and the 40 snare drum rudiments.\n\nTOOLS\n• Chromatic tuner with presets for guitar, bass, ukulele, violin and more.\n• Metronome with subdivisions.\n• Backing band: write a chord chart, pick a style, and drums, bass and piano play along. Scales and modes on the staff or on the fretboard.\n• Chord dictionary for guitar, ukulele and piano.\n• Recorder to listen back and share your takes.\n• Fingering charts for wind and string instruments, technical studies and vocal warm-ups.\n\nUNDERSTAND\n• A complete theory library: staff and clefs, rhythm, scales and keys, intervals, chords, cadences, modes, improvisation, tablature and drum notation, with audio examples.\n• Test my knowledge: quizzes at the level you choose.\n• Badges to stay motivated.\n\nYOUR PRIVACY\nNo account, no ads, no tracking. Your results and recordings stay on your device.\n\nAvailable in French, English and Spanish.",
+      "locale": "en-CA",
+      "keywords": "ear training,solfege,dictation,theory,tuner,metronome,sight reading,rhythm,intervals,chords",
+      "marketingUrl": "https://tommusic.ca/musidev/",
+      "promotionalText": "Dictations, note reading, tuner, metronome and a backing band: everything to learn music, made by a Quebec music teacher. No ads, no account.",
+      "supportUrl": "https://tommusic.ca/musidev/soutien.html",
+      "whatsNew": null
+     },
+     "sets": [
+      [
+       "APP_IPHONE_67",
+       6
+      ],
+      [
+       "APP_IPAD_PRO_3GEN_129",
+       6
+      ]
+     ]
+    },
+    {
+     "attr": {
+      "description": "MusiDev reúne en una sola app todo lo necesario para desarrollar el oído, aprender a leer música y practicar tu instrumento. Creada por un profesor de música de secundaria, sirve para estudiantes, músicos aficionados y docentes que buscan una herramienta sencilla para el aula o la casa.\n\nESCUCHAR\n• Dictado melódico y rítmico: escucha y escribe directamente en el pentagrama.\n• Intervalos: ascendentes, descendentes o armónicos.\n• Progresiones de acordes: reconócelas de oído.\n\nLEER Y TOCAR\n• Lectura de notas en clave de sol, fa y do, contra reloj.\n• Lectura melódica y a primera vista: el micrófono verifica cada nota que tocas o cantas.\n• Lectura rítmica: marca el ritmo después de la cuenta.\n• Solfeo cantado con verificación de la afinación.\n• Lectura de batería y los 40 rudimentos de caja.\n\nHERRAMIENTAS\n• Afinador cromático con ajustes para guitarra, bajo, ukelele, violín y más.\n• Metrónomo con subdivisiones.\n• Acompañamiento: escribe una progresión, elige un estilo, y batería, bajo y piano te acompañan. Escalas y modos en el pentagrama o en el mástil.\n• Diccionario de acordes para guitarra, ukelele y piano.\n• Grabadora para escucharte y compartir tus tomas.\n• Digitaciones de instrumentos de viento y cuerda, estudios técnicos y vocalizaciones.\n\nCOMPRENDER\n• Biblioteca teórica completa: pentagrama y claves, ritmo, escalas y tonalidades, intervalos, acordes, cadencias, modos, improvisación, tablaturas y partituras de batería, con ejemplos sonoros.\n• Pon a prueba tus conocimientos: cuestionarios según el nivel elegido.\n• Insignias para mantener la motivación.\n\nTU PRIVACIDAD\nSin cuenta, sin anuncios, sin rastreo. Tus resultados y grabaciones se quedan en tu dispositivo.\n\nDisponible en francés, inglés y español.",
+      "locale": "es-MX",
+      "keywords": "solfeo,dictado,oído,teoría,afinador,metrónomo,lectura,ritmo,intervalos,acordes,escala",
+      "marketingUrl": "https://tommusic.ca/musidev/",
+      "promotionalText": "Dictados, lectura de notas, afinador, metrónomo y acompañamiento: todo para aprender música, creado por un profesor de Quebec. Sin anuncios ni cuenta.",
+      "supportUrl": "https://tommusic.ca/musidev/soutien.html",
+      "whatsNew": null
+     },
+     "sets": []
+    },
+    {
+     "attr": {
+      "description": "MusiDev réunit dans une seule app tout ce qu'il faut pour développer l'oreille, apprendre à lire la musique et pratiquer son instrument. Conçue par un enseignant de musique au secondaire, elle convient aux élèves, aux musiciens amateurs et aux enseignants qui veulent un outil simple à utiliser en classe ou à la maison.\n\nENTENDRE\n• Dictée mélodique et dictée rythmique : écoute, puis écris directement sur la portée.\n• Intervalles : montants, descendants ou harmoniques.\n• Progressions d'accords : reconnais les enchaînements à l'oreille.\n\nLIRE ET JOUER\n• Lecture de notes en clé de sol, de fa et d'ut, contre la montre.\n• Lecture mélodique et lecture à vue : le micro vérifie chaque note que tu joues ou chantes.\n• Lecture rythmique : frappe le rythme après le décompte.\n• Solfège chanté avec vérification de la justesse.\n• Lecture batterie et les 40 rudiments de caisse claire.\n\nOUTILS\n• Accordeur chromatique avec préréglages pour guitare, basse, ukulélé, violon et plus.\n• Métronome avec subdivisions.\n• Accompagnateur : écris une grille d'accords, choisis un style, et batterie, basse et piano t'accompagnent. Gammes et modes sur portée ou sur manche.\n• Dictionnaire d'accords pour guitare, ukulélé et piano.\n• Enregistreur pour t'écouter et partager tes prises.\n• Doigtés d'instruments à vent et à cordes, études techniques et vocalises.\n\nCOMPRENDRE\n• Bibliothèque théorique complète : portée et clés, rythme, gammes et tonalités, intervalles, accords, cadences, modes, improvisation, tablatures et partitions de batterie, avec exemples sonores.\n• Tester mes connaissances : des questionnaires selon le niveau choisi.\n• Badges pour garder la motivation.\n\nRESPECT DE TA VIE PRIVÉE\nAucun compte, aucune publicité, aucun pistage. Tes résultats et tes enregistrements restent sur ton appareil.\n\nOfferte en français, en anglais et en espagnol.",
+      "locale": "fr-CA",
+      "keywords": "solfège,dictée,oreille,théorie,accordeur,métronome,lecture,rythme,intervalles,accords,gamme",
+      "marketingUrl": "https://tommusic.ca/musidev/",
+      "promotionalText": "Dictées, lecture de notes, accordeur, métronome et accompagnateur : tout pour apprendre la musique, conçu par un enseignant du Québec. Sans pub ni compte.",
+      "supportUrl": "https://tommusic.ca/musidev/soutien.html",
+      "whatsNew": null
+     },
+     "sets": [
+      [
+       "APP_IPHONE_67",
+       6
+      ],
+      [
+       "APP_IPAD_PRO_3GEN_129",
+       6
+      ]
+     ]
+    }
+   ],
+   "review": {
+    "contactFirstName": false,
+    "contactLastName": false,
+    "contactPhone": false,
+    "contactEmail": false,
+    "demoAccountName": false,
+    "demoAccountPassword": false,
+    "demoAccountRequired": false,
+    "notes": true
+   },
+   "build": {
+    "type": "builds",
+    "id": "7f4b7e4d-6e86-4ea8-beac-8da1c88b9548",
+    "attributes": {
+     "version": "32",
+     "uploadedDate": "2026-11-04T18:56:12-08:00",
+     "expirationDate": "2027-02-02T18:56:12-08:00",
+     "expired": false,
+     "minOsVersion": "15.0",
+     "lsMinimumSystemVersion": null,
+     "computedMinMacOsVersion": "12.0",
+     "computedMinVisionOsVersion": "1.0",
+     "iconAssetToken": {
+      "templateUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ac/3f/c4/ac3fc400-cf10-4851-a248-4d90435684da/AppIcon76x76@2x_U007eipad.png/{w}x{h}bb.{f}",
+      "width": 152,
+      "height": 152
+     },
+     "processingState": "VALID",
+     "buildAudienceType": "APP_STORE_ELIGIBLE",
+     "usesNonExemptEncryption": false
+    },
+    "relationships": {
+     "preReleaseVersion": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/relationships/preReleaseVersion",
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/preReleaseVersion"
+      }
+     },
+     "individualTesters": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/relationships/individualTesters",
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/individualTesters"
+      }
+     },
+     "betaGroups": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/relationships/betaGroups"
+      }
+     },
+     "betaBuildLocalizations": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/relationships/betaBuildLocalizations",
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/betaBuildLocalizations"
+      }
+     },
+     "appEncryptionDeclaration": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/relationships/appEncryptionDeclaration",
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/appEncryptionDeclaration"
+      }
+     },
+     "betaAppReviewSubmission": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/relationships/betaAppReviewSubmission",
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/betaAppReviewSubmission"
+      }
+     },
+     "app": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/relationships/app",
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/app"
+      }
+     },
+     "buildBetaDetail": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/relationships/buildBetaDetail",
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/buildBetaDetail"
+      }
+     },
+     "appStoreVersion": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/relationships/appStoreVersion",
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/appStoreVersion"
+      }
+     },
+     "icons": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/relationships/icons",
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/icons"
+      }
+     },
+     "perfPowerMetrics": {
+      "links": {
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/perfPowerMetrics"
+      }
+     },
+     "diagnosticSignatures": {
+      "links": {
+       "self": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/relationships/diagnosticSignatures",
+       "related": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548/diagnosticSignatures"
+      }
+     }
+    },
+    "links": {
+     "self": "https://api.appstoreconnect.apple.com/v1/builds/7f4b7e4d-6e86-4ea8-beac-8da1c88b9548"
+    }
+   }
+  }
+ ],
+ "price": {
+  "data": {
+   "type": "appPriceSchedules",
+   "id": "6827199318",
+   "relationships": {
+    "baseTerritory": {
+     "links": {
+      "self": "https://api.appstoreconnect.apple.com/v1/appPriceSchedules/6827199318/relationships/baseTerritory",
+      "related": "https://api.appstoreconnect.apple.com/v1/appPriceSchedules/6827199318/baseTerritory"
+     }
+    },
+    "manualPrices": {
+     "meta": {
+      "paging": {
+       "total": 1,
+       "limit": 10
+      }
+     },
+     "data": [
+      {
+       "type": "appPrices",
+       "id": "eyJzIjoiNjgyNzE5OTMxOCIsInQiOiJDQU4iLCJwIjoiMTAwNDkiLCJzZCI6MC4wLCJlZCI6MC4wfQ"
+      }
+     ],
+     "links": {
+      "self": "https://api.appstoreconnect.apple.com/v1/appPriceSchedules/6827199318/relationships/manualPrices",
+      "related": "https://api.appstoreconnect.apple.com/v1/appPriceSchedules/6827199318/manualPrices"
+     }
+    },
+    "automaticPrices": {
+     "links": {
+      "self": "https://api.appstoreconnect.apple.com/v1/appPriceSchedules/6827199318/relationships/automaticPrices",
+      "related": "https://api.appstoreconnect.apple.com/v1/appPriceSchedules/6827199318/automaticPrices"
+     }
+    }
+   },
+   "links": {
+    "self": "https://api.appstoreconnect.apple.com/v1/appPriceSchedules/6827199318"
+   }
+  },
+  "included": [
+   {
+    "type": "appPrices",
+    "id": "eyJzIjoiNjgyNzE5OTMxOCIsInQiOiJDQU4iLCJwIjoiMTAwNDkiLCJzZCI6MC4wLCJlZCI6MC4wfQ",
+    "attributes": {
+     "manual": true,
+     "startDate": null,
+     "endDate": null
+    },
+    "links": {
+     "self": "https://api.appstoreconnect.apple.com/v2/appPrices/eyJzIjoiNjgyNzE5OTMxOCIsInQiOiJDQU4iLCJwIjoiMTAwNDkiLCJzZCI6MC4wLCJlZCI6MC4wfQ"
+    }
+   }
+  ],
+  "links": {
+   "self": "https://api.appstoreconnect.apple.com/v1/apps/6827199318/appPriceSchedule?include=manualPrices"
+  }
+ },
+ "availability": {
+  "data": {
+   "type": "appAvailabilities",
+   "id": "6827199318",
+   "attributes": {
+    "availableInNewTerritories": true
+   },
+   "relationships": {
+    "territoryAvailabilities": {
+     "links": {
+      "self": "https://api.appstoreconnect.apple.com/v2/appAvailabilities/6827199318/relationships/territoryAvailabilities",
+      "related": "https://api.appstoreconnect.apple.com/v2/appAvailabilities/6827199318/territoryAvailabilities"
+     }
+    }
+   },
+   "links": {
+    "self": "https://api.appstoreconnect.apple.com/v2/appAvailabilities/6827199318"
+   }
+  },
+  "links": {
+   "self": "https://api.appstoreconnect.apple.com/v2/appAvailabilities/6827199318"
+  }
+ },
+ "builds": [
+  [
+   "33",
+   "VALID"
+  ],
+  [
+   "32",
+   "VALID"
+  ],
+  [
+   "31",
+   "VALID"
+  ],
+  [
+   "30",
+   "VALID"
+  ],
+  [
+   "28",
+   "VALID"
+  ],
+  [
+   "29",
+   "VALID"
+  ]
+ ]
+}
