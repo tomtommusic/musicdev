@@ -173,6 +173,10 @@ const TUNINGS={
     ['dropc','Drop C / accord en do (sol do sol si ré)',[67,48,55,59,62]],
     ['gmod','Sol modal (sol ré sol do ré)',[67,50,55,60,62]],
     ['opend','Open D (fa♯ ré fa♯ la ré)',[66,50,54,57,62]]]},
+  mando:{t:'Mandoline',sets:[
+    ['std','Standard (sol ré la mi)',[55,62,69,76]],
+    ['crossa','Cross A (la mi la mi)',[57,64,69,76]],
+    ['opend','Open D (ré ré la ré)',[50,62,69,74]]]},
   violon:{t:'Violon',sets:[['std','Standard (sol ré la mi)',[55,62,69,76]]]},
   alto:{t:'Alto',sets:[['std','Standard (do sol ré la)',[48,55,62,69]]]},
   cello:{t:'Violoncelle',sets:[['std','Standard (do sol ré la)',[36,43,50,57]]]},

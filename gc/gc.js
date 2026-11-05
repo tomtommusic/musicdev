@@ -25,11 +25,25 @@ const GC_TYPES=[
   {id:'dim7',sym:'°7',n:'septième diminuée',iv:[0,3,6,9]},
   {id:'m7b5',sym:'m7♭5',n:'demi-diminué',iv:[0,3,6,10]},
   {id:'aug',sym:'+',n:'augmenté',iv:[0,4,8]}];
-const GC={root:0,type:'maj',inst:'gtr'};
+/* accordages de guitare (de la corde grave à l'aiguë) ; « b » = noms en bémols */
+const GC_GTR_TUNES=[
+  ['std','Standard',[40,45,50,55,59,64]],
+  ['dropd','Drop D',[38,45,50,55,59,64]],
+  ['half','½ ton plus bas',[39,44,49,54,58,63],'b'],
+  ['full','1 ton plus bas',[38,43,48,53,57,62]],
+  ['dropc','Drop C',[36,43,48,53,57,62]],
+  ['openg','Open G',[38,43,50,55,59,62]],
+  ['opend','Open D',[38,45,50,54,57,62]],
+  ['opene','Open E',[40,47,52,56,59,64]],
+  ['dadgad','DADGAD',[38,45,50,55,57,62]]];
+const GC={root:0,type:'maj',inst:'gtr',gtune:'std'};
 try{Object.assign(GC,JSON.parse(localStorage.getItem('atelier-gc')||'{}'));}catch(e){}
-const gcSave=()=>{try{localStorage.setItem('atelier-gc',JSON.stringify({root:GC.root,type:GC.type,inst:GC.inst}));}catch(e){}};
+const gcSave=()=>{try{localStorage.setItem('atelier-gc',JSON.stringify({root:GC.root,type:GC.type,inst:GC.inst,gtune:GC.gtune}));}catch(e){}};
 const gcType=id=>GC_TYPES.find(t=>t.id===id)||GC_TYPES[0];
-const gcInst=()=>GC_INSTS.find(i=>i.id===GC.inst)||GC_INSTS[0];
+const gcGtrTune=()=>GC_GTR_TUNES.find(t=>t[0]===GC.gtune)||GC_GTR_TUNES[0];
+const gcInst=()=>{const I=GC_INSTS.find(i=>i.id===GC.inst)||GC_INSTS[0];if(I.id!=='gtr')return I;const t=gcGtrTune();return Object.assign({},I,{tune:t[2],tflat:t[3]==='b',drone:/^open|dadgad/.test(t[0])});};
+/* noms des cordes à vide, de la grave à l'aiguë (ex. ré la ré sol si mi) */
+const gcOpenNames=(TU,fl)=>TU.map(m=>gcNote(m%12,fl)).join(' ');
 /* nom d'une note selon l'orthographe du symbole (bémols pour mi♭, la♭, si♭, dièses sinon) */
 const gcFlat=r=>[3,8,10].includes(r);
 const gcNote=(pc,flat)=>dgCap(T(dgName(pc,flat)));
@@ -48,7 +62,7 @@ function gcVoicings(root,type,I){
     const have=new Set(snd.map(i=>(TU[i]+fr[i])%12));if(!req.every(p=>have.has(p)))return;
     const fd=snd.filter(i=>fr[i]>0);const opens=snd.length-fd.length;
     let minF=0,maxF=0;if(fd.length){minF=Math.min(...fd.map(i=>fr[i]));maxF=Math.max(...fd.map(i=>fr[i]));}
-    if(maxF-minF>span||maxF>12)return;if(opens&&maxF>4+(span-3))return;if(opens&&inner)return;
+    if(maxF-minF>span||maxF>12)return;if(opens&&maxF>(I.drone?9:4+(span-3)))return;if(opens&&inner)return;   /* accordages ouverts : les cordes à vide sonnent aussi haut sur le manche */
     /* barré : la plus basse case tenue sur plusieurs cordes, sans corde à vide ni étouffée dessous */
     let barre=null,fingers=fd.length;const atMin=fd.filter(i=>fr[i]===minF);
     if(atMin.length>=2&&(fd.length>4||(atMin.length>=3&&!opens))){const a=atMin[0],b=atMin[atMin.length-1];let ok=true;for(let i=a;i<=b;i++)if(fr[i]<minF)ok=false;
@@ -164,6 +178,9 @@ function gcRender(){
     el('section',{class:'mtsec gcpick'},
       el('p',{class:'gclab first'},'Instrument'),
       el('div',{class:'gcchips'},...GC_INSTS.map(i=>el('button',{type:'button',class:'dgchip','aria-pressed':String(i.id===GC.inst),onclick:()=>{GC.inst=i.id;gcSave();gcRender();}},i.t))),
+      I.id==='gtr'?el('p',{class:'gclab'},'Accordage'):null,
+      I.id==='gtr'?el('div',{class:'gcchips'},...GC_GTR_TUNES.map(t=>el('button',{type:'button',class:'dgchip','aria-pressed':String(t[0]===gcGtrTune()[0]),title:gcOpenNames(t[2],t[3]==='b'),onclick:()=>{GC.gtune=t[0];gcSave();gcRender();}},T(t[1])))):null,
+      I.id==='gtr'&&gcGtrTune()[0]!=='std'?el('p',{class:'hint gctune'},T('Cordes à vide')+' : ',el('b',{'data-notr':''},gcOpenNames(I.tune,I.tflat))):null,
       el('div',{class:'gcsearch'},search,btn('Trouver',go,'primary'),msg),
       el('p',{class:'gclab'},'Fondamentale'),
       el('div',{class:'gcchips'},...GC_LET.map((l,r)=>el('button',{type:'button',class:'dgchip gcroot','aria-pressed':String(r===GC.root),onclick:()=>{GC.root=r;gcSave();gcRender();}},
