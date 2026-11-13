@@ -12,7 +12,7 @@ Cette branche `sources` contient tout ce qui sert à le fabriquer. Point de sauv
    remplacer ces chemins par les nouveaux (`grep -rl scratchpad .` pour les trouver).
 3. Construire : `bash build.sh` → copie `index-before-quiz.html` dans `main/index.html`, puis applique dans l'ordre
    `quiz/integrate.py`, `method.py`, `tools/integrate_tools.py`, `features2.py` (accueil + accords de guitare), `unmute.py`, `micbleed.py`, `i18n/integrate_i18n.py`.
-4. Publier : augmenter `VERSION` dans `sw.js` (actuellement `musicdev-1.39.2`), commit, push sur `main`
+4. Publier : augmenter `VERSION` dans `sw.js` (actuellement `musicdev-1.39.3`), commit, push sur `main`
    (GitHub Pages se met à jour en ~30 s). Pousser aussi les sources modifiées sur cette branche.
 
 ## Repères
@@ -48,3 +48,4 @@ Cette branche `sources` contient tout ce qui sert à le fabriquer. Point de sauv
 ## 1.39.2
 - Explications au toucher (iOS) : action sur pointerup quand pointerType != mouse, puis le click suivant est avalé (HELP.swallow). Safari iOS n'envoie pas toujours de click sur un élément non cliquable.
 - Avant build.sh : `python3 i18n/mkextra.py` (sinon extra.json est périmé).
+- 1.39.3 : la clé (et le réglage « Clé ») pointait vers la fiche 'cles', fusionnée dans 'portee' : redirection dans helpTopicFor.
