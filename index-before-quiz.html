@@ -383,6 +383,7 @@ h1{font:700 clamp(2rem,4vw,2.9rem)/1.05 var(--f-display);letter-spacing:-.01em;c
 .helpbtn[aria-pressed="true"] .q{background:var(--accent-ink);color:var(--accent)}
 body.helpmode main{cursor:help}
 body.helpmode main *{cursor:help!important}
+@media (hover:none){body.helpmode main *{cursor:pointer!important;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}}
 .helpbox{position:fixed;z-index:50;pointer-events:none;border:2px dashed var(--accent);border-radius:10px;background:color-mix(in srgb,var(--accent) 7%,transparent);transition:all .08s}
 .helpbox .hb-tag{position:absolute;left:-2px;top:-26px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);font:700 .75rem/1 var(--f-body);padding:5px 9px;border-radius:8px}
 .helpwrap{position:relative;align-self:flex-start}
@@ -2855,11 +2856,18 @@ function helpHover(e){
   Object.assign(box.style,{left:(r.left-4)+'px',top:(r.top-4)+'px',width:(r.width+8)+'px',height:(r.height+8)+'px'});
   $('#hbtag').textContent=LIB_TOPICS[t].t;
 }
-['pointerdown','mousedown','click'].forEach(type=>document.addEventListener(type,e=>{
+/* iPhone/iPad : Safari n'envoie pas toujours de « click » quand on touche un élément non cliquable (texte, note de la partition…).
+   Au doigt, on agit donc dès que le doigt se lève (pointerup), puis on avale le « click » qui pourrait suivre,
+   sinon il déclencherait le bouton placé sous le doigt une fois le mode Explications fermé. */
+HELP.swallow=0;
+['pointerdown','pointerup','mousedown','mouseup','click'].forEach(type=>document.addEventListener(type,e=>{
+  if(type==='click'&&Date.now()<HELP.swallow){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();return;}
   if(!HELP.on)return;if(e.target.closest&&(e.target.closest('#helpbtn')||e.target.closest('#helpbar')))return;
   e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
-  if(type!=='click')return;
+  const touch=type==='pointerup'&&e.pointerType&&e.pointerType!=='mouse';
+  if(type!=='click'&&!touch)return;
   const t=helpTopicFor(helpTarget(e));helpSet(false);
+  if(touch)HELP.swallow=Date.now()+700;
   if(t&&LIB_TOPICS[t])openLibrary(t);
 },true));
 document.addEventListener('pointermove',helpHover,true);
