@@ -89,3 +89,10 @@
 .baw .mtsec.closed .bafoldi{transform:rotate(-90deg)}
 .baw .mtsec.closed>:not(h3){display:none}
 .baw .mtsec>h3+*{margin-top:10px}
+
+/* progression en degrés */
+.badeg .mtline{align-items:flex-end}
+.badegf{flex:1 1 220px}.badegin{width:100%;box-sizing:border-box;font:600 1rem/1.3 var(--f-mono,monospace)}
+.bakey.badeg{display:inline-flex;flex-direction:column;align-items:center;gap:3px;min-width:50px;padding:6px 8px}
+.bakey.badeg small{font:500 .72rem/1 var(--f-ui,inherit);color:var(--muted)}
+.badegout{font:600 .92rem/1.4 var(--f-mono,monospace);color:var(--ink);margin:6px 0}.badegout.bad{color:var(--bad,#b3261e)}

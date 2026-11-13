@@ -56,3 +56,8 @@
 .gckeys{font-weight:700;font-size:.92rem;color:var(--ink)}
 .gcfifth{margin:10px 0 0;font-size:.9rem;color:var(--ink)}
 @media (max-width:600px){.gcgrid.kb{grid-template-columns:1fr}}
+
+/* degrés des notes (option) */
+.gcdg{font:700 7.5px/1 var(--f-mono);fill:var(--accent)}.gcdg.root{fill:var(--ink)}
+.gckd{font:700 7px/1 var(--f-mono);fill:var(--accent-ink);opacity:.85}.gckd.b{font-size:6px}
+.gcdegtog{margin-top:8px;font-size:.88rem}

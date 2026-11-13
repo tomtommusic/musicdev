@@ -38,7 +38,14 @@ const GC_GTR_TUNES=[
   ['dadgad','DADGAD',[38,45,50,55,57,62]]];
 const GC={root:0,type:'maj',inst:'gtr',gtune:'std'};
 try{Object.assign(GC,JSON.parse(localStorage.getItem('atelier-gc')||'{}'));}catch(e){}
-const gcSave=()=>{try{localStorage.setItem('atelier-gc',JSON.stringify({root:GC.root,type:GC.type,inst:GC.inst,gtune:GC.gtune}));}catch(e){}};
+const gcSave=()=>{try{localStorage.setItem('atelier-gc',JSON.stringify({root:GC.root,type:GC.type,inst:GC.inst,gtune:GC.gtune,deg:!!GC.deg}));}catch(e){}};
+/* degré d'une note dans l'accord (1, 3, ♭3, 5, ♭5, ♯5, 6, ♭7, 7, ♭♭7, 9, 2, 4), à partir de son écart en demi-tons avec la fondamentale */
+/* nom d'une note de l'accord, écrit comme dans l'en-tête (mi♭ dans do mineur, pas ré♯) */
+const gcNm=(pc,root,flat,ty)=>{const i=((pc-root)%12+12)%12;return gcNote(pc,flat||(!!ty&&[3,6,10].includes(i)&&ty.id!=='aug'));};
+function gcDeg(ty,semi){semi=((semi%12)+12)%12;
+  if(semi===2)return ty.id==='sus2'?'2':'9';
+  if(semi===9)return ty.id==='dim7'?'♭♭7':'6';
+  return{0:'1',1:'♭9',3:'♭3',4:'3',5:'4',6:'♭5',7:'5',8:'♯5',10:'♭7',11:'7'}[semi]||'?';}
 const gcType=id=>GC_TYPES.find(t=>t.id===id)||GC_TYPES[0];
 const gcGtrTune=()=>GC_GTR_TUNES.find(t=>t[0]===GC.gtune)||GC_GTR_TUNES[0];
 const gcInst=()=>{const I=GC_INSTS.find(i=>i.id===GC.inst)||GC_INSTS[0];if(I.id!=='gtr')return I;const t=gcGtrTune();return Object.assign({},I,{tune:t[2],tflat:t[3]==='b',drone:/^open|dadgad/.test(t[0])});};
@@ -90,10 +97,10 @@ function gcFingers(v){const f=[],fd=v.fr.map((x,i)=>i).filter(i=>v.fr[i]>0);let 
   fd.filter(i=>f[i]==null).sort((a,b)=>v.fr[a]-v.fr[b]||a-b).forEach(i=>{f[i]=n++;});return f;}
 
 /* ---------- diagramme (cordes) ---------- */
-function gcDiagram(v,root,flat,TU){
+function gcDiagram(v,root,flat,TU,ty,showDeg){
   const NS='http://www.w3.org/2000/svg',N=TU.length,SX=18,SY=22,X0=N<6?34:26,Y0=30,NF=5;
   const start=v.maxF<=5?1:v.minF;const svg=document.createElementNS(NS,'svg');
-  svg.setAttribute('viewBox',`0 0 ${X0*2+SX*5} ${Y0+SY*NF+30}`);svg.setAttribute('class','gcd');svg.setAttribute('aria-hidden','true');
+  svg.setAttribute('viewBox',`0 0 ${X0*2+SX*5} ${Y0+SY*NF+(showDeg?42:30)}`);svg.setAttribute('class','gcd');svg.setAttribute('aria-hidden','true');
   const mk=(t,a,txt)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;svg.append(e);return e;};
   const off=(5-(N-1))*SX/2,x=i=>X0+off+i*SX,y=f=>Y0+(f-start+.5)*SY;
   for(let k=0;k<=NF;k++)mk('line',{x1:x(0),x2:x(N-1),y1:Y0+k*SY,y2:Y0+k*SY,class:'gcfret'});
@@ -107,7 +114,8 @@ function gcDiagram(v,root,flat,TU){
     else if(f===0)mk('circle',{cx:x(i),cy:Y0-14,r:4.6,class:'gco'});
     else{if(!(v.barre&&f===v.barre.f&&i>v.barre.a&&i<v.barre.b&&fg[i]===1))mk('circle',{cx:x(i),cy:y(f),r:7.6,class:'gcdot'});
       if(!(v.barre&&fg[i]===1&&i!==v.barre.a))mk('text',{x:x(i),y:y(f)+3.6,'text-anchor':'middle',class:'gcfn'},String(fg[i]));}
-    if(f>=0){const pc=(TU[i]+f)%12;mk('text',{x:x(i),y:Y0+NF*SY+16,'text-anchor':'middle',class:'gcnn'+(pc===root?' root':'')},gcNote(pc,flat).slice(0,4));}}
+    if(f>=0){const pc=(TU[i]+f)%12;mk('text',{x:x(i),y:Y0+NF*SY+16,'text-anchor':'middle',class:'gcnn'+(pc===root?' root':'')},gcNm(pc,root,flat,ty).slice(0,4));
+      if(showDeg)mk('text',{x:x(i),y:Y0+NF*SY+29,'text-anchor':'middle',class:'gcdg'+(pc===root?' root':'')},gcDeg(ty,pc-root));}}
   return svg;
 }
 function gcStrum(v,TU){try{const c=A.init();if(typeof qzUnmute==='function')qzUnmute();let t=c.currentTime+.04;
@@ -121,7 +129,7 @@ function gcPianoVoicings(root,type){
   for(let k=0;k<n;k++){let v=tones.map((m,j)=>j<k?m+12:m).sort((a,b)=>a-b);if(Math.max(...v)>84)v=v.map(m=>m-12);out.push({inv:k,notes:v});}
   return out;
 }
-function gcKeyboard(notes,root,flat){
+function gcKeyboard(notes,root,flat,ty,showDeg){
   const NS='http://www.w3.org/2000/svg',WW=20,WH=86,BW=13,BH=54;
   const lo=Math.floor(Math.min(...notes)/12)*12,hi=Math.max(lo+23,Math.floor(Math.max(...notes)/12)*12+11);
   const whites=[];for(let m=lo;m<=hi;m++)if(!dgBlack(m))whites.push(m);
@@ -129,10 +137,12 @@ function gcKeyboard(notes,root,flat){
   const mk=(t,a,txt)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;svg.append(e);return e;};
   const on=new Set(notes),wx={};whites.forEach((m,i)=>wx[m]=1+i*WW);
   whites.forEach(m=>{mk('rect',{x:wx[m],y:1,width:WW,height:WH,rx:3,class:'gcw'+(on.has(m)?' on':'')});
-    if(on.has(m))mk('text',{x:wx[m]+WW/2,y:WH-8,'text-anchor':'middle',class:'gckn'+(m%12===root?' root':'')},gcNote(m%12,flat).slice(0,4));});
+    if(on.has(m))mk('text',{x:wx[m]+WW/2,y:WH-8,'text-anchor':'middle',class:'gckn'+(m%12===root?' root':'')},gcNm(m%12,root,flat,ty).slice(0,4));
+    if(on.has(m)&&showDeg)mk('text',{x:wx[m]+WW/2,y:WH-20,'text-anchor':'middle',class:'gckd'},gcDeg(ty,m-root));});
   for(let m=lo;m<=hi;m++)if(dgBlack(m)){const x=wx[m-1]+WW-BW/2;mk('rect',{x,y:1,width:BW,height:BH,rx:2,class:'gcb'+(on.has(m)?' on':'')});
-    if(on.has(m))mk('text',{x:x+BW/2,y:BH-7,'text-anchor':'middle',class:'gckn b'+(m%12===root?' root':'')},gcNote(m%12,flat).slice(0,4));}
-  if(lo<=60&&hi>=60)mk('circle',{cx:wx[60]+WW/2,cy:WH-22,r:2,class:'gcc4'});
+    if(on.has(m))mk('text',{x:x+BW/2,y:BH-7,'text-anchor':'middle',class:'gckn b'+(m%12===root?' root':'')},gcNm(m%12,root,flat,ty).slice(0,4));
+    if(on.has(m)&&showDeg)mk('text',{x:x+BW/2,y:BH-17,'text-anchor':'middle',class:'gckd b'},gcDeg(ty,m-root));}
+  if(lo<=60&&hi>=60)mk('circle',{cx:wx[60]+WW/2,cy:showDeg?WH-34:WH-22,r:2,class:'gcc4'});
   return svg;
 }
 function gcPlayKeys(notes){try{const c=A.init();if(typeof qzUnmute==='function')qzUnmute();const t=c.currentTime+.04;notes.forEach((m,i)=>A.piano(m,t+i*.03,2,.45));}catch(e){}}
@@ -164,13 +174,13 @@ function gcRender(){
   let cards,hint;
   if(I.kb){const vs=gcPianoVoicings(GC.root,GC.type);
     cards=el('div',{class:'gcgrid kb'},...vs.map(v=>{const lab=T(GC_INV[v.inv]);
-      return el('button',{type:'button',class:'gccard kb',onclick:()=>gcPlayKeys(v.notes),'aria-label':sym+' — '+lab},gcKeyboard(v.notes,GC.root%12,flat),
-        el('span',{class:'gckeys','data-notr':''},v.notes.map(m=>gcNote(m%12,flat)).join(' – ')),el('span',{class:'gccap','data-notr':''},lab),el('span',{class:'gcplay','aria-hidden':'true'},'▶'));}));
+      return el('button',{type:'button',class:'gccard kb',onclick:()=>gcPlayKeys(v.notes),'aria-label':sym+' — '+lab},gcKeyboard(v.notes,GC.root%12,flat,ty,!!GC.deg),
+        el('span',{class:'gckeys','data-notr':''},v.notes.map(m=>gcNm(m%12,GC.root%12,flat,ty)).join(' – ')),el('span',{class:'gccap','data-notr':''},lab),el('span',{class:'gcplay','aria-hidden':'true'},'▶'));}));
     hint='Touche un clavier pour l\'entendre. Les noms sont écrits sur les touches à jouer; le point marque le do central.';}
   else{const vs=gcVoicings(GC.root,GC.type,I);
     cards=vs.length?el('div',{class:'gcgrid'},...vs.map(v=>{
       const lab=v.minF===0||(v.opens&&v.minF<=3)?T('Position ouverte'):v.barre?TL(`Barré, case ${v.barre.f}`,`Barre, fret ${v.barre.f}`,`Cejilla, traste ${v.barre.f}`):TL(`Case ${v.minF}`,`Fret ${v.minF}`,`Traste ${v.minF}`);
-      return el('button',{type:'button',class:'gccard',onclick:()=>gcStrum(v,I.tune),'aria-label':sym+' — '+lab},gcDiagram(v,GC.root,flat,I.tune),el('span',{class:'gccap','data-notr':''},lab),el('span',{class:'gcplay','aria-hidden':'true'},'▶'));}))
+      return el('button',{type:'button',class:'gccard',onclick:()=>gcStrum(v,I.tune),'aria-label':sym+' — '+lab},gcDiagram(v,GC.root,flat,I.tune,ty,!!GC.deg),el('span',{class:'gccap','data-notr':''},lab),el('span',{class:'gcplay','aria-hidden':'true'},'▶'));}))
       :el('p',{class:'hint'},'Aucune position simple trouvée pour cet accord.');
     hint='Touche un diagramme pour l\'entendre. × = corde étouffée · ○ = corde à vide · chiffres = doigts (1 = index) · nom en gras = fondamentale.';}
   const fifth=I.fifth?el('p',{class:'gcfifth'},new Set(ty.iv.map(i=>(GC.root+i)%12)).has(I.fifth%12)?'5e corde (sol aigu) : à vide, elle fait partie de l\'accord.':'5e corde (sol aigu) : ne la joue pas, le sol ne fait pas partie de l\'accord.'):null;
@@ -190,7 +200,9 @@ function gcRender(){
         el('b',{'data-notr':''},gcSym(GC.root,t)),el('span',{class:'gctn'},' '+T(t.n)))))),
     el('section',{class:'mtsec gcres'},
       el('div',{class:'gchead'},el('h2',{class:'gcsym','data-notr':''},sym),el('div',{},el('p',{class:'gcname','data-notr':''},name),
-        el('p',{class:'gcnotes'},el('span',{},'Notes'),' ',el('b',{'data-notr':''},notes.join(' – '))))),
+        el('p',{class:'gcnotes'},el('span',{},'Notes'),' ',el('b',{'data-notr':''},notes.join(' – '))),
+        GC.deg?el('p',{class:'gcnotes gcdegs'},el('span',{},'Degrés'),' ',el('b',{'data-notr':''},ty.iv.map(i=>gcDeg(ty,i)).join(' – '))):null,
+        el('label',{class:'chk gcdegtog'},(()=>{const c=el('input',{type:'checkbox'});c.checked=!!GC.deg;c.addEventListener('change',()=>{GC.deg=c.checked;gcSave();gcRender();});return c;})(),'Afficher les degrés'))),
       cards,fifth,el('p',{class:'hint'},hint)));
 }
 MOD.gc.mount=function(){$('#toolbar').replaceChildren();this.root=el('div',{class:'tl gc'});$('#answer').replaceChildren(this.root);};

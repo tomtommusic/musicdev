@@ -1289,7 +1289,15 @@
 "{0} (la fondamentale)": "{0} (the root)",
 "Quelles sont les notes guides (3ce et 7e) de l'accord {0}7 ?": "What are the guide tones (3rd and 7th) of the {0}7 chord?",
 "Dans un ii–V–I en {0}, la 7e de l'accord {1}7 ({2}) descend d'un demi-ton vers quelle note de l'accord {3} ?": "In a ii–V–I in {0}, the 7th of the {1}7 chord ({2}) falls a half step to which note of the {3} chord?",
-"Écoute l'accord de la tonique puis la gamme. Quel mode entends-tu ?": "Listen to the tonic chord and then the scale. Which mode do you hear?"
+"Écoute l'accord de la tonique puis la gamme. Quel mode entends-tu ?": "Listen to the tonic chord and then the scale. Which mode do you hear?",
+"Outils": "Tools",
+"Afficher les degrés": "Show degrees",
+"Progression en degrés": "Progression in Roman numerals",
+"Accords de la gamme": "Chords of the key",
+"→ Mettre dans la grille": "→ Put in the chart",
+"Effacer": "Clear",
+"Degrés non reconnus : {0}": "Unrecognized numerals: {0}",
+"Sépare les accords par « – » ou « | ». Tout en majuscules (I – VI – II – V) : l'app prend les accords de la gamme. Majuscules et minuscules mélangées : majuscule = majeur, minuscule = mineur. Aussi : ° (diminué), 7, maj7, ø7, ♭VII, V7/V.": "Separate chords with “–” or “|”. All capitals (I – VI – II – V): the app uses the chords of the key. Mixed capitals and lowercase: capital = major, lowercase = minor. Also: ° (diminished), 7, maj7, ø7, ♭VII, V7/V."
 },
 "es": {
 "Modules": "Módulos",
@@ -2581,6 +2589,14 @@
 "{0} (la fondamentale)": "{0} (la fundamental)",
 "Quelles sont les notes guides (3ce et 7e) de l'accord {0}7 ?": "¿Cuáles son las notas guía (3.ª y 7.ª) del acorde {0}7?",
 "Dans un ii–V–I en {0}, la 7e de l'accord {1}7 ({2}) descend d'un demi-ton vers quelle note de l'accord {3} ?": "En un ii–V–I en {0}, la 7.ª del acorde {1}7 ({2}) baja un semitono hacia ¿qué nota del acorde {3}?",
-"Écoute l'accord de la tonique puis la gamme. Quel mode entends-tu ?": "Escucha el acorde de tónica y luego la escala. ¿Qué modo oyes?"
+"Écoute l'accord de la tonique puis la gamme. Quel mode entends-tu ?": "Escucha el acorde de tónica y luego la escala. ¿Qué modo oyes?",
+"Outils": "Herramientas",
+"Afficher les degrés": "Mostrar los grados",
+"Progression en degrés": "Progresión en grados",
+"Accords de la gamme": "Acordes de la tonalidad",
+"→ Mettre dans la grille": "→ Poner en el cifrado",
+"Effacer": "Borrar",
+"Degrés non reconnus : {0}": "Grados no reconocidos: {0}",
+"Sépare les accords par « – » ou « | ». Tout en majuscules (I – VI – II – V) : l'app prend les accords de la gamme. Majuscules et minuscules mélangées : majuscule = majeur, minuscule = mineur. Aussi : ° (diminué), 7, maj7, ø7, ♭VII, V7/V.": "Separa los acordes con «–» o «|». Todo en mayúsculas (I – VI – II – V): la app usa los acordes de la tonalidad. Mayúsculas y minúsculas mezcladas: mayúscula = mayor, minúscula = menor. También: ° (disminuido), 7, maj7, ø7, ♭VII, V7/V."
 }
 }

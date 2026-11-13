@@ -130,8 +130,60 @@ function baGenProg(style){
     if(minor&&m[1])semi=BA_ROM[rn]-1;   /* en mineur, bIII / bVI / bVII = degrés de la gamme majeure abaissés */
     if(low&&!/^ø|^°/.test(suf))suf=suf==='7'?'m7':'m'+suf;
     return NM[((key+semi)%12+12)%12]+suf;};
+  baGenProg.info={tpl,key,minor};
   return tpl.split('|').map(b=>b.trim().split(/\s+/).map(chord).join(' ')).join(' | ');
 }
+
+/* ---- progression écrite en degrés (I – vi – ii – V) + tonalité → grille d'accords ----
+   Majuscules et minuscules mélangées : la casse décide (I majeur, vi mineur).
+   Tout en majuscules (ou tout en minuscules) : on prend les accords de la gamme (I – VI – II – V en do = C – Am – Dm – G).
+   ° = diminué, ø = demi-diminué, + = augmenté ; 7 = septième (de dominante sur un accord majeur), maj7, 6, 9, add9, sus2, sus4 ;
+   ♭ ou ♯ devant le chiffre romain (♭VII) ; V7/V = dominante secondaire. En mineur : i ii° III iv V VI VII (V majeur). */
+const BA_DKEYS=[[0,0],[7,4],[2,1],[9,5],[4,2],[11,6],[6,3],[1,1],[8,5],[3,2],[10,6],[5,3]];   /* majeures : [hauteur, lettre] */
+const BA_DMKEYS=[[9,5],[4,2],[11,6],[6,3],[1,0],[8,4],[2,1],[7,4],[0,0],[5,3],[10,6],[3,2]];   /* mineures */
+const BA_NAT=[0,2,4,5,7,9,11],BA_DSC={M:[0,2,4,5,7,9,11],m:[0,2,3,5,7,8,10]};
+const BA_DQ={M:['M','m','m','M','M','m','d'],m:['m','d','M','m','M','M','M']};   /* qualité des accords de la gamme (V majeur en mineur) */
+const BA_ROMS=['i','ii','iii','iv','v','vi','vii'];
+/* nom de note avec la bonne lettre (fa♯ et non sol♭ en ré majeur) */
+function baDSpell(pc,li){const a=((pc-BA_NAT[li])%12+18)%12-6;if(Math.abs(a)>1)return BA_NAMES_SH[((pc%12)+12)%12].replace('♯','#').replace('♭','b');return'CDEFGAB'[li]+(a===1?'♯':a===-1?'♭':'');}
+const baKeyName=(pc,li,minor)=>{const L=baDSpell(pc,li);const FR={C:'do',D:'ré',E:'mi',F:'fa',G:'sol',A:'la',B:'si'},ES={C:'Do',D:'Re',E:'Mi',F:'Fa',G:'Sol',A:'La',B:'Si'};
+  const fr=FR[L[0]]+L.slice(1),es=ES[L[0]]+L.slice(1);
+  return TL(`${L}${minor?'m':''} (${fr} ${minor?'mineur':'majeur'})`,`${L} ${minor?'minor':'major'}`,`${es} ${minor?'menor':'mayor'}`);};
+function baDegChord(tok,tonic,tli,minor,auto){
+  let sec=null;const sl=tok.indexOf('/');
+  if(sl>0){const right=tok.slice(sl+1),m2=right.match(/^([b♭#♯]?)(vii|vi|iv|v|iii|ii|i)$/i);
+    if(m2){const d=BA_ROMS.indexOf(m2[2].toLowerCase()),acc=m2[1]?(/[#♯]/.test(m2[1])?1:-1):0;
+      sec={pc:((tonic+BA_DSC[minor?'m':'M'][d]+acc)%12+12)%12,li:(tli+d)%7};tok=tok.slice(0,sl);}}
+  if(sec){tonic=sec.pc;tli=sec.li;minor=false;auto=false;}
+  const m=tok.match(/^([b♭#♯]?)(VII|VI|IV|V|III|II|I|vii|vi|iv|v|iii|ii|i)(.*)$/);if(!m)return null;
+  const d=BA_ROMS.indexOf(m[2].toLowerCase()),up=m[2]===m[2].toUpperCase();let acc=m[1]?(/[#♯]/.test(m[1])?1:-1):0,suf=m[3];
+  let semi;if(minor&&acc===-1)semi=BA_DSC.M[d]-1;else semi=BA_DSC[minor?'m':'M'][d]+acc;   /* en mineur, ♭III ♭VI ♭VII = degrés de la majeure abaissés */
+  if(minor&&acc===-1)acc=0;
+  const pc=((tonic+semi)%12+12)%12,li=(tli+d)%7;
+  let q=(auto&&!m[1])?BA_DQ[minor?'m':'M'][d]:(up?'M':'m');
+  if(/^(°|o(?![a-z])|dim)/.test(suf)){q='d';suf=suf.replace(/^(°|o|dim)/,'');}
+  else if(/^ø/.test(suf)){q='h';suf=suf.replace(/^ø/,'');}
+  else if(/^(\+|aug)/.test(suf)){q='a';suf=suf.replace(/^(\+|aug)/,'');}
+  let out;
+  if(/^(maj7|M7|Δ7?|maj)$/.test(suf))out=q==='m'?'m7':'maj7';
+  else if(q==='M')out=suf;
+  else if(q==='m')out=/^sus/.test(suf)?suf:'m'+suf;
+  else if(q==='d')out=suf==='7'?(m[3].startsWith('°')||m[3].startsWith('dim')||m[3].startsWith('o')?'dim7':'m7b5'):'dim';
+  else if(q==='h')out='m7b5';
+  else out='aug';
+  if(q==='d'&&suf==='7'&&auto&&!/^(°|o|dim)/.test(m[3]))out='m7b5';
+  const sym=baDSpell(pc,li)+out;const c=baParse(sym);return c&&!c.bad?sym:null;
+}
+function baDegGrid(txt,keyIdx,minor){
+  const K=(minor?BA_DMKEYS:BA_DKEYS)[keyIdx]||BA_DKEYS[0];
+  const bars=String(txt||'').replace(/\n/g,'|').split(/\s*[|,–—]\s*|\s+-\s+|\s*-\s*(?=[b♭#♯]?[ivIV])/).map(b=>b.trim()).filter(Boolean);
+  const nums=bars.flatMap(b=>b.split(/\s+/)).map(t=>(t.replace(/^[b♭#♯]/,'').match(/^(VII|VI|IV|V|III|II|I|vii|vi|iv|v|iii|ii|i)/)||[])[0]).filter(Boolean);const auto=nums.every(x=>x===x.toUpperCase())||nums.every(x=>x===x.toLowerCase());
+  const bad=[];const out=bars.map(b=>b==='%'?'%':b.split(/\s+/).map(t=>{const c=baDegChord(t,K[0],K[1],minor,auto);if(!c)bad.push(t);return c;}).filter(Boolean).join(' ')).filter(Boolean);
+  return{grid:out.join(' | '),bad,auto};
+}
+/* accords de la gamme, pour les boutons : [chiffre romain, accord] */
+function baDegChips(keyIdx,minor){const K=(minor?BA_DMKEYS:BA_DKEYS)[keyIdx]||BA_DKEYS[0],Q=BA_DQ[minor?'m':'M'];
+  return BA_ROMS.map((r,d)=>{const q=Q[d],rom=(q==='M'?r.toUpperCase():r)+(q==='d'?'°':'');return[rom,baDegChord(rom,K[0],K[1],minor,false)];});}
 /* ---- intensité : change l'arrangement, pas seulement le volume ----
    Doux : grosse caisse et charleston sur les temps, cross-stick au lieu de la caisse claire, basse et piano sur les temps seulement, pas de roulement.
    Intense : ride au lieu du charleston (pop, rock, country, ballade), grosse caisse plus chargée, basse en croches (pop, rock, country),
@@ -307,6 +359,26 @@ MOD.ba.fresh=function(){
   const addBar=()=>{const g=BA_S.grid.replace(/\s+$/,'');if(!g||/\|$/.test(g))return;setGrid(g+' |');};
   const addRepeat=()=>{let g=BA_S.grid.replace(/\s+$/,'');if(!g)return;if(!/\|$/.test(g))g+=' |';setGrid(g+' %');};
   const undo=()=>{let g=BA_S.grid.replace(/\s+$/,'');g=g.replace(/\s*(\||[^\s|]+)$/,'');setGrid(g);};
+  /* progression en degrés */
+  const D=BA_S.deg||(BA_S.deg={prog:'I – vi – ii – V',key:0,minor:false,last:''});
+  const degIn=el('input',{type:'text',class:'qzin badegin',spellcheck:'false',autocapitalize:'off',autocomplete:'off',placeholder:'I – vi – ii – V','aria-label':'Progression en degrés'});degIn.value=D.prog;
+  const keyOpts=()=>[...BA_DKEYS.map((k,i)=>['M'+i,baKeyName(k[0],k[1],false)]),...BA_DMKEYS.map((k,i)=>['m'+i,baKeyName(k[0],k[1],true)])];
+  const keySel=sel('ba_dkey',keyOpts(),(D.minor?'m':'M')+D.key,v=>{D.minor=v[0]==='m';D.key=+v.slice(1);degApply(false);paintChips();});
+  const degOut=el('p',{class:'hint badegout','aria-live':'polite'});
+  const chipBox=el('div',{class:'bakeys badegchips'});
+  const degApply=force=>{D.prog=degIn.value;const r=baDegGrid(D.prog,D.key,D.minor);
+    degOut.textContent=r.bad.length?T('Degrés non reconnus : {0}').replace('{0}',r.bad.join(', ')):r.grid?'→ '+r.grid:'';degOut.classList.toggle('bad',!!r.bad.length);
+    if(r.grid&&!r.bad.length&&(force||!BA_S.grid.trim()||BA_S.grid.trim()===String(D.last||'').trim())){D.last=r.grid;setGrid(r.grid);}else save();};
+  const paintChips=()=>chipBox.replaceChildren(...baDegChips(D.key,D.minor).map(([rom,ch])=>el('button',{type:'button',class:'bakey badeg',title:ch||'',onclick:()=>{const v=degIn.value.replace(/\s+$/,''),au=v&&baDegGrid(v,D.key,D.minor).auto&&/[IV]/.test(v),r2=au?rom.toUpperCase():rom;degIn.value=v?v+' – '+r2:r2;degApply(false);}},el('b',{'data-notr':''},rom),el('small',{'data-notr':''},ch?baName(baParse(ch)):''))));
+  degIn.addEventListener('input',()=>degApply(false));
+  const degUndo=()=>{degIn.value=degIn.value.replace(/\s*[–\-|,]?\s*[^\s–\-|,]+\s*$/,'');degApply(false);};
+  const degBox=el('div',{class:'babuild badeg'},
+    el('div',{class:'bbrow'},el('span',{class:'fl'},'Progression en degrés')),
+    el('div',{class:'mtline'},el('label',{class:'qzfield'},el('span',{class:'fl'},'Tonalité'),keySel),el('label',{class:'qzfield badegf'},el('span',{class:'fl'},'Degrés'),degIn)),
+    el('div',{class:'bbrow'},el('span',{class:'fl'},'Accords de la gamme'),chipBox),
+    degOut,
+    el('div',{class:'bbrow bbtools'},btn('→ Mettre dans la grille',()=>degApply(true),'primary'),btn('⌫ Retirer le dernier',degUndo,'quiet'),btn('Effacer',()=>{degIn.value='';degApply(false);},'quiet')),
+    el('p',{class:'hint'},'Sépare les accords par « – » ou « | ». Tout en majuscules (I – VI – II – V) : l\'app prend les accords de la gamme. Majuscules et minuscules mélangées : majuscule = majeur, minuscule = mineur. Aussi : ° (diminué), 7, maj7, ø7, ♭VII, V7/V.'));
   const hear=()=>{const c=baParse(sym());if(!c||c.bad)return;const ac=A.init();if(typeof qzUnmute==='function')qzUnmute();const t0=ac.currentTime+.03;
     baVoice(c).forEach(m=>A.piano(m,t0,1.4,.42));A.bass(baBassNote(c,'R'),t0,1.4,.7);};
   const meterSel=el('select',{id:'ba_meter'});meterSel.addEventListener('change',()=>{BA_S.meter=meterSel.value;save();M.paint();});
@@ -349,7 +421,8 @@ MOD.ba.fresh=function(){
       el('div',{class:'babar'},M.play,M.cnt,el('button',{type:'button',class:'btn quiet sq','aria-label':'Plus lent',onclick:()=>setT(BA_S.tempo-4)},'−'),tl,el('button',{type:'button',class:'btn quiet sq','aria-label':'Plus rapide',onclick:()=>setT(BA_S.tempo+4)},'+'),btn('Tap',tap,'quiet')),
       tr,M.cells,M.err),
     el('section',{class:'mtsec'},el('h3',{},'Grille d\'accords'),
-      el('div',{class:'mtline'},el('label',{class:'qzfield'},el('span',{class:'fl'},'Grilles toutes prêtes'),preSel),el('div',{class:'qzfield'},el('span',{class:'fl'},'Au hasard'),btn('🎲 Nouvelle progression',()=>setGrid(baGenProg(BA_S.style)),'quiet')),el('label',{class:'qzfield'},el('span',{class:'fl'},'Chiffre indicateur'),meterSel)),
+      el('div',{class:'mtline'},el('label',{class:'qzfield'},el('span',{class:'fl'},'Grilles toutes prêtes'),preSel),el('div',{class:'qzfield'},el('span',{class:'fl'},'Au hasard'),btn('🎲 Nouvelle progression',()=>{const g=baGenProg(BA_S.style),inf=baGenProg.info;let done=false;if(inf){const L=inf.minor?BA_DMKEYS:BA_DKEYS,ki=L.findIndex(k=>k[0]===inf.key);if(ki>=0){const r=baDegGrid(inf.tpl.replace(/\s*\|\s*/g,' – '),ki,inf.minor);if(r.grid&&!r.bad.length){D.key=ki;D.minor=inf.minor;degIn.value=inf.tpl.replace(/\s*\|\s*/g,' – ');D.prog=degIn.value;keySel.value=(D.minor?'m':'M')+ki;paintChips();D.last=r.grid;setGrid(r.grid);done=true;}}}if(!done)setGrid(g);},'quiet')),el('label',{class:'qzfield'},el('span',{class:'fl'},'Chiffre indicateur'),meterSel)),
+      degBox,
       builder,
       area,
       el('p',{class:'hint'},'Sépare les mesures par « | » et les accords d\'une même mesure par une espace. Exemples : C, Am, F♯m7, B♭maj7, G7/B, Dsus4, Edim, ou en français : Do, Rém, Sol7. « % » répète la mesure précédente.')),
@@ -369,7 +442,7 @@ MOD.ba.fresh=function(){
     const set=open=>{sec.classList.toggle('closed',!open);b.setAttribute('aria-expanded',String(open));};
     set(BA_S.fold[key]===false);   /* fermés par défaut */
     b.addEventListener('click',()=>{const open=sec.classList.contains('closed');set(open);BA_S.fold[key]=!open;save();if(open&&key==='scale'&&M.scPaint)M.scPaint();});});
-  fillMeters();setT(BA_S.tempo);M.paint();M.ui();paintB();
+  fillMeters();setT(BA_S.tempo);M.paint();M.ui();paintB();paintChips();{const r=baDegGrid(D.prog,D.key,D.minor);degOut.textContent=r.grid&&!r.bad.length?'→ '+r.grid:'';}
   S.keyHandler=e=>{if(e.code==='Space'&&document.activeElement!==area){e.preventDefault();BA.sess?baStop():baPlay();return true;}};
 };
 MOD.ba.now=function(i){const M=this;if(!M.cells)return;if(M.scChord){const bs=baGrid(BA_S.grid).bars;if(i>=0&&bs[i])M.scChord(bs[i][0]);else if(i<0&&M.scCh){M.scCh=null;M.scPaint();}}M.cnt.textContent='';M.cells.querySelectorAll('.bacell').forEach(c=>c.classList.toggle('is-now',+c.dataset.i===i));};

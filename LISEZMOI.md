@@ -12,7 +12,7 @@ Cette branche `sources` contient tout ce qui sert à le fabriquer. Point de sauv
    remplacer ces chemins par les nouveaux (`grep -rl scratchpad .` pour les trouver).
 3. Construire : `bash build.sh` → copie `index-before-quiz.html` dans `main/index.html`, puis applique dans l'ordre
    `quiz/integrate.py`, `method.py`, `tools/integrate_tools.py`, `features2.py` (accueil + accords de guitare), `unmute.py`, `micbleed.py`, `i18n/integrate_i18n.py`.
-4. Publier : augmenter `VERSION` dans `sw.js` (actuellement `musicdev-1.39.4`), commit, push sur `main`
+4. Publier : augmenter `VERSION` dans `sw.js` (actuellement `musicdev-1.40.0`), commit, push sur `main`
    (GitHub Pages se met à jour en ~30 s). Pousser aussi les sources modifiées sur cette branche.
 
 ## Repères
@@ -50,3 +50,4 @@ Cette branche `sources` contient tout ce qui sert à le fabriquer. Point de sauv
 - Avant build.sh : `python3 i18n/mkextra.py` (sinon extra.json est périmé).
 - 1.39.3 : la clé (et le réglage « Clé ») pointait vers la fiche 'cles', fusionnée dans 'portee' : redirection dans helpTopicFor.
 - 1.39.4 : zones mortes d'Explications : portées hors #score (dictée, légende batterie), lignes sup., nuances, liaisons, n-olets, tempo, chiffrage, ligatures, accolade ; libellés de réglages plus longs (préfixe) ; EN/ES via helpFr() (texte français d'origine : TR_SEEN ou dictionnaire inversé). Tests : scratchpad grid.py, fl*.py.
+- 1.40.0 : accueil (seule la bulle des modules ; langues + thème sur une rangée .prefrow, thème en icônes ; icônes d'app vers mt/ac/en/gc/ba : HO_APPS dans home.js) ; Accompagnateur : progression en degrés + tonalité (baDegGrid/baDegChord dans ba.js, BA_S.deg ; tout en majuscules = accords de la gamme) ; Dictionnaire : option degrés (GC.deg, gcDeg, gcNm pour l'orthographe mi♭).

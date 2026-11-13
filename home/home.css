@@ -39,3 +39,22 @@ main[data-mod="ho"] .helpwrap{display:flex!important}
 main[data-mod="ho"] #helpbtn{box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 35%,transparent);animation:hopulse 2.4s ease-in-out 3}
 @keyframes hopulse{50%{box-shadow:0 0 0 7px color-mix(in srgb,var(--accent) 15%,transparent)}}
 @media (prefers-reduced-motion:reduce){main[data-mod="ho"] #helpbtn{animation:none}}
+
+/* raccourcis : icônes d'app vers les outils */
+.hoapps{display:flex;flex-direction:column;gap:10px;margin:0 0 18px;max-width:640px}
+.hoappst{margin:0;font:600 .72rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.hoappgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;max-width:520px}
+.hoapp{display:flex;flex-direction:column;align-items:center;gap:7px;border:0;background:none;padding:4px 0;cursor:pointer;color:var(--ink);font:600 .8rem/1.2 var(--f-body);text-align:center;-webkit-tap-highlight-color:transparent}
+.hoico{display:grid;place-items:center;width:62px;height:62px;border-radius:16px;color:#fff;box-shadow:0 1px 0 rgb(255 255 255/.25) inset,0 4px 10px rgb(0 0 0/.18);transition:transform .15s ease,box-shadow .15s ease}
+.hoico svg{width:34px;height:34px}
+.hoapp:hover .hoico,.hoapp:focus-visible .hoico{transform:translateY(-2px);box-shadow:0 1px 0 rgb(255 255 255/.25) inset,0 8px 16px rgb(0 0 0/.22)}
+.hoapp:active .hoico{transform:scale(.94)}
+.hoapp:focus-visible{outline:none}.hoapp:focus-visible .hoico{outline:3px solid var(--accent);outline-offset:3px}
+.hoappn{max-width:88px;hyphens:manual;overflow-wrap:normal}
+.ico-mt{background:linear-gradient(160deg,#3E8A79,#1F4D44)}
+.ico-ac{background:linear-gradient(160deg,#E39A3E,#A85A12)}
+.ico-en{background:linear-gradient(160deg,#D85A4E,#8E2C24)}
+.ico-gc{background:linear-gradient(160deg,#4C83C0,#22497A)}
+.ico-ba{background:linear-gradient(160deg,#8466C2,#4B347A)}
+@media (max-width:600px){.hoapps{margin-inline:-12px}.hoappgrid{gap:2px}.hoico{width:54px;height:54px;border-radius:14px}.hoico svg{width:30px;height:30px}.hoapp{font-size:.64rem;letter-spacing:-.02em}.hoappn{hyphens:auto}}
+@media (prefers-reduced-motion:reduce){.hoico{transition:none}}

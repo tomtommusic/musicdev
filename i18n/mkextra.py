@@ -434,5 +434,18 @@ exec(open('/tmp/claude-0/-home-claude-musicdev/4258b5e8-eacb-5999-9d1d-cfd4cbd81
 for _f,_e,_s in T:a(_f,_e,_s)
 exec(open('/tmp/claude-0/-home-claude-musicdev/4258b5e8-eacb-5999-9d1d-cfd4cbd81d51/scratchpad/modes/tr.py').read())
 for _f,_e,_s in T:a(_f,_e,_s)
+
+# 1.40 : accueil, degrés
+a("Outils","Tools","Herramientas")
+a("Afficher les degrés","Show degrees","Mostrar los grados")
+a("Degrés","Degrees","Grados")
+a("Progression en degrés","Progression in Roman numerals","Progresión en grados")
+a("Accords de la gamme","Chords of the key","Acordes de la tonalidad")
+a("→ Mettre dans la grille","→ Put in the chart","→ Poner en el cifrado")
+a("Effacer","Clear","Borrar")
+a("Degrés non reconnus : {0}","Unrecognized numerals: {0}","Grados no reconocidos: {0}")
+a("Sépare les accords par « – » ou « | ». Tout en majuscules (I – VI – II – V) : l'app prend les accords de la gamme. Majuscules et minuscules mélangées : majuscule = majeur, minuscule = mineur. Aussi : ° (diminué), 7, maj7, ø7, ♭VII, V7/V.",
+  "Separate chords with “–” or “|”. All capitals (I – VI – II – V): the app uses the chords of the key. Mixed capitals and lowercase: capital = major, lowercase = minor. Also: ° (diminished), 7, maj7, ø7, ♭VII, V7/V.",
+  "Separa los acordes con «–» o «|». Todo en mayúsculas (I – VI – II – V): la app usa los acordes de la tonalidad. Mayúsculas y minúsculas mezcladas: mayúscula = mayor, minúscula = menor. También: ° (disminuido), 7, maj7, ø7, ♭VII, V7/V.")
 json.dump({'en':E,'es':S},open('extra.json','w'),ensure_ascii=False,indent=0)
 print(len(E))
