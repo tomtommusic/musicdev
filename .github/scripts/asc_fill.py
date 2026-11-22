@@ -107,6 +107,15 @@ if 'version' in ST and os.environ.get('NEWVER'):
     for v in j['data']:
         ok(*call('PATCH',f'/v1/appStoreVersions/{v["id"]}',{'data':{'type':'appStoreVersions','id':v['id'],'attributes':{'versionString':os.environ['NEWVER']}}}),v['attributes']['platform']+' version '+os.environ['NEWVER'])
 
+if 'notes' in ST:
+    # notes pour l'équipe de révision (ios/store/review_notes.txt), sans toucher au reste
+    NOTES=open('ios/store/review_notes.txt').read().strip()
+    st,j=call('GET',f'/v1/apps/{aid}/appStoreVersions?filter[appStoreState]=PREPARE_FOR_SUBMISSION,DEVELOPER_REJECTED,REJECTED,METADATA_REJECTED,WAITING_FOR_REVIEW,IN_REVIEW')
+    for v in j['data']:
+        vid=v['id'];P=v['attributes']['platform']
+        st,jr=call('GET',f'/v1/appStoreVersions/{vid}/appStoreReviewDetail')
+        if st<300 and jr.get('data'):ok(*call('PATCH',f'/v1/appStoreReviewDetails/{jr["data"]["id"]}',{'data':{'type':'appStoreReviewDetails','id':jr['data']['id'],'attributes':{'notes':NOTES}}}),P+' notes ('+v['attributes']['appStoreState']+')')
+        else:ok(*call('POST','/v1/appStoreReviewDetails',{'data':{'type':'appStoreReviewDetails','attributes':{'notes':NOTES},'relationships':{'appStoreVersion':{'data':{'type':'appStoreVersions','id':vid}}}}}),P+' notes')
 if on('build'):
     st,j=call('GET',f'/v1/apps/{aid}/appStoreVersions?filter[appStoreState]=PREPARE_FOR_SUBMISSION,DEVELOPER_REJECTED,REJECTED,METADATA_REJECTED')
     for v in j['data']:
