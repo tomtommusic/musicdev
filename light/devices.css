@@ -1,0 +1,51 @@
+/* Mode clair : le métronome, l'accordeur et l'enregistreur prennent un habillage clair
+   (sinon ils restent en « appareil sombre » dans une app claire). Le mode sombre ne change pas. */
+.mtpanel,.tnpanel,.rcpanel{background:linear-gradient(180deg,#FFFFFF,#F3F0E8);color:#1E2A26;border:1px solid #DED8CB;box-shadow:var(--shadow-sm),inset 0 1px 0 #fff}
+.mtscreen,.tnbox,.tnguide{background:#EAF4EF;border-color:#C5DDD3;box-shadow:inset 0 2px 6px rgb(31 94 78/.10)}
+.mtbpm,.rcclock{color:#1F5E4E;text-shadow:none}
+.mtunit span,.mtbar,.tnoct,.tnwr,.tngh span{color:#3E8670}
+.mtword,.rcstate{color:#2C4A41!important}
+.mtleds i{background:#D3E4DC;box-shadow:inset 0 1px 2px rgb(0 0 0/.12)}
+.mtleds i.on{background:#22A27C;box-shadow:0 0 10px rgb(34 162 124/.55)}
+.mtleds i.acc.on{background:#E3951C;box-shadow:0 0 10px rgb(227 149 28/.6)}
+.mtleds i.mute{background:#E6E2DA}
+.mtstep,.mttap,.tnstrings button,.rctog{background:#FFFFFF;border-color:#D6D0C4;color:#1E2A26}
+.mtstep:active,.mttap:active{background:#EEE9DF}
+.mtslider,.tnlearn input{accent-color:#1F8A6B}
+.mtgo{background:#1F8A6B;color:#FFFFFF;box-shadow:0 2px 0 #145C48}
+.mtgo.on{background:#E2604C;color:#FFFFFF;box-shadow:0 2px 0 #A8402F}
+.tnlevel,.rcmeter{background:#D3E4DC;box-shadow:inset 0 1px 2px rgb(0 0 0/.12)}
+.tnlevel i{background:#22A27C}
+.tnflat,.tnsharp{color:#B7CEC4}
+.tnbox.low .tnflat,.tnbox.high .tnsharp{color:#D9503C}
+.tnnote{color:#1E2A26}
+.tnbox.ok .tnnote{color:#1A8A68;text-shadow:none}
+.tncents{color:#2C4A41}
+.tnbox.ok .tncents{color:#1A8A68}
+.tnbox.low .tncents,.tnbox.high .tncents{color:#C2412D}
+.tnbox.idle .tncents{color:#3E8670}
+.tnleds i{background:#DCE7E2;box-shadow:inset 0 1px 2px rgb(0 0 0/.10)}
+.tnleds i[data-v="0"]{background:#CFE3DA;outline-color:#6FAE98}
+.tnleds i.off2{background:#E3951C;box-shadow:0 0 8px rgb(227 149 28/.5)}
+.tnleds i.far{background:#E2604C;box-shadow:0 0 8px rgb(226 96 76/.5)}
+.tnleds i.near{background:#6FBF9F}
+.tnleds i.ok{background:#1F9E78;box-shadow:0 0 12px rgb(31 158 120/.55)}
+.tnledlab,.tnstrings button small,.tnstrings button span{color:#5E6E68}
+.tnhz{color:#4F625B}
+.tnstrings .tnauto.on,.tnstrings button.lock{border-color:#1F8A6B;box-shadow:inset 0 0 0 1px #1F8A6B}
+.tnstrings button.cur{background:#E3F1EB}
+.tnstrings button.done::after{background:#1F8A6B;color:#fff}
+.tnmic:not(.primary){background:#FFFFFF;color:#1E2A26;border-color:#D6D0C4}
+.tnlearn{color:#2C4A41}
+.tnguide.danger{background:#FBE6E2;border-color:#E2604C}
+.tnguide.ok{border-color:#1F8A6B}
+.tngh b{color:#1E2A26}
+.tnrung{background:#FFFFFF;color:#4F625B;border:1px solid #DED8CB}
+.rcdot{background:#E8D6D3;box-shadow:inset 0 1px 2px rgb(0 0 0/.15)}
+.rcgo{background:#E2604C;color:#FFFFFF;box-shadow:0 2px 0 #A8402F}
+.rcgo.on{background:#1E2A26;color:#FFFFFF;box-shadow:0 2px 0 #000}
+.rctog{color:#5E6E68}
+.rctog[aria-pressed="true"]{background:#EAF4EF;color:#1F5E4E;border-color:#1F8A6B;box-shadow:inset 0 0 0 1px #1F8A6B}
+.rcpanel .rcretry{background:#FFFFFF;color:#1E2A26;border-color:#D6D0C4}
+.rcpanel .rcretry:hover{background:#F3F0E8}
+.rcpanel .rcact .rcplay.on{background:#E3F1EB}
