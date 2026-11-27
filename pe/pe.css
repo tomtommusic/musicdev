@@ -1,0 +1,13 @@
+/* ---- Pièces pour enfants ---- */
+.pectl{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:flex-end;margin:10px 0}
+.pectl .pewide{min-width:min(100%,300px)}.pectl .pewide select{max-width:100%}
+.pechk{display:flex;gap:8px;align-items:center;font-size:.92rem;cursor:pointer}
+.pehead{margin:6px 0 4px}.pehead h2{margin:0;font-size:1.35rem}.pehead p{margin:2px 0 0}
+.pestaff{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 6px;margin:8px 0;color:var(--ink);overflow:hidden}
+.pestaff svg{display:block;margin:0 auto;max-width:100%;height:auto}
+.pectl .row2{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.pestaff .pepaper{fill:var(--surface)}.pestaff .pepapertx{fill:var(--surface)}
+.pestaff .pe-now path,.pestaff .pe-now ellipse{fill:var(--accent)!important;stroke:var(--accent)!important}
+.pestaff .pe-now text{fill:var(--accent-ink,#fff)!important}
+.petip{margin:4px 0;padding:8px 12px;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:8px}
+.pefoot{margin-top:10px}.peout{margin:8px 0}
