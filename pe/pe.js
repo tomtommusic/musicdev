@@ -79,7 +79,7 @@ function peDraw(box,s,o){
   /* même largeur de tête partout (sinon les ligatures ne suivent plus les hampes) */
   if(specs.length){
     const bw=Math.max(...specs.map(x=>x.b.width)),bh=Math.max(...specs.map(x=>x.b.height)),ml=Math.max(0,...specs.map(x=>[...x.txt].length));
-    const RY=4.45,fs0=RY*1.48,R=ml>1?Math.max(bw*.62,Math.min(bw*1.02,.3*fs0*ml+.9)):bw*.62,moved=[];    /* tête haute d'un interligne (8) : elle touche les lignes comme une vraie note */
+    const RY=4.45,fs0=RY*1.48,R=RY*1.3,moved=[];    /* tête haute d'un interligne (8) : elle touche les lignes comme une vraie note */
     specs.forEach(({g,h,b,p,open,txt})=>{
       const len=[...txt].length,fs=len?Math.min(fs0,(2*R-1.6)/(.6*len)):fs0;
       const cx=b.x+b.width/2,cy=b.y+b.height/2,G=document.createElementNS(NS,'g');G.setAttribute('class','pehd');
