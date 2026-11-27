@@ -12,7 +12,7 @@ Cette branche `sources` contient tout ce qui sert à le fabriquer. Point de sauv
    remplacer ces chemins par les nouveaux (`grep -rl scratchpad .` pour les trouver).
 3. Construire : `bash build.sh` → copie `index-before-quiz.html` dans `main/index.html`, puis applique dans l'ordre
    `quiz/integrate.py`, `method.py`, `tools/integrate_tools.py`, `features2.py` (accueil + accords de guitare), `unmute.py`, `micbleed.py`, `i18n/integrate_i18n.py`.
-4. Publier : augmenter `VERSION` dans `sw.js` (actuellement `musicdev-1.40.3`), commit, push sur `main`
+4. Publier : augmenter `VERSION` dans `sw.js` (actuellement `musicdev-1.40.4`), commit, push sur `main`
    (GitHub Pages se met à jour en ~30 s). Pousser aussi les sources modifiées sur cette branche.
 
 ## Repères
@@ -54,3 +54,4 @@ Cette branche `sources` contient tout ce qui sert à le fabriquer. Point de sauv
 - 1.40.1 : icônes d'outils de l'accueil = images découpées du modèle de l'utilisateur (home/ico/*.webp, home/mkicons.py → home.css).
 - 1.40.2 : thème clair pour le métronome, l'accordeur et l'enregistreur (light/devices.css + light/light.py, seulement en thème clair); nouvelles icônes rapides (2e modèle de l'utilisateur).
 - 1.40.3 : module « Pièces pour enfants » (pe/songs.js, pe/pe.js, pe/pe.css, pe/pe.py) : 28 pièces du domaine public classées par niveau, 2 à 4 voix, grosses notes nommées, couleurs, PDF.
+- 1.40.4 : Pièces pour enfants : plein écran (écouter, métronome, tempo, défilement), têtes de notes à la hauteur de l'interligne, partition plus grande.
