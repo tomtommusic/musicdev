@@ -79,7 +79,7 @@ function peDraw(box,s,o){
   /* même largeur de tête partout (sinon les ligatures ne suivent plus les hampes) */
   if(specs.length){
     const bw=Math.max(...specs.map(x=>x.b.width)),bh=Math.max(...specs.map(x=>x.b.height)),ml=Math.max(0,...specs.map(x=>[...x.txt].length));
-    const fs0=bh*1.02,R=ml>1?Math.max(bw*.74,Math.min(bw*1.12,.29*fs0*ml+1.4)):bw*.74,RY=bh*.8,moved=[];
+    const fs0=bh*.9,R=ml>1?Math.max(bw*.64,Math.min(bw*.95,.29*fs0*ml+1)):bw*.64,RY=bh*.68,moved=[];
     specs.forEach(({g,h,b,p,open,txt})=>{
       const len=[...txt].length,fs=len?Math.min(fs0,(2*R-1.6)/(.6*len)):fs0;
       const cx=b.x+b.width/2,cy=b.y+b.height/2,G=document.createElementNS(NS,'g');G.setAttribute('class','pehd');
