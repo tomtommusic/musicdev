@@ -1,7 +1,7 @@
 /* ========== MODULE : Pièces pour enfants ==========
    Des chansons connues en grosses notes, avec le nom de chaque note dans sa tête (option), à écouter,
    à jouer avec le métronome et à imprimer (PDF). Pièces à une voix et à 2, 3 ou 4 voix. Données : pe/songs.js. */
-const PE_SZ={m:{t:'Normale',s:1.25,pdf:1.6},l:{t:'Grande',s:1.65,pdf:2.3},xl:{t:'Très grande',s:2.15,pdf:3}};
+const PE_SZ={m:{t:'Normale',s:1.45,pdf:1.8},l:{t:'Grande',s:1.95,pdf:2.5},xl:{t:'Très grande',s:2.5,pdf:3.2}};
 const PE_NM={fr:['Do','Ré','Mi','Fa','Sol','La','Si'],es:['Do','Re','Mi','Fa','Sol','La','Si'],en:['C','D','E','F','G','A','B']};
 /* couleurs « arc-en-ciel » des cloches et des boomwhackers : do rouge, ré orange, mi jaune, fa vert, sol bleu clair, la bleu, si violet */
 const PE_COL=['#E53935','#FB8C00','#FDD835','#43A047','#29B6F6','#3949AB','#8E24AA'],PE_COLTX=['#fff','#1a1a1a','#1a1a1a','#fff','#1a1a1a','#fff','#fff'];
@@ -79,7 +79,7 @@ function peDraw(box,s,o){
   /* même largeur de tête partout (sinon les ligatures ne suivent plus les hampes) */
   if(specs.length){
     const bw=Math.max(...specs.map(x=>x.b.width)),bh=Math.max(...specs.map(x=>x.b.height)),ml=Math.max(0,...specs.map(x=>[...x.txt].length));
-    const fs0=bh*.9,R=ml>1?Math.max(bw*.64,Math.min(bw*.95,.29*fs0*ml+1)):bw*.64,RY=bh*.68,moved=[];
+    const RY=4.45,fs0=RY*1.48,R=ml>1?Math.max(bw*.62,Math.min(bw*1.02,.3*fs0*ml+.9)):bw*.62,moved=[];    /* tête haute d'un interligne (8) : elle touche les lignes comme une vraie note */
     specs.forEach(({g,h,b,p,open,txt})=>{
       const len=[...txt].length,fs=len?Math.min(fs0,(2*R-1.6)/(.6*len)):fs0;
       const cx=b.x+b.width/2,cy=b.y+b.height/2,G=document.createElementNS(NS,'g');G.setAttribute('class','pehd');
@@ -133,8 +133,10 @@ function pePlay(withClick){
     for(let u=ci,k=0;u<endU-.01;u+=mt.bu,k++)clicks.push({u,strong:k%mt.beats===0,b:k%mt.beats});}
   const us=60/peTempo(s),plan={items,clicks,us,endU,ci,meter:{beats:mt.beats,label:mt.label}};
   const last={};
-  const sess=run(plan,{sound:'none',onStep:it=>{const p=last[it.v];if(p)p.classList.remove('pe-now');if(it.g){it.g.classList.add('pe-now');last[it.v]=it.g;}},
-    onEnd:()=>{Object.values(last).forEach(g=>g&&g.classList.remove('pe-now'));}});
+  const sess=run(plan,{sound:'none',onStep:it=>{const p=last[it.v];if(p)p.classList.remove('pe-now');if(it.g){it.g.classList.add('pe-now');last[it.v]=it.g;
+      /* plein écran : la ligne jouée reste visible */
+      const ln=(it.g.getAttribute('class').match(/abcjs-l(\d+)/)||[])[1];if(M.full&&ln!==last.ln){last.ln=ln;try{it.g.scrollIntoView({block:'center',behavior:'smooth'});}catch(e){}}}},
+    onEnd:()=>{Object.values(last).forEach(g=>g&&g.classList&&g.classList.remove('pe-now'));}});
   if(sess)for(const it of items)for(const m of it.chord)peNote(m,sess.t0+it.u*us,it.d*us,sess.g);
 }
 
@@ -176,11 +178,33 @@ async function pePdf(){
 
 /* ---------- interface ---------- */
 MOD.pe.mount=function(){
-  const M=this;$('#toolbar').replaceChildren();M.root=el('div',{class:'tl pe'});$('#answer').replaceChildren(M.root);
+  const M=this;M.full=false;document.documentElement.classList.remove('pe-fs');$('#toolbar').replaceChildren();M.root=el('div',{class:'tl pe'});$('#answer').replaceChildren(M.root);
   if(!M.rz){M.rz=1;let tm;window.addEventListener('resize',()=>{clearTimeout(tm);tm=setTimeout(()=>{if(S.mod==='pe'&&MOD.pe.stand&&MOD.pe.stand.isConnected)MOD.pe.draw();},200);});}
 };
+/* plein écran : la partition seule, avec les boutons pour l'écouter, le métronome et le tempo */
+function peFull(on){
+  const M=MOD.pe;M.full=!!on;stop();
+  const d=document,fe=d.fullscreenElement||d.webkitFullscreenElement;
+  try{if(on&&!fe){const r=d.documentElement,f=r.requestFullscreen||r.webkitRequestFullscreen;if(f){const x=f.call(r);if(x&&x.catch)x.catch(()=>{});}}
+    else if(!on&&fe){const f=d.exitFullscreen||d.webkitExitFullscreen;if(f){const x=f.call(d);if(x&&x.catch)x.catch(()=>{});}}}catch(e){}
+  document.documentElement.classList.toggle('pe-fs',M.full);M.fresh();window.scrollTo({top:0});
+}
+['fullscreenchange','webkitfullscreenchange'].forEach(ev=>document.addEventListener(ev,()=>{const fe=document.fullscreenElement||document.webkitFullscreenElement;if(!fe&&MOD.pe&&MOD.pe.full&&S.mod==='pe')peFull(false);}));
 MOD.pe.fresh=function(){
   const M=this,s=peSong();if(!PE_SONGS.some(x=>x.id===PE.id))PE.id=PE_SONGS[0].id;
+  if(M.full){
+    const tv=el('b',{class:'petv'},`♩ = ${peTempo(s)}`),setT=d=>{PE.tempo[s.id]=Math.max(40,Math.min(180,peTempo(s)+d));tv.textContent=`♩ = ${peTempo(s)}`;peSave();};
+    M.stand=el('div',{class:'pestaff'});M.out=el('div');
+    M.root.className='tl pe pefull';
+    M.root.replaceChildren(el('div',{class:'pefbar'},
+      el('b',{class:'peft'},peTitle(s)),
+      btn('▶ Écouter',()=>pePlay(false),'primary'),btn('● Métronome',()=>pePlay(true)),stopBtn(),
+      el('span',{class:'petempo'},btn('−',()=>setT(-4),'quiet sq'),tv,btn('+',()=>setT(4),'quiet sq')),
+      btn('✕ Quitter',()=>peFull(false),'quiet')),M.stand);
+    S.keyHandler=e=>{if(e.code==='Escape'){peFull(false);return true;}if(e.code==='Space'){if(P.sess)stop();else pePlay(false);return true;}return false;};
+    M.draw();return;
+  }
+  M.root.className='tl pe';S.keyHandler=null;
   if(PE.hear!=='all'&&(!s.v||+PE.hear>=s.v.length))PE.hear='all';
   const redo=()=>{peSave();stop();M.fresh();};
   /* choix de la pièce, groupé par niveau, puis les pièces à plusieurs voix */
@@ -202,7 +226,7 @@ MOD.pe.fresh=function(){
   M.stand=el('div',{class:'pestaff'});
   const sub=peSub(s);
   M.root.replaceChildren(
-    el('div',{class:'qzbtns pebar'},btn('▶ Écouter',()=>pePlay(false),'primary'),btn('● Jouer avec le métronome',()=>pePlay(true)),btn('Une autre pièce du même niveau',rnd),stopBtn(),pdfB),
+    el('div',{class:'qzbtns pebar'},btn('▶ Écouter',()=>pePlay(false),'primary'),btn('● Jouer avec le métronome',()=>pePlay(true)),btn('Une autre pièce du même niveau',rnd),stopBtn(),pdfB,btn('⛶ Plein écran',()=>peFull(true))),
     el('div',{class:'pectl'},
       el('label',{class:'qzfield pewide'},el('span',{class:'fl'},'Pièce'),songSel),
       el('label',{class:'qzfield'},el('span',{class:'fl'},'Noms dans les notes'),names),
@@ -218,7 +242,7 @@ MOD.pe.fresh=function(){
 };
 MOD.pe.draw=function(){
   const M=this,s=peSong();if(!M.stand)return;stop();
-  const w=M.stand.clientWidth||($('#answer').clientWidth-20)||640,sc=PE_SZ[PE.size].s*(w<480?.82:1);
+  const w=M.stand.clientWidth||($('#answer').clientWidth-20)||640,sc=PE_SZ[PE.size].s*(w<480?.82:1)*(M.full&&w>700?1.25:1);
   const fit=w/(sc*(s.v?118:108)),per=fit>=3.6?4:fit>=1.6?2:1;
   M.r=peDraw(M.stand,s,{width:w,scale:sc,per,names:peNames(),color:PE.color});
   if(!M.r)return;

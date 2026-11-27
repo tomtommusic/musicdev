@@ -448,6 +448,9 @@ a("Sépare les accords par « – » ou « | ». Tout en majuscules (I – VI �
   "Separate chords with “–” or “|”. All capitals (I – VI – II – V): the app uses the chords of the key. Mixed capitals and lowercase: capital = major, lowercase = minor. Also: ° (diminished), 7, maj7, ø7, ♭VII, V7/V.",
   "Separa los acordes con «–» o «|». Todo en mayúsculas (I – VI – II – V): la app usa los acordes de la tonalidad. Mayúsculas y minúsculas mezcladas: mayúscula = mayor, minúscula = menor. También: ° (disminuido), 7, maj7, ø7, ♭VII, V7/V.")
 # --- Pièces pour enfants ---
+a("⛶ Plein écran","⛶ Full screen","⛶ Pantalla completa")
+a("✕ Quitter","✕ Exit","✕ Salir")
+a("● Métronome","● Metronome","● Metrónomo")
 a('Pièces pour enfants',"Children's pieces",'Piezas infantiles')
 a('Xylophone, flûte à bec, clarion','Xylophone, recorder, clarion','Xilófono, flauta dulce, clarion')
 a("Des chansons connues classées par niveau, en grosses notes avec leur nom à l'intérieur, et des pièces à 2, 3 ou 4 voix. Écoute, joue avec le métronome et imprime la partition.",'Well-known songs sorted by level, in big notes with their names inside, plus pieces in 2, 3 or 4 parts. Listen, play with the metronome and print the score.','Canciones conocidas ordenadas por nivel, con notas grandes y su nombre adentro, y piezas a 2, 3 o 4 voces. Escucha, toca con el metrónomo e imprime la partitura.')

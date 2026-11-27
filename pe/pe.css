@@ -11,3 +11,11 @@
 .pestaff .pe-now text{fill:var(--accent-ink,#fff)!important}
 .petip{margin:4px 0;padding:8px 12px;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:8px}
 .pefoot{margin-top:10px}.peout{margin:8px 0}
+/* plein écran */
+.pe.pefull{position:fixed;inset:0;z-index:900;background:var(--paper);overflow:auto;padding:calc(env(safe-area-inset-top,0px) + 8px) 12px calc(env(safe-area-inset-bottom,0px) + 16px);margin:0;max-width:none}
+.pefbar{position:sticky;top:0;z-index:2;display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--paper);padding:6px 0 8px;border-bottom:1px solid var(--line)}
+.pefbar .peft{font:700 1.05rem/1.2 var(--f-display,inherit);margin-right:auto;min-width:0}
+.pefbar .petempo{display:inline-flex;align-items:center;gap:6px}.pefbar .petv{min-width:4.2em;text-align:center}
+.pe.pefull .pestaff{border:0;background:var(--surface);margin-top:10px}
+html.pe-fs,html.pe-fs body{overflow:hidden}
+@media (max-width:900px){.pefbar{gap:6px;padding:4px 0 6px}.pefbar .peft{display:none}.pefbar .btn{padding:6px 11px;font-size:.85rem;min-height:0}}
