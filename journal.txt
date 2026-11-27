@@ -1,0 +1,41 @@
+--------- beginning of main
+11-27 21:03:46.196  2693  3029 W chromium: [WARNING:dns_config_service_android.cc(115)] Failed to read DnsConfig.
+11-27 21:03:47.465  2693  2693 I MusiDev : lancement
+11-27 21:03:48.424  2693  3096 I MusiDev : req https://appassets.androidplatform.net/web/index.html -> 0 text/html
+11-27 21:03:48.904  2693  2693 I MusiDev : début https://appassets.androidplatform.net/web/index.html
+11-27 21:03:48.990  2693  3029 I MusiDev : req https://appassets.androidplatform.net/web/fonts/fonts.css -> 0 text/css
+11-27 21:03:48.999  2693  3029 I MusiDev : req https://appassets.androidplatform.net/web/abcjs-basic-min.js -> 0 application/javascript
+11-27 21:03:50.247  2693  3029 I MusiDev : req https://appassets.androidplatform.net/web/fonts/AtkinsonHyperlegible-Regular.ttf -> 0 font/ttf
+11-27 21:03:50.259  2693  3096 I MusiDev : req https://appassets.androidplatform.net/web/fonts/Lora.ttf -> 0 font/ttf
+11-27 21:03:50.260  2693  3096 I MusiDev : req https://appassets.androidplatform.net/web/fonts/AtkinsonHyperlegible-Bold.ttf -> 0 font/ttf
+11-27 21:03:51.610  2693  3029 I MusiDev : req https://appassets.androidplatform.net/web/fonts/IBMPlexMono-Medium.ttf -> 0 font/ttf
+11-27 21:03:53.615  2693  3029 I MusiDev : req https://appassets.androidplatform.net/web/icons/favicon-32.png -> 0 image/png
+11-27 21:03:53.797  2693  2693 I MusiDev : fin https://appassets.androidplatform.net/web/index.html
+11-27 21:03:58.501  2693  2693 I MusiDev : test: "MusiDev|1787503|https://appassets.androidplatform.net/web/index.html"
+11-27 21:04:01.780  2693  2693 I MusiDev : test: null
+11-27 21:04:07.368  2693  2693 I MusiDev : test: null
+11-27 21:04:11.967  2693  2693 I MusiDev : test: null
+11-27 21:04:12.133  3103  3169 I chromium: [INFO:audio_latency.cc(179)] audioHardwareBufferSize = 4360
+11-27 21:04:16.954  3103  3169 I chromium: [INFO:audio_latency.cc(179)] audioHardwareBufferSize = 4360
+11-27 21:04:17.390  2693  2693 I MusiDev : test: null
+11-27 21:04:21.767  2693  2693 I MusiDev : test: null
+11-27 21:04:25.921  2693  3029 I MusiDev : req https://appassets.androidplatform.net/web/icons/favicon-32.png -> 0 image/png
+11-27 21:04:26.051  2693  3029 I MusiDev : req https://appassets.androidplatform.net/web/icons/favicon-32.png -> 0 image/png
+11-27 21:04:26.670  2693  3029 I MusiDev : req https://appassets.androidplatform.net/web/icons/favicon-32.png -> 0 image/png
+11-27 21:04:28.701  2693  2693 I MusiDev : test: null
+11-27 21:04:34.094  2693  3029 I MusiDev : req https://appassets.androidplatform.net/web/icons/favicon-32.png -> 0 image/png
+11-27 21:04:34.261  2693  3029 I MusiDev : req https://appassets.androidplatform.net/web/icons/favicon-32.png -> 0 image/png
+11-27 21:04:35.007  2693  3029 I MusiDev : req https://appassets.androidplatform.net/web/icons/favicon-32.png -> 0 image/png
+11-27 21:04:35.446  2693  2693 I MusiDev : test: null
+11-27 21:04:45.631  2693  2693 I MusiDev : lancement
+11-27 21:04:45.638  2693  3029 I MusiDev : req https://appassets.androidplatform.net/web/index.html -> 0 text/html
+11-27 21:04:46.351  2693  2693 I MusiDev : début https://appassets.androidplatform.net/web/index.html
+11-27 21:04:46.397  2693  3096 I MusiDev : req https://appassets.androidplatform.net/web/abcjs-basic-min.js -> 0 application/javascript
+11-27 21:04:46.398  2693  3030 I MusiDev : req https://appassets.androidplatform.net/web/fonts/fonts.css -> 0 text/css
+11-27 21:04:46.700  2693  3029 I MusiDev : req https://appassets.androidplatform.net/web/fonts/AtkinsonHyperlegible-Regular.ttf -> 0 font/ttf
+11-27 21:04:46.703  2693  3029 I MusiDev : req https://appassets.androidplatform.net/web/fonts/AtkinsonHyperlegible-Bold.ttf -> 0 font/ttf
+11-27 21:04:46.709  2693  3029 I MusiDev : req https://appassets.androidplatform.net/web/fonts/Lora.ttf -> 0 font/ttf
+11-27 21:04:47.041  2693  3029 I MusiDev : req https://appassets.androidplatform.net/web/fonts/IBMPlexMono-Medium.ttf -> 0 font/ttf
+11-27 21:04:47.162  2693  2693 I MusiDev : fin https://appassets.androidplatform.net/web/index.html
+11-27 21:04:47.226  2693  3029 I MusiDev : req https://appassets.androidplatform.net/web/icons/favicon-32.png -> 0 image/png
+11-27 21:04:49.823  2693  3029 I MusiDev : req https://appassets.androidplatform.net/web/icons/favicon-32.png -> 0 image/png
